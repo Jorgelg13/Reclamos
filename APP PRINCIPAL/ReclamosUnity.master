@@ -1,0 +1,174 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="ReclamosUnity.master.cs" Inherits="ReclamosUnity" %>
+
+<!DOCTYPE html>
+
+<html lang="es">
+<head runat="server">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
+    <title>Sistema Reclamos</title>
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="css/summernote.css" rel="stylesheet" />
+    <link href="css/estilos.css" rel="stylesheet" />
+    <link href="Scripts/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="css/toastr.min.css" rel="stylesheet" />
+    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <link href="css/GridviewScroll.css" rel="stylesheet" />
+    <link href="Scripts/FlipClock/compiled/flipclock.css" rel="stylesheet" />
+    <link href="css/estilosContador.css" rel="stylesheet" />
+<script type="text/javascript">
+</script>
+    <asp:ContentPlaceHolder ID="head" runat="server"></asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div class="jumbotron titulo-cabecera">
+            <h2 style="width: 781px; padding-bottom: 20px;">Reclamos Unity Promotores S.A</h2>
+            <header>
+                <div class="content-wrapper">
+                    <div class="float-right">
+                        <div class="img-float-right" style="float: right;">
+                            <img src="/imgUnity/Unity%20Promotores-%20Logo%20en%20blanco.png" style="margin-top: -90px; width: 235px;">
+                        </div>
+                        <section id="login">
+                            <asp:LoginView runat="server" ViewStateMode="Disabled">
+                                <AnonymousTemplate>
+                                    <ul>
+                                        <li><a class="color" id="loginLink" runat="server" href="~/Account/Login"><strong class="fondo">Iniciar sesión</strong></a></li>
+                                        <br />
+                                    </ul>
+                                </AnonymousTemplate>
+                                <LoggedInTemplate>
+                                    <p>
+                                        Hola  <a runat="server" class="username fondo" href="/Account/Manage" title="Manage your account">
+                                            <asp:LoginName runat="server" CssClass="username" />
+                                        </a>!
+                                <asp:LoginStatus runat="server" LogoutAction="Redirect" CssClass="fondo" LogoutText="Cerrar sesión" LogoutPageUrl="~/" />
+                                    </p>
+                                </LoggedInTemplate>
+                            </asp:LoginView>
+                        </section>
+                    </div>
+                </div>
+            </header>
+        </div>
+        <nav class="navbar navbar-default">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="/Default.aspx">Inicio</a>
+                </div>
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle fa fa-car" style="font-size: 16px;" aria-hidden="true" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Reclamos Autos <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                 <li><a href="/Modulos/MdReclamosUnity/wbFrmReclamosAsignadosUnity.aspx">Mis Reclamos Asignados</a></li>
+                                <li><a href="/Modulos/MdReclamosUnity/wbFrmReclamosEnSeguimiento.aspx">Mis Reclamos En seguimiento</a></li>
+                                <li><a href="/Modulos/MdReclamosUnity/wbFrmBusquedaReclamos.aspx">Busqueda Reclamo</a></li>
+                                <li><a data-toggle="modal" data-target=".bs-example-modal-sm">Busqueda por ID</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle fa fa-exclamation-triangle" style="font-size: 16px;" aria-hidden="true" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Reclamos Daños <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="/Modulos/MdReclamosUnity/wbFrmReclamosDañosAsignados.aspx">Mis Reclamos Asignados</a></li>
+                                <li><a href="/Modulos/MdReclamosUnity/wbFrmRecDañosSeguimiento.aspx">Mis Reclamos En Seguimiento</a></li>
+                                <li><a href="/Modulos/MdReclamosUnity/wbFrmBusquedaReclamosDaños.aspx">Busqueda Reclamo</a></li> 
+                                <li><a data-toggle="modal" data-target=".bs-example-modal-sm2">Busqueda por ID</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle fa fa-heartbeat" aria-hidden="true" style="font-size: 16px;" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Reclamos Medicos <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="/Modulos/MdReclamosUnity/wbFrmReclamosMedicosAsignados.aspx">Reclamos Asignados</a></li>
+                                <li><a href="/Modulos/MdReclamosUnity/wbFrmRecMedSeguimiento.aspx">Reclamos en seguimiento</a></li>
+                                <li><a href="/Modulos/MdReclamosUnity/wbFrmBusquedaReclamosMedicos.aspx">Busqueda Reclamo</a></li>
+                                <li><a href="/Modulos/MdReclamosUnity/wbFrmAsignarChequeGM.aspx">Ingresar Cheque</a></li>
+                                <li><a data-toggle="modal" data-target=".bs-example-modal-sm3">Busqueda por ID</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle fa fa-line-chart" aria-hidden="true" style="font-size: 16px;" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Reportes <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="/Modulos/MdReportes/wbFrmReportesAutos.aspx">Reportes Reclamos Autos</a></li>
+                                <li><a href="/Modulos/MdReportes/wbFrmReportesDaños.aspx">Reportes Reclamos Daños</a></li>
+                                <li><a href="/Modulos/MdReportes/wbFrmReportesMedicos.aspx">Reportes Reclamos Gastos Medicos</a></li>
+                                <li><a href="/Modulos/MdReportes/wbFrmReportesAutorizaciones.aspx">Reportes de Autorizaciones</a></li>
+                                <li><a href="/Modulos/MdReportes/wbFrmReporteNoConforme.aspx">Reporte No Conforme</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle fa fa-folder-open" aria-hidden="true" style="font-size: 16px;" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Catalogos <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="/Modulos/MdReclamosUnity/wbFrmTalleres.aspx">Talleres</a></li>
+                                <li><a href="/Modulos/MdReclamosUnity/wbFrmAnalistas.aspx">Analistas</a></li>
+                                <li><a href="/Modulos/MdReclamosUnity/wbFrmGestores.aspx">Gestores</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        <div>
+           <%-- modal para la busqueda de un reclamo de auto--%>
+            <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+                    <div class="modal-content form-inline">
+                        <div class="modal-dialog modal-sm" role="document">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times</span></button>
+                                <h4 class="modal-title" id="ModalCobertura1"><b>Buscar Por Id Del Reclamo</b></h4>
+                            </div>
+                        <asp:TextBox ID="txtBusquedaId" type="number" CssClass="form-control" runat="server"></asp:TextBox>
+                        <asp:Button ID="btnBuscarId" runat="server" CssClass="btn btn-primary" Text="Buscar" OnClick="btnBuscarId_Click" />
+                    </div>
+                </div>
+            </div>
+
+               <%-- modal para la busqueda de un reclamo de daños--%>
+            <div class="modal fade bs-example-modal-sm2" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+                    <div class="modal-content form-inline">
+                        <div class="modal-dialog modal-sm" role="document">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times</span></button>
+                                <h4 class="modal-title" id="ModalReclamosVarios"><b>Buscar Por ID Del Reclamo</b></h4>
+                            </div>
+                        <asp:TextBox ID="txtReclamosVarios" type="number" CssClass="form-control" runat="server"></asp:TextBox>
+                        <asp:Button ID="btnBuscarReclamosVarios" runat="server" CssClass="btn btn-primary" Text="Buscar" OnClick="btnBuscarReclamosVarios_Click"/>
+                    </div>
+                </div>
+            </div>
+               <%-- modal para la busqueda de un reclamo de gastos medicos--%>
+            <div class="modal fade bs-example-modal-sm3" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+                    <div class="modal-content form-inline">
+                        <div class="modal-dialog modal-sm" role="document">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times</span></button>
+                                <h4 class="modal-title" id="ModalReclamosMedicos"><b>Buscar Por ID Del Reclamo</b></h4>
+                            </div>
+                        <asp:TextBox ID="txtBuscarReclamoMedico" type="number" CssClass="form-control" runat="server"></asp:TextBox>
+                        <asp:Button ID="btnReclamoMedico" runat="server" CssClass="btn btn-primary" Text="Buscar" OnClick="btnReclamoMedico_Click"/>
+                    </div>
+                </div>
+            </div>
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+            </asp:ContentPlaceHolder>  
+        </div>
+        <script type="text/javascript" src="<%= ResolveUrl("/Scripts/jquery-3.1.1.min.js") %>"></script>
+        <script type="text/javascript" src="<%= ResolveUrl("/bootstrap/js/bootstrap.min.js") %>"></script>
+        <script type="text/javascript" src="<%= ResolveUrl("/Scripts/jquery.cookie.min.js") %>"></script>
+        <script type="text/javascript" src="<%= ResolveUrl("/Scripts/toastr.min.js") %>"></script>
+        <script type="text/javascript" src="<%= ResolveUrl("/Scripts/gridviewScroll.min.js") %>"></script>
+        <script type="text/javascript" src="<%= ResolveUrl("/Scripts/summernote.min.js") %>"></script>
+        <script type="text/javascript" src="<%= ResolveUrl("/Scripts/jQuery.print.min.js") %>"></script>
+        <script type="text/javascript" src="<%= ResolveUrl("/Scripts/FlipClock/compiled/flipclock.min.js") %>"></script>
+        <script type="text/javascript" src="<%= ResolveUrl("/Scripts/app.js") %>"></script>
+        <script type="text/javascript" src="<%= ResolveUrl("Scripts/contador.js") %>"></script>
+           <asp:ContentPlaceHolder ID="ContentJs" runat="server">
+            </asp:ContentPlaceHolder>  
+    </form>
+</body>
+</html>

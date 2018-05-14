@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="f6b4798536da4735887fb7f905f97590" Name="Diagram1" ZoomLevel="97">
+        <EntityTypeShape EntityType="reclamosModel.ajustadores" Width="1.5" PointX="1.5" PointY="0.75" />
+        <EntityTypeShape EntityType="reclamosModel.analistas" Width="1.5" PointX="7.5" PointY="62.125" />
+        <EntityTypeShape EntityType="reclamosModel.aseguradoras" Width="1.5" PointX="3.5" PointY="0.75" />
+        <EntityTypeShape EntityType="reclamosModel.auto_reclamo" Width="1.5" PointX="7.5" PointY="5.5" />
+        <EntityTypeShape EntityType="reclamosModel.autorizaciones" Width="1.5" PointX="14.75" PointY="32.375" />
+        <EntityTypeShape EntityType="reclamosModel.bitacora_autorizaciones" Width="1.5" PointX="17" PointY="34" />
+        <EntityTypeShape EntityType="reclamosModel.bitacora_autos_unity" Width="1.5" PointX="12" PointY="40.375" />
+        <EntityTypeShape EntityType="reclamosModel.bitacora_consulta_movil" Width="1.5" PointX="3.5" PointY="3.75" />
+        <EntityTypeShape EntityType="reclamosModel.bitacora_estados_autos" Width="1.5" PointX="12" PointY="37.75" />
+        <EntityTypeShape EntityType="reclamosModel.bitacora_estados_reclamos_varios" Width="1.5" PointX="9" PointY="45.125" />
+        <EntityTypeShape EntityType="reclamosModel.bitacora_reclamo_auto" Width="1.5" PointX="12" PointY="28.5" />
+        <EntityTypeShape EntityType="reclamosModel.bitacora_reclamos_medicos" Width="1.5" PointX="6" PointY="38.875" />
+        <EntityTypeShape EntityType="reclamosModel.bitacora_reclamos_varios" Width="1.5" PointX="9" PointY="22.5" />
+        <EntityTypeShape EntityType="reclamosModel.busqCoberturasPolizasDaños" Width="1.5" PointX="5.5" PointY="0.75" />
+        <EntityTypeShape EntityType="reclamosModel.cabina" Width="1.5" PointX="7.5" PointY="58.25" />
+        <EntityTypeShape EntityType="reclamosModel.coberturas" Width="1.5" PointX="7.5" PointY="0.75" />
+        <EntityTypeShape EntityType="reclamosModel.coberturas_afectadas" Width="1.5" PointX="12" PointY="21.375" />
+        <EntityTypeShape EntityType="reclamosModel.coberturas_afectadas_danios" Width="1.5" PointX="9" PointY="47.875" />
+        <EntityTypeShape EntityType="reclamosModel.comentarios_reclamos_autos" Width="1.5" PointX="12" PointY="34.625" />
+        <EntityTypeShape EntityType="reclamosModel.comentarios_reclamos_medicos" Width="1.5" PointX="6" PointY="22.5" />
+        <EntityTypeShape EntityType="reclamosModel.comentarios_reclamos_varios" Width="1.5" PointX="9" PointY="18.625" />
+        <EntityTypeShape EntityType="reclamosModel.contacto_auto" Width="1.5" PointX="12" PointY="31.625" />
+        <EntityTypeShape EntityType="reclamosModel.contactos_reclamos_varios" Width="1.5" PointX="1.5" PointY="6.75" />
+        <EntityTypeShape EntityType="reclamosModel.detalle_gasto_medico" Width="1.5" PointX="6" PointY="18.625" />
+        <EntityTypeShape EntityType="reclamosModel.detalle_pagos_reclamos_autos" Width="1.5" PointX="12" PointY="24.625" />
+        <EntityTypeShape EntityType="reclamosModel.detalle_pagos_reclamos_medicos" Width="1.5" PointX="6" PointY="45" />
+        <EntityTypeShape EntityType="reclamosModel.detalle_pagos_reclamos_varios" Width="1.5" PointX="9" PointY="39.5" />
+        <EntityTypeShape EntityType="reclamosModel.direcciones" Width="1.5" PointX="3.5" PointY="6.75" />
+        <EntityTypeShape EntityType="reclamosModel.direcciones_clientes_gm" Width="1.5" PointX="9.5" PointY="0.75" />
+        <EntityTypeShape EntityType="reclamosModel.documentos_medicos" Width="1.5" PointX="9.5" PointY="3.75" />
+        <EntityTypeShape EntityType="reclamosModel.ejecutivos" Width="1.5" PointX="9.5" PointY="6.75" />
+        <EntityTypeShape EntityType="reclamosModel.empresa" Width="1.5" PointX="3" PointY="58.875" />
+        <EntityTypeShape EntityType="reclamosModel.encuesta" Width="1.5" PointX="1.5" PointY="9.75" />
+        <EntityTypeShape EntityType="reclamosModel.errores_insercion" Width="1.5" PointX="3.5" PointY="9.75" />
+        <EntityTypeShape EntityType="reclamosModel.estado" Width="1.5" PointX="1.5" PointY="31" />
+        <EntityTypeShape EntityType="reclamosModel.estados_reclamos_unity" Width="1.5" PointX="9.5" PointY="9.75" />
+        <EntityTypeShape EntityType="reclamosModel.formulario_colectivo" Width="1.5" PointX="11.5" PointY="0.75" />
+        <EntityTypeShape EntityType="reclamosModel.gestores" Width="1.5" PointX="7.5" PointY="51.5" />
+        <EntityTypeShape EntityType="reclamosModel.pais" Width="1.5" PointX="0.75" PointY="58.875" />
+        <EntityTypeShape EntityType="reclamosModel.ramos" Width="1.5" PointX="13.5" PointY="0.75" />
+        <EntityTypeShape EntityType="reclamosModel.recibos_medicos" Width="1.5" PointX="6" PointY="42" />
+        <EntityTypeShape EntityType="reclamosModel.reclamo_auto" Width="1.5" PointX="9.75" PointY="25.75" />
+        <EntityTypeShape EntityType="reclamosModel.reclamos_medicos" Width="1.5" PointX="3.75" PointY="26.125" />
+        <EntityTypeShape EntityType="reclamosModel.reclamos_varios" Width="1.5" PointX="6.75" PointY="26.125" />
+        <EntityTypeShape EntityType="reclamosModel.reg_reclamo_varios" Width="1.5" PointX="4.5" PointY="12.5" />
+        <EntityTypeShape EntityType="reclamosModel.reg_reclamos_medicos" Width="1.5" PointX="1.5" PointY="24.625" />
+        <EntityTypeShape EntityType="reclamosModel.resguardos" Width="1.5" PointX="13.5" PointY="3.75" />
+        <EntityTypeShape EntityType="reclamosModel.sucursal" Width="1.5" PointX="5.25" PointY="58.875" />
+        <EntityTypeShape EntityType="reclamosModel.sysdiagrams" Width="1.5" PointX="13.5" PointY="8.75" />
+        <EntityTypeShape EntityType="reclamosModel.talleres" Width="1.5" PointX="7.5" PointY="55" />
+        <EntityTypeShape EntityType="reclamosModel.usuario" Width="1.5" PointX="7.5" PointY="13" />
+        <EntityTypeShape EntityType="reclamosModel.viewCoberturasAutos" Width="1.5" PointX="9.5" PointY="12.75" />
+        <EntityTypeShape EntityType="reclamosModel.vistaBusquedaPolizaMovil" Width="1.5" PointX="11.5" PointY="12.75" />
+        <EntityTypeShape EntityType="reclamosModel.vistaReclamosDaños" Width="1.5" PointX="13.5" PointY="11.75" />
+        <EntityTypeShape EntityType="reclamosModel.vistaReclamosMedicos" Width="1.5" PointX="1.5" PointY="13.75" />
+        <EntityTypeShape EntityType="reclamosModel.ViewBusquedaAuto" Width="1.5" PointX="15.5" PointY="0.75" />
+        <EntityTypeShape EntityType="reclamosModel.v_producto_no_conforme" Width="1.5" PointX="15.5" PointY="8.75" />
+        <AssociationConnector Association="reclamosModel.FK_reclamo_auto_analistas" />
+        <AssociationConnector Association="reclamosModel.FK_reclamos_varios_analistas" />
+        <AssociationConnector Association="reclamosModel.FK__reclamo_a__id_au__300424B4" />
+        <AssociationConnector Association="reclamosModel.FK__autorizac__id_ca__30F848ED" />
+        <AssociationConnector Association="reclamosModel.FK__autorizac__id_re__3D5E1FD2" />
+        <AssociationConnector Association="reclamosModel.FK__autorizac__id_us__412EB0B6" />
+        <AssociationConnector Association="reclamosModel.FK__bitacora___id_au__2F10007B" />
+        <AssociationConnector Association="reclamosModel.FK_bitacora_autos_unity_reclamo_auto" />
+        <AssociationConnector Association="reclamosModel.FK_bitacora_estado_autos_reclamo_auto" />
+        <AssociationConnector Association="reclamosModel.FK_bitacora_estados_reclamos_varios_reclamos_varios" />
+        <AssociationConnector Association="reclamosModel.FK__bitacora___id_re__3C69FB99" />
+        <AssociationConnector Association="reclamosModel.FK__bitacora___id_re__3A81B327" />
+        <AssociationConnector Association="reclamosModel.FK__bitacora___id_re__47DBAE45" />
+        <AssociationConnector Association="reclamosModel.FK__cabina__id_sucur__4E88ABD4" />
+        <AssociationConnector Association="reclamosModel.FK__reclamo_a__id_ca__33D4B598" />
+        <AssociationConnector Association="reclamosModel.FK__reclamos___id_ca__4E88ABD4" />
+        <AssociationConnector Association="reclamosModel.FK__reclamos___id_ca__52593CB8" />
+        <AssociationConnector Association="reclamosModel.FK__usuario__id_cabi__5CD6CB2B" />
+        <AssociationConnector Association="reclamosModel.FK_cobertuas_afectadas_reclamo_auto" />
+        <AssociationConnector Association="reclamosModel.FK_coberturas_afectadas_danios_reclamos_varios" />
+        <AssociationConnector Association="reclamosModel.FK_comentarios_reclamos_autos_reclamo_auto" />
+        <AssociationConnector Association="reclamosModel.FK_comentarios_reclamos_medicos_reclamos_medicos" />
+        <AssociationConnector Association="reclamosModel.FK_comentarios_reclamos_varios_reclamos_varios" />
+        <AssociationConnector Association="reclamosModel.FK_contacto_auto_contacto_auto1" />
+        <AssociationConnector Association="reclamosModel.FK_detalle_gasto_medico_reclamos_medicos" />
+        <AssociationConnector Association="reclamosModel.FK_detalle_pago_reclamos_autos_reclamo_auto" />
+        <AssociationConnector Association="reclamosModel.FK_detalle_pagos_reclamos_medicos_detalle_pagos_reclamos_medicos1" />
+        <AssociationConnector Association="reclamosModel.FK_detalle_pagos_reclamos_varios_reclamos_varios" />
+        <AssociationConnector Association="reclamosModel.FK__empresa__id_pais__4F7CD00D" />
+        <AssociationConnector Association="reclamosModel.FK__sucursal__id_emp__5BE2A6F2" />
+        <AssociationConnector Association="reclamosModel.FK__reclamo_a__id_es__38996AB5" />
+        <AssociationConnector Association="reclamosModel.FK__reclamos___id_es__4F7CD00D" />
+        <AssociationConnector Association="reclamosModel.FK__reclamos___id_es__534D60F1" />
+        <AssociationConnector Association="reclamosModel.FK_reclamo_auto_gestores" />
+        <AssociationConnector Association="reclamosModel.FK_reclamos_varios_gestores" />
+        <AssociationConnector Association="reclamosModel.FK_recibos_medicos_recibos_medicos" />
+        <AssociationConnector Association="reclamosModel.FK__reclamo_a__id_us__440B1D61" />
+        <AssociationConnector Association="reclamosModel.FK_reclamo_auto_talleres" />
+        <AssociationConnector Association="reclamosModel.FK__reclamos___id_re__3E52440B" />
+        <AssociationConnector Association="reclamosModel.FK__reclamos___id_us__5165187F" />
+        <AssociationConnector Association="reclamosModel.FK__reclamos___id_re__5441852A" />
+        <AssociationConnector Association="reclamosModel.FK__reclamos___id_us__5535A963" />
+        <AssociationConnector Association="reclamosModel.FK_reclamos_varios_talleres" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

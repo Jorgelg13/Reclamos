@@ -1,0 +1,12 @@
+﻿body{
+    margin: 0;
+    padding: 0;
+
+}
+
+#mi-contador{
+    height: 100px;
+    margin: 0px;
+    padding: 20px 0 0 0 ;
+    width: 620px;
+}

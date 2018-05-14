@@ -1,0 +1,472 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="Site.master.cs" Inherits="SiteMaster" %>
+
+<!DOCTYPE html>
+<html lang="es">
+<head runat="server">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
+    <title>Sistema Reclamos</title>
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="css/estilos.css" rel="stylesheet" />
+    <link href="Scripts/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="css/toastr.min.css" rel="stylesheet" />
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <asp:ContentPlaceHolder ID="head" runat="server"></asp:ContentPlaceHolder>
+</head>
+<body onLoad="setInterval('notificarme()',300000);">
+    <form runat="server">
+        <div class="jumbotron titulo-cabecera">
+            <h2 style="width: 781px; padding-bottom: 20px;">Reclamos Unity Promotores</h2>
+            <header>
+                <div class="content-wrapper">
+                    <div class="float-right">
+                        <div class="img-float-right" style="float: right;">
+                            <img src="/imgUnity/Unity%20Promotores-%20Logo%20en%20blanco.png" style="margin-top: -90px; width: 235px;">
+                        </div>
+                        <section id="login">
+                            <asp:LoginView runat="server" ViewStateMode="Disabled">
+                                <AnonymousTemplate>
+                                    <ul>
+                                        <li><a class="color" id="loginLink" runat="server" href="~/Account/Login"><strong class="fondo">Iniciar sesión</strong></a></li>
+                                        <br />
+                                    </ul>
+                                </AnonymousTemplate>
+                                <LoggedInTemplate>
+                                    <p>
+                                        Hola  <a runat="server" class="username fondo" href="/Account/Manage" title="Manage your account">
+                                            <asp:LoginName runat="server" CssClass="username" />
+                                        </a>!
+                                <asp:LoginStatus runat="server" LogoutAction="Redirect" CssClass="fondo" LogoutText="Cerrar sesión" LogoutPageUrl="~/" />
+                                    </p>
+                                </LoggedInTemplate>
+                            </asp:LoginView>
+                        </section>
+                    </div>
+                </div>
+            </header>
+        </div>
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="/Default.aspx">Inicio</a>
+                </div>
+            <asp:Label ID="totalReclamosAutos" runat="server" hidden="true" ></asp:Label>
+            <asp:Label ID="totalReclamosDaños" runat="server" hidden="true"  ></asp:Label>
+            <asp:Label ID="totalReclamosMedicos" runat="server" hidden="true" ></asp:Label>
+            <asp:Label ID="totalAutorizaciones" runat="server" hidden="true" ></asp:Label>
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle fa fa-car" style="font-size: 16px;" aria-hidden="true" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Reclamos Autos <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="/Modulos/MdReclamos/wbFrmReclamosAutos.aspx">Realizar Un Reclamo</a></li>
+                                <li><a href="/Modulos/MdReclamos/wbFrmReclamoAutoManual.aspx">Reclamo manual</a></li>
+                                <li><a href="/Modulos/MdReclamos/wbFrmReclamosAbiertos.aspx">Mis Reclamos Abiertos</a></li>
+                                <li><a href="/Modulos/MdReclamos/wbFrmReclamosAutosGeneral.aspx">Reclamos En General</a></li>
+                                <li><a href="/Modulos/MdReclamos/wbFrmCrearResguardos.aspx">Crear Un Resguardo</a></li>
+                                <li><a href="/Modulos/MdReclamos/wbFrmBitacoras.aspx">Ver Registros Anteriores</a></li>
+                                <li><a href="/Modulos/MdReclamosUnity/wbFrmReclamosAsignadosUnity.aspx">Mis Reclamos Asignados</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle fa fa-exclamation-triangle" style="font-size: 16px;" aria-hidden="true" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Reclamos Daños <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="/Modulos/MdReclamos/wbFrmReclamosDaños.aspx">Realizar Un Reclamo</a></li>
+                                <li><a href="/Modulos/MdReclamos/wbFrmReclamoDañoManual.aspx">Reclamo manual</a></li>
+                                <li><a href="/Modulos/MdReclamos/wbFrmReclamosDañosAbiertos.aspx">Mis Reclamos Abiertos</a></li>
+                                <li><a href="/Modulos/MdReclamos/wbFrmReclamosDañosGeneral.aspx">Reclamos En General</a></li>
+                                <li><a href="/Modulos/MdReclamosUnity/wbFrmReclamosDañosAsignados.aspx">Mis Reclamos Asignados</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle fa fa-heartbeat" aria-hidden="true" style="font-size: 16px;" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Reclamos Medicos <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="/Modulos/MdReclamos/wbFrmReclamosMedicos.aspx">Realizar Un Reclamo</a></li>
+                                <li><a href="/Modulos/MdReclamos/wbFrmReclamoMedicoManual.aspx">Realizar Reclamo manual</a></li>
+                                <li><a href="/Modulos/MdReclamos/wbFrmReclamosMedicosGeneral.aspx">Reclamos En General</a></li>
+                                <li><a href="/Modulos/MdReclamosUnity/wbFrmReclamosMedicosAsignados.aspx">Mis Reclamos Asignados</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle fa fa-medkit" aria-hidden="true" style="font-size: 16px;" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Autorizaciones <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="/Modulos/MdReclamos/wbFrmAutorizaciones.aspx">Realizar una Autorizacion</a></li>
+                                <li><a href="/Modulos/MdReclamos/wbFrmAutorizacionManual.aspx">Realizar Una autorizacion Manual</a></li>
+                                <li><a href="/Modulos/MdReclamos/wbFrmAutorizacionesAbiertas.aspx">Mis Autorizaciones Abiertas</a></li>
+                                <li><a href="/Modulos/MdReclamos/wbFrmAutorizacionesGenerales.aspx">Autorizaciones Generales</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle fa fa-line-chart" aria-hidden="true" style="font-size: 16px;" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Reportes <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="/Modulos/MdReportes/ReportesAutos.aspx">Reportes Reclamos Autos</a></li>
+                                <li><a href="/Modulos/MdReportes/ReportesDaños.aspx">Reportes Reclamos Daños</a></li>
+                                <li><a href="/Modulos/MdReportes/ReportesMedicos.aspx">Reportes Reclamos Medicos</a></li>
+                                <li><a href="/Modulos/MdReportes/ReporteAutorizacions.aspx">Reportes Autorizaciones</a></li>
+                                <li><a href="/Modulos/MdReportes/ReportesAutorizacionesAbiertas.aspx">Reportes Autorizaciones Abiertas</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle fa fa-question-circle-o" aria-hidden="true" style="font-size: 18px;" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Opciones <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li class="dropdown-submenu">
+                                    <a tabindex="-1" href="#">Protocolos</a>
+                                    <ul class="dropdown-menu">
+                                        <li class="dropdown-submenu"></li>
+                                        <li><a href="javascript:ventanaSecundaria('/pdf/Protocolos/AutosDaños.pdf')">Autos y Daños</a></li>
+                                        <li><a href="javascript:ventanaSecundaria('/pdf/Protocolos/CopagosCoaseguros.pdf')">Copagos y coaseguros</a> </li>
+                                        <li><a href="javascript:ventanaSecundaria('/pdf/Protocolos/ProtocolosClientesIndividuales.pdf')">Gastos medicos Individuales</a> </li>
+                                        <li><a href="javascript:ventanaSecundaria('/pdf/Protocolos/ProtocoloColectivos.pdf')">Gastos medicos colectivos</a></li>
+                                    </ul>
+                                </li>
+                                 <li class="dropdown-submenu">
+                                    <a tabindex="-1" href="#">Contactos</a>
+                                    <ul class="dropdown-menu">
+                                        <li class="dropdown-submenu"></li>
+                                        <li><a href="/pdf/ContactosAseguradoras/Contactos Colectivos.xlsx">Colectivos Unity</a></li>
+                                    </ul>
+                                </li>
+                                 <li class="dropdown-submenu">
+                                    <a tabindex="-1" href="#">Redes Especiales</a>
+                                    <ul class="dropdown-menu">
+                                        <li class="dropdown-submenu"></li>
+                                        <li><a href="javascript:ventanaSecundaria('/pdf/Redes Especiales/WALMART PALIGMED 2017.pdf')">Walmart Paligmed 2017</a> </li>
+                                    </ul>
+                                </li>
+                                  <li class="dropdown-submenu">
+                                    <a tabindex="-1" href="#">Copagos</a>
+                                    <ul class="dropdown-menu">
+                                        <li class="dropdown-submenu"></li>
+                                        <li><a href="javascript:excel('/pdf/Copagos/AMICELCO COPAGOS.xlsx')">Amicelco</a></li>
+                                        <li><a href="javascript:excel('/pdf/Copagos/CAJA DE AHORRO COPAGOS.xlsx')">Caja de Ahorro</a></li>
+                                        <li><a href="javascript:excel('/pdf/Copagos/COEX Y AFILIADAS COPAGOS.xlsx')">Coex y Afiliadas</a></li>
+                                        <li><a href="javascript:ventanaSecundaria('/pdf/Copagos/Agropecuaria Popoyan POLIZA 856-VDGM.pdf')">Agropecuaria Popoyan</a></li>
+                                        <li><a href="javascript:ventanaSecundaria('/pdf/Copagos/Alfa Uno POLIZA 962-001.pdf')">Alfa Uno</a></li>
+                                        <li><a href="javascript:ventanaSecundaria('/pdf/Copagos/Aliprac POLIZA 55958.pdf')">Aliprac</a></li>
+                                        <li><a href="javascript:ventanaSecundaria('/pdf/Copagos/Cartones de Guatemala.pdf')">Cartones De Guatemala</a></li>
+                                        <li><a href="javascript:ventanaSecundaria('/pdf/Copagos/Disagro Guatemala.pdf')">Disagro Guatemala</a></li>
+                                        <li><a href="javascript:ventanaSecundaria('/pdf/Copagos/Dollarcity.pdf')">DollarCity</a></li>
+                                        <li><a href="javascript:ventanaSecundaria('/pdf/Copagos/Ingenio Palo Gordo.pdf')">Ingenio Palo Gordo</a></li>
+                                        <li><a href="javascript:ventanaSecundaria('/pdf/Copagos/Lafrancol.pdf')">Lafrancol</a></li>
+                                        <li><a href="javascript:ventanaSecundaria('/pdf/Copagos/Manpower.pdf')">Manpower</a></li>
+                                        <li><a href="javascript:ventanaSecundaria('/pdf/Copagos/Oro del Pacifico.pdf')">Oro del pacifico</a></li>
+                                        <li><a href="javascript:ventanaSecundaria('/pdf/Copagos/Promotores Unity.pdf')">Promotores Unity</a></li>
+                                        <li><a href="javascript:ventanaSecundaria('/pdf/Copagos/Quala.pdf')">Quala</a></li>
+                                        <li><a href="javascript:ventanaSecundaria('/pdf/Copagos/Super Vitaminas.pdf')">Super Vitaminas</a></li>
+                                        <li><a href="javascript:ventanaSecundaria('/pdf/Copagos/Tetel.pdf')">Tetel</a></li>
+                                        <li><a href="javascript:ventanaSecundaria('/pdf/Copagos/The People Company.pdf')">The People Company</a></li>
+                                        <li><a href="javascript:ventanaSecundaria('/pdf/Copagos/Tetel.pdf')">Tetel</a></li>
+                                        <li><a href="javascript:ventanaSecundaria('/pdf/Copagos/Volaris.pdf')">Volaris</a></li>
+                                        <li><a href="javascript:ventanaSecundaria('/pdf/Copagos/Yara Guatemala.pdf')">Yara</a></li>
+                                        <li><a href="/pdf/Copagos/Cuentas Daniela Lima.xlsx">Cuentas Daniela Lima</a></li>
+                                        <li><a href="/pdf/Copagos/Cuentas Maribel Cermeño.xlsx">Cuentas Maribel Cermeño</a></li>
+                                        <li><a href="/pdf/Copagos/Cuentas Juan Antonio.xls">Cuentas Juan Antonio</a></li>
+                                        <li><a href="/pdf/Copagos/Cuentas Marvin Escobar.xls">Cuentas Marvin Escobar</a></li>
+                                    </ul>
+                                </li>
+                                <li class="dropdown-submenu">
+                                    <a tabindex="-1" href="#">Preguntas Frecuentes</a>
+                                    <ul class="dropdown-menu">
+                                        <li class="dropdown-submenu"></li>
+                                        <li><a href="javascript:ventanaSecundaria('/pdf/Preguntas Frecuentes por Linea de negocio/Preguntas frecuentes Colectivos y Salud.pdf')">Preguntas frecuentes Colectivos y Salud</a></li>
+                                        <li><a href="javascript:ventanaSecundaria('/pdf/Preguntas Frecuentes por Linea de negocio/Preguntas frecuentes Servicio al cliente LP - Corp.pdf')">Preguntas frecuentes Servicio al cliente LP - Corp</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="/Modulos/MdReclamos/wbFrmConsultarAjustadores.aspx">Ajustadores y Contactos Aseguradoras</a></li>
+                                <li class="dropdown-submenu">
+                                    <a tabindex="-1" href="#">Aseguradoras Afiliadas</a>
+                                    <ul class="dropdown-menu">
+                                        <li class="dropdown-submenu"></li>
+                                        <li class="dropdown-submenu">
+                                            <a tabindex="-1" href="#">El Roble</a>
+                                            <ul class="dropdown-menu">
+                                                <li class="dropdown-submenu"></li>
+                                                <li><a href="http://roblered.mediprocesos.com/" target="_blank">Link El Roble</a></li>
+                                            </ul>
+                                        </li>
+                                        <li class="dropdown-submenu">
+                                            <a tabindex="-1" href="#">Seguros G&T</a>
+                                            <ul class="dropdown-menu">
+                                                <li class="dropdown-submenu"></li>
+                                                <li><a href="https://www.segurosgyt.com.gt/medired/" target="_blank">Link Seguros G&T</a></li>
+                                            </ul>
+                                        </li>
+                                        <li class="dropdown-submenu">
+                                            <a tabindex="-1" href="#">Seguros Mapfre</a>
+                                            <ul class="dropdown-menu">
+                                                <li class="dropdown-submenu"></li>
+                                                <li><a href="javascript:excel('/pdf/Red de Proveedores/RED MEDICA MAPFRE 2017.xls')">Red De Proveedores</a></li>
+                                            </ul>
+                                        </li>
+                                        <li class="dropdown-submenu">
+                                            <a tabindex="-1" href="#">Seguros Universales</a>
+                                            <ul class="dropdown-menu">
+                                                <li class="dropdown-submenu"></li>
+                                                <li><a href="https://www.universales.com/area/medicos/" target="_blank">Link Seguros Universales</a></li>
+                                            </ul>
+                                        </li>
+                                        <li class="dropdown-submenu">
+                                            <a tabindex="-1" href="#">Seguros Panamerican</a>
+                                            <ul class="dropdown-menu">
+                                                <li class="dropdown-submenu"></li>
+                                                <li><a href="javascript:excel('/pdf/Red de Proveedores/RED PALIGMED MAYO 2017.xls')">Red De Proveedores</a></li>
+                                            </ul>
+                                        </li>
+                                        <li class="dropdown-submenu">
+                                            <a tabindex="-1" href="#">Seguros Agro Mercantil</a>
+                                            <ul class="dropdown-menu">
+                                                <li class="dropdown-submenu"></li>
+                                                <li><a href="javascript:ventanaSecundaria('/pdf/Red de Proveedores/BAM 2016 Global Care Lista de Hospitales.pdf')">Red De Hospitales</a></li>
+                                                <li><a href="javascript:excel('/pdf/Red de Proveedores/RED PROVEEEDORES BAM.xlsX')">Red De Proveedores</a></li>
+                                            </ul>
+                                        </li>
+                                        <li class="dropdown-submenu">
+                                            <a tabindex="-1" href="#">Seguros de occidente</a>
+                                            <ul class="dropdown-menu">
+                                                <li class="dropdown-submenu"></li>
+                                                <li><a href="https://occidente.confio.com.gt/mediprocesos.aspx" target="_blank">Link Seguros de Occidente</a></li>
+                                            </ul>
+                                        </li>
+                                        <li class="dropdown-submenu">
+                                            <a tabindex="-1" href="#">BUPA</a>
+                                            <ul class="dropdown-menu">
+                                                <li class="dropdown-submenu"></li>
+                                                <li><a href="https://www.bupaesmas.com/oficina-movil/red-de-hospitales" target="_blank">Link BUPA</a></li>
+                                            </ul>
+                                        </li>
+                                        <li class="dropdown-submenu">
+                                            <a tabindex="-1" href="#">BMI</a>
+                                            <ul class="dropdown-menu">
+                                                <li class="dropdown-submenu"></li>
+                                                <li><a href="https://www.bmicos.com/4324" target="_blank">Link BMI</a></li>
+                                            </ul>
+                                        </li>
+                                        <li class="dropdown-submenu">
+                                            <a tabindex="-1" href="#">Best Doctors</a>
+                                            <ul class="dropdown-menu">
+                                                <li class="dropdown-submenu"></li>
+                                                <li><a href="javascript:ventanaSecundaria('/pdf/Red de Proveedores/BAM 2016 Medical Elite Lista de Hospitales de Maternidad.pdf')">Red Hosp. Maternidad</a></li>
+                                            </ul>
+                                        </li>
+                                        <li class="dropdown-submenu">
+                                            <a tabindex="-1" href="#">Aseguradora General</a>
+                                            <ul class="dropdown-menu">
+                                                <li class="dropdown-submenu"></li>
+                                                <li><a href="http://rpn.mediprocesos.com/" target="_blank">Link Aseguradora General</a></li>
+                                            </ul>
+                                        </li>
+                                        <li class="dropdown-submenu">
+                                            <a tabindex="-1" href="#">Seguros El Roble PHI</a>
+                                            <ul class="dropdown-menu">
+                                                <li class="dropdown-submenu"></li>
+                                                <li><a href="http://omhc.com/provider-search/" target="_blank">Link PHI</a></li>
+                                                <li><a href="javascript:ventanaSecundaria('/pdf/Red de Proveedores/Hospitales Selectos.pdf')">Hospitales Selectos</a></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li><a href="#">Directorio Regional</a></li>
+                                                                 <li class="dropdown-submenu">
+                                    <a tabindex="-1" href="#">Formularios Aseguradoras</a>
+                                    <ul class="dropdown-menu">
+                                        <li class="dropdown-submenu"></li>
+                                        <li class="dropdown-submenu">
+                                            <a tabindex="-1" href="#">Asa</a>
+                                            <ul class="dropdown-menu">
+                                                <li class="dropdown-submenu"></li>
+                                                <li><a href="javascript:ventanaSecundaria('pdf/Formularios%20aseguradoras/ASSA/Formulario%20de%20Reclamacion%20Inicial%20de%20Gastos%20Médicos%20(1)ASSA.pdf')">Reclamacion Inicial de Gastos Médicos</a></li>
+                                                <li><a href="javascript:ventanaSecundaria('pdf/Formularios%20aseguradoras/ASSA/Formulario%20de%20Reclamo%20por%20ComplementoASSA.pdf')">Reclamo por ComplementoASSA</a></li>
+                                                <li><a href="javascript:ventanaSecundaria('pdf/Formularios%20aseguradoras/ASSA/Instructivo%20de%20Presentaciòn%20de%20Reclamos%20de%20Gastos%20MèdicosASSA.pdf')">Reclamos de Gastos MèdicosASSA</a></li>
+                                            </ul>
+                                        </li>
+                                        <li class="dropdown-submenu">
+                                            <a tabindex="-1" href="#">Seguros G&T</a>
+                                            <ul class="dropdown-menu">
+                                                <li class="dropdown-submenu"></li>
+                                                <li><a href="javascript:ventanaSecundaria('pdf/Formularios%20aseguradoras/GYT/Seguros%20GyT_Formulario%20Unico%20de%20Reclamacion.pdf')">Formulario Unico de Reclamacion</a></li>
+                                            </ul>
+                                        </li>
+                                        <li class="dropdown-submenu">
+                                            <a tabindex="-1" href="#">Seguros Mapfre</a>
+                                            <ul class="dropdown-menu">
+                                                <li class="dropdown-submenu"></li>
+                                                <li><a href="javascript:ventanaSecundaria('pdf/Formularios%20aseguradoras/MAPFRE/INFORME%20MEDICO%20mapfre.pdf')">INFORME MEDICO mapfre</a></li>
+                                                <li><a href="javascript:ventanaSecundaria('pdf/Formularios%20aseguradoras/MAPFRE/Mapfre_Formulario%20Unico%20de%20Reclamación.pdf')">Mapfre Formulario Unico de Reclamación</a></li>
+                                            </ul>
+                                        </li>
+                                        <li class="dropdown-submenu">
+                                            <a tabindex="-1" href="#">Palig</a>
+                                            <ul class="dropdown-menu">
+                                                <li class="dropdown-submenu"></li>
+                                                <li><a href="javascript:ventanaSecundaria('pdf/Formularios%20aseguradoras/PALIG/INFORME%20MEDICO%20(2)%20panamerican.pdf')">INFORME MEDICO panamerican</a></li>
+                                                <li><a href="javascript:ventanaSecundaria('pdf/Formularios%20aseguradoras/PALIG/paligexaespeciale.JPG')">Examenes Especiales</a></li>
+                                                <li><a href="javascript:ventanaSecundaria('pdf/Formularios%20aseguradoras/PALIG/Pan%20American%20Life_Formulario%20Unico%20de%20Reclamación.pdf')">Life Formulario Unico de Reclamación</a></li>
+                                                <li><a href="javaScript:ventanaSecundaria('pdf/Formularios%20aseguradoras/PALIG/Pan%20American%20Life_Hospitalizaciones%20Programadas.pdf')">Pan American Life_Hospitalizaciones Programadas</a></li>
+                                                <li><a href="javascript('pdf/Formularios%20aseguradoras/PALIG/Pan%20American%20Life_Reclamos%20gastos%20médicos%20Palig.pdf')">Pan American Life Reclamos gastos médicos Palig</a></li>
+                                                <li><a href="javascript:ventanaSecundaria('pdf/Formularios%20aseguradoras/PALIG/Pan%20American%20Life_Solicitud%20de%20autorizacion%20de%20vacunas.pdf')">Pan American Life Solicitud de autorizacion de vacunas</a></li>
+                                                <li><a href="javascript:ventanaSecundaria('pdf/Formularios%20aseguradoras/PALIG/Pan%20American%20Life_Solicitud%20de%20Reclamacion%20de%20Dental.pdf')">Pan American Life Solicitud de Reclamacion de Dental</a></li>
+                                                <li><a href="javascript:ventanaSecundaria('pdf/Formularios%20aseguradoras/PALIG/Pan%20American%20Life_Terapia%20fisica%20y%20rehabilitacion.pdf')">American Life Terapia fisica y rehabilitacion</a></li>
+                                            </ul>
+                                        </li>
+                                        <li class="dropdown-submenu">
+                                            <a tabindex="-1" href="#">Seguros El Roble</a>
+                                            <ul class="dropdown-menu">
+                                                <li class="dropdown-submenu"></li>
+                                                <li><a href="javascript:ventanaSecundaria:('pdf/Formularios%20aseguradoras/ROBLE/El%20Roble_Formulario%20Unico%20Reclamacion.pdf')">Formulario Unico Reclamacion</a></li>
+                                                <li><a href="javascript:ventanaSecundaria('pdf/Formularios%20aseguradoras/ROBLE/El%20Roble_Solicitud%20Hospitalizacion.pdf')">Solicitud Hospitalizacion</a></li>
+                                                <li><a href="javascript:ventanaSecundaria('pdf/Formularios%20aseguradoras/ROBLE/El%20Roble_Solicitud%20Procedimientos.pdf')">Solicitud Procedimientos</a></li>
+                                                <li><a href="javascript:ventanaSecundaria('pdf/Formularios%20aseguradoras/ROBLE/ORDEN%20DE%20LABORATORIO.pdf')">ORDEN DE LABORATORIO</a></li>
+                                                <li><a href="javascript:ventanaSecundaria('pdf/Formularios%20aseguradoras/ROBLE/ORDEN%20DE%20RADIOLOGIA.pdf')">ORDEN DE RADIOLOGIA.pdf</a></li>
+                                                <li><a href="javascript:ventanaSecundaria('pdf/Formularios%20aseguradoras/ROBLE/RECETAroble.pdf')">RECETA Roble</a></li>
+                                                <li><a href="javascript:ventanaSecundaria('pdf/Formularios%20aseguradoras/ROBLE/ROBLE%20GASTOS%20M%20EDITABLE-3.pdf')">ROBLE GASTOS M EDITABLE</a></li>
+                                                <li><a href="javascript:ventanaSecundaria('pdf/Formularios%20aseguradoras/ROBLE/SOLICITUD%20DE%20PROCEDIMIENTOS.pdf')">SOLICITUD DE PROCEDIMIENTOS</a></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="dropdown-submenu">
+                                    <a tabindex="-1" href="#">Formularios Inspeccion de Vehiculos</a>
+                                    <ul class="dropdown-menu">
+                                        <li class="dropdown-submenu"></li>
+                                        <li><a href="javascript:excel('/pdf/FormularioInspecciónvehículos/inspeccionDeVehiculos.xlsx')">Inspeccion de Vehiculos</a></li>
+                                    </ul>
+                                </li>
+                                <li class="dropdown-submenu ">
+                                    <a tabindex="-1" href="#">Formularios IVE</a>
+                                    <ul class="dropdown-menu">
+                                        <li class="dropdown-submenu"></li>
+                                        <li class="dropdown-submenu">
+                                            <a tabindex="-1" href="#">Formularios Aseguradoras IVE</a>
+                                            <ul class="dropdown-menu">
+                                                <li class="dropdown-submenu"></li>
+                                                <li><a href="javascript:excel('/pdf/FormulariosAseguradorasIVE/Registro de inicio de relaciones, PI ( IVE-ASR-32) El Roble.xlsx')">Registro de inicio de relaciones, PI ( IVE-ASR-32) El Roble</a></li>
+                                                <li><a href="javascript:excel('/pdf/FormulariosAseguradorasIVE/Registros de inicio de relaciones PJ ( IVE-ASR-32)El Roble.xlsx')">Registros de inicio de relaciones PJ ( IVE-ASR-32)El Roble</a></li>
+                                            </ul>
+                                        </li>
+                                        <li class="dropdown-submenu">
+                                            <a tabindex="-1" href="#">Boletas de actualización IVE</a>
+                                            <ul class="dropdown-menu">
+                                                <li class="dropdown-submenu"></li>
+                                                <li><a href="javascript:excel('/pdf/Formularios Internos Promotores IVE/Boleta  renovaciones  Promotores.xlsx')">Boleta  renovaciones  Promotores</a></li>
+                                                <li><a href="javascript:excel('/pdf/Formularios Internos Promotores IVE/Boleta Inicio de ralaciones.xls.xlsx')">Boleta Inicio de ralaciones</a></li>
+                                                <li><a href="javascript:excel('/pdf/Formularios Internos Promotores IVE/Boleta inicio de relaciones Promotores.xlsx')">Boleta inicio de relaciones Promotores</a></li>
+                                            </ul>
+                                        </li>
+                                        <li class="dropdown-submenu">
+                                            <a tabindex="-1" href="#">Formularios IVE de Promotores</a>
+                                            <ul class="dropdown-menu">
+                                                <li class="dropdown-submenu"></li>
+                                                <li><a href="javascript:excel('/pdf/Formularios IVE/Anexo Oficio 1268-2015 Anexo A.III Persona Expuesta Políticamente.xlsx')">Anexo Oficio 1268-2015 Anexo A.III Persona Expuesta Políticamente</a></li>
+                                                <li><a href="javascript:excel('/pdf/Formularios IVE/Anexo Oficio 1268-2015 Anexo A.IV Beneficiarios.xlsx')">Anexo Oficio 1268-2015 Anexo A.IV Beneficiarios</a></li>
+                                                <li><a href="javascript:excel('/pdf/Formularios IVE/Anexo Oficio 1268-2015 Formulario IVE-ASS-01.xlsx')">Anexo Oficio 1268-2015 Formulario IVE-ASS-01</a></li>
+                                                <li><a href="javascript:excel('/pdf/Formularios IVE/Anexo Oficio 1268-2015 Formulario IVE-ASS-02.xlsx')">Anexo Oficio 1268-2015 Formulario IVE-ASS-02</a></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
+
+                                <li class="dropdown-submenu">
+                                    <a tabindex="-1" href="#">Formularios TC</a>
+                                    <ul class="dropdown-menu">
+                                        <li class="dropdown-submenu"></li>
+                                        <li><a href="javascript:excel('/pdf/Formularios TC/FORMULARIODECARGOS.ods')">bamCB-R-02 FORMULARIO DE CARGOS A TARJETA NUEVO</a></li>
+                                        <li><a href="javascript:ventanaSecundaria('/pdf/Formularios TC/Formulario autorización TC - Aseguradora General 2.pdf')">Formulario autorización TC - Aseguradora General 2</a></li>
+                                        <li><a href="javascript:ventanaSecundaria('/pdf/Formularios TC/Formulario autorización TC - Aseguradora General 3.pdf')">Formulario autorización TC - Aseguradora General 3</a></li>
+                                        <li><a href="javascript:ventanaSecundaria('/pdf/Formularios TC/Formulario autorización TC - Aseguradora General.jpg')">Formulario autorización TC - Aseguradora General</a></li>
+                                        <li><a href="javascript:ventanaSecundaria('/pdf/Formularios TC/Formulario autorización TC - Mapfre.pdf')">Formulario autorización TC - Mapfre</a></li>
+                                        <li><a href="javascript:ventanaSecundaria('/pdf/Formularios TC/Formulario autorización TC - Roble 2.pdf')">Formulario autorización TC - Roble 2</a></li>
+                                        <li><a href="javascript:ventanaSecundaria('/pdf/Formularios TC/Formulario autorización TC - Roble 3.pdf')">Formulario autorización TC - Roble 3</a></li>
+                                        <li><a href="javascript:ventanaSecundaria('/pdf/Formularios TC/Formulario autorización TC - Roble.pdf')">Formulario autorización TC - Roble</a></li>
+                                        <li><a href="javascript:ventanaSecundaria('/pdf/Formularios TC/Formulario autorización TC - Seguros G&T 2.pdf')">Formulario autorización TC - Seguros G&T 2</a></li>
+                                        <li><a href="javascript:excel('/pdf/Formularios TC/Formulario autorización TC - Seguros G&T.doc')">Formulario autorización TC - Seguros G&T</a></li>
+                                        <li><a href="javascript:ventanaSecundaria('/pdf/Formularios TC/Formulario autorización TC - Seguros Universales.pdf')">Formulario autorización TC - Seguros Universales</a></li>
+                                        <li><a href="javascript:ventanaSecundaria('/pdf/Formularios TC/Formulario autorización TC- Seguros Occidente.pdf')">Formulario autorización TC- Seguros Occidente</a></li>
+                                    </ul>
+                                </li>
+                                <li class="dropdown-submenu">
+                                    <a tabindex="-1" href="#">Cotizadores</a>
+                                    <ul class="dropdown-menu">
+                                        <li class="dropdown-submenu"></li>
+                                        <li><a href="javascript:excel('/pdf/Cotizadores/Cotizador Autos 0615.xls')">Cotizador Autos 0615</a></li>
+                                        <li><a href="javascript:excel('/pdf/Cotizadores/Cotizador Bupa 0615.xlsm')">Cotizador Bupa 0615</a></li>
+                                        <li><a href="javascript:excel('/pdf/Cotizadores/Cotizador de VIVIENDA BAM UNIV Y GENERALI 2013.xlsx')">Cotizador de VIVIENDA BAM UNIV Y GENERALI 2013</a></li>
+                                        <li><a href="javascript:excel('/pdf/Cotizadores/Cotizador FIANZAS GENERALI 2013.xls')">Cotizador FIANZAS GENERALI 2013</a></li>
+                                        <li><a href="javascript:excel('/pdf/Cotizadores/Cotizador FIANZAS GYT 2013.xls')">Cotizador FIANZAS GYT 2013</a></li>
+                                        <li><a href="javascript:excel('/pdf/Cotizadores/Cotizador FIANZAS ROBLE 2013.xlsx')">Cotizador FIANZAS ROBLE 2013</a></li>
+                                        <li><a href="javascript:excel('/pdf/Cotizadores/Cotizador Gastos Médicos 0615.xls')">Cotizador Gastos Médicos 0615</a></li>
+                                        <li><a href="javascript:excel('/pdf/Cotizadores/COTIZADOR MAQUINARIA ROBLE Y MAPFRE 2013.xls')">COTIZADOR MAQUINARIA ROBLE Y MAPFRE 2013</a></li>
+                                        <li><a href="javascript:ventanaSecundaria('/pdf/Cotizadores/Proyecto certificados de transporte G&T.pdf')">Proyecto certificados de transporte G&T</a></li>
+                                        <li><a href="javascript:ventanaSecundaria('/pdf/Cotizadores/Proyecto certificados de transporte.pdf')">Proyecto certificados de transporte</a></li>
+                                        <li><a href="javascript:ventanaSecundaria('/pdf/Cotizadores/Roble Construcción 0615.pdf')">Roble Construcción 0615</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="javascript:excel('/pdf/CopagosAmbulancias/Copagos Ambulancias.ods')">Copagos Ambulancias</a></li>
+                                <li><a href="javascript:excel('/pdf/ContactosAseguradoras/CONTACTOS ASEGURADORAS.xls')">Contactos Aseguradoras</a></li>
+                                <li><a href="javascript:ventanaSecundaria('/pdf/textos/TEXTOS DE RESPUESTA.pdf')">Textos de respuesta</a></li>
+                            </ul>
+                        </li>
+
+                        <li class="dropdown">
+                            <a href="#" class="fa fa-cogs" aria-hidden="true" style="font-size: 18px;" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Admin <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="/Modulos/MdAdmin/wbFrmAsignacionUsuarios.aspx">Asignacion Usuarios</a></li>
+                                <li><a href="/Modulos/MdAdmin/wbFrmAjustadores.aspx">Ajustadores</a></li>
+                                <li class="dropdown-submenu">
+                                    <a tabindex="-1" href="#">Asignacion Usuario Unity</a>
+                                    <ul class="dropdown-menu">
+                                        <li class="dropdown-submenu"></li>
+                                        <li><a href="/Modulos/MdAdmin/wbFrmAsignacionUnity.aspx">Asignacion Reclamos Autos</a></li>
+                                        <li><a href="/Modulos/MdAdmin/wbFrmAsigReclamosDaños.aspx">Asignacion Reclamos Daños</a></li>
+                                        <li><a href="/Modulos/MdAdmin/wbFrmAsigReclamosMedicos.aspx">Asignacion Reclamos Medicos</a></li>
+                                    </ul>
+                                </li>
+                                <li class="dropdown-submenu">
+                                    <a tabindex="-1" href="#">Bitacoras</a>
+                                    <ul class="dropdown-menu">
+                                        <li class="dropdown-submenu"></li>
+                                        <li><a href="/Modulos/MdAdmin/wbFrmBitacoras.aspx">Bitacoras En General</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <script language="javascript"> 
+            function ventanaSecundaria(URL) {
+                window.open(URL, "ventana1", "width=800,height=600,scrollbars=NO")
+            }
+        </script>
+        <script language="javascript"> 
+            function excel(URL) {
+                window.open(URL, "ventana1", "width=450,height=150,scrollbars=NO")
+            }
+        </script>
+        <div id="body">
+            <asp:ContentPlaceHolder runat="server" ID="FeaturedContent">
+            </asp:ContentPlaceHolder>
+            <section class="content-wrapper main-content clear-fix">
+                <asp:ContentPlaceHolder runat="server" ID="MainContent" />
+            </section>
+        </div>
+        <script type="text/javascript" src="<%= ResolveUrl("/Scripts/jquery-3.1.1.min.js") %>"></script>
+        <script type="text/javascript" src="<%= ResolveUrl("/bootstrap/js/bootstrap.min.js") %>"></script>
+        <script type="text/javascript" src="<%= ResolveUrl("/Scripts/jquery.cookie.min.js") %>"></script>
+        <script type="text/javascript" src="<%= ResolveUrl("/Scripts/toastr.min.js") %>"></script>
+        <script type="text/javascript" src="<%= ResolveUrl("/Scripts/jQuery.print.min.js") %>"></script>
+        <script type="text/javascript" src="<%= ResolveUrl("/Scripts/app.js") %>"></script>
+        <asp:ContentPlaceHolder ID="contentJS" runat="server">
+        </asp:ContentPlaceHolder>
+    </form>
+</body>
+</html>
