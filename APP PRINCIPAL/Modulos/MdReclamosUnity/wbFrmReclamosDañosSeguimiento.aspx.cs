@@ -615,7 +615,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosDañosSeguimiento : Sy
             this.Page.ClientScript.RegisterStartupScript(this.Page.GetType(), "show_modal", "$('#confirmacion_sms').modal('show');", addScriptTags: true);
         }
 
-        if (ddlEstadoReclamo.SelectedValue == "Cheque")
+        if (ddlEstadoReclamo.SelectedValue == "Cheque Entrega")
         {
             txtMensaje.Text = Constantes.CHEQUE_DAÑOS(lblIDRec);
             txtAsunto.Text = "Cheque";
@@ -627,7 +627,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosDañosSeguimiento : Sy
             txtAsunto.Text = "Inactivo";
         }
 
-        if (ddlEstadoReclamo.SelectedValue == "Cheque" && txtTelefono.Text != "")
+        if (ddlEstadoReclamo.SelectedValue == "Cheque Entrega" && txtTelefono.Text != "")
         {
             var destino_cheque = DBReclamos.detalle_pagos_reclamos_varios.Select(d => new { d.destino, d.id_reclamos_varios }).Where(de => de.id_reclamos_varios == id).First();
             if (destino_cheque.destino == "Escritura de pago")
@@ -662,7 +662,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosDañosSeguimiento : Sy
 
         else if (ddlEstadoReclamo.SelectedValue == "Ajuste")
         {
-            Utils.SMS_reclamos_danios(txtTelefono.Text, "UNITY: Estimad@ cliente la documentacion del reclamo " + id + " esta siendo analizada por el ajustador asignado.", userlogin, id);
+            Utils.SMS_reclamos_danios(txtTelefono.Text, "UNITY: Estimad@ cliente la documentacion del reclamo " + id + " esta siendo analizada por la aseguradora.", userlogin, id);
             llenado.llenarGrid(comentarios, GridComentarios);
         }
 
@@ -672,7 +672,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosDañosSeguimiento : Sy
             llenado.llenarGrid(comentarios, GridComentarios);
         }
 
-        else if (ddlEstadoReclamo.SelectedValue == "Cheque")
+        else if (ddlEstadoReclamo.SelectedValue == "Cheque Entrega")
         {
             var destino_cheque = DBReclamos.detalle_pagos_reclamos_varios.Select(d => new { d.destino, d.id_reclamos_varios }).Where(de => de.id_reclamos_varios == id).First();
 
@@ -684,7 +684,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosDañosSeguimiento : Sy
 
             else if (destino_cheque.destino == "Recepcion")
             {
-                Utils.SMS_reclamos_danios(txtTelefono.Text, "UNITY: Estimad@ cliente el cheque del reclamo " + id + " se encuentra listo en nuestra recepción para que se sirva recogerlo.", userlogin, id);
+                Utils.SMS_reclamos_danios(txtTelefono.Text, "UNITY: Estimad@ cliente el cheque del reclamo " + id + " se encuentra listo recepcion Unity favor pasar a recogerlo.", userlogin, id);
                 llenado.llenarGrid(comentarios, GridComentarios);
             }
 
