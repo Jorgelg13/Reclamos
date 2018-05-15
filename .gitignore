@@ -1,0 +1,12 @@
+Servicios/Mensajeria/node_modules
+Servicios/Mensajeria/public/hot
+Servicios/Mensajeria/public/storage
+Servicios/Mensajeria/storage/*.key
+Servicios/Mensajeria/vendor
+Servicios/Mensajeria/.idea
+Servicios/Mensajeria/.vscode
+Servicios/Mensajeria/.vagrant
+Servicios/Mensajeria/Homestead.json
+Servicios/Mensajeria/Homestead.yaml
+Servicios/Mensajeria/npm-debug.log
+Servicios/Mensajeria/yarn-error.log
