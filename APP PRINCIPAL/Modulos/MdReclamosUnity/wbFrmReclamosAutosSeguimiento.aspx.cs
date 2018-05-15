@@ -532,6 +532,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosAutosSeguimiento : Sys
             pago.primas = Convert.ToDecimal(txtPrimasPago.Text);
             pago.total = Convert.ToDecimal(total);
             pago.fecha = DateTime.Now;
+            pago.destino = ddlDestino.SelectedValue;
             pago.id_reclamo_auto = id;
             DBReclamos.detalle_pagos_reclamos_autos.Add(pago);
             DBReclamos.SaveChanges();
@@ -547,6 +548,41 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosAutosSeguimiento : Sys
         {
             Utils.ShowMessage(this.Page, "No se a podido realizar el pago", "Nota..!", "error");
         }
+    }
+
+    //editar una liquidacion
+    protected void GridPagosReclamos_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        int id_pago = Convert.ToInt32(GridPagosReclamos.SelectedRow.Cells[1].Text);
+        var pago = DBReclamos.detalle_pagos_reclamos_autos.Find(id_pago);
+        txtMonto.Text = pago.monto.ToString();
+        txtIva.Text = pago.iva.ToString();
+        txtPagoDeducible.Text = pago.deducible.ToString();
+        txtTimbres.Text = pago.timbres.ToString();
+        txtPrimasPago.Text = pago.primas.ToString();
+        txtTotal.Text = pago.total.ToString();
+        ddlDestino.SelectedValue = ddlDestino.SelectedValue = String.IsNullOrEmpty(pago.destino) ? "" : pago.destino;
+        txtIva.Enabled = true;
+        txtTimbres.Enabled = true;
+        txtTotal.Enabled = true;
+        btnPago.Enabled = false;
+        btnActualizarPagos.Enabled = true;
+        this.Page.ClientScript.RegisterStartupScript(this.Page.GetType(), "show_modal", "$('#IngresarLiquidacion').modal('show');", addScriptTags: true);
+    }
+
+    protected void btnActualizarPagos_Click(object sender, EventArgs e)
+    {
+        int id_pago = Convert.ToInt32(GridPagosReclamos.SelectedRow.Cells[1].Text);
+        var pago = DBReclamos.detalle_pagos_reclamos_autos.Find(id_pago);
+        pago.monto = Convert.ToDecimal(txtMonto.Text);
+        pago.iva = Convert.ToDecimal(txtIva.Text);
+        pago.deducible = Convert.ToDecimal(txtPagoDeducible.Text);
+        pago.timbres = Convert.ToDecimal(txtTimbres.Text);
+        pago.primas = Convert.ToDecimal(txtPrimasPago.Text);
+        pago.total = Convert.ToDecimal(txtTotal.Text);
+        pago.destino = ddlDestino.SelectedValue;
+        DBReclamos.SaveChanges();
+        llenado.llenarGrid(pagos, GridPagosReclamos);
     }
 
     //salir del reclamo y me redirecciona a los reclamos en seguimiento
@@ -584,35 +620,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosAutosSeguimiento : Sys
             Utils.ShowMessage(this.Page, "No se a podido actualizar la fecha a visualizar", "Nota..!", "warning");
         }
     }
-    // scripts para enviar correos electronicos segun el estado al que se cambie el vehiculo
-    protected void ddlEstadoAuto_SelectedIndexChanged(object sender, EventArgs e)
-    {
-        if (ddlEstadoAuto.SelectedItem.Text == "Asignacion" && txtCorreoContacto.Text != "")
-        {
-            this.Page.ClientScript.RegisterStartupScript(this.Page.GetType(), "show_modal", "$('#confirmar_envio_correo').modal('show');", addScriptTags: true);
-        }
-
-        else if (ddlEstadoAuto.SelectedItem.Text == "Presupuesto" && txtCorreoContacto.Text != "")
-        {
-            this.Page.ClientScript.RegisterStartupScript(this.Page.GetType(), "show_modal", "$('#confirmar_envio_correo').modal('show');", addScriptTags: true);
-        }
-
-        else if (ddlEstadoAuto.SelectedItem.Text == "Ajustes autos" && txtCorreoContacto.Text != "")
-        {
-            this.Page.ClientScript.RegisterStartupScript(this.Page.GetType(), "show_modal", "$('#confirmar_envio_correo').modal('show');", addScriptTags: true);
-        }
-
-        else if (ddlEstadoAuto.SelectedItem.Text == "Reparacion" && txtCorreoContacto.Text != "")
-        {
-            this.Page.ClientScript.RegisterStartupScript(this.Page.GetType(), "show_modal", "$('#confirmar_envio_correo').modal('show');", addScriptTags: true);
-        }
-
-        else if (ddlEstadoAuto.SelectedItem.Text == "Entrega" && txtCorreoContacto.Text != "")
-        {
-            this.Page.ClientScript.RegisterStartupScript(this.Page.GetType(), "show_modal", "$('#confirmar_envio_correo').modal('show');", addScriptTags: true);
-        }
-    }
-
+    
     protected void chCartaCierre_CheckedChanged(object sender, EventArgs e)
     {        
         if (chCartaCierre.Checked)
@@ -722,58 +730,209 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosAutosSeguimiento : Sys
         notificacion.enviarcorreo("reclamosgt@unitypromotores.com", "123$456R", txtCorreoContacto.Text.Trim(), mensaje, txtAsunto.Text);
     }
 
+    public void Notificacion()
+    {
+        this.Page.ClientScript.RegisterStartupScript(this.Page.GetType(), "show_modal", "$('#confirmar_envio_correo').modal('show');", addScriptTags: true);
+    }
+
+    // scripts para enviar correos electronicos segun el estado al que se cambie el vehiculo
+    protected void ddlEstadoAuto_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        if (ddlEstadoAuto.SelectedValue == "Asignacion")
+        {
+            Notificacion();
+        }
+
+        else if (ddlEstadoAuto.SelectedValue == "Presupuesto")
+        {
+            Notificacion();
+        }
+
+        else if (ddlEstadoAuto.SelectedValue == "Reparacion")
+        {
+            Notificacion();
+        }
+
+        else if (ddlEstadoAuto.SelectedValue == "Entrega")
+        {
+            Notificacion();
+        }
+
+        else if(ddlEstadoAuto.SelectedValue == "Perdida Total")
+        {
+            Notificacion();
+            chEnviarCorreo.Enabled = false;
+        }
+
+        else if(ddlEstadoAuto.SelectedValue == "Revision gestor autos")
+        {
+            Notificacion();
+            chEnviarCorreo.Enabled = false;
+        }
+
+        else if (ddlEstadoAuto.SelectedValue == "Ajustes autos")
+        {
+            Notificacion();
+        }
+
+        else if(ddlEstadoAuto.SelectedValue == "Cheque")
+        {
+            Notificacion();
+            chEnviarCorreo.Enabled = false;
+        }
+
+        else if(ddlEstadoAuto.SelectedValue == "Cheque por retirar")
+        {
+            try
+            {
+                var destino_cheque = DBReclamos.detalle_pagos_reclamos_autos.Select(d => new { d.destino, d.id_reclamo_auto }).Where(de => de.id_reclamo_auto == id).First();
+                if (destino_cheque.destino == "Escritura de pago") txtSMS.Visible = true;
+                txtSMS.Text = "UNITY: Estimad@ cliente reunion entrega de cheque/firma de escritura, " + id + " coordinada para el xx/xx/xx a las xxam/pm";
+            }
+
+            catch (Exception)
+            {
+
+            }
+
+            Notificacion();
+            chEnviarCorreo.Enabled = false;
+        }
+    }
+
     public void enviar_notificaciones_click(object sender, EventArgs e)
     {
-        if (ddlEstadoAuto.SelectedItem.Text == "Asignacion" && txtCorreoContacto.Text != "")
+        if (ddlEstadoAuto.SelectedValue == "Asignacion" && txtCorreoContacto.Text != "")
         {
-            mensaje = "Estimado asegurado: \n\n" +
-                " Mi nombre es " + txtGestor.Text + ", soy la persona asignada para la atención del reclamo presentado por daños al vehículo" +
-                " Placas: " + txtPlaca.Text + " Marca: " + txtMarca.Text + " Año: " + txtModelo.Text + ", " +
-                " Mi teléfono directo es:   " + txtGestorTelefono.Text + " para que pueda contactarme en cualquier consulta. \n" +
-                " Solicito de su amable apoyo a manera que pueda confirmarme si ya cuenta con fecha para el ingreso de su vehículo al taller y así poderle apoyar en el proceso de su reclamo. \n\n" +
-                " Cualquier duda, estoy a la orden.";
+            mensaje = Constantes.ASIGNACION_AUTOS(txtGestor,txtPlaca, txtMarca,txtModelo,txtGestorTelefono); 
             txtAsunto.Text = "Asignacion Reclamo";
             enviarNotificacion();
             agregarComentario("Correo automatico: " + mensaje);
         }
 
-        else if (ddlEstadoAuto.SelectedItem.Text == "Presupuesto" && txtCorreoContacto.Text != "")
+        else if (ddlEstadoAuto.SelectedValue == "Presupuesto")
         {
-            mensaje = "Estimado Asegurado, \n" +
-             "Reciba un cordial saludo! Actualmente su reclamo presentado por daños al vehículo " + txtMarca.Text + ", " + txtModelo.Text + ", con placas: " + txtPlaca.Text + ", se encuentra en elaboración de presupuesto y cotización de repuestos. \n\n " +
-             "Saludos cordiales..";
-            txtAsunto.Text = "Presupuesto";
-            enviarNotificacion();
-            agregarComentario("Correo Automatico: " + mensaje);
+            if(chEnviarCorreo.Checked && txtCorreoContacto.Text !="")
+            {
+                mensaje = Constantes.PRESUPUESTO_AUTO(txtPlaca, txtMarca, txtModelo);
+                txtAsunto.Text = "Presupuesto";
+                enviarNotificacion();
+                agregarComentario("Correo Automatico: " + mensaje);
+            }
+
+            if(chEnviarSMS.Checked && txtTelefono.Text != "")
+            {
+                Utils.SMS_reclamos_autos(txtTelefono.Text, "UNITY: Estimad@ cliente Reclamo " + id + " su vehículo en proceso de elaboración de presupuesto en taller de su elección.", userlogin, id);
+            }
+
+            llenado.llenarGrid(comentarios, GridComentarios);
         }
 
-        else if (ddlEstadoAuto.SelectedItem.Text == "Ajustes autos" && txtCorreoContacto.Text != "")
+        else if (ddlEstadoAuto.SelectedValue == "Reparacion")
         {
-            mensaje = "Estimado Asegurado \n\n" +
-               "Hacemos de su conocimiento que el vehículo está en proceso de ajuste de parte de la compañía de seguros. \n\n" +
-               "Saludos Cordiales";
-            txtAsunto.Text = "Ajuste Auto";
-            enviarNotificacion();
-            agregarComentario("Correo Automatico: " + mensaje);
+            if(chEnviarCorreo.Checked && txtCorreoContacto.Text != "")
+            {
+                mensaje = Constantes.REPARACION_AUTOS();
+                txtAsunto.Text = "Reparacion";
+                enviarNotificacion();
+                agregarComentario("Correo Automatico: " + mensaje);
+            }
+
+            if(chEnviarSMS.Checked && txtTelefono.Text != "")
+            {
+                Utils.SMS_reclamos_autos(txtTelefono.Text, "UNITY: Estimad@ cliente Reclamo ID "+id+" su vehiculo esta en proceso de reparacion le estaremos informando sobre avances.", userlogin, id);
+            }
+
+            llenado.llenarGrid(comentarios, GridComentarios);
         }
 
-        else if (ddlEstadoAuto.SelectedItem.Text == "Reparacion" && txtCorreoContacto.Text != "")
+        else if (ddlEstadoAuto.SelectedValue == "Entrega")
         {
-            mensaje = "Estimado Asegurado,\n\n " +
-                "Su vehículo actualmente está en proceso de reparación, con gusto se le estará retroalimentando sobre el proceso hasta su entrega. \n\n" +
-                "Saludos Cordiales";
-            txtAsunto.Text = "Reparacion";
-            enviarNotificacion();
-            agregarComentario("Correo Automatico: " + mensaje);
+            if(chEnviarCorreo.Checked && txtCorreoContacto.Text != "")
+            {
+                mensaje = Constantes.ENTREGA_AUTO();
+                txtAsunto.Text = "Entrega";
+                enviarNotificacion();
+                agregarComentario("Correo Automatico: " + mensaje);
+            }
+
+            if(chEnviarSMS.Checked && txtTelefono.Text != "")
+            {
+                 Utils.SMS_reclamos_autos(txtTelefono.Text, "UNITY: Estimad@ cliente Reclamo "+id+" su vehiculo esta en proceso final de reparacion le informaremos sobre la entrega.", userlogin, id);
+            }
+
+            llenado.llenarGrid(comentarios, GridComentarios);
         }
 
-        else if (ddlEstadoAuto.SelectedItem.Text == "Entrega" && txtCorreoContacto.Text != "")
+        else if (ddlEstadoAuto.SelectedValue == "Perdida Total")
         {
-            txtMensaje.Text = "Estimado Asegurado: \n\n" +
-                "Su vehículo está programado para fecha __________ , \n" +
-                "Le recordamos realizar el pago de su deducible que corresponde. \n\n" +
-                "Saludos Cordiales";
-            txtAsunto.Text = "Entrega";
+            if (chEnviarSMS.Checked && txtTelefono.Text != "")
+            {
+                Utils.SMS_reclamos_autos(txtTelefono.Text, "UNITY: Estimad@ cliente Reclamo "+id+" su vehiculo esta declarado como perdida total, se envia solicitud de documentos.", userlogin, id);
+                llenado.llenarGrid(comentarios,GridComentarios);
+            }
+        }
+
+        else if(ddlEstadoAuto.SelectedValue == "Revision gestor autos")
+        {
+            if (chEnviarSMS.Checked && txtTelefono.Text != "")
+            {
+                Utils.SMS_reclamos_autos(txtTelefono.Text, "UNITY: Estimad@ cliente hemos recibido documentacion para revision y envio a la Aseguradora, segun reclamo ID "+id+".", userlogin, id);
+                llenado.llenarGrid(comentarios, GridComentarios);
+            }
+        }
+
+        else if (ddlEstadoAuto.SelectedValue == "Ajustes autos")
+        {
+            if(chEnviarCorreo.Checked && txtCorreoContacto.Text != "")
+            {
+                mensaje = Constantes.AJUSTES_AUTOS();
+                txtAsunto.Text = "Ajuste Auto";
+                enviarNotificacion();
+                agregarComentario("Correo Automatico: " + mensaje);
+            }
+
+            if(chEnviarSMS.Checked && txtTelefono.Text != "")
+            {
+                Utils.SMS_reclamos_autos(txtTelefono.Text, "UNITY: Estimad@ cliente reclamo "+id+" esta en proceso de revision y ajuste en la compañia de seguros.", userlogin, id);
+            }
+
+            llenado.llenarGrid(comentarios,GridComentarios);
+        }
+
+        else if(ddlEstadoAuto.SelectedValue == "Cheque")
+        {
+            if (chEnviarSMS.Checked && txtTelefono.Text != "")
+            {
+                Utils.SMS_reclamos_autos(txtTelefono.Text, "UNITY: Estimad@ cliente su reclamo "+id+" esta en proceso de emision de cheque en la compañia de seguros.", userlogin, id);
+            }
+
+            llenado.llenarGrid(comentarios, GridComentarios);
+        }
+
+        else if(ddlEstadoAuto.SelectedValue == "Cheque por retirar")
+        {
+            if (chEnviarSMS.Checked && txtTelefono.Text != "")
+            {
+                var destino_cheque = DBReclamos.detalle_pagos_reclamos_autos.Select(d => new { d.destino, d.id_reclamo_auto }).Where(de => de.id_reclamo_auto == id).First();
+
+                if (destino_cheque.destino == "Ruta")
+                {
+                    Utils.SMS_reclamos_autos(txtTelefono.Text, "UNITY: Estimad@ cliente  cheque del reclamo ID " + id + " se encuentra en ruta para la entrega en direccion registrada.", userlogin, id);
+                }
+
+                else if(destino_cheque.destino == "Recepcion")
+                {
+                    Utils.SMS_reclamos_autos(txtTelefono.Text, "UNITY: Estimad@ cliente cheque del reclamo "+id+" se encuentra listo en  recepcion Unity favor pasar a recogerlo.", userlogin, id);
+                }
+
+                else if (destino_cheque.destino == "Escritura de pago")
+                {
+                    Utils.SMS_reclamos_autos(txtTelefono.Text,txtSMS.Text, userlogin, id);
+                }
+            }
+
+            llenado.llenarGrid(comentarios, GridComentarios);
         }
 
         else
@@ -869,35 +1028,6 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosAutosSeguimiento : Sys
         llenado.llenarGrid(comentarios, BitSeguimiento);
     }
 
-    //editar una liquidacion
-    protected void GridPagosReclamos_SelectedIndexChanged(object sender, EventArgs e)
-    {
-        int id_pago = Convert.ToInt32(GridPagosReclamos.SelectedRow.Cells[1].Text);
-        var pago = DBReclamos.detalle_pagos_reclamos_autos.Find(id_pago);
-        txtMontoEditar.Text = pago.monto.ToString();
-        txtIvaEditar.Text = pago.iva.ToString();
-        txtDeducibleEditar.Text = pago.deducible.ToString();
-        txtTimbresEditar.Text = pago.timbres.ToString();
-        txtPrimasEditar.Text = pago.primas.ToString();
-        txtTotalEditar.Text = pago.total.ToString();
-        this.Page.ClientScript.RegisterStartupScript(this.Page.GetType(), "show_modal", "$('#ModalEditarPago').modal('show');", addScriptTags: true);
-    }
-
-    protected void btnActualizarPagos_Click(object sender, EventArgs e)
-    {
-        int id_pago = Convert.ToInt32(GridPagosReclamos.SelectedRow.Cells[1].Text);
-        var pago = DBReclamos.detalle_pagos_reclamos_autos.Find(id_pago);
-        pago.monto =Convert.ToDecimal(txtMontoEditar.Text);
-        pago.iva = Convert.ToDecimal(txtIvaEditar.Text);
-        pago.deducible = Convert.ToDecimal(txtDeducibleEditar.Text);
-        pago.timbres = Convert.ToDecimal(txtTimbresEditar.Text);
-        pago.primas = Convert.ToDecimal(txtPrimasEditar.Text);
-        pago.total = Convert.ToDecimal(txtTotalEditar.Text);
-        DBReclamos.SaveChanges();
-        llenado.llenarGrid(pagos, GridPagosReclamos);
-    }
-
-
     protected void btnProductoNoConforme_Click(object sender, EventArgs e)
     {
         try
@@ -938,5 +1068,3 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosAutosSeguimiento : Sys
         ddlEstadoAuto.SelectedValue = "Cerrado";
     }
 }
-
-//859 lineas de codigo

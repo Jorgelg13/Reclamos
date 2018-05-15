@@ -80,7 +80,7 @@ public class Consultas
     //seccion de consultas de autos
     public static string PAGOS_AUTOS(int ID)
     {
-        return "select id as ID, cobertura_pagada as [Cobertura Pagada], monto as Monto, iva IVA, deducible as Deducible, timbres as Timbres, " +
+        return "select id as ID, cobertura_pagada as Cobertura, destino as Destino, monto as Monto, iva IVA, deducible as Deducible, timbres as Timbres, " +
                 "primas as Primas, total as Total, fecha as Fecha from detalle_pagos_reclamos_autos where id_reclamo_auto = " + ID + "";
     }
 

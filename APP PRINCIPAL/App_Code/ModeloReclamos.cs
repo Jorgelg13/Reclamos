@@ -363,6 +363,7 @@ public partial class detalle_pagos_reclamos_autos
     public Nullable<decimal> total { get; set; }
     public Nullable<long> id_reclamo_auto { get; set; }
     public Nullable<System.DateTime> fecha { get; set; }
+    public string destino { get; set; }
 
     public virtual reclamo_auto reclamo_auto { get; set; }
 }

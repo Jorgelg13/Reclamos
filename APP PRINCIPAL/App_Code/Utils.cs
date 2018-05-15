@@ -270,4 +270,35 @@ public class Utils
             }
         }
     }
+
+    public static void SMS_reclamos_autos(String telefono, String mensaje, String usuario, int id)
+    {
+        int numero = Convert.ToInt32(telefono);
+
+        if (numero > 30000000)
+        {
+            if (telefono != "")
+            {
+                HttpClient client = new HttpClient();
+                var values = new System.Collections.Generic.Dictionary<string, string>
+             {
+               { "token", "Un!ty2018" },
+               { "numero", telefono },
+               { "mensaje", mensaje}
+             };
+
+                var content = new FormUrlEncodedContent(values);
+                var response = client.PostAsync("http://192.168.81.225:9900/movistar/enviar", content);
+                bool estado_envio = response.IsFaulted;
+
+                comentarios_reclamos_autos comentario = new comentarios_reclamos_autos();
+                comentario.descripcion = "Notificacion SMS: " + mensaje;
+                comentario.fecha = DateTime.Now;
+                comentario.usuario = usuario;
+                comentario.id_reclamo_auto = id;
+                DBReclamos.comentarios_reclamos_autos.Add(comentario);
+                DBReclamos.SaveChanges();
+            }
+        }
+    }
 }

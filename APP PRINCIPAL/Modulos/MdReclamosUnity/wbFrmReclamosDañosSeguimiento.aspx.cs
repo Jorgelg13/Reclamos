@@ -18,7 +18,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosDañosSeguimiento : Sy
     bool complicado = false;
     bool compromiso_pago = false;
     String estado = "Seguimiento"; //esta variable es la que se utiliza para cambiar el estado a cerrado de un reclamo.
-    String poliza, placa, ejecutivo,ramo;
+    String poliza;
     String idRecibido, comentarios, pagos, llamadas, coberturas, datosSiniestro, estados, liquidaciones;
     String estadoReclamo, cartaEnvioCheque, cartaCierreInterno, cartaDeclinado;
     int id, dias, idPago=0;

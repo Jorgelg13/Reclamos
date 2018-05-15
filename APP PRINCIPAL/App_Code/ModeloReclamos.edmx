@@ -314,6 +314,7 @@
           <Property Name="total" Type="decimal" Precision="10" Scale="2" />
           <Property Name="id_reclamo_auto" Type="bigint" />
           <Property Name="fecha" Type="datetime" />
+          <Property Name="destino" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="detalle_pagos_reclamos_medicos">
           <Key>
@@ -2608,6 +2609,7 @@ FROM [dbo].[v_producto_no_conforme] AS [v_producto_no_conforme]</DefiningQuery>
           <Property Name="id_reclamo_auto" Type="Int64" />
           <Property Name="fecha" Type="DateTime" Precision="3" />
           <NavigationProperty Name="reclamo_auto" Relationship="reclamosModel.FK_detalle_pago_reclamos_autos_reclamo_auto" FromRole="detalle_pagos_reclamos_autos" ToRole="reclamo_auto" />
+          <Property Name="destino" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="detalle_pagos_reclamos_medicos">
           <Key>
@@ -4349,6 +4351,7 @@ FROM [dbo].[v_producto_no_conforme] AS [v_producto_no_conforme]</DefiningQuery>
           <EntitySetMapping Name="detalle_pagos_reclamos_autos">
             <EntityTypeMapping TypeName="reclamosModel.detalle_pagos_reclamos_autos">
               <MappingFragment StoreEntitySet="detalle_pagos_reclamos_autos">
+                <ScalarProperty Name="destino" ColumnName="destino" />
                 <ScalarProperty Name="fecha" ColumnName="fecha" />
                 <ScalarProperty Name="id_reclamo_auto" ColumnName="id_reclamo_auto" />
                 <ScalarProperty Name="total" ColumnName="total" />

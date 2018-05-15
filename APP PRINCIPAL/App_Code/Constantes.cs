@@ -14,9 +14,15 @@ public class Constantes
         //
     }
 
+    //textos para reclamos de daños
+
     public static string Mensaje(Label fecha )
     {
-        return "Nuestro seguimiento consta de 60 días para la recepción de documentos, actualmente su reclamación ha superado este tiempo por lo que estaremos cerrando internamente su reclamo.  En caso reúna todos los documentos necesarios para el análisis puede enviarlos a nuestras oficinas para apertura nuevamente nuestros registros y así continuar el proceso normal de su reclamación.  Es importante indicar que ante la aseguradora el reclamo continúa apertura do, sin embargo una vez  la aseguradora notifique formalmente el cierre del reclamo por falta de documentos, estaremos compartiendo esta información para su conocimiento.\n\n Derivado que a la fecha no contamos con la información necesaria para el análisis de su reclamación de fecha " + fecha.Text + " a causa de_______________, estamos procediendo al cierre interno de su reclamación.";
+        return "Nuestro seguimiento consta de 60 días para la recepción de documentos, actualmente su reclamación ha superado este tiempo por lo que estaremos cerrando internamente su reclamo. " +
+            " En caso reúna todos los documentos necesarios para el análisis puede enviarlos a nuestras oficinas para apertura nuevamente nuestros registros y así " +
+            "continuar el proceso normal de su reclamación.  Es importante indicar que ante la aseguradora el reclamo continúa apertura do, sin embargo una vez  la aseguradora " +
+            "notifique formalmente el cierre del reclamo por falta de documentos, estaremos compartiendo esta información para su conocimiento.\n\n Derivado que a la fecha no contamos " +
+            "con la información necesaria para el análisis de su reclamación de fecha " + fecha.Text + " a causa de_______________, estamos procediendo al cierre interno de su reclamación.";
     }
 
     public static string ASIGNACION_DAÑOS (Label fechaSiniestro)
@@ -51,6 +57,46 @@ public class Constantes
     public static string CHEQUE_DAÑOS(Label idrec)
     {
         return "Por medio del presente le informo que después de su aceptación a la propuesta de liquidación del reclamo No. " + idrec.Text + ", su caso se encuentra en proceso de emisión de cheque y/o escritura de pago, en cuanto tengamos conocimiento de disponibilidad de estos documentos, estaremos informando vía telefónica para coordinar la entrega.";
+    }
+
+    //Textos para reclamos de autos 
+    public static string ASIGNACION_AUTOS(TextBox gestor, TextBox placa, TextBox marca, TextBox modelo, TextBox telefono)
+    {
+        return "Estimado asegurado: \n\n" +
+                " Mi nombre es " + gestor.Text + ", soy la persona asignada para la atención del reclamo presentado por daños al vehículo" +
+                " Placas: " + placa.Text + " Marca: " + marca.Text + " Año: " + modelo.Text + ", " +
+                " Mi teléfono directo es:   " + telefono.Text + " para que pueda contactarme en cualquier consulta. \n" +
+                " Solicito de su amable apoyo a manera que pueda confirmarme si ya cuenta con fecha para el ingreso de su vehículo al taller y así poderle apoyar en el proceso de su reclamo. \n\n" +
+                " Cualquier duda, estoy a la orden.";
+    }
+    
+    public static string PRESUPUESTO_AUTO(TextBox placa, TextBox marca, TextBox modelo)
+    {
+        return "Estimado Asegurado, \n" +
+             "Reciba un cordial saludo! Actualmente su reclamo presentado por daños al vehículo " + marca.Text + ", " + modelo.Text + ", con placas: " + placa.Text + ", se encuentra en elaboración de presupuesto y cotización de repuestos. \n\n " +
+             "Saludos cordiales..";
+    }
+
+    public static string AJUSTES_AUTOS()
+    {
+        return "Estimado Asegurado \n\n" +
+               "Hacemos de su conocimiento que el vehículo está en proceso de ajuste de parte de la compañía de seguros. \n\n" +
+               "Saludos Cordiales";
+    }
+
+    public static string REPARACION_AUTOS()
+    {
+        return "Estimado Asegurado,\n\n " +
+                "Su vehículo actualmente está en proceso de reparación, con gusto se le estará retroalimentando sobre el proceso hasta su entrega. \n\n" +
+                "Saludos Cordiales";
+    }
+
+    public static string ENTREGA_AUTO()
+    {
+        return "Estimado Asegurado: \n\n" +
+                "Su vehículo está programado para fecha __________ , \n" +
+                "Le recordamos realizar el pago de su deducible que corresponde. \n\n" +
+                "Saludos Cordiales";
     }
 
     //usuario logeado

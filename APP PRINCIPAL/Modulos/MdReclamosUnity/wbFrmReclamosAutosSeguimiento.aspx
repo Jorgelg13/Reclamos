@@ -3,7 +3,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
-    <div class="container-fluid">
+    <div class="">
         <asp:Label ID="lblID" runat="server" Text="Label" Visible="false"></asp:Label>
         <div class="panel panel-default col-sm-12">
             <div class="img-float-right" style="float: right; padding-top: 15px;">
@@ -260,7 +260,7 @@
                             <asp:CheckBox ID="checkHabilitar" AutoPostBack="true" runat="server" OnCheckedChanged="checkHabilitar_CheckedChanged" />
                         </div>
                         <div class="panel-body">
-                            <div style="height: 300px; overflow-x: auto;">
+                            <div style="height: 300px; overflow-x: auto;" class="scrolling-table-container">
                                 <asp:GridView ID="GridComentarios" CssClass="table bs-table tablaDetalleAuto table-responsive table-hover" runat="server" AutoGenerateColumns="true" CellPadding="3" BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" OnRowDataBound="GridComentarios_RowDataBound">
                                     <AlternatingRowStyle BackColor="White" />
                                     <FooterStyle BackColor="White" ForeColor="black" />
@@ -274,58 +274,30 @@
                 </div>
                 <%-- -------------------------- tabla de detalle de pagos----------------------------%>
                 <div role="tabpanel" class="tab-pane" id="ingreso-datos">
-                    <br />
                     <div class="form-inline">
-                        <div class="form-group" style="width: 15%">
-                            <label for="message-text" class="control-label">Monto:</label>
-                            <asp:TextBox runat="server" ID="txtMonto" Text="0.00" Style="width: 100%; padding-right: 30px;" autocomplete="off" class="form-control" placeholder="Monto"></asp:TextBox>
-                        </div>
-                        <div class="form-group" style="width: 15%">
-                            <label for="message-text" class="control-label">Deducible:</label>
-                            <asp:TextBox runat="server" ID="txtPagoDeducible" Text="0.00" Style="width: 100%;" autocomplete="off" class="form-control" placeholder="Deducble"></asp:TextBox>
-                        </div>
-                        <div class="form-group" style="width: 15%">
-                            <label for="message-text" class="control-label">Primas:</label>
-                            <asp:TextBox runat="server" ID="txtPrimasPago" Text="0.00" Style="width: 100%;" autocomplete="off" class="form-control" placeholder="Primas"></asp:TextBox>
-                        </div>
-                        <div class="form-group" style="width: 5%; margin-left: 2px;">
-                            <label for="message-text" class="control-label">Con IVA:</label>
-                            <asp:CheckBox ID="checkIva" CssClass="form-control" runat="server" Text="_IVA" AutoPostBack="True" />
-                        </div>
-                        <div class="form-group" style="width: 15%">
-                            <label for="message-text" class="control-label">Seleccionar Cobertura:</label>
-                            <asp:DropDownList class="form-control" AutoPostBack="true" ID="ddlCoberturas" Style="width: 100%" Height="34px" runat="server" OnSelectedIndexChanged="ddlCoberturas_SelectedIndexChanged">
-                            </asp:DropDownList>
-                        </div>
-                        <div class="form-group">
-                            <br />
-                            <asp:Button runat="server" Text="Guardar Pago" ID="btnPago" class="btn btn-primary" OnClick="btnPago_Click" />
-                        </div>
-                        <div class="form-group">
-                            <br />
-                            <asp:Label ID="lblPagoTotal" Style="font-size: 20px; padding-left: 3px;" runat="server" Text=""></asp:Label>
-                        </div>
-                    </div>
-                    <b>
+                        <a runat="server" data-toggle="modal" role="button" data-target="#IngresarLiquidacion" id="lnPago" style="font-size: 40px;"><i class="fa fa-money"></i></a>
+                        <asp:Label ID="lblPagoTotal" Style="font-size: 20px; padding-left: 3px;" runat="server" Text=""></asp:Label>
                         <asp:Label ID="lblMoneda" runat="server" Style="font-size: 17px;"></asp:Label>
-                    </b>
-                    <asp:GridView ID="GridPagosReclamos" CssClass="table bs-table tablaDetalleAuto table-responsive table-hover" runat="server" AutoGenerateColumns="true" CellPadding="4" ForeColor="#333333" GridLines="None" OnSelectedIndexChanged="GridPagosReclamos_SelectedIndexChanged">
-                          <Columns>
+                    </div>
+                    <div class="scrolling-table-container">
+                        <asp:GridView ID="GridPagosReclamos" CssClass="table bs-table tablaDetalleAuto table-responsive table-hover" runat="server" AutoGenerateColumns="true" CellPadding="4" ForeColor="#333333" GridLines="None" OnSelectedIndexChanged="GridPagosReclamos_SelectedIndexChanged">
+                            <Columns>
                                 <asp:CommandField ShowSelectButton="True">
                                     <HeaderStyle HorizontalAlign="Center" Wrap="False" />
                                     <ItemStyle HorizontalAlign="Left" Wrap="False" />
                                 </asp:CommandField>
                             </Columns>
-                        <AlternatingRowStyle BackColor="White" />
-                        <HeaderStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" HorizontalAlign="Center" />
-                        <RowStyle BackColor="#EFF3FB" />
-                        <SelectedRowStyle BackColor="#D1DDF1" Font-Bold="True" ForeColor="#333333" />
-                    </asp:GridView>
+                            <AlternatingRowStyle BackColor="White" />
+                            <HeaderStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" HorizontalAlign="Center" />
+                            <RowStyle BackColor="#EFF3FB" />
+                            <SelectedRowStyle BackColor="#D1DDF1" Font-Bold="True" ForeColor="#333333" />
+                        </asp:GridView>
+                    </div>
                 </div>
             </div>
         </div>
             <%-----------------------------------   modal para Editar un pago  ---------------------------------------%>
-                <div class="modal fade" id="ModalEditarPago" tabindex="-1" role="dialog" aria-labelledby="ModalPagos">
+                <div class="modal fade" id="IngresarLiquidacion" tabindex="-1" role="dialog" aria-labelledby="ModalPagos">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header" style="background-color: #ACD6F2">
@@ -334,30 +306,41 @@
                             </div>
                             <div class="modal-body">
                                 <div class="form-group col-sm-12 col-md-6 col-lg-6">
-                                    Cobertura:<asp:DropDownList class="form-control" ID="ddlcoberturasEditar" Style="width: 100%" Height="32px" runat="server">
+                                    Cobertura:<asp:DropDownList class="form-control" ID="ddlCoberturas" Style="width: 100%" Height="32px" runat="server">
                                     </asp:DropDownList>
                                 </div>
-                                <div class="form-group col-sm-12 col-md-6 col-lg-6">
-                                    Monto:<asp:TextBox ID="txtMontoEditar" Style="width: 100%" autocomplete="off" class="form-control" placeholder="Monto" runat="server"></asp:TextBox>
+                                <div class="form-group col-sm-10 col-md-5 col-lg-5">
+                                    Monto:<asp:TextBox ID="txtMonto" Style="width: 100%" autocomplete="off" class="form-control" placeholder="Monto" runat="server" Text="0.00"></asp:TextBox>
+                                </div>
+                                <br />
+                                <asp:CheckBox runat="server" Text="IVA" id="checkIva"/>
+                                 <div class="form-group col-sm-12 col-md-6 col-lg-6">
+                                    IVA:<asp:TextBox ID="txtIva" Enabled="false" Style="width: 100%" autocomplete="off" class="form-control" placeholder="iva" runat="server"></asp:TextBox>
                                 </div>
                                  <div class="form-group col-sm-12 col-md-6 col-lg-6">
-                                    Iva:<asp:TextBox ID="txtIvaEditar" Style="width: 100%" autocomplete="off" class="form-control" placeholder="iva" runat="server"></asp:TextBox>
+                                    Timbres:<asp:TextBox ID="txtTimbres" Enabled="false" Style="width: 100%" autocomplete="off" class="form-control" placeholder="Timbres" runat="server" Text="0.00"></asp:TextBox>
                                 </div>
                                  <div class="form-group col-sm-12 col-md-6 col-lg-6">
-                                    Deducible:<asp:TextBox ID="txtDeducibleEditar" Style="width: 100%" autocomplete="off" class="form-control" placeholder="Deducible" runat="server"></asp:TextBox>
-                                </div>
-                                <div class="form-group col-sm-12 col-md-6 col-lg-6">
-                                    Timbres:<asp:TextBox ID="txtTimbresEditar" Style="width: 100%" autocomplete="off" class="form-control" placeholder="Timbres" runat="server"></asp:TextBox>
+                                    Deducible:<asp:TextBox ID="txtPagoDeducible" Style="width: 100%" autocomplete="off" class="form-control" placeholder="Deducible" runat="server" Text="0.00"></asp:TextBox>
                                 </div>
                                  <div class="form-group col-sm-12 col-md-6 col-lg-6">
-                                    Primas:<asp:TextBox ID="txtPrimasEditar" Style="width: 100%" autocomplete="off" class="form-control" placeholder="Primas" runat="server"></asp:TextBox>
+                                    Primas:<asp:TextBox ID="txtPrimasPago" Style="width: 100%" autocomplete="off" class="form-control" placeholder="Primas" runat="server" Text="0.00"></asp:TextBox>
                                 </div>
-                                 <div class="form-group col-sm-12 col-md-12 col-lg-12">
-                                    Total:<asp:TextBox ID="txtTotalEditar" Style="width: 100%" autocomplete="off" class="form-control" placeholder="total" runat="server"></asp:TextBox>
+                                 <div class="form-group col-sm-12 col-md-6 col-lg-6">
+                                    <label>Seleccionar Cobertura:</label>
+                                    <asp:DropDownList ID="ddlDestino" class="form-control" Style="width: 100%; height: 30px;" runat="server">
+                                        <asp:ListItem Value="Ruta">Ruta</asp:ListItem>
+                                        <asp:ListItem Value="Recepcion">Recepcion</asp:ListItem>
+                                        <asp:ListItem Value="Escritura de pago">Escritura de pago</asp:ListItem>
+                                    </asp:DropDownList>
+                                </div>
+                                 <div class="form-group col-sm-12 col-md-6 col-lg-6">
+                                    Total:<asp:TextBox ID="txtTotal" Enabled="false" Style="width: 100%" autocomplete="off" class="form-control" placeholder="total" runat="server" Text="0.00"></asp:TextBox>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-warning" data-dismiss="modal">Cerrar</button>
-                                    <asp:Button ID="btnActualizarPagos" CssClass="btn btn-success" runat="server" Text="Actualizar" OnClick="btnActualizarPagos_Click" />
+                                    <asp:Button runat="server" Text="Guardar" ID="btnPago" class="btn btn-primary" OnClick="btnPago_Click" />
+                                    <asp:Button ID="btnActualizarPagos" Enabled="false" CssClass="btn btn-success" runat="server" Text="Actualizar" OnClick="btnActualizarPagos_Click" />
                                 </div>
                             </div>
                         </div>
@@ -507,7 +490,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="message-text" class="control-label">Telefono:</label>
-                                <asp:TextBox ID="txtTelefono" Style="width: 100%" CssClass="form-control" AutoComplete="off" runat="server"></asp:TextBox>
+                                <asp:TextBox ID="txtTelefono" MaxLength="8" Style="width: 100%" CssClass="form-control" AutoComplete="off" runat="server"></asp:TextBox>
                             </div>
                         </div>
                     </div>
@@ -765,13 +748,22 @@
             </div>
         </div>
 
-        <%-- modal para verificacion de envio de correo --%>
-        <div class="modal fade bs-example-modal-sm" tabindex="-1" id="confirmar_envio_correo" role="dialog" aria-labelledby="mySmallModalLabel">
+        <%-- modal para verificacion de envio de notificaciones --%>
+        <div class="modal" tabindex="-1" id="confirmar_envio_correo" role="dialog" aria-labelledby="mySmallModalLabel" data-keyboard="false" data-backdrop="static">
             <div class="modal-dialog modal-sm" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title"><b>Desea Enviar Notificacion..</b></h4>
+                        <h4 class="modal-title"><b>Desea Enviar Notificaciones</b></h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-inline">
+                            <a href="#" style="font-size: 40px;"><i class="fa fa-envelope-o" aria-hidden="true"></i></a>
+                            <asp:CheckBox runat="server" ID="chEnviarCorreo" Text="Enviar Correo Electronico" Style="margin-left: 15px;" />
+                            <a href="#" style="font-size: 40px;"><i class="fa fa fa-comments" aria-hidden="true"></i></a>
+                            <asp:CheckBox runat="server" ID="chEnviarSMS" Text="Enviar Mensaje SMS" Checked="true" Style="margin-left: 15px;" />
+                        </div>
+                        <asp:TextBox ID="txtSMS" Style="width: 99%" autocomplete="off" class="form-control" TextMode="multiline" Columns="50" Rows="8" runat="server" Visible="false"></asp:TextBox>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-warning" data-dismiss="modal">Cancelar</button>
@@ -919,6 +911,11 @@
             document.body.innerHTML = contenidoOriginal;
             window.location.reload(true);
         }
+    </script>
+     <script>
+         $('#<%=txtTelefono.ClientID%>').on('input', function () {
+             this.value = this.value.replace(/[^0-9]/g, '');
+         });
     </script>
 </asp:Content>
 

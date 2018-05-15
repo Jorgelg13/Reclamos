@@ -2,9 +2,7 @@
 using System.Web.UI;
 using System.IO;
 using System.Linq;
-using System.Data.SqlClient;
 using System.Data;
-using System.Text;
 using System.Web;
 using System.Web.UI.WebControls;
 
@@ -160,34 +158,6 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesDaños : System.Web.UI
     {
         try
         {
-            //lblGestor.Text = ddlBuscar.SelectedItem.Text;
-            //var pendientes = DBReclamos.reclamos_varios.ToList().Where(c => c.estado_unity == "Seguimiento" && c.id_gestor == Convert.ToInt16(ddlBuscar.SelectedValue)).Count();
-            //lblPendientes.Text = pendientes.ToString();
-
-            //String count;
-            //count = "select count(*) from reclamos_varios where fecha_cierre_reclamo between  '" + txtFechaInicio.Text + "' and '" + txtFechaFin.Text + "' and estado_unity = 'Cerrado' and id_gestor = " + ddlBuscar.SelectedValue + " ";
-            //SqlDataAdapter da = new SqlDataAdapter(count, obj.ObtenerConexionReclamos());
-            //DataTable dt = new DataTable();
-            //da.Fill(dt);
-            //lblCerrados.Text = dt.Rows[0][0].ToString();
-            //obj.conexion.Close();
-
-            //String sql;
-            //sql = "select count(*) from reclamos_varios whe" +
-            //    "re fecha_apertura_reclamo between '" + txtFechaInicio.Text + "' and '" + txtFechaFin.Text + "' and id_gestor = " + ddlBuscar.SelectedValue + " ";
-            //SqlDataAdapter da2 = new SqlDataAdapter(sql, obj.ObtenerConexionReclamos());
-            //DataTable dt2 = new DataTable();
-            //da2.Fill(dt2);
-            //lblNuevos.Text = dt2.Rows[0][0].ToString();
-            //obj.conexion.Close();
-
-            //Double eficiencia = 0.00;
-            //eficiencia = Convert.ToDouble(lblCerrados.Text) / (Convert.ToDouble(lblPendientes.Text) + Convert.ToDouble(lblNuevos.Text));
-            //lblEficiencia.Text = (eficiencia * 100).ToString("N2") + " %";
-
-            // llenado.llenarGrid(EficienciaGestor, GridEficiencia);
-
-            //Indico el SP que voy a utilizar
             llenado.llenarGrid(EficienciaGestor, GridEficiencia);
         }
 
@@ -219,14 +189,6 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesDaños : System.Web.UI
 
     protected void btnExportarEficiencia_Click(object sender, EventArgs e)
     {
-        //Response.ContentType = "application/x-msexcel";
-        //Response.AddHeader("Content-Disposition", "attachment; filename = EficienciaDaños.xls");
-        //Response.ContentEncoding = Encoding.UTF8;
-        //StringWriter tw = new StringWriter();
-        //HtmlTextWriter hw = new HtmlTextWriter(tw);
-        //tbl.RenderControl(hw);
-        //Response.Write(tw.ToString());
-        //Response.End();
         Response.Clear();
         Response.Buffer = true;
         Response.AddHeader("content-disposition", "attachment;filename=Eficiencia Reclamos Daños.xls");

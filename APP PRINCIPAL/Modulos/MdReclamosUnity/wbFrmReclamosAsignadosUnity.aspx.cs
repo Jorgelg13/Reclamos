@@ -183,8 +183,12 @@ public partial class Modulos_MdReclamos_wbFrmReclamosAsignadosUnity : System.Web
             reclamo.id_taller = Convert.ToInt16(ddlTaller.SelectedValue);
             reclamo.fecha_apertura_reclamo = DateTime.Now;
             reclamo.fecha_cierre_reclamo = DateTime.Now;
-
             DBReclamos.SaveChanges();
+
+            if (txtTelefono.Text != "")
+            {
+                Utils.SMS_reclamos_autos(txtTelefono.Text, "UNITY: Estimad@ cliente recibimos aviso del reclamo "+reclamo.id+" asesor asignado: "+ddlGestor.SelectedItem+" Tel: "+reclamo.gestores.telefono+".", userlogin, id);
+            }
             Response.Redirect("/Modulos/MdReclamosUnity/wbFrmReclamosAutosSeguimiento.aspx?ID_reclamo=" + id, false);
         }
         catch (Exception ex)

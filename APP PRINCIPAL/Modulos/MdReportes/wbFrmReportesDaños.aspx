@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Reportes Daños" Language="C#" MasterPageFile="~/ReclamosUnity.master" AutoEventWireup="true" CodeFile="wbFrmReportesDaños.aspx.cs" Inherits="Modulos_MdReclamosUnity_wbFrmReportesDaños" %>
+﻿<%@ Page Title="Reportes Daños" Language="C#" MasterPageFile="~/ReclamosUnity.master" AutoEventWireup="true" EnableEventValidation="false" CodeFile="wbFrmReportesDaños.aspx.cs" Inherits="Modulos_MdReclamosUnity_wbFrmReportesDaños" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
 </asp:Content>

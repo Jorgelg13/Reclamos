@@ -146,7 +146,7 @@
                                     <br />
                                     <br />
                                     <label for="message-text" class="control-label">Telefono:</label>
-                                    <asp:TextBox ID="txtTelefono" Style="width: 95%" CssClass="form-control" AutoComplete="off" runat="server"></asp:TextBox>
+                                    <asp:TextBox ID="txtTelefono" MaxLength="8" Style="width: 95%" CssClass="form-control" AutoComplete="off" runat="server"></asp:TextBox>
                                 </div>
                             </div>
                         </div>
@@ -170,6 +170,13 @@
             <asp:ControlParameter ControlID="lblChasis" Name="chasis" PropertyName="Text" />
         </SelectParameters>
     </asp:SqlDataSource>
+</asp:Content>
+<asp:Content runat="server" id="Content3" ContentPlaceHolderID="ContentJs">
+     <script>
+        $('#<%=txtTelefono.ClientID%>').on('input', function () {
+            this.value = this.value.replace(/[^0-9]/g, '');
+        });
+    </script>
 </asp:Content>
 
 
