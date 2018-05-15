@@ -43,10 +43,6 @@
                         <asp:ListItem Value="reclamos_medicos.observacion as Observacion">Observacion</asp:ListItem>
                         <asp:ListItem Value="reg_reclamos_medicos.certificado as Certificado">Certificado</asp:ListItem>
                         <asp:ListItem Value="reclamos_medicos.num_reclamo as [Numero Reclamo]">Numero Reclamo</asp:ListItem>
-                        <%--<asp:ListItem Value="cabina.nombre as Cabina">Cabina</asp:ListItem>
-                        <asp:ListItem Value="sucursal.nombre as Sucursal">Sucursal</asp:ListItem>
-                        <asp:ListItem Value="empresa.nombre as Empresa">Empresa</asp:ListItem>
-                        <asp:ListItem Value="pais.nombre as Pais">Pais</asp:ListItem>--%>
                         <asp:ListItem Value="CONCAT(DATEDIFF(MINUTE, reclamos_medicos.fecha_completa_commit,reclamos_medicos.fecha_asignacion)/60 ,':',
                                                     DATEDIFF(MINUTE, reclamos_medicos.fecha_completa_commit,reclamos_medicos.fecha_asignacion)%60 ,':',
                                                     DATEDIFF(SECOND, reclamos_medicos.fecha_completa_commit,reclamos_medicos.fecha_asignacion)%60 ) as [Fecha creacion A Fecha Asignacion] ">Fecha Apertura a fecha asignacion</asp:ListItem>

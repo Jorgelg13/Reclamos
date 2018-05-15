@@ -32,7 +32,7 @@
                         <asp:ListItem Value="reclamos_varios.telefono as Telefono">Telefono</asp:ListItem>
                         <asp:ListItem Value="reclamos_varios.ajustador as Ajustador">Ajustador</asp:ListItem>
                         <asp:ListItem Value="reclamos_varios.version as Version">Version</asp:ListItem>
-                        <asp:ListItem Value="(select top 1 CONCAT(descripcion, fecha) from comentarios_reclamos_varios where id_reclamos_varios = reclamos_varios.id order by id desc) as [Ultimo Comentario]">Ultimo Comentario</asp:ListItem>
+                        <asp:ListItem Value="(select top 1 CONCAT(fecha, descripcion) from comentarios_reclamos_varios where id_reclamos_varios = reclamos_varios.id order by id desc) as [Ultimo Comentario]">Ultimo Comentario</asp:ListItem>
                         <asp:ListItem Value="detalle_pagos_reclamos_varios.cobertura_pagada as [Cobertura Pagada]">Cobertura Pagada</asp:ListItem>
                         <asp:ListItem Value="detalle_pagos_reclamos_varios.valor_indemnizado as [Valor Indemnizado]">Valor Indemnizado</asp:ListItem>
                         <asp:ListItem Value="reclamos_varios.ubicacion as Ubicacion">Ubicacion</asp:ListItem>

@@ -16,6 +16,7 @@
                         <asp:ListItem Value="auto_reclamo.poliza as Poliza">Poliza</asp:ListItem>
                         <asp:ListItem Value="auto_reclamo.asegurado as Asegurado">Asegurado</asp:ListItem>
                         <asp:ListItem Value="auto_reclamo.cliente as Cliente">Cliente</asp:ListItem>
+                        <asp:ListItem Value="auto_reclamo.vip as VIP">VIP</asp:ListItem>
                         <asp:ListItem Value="auto_reclamo.placa as Placa">Placa</asp:ListItem>
                         <asp:ListItem Value="auto_reclamo.marca as Marca">Marca</asp:ListItem>
                         <asp:ListItem Value="auto_reclamo.color as Color">Color</asp:ListItem>
@@ -35,6 +36,7 @@
                         <asp:ListItem Value="reclamo_auto.ubicacion as Ubicacion">Ubicacion</asp:ListItem>
                         <asp:ListItem Value="reclamo_auto.reportante as Reportante">Reportante</asp:ListItem>
                         <asp:ListItem Value="reclamo_auto.version as Version">Version</asp:ListItem>
+                        <asp:ListItem Value="(select top 1 CONCAT(fecha, ' ', descripcion) from comentarios_reclamos_autos where id_reclamo_auto = reclamo_auto.id order by id desc) as [Ultimo Comentario]">Ultimo Comentario</asp:ListItem>
                         <asp:ListItem Value="reclamo_auto.edad as Edad">Edad</asp:ListItem>
                         <asp:ListItem Value="reclamo_auto.telefono as Telefono">Telefono</asp:ListItem>
                         <asp:ListItem Value="reclamo_auto.ajustador as Ajustador">Ajustador</asp:ListItem>
