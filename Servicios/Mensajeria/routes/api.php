@@ -18,4 +18,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 
-Route::get('persona', 'PersonaController@todos');
+Route::post('CrearMensaje', 'MensajeController@CrearMensaje');
