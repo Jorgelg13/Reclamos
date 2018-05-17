@@ -234,21 +234,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesAutorizaciones : Syste
 
     protected void btnExportarEficiencia_Click(object sender, EventArgs e)
     {
-        Response.Clear();
-        Response.Buffer = true;
-        Response.AddHeader("content-disposition", "attachment;filename=Eficiencia Autorizaciones.xls");
-        Response.Charset = "";
-        Response.ContentType = "application/vnd.ms-excel";
-
-        using (StringWriter sw = new StringWriter())
-        {
-            HtmlTextWriter hw = new HtmlTextWriter(sw);
-            GridEficiencia.AllowPaging = false;
-            GridEficiencia.RenderControl(hw);
-            Response.Output.Write(sw.ToString());
-            Response.Flush();
-            Response.End();
-        }
+        Utils.ExportarExcel(GridEficiencia, Response, "Eficiencia Autorizaciones");
     }
 
     public void aseguradoras()

@@ -92,7 +92,7 @@ public partial class SiteMaster : MasterPage
 
         catch (Exception ex)
         {
-            Util.enviarcorreo("reclamosgt@unitypromotores.com", "123$456R", "jorge.laj@unitypromotores.com", "Descripcion del error: " + ex, "Error en conteo de reclamos en cabina");
+            Email.EnviarERROR("Descripcion del error: " + ex, "Error en conteo de reclamos en cabina");
         }
     }
 }

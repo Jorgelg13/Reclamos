@@ -5,7 +5,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <div class="container-fluid">
         <div class="col-sm-2">
-            <div class="panel panel-default">
+            <div class="panel panel-info">
                 <div class="panel-heading">
                     <h3 class="panel-title"><b style="font-size: 16px;">Seleccione los campos</b></h3>
                 </div>
@@ -23,20 +23,21 @@
                         <asp:ListItem Value="auto_reclamo.modelo as Modelo">Modelo</asp:ListItem>
                         <asp:ListItem Value="auto_reclamo.chasis as Chasis">Chasis</asp:ListItem>
                         <asp:ListItem Value="auto_reclamo.motor as Motor">Motor</asp:ListItem>
+                        <asp:ListItem Value="(select top 1 cobertura from coberturas_afectadas where id_reclamo_auto = reclamo_auto.id) as [Cobertura Afectada]">Cober.Afectada</asp:ListItem>
                         <asp:ListItem Value="auto_reclamo.propietario as Propietario">Propietario</asp:ListItem>
                         <asp:ListItem Value="auto_reclamo.ejecutivo as Ejecutivo">Ejecutivo</asp:ListItem>
                         <asp:ListItem Value="auto_reclamo.aseguradora as Aseguradora">Aseguradora</asp:ListItem>
                         <asp:ListItem Value="auto_reclamo.contratante as Contratante">Contratante</asp:ListItem>
                         <asp:ListItem Value="auto_reclamo.estado_poliza as Estado_Poliza">Estatus Poliza</asp:ListItem>
                         <asp:ListItem Value="reclamo_auto.boleta as Boleta">Boleta</asp:ListItem>
-                        <asp:ListItem Value="reclamo_auto.titular  as Titular">Titular</asp:ListItem>
+                        <asp:ListItem Value="reclamo_auto.titular as Titular">Titular</asp:ListItem>
                         <asp:ListItem Value="reclamo_auto.hora as [Hora Siniestro]">Hora Siniestro</asp:ListItem>
                         <asp:ListItem Value="Convert(varchar(10),reclamo_auto.fecha, 103) As [Fecha Siniestro]">Fecha Siniestro</asp:ListItem>
                         <asp:ListItem Value="Convert(varchar(10),reclamo_auto.fecha_commit, 103) As [Fecha Creacion]">Fecha Creacion</asp:ListItem>
                         <asp:ListItem Value="reclamo_auto.ubicacion as Ubicacion">Ubicacion</asp:ListItem>
                         <asp:ListItem Value="reclamo_auto.reportante as Reportante">Reportante</asp:ListItem>
                         <asp:ListItem Value="reclamo_auto.version as Version">Version</asp:ListItem>
-                        <asp:ListItem Value="(select top 1 CONCAT(fecha, ' ', descripcion) from comentarios_reclamos_autos where id_reclamo_auto = reclamo_auto.id order by id desc) as [Ultimo Comentario]">Ultimo Comentario</asp:ListItem>
+                        <asp:ListItem Value="(select top 1 CONCAT(fecha, '  /  ', descripcion) from comentarios_reclamos_autos where id_reclamo_auto = reclamo_auto.id order by id desc) as [Ultimo Comentario]">Ultimo Comentario</asp:ListItem>
                         <asp:ListItem Value="reclamo_auto.edad as Edad">Edad</asp:ListItem>
                         <asp:ListItem Value="reclamo_auto.telefono as Telefono">Telefono</asp:ListItem>
                         <asp:ListItem Value="reclamo_auto.ajustador as Ajustador">Ajustador</asp:ListItem>
@@ -63,7 +64,7 @@
             </div>
         </div>
         <div class="col-sm-10">
-            <div class="panel panel-default">
+            <div class="panel panel-info">
                 <div class="panel-heading">
                     <h3 class="panel-title"><b style="font-size: 16px;">Tabla con campos seleccionados <spam style="margin-left:100px">Total de registros: </spam><asp:Label ID="lblConteo" runat="server" Style="font-size: 20px;"></asp:Label></b></h3>
                 </div>

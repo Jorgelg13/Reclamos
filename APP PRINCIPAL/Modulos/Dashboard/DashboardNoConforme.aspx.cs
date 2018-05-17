@@ -1,5 +1,4 @@
 ﻿using System;
-using System.IO;
 using System.Linq;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -83,21 +82,7 @@ public partial class Modulos_Dashboard_DashboardNoConforme : System.Web.UI.Page
     }
     protected void linkDescargar_Click(object sender, EventArgs e)
     {
-        Response.Clear();
-        Response.Buffer = true;
-        Response.AddHeader("content-disposition", "attachment;filename=Producto No Conforme.xls");
-        Response.Charset = "";
-        Response.ContentType = "application/vnd.ms-excel";
-
-        using (StringWriter sw = new StringWriter())
-        {
-            HtmlTextWriter hw = new HtmlTextWriter(sw);
-            GridNoConforme.AllowPaging = false;
-            GridNoConforme.RenderControl(hw);
-            Response.Output.Write(sw.ToString());
-            Response.Flush();
-            Response.End();
-        }
+        Utils.ExportarExcel(GridNoConforme,Response, "Producto No Conforme");
     }
 
     public override void VerifyRenderingInServerForm(Control control)

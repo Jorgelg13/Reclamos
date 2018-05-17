@@ -18,21 +18,7 @@ public partial class ReportesMedicos : System.Web.UI.Page
     }
     protected void linkDescargar_Click(object sender, EventArgs e)
     {
-        Response.Clear();
-        Response.Buffer = true;
-        Response.AddHeader("content-disposition", "attachment;filename=Reporte Gastos Medicos.xls");
-        Response.Charset = "";
-        Response.ContentType = "application/vnd.ms-excel";
-
-        using (StringWriter sw = new StringWriter())
-        {
-            HtmlTextWriter hw = new HtmlTextWriter(sw);
-            GridMedicos.AllowPaging = false;
-            GridMedicos.RenderControl(hw);
-            Response.Output.Write(sw.ToString());
-            Response.Flush();
-            Response.End();
-        }
+        Utils.ExportarExcel(GridMedicos, Response, "Reporte Gastos Medicos");
     }
     public override void VerifyRenderingInServerForm(Control control)
     {

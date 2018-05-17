@@ -1,12 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.UI;
-using System.Web.UI.WebControls;
-using System.Data;
-using System.Data.SqlClient;
-using System.IO;
 
 public partial class Modulos_MdReclamosUnity_wbFrmReclamosDañosGeneral : System.Web.UI.Page
 {
@@ -71,21 +64,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosDañosGeneral : System
     //funcion para exportar a un archivo de excel lo que aparece en el gridview
     protected void linkDescargar_Click(object sender, EventArgs e)
     {
-        Response.Clear();
-        Response.Buffer = true;
-        Response.AddHeader("content-disposition", "attachment;filename=Reporte_daños_seguimiento.xls");
-        Response.Charset = "";
-        Response.ContentType = "application/vnd.ms-excel";
-
-        using (StringWriter sw = new StringWriter())
-        {
-            HtmlTextWriter hw = new HtmlTextWriter(sw);
-            GridGeneral.AllowPaging = false;
-            GridGeneral.RenderControl(hw);
-            Response.Output.Write(sw.ToString());
-            Response.Flush();
-            Response.End();
-        }
+        Utils.ExportarExcel(GridGeneral,Response,"Reporte daños en seguimiento");
     }
 
 

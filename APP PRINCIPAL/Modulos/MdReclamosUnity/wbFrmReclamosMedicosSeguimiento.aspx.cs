@@ -225,7 +225,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosMedicosSeguimientos : 
             string to = txtDestinatario.Text;
             string mensaje = txtMensaje.Text;
             string asunto = txtAsunto.Text;
-            new Email().enviarcorreo(from, password, to, mensaje, asunto);
+            new Email().CorreoReclamos(to, mensaje, asunto);
             Utils.ShowMessage(this.Page, "Correo Enviado con exito", "Excelente..!", "success");
         }
 

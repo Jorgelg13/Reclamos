@@ -81,6 +81,8 @@
                                 <br />
                                 <asp:Label ID="lblAsegurado" runat="server"></asp:Label>
                                 <br />
+                                <asp:Label ID="lblcliente" runat="server"></asp:Label>
+                                <br />
                                 <asp:Label ID="lblEjecutivo" runat="server"></asp:Label>
                                 <br />
                                 <asp:Label ID="lblAseguradora" runat="server"></asp:Label>

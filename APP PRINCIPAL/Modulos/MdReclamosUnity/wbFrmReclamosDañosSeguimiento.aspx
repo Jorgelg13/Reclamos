@@ -55,6 +55,8 @@
                                 <br />
                                 <asp:Label ID="lblAsegurado" runat="server"></asp:Label>
                                 <br />
+                                <asp:Label ID="lblcliente" runat="server"></asp:Label>
+                                <br />
                                 <asp:Label ID="lblEjecutivo" runat="server"></asp:Label>
                                 <br />
                                 <asp:Label ID="lblAseguradora" runat="server"></asp:Label>
@@ -320,7 +322,7 @@
                                 </div>
                                 <div class="form-group col-sm-12 col-md-6 col-lg-6">
                                     <label>IVA:</label>
-                                    <asp:TextBox ID="txtIva" Style="width: 100%" autocomplete="off" class="form-control" placeholder="iva" runat="server"></asp:TextBox>
+                                    <asp:TextBox ID="txtIva" Text="0.00" Style="width: 100%" autocomplete="off" class="form-control" placeholder="iva" runat="server"></asp:TextBox>
                                 </div>
                                 <div class="form-group col-sm-12 col-md-6 col-lg-6">
                                     <label>Monto Ajustado:</label>

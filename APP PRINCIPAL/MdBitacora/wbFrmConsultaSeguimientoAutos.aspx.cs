@@ -206,7 +206,6 @@ public partial class MdBitacora_wbFrmConsultaSeguimientoAutos : System.Web.UI.Pa
             string to = txtDestinatario.Text;
             string mensaje = txtMensaje.Text;
             string asunto = txtAsunto.Text;
-            new Email().enviarcorreo(from, password, to, mensaje, asunto);
             Utils.ShowMessage(this.Page, "Correo enviado con exito", "Excelente", "success");
         }
 
@@ -306,7 +305,7 @@ public partial class MdBitacora_wbFrmConsultaSeguimientoAutos : System.Web.UI.Pa
         catch (Exception ex)
         {
             Utils.ShowMessage(this.Page, "No se a podido actualizar el registro", "Nota..", "error");
-            notificacion.enviarcorreo("reclamosgt@unitypromotores.com", "123$456R", "jorge.laj@unitypromotores.com", "Error ocasionado al usuario: " + userlogin + " en el registro con el id: " + id + "\n\n" + ex, "Error de reclamo en seguimiento de autos");
+            Email.EnviarERROR("Error ocasionado al usuario: " + userlogin + " en el registro con el id: " + id + "\n\n" + ex, "Error de reclamo en seguimiento de autos");
         }
 
         if (checkCerrarReclamo.Checked)
@@ -663,7 +662,6 @@ public partial class MdBitacora_wbFrmConsultaSeguimientoAutos : System.Web.UI.Pa
     //envio de notificacion automatica de correos electronicos por cambio de estado del reclamo
     public void enviarNotificacion()
     {
-        notificacion.enviarcorreo("reclamosgt@unitypromotores.com", "123$456R", txtCorreoContacto.Text.Trim(), mensaje, txtAsunto.Text);
     }
 
     public void enviar_notificaciones_click(object sender, EventArgs e)

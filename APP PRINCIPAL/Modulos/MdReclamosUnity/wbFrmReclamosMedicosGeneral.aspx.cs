@@ -84,21 +84,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosMedicosGeneral : Syste
     //funcion para exportar a un archivo de excel lo que aparece en el gridview
     protected void linkDescargar_Click(object sender, EventArgs e)
     {
-        Response.Clear();
-        Response.Buffer = true;
-        Response.AddHeader("content-disposition", "attachment;filename=Reclamos_medicos_seguimiento.xls");
-        Response.Charset = "";
-        Response.ContentType = "application/vnd.ms-excel";
-
-        using (StringWriter sw = new StringWriter())
-        {
-            HtmlTextWriter hw = new HtmlTextWriter(sw);
-            GridGeneral.AllowPaging = false;
-            GridGeneral.RenderControl(hw);
-            Response.Output.Write(sw.ToString());
-            Response.Flush();
-            Response.End();
-        }
+        Utils.ExportarExcel(GridGeneral, Response, "Reclamos Medicos en seguimiento");
     }
 
     public override void VerifyRenderingInServerForm(Control control)

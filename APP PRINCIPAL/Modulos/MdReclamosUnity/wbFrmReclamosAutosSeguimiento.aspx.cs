@@ -43,12 +43,12 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosAutosSeguimiento : Sys
         cartaEnvioCheque = "";
 
         // variables para llenandos de gridviews utilizados en esta vista
-        pagos = Consultas.PAGOS_AUTOS(id);
-        llamadas = Consultas.LLAMADAS_AUTOS(id);
-        coberturas = Consultas.COBERTURAS_AUTOS(id);
+        pagos          = Consultas.PAGOS_AUTOS(id);
+        llamadas       = Consultas.LLAMADAS_AUTOS(id);
+        coberturas     = Consultas.COBERTURAS_AUTOS(id);
         datosAccidente = Consultas.DATOS_ACCIDENTE_AUTOS(id);
-        comentarios = Consultas.COMENTARIOS_AUTOS(id);
-        estados_autos = Consultas.ESTADOS_AUTOS(id);
+        comentarios    = Consultas.COMENTARIOS_AUTOS(id);
+        estados_autos  = Consultas.ESTADOS_AUTOS(id);
 
         if (!IsPostBack)
         {
@@ -86,6 +86,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosAutosSeguimiento : Sys
             //listado de detalle de poliza
             lblPoliza.Text = "<b>POLIZA :</b>             " + reclamo.auto_reclamo.poliza;
             lblAsegurado.Text = "<b>ASEGURADO :</b>       " + reclamo.auto_reclamo.asegurado;
+            lblcliente.Text = "<b>No.Cliente</b>:         " + reclamo.auto_reclamo.cliente;
             lblEjecutivo.Text = "<b>EJECUTIVO :</b>       " + reclamo.auto_reclamo.ejecutivo;
             lblAseguradora.Text = "<b>ASEGURADORA :</b>   " + reclamo.auto_reclamo.aseguradora;
             lblContratante.Text = "<b>CONTRATANTE :</b>   " + reclamo.auto_reclamo.contratante;
@@ -99,26 +100,26 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosAutosSeguimiento : Sys
             txtObservaciones.Text = reclamo.observaciones;
             txtObservacionesNoConf.Text = reclamo.observacion_no_conforme;
             //listado de dropdowns
-            ddlEstadoAuto.Text = reclamo.estado_auto_unity;
-            ddlGestor.SelectedValue = reclamo.id_gestor.ToString();
-            ddlTaller.SelectedValue = reclamo.id_taller.ToString();
-            ddlAnalista.SelectedValue = reclamo.id_analista.ToString();
+            ddlEstadoAuto.Text          = reclamo.estado_auto_unity;
+            ddlGestor.SelectedValue     = reclamo.id_gestor.ToString();
+            ddlTaller.SelectedValue     = reclamo.id_taller.ToString();
+            ddlAnalista.SelectedValue   = reclamo.id_analista.ToString();
             ddlNoConforme.SelectedValue = reclamo.detalle_no_conforme;
             ddlNoConforme.SelectedValue = String.IsNullOrEmpty(reclamo.detalle_no_conforme) ? "" : reclamo.detalle_no_conforme;
             //campos varios
-            txtFrom.Text = reclamo.gestores.correo;
-            txtEjecutivo.Text = reclamo.auto_reclamo.ejecutivo;
-            txtGestor.Text = reclamo.gestores.nombre;
-            txtGestorTelefono.Text = reclamo.gestores.telefono;
-            txtFechaSiniestro.Text = reclamo.fecha.ToString();
-            lblNumeroPoliza.Text = reclamo.auto_reclamo.poliza;
+            txtFrom.Text            = reclamo.gestores.correo;
+            txtEjecutivo.Text       = reclamo.auto_reclamo.ejecutivo;
+            txtGestor.Text          = reclamo.gestores.nombre;
+            txtGestorTelefono.Text  = reclamo.gestores.telefono;
+            txtFechaSiniestro.Text  = reclamo.fecha.ToString();
+            lblNumeroPoliza.Text    = reclamo.auto_reclamo.poliza;
             lblNombreAsegurado.Text = reclamo.auto_reclamo.poliza;
             lblDireccionAsegurado.Text = reclamo.auto_reclamo.direccion;
-            lblIdReclamo.Text = "<b>ID:</b>" + reclamo.id;
-            txtNumReclamo.Text = reclamo.num_reclamo;
-            lblEstadoAuto.Text = reclamo.estado_auto_unity;
-            lblProximaFecha.Text = "Proxima Fecha:" + Convert.ToDateTime(reclamo.fecha_visualizar).ToString("dd/MM/yyyy");
-            lblEstadoReclamo.Text = reclamo.estado_unity;
+            lblIdReclamo.Text       = "<b>ID:</b>" + reclamo.id;
+            txtNumReclamo.Text      = reclamo.num_reclamo;
+            lblEstadoAuto.Text      = reclamo.estado_auto_unity;
+            lblProximaFecha.Text    = "Proxima Fecha:" + Convert.ToDateTime(reclamo.fecha_visualizar).ToString("dd/MM/yyyy");
+            lblEstadoReclamo.Text   = reclamo.estado_unity;
 
             if(reclamo.estado_unity == "Cerrado")
             {
@@ -126,28 +127,25 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosAutosSeguimiento : Sys
             }
 
             //opciones de checks
-            checkPrioritario.Checked = reclamo.prioritario.Value;
-            CheckComplicado.Checked = reclamo.complicado.Value;
-            checkCompromiso.Checked = reclamo.compromiso_pago.Value;
-            ChecKAutoAlquiler.Checked = reclamo.alquiler_auto.Value;
-            CheckPerdida.Checked = reclamo.perdida_total.Value;
+            checkPrioritario.Checked   = reclamo.prioritario.Value;
+            CheckComplicado.Checked    = reclamo.complicado.Value;
+            checkCompromiso.Checked    = reclamo.compromiso_pago.Value;
+            ChecKAutoAlquiler.Checked  = reclamo.alquiler_auto.Value;
+            CheckPerdida.Checked       = reclamo.perdida_total.Value;
             checkCierreInterno.Checked = reclamo.cierre_interno.Value;
 
             //informacion del taller asignado
-            txtNombreTaller.Text = reclamo.talleres.nombre;
-            txtDireccionTaller.Text = reclamo.talleres.direccion;
-            txtTelefonoTaller.Text = reclamo.talleres.telefono;
-            txtCorreoTaller.Text = reclamo.talleres.correo;
+            txtNombreTaller.Text      = reclamo.talleres.nombre;
+            txtDireccionTaller.Text   = reclamo.talleres.direccion;
+            txtTelefonoTaller.Text    = reclamo.talleres.telefono;
+            txtCorreoTaller.Text      = reclamo.talleres.correo;
 
             //datos del analista
-            txtNombreAnalista.Text = reclamo.analistas.nombre;
+            txtNombreAnalista.Text   = reclamo.analistas.nombre;
             txtTelefonoAnalista.Text = reclamo.analistas.telefono;
-            txtCorreoAnalista.Text = reclamo.analistas.correo;
+            txtCorreoAnalista.Text   = reclamo.analistas.correo;
 
-            if (reclamo.estado_unity == "Cerrado")
-            {
-                checkCerrarReclamo.Checked = true;
-            }
+            if (reclamo.estado_unity == "Cerrado") checkCerrarReclamo.Checked = true;
 
             if (reclamo.no_conforme == false)
             {
@@ -218,7 +216,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosAutosSeguimiento : Sys
             string to = txtDestinatario.Text;
             string mensaje = txtMensaje.Text;
             string asunto = txtAsunto.Text;
-            new Email().enviarcorreo(from, password, to, mensaje, asunto);
+            new Email().CorreoReclamos(to, mensaje, asunto);
             Utils.ShowMessage(this.Page, "Correo enviado con exito", "Excelente", "success");
         }
 
@@ -313,12 +311,13 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosAutosSeguimiento : Sys
             reclamo.fecha_visualizar = fecha_v.AddDays(dias);
             DBReclamos.SaveChanges();
             DatosReclamo(id);
+            llenado.llenarGrid(estados_autos,GridEstadosAuto);
             Utils.ShowMessage(this.Page, "Datos actualizados", "Excelente...!", "success");
         }
         catch (Exception ex)
         {
             Utils.ShowMessage(this.Page, "No se a podido actualizar el registro", "Nota..", "error");
-            notificacion.enviarcorreo("reclamosgt@unitypromotores.com", "123$456R", "jorge.laj@unitypromotores.com", "Error ocasionado al usuario: " + userlogin + " en el registro con el id: " + id + "\n\n" + ex, "Error de reclamo en seguimiento de autos");
+            Email.EnviarERROR("Error ocasionado al usuario: " + userlogin + " en el registro con el id: " + id + "\n\n" + ex, "Error de reclamo en seguimiento de autos");
         }
 
         if(checkCierreInterno.Checked)
@@ -365,12 +364,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosAutosSeguimiento : Sys
     {
         txtDestinatario.Text = txtCorreoContacto.Text;
         //mensaje personalizado de un alquiler de vehiculo        
-        txtMensaje.Text = " Reciba un cordial saludo \n\n " +
-            "En relación al reclamo en la referencia, por este medio hacemos de su conocimiento que su póliza goza con la cobertura de alquiler de vehículo por colisión. \n\n " +
-            "El límite diario es de Q.   hasta un máximo de __ días, equivalente a Q     .   Aplicable por medio de reembolso y sujeto a  presentar la factura correspondiente de un Arrendadora legalmente autorizada. \n\n " +
-            "Dentro del reembolso no se contemplará el costo de los seguros incluidos  en el contrato de arrendamiento.No aplica para servicios de taxis, y está sujeto a un deducible de Q - diarios y el 3 % de timbres fiscales. \n\n" +
-            "La factura deberá ser emitida a su nombre, nos deberá enviar copia de la misma y el contrato por está vía, para el trámite del reembolso.\n\n" +
-            "Cualquier duda, estamos a la orden";
+        txtMensaje.Text = Constantes.ALQUILER_VEHICULO(); 
             txtAsunto.Text = "Alquiler De Vehiculo ";
     }
 
@@ -391,7 +385,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosAutosSeguimiento : Sys
         }
 
         //mensaje personalizado de una perdida total.           
-        txtMensaje.Text = "Estimado Ejecutivo \n\n Por este medio hacemos de su conocimiento que recibimos notificación de pérdida total,  del vehículo Placa: "+ txtPlaca.Text+ ", Marca: "+ txtMarca.Text +", Modelo: "+txtModelo.Text+",  propiedad del asegurado "+lblNombreAsegurado.Text+" póliza "+lblNumeroPoliza.Text+" . Saludos";
+        txtMensaje.Text = Constantes.PERDIDA_TOTAL_AUTO(txtPlaca, txtMarca, txtModelo, lblNombreAsegurado, lblNumeroPoliza);
         txtAsunto.Text = "Perdida Total en vehiculo ";
     }
 
@@ -727,7 +721,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosAutosSeguimiento : Sys
     //envio de notificacion automatica de correos electronicos por cambio de estado del reclamo
     public void enviarNotificacion()
     {
-        notificacion.enviarcorreo("reclamosgt@unitypromotores.com", "123$456R", txtCorreoContacto.Text.Trim(), mensaje, txtAsunto.Text);
+        notificacion.CorreoReclamos(txtCorreoContacto.Text.Trim(), mensaje, txtAsunto.Text);
     }
 
     public void Notificacion()
@@ -743,7 +737,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosAutosSeguimiento : Sys
             Notificacion();
         }
 
-        else if (ddlEstadoAuto.SelectedValue == "Presupuesto")
+        else if (ddlEstadoAuto.SelectedValue == "Presupuesto y ajuste")
         {
             Notificacion();
         }
@@ -770,12 +764,12 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosAutosSeguimiento : Sys
             chEnviarCorreo.Enabled = false;
         }
 
-        else if (ddlEstadoAuto.SelectedValue == "Ajustes autos")
+        else if (ddlEstadoAuto.SelectedValue == "Ajuste y liquidacion")
         {
             Notificacion();
         }
 
-        else if(ddlEstadoAuto.SelectedValue == "Cheque")
+        else if(ddlEstadoAuto.SelectedValue == "Emision cheque")
         {
             Notificacion();
             chEnviarCorreo.Enabled = false;
@@ -810,19 +804,19 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosAutosSeguimiento : Sys
             agregarComentario("Correo automatico: " + mensaje);
         }
 
-        else if (ddlEstadoAuto.SelectedValue == "Presupuesto")
+        else if (ddlEstadoAuto.SelectedValue == "Presupuesto y ajuste")
         {
             if(chEnviarCorreo.Checked && txtCorreoContacto.Text !="")
             {
                 mensaje = Constantes.PRESUPUESTO_AUTO(txtPlaca, txtMarca, txtModelo);
-                txtAsunto.Text = "Presupuesto";
+                txtAsunto.Text = "Presupuesto y ajuste";
                 enviarNotificacion();
                 agregarComentario("Correo Automatico: " + mensaje);
             }
 
             if(chEnviarSMS.Checked && txtTelefono.Text != "")
             {
-                Utils.SMS_reclamos_autos(txtTelefono.Text, "UNITY: Estimad@ cliente Reclamo " + id + " su vehículo en proceso de elaboración de presupuesto en taller de su elección.", userlogin, id);
+                Utils.SMS_reclamos_autos(txtTelefono.Text, "UNITY: Estimad@ cliente Reclamo "+id+" su vehículo en proceso de presupuesto y ajuste en taller de su elección", userlogin, id);
             }
 
             llenado.llenarGrid(comentarios, GridComentarios);
@@ -868,7 +862,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosAutosSeguimiento : Sys
         {
             if (chEnviarSMS.Checked && txtTelefono.Text != "")
             {
-                Utils.SMS_reclamos_autos(txtTelefono.Text, "UNITY: Estimad@ cliente Reclamo "+id+" su vehiculo esta declarado como perdida total, se envia solicitud de documentos.", userlogin, id);
+                Utils.SMS_reclamos_autos(txtTelefono.Text, "UNITY: Estimad@ cliente Reclamo "+id+" su vehiculo fue declarado como perdida total, se envia solicitud de documentos.", userlogin, id);
                 llenado.llenarGrid(comentarios,GridComentarios);
             }
         }
@@ -882,7 +876,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosAutosSeguimiento : Sys
             }
         }
 
-        else if (ddlEstadoAuto.SelectedValue == "Ajustes autos")
+        else if (ddlEstadoAuto.SelectedValue == "Ajuste y liquidacion")
         {
             if(chEnviarCorreo.Checked && txtCorreoContacto.Text != "")
             {
@@ -894,13 +888,13 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosAutosSeguimiento : Sys
 
             if(chEnviarSMS.Checked && txtTelefono.Text != "")
             {
-                Utils.SMS_reclamos_autos(txtTelefono.Text, "UNITY: Estimad@ cliente reclamo "+id+" esta en proceso de revision y ajuste en la compañia de seguros.", userlogin, id);
+                Utils.SMS_reclamos_autos(txtTelefono.Text, "UNITY: Estimad@ cliente reclamo "+id+" esta en proceso de ajuste y liquidacion en la compañia de seguros.", userlogin, id);
             }
 
             llenado.llenarGrid(comentarios,GridComentarios);
         }
 
-        else if(ddlEstadoAuto.SelectedValue == "Cheque")
+        else if(ddlEstadoAuto.SelectedValue == "Emision cheque")
         {
             if (chEnviarSMS.Checked && txtTelefono.Text != "")
             {
@@ -1051,7 +1045,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosAutosSeguimiento : Sys
                 noConforme.no_conforme = false;
                 noConforme.fecha_cierre_no_conforme = DateTime.Now;
                 DBReclamos.SaveChanges();
-                agregarComentario("La incorformidad encontrada en el reclamo por: " + ddlNoConforme.SelectedValue + ", a sido solventada. ");
+                agregarComentario("La incorformidad encontrada en el reclamo por: " + ddlNoConforme.SelectedValue + ", ha sido solventada. ");
                 llenado.llenarGrid(comentarios, GridComentarios);
                 Utils.ShowMessage(this.Page, "Reclamo Actualizado como producto no conforme.", "Excelente", "info");
             }

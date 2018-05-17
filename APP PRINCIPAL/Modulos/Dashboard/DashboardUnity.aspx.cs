@@ -65,7 +65,7 @@ public partial class DashboardUnity : System.Web.UI.Page
 
         catch (Exception ex)
         {
-            util.enviarcorreo("reclamosgt@unitypromotores.com", "123$456R", "jorge.laj@unitypromotores.com", "Descripcion del error: " + ex, "Error en conteo de reclamos en unity");
+            Email.EnviarERROR("Descripcion del error: " + ex, "Error en conteo de reclamos de unity");
         }
     }
 

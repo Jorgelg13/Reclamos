@@ -4,7 +4,9 @@ using System.Data.SqlClient;
 using System.Web.UI.WebControls;
 using System.Web.UI;
 using System.Net.Http;
-
+using System.Linq;
+using System.Web;
+using System.IO;
 
 public class Utils
 {
@@ -202,12 +204,39 @@ public class Utils
         return exito;
     }
 
+    public static string TelefonoGestor(DropDownList gestor)
+    {
+
+        string telefono;
+        var numero = DBReclamos.gestores.Select(t => new { t.telefono, t.nombre }).Where(tel => tel.nombre == gestor.SelectedItem.Text).First();
+        telefono = numero.telefono.ToString();
+        return telefono;
+
+    }
+
     public static void ShowMessage(Page page, string message, string title, string type = "info")
     {
         page.ClientScript.RegisterStartupScript(page.GetType(), "toastr_message",
               String.Format("toastr.{0}('{1}', '{2}');", type.ToLower(), message, title), addScriptTags: true);
     }
 
+    public static void ExportarExcel(Control ctrl, HttpResponse Response, string nombre)
+    {
+        Response.Clear();
+        Response.Buffer = true;
+        Response.AddHeader("content-disposition", "attachment;filename="+nombre+".xls");
+        Response.Charset = "";
+        Response.ContentType = "application/vnd.ms-excel";
+
+        using (StringWriter sw = new StringWriter())
+        {
+            HtmlTextWriter hw = new HtmlTextWriter(sw);
+            ctrl.RenderControl(hw);
+            Response.Output.Write(sw.ToString());
+            Response.Flush();
+            Response.End();
+        }
+    }
     public static void SMS_gastos_medicos(String telefono, String mensaje, String usuario, String estado, long id,string tipo)
     {
         int numero = Convert.ToInt32(telefono);

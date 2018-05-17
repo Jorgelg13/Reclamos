@@ -97,11 +97,13 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosEnSeguimiento : System
         //query con el que se muestran los reclamos prioritarios.
         string reclamosPrioritarios = reclamosGeneral +
                     " where ((reclamo_auto.prioritario = 'true') and (reclamo_auto.usuario_unity = '" + userlogin + "' and reclamo_auto.estado_unity != 'Cerrado' ))";
-
+        if(!IsPostBack)
+        {
             //funciones que llenan los grid con los registros
             llenado.llenarGrid(reclamosSeguimiento, GridReclamosSeguimiento);
             llenado.llenarGrid(reclamosComplicados, GridComplicados);
             llenado.llenarGrid(reclamosPrioritarios, GridPrioritarios);
+        }
     }
 
     protected void GridReclamosSeguimiento_SelectedIndexChanged(object sender, EventArgs e)
@@ -109,35 +111,35 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosEnSeguimiento : System
         int id1;
         id1 = Convert.ToInt32(GridReclamosSeguimiento.SelectedRow.Cells[1].Text);
         fechaVisualizar(id1);
-        Response.Redirect("/Modulos/MdReclamosUnity/wbFrmReclamosAutosSeguimiento.aspx?ID_reclamo=" + id1);
+        Response.Redirect("/Modulos/MdReclamosUnity/wbFrmReclamosAutosSeguimiento.aspx?ID_reclamo=" + id1,false);
     }
 
     protected void GridComplicados_SelectedIndexChanged(object sender, EventArgs e)
     {
         int id2;
         id2 = Convert.ToInt32(GridComplicados.SelectedRow.Cells[1].Text);
-        Response.Redirect("/Modulos/MdReclamosUnity/wbFrmReclamosAutosSeguimiento.aspx?ID_reclamo=" + id2);
+        Response.Redirect("/Modulos/MdReclamosUnity/wbFrmReclamosAutosSeguimiento.aspx?ID_reclamo=" + id2, false);
     }
 
     protected void GridPrioritarios_SelectedIndexChanged(object sender, EventArgs e)
     {
         int id3;
         id3 = Convert.ToInt32(GridPrioritarios.SelectedRow.Cells[1].Text);
-        Response.Redirect("/Modulos/MdReclamosUnity/wbFrmReclamosAutosSeguimiento.aspx?ID_reclamo=" + id3);
+        Response.Redirect("/Modulos/MdReclamosUnity/wbFrmReclamosAutosSeguimiento.aspx?ID_reclamo=" + id3, false);
     }
 
     protected void GridReclamosGeneral_SelectedIndexChanged(object sender, EventArgs e)
     {
         int id4;
         id4 = Convert.ToInt32(GridReclamosGeneral.SelectedRow.Cells[1].Text);
-        Response.Redirect("/Modulos/MdReclamosUnity/wbFrmReclamosAutosSeguimiento.aspx?ID_reclamo=" + id4);
+        Response.Redirect("/Modulos/MdReclamosUnity/wbFrmReclamosAutosSeguimiento.aspx?ID_reclamo=" + id4, false);
     }
 
     protected void GridReclamosEstado_SelectedIndexChanged(object sender, EventArgs e)
     {
         int id5;
         id5 = Convert.ToInt32(GridReclamosEstado.SelectedRow.Cells[1].Text);
-        Response.Redirect("/Modulos/MdReclamosUnity/wbFrmReclamosAutosSeguimiento.aspx?ID_reclamo=" + id5);
+        Response.Redirect("/Modulos/MdReclamosUnity/wbFrmReclamosAutosSeguimiento.aspx?ID_reclamo=" + id5, false);
     }
 
     //funcion que coloca en rojo los registros que no se an abierto en el dia
@@ -164,8 +166,17 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosEnSeguimiento : System
 
     protected void ddlGestor_SelectedIndexChanged(object sender, EventArgs e)
     {
-        //query que trae los reclamos en general de todos los usuarios.
-        string reclamosEnGeneral = reclamosGeneral + " where ( reclamo_auto.id_gestor = " + ddlgestor.SelectedValue + " and reclamo_auto.estado_unity != 'Cerrado')";
-        llenado.llenarGrid(reclamosEnGeneral, GridReclamosGeneral);
+        String reclamosGestor = reclamosGeneral +
+              "where ( reclamo_auto.id_gestor = " + ddlgestor.SelectedValue + " and reclamo_auto.estado_unity = 'Seguimiento')";
+
+        String Prioritarios = reclamosGeneral +
+             " where ((reclamo_auto.prioritario = 'true') and (reclamo_auto.id_gestor = " + ddlgestor.SelectedValue + " and reclamo_auto.estado_unity = 'Seguimiento' ))";
+
+        String Complicados = reclamosGeneral +
+             " where ((reclamo_auto.complicado = 'true') and (reclamo_auto.id_gestor = " + ddlgestor.SelectedValue + " and reclamo_auto.estado_unity = 'Seguimiento' ))";
+
+        llenado.llenarGrid(reclamosGestor, GridReclamosGeneral);
+        llenado.llenarGrid(Prioritarios, GridPrioritarios);
+        llenado.llenarGrid(Complicados, GridComplicados);   
     }
 }

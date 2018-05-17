@@ -167,13 +167,13 @@ public partial class Modulos_MdReclamosUnity_wbFrmRecDañosSeguimiento : System.
     protected void ddlgestor_SelectedIndexChanged(object sender, EventArgs e)
     {
         String reclamosGestor = selectGeneral +
-              "where ( reclamos_varios.id_gestor = " + ddlgestor.SelectedValue + " and reclamos_varios.estado_unity != 'Cerrado')";
+              "where ( reclamos_varios.id_gestor = " + ddlgestor.SelectedValue + " and reclamos_varios.estado_unity = 'Seguimiento')";
 
         String Prioritarios = selectGeneral +
-             " where ((reclamos_varios.prioritario = 'true') and (reclamos_varios.id_gestor = " + ddlgestor.SelectedValue + " and reclamos_varios.estado_unity != 'Cerrado' ))";
+             " where ((reclamos_varios.prioritario = 'true') and (reclamos_varios.id_gestor = " + ddlgestor.SelectedValue + " and reclamos_varios.estado_unity = 'Seguimiento' ))";
 
         String Complicados = selectGeneral +
-             " where ((reclamos_varios.complicado = 'true') and (reclamos_varios.id_gestor = " + ddlgestor.SelectedValue + " and reclamos_varios.estado_unity != 'Cerrado' ))";
+             " where ((reclamos_varios.complicado = 'true') and (reclamos_varios.id_gestor = " + ddlgestor.SelectedValue + " and reclamos_varios.estado_unity = 'Seguimiento' ))";
 
         llenado.llenarGrid(reclamosGestor, GridReclamosGeneral);
         llenado.llenarGrid(Prioritarios, GridPrioritarios);

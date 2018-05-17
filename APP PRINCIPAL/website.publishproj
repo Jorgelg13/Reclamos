@@ -18,7 +18,7 @@ Copyright (C) Microsoft Corporation. Todos los derechos reservados.
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{4340b9db-38fd-4fb4-b470-a651f878d49e}</ProjectGuid>
     <SourceWebPhysicalPath>$(MSBuildThisFileDirectory)</SourceWebPhysicalPath>
-    <SourceWebVirtualPath>/reclamos</SourceWebVirtualPath>
+    <SourceWebVirtualPath>/APP PRINCIPAL</SourceWebVirtualPath>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <SourceWebProject>
     </SourceWebProject>

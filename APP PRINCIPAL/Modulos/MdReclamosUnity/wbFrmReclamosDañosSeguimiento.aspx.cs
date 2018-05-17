@@ -94,9 +94,10 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosDañosSeguimiento : Sy
         {
             var reclamo = DBReclamos.reclamos_varios.Find(id);
             //detalle de la poliza
-            lblIdReclamo.Text = "<b>ID :</b>                  " + reclamo.id;
-            lblPoliza.Text = "<b>POLIZA :</b>                 " + reclamo.reg_reclamo_varios.poliza;
+            lblIdReclamo.Text =   "<b>ID :</b>                " + reclamo.id;
+            lblPoliza.Text =      "<b>POLIZA :</b>            " + reclamo.reg_reclamo_varios.poliza;
             lblAsegurado.Text =   "<b>ASEGURADO :</b>         " + reclamo.reg_reclamo_varios.asegurado;
+            lblcliente.Text = "<b>No.Cliente</b>              " + reclamo.reg_reclamo_varios.cliente;
             lblAseguradora.Text = "<b>ASEGURADORA :</b>       " + reclamo.reg_reclamo_varios.aseguradora;
             lblContratante.Text = "<b>CONTRATANTE :</b>       " + reclamo.reg_reclamo_varios.contratante;
             lblEjecutivo.Text =   "<b>EJECUTIVO :</b>         " + reclamo.reg_reclamo_varios.ejecutivo;
@@ -104,7 +105,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosDañosSeguimiento : Sy
             lblDireccion.Text =   "<b>DIRECCION :</b>         " + reclamo.reg_reclamo_varios.direccion;
             lblVip.Text =         "<b>VIP :</b>               " + reclamo.reg_reclamo_varios.vip;
             lblSumaAsegurada.Text = "<b>Suma Aseguarda :</b>  " + reclamo.reg_reclamo_varios.suma_asegurada;
-            lblMoneda.Text = "<b>Moneda :</b>                 " + reclamo.reg_reclamo_varios.moneda;
+            lblMoneda.Text =      "<b>Moneda :</b>            " + reclamo.reg_reclamo_varios.moneda;
             lblProductoNoConforme.Text = "<b>Producto No Conforme Asignado: </b>" + reclamo.detalle_no_conforme;
             txtObservacionesNoConf.Text =                         reclamo.observacion_no_conforme;
 
@@ -306,10 +307,6 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosDañosSeguimiento : Sy
         {
             prioritario = true;
         }
-        //if (checkCerrarReclamo.Checked)
-        //{
-        //    estado = "Cerrado";
-        //}
     }
 
     private void actualizar_fecha_seguimiento()
@@ -373,7 +370,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosDañosSeguimiento : Sy
         catch (Exception ex)
         {
             Utils.ShowMessage(this.Page, "No se a podido actualizar el reclamo", "Error..!", "error");
-            notificacion.enviarcorreo("reclamosgt@unitypromotores.com", "123$456R", "jorge.laj@unitypromotores.com", "Error ocasionado al usuario: " + userlogin + " en el registro con el id: " + id + "\n\n" + ex, "Error en seguimiento de reclamos de daños");
+            Email.EnviarERROR("Error ocasionado al usuario: " + userlogin + " en el registro con el id: " + id + "\n\n" + ex, "Error en seguimiento de reclamos de daños");
         }
     }
 
@@ -656,13 +653,13 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosDañosSeguimiento : Sy
     {
         if (ddlEstadoReclamo.SelectedValue == "Revisión Gestor Reclamos")
         {
-            Utils.SMS_reclamos_danios(txtTelefono.Text, "UNITY: Estimad@ cliente hemos recibido la documentacion de su reclamo ID " + id + ", se revisara para enviar al ajustador.", userlogin, id);
+            Utils.SMS_reclamos_danios(txtTelefono.Text, "UNITY: Estimad@ cliente hemos recibido la documentacion de su reclamo ID " + id + ", se revisara para enviar a la aseguradora.", userlogin, id);
             llenado.llenarGrid(comentarios, GridComentarios);
         }
 
         else if (ddlEstadoReclamo.SelectedValue == "Ajuste")
         {
-            Utils.SMS_reclamos_danios(txtTelefono.Text, "UNITY: Estimad@ cliente la documentacion del reclamo " + id + " esta siendo analizada por la aseguradora.", userlogin, id);
+            Utils.SMS_reclamos_danios(txtTelefono.Text, "UNITY: Estimad@ cliente la documentacion del reclamo ID " + id + " esta siendo analizada por la aseguradora.", userlogin, id);
             llenado.llenarGrid(comentarios, GridComentarios);
         }
 
@@ -678,13 +675,13 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosDañosSeguimiento : Sy
 
             if (destino_cheque.destino == "Ruta")
             {
-                Utils.SMS_reclamos_danios(txtTelefono.Text, "UNITY: Estimad@ cliente el cheque del reclamo " + id + " se encuentra en ruta para la entrega a su dirección registrada.", userlogin, id);
+                Utils.SMS_reclamos_danios(txtTelefono.Text, "UNITY: Estimad@ cliente el cheque del reclamo ID " + id + " se encuentra en ruta para la entrega a su dirección registrada.", userlogin, id);
                 llenado.llenarGrid(comentarios, GridComentarios);
             }
 
             else if (destino_cheque.destino == "Recepcion")
             {
-                Utils.SMS_reclamos_danios(txtTelefono.Text, "UNITY: Estimad@ cliente el cheque del reclamo " + id + " se encuentra listo recepcion Unity favor pasar a recogerlo.", userlogin, id);
+                Utils.SMS_reclamos_danios(txtTelefono.Text, "UNITY: Estimad@ cliente el cheque del reclamo ID " + id + " se encuentra listo recepcion Unity favor pasar a recogerlo.", userlogin, id);
                 llenado.llenarGrid(comentarios, GridComentarios);
             }
 

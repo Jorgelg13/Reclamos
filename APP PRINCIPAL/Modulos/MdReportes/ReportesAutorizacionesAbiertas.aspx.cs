@@ -1,5 +1,4 @@
 ﻿using System;
-using System.IO;
 using System.Web.UI;
 
 public partial class ReportesAutorizacionesAbiertas : System.Web.UI.Page
@@ -18,21 +17,7 @@ public partial class ReportesAutorizacionesAbiertas : System.Web.UI.Page
     }
     protected void linkDescargar_Click(object sender, EventArgs e)
     {
-        Response.Clear();
-        Response.Buffer = true;
-        Response.AddHeader("content-disposition", "attachment;filename=Autorizaciones Abiertas.xls");
-        Response.Charset = "";
-        Response.ContentType = "application/vnd.ms-excel";
-
-        using (StringWriter sw = new StringWriter())
-        {
-            HtmlTextWriter hw = new HtmlTextWriter(sw);
-            GridReporteAutorizaciones.AllowPaging = false;
-            GridReporteAutorizaciones.RenderControl(hw);
-            Response.Output.Write(sw.ToString());
-            Response.Flush();
-            Response.End();
-        }
+        Utils.ExportarExcel(GridReporteAutorizaciones,Response,"Autorizaciones Abiertas");
     }
     public override void VerifyRenderingInServerForm(Control control)
     {

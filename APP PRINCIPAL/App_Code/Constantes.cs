@@ -59,6 +59,27 @@ public class Constantes
         return "Por medio del presente le informo que después de su aceptación a la propuesta de liquidación del reclamo No. " + idrec.Text + ", su caso se encuentra en proceso de emisión de cheque y/o escritura de pago, en cuanto tengamos conocimiento de disponibilidad de estos documentos, estaremos informando vía telefónica para coordinar la entrega.";
     }
 
+    public static string NOTIFICACION_EJECUTIVO(string fecha, string asegurado, string poliza, DropDownList gestor, int id)
+    {
+        return "<p>Estimado Ejecutivo:</p>" +
+           "<p> Hacemos de su conocimiento que con fecha " + fecha + " ingreso un reclamo del Asegurado " + asegurado + " " +
+           "bajo la poliza No. " + poliza + ", favor tomar nota para solicitar la rehabilitacion de la suma asegurada correspondiente, siempre y cuando la misma si aplique.</p>" +
+           "<p>La asesora de reclamos asignada es " + gestor.SelectedItem.Text + ".</p>" +
+           "<p>Para mas detalles puede consultar el reclamo con este id : " + id + " en el siguiente link </p>" +
+           "<a href= \"http://reclamosgt.unitypromotores.com/MdBitacora/DashboardUnity.aspx\">Consulta Reclamos</a>" +
+        "<p>Cualquier duda y/ o comentario al respecto quedamos a sus ordenes.</p>";
+    }
+
+    public static string ASIGNACION_DANOS(DropDownList gestor, string poliza,string Telefono)
+    {
+        return "Estimado asegurado: \n\n" +
+               " Mi nombre es " + gestor.SelectedItem + ", soy la persona asignada para la atención del reclamo presentado a la poliza "+poliza+"" +
+               " Mi teléfono directo es: "+ Telefono +" para que pueda contactarme en cualquier consulta. \n" +
+               " Cualquier duda, estoy a la orden.";
+    }
+
+
+    /////////////////////////////////////////////////////////
     //Textos para reclamos de autos 
     public static string ASIGNACION_AUTOS(TextBox gestor, TextBox placa, TextBox marca, TextBox modelo, TextBox telefono)
     {
@@ -97,6 +118,22 @@ public class Constantes
                 "Su vehículo está programado para fecha __________ , \n" +
                 "Le recordamos realizar el pago de su deducible que corresponde. \n\n" +
                 "Saludos Cordiales";
+    }
+
+    public static string ALQUILER_VEHICULO()
+    {
+        return " Reciba un cordial saludo \n\n " +
+            "En relación al reclamo en la referencia, por este medio hacemos de su conocimiento que su póliza goza con la cobertura de alquiler de vehículo por colisión. \n\n " +
+            "El límite diario es de Q.   hasta un máximo de __ días, equivalente a Q     .Aplicable por medio de reembolso y sujeto a  presentar la factura correspondiente de un Arrendadora legalmente autorizada. \n\n " +
+            "Dentro del reembolso no se contemplará el costo de los seguros incluidos  en el contrato de arrendamiento.No aplica para servicios de taxis, y está sujeto a un deducible de Q - diarios y el 3 % de timbres fiscales. \n\n" +
+            "La factura deberá ser emitida a su nombre, nos deberá enviar copia de la misma y el contrato por está vía, para el trámite del reembolso.\n\n" +
+            "Cualquier duda, estamos a la orden";
+    }
+
+    public static string PERDIDA_TOTAL_AUTO(TextBox placa, TextBox marca, TextBox modelo, Label asegurado, Label poliza)
+    {
+        return "Estimado Ejecutivo \n\n Por este medio hacemos de su conocimiento que recibimos notificación de pérdida total,  del vehículo Placa: " + placa.Text + ", " +
+            "Marca: " + marca.Text + ", Modelo: " + modelo.Text + ",  propiedad del asegurado " + asegurado.Text + " póliza " + poliza.Text + " . Saludos";
     }
 
     //usuario logeado

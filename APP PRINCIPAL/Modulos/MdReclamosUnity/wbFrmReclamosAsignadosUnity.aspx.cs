@@ -194,7 +194,7 @@ public partial class Modulos_MdReclamos_wbFrmReclamosAsignadosUnity : System.Web
         catch (Exception ex)
         {
             Utils.ShowMessage(this.Page, "No se a podido ingresar ese registro..", "Nota..!", "error");
-            notificacion.enviarcorreo("reclamosgt@unitypromotores.com", "123$456R", "jorge.laj@unitypromotores.com", "Error ocasionado al usuario: " + userlogin + " en el registro con el id: " + id +  "\n\n" + ex, "Error en apertura de reclamos de autos");
+            Email.EnviarERROR("Error ocasionado al usuario: " + userlogin + " en el registro con el id: " + id +  "\n\n" + ex, "Error en apertura de reclamos de autos");
         }
     }
 
@@ -255,7 +255,7 @@ public partial class Modulos_MdReclamos_wbFrmReclamosAsignadosUnity : System.Web
                " Mi teléfono directo es:  "+ lblTelefono.Text+"  para que pueda contactarme en cualquier consulta. \n" +
                " Cualquier duda, estoy a la orden.";
 
-        notificacion.enviarcorreo("reclamosgt@unitypromotores.com", "123$456R", txtCorreo.Text.Trim(), mensaje, "Asignacion de Reclamo");
+        notificacion.CorreoReclamos(txtCorreo.Text.Trim(), mensaje, "Asignacion de Reclamo");
         agregarComentario("Registro de envio de correo de notificacion: \n\n" + mensaje);
     }
     //insertar el primero estado del auto su bitacora

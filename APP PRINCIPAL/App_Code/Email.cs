@@ -19,14 +19,16 @@ public class Email
         //
     }
 
-    public bool enviarcorreo(string from, string password, string to, string mensaje, string asunto)
+    public bool CorreoReclamos( string para, string cuerpo, string asunto)
     {
         try
         {
+            string from = "reclamosgt@unitypromotores.com";
+            string password = "123$456R";
             m.To.Clear();
             m.From = new MailAddress(from);
-            m.To.Add(new MailAddress(to));
-            m.Body = mensaje;
+            m.To.Add(new MailAddress(para));
+            m.Body = cuerpo;
             m.Subject = asunto;
             smtp.Host = "smtp.office365.com";
             smtp.Port = 587;
@@ -39,15 +41,42 @@ public class Email
 
         catch (SmtpException ex)
         {
-            Console.WriteLine( "Bitaocora de error" + ex);
             throw ex;
         }
-
     }
+
+    public static bool EnviarERROR(string asunto, string cuerpo)
+    {
+        try
+        {
+            MailMessage mail = new MailMessage();
+            SmtpClient smtp = new SmtpClient();
+            string from = "reclamosgt@unitypromotores.com";
+            string password = "123$456R";
+            string para = "jorge.laj@unitypromotores.com";
+            mail.To.Clear();
+            mail.From = new MailAddress(from);
+            mail.To.Add(new MailAddress(para));
+            mail.Body = cuerpo;
+            mail.Subject = asunto;
+            smtp.Host = "smtp.office365.com";
+            smtp.Port = 587;
+            smtp.Credentials = new NetworkCredential(from, password);
+            smtp.EnableSsl = true;
+            smtp.Send(mail);
+
+            return true;
+        }
+
+        catch (SmtpException ex)
+        {
+            throw ex;
+        }
+    }
+
 
     public bool enviarcorreo2(string from, string password, string to, string mensaje, string asunto, string copia)
     {
-
         try
         {
             m.To.Clear();
@@ -71,7 +100,5 @@ public class Email
             Console.WriteLine("Bitaocora de error" + ex);
             throw ex;
         }
-
     }
-
 }

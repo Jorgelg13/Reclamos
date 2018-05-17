@@ -154,31 +154,12 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesMedicos : System.Web.U
     //funcion para exportar a un archivo de excel lo que aparece en el gridview
     protected void btnExportar_Click(object sender, EventArgs e)
     {
-        ExportarExcel(GridCamposSeleccion, "Reporte_gastos_medicos");
+        Utils.ExportarExcel(GridCamposSeleccion, Response, "Reporte_gastos_medicos");
     }
 
     public void Conteo()
     {
         lblConteo.Text = this.GridCamposSeleccion.Rows.Count.ToString();
-    }
-
-    private void ExportarExcel(GridView gridExportar, string reporte)
-    {
-        Response.Clear();
-        Response.Buffer = true;
-        Response.AddHeader("content-disposition", "attachment;filename="+reporte+".xls");
-        Response.Charset = "";
-        Response.ContentType = "application/vnd.ms-excel";
-
-        using (StringWriter sw = new StringWriter())
-        {
-            HtmlTextWriter hw = new HtmlTextWriter(sw);
-            gridExportar.AllowPaging = false;
-            gridExportar.RenderControl(hw);
-            Response.Output.Write(sw.ToString());
-            Response.Flush();
-            Response.End();
-        }
     }
 
     protected void linkSalir_Click(object sender, EventArgs e)
@@ -377,35 +358,17 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesMedicos : System.Web.U
     //exportar reportes a excel
     protected void LinkCicloCliente_Click(object sender, EventArgs e)
     {
-        ExportarExcel(GridCicloCliente, "Reporte Ciclo Cliente");
+        Utils.ExportarExcel(GridCicloCliente,Response, "Reporte Ciclo Cliente");
     }
 
     protected void linkDescarPromedio_Click(object sender, EventArgs e)
     {
-        ExportarExcel(GridPromedioAseguradora, "Reporte Ciclo Aseguradora");
+        Utils.ExportarExcel(GridPromedioAseguradora,Response, "Reporte Ciclo Aseguradora");
     }
 
     protected void linkCicloEjecutivo_Click(object sender, EventArgs e)
     {
-        ExportToExcel(PnCicloEjecutivo);
-    }
-
-    public void ExportToExcel(Control ctrl)
-    {
-        Response.Clear();
-        Response.Buffer = true;
-        Response.AddHeader("content-disposition", "attachment;filename=Ciclos-Ejecutivos.xls");
-        Response.Charset = "";
-        Response.ContentType = "application/vnd.ms-excel";
-
-        using (StringWriter sw = new StringWriter())
-        {
-            HtmlTextWriter hw = new HtmlTextWriter(sw);
-            ctrl.RenderControl(hw);
-            Response.Output.Write(sw.ToString());
-            Response.Flush();
-            Response.End();
-        }
+        Utils.ExportarExcel(PnCicloEjecutivo, Response, "Ciclos Ejecutivos");
     }
 
     //funcion para realizar una sumatoria y colocar el total en la parte de abajo del grid
@@ -545,21 +508,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesMedicos : System.Web.U
 
     protected void btnExportarEficiencia_Click(object sender, EventArgs e)
     {
-        Response.Clear();
-        Response.Buffer = true;
-        Response.AddHeader("content-disposition", "attachment;filename=Eficiencia Reclamos Medicos.xls");
-        Response.Charset = "";
-        Response.ContentType = "application/vnd.ms-excel";
-
-        using (StringWriter sw = new StringWriter())
-        {
-            HtmlTextWriter hw = new HtmlTextWriter(sw);
-            GridEficiencia.AllowPaging = false;
-            GridEficiencia.RenderControl(hw);
-            Response.Output.Write(sw.ToString());
-            Response.Flush();
-            Response.End();
-        }
+        Utils.ExportarExcel(GridEficiencia, Response,"Eficiencia Reclamos Medicos"); 
     }
 
     protected void Mostrar_Click(object sender, EventArgs e)

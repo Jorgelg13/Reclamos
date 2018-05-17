@@ -54,19 +54,19 @@ public partial class Modulos_MdReclamos_wbFrmReclamosDañosAsignados : System.We
            "dbo.reclamos_varios.ajustador as Ajustador," +
            "dbo.reclamos_varios.version as Version," +
            "Convert(varchar(10),dbo.reclamos_varios.fecha_commit, 103) as [Fecha Creacion]," +//23
-           "dbo.cabina.nombre as Cabina," +
-           "dbo.sucursal.nombre as Sucursal," +
-           "dbo.empresa.nombre as Empresa," +
-           "dbo.pais.nombre as Pais," +
+           //"dbo.cabina.nombre as Cabina," +
+           //"dbo.sucursal.nombre as Sucursal," +
+           //"dbo.empresa.nombre as Empresa," +
+           //"dbo.pais.nombre as Pais," +
            "dbo.usuario.nombre as Usuario, " +
            "dbo.reg_reclamo_varios.id as id_registro," + //29
            "dbo.reg_reclamo_varios.gestor as [Codigo Ejecutivo] " +//30
            "FROM dbo.reclamos_varios " +
            "INNER JOIN dbo.reg_reclamo_varios ON dbo.reclamos_varios.id_reg_reclamos_varios = dbo.reg_reclamo_varios.id " +
            "INNER JOIN dbo.cabina ON dbo.reclamos_varios.id_cabina = dbo.cabina.id " +
-           "INNER JOIN dbo.sucursal ON dbo.cabina.id_sucursal = dbo.sucursal.id " +
-           "INNER JOIN dbo.empresa ON dbo.sucursal.id_empresa = dbo.empresa.id " +
-           "INNER JOIN dbo.pais ON dbo.empresa.id_pais = dbo.pais.id " +
+           //"INNER JOIN dbo.sucursal ON dbo.cabina.id_sucursal = dbo.sucursal.id " +
+           //"INNER JOIN dbo.empresa ON dbo.sucursal.id_empresa = dbo.empresa.id " +
+           //"INNER JOIN dbo.pais ON dbo.empresa.id_pais = dbo.pais.id " +
            "INNER JOIN dbo.usuario ON dbo.usuario.id_cabina = dbo.cabina.id AND dbo.reclamos_varios.id_usuario = dbo.usuario.id " +
            "where(usuario_unity = '" + userlogin + "') and(estado_unity = 'Sin Cerrar')";
 
@@ -170,6 +170,9 @@ public partial class Modulos_MdReclamos_wbFrmReclamosDañosAsignados : System.We
     //carga de coberturas y llamadas al seleccionar un registro de la tabla de asignaciones de reclamos
     protected void GridReclamosDaños_SelectedIndexChanged(object sender, EventArgs e)
     {
+        var gestor = DBReclamos.gestores.ToList().Where(ge => ge.usuario == userlogin && ge.tipo == "Daños varios").First();
+        ddlGestor.SelectedValue = gestor.id.ToString();
+
         id = Convert.ToInt32(GridReclamosDaños.SelectedRow.Cells[1].Text);
         poliza = GridReclamosDaños.SelectedRow.Cells[2].Text.ToString();
 
@@ -276,10 +279,8 @@ public partial class Modulos_MdReclamos_wbFrmReclamosDañosAsignados : System.We
             bitacora.fecha = DateTime.Now;
             DBReclamos.bitacora_estados_reclamos_varios.Add(bitacora);
 
-            if(txtComentarios.Text != "")
-            {
-                insertarComentarios(txtComentarios.Text);
-            }
+            if (txtComentarios.Text != "") insertarComentarios(txtComentarios.Text);
+            if (txtCorreo.Text != "") enviarNotificacion();
 
             contactos_reclamos_varios contacto = new contactos_reclamos_varios();
             contacto.nombre = txtContacto.Text.ToString();
@@ -306,7 +307,8 @@ public partial class Modulos_MdReclamos_wbFrmReclamosDañosAsignados : System.We
 
             if(txtTelefono.Text != "")
             {
-                Utils.SMS_reclamos_danios(txtTelefono.Text, "UNITY: Estimad@ cliente recibimos su aviso de siniestro, su asesor asignado es " + ddlGestor.SelectedItem + " Tel " + reclamo.gestores.telefono + " número de ID " + id + " ", userlogin, id);
+                Utils.SMS_reclamos_danios(txtTelefono.Text, "UNITY: Estimad@ cliente recibimos su aviso de siniestro, su asesor asignado " +
+                    "es " + ddlGestor.SelectedItem + " Tel " + reclamo.gestores.telefono + " número de ID " + id + " ", userlogin, id);
             }
 
             Response.Redirect("/Modulos/MdReclamosUnity/wbFrmReclamosDañosSeguimiento.aspx?ID_reclamo=" + id, false);
@@ -314,8 +316,17 @@ public partial class Modulos_MdReclamos_wbFrmReclamosDañosAsignados : System.We
         catch (Exception ex)
         {
             Utils.ShowMessage(this.Page, "A ocurrido un error al insertar los datos", "Nota..!", "error");
-            notificacion.enviarcorreo("reclamosgt@unitypromotores.com", "123$456R", "jorge.laj@unitypromotores.com", "Error ocasionado al usuario: " + userlogin + " en el registro con el id: " + id + "\n\n" + ex.Message, "Error en apertura de reclamos de daños");
+            Email.EnviarERROR("Error ocasionado al usuario: " + userlogin + " en el registro con el id: " + id + "\n\n" + ex.Message, "Error en apertura de reclamos de daños");
         }
+    }
+
+    public void enviarNotificacion()
+    {
+        string telefono = Utils.TelefonoGestor(ddlGestor);
+        string mensaje = Constantes.ASIGNACION_DANOS(ddlGestor, poliza, telefono); 
+
+        notificacion.CorreoReclamos(txtCorreo.Text.Trim(), mensaje, "Asignacion de Reclamo");
+        insertarComentarios("Registro de envio de correo de notificacion: \n\n" + mensaje);
     }
 
     //actualizar datos de un reclamo que se ingreso de forma manual y por lo tanto no tiene todos sus datos completos
@@ -352,9 +363,13 @@ public partial class Modulos_MdReclamos_wbFrmReclamosDañosAsignados : System.We
     //enviar notificacion al correo electronico del ejecutivo
     public void enviarNoficacion()
     {
-        codigo = GridReclamosDaños.SelectedRow.Cells[30].Text;
+        codigo = GridReclamosDaños.SelectedRow.Cells[26].Text;
+        bool insertar = true;
+        seleccionarCorreoGestor();
+        cuerpo = Constantes.NOTIFICACION_EJECUTIVO(fechaCreacion, asegurado, poliza, ddlGestor, id);
+        asunto = "Notificacion Siniestro";
 
-        if(codigo == "&nbsp;")
+        if (codigo == "&nbsp;")
         {
           
         }
@@ -363,28 +378,13 @@ public partial class Modulos_MdReclamos_wbFrmReclamosDañosAsignados : System.We
             seleccionarCorreo(Convert.ToInt16(codigo));
         }
 
-        seleccionarCorreoGestor();
-
-        cuerpo = "<p>Estimado Ejecutivo:</p>" +
-           "<p> Hacemos de su conocimiento que con fecha " + fechaCreacion + " ingreso un reclamo del Asegurado " + asegurado + " " +
-           "bajo la poliza No. " + poliza + ", favor tomar nota para solicitar la rehabilitacion de la suma asegurada correspondiente, siempre y cuando la misma si aplique.</p>" +
-           "<p>La asesora de reclamos asignada es " + ddlGestor.SelectedItem.Text + ".</p>" +
-           "<p>Para mas detalles puede consultar el reclamo con este id : " + id + " en el siguiente link </p>" +
-           "<a href= \"http://reclamosgt.unitypromotores.com/MdBitacora/DashboardUnity.aspx\">Consulta Reclamos</a>" +
-        "<p>Cualquier duda y/ o comentario al respecto quedamos a sus ordenes.</p>";
-
-        asunto = "Notificacion Siniestro";
-
-        bool insertar = true;
         try
         {
             notificacion.enviarcorreo2("reclamosgt@unitypromotores.com", "123$456R", correo, cuerpo, asunto, correoGestor);
-            Response.Write("<Script>setTimeout(function () { toastr.success('Correo enviado con exito..', 'Excelente!');  }, 200);</script>");
         }
 
         catch (SmtpException)
         {
-            Response.Write("<Script>setTimeout(function () { toastr.error('Error De notificacion de envio de correo..', 'Error!');  }, 200);</script>");
             insertar = false;
         }
 
