@@ -41,6 +41,7 @@ public partial class ReclamosEntities : DbContext
     public DbSet<bitacora_reclamos_varios> bitacora_reclamos_varios { get; set; }
     public DbSet<busqCoberturasPolizasDaños> busqCoberturasPolizasDaños { get; set; }
     public DbSet<cabina> cabina { get; set; }
+    public DbSet<cartas> cartas { get; set; }
     public DbSet<coberturas> coberturas { get; set; }
     public DbSet<coberturas_afectadas> coberturas_afectadas { get; set; }
     public DbSet<coberturas_afectadas_danios> coberturas_afectadas_danios { get; set; }
@@ -303,5 +304,10 @@ public partial class ReclamosEntities : DbContext
             new ObjectParameter("fechaFin", typeof(System.DateTime));
 
         return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pa_kpi_autirizaciones", fechaInicioParameter, fechaFinParameter);
+    }
+
+    public virtual ObjectResult<Nullable<int>> pa_sec_cartas()
+    {
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("pa_sec_cartas");
     }
 }

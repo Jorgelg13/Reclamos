@@ -4,7 +4,6 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="FeaturedContent" runat="Server">
     <div class="container-fluid">
-        <div class="">
             <div class="form-inline">
                 <div class="form-group" style="width: 15%">
                     <label for="message-text" class="control-label">Buscar por:</label>
@@ -36,10 +35,9 @@
                 </div>
                 <div class="form-group" style="width: 5%">
                     <label for="message-text" class="control-label"></label>
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">Ver Detalle</button>
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#bitacora">Ver Detalle</button>
                 </div>
             </div>
-        </div>
         <br />
         <div class="panel panel-info" style="min-height: 400px;">
             <div class="panel-heading">Registro de Reclamos de Autos</div>
@@ -59,12 +57,11 @@
                 </div>
             </div>
         </div>
-        <div class="modal fade bs-example-modal-lg" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
-            <div class="modal-dialog modal-lg" role="document">
+        <div class="modal fade bs-example-modal-lg" id="bitacora">
+            <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title" id="myModalLabel"><b>Bitacora De LLamadas realizadas</b></h4>
+                        <h4 class="modal-title"><b>Bitacora De LLamadas realizadas</b></h4>
                     </div>
                     <div class="modal-body">
                         <div class="scrolling-table-container">

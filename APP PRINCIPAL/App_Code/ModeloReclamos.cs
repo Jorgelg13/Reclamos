@@ -250,6 +250,15 @@ public partial class cabina
     public virtual ICollection<usuario> usuario { get; set; }
 }
 
+public partial class cartas
+{
+    public int id { get; set; }
+    public string contenido { get; set; }
+    public string tipo { get; set; }
+    public string modulo { get; set; }
+    public Nullable<int> id_reclamo { get; set; }
+}
+
 public partial class coberturas
 {
     public int id { get; set; }
@@ -677,6 +686,9 @@ public partial class reclamo_auto
     public Nullable<System.DateTime> fecha_no_conforme { get; set; }
     public Nullable<System.DateTime> fecha_cierre_no_conforme { get; set; }
     public string observacion_no_conforme { get; set; }
+    public Nullable<bool> b_carta_cierre_interno { get; set; }
+    public Nullable<bool> b_carta_declinado { get; set; }
+    public Nullable<bool> b_carta_envio_cheque { get; set; }
 
     public virtual analistas analistas { get; set; }
     public virtual auto_reclamo auto_reclamo { get; set; }
@@ -819,6 +831,9 @@ public partial class reclamos_varios
     public Nullable<System.DateTime> fecha_no_conforme { get; set; }
     public Nullable<System.DateTime> fecha_cierre_no_conforme { get; set; }
     public string observacion_no_conforme { get; set; }
+    public Nullable<bool> b_carta_cierre_interno { get; set; }
+    public Nullable<bool> b_carta_declinado { get; set; }
+    public Nullable<bool> b_carta_envio_cheque { get; set; }
 
     public virtual analistas analistas { get; set; }
     public virtual ICollection<bitacora_estados_reclamos_varios> bitacora_estados_reclamos_varios { get; set; }

@@ -97,12 +97,11 @@
                         </div>
                        </div>
                         <div class="container">
-                            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                                <div class="modal-dialog" role="document">
+                            <div class="modal fade" id="myModal">
+                                <div class="modal-dialog">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                            <h4 class="modal-title" id="myModalLabel"><b>Confirmacion De guardar</b></h4>
+                                            <h4 class="modal-title"><b>Confirmacion De guardar</b></h4>
                                         </div>
                                         <div class="modal-body">
                                             <p>Esta seguro que desea dar permisos a este usuario</p>
@@ -120,7 +119,6 @@
                 </div>
             </div>
         </div>
- 
     <div class=" col-sm-2">
         <div class="panel-body">
             <h1></h1>

@@ -114,7 +114,7 @@ public partial class Modulos_MdReclamos_wbFrmReclamosMedicosEditar : System.Web.
         {
             if(ddlEstado.SelectedValue == "2" || ddlEstado.SelectedValue =="3")
             {
-                Response.Redirect("/DashboardCabina.aspx");
+                Response.Redirect("/Modulos/Dashboard/DashboardCabina.aspx");
             }
             DevolverDatos(id);
             Utils.ShowMessage(this.Page, "Datos Actualizados con exito.", "Excelente..!", "success");

@@ -128,8 +128,9 @@ public partial class Modulos_MdReclamos_wbFrmAsignacionUsuarios : System.Web.UI.
 
                 Utils.ShowMessage(this.Page, "Usuario Asignado..", "Excelente", "success");
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Response.Write(ex);
                 Utils.ShowMessage(this.Page, "Hubo un error al asignar el usuario..", "Error", "error");
             }
         }
@@ -155,8 +156,9 @@ public partial class Modulos_MdReclamos_wbFrmAsignacionUsuarios : System.Web.UI.
 
             Utils.ShowMessage(this.Page, "Usuario Actualizado", "Excelente..!", "success");
         }
-        catch (Exception )
+        catch (Exception ex)
         {
+            Response.Write(ex);
             Utils.ShowMessage(this.Page, "No se pudo actualizar", "Error..!", "error");
         }
     }

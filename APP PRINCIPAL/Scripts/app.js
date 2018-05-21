@@ -72,22 +72,33 @@ $(document).ready(function () {
 //funcion para mostrar el editor de texto de las cartas
 $(document).ready(function () {
 
-    if ($('#ContentPlaceHolder1_checkmostrar')[0].checked)
-    {
+    if ($('#ContentPlaceHolder1_chCartaCierre')[0].checked && $('#ContentPlaceHolder1_lblBanderaCierreInterno').text() == 'True') {
         $('#summernote').html($('#ContentPlaceHolder1_lblcarta').html());
-    } else
-    {
+    }
+    else {
+        $('#summernote').html($('#MemosReclamos').html());
+    }
+
+    if ($('#ContentPlaceHolder1_chCartaDeclinado')[0].checked && $('#ContentPlaceHolder1_lblBanderaDeclinado').text() == 'True') {
+        $('#summernote').html($('#ContentPlaceHolder1_lblcarta').html());
+    }
+    else {
+        $('#summernote').html($('#MemosReclamos').html());
+    }
+
+    if ($('#ContentPlaceHolder1_chEnvioCarta')[0].checked && $('#ContentPlaceHolder1_lblBanderaEnvioCheque').text() == 'True') {
+        $('#summernote').html($('#ContentPlaceHolder1_lblcarta').html());
+    }
+    else {
         $('#summernote').html($('#MemosReclamos').html());
     }
     try {
         $('#summernote').summernote();
-       
-    } catch ($ex){
+    }
+    catch ($ex) {
 
     }
-   
 });
-
 
 
 //funcion para enviar correo electronico
@@ -162,12 +173,4 @@ function NotificacionSMS($telefono, $mensaje, $token)
         toastr.error('No se a podido enviar la notificacion SMS', 'Error..!');
     });
 }
-
-$("#descargar").click(function(e) {   
-    window.open('data:application/vnd.ms-   excel,' + encodeURIComponent($('#Reporte').html())); // content is the id of the DIV element  
-   e.preventDefault();   
-});  
-
-//var memo = $("#ContentPlaceHolder1_lblMemo").text();
-//$("#lblcuerpoMemo").text(memo);
 

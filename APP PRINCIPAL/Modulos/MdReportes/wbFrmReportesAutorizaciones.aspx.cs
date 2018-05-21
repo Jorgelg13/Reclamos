@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Data;
 using System.Data.SqlClient;
-using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -104,31 +103,12 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesAutorizaciones : Syste
     //funcion para exportar a un archivo de excel lo que aparece en el gridview
     protected void btnExportar_Click(object sender, EventArgs e)
     {
-        ExportarExcel(GridCamposSeleccion, "Reporte Autorizaciones");
+        Utils.ExportarExcel(GridCamposSeleccion,Response,"Reporte Autorizaciones");
     }
 
     public void Conteo()
     {
         lblConteo.Text = this.GridCamposSeleccion.Rows.Count.ToString();
-    }
-
-    private void ExportarExcel(GridView gridExportar, string reporte)
-    {
-        Response.Clear();
-        Response.Buffer = true;
-        Response.AddHeader("content-disposition", "attachment;filename=" + reporte + ".xls");
-        Response.Charset = "";
-        Response.ContentType = "application/vnd.ms-excel";
-
-        using (StringWriter sw = new StringWriter())
-        {
-            HtmlTextWriter hw = new HtmlTextWriter(sw);
-            gridExportar.AllowPaging = false;
-            gridExportar.RenderControl(hw);
-            Response.Output.Write(sw.ToString());
-            Response.Flush();
-            Response.End();
-        }
     }
 
     protected void linkSalir_Click(object sender, EventArgs e)

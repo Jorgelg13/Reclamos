@@ -108,10 +108,12 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosDañosSeguimiento : Sy
             lblMoneda.Text =      "<b>Moneda :</b>            " + reclamo.reg_reclamo_varios.moneda;
             lblProductoNoConforme.Text = "<b>Producto No Conforme Asignado: </b>" + reclamo.detalle_no_conforme;
             txtObservacionesNoConf.Text =                         reclamo.observacion_no_conforme;
+            lblBanderaCierreInterno.Text =                        reclamo.b_carta_cierre_interno.Value.ToString();
+            lblBanderaDeclinado.Text =                            reclamo.b_carta_declinado.Value.ToString();
+            lblBanderaEnvioCheque.Text =                          reclamo.b_carta_envio_cheque.Value.ToString();
 
             //listado de dropdown
             lblEstadoReclamo.Text        = reclamo.estado_reclamo_unity;
-            ddlTipoCierre.SelectedValue  = reclamo.motivo_cierre;
             lblRamo.Text                 = reclamo.reg_reclamo_varios.ramo;
             ddlEstadoReclamo.Text        = reclamo.estado_reclamo_unity;
             ddlGestor.SelectedValue      = reclamo.id_gestor.ToString();
@@ -131,7 +133,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosDañosSeguimiento : Sy
             lblIDRec.Text                = reclamo.num_reclamo;
             lblAseguradoRec.Text         = reclamo.reg_reclamo_varios.asegurado;
             lblProximaFecha.Text         = "Proxima Fecha:" + Convert.ToDateTime(reclamo.fecha_visualizar).ToString("dd/MM/yyyy");
-            lblEstadoR.Text              =  reclamo.estado_unity;
+            lblEstadoR.Text              = reclamo.estado_unity;
 
             if (reclamo.estado_unity == "Cerrado")
             {
@@ -163,9 +165,10 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosDañosSeguimiento : Sy
                 btnProductoNoConforme.Enabled = false;
             }
         }
-        catch(Exception)
+        catch(Exception ex)
         {
-            Utils.ShowMessage(this.Page, "El id seleccionado no tiene ningun seguimiento", "Error.. !", "error");
+            Response.Write(ex);
+            Utils.ShowMessage(this.Page, "El id seleccionado no tiene ningun seguimiento " + ex.Message, "Error.. !", "error");
         }
     }
 
@@ -370,7 +373,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosDañosSeguimiento : Sy
         catch (Exception ex)
         {
             Utils.ShowMessage(this.Page, "No se a podido actualizar el reclamo", "Error..!", "error");
-            Email.EnviarERROR("Error ocasionado al usuario: " + userlogin + " en el registro con el id: " + id + "\n\n" + ex, "Error en seguimiento de reclamos de daños");
+            Email.EnviarERROR("Error en seguimiento de reclamos de daños","Error ocasionado al usuario: " + userlogin + " en el registro con el id: " + id + "\n\n" + ex);
         }
     }
 
@@ -483,55 +486,6 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosDañosSeguimiento : Sy
         catch(Exception)
         {
             Utils.ShowMessage(this.Page, "No se a podido cerrar el reclamo..", "Nota..!", "error");
-        }
-    }
-
-    //asignar valor al modelo de la carta
-    protected void chEnvioCarta_CheckedChanged(object sender, EventArgs e)
-    {
-        if (chEnvioCarta.Checked)
-        {
-            DatosCarta();
-            PnDetallePago.Visible = true;
-            lblMemo.Text = cartaEnvioCheque;
-            chCartaCierre.Checked = false;
-            chCartaDeclinado.Checked = false;
-        }
-        else
-        {
-            lblMemo.Text = "";
-            PnDetallePago.Visible = false;
-        }
-    }
-    protected void chCartaDeclinado_CheckedChanged(object sender, EventArgs e)
-    {
-        if (chCartaDeclinado.Checked)
-        {
-            PnDetallePago.Visible = false;
-            DatosCarta();
-            lblMemo.Text = cartaDeclinado;
-            chCartaCierre.Checked = false;
-            chEnvioCarta.Checked = false;
-        }
-
-        else
-        {
-            lblMemo.Text = "";
-        }
-    }
-    protected void chCartaCierre_CheckedChanged(object sender, EventArgs e)
-    {
-        if (chCartaCierre.Checked)
-        {
-            PnDetallePago.Visible = false;
-            DatosCarta();
-            lblMemo.Text = cartaCierreInterno;
-            chCartaDeclinado.Checked = false;
-            chEnvioCarta.Checked = false;
-        }
-        else
-        {
-            lblMemo.Text = "";
         }
     }
 
@@ -654,19 +608,16 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosDañosSeguimiento : Sy
         if (ddlEstadoReclamo.SelectedValue == "Revisión Gestor Reclamos")
         {
             Utils.SMS_reclamos_danios(txtTelefono.Text, "UNITY: Estimad@ cliente hemos recibido la documentacion de su reclamo ID " + id + ", se revisara para enviar a la aseguradora.", userlogin, id);
-            llenado.llenarGrid(comentarios, GridComentarios);
         }
 
         else if (ddlEstadoReclamo.SelectedValue == "Ajuste")
         {
             Utils.SMS_reclamos_danios(txtTelefono.Text, "UNITY: Estimad@ cliente la documentacion del reclamo ID " + id + " esta siendo analizada por la aseguradora.", userlogin, id);
-            llenado.llenarGrid(comentarios, GridComentarios);
         }
 
         else if (ddlEstadoReclamo.SelectedValue == "Pendiente Finiquito")
         {
             Utils.SMS_reclamos_danios(txtTelefono.Text, "UNITY: Estimad@ cliente la propuesta de liquidación/convenio de ajuste del reclamo ID " + id + " fue enviada a su e-mail para revisión.", userlogin, id);
-            llenado.llenarGrid(comentarios, GridComentarios);
         }
 
         else if (ddlEstadoReclamo.SelectedValue == "Cheque Entrega")
@@ -676,21 +627,20 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosDañosSeguimiento : Sy
             if (destino_cheque.destino == "Ruta")
             {
                 Utils.SMS_reclamos_danios(txtTelefono.Text, "UNITY: Estimad@ cliente el cheque del reclamo ID " + id + " se encuentra en ruta para la entrega a su dirección registrada.", userlogin, id);
-                llenado.llenarGrid(comentarios, GridComentarios);
             }
 
             else if (destino_cheque.destino == "Recepcion")
             {
                 Utils.SMS_reclamos_danios(txtTelefono.Text, "UNITY: Estimad@ cliente el cheque del reclamo ID " + id + " se encuentra listo recepcion Unity favor pasar a recogerlo.", userlogin, id);
-                llenado.llenarGrid(comentarios, GridComentarios);
             }
 
             else if (destino_cheque.destino == "Escritura de pago")
             {
                 Utils.SMS_reclamos_danios(txtTelefono.Text, txtSMS.Text, userlogin, id);
-                llenado.llenarGrid(comentarios, GridComentarios);
             }
         }
+
+        llenado.llenarGrid(comentarios, GridComentarios);
     }
 
     protected void GridComentarios_RowDataBound(object sender, GridViewRowEventArgs e)
@@ -789,14 +739,134 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosDañosSeguimiento : Sy
         lblCartaAsesorReclamo.Text = registro.gestores.nombre;
     }
 
+    private void IngresarCartas()
+    {
+        var bandera = DBReclamos.reclamos_varios.Find(id);
+    }
+
+    //asignar valor al modelo de la carta
+    protected void chEnvioCarta_CheckedChanged(object sender, EventArgs e)
+    {
+        if (chEnvioCarta.Checked)
+        {
+            var buscarCarta = DBReclamos.cartas.Where(ca => ca.tipo == "envio cheque" && ca.modulo == "daños" && ca.id_reclamo == id).Count();
+
+            if (buscarCarta == 1)
+            {
+                var mostrar = DBReclamos.cartas.Where(ma => ma.id_reclamo == id && ma.tipo == "envio cheque" && ma.modulo == "daños").First();
+                txtContenidoCarta.Text = mostrar.contenido;
+                panelPrincipal.Visible = false;
+                Panelsecundario.Visible = true;
+                lblcarta.Text = txtContenidoCarta.Text;
+            }
+            else
+            {
+                DatosCarta();
+                PnDetallePago.Visible = true;
+                lblMemo.Text = cartaEnvioCheque;
+                chCartaCierre.Checked = false;
+                chCartaDeclinado.Checked = false;
+            }
+        }
+        else
+        {
+            lblMemo.Text = "";
+            panelPrincipal.Visible = true;
+            Panelsecundario.Visible = false;
+        }
+
+        this.Page.ClientScript.RegisterStartupScript(this.Page.GetType(), "show_modal", "$('#Editor').modal('show');", addScriptTags: true);
+    }
+    protected void chCartaDeclinado_CheckedChanged(object sender, EventArgs e)
+    {
+        if (chCartaDeclinado.Checked)
+        {
+            var buscarCarta = DBReclamos.cartas.Where(ca => ca.tipo == "declinado" && ca.modulo == "daños" && ca.id_reclamo == id).Count();
+
+            if (buscarCarta == 1)
+            {
+                var mostrar = DBReclamos.cartas.Where(ma => ma.id_reclamo == id && ma.tipo == "declinado" && ma.modulo== "daños").First();
+                txtContenidoCarta.Text = mostrar.contenido;
+                panelPrincipal.Visible = false;
+                Panelsecundario.Visible = true;
+                lblcarta.Text = txtContenidoCarta.Text;
+            }
+            else
+            {
+                PnDetallePago.Visible = false;
+                DatosCarta();
+                lblMemo.Text = cartaDeclinado;
+                chCartaCierre.Checked = false;
+                chEnvioCarta.Checked = false;
+            }
+        }
+        else
+        {
+            lblMemo.Text = "";
+            panelPrincipal.Visible = true;
+            Panelsecundario.Visible = false;
+        }
+
+        this.Page.ClientScript.RegisterStartupScript(this.Page.GetType(), "show_modal", "$('#Editor').modal('show');", addScriptTags: true);
+    }
+    protected void chCartaCierre_CheckedChanged(object sender, EventArgs e)
+    {
+        if (chCartaCierre.Checked)
+        {
+            var buscarCarta = DBReclamos.cartas.Where(ca => ca.tipo == "cierre interno" && ca.modulo == "daños" && ca.id_reclamo == id).Count();
+
+            if(buscarCarta == 1)
+            {
+                var mostrar = DBReclamos.cartas.Where(ma => ma.id_reclamo == id && ma.tipo=="cierre interno" && ma.modulo == "daños").First();
+                txtContenidoCarta.Text = mostrar.contenido;
+                panelPrincipal.Visible = false;
+                Panelsecundario.Visible = true;
+                lblcarta.Text = txtContenidoCarta.Text;
+            }
+            else
+            {
+                PnDetallePago.Visible = false;
+                DatosCarta();
+                lblMemo.Text = cartaCierreInterno;
+                chCartaDeclinado.Checked = false;
+                chEnvioCarta.Checked = false;
+            }
+        }
+        else
+        {
+            lblMemo.Text = "";
+            panelPrincipal.Visible = true;
+            Panelsecundario.Visible = false;
+        }
+
+        this.Page.ClientScript.RegisterStartupScript(this.Page.GetType(), "show_modal", "$('#Editor').modal('show');", addScriptTags: true);
+    }
+
     protected void lnkGuardarCarta_Click(object sender, EventArgs e)
     {
-        //cartas carta = new cartas();
-        //carta.contenido = txtContenidoCarta.Text;
-        //carta.tipo = "rv_cierre_interno";
-        //carta.id_reclamo = id;
-        //DBReclamos.cartas.Add(carta);
-        //DBReclamos.SaveChanges();
+        try
+        {
+            if (chCartaCierre.Checked)
+            {
+                Utils.Guardar_cartas(txtContenidoCarta, "cierre interno", "daños", id, chCartaCierre, chCartaDeclinado, chEnvioCarta, Response);
+            }
+
+            else if (chCartaDeclinado.Checked)
+            {
+                Utils.Guardar_cartas(txtContenidoCarta, "declinado", "daños", id, chCartaCierre, chCartaDeclinado, chEnvioCarta, Response);
+            }
+
+            else if (chEnvioCarta.Checked)
+            {
+                Utils.Guardar_cartas(txtContenidoCarta, "envio cheque", "daños", id, chCartaCierre, chCartaDeclinado, chEnvioCarta, Response);
+            }
+
+            Utils.ShowMessage(this.Page, "Carta Guardada con exito", "Excelente", "success");
+        }
+        catch (Exception ex)
+        {
+            Utils.ShowMessage(this.Page, "Error al guardar la carta" + ex.Message, "Error", "error");
+        }
     }
 
     protected void btnProductoNoConforme_Click(object sender, EventArgs e)
@@ -842,20 +912,29 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosDañosSeguimiento : Sy
 
     protected void checkmostrar_CheckedChanged(object sender, EventArgs e)
     {
-        //if(checkmostrar.Checked)
-        //{
+        if (checkmostrar.Checked)
+        {
+            var mostrar = DBReclamos.cartas.Select(m => new { m.contenido, m.id_reclamo }).Where(ma => ma.id_reclamo == id).First();
+            txtContenidoCarta.Text = mostrar.contenido;
+            panelPrincipal.Visible = false;
+            Panelsecundario.Visible = true;
+            lblcarta.Text = txtContenidoCarta.Text;
+        }
+        else
+        {
+            panelPrincipal.Visible = true;
+            Panelsecundario.Visible = false;
+        }
+    }
 
-        //    var mostrar = DBReclamos.cartas.Select(m => new { m.contenido, m.id_reclamo }).Where(ma => ma.id_reclamo == id).First();
-        //    txtContenidoCarta.Text = mostrar.contenido;
-        //    panelPrincipal.Visible = false;
-        //    Panelsecundario.Visible = true;
-        //    lblcarta.Text = txtContenidoCarta.Text;
-        //}
-        //else
-        //{
-        //    panelPrincipal.Visible = true;
-        //    Panelsecundario.Visible = false;
-        //}
-
+    //envio de sms manual
+    protected void btnEnviarSMS_Click(object sender, EventArgs e)
+    {
+        if(txtTelefono.Text != "")
+        {
+            Utils.SMS_reclamos_danios(txtTelefono.Text, TxtEnvioSms.Text, userlogin, id);
+            TxtEnvioSms.Text = "";
+            llenado.llenarGrid(comentarios, GridComentarios);
+        }
     }
 }

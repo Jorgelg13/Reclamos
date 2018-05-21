@@ -180,6 +180,9 @@ public partial class Modulos_MdReclamos_wbFrmReclamosAsignadosUnity : System.Web
             reclamo.compromiso_pago = compromiso_pago;
             reclamo.alquiler_auto = alquiler;
             reclamo.perdida_total = perdidaTotal;
+            reclamo.b_carta_cierre_interno = false;
+            reclamo.b_carta_declinado = false;
+            reclamo.b_carta_envio_cheque = false;
             reclamo.id_taller = Convert.ToInt16(ddlTaller.SelectedValue);
             reclamo.fecha_apertura_reclamo = DateTime.Now;
             reclamo.fecha_cierre_reclamo = DateTime.Now;
@@ -194,7 +197,7 @@ public partial class Modulos_MdReclamos_wbFrmReclamosAsignadosUnity : System.Web
         catch (Exception ex)
         {
             Utils.ShowMessage(this.Page, "No se a podido ingresar ese registro..", "Nota..!", "error");
-            Email.EnviarERROR("Error ocasionado al usuario: " + userlogin + " en el registro con el id: " + id +  "\n\n" + ex, "Error en apertura de reclamos de autos");
+            Email.EnviarERROR("Error en apertura de reclamos de autos","Error ocasionado al usuario: " + userlogin + " en el registro con el id: " + id +  "\n\n" + ex);
         }
     }
 

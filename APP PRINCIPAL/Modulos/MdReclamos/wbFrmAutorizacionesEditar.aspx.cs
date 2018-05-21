@@ -121,7 +121,7 @@ public partial class Modulos_MdReclamos_wbFrmAutorizacionesEditar : System.Web.U
 
         if (DDLEstado.SelectedValue == "Cerrado")
         {
-            Response.Redirect("/Default.aspx");
+            Response.Redirect("/Modulos/Dashboard/DashboardCabina.aspx");
         }
 
         else if(DDLEstado.SelectedValue == "Anulado")
@@ -129,8 +129,4 @@ public partial class Modulos_MdReclamos_wbFrmAutorizacionesEditar : System.Web.U
             Response.Redirect("/Default.aspx");
         }
     }
-
-    /*cmd.CommandText = "UPDATE autorizaciones SET tiempo_de_cierre= DATEDIFF(second, fecha_completa_commit,fecha_completa_cierre ) where id = " + id + " ";
- * funcion utilizada para calcular los segundos desde la creacion hasta el cierre
-*/
 }

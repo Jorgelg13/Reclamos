@@ -63,4 +63,10 @@ public class Cartas
             "<p>Esperamos poder servirle en otra oportunidad</p>" +
             "<p>Cordialmente,</p>";
     }
+
+    public static string CARTA_ENVIO_CHEQUE_AUTOS(reclamo_auto auto)
+    {
+        return "<p>Adjunto encontrará el cheque No. (Número de cheque) por la cantidad de Q. (Monto del cheque), cubriendo el reclamo por " + auto.version + ", evento ocurrido en fecha " + auto.fecha_commit.ToString() + ", amparado bajo la póliza No. " + auto.auto_reclamo.poliza + "  a  nombre de " + auto.auto_reclamo.asegurado + ". <p>" +
+            "<p>La liquidación se efectuó de la siguiente manera</p>";
+    }
 }

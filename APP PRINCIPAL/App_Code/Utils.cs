@@ -330,4 +330,187 @@ public class Utils
             }
         }
     }
+
+    public static void Guardar_cartas(TextBox contenido, string tipo, string modulo, int id, CheckBox chCierreInterno, CheckBox chDeclinado, CheckBox chEnvioCheque, HttpResponse Response)
+    {
+        try
+        {   
+            var bandera = DBReclamos.reclamos_varios.Find(id);
+            if(chCierreInterno.Checked)
+            {
+                if (bandera.b_carta_cierre_interno == false)
+                {
+                    cartas carta = new cartas();
+                    var sec_registro = DBReclamos.pa_sec_cartas();
+                    int? id_registro = sec_registro.Single();
+                    carta.id = Convert.ToInt32(id_registro);
+                    carta.contenido = contenido.Text;
+                    carta.tipo = tipo;
+                    carta.modulo = modulo;
+                    carta.id_reclamo = id;
+                    bandera.b_carta_cierre_interno = true;
+                    DBReclamos.cartas.Add(carta);
+                }
+
+                else
+                {
+                    var actualizar = DBReclamos.cartas.Where(ca => ca.id_reclamo == id && ca.tipo == tipo && ca.modulo == modulo).First();
+                    actualizar.contenido = contenido.Text;
+                    actualizar.tipo = tipo;
+                    actualizar.modulo = modulo;
+                    actualizar.id_reclamo = id;
+                }
+            }
+
+            if (chDeclinado.Checked)
+            {
+                if (bandera.b_carta_declinado == false)
+                {
+                    cartas carta = new cartas();
+                    var sec_registro = DBReclamos.pa_sec_cartas();
+                    int? id_registro = sec_registro.Single();
+                    carta.id = Convert.ToInt32(id_registro);
+                    carta.contenido = contenido.Text;
+                    carta.tipo = tipo;
+                    carta.modulo = modulo;
+                    carta.id_reclamo = id;
+                    bandera.b_carta_declinado = true;
+                    DBReclamos.cartas.Add(carta);
+                }
+
+                else
+                {
+                    var actualizar = DBReclamos.cartas.Where(ca => ca.id_reclamo == id && ca.tipo == tipo && ca.modulo == modulo).First();
+                    actualizar.contenido = contenido.Text;
+                    actualizar.tipo = tipo;
+                    actualizar.modulo = modulo;
+                    actualizar.id_reclamo = id;
+                }
+            }
+
+            if (chEnvioCheque.Checked)
+            {
+                if (bandera.b_carta_envio_cheque == false)
+                {
+                    cartas carta = new cartas();
+                    var sec_registro = DBReclamos.pa_sec_cartas();
+                    int? id_registro = sec_registro.Single();
+                    carta.id = Convert.ToInt32(id_registro);
+                    carta.contenido = contenido.Text;
+                    carta.tipo = tipo;
+                    carta.modulo = modulo;
+                    carta.id_reclamo = id;
+                    bandera.b_carta_envio_cheque = true;
+                    DBReclamos.cartas.Add(carta);
+                }
+
+                else
+                {
+                    var actualizar = DBReclamos.cartas.Where(ca => ca.id_reclamo == id && ca.tipo == tipo && ca.modulo == modulo).First();
+                    actualizar.contenido = contenido.Text;
+                    actualizar.tipo = tipo;
+                    actualizar.modulo = modulo;
+                    actualizar.id_reclamo = id;
+                }
+            }
+
+            DBReclamos.SaveChanges();
+           
+        }
+        catch (Exception ex)
+        {
+            Response.Write(ex);
+        }
+    }
+
+    public static void Guardar_cartas_autos(TextBox contenido, string tipo, string modulo, int id, CheckBox chCierreInterno, CheckBox chDeclinado, CheckBox chEnvioCheque)
+    {
+        try
+        {
+            var bandera = DBReclamos.reclamo_auto.Find(id);
+            if (chCierreInterno.Checked)
+            {
+                if (bandera.b_carta_cierre_interno == false)
+                {
+                    cartas carta = new cartas();
+                    var sec_registro = DBReclamos.pa_sec_cartas();
+                    int? id_registro = sec_registro.Single();
+                    carta.id = Convert.ToInt32(id_registro);
+                    carta.contenido = contenido.Text;
+                    carta.tipo = tipo;
+                    carta.modulo = modulo;
+                    carta.id_reclamo = id;
+                    bandera.b_carta_cierre_interno = true;
+                    DBReclamos.cartas.Add(carta);
+                }
+
+                else
+                {
+                    var actualizar = DBReclamos.cartas.Where(ca => ca.id_reclamo == id && ca.tipo == tipo && ca.modulo == modulo).First();
+                    actualizar.contenido = contenido.Text;
+                    actualizar.tipo = tipo;
+                    actualizar.modulo = modulo;
+                    actualizar.id_reclamo = id;
+                }
+            }
+
+            if (chDeclinado.Checked)
+            {
+                if (bandera.b_carta_declinado == false)
+                {
+                    cartas carta = new cartas();
+                    var sec_registro = DBReclamos.pa_sec_cartas();
+                    int? id_registro = sec_registro.Single();
+                    carta.id = Convert.ToInt32(id_registro);
+                    carta.contenido = contenido.Text;
+                    carta.tipo = tipo;
+                    carta.modulo = modulo;
+                    carta.id_reclamo = id;
+                    bandera.b_carta_declinado = true;
+                    DBReclamos.cartas.Add(carta);
+                }
+
+                else
+                {
+                    var actualizar = DBReclamos.cartas.Where(ca => ca.id_reclamo == id && ca.tipo == tipo && ca.modulo == modulo).First();
+                    actualizar.contenido = contenido.Text;
+                    actualizar.tipo = tipo;
+                    actualizar.modulo = modulo;
+                    actualizar.id_reclamo = id;
+                }
+            }
+
+            if (chEnvioCheque.Checked)
+            {
+                if (bandera.b_carta_envio_cheque == false)
+                {
+                    cartas carta = new cartas();
+                    var sec_registro = DBReclamos.pa_sec_cartas();
+                    int? id_registro = sec_registro.Single();
+                    carta.id = Convert.ToInt32(id_registro);
+                    carta.contenido = contenido.Text;
+                    carta.tipo = tipo;
+                    carta.modulo = modulo;
+                    carta.id_reclamo = id;
+                    bandera.b_carta_envio_cheque = true;
+                    DBReclamos.cartas.Add(carta);
+                }
+
+                else
+                {
+                    var actualizar = DBReclamos.cartas.Where(ca => ca.id_reclamo == id && ca.tipo == tipo && ca.modulo == modulo).First();
+                    actualizar.contenido = contenido.Text;
+                    actualizar.tipo = tipo;
+                    actualizar.modulo = modulo;
+                    actualizar.id_reclamo = id;
+                }
+            }
+
+            DBReclamos.SaveChanges();
+        }
+        catch (Exception ex)
+        {
+
+        }
+    }
 }

@@ -204,6 +204,16 @@
           <Property Name="telefono" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="id_sucursal" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="cartas">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="contenido" Type="text" />
+          <Property Name="tipo" Type="varchar" MaxLength="50" />
+          <Property Name="modulo" Type="varchar" MaxLength="50" />
+          <Property Name="id_reclamo" Type="int" />
+        </EntityType>
         <EntityType Name="coberturas">
           <Key>
             <PropertyRef Name="id" />
@@ -591,6 +601,9 @@
           <Property Name="fecha_no_conforme" Type="datetime" />
           <Property Name="fecha_cierre_no_conforme" Type="datetime" />
           <Property Name="observacion_no_conforme" Type="varchar" MaxLength="500" />
+          <Property Name="b_carta_cierre_interno" Type="bit" />
+          <Property Name="b_carta_declinado" Type="bit" />
+          <Property Name="b_carta_envio_cheque" Type="bit" />
         </EntityType>
         <EntityType Name="reclamos_medicos">
           <Key>
@@ -692,6 +705,9 @@
           <Property Name="fecha_no_conforme" Type="datetime" />
           <Property Name="fecha_cierre_no_conforme" Type="datetime" />
           <Property Name="observacion_no_conforme" Type="varchar" MaxLength="500" />
+          <Property Name="b_carta_cierre_interno" Type="bit" />
+          <Property Name="b_carta_declinado" Type="bit" />
+          <Property Name="b_carta_envio_cheque" Type="bit" />
         </EntityType>
         <EntityType Name="reg_reclamo_varios">
           <Key>
@@ -1497,6 +1513,7 @@ advertencia 6002: La tabla o vista 'reclamos.dbo.v_producto_no_conforme' no tien
         </Function>
         <Function Name="pa_sec_auto_reclamo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="pa_sec_autorizaciones" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="pa_sec_cartas" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="pa_sec_reclamo_auto" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="pa_sec_reclamos_medicos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="pa_sec_registros_medicos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
@@ -1547,6 +1564,7 @@ advertencia 6002: La tabla o vista 'reclamos.dbo.v_producto_no_conforme' no tien
           <EntitySet Name="bitacora_reclamos_varios" EntityType="Self.bitacora_reclamos_varios" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="busqCoberturasPolizasDaños" EntityType="Self.busqCoberturasPolizasDaños" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="cabina" EntityType="Self.cabina" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="cartas" EntityType="Self.cartas" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="coberturas" EntityType="Self.coberturas" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="coberturas_afectadas" EntityType="Self.coberturas_afectadas" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="coberturas_afectadas_danios" EntityType="Self.coberturas_afectadas_danios" Schema="dbo" store:Type="Tables" />
@@ -1878,6 +1896,7 @@ FROM [dbo].[v_producto_no_conforme] AS [v_producto_no_conforme]</DefiningQuery>
             <Parameter Name="fechaInicio" Mode="In" Type="DateTime" />
             <Parameter Name="fechaFin" Mode="In" Type="DateTime" />
           </FunctionImport>
+          <FunctionImport Name="pa_sec_cartas" ReturnType="Collection(Int32)" />
           <EntitySet Name="ajustadores" EntityType="reclamosModel.ajustadores" />
           <EntitySet Name="analistas" EntityType="reclamosModel.analistas" />
           <EntitySet Name="aseguradoras" EntityType="reclamosModel.aseguradoras" />
@@ -1893,6 +1912,7 @@ FROM [dbo].[v_producto_no_conforme] AS [v_producto_no_conforme]</DefiningQuery>
           <EntitySet Name="bitacora_reclamos_varios" EntityType="reclamosModel.bitacora_reclamos_varios" />
           <EntitySet Name="busqCoberturasPolizasDaños" EntityType="reclamosModel.busqCoberturasPolizasDaños" />
           <EntitySet Name="cabina" EntityType="reclamosModel.cabina" />
+          <EntitySet Name="cartas" EntityType="reclamosModel.cartas" />
           <EntitySet Name="coberturas" EntityType="reclamosModel.coberturas" />
           <EntitySet Name="coberturas_afectadas" EntityType="reclamosModel.coberturas_afectadas" />
           <EntitySet Name="coberturas_afectadas_danios" EntityType="reclamosModel.coberturas_afectadas_danios" />
@@ -2491,6 +2511,16 @@ FROM [dbo].[v_producto_no_conforme] AS [v_producto_no_conforme]</DefiningQuery>
           <NavigationProperty Name="reclamos_varios" Relationship="reclamosModel.FK__reclamos___id_ca__52593CB8" FromRole="cabina" ToRole="reclamos_varios" />
           <NavigationProperty Name="usuario" Relationship="reclamosModel.FK__usuario__id_cabi__5CD6CB2B" FromRole="cabina" ToRole="usuario" />
         </EntityType>
+        <EntityType Name="cartas">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="contenido" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="tipo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="modulo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="id_reclamo" Type="Int32" />
+        </EntityType>
         <EntityType Name="coberturas">
           <Key>
             <PropertyRef Name="id" />
@@ -2608,8 +2638,8 @@ FROM [dbo].[v_producto_no_conforme] AS [v_producto_no_conforme]</DefiningQuery>
           <Property Name="total" Type="Decimal" Precision="10" Scale="2" />
           <Property Name="id_reclamo_auto" Type="Int64" />
           <Property Name="fecha" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="reclamo_auto" Relationship="reclamosModel.FK_detalle_pago_reclamos_autos_reclamo_auto" FromRole="detalle_pagos_reclamos_autos" ToRole="reclamo_auto" />
           <Property Name="destino" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="reclamo_auto" Relationship="reclamosModel.FK_detalle_pago_reclamos_autos_reclamo_auto" FromRole="detalle_pagos_reclamos_autos" ToRole="reclamo_auto" />
         </EntityType>
         <EntityType Name="detalle_pagos_reclamos_medicos">
           <Key>
@@ -2911,6 +2941,9 @@ FROM [dbo].[v_producto_no_conforme] AS [v_producto_no_conforme]</DefiningQuery>
           <NavigationProperty Name="gestores" Relationship="reclamosModel.FK_reclamo_auto_gestores" FromRole="reclamo_auto" ToRole="gestores" />
           <NavigationProperty Name="usuario" Relationship="reclamosModel.FK__reclamo_a__id_us__440B1D61" FromRole="reclamo_auto" ToRole="usuario" />
           <NavigationProperty Name="talleres" Relationship="reclamosModel.FK_reclamo_auto_talleres" FromRole="reclamo_auto" ToRole="talleres" />
+          <Property Name="b_carta_cierre_interno" Type="Boolean" />
+          <Property Name="b_carta_declinado" Type="Boolean" />
+          <Property Name="b_carta_envio_cheque" Type="Boolean" />
         </EntityType>
         <EntityType Name="reclamos_medicos">
           <Key>
@@ -3033,6 +3066,9 @@ FROM [dbo].[v_producto_no_conforme] AS [v_producto_no_conforme]</DefiningQuery>
           <NavigationProperty Name="reg_reclamo_varios" Relationship="reclamosModel.FK__reclamos___id_re__5441852A" FromRole="reclamos_varios" ToRole="reg_reclamo_varios" />
           <NavigationProperty Name="usuario" Relationship="reclamosModel.FK__reclamos___id_us__5535A963" FromRole="reclamos_varios" ToRole="usuario" />
           <NavigationProperty Name="talleres" Relationship="reclamosModel.FK_reclamos_varios_talleres" FromRole="reclamos_varios" ToRole="talleres" />
+          <Property Name="b_carta_cierre_interno" Type="Boolean" />
+          <Property Name="b_carta_declinado" Type="Boolean" />
+          <Property Name="b_carta_envio_cheque" Type="Boolean" />
         </EntityType>
         <EntityType Name="reg_reclamo_varios">
           <Key>
@@ -4029,6 +4065,7 @@ FROM [dbo].[v_producto_no_conforme] AS [v_producto_no_conforme]</DefiningQuery>
           <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="reclamosModel.Store.sp_renamediagram" />
           <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="reclamosModel.Store.sp_upgraddiagrams" />
           <FunctionImportMapping FunctionImportName="pa_kpi_autirizaciones" FunctionName="reclamosModel.Store.pa_kpi_autirizaciones" />
+          <FunctionImportMapping FunctionImportName="pa_sec_cartas" FunctionName="reclamosModel.Store.pa_sec_cartas" />
           <EntitySetMapping Name="ajustadores">
             <EntityTypeMapping TypeName="reclamosModel.ajustadores">
               <MappingFragment StoreEntitySet="ajustadores">
@@ -4239,6 +4276,17 @@ FROM [dbo].[v_producto_no_conforme] AS [v_producto_no_conforme]</DefiningQuery>
                 <ScalarProperty Name="telefono" ColumnName="telefono" />
                 <ScalarProperty Name="direccion" ColumnName="direccion" />
                 <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="cartas">
+            <EntityTypeMapping TypeName="reclamosModel.cartas">
+              <MappingFragment StoreEntitySet="cartas">
+                <ScalarProperty Name="id_reclamo" ColumnName="id_reclamo" />
+                <ScalarProperty Name="modulo" ColumnName="modulo" />
+                <ScalarProperty Name="tipo" ColumnName="tipo" />
+                <ScalarProperty Name="contenido" ColumnName="contenido" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -4609,6 +4657,9 @@ FROM [dbo].[v_producto_no_conforme] AS [v_producto_no_conforme]</DefiningQuery>
           <EntitySetMapping Name="reclamo_auto">
             <EntityTypeMapping TypeName="reclamosModel.reclamo_auto">
               <MappingFragment StoreEntitySet="reclamo_auto">
+                <ScalarProperty Name="b_carta_envio_cheque" ColumnName="b_carta_envio_cheque" />
+                <ScalarProperty Name="b_carta_declinado" ColumnName="b_carta_declinado" />
+                <ScalarProperty Name="b_carta_cierre_interno" ColumnName="b_carta_cierre_interno" />
                 <ScalarProperty Name="observacion_no_conforme" ColumnName="observacion_no_conforme" />
                 <ScalarProperty Name="fecha_cierre_no_conforme" ColumnName="fecha_cierre_no_conforme" />
                 <ScalarProperty Name="fecha_no_conforme" ColumnName="fecha_no_conforme" />
@@ -4714,6 +4765,9 @@ FROM [dbo].[v_producto_no_conforme] AS [v_producto_no_conforme]</DefiningQuery>
           <EntitySetMapping Name="reclamos_varios">
             <EntityTypeMapping TypeName="reclamosModel.reclamos_varios">
               <MappingFragment StoreEntitySet="reclamos_varios">
+                <ScalarProperty Name="b_carta_envio_cheque" ColumnName="b_carta_envio_cheque" />
+                <ScalarProperty Name="b_carta_declinado" ColumnName="b_carta_declinado" />
+                <ScalarProperty Name="b_carta_cierre_interno" ColumnName="b_carta_cierre_interno" />
                 <ScalarProperty Name="observacion_no_conforme" ColumnName="observacion_no_conforme" />
                 <ScalarProperty Name="fecha_cierre_no_conforme" ColumnName="fecha_cierre_no_conforme" />
                 <ScalarProperty Name="fecha_no_conforme" ColumnName="fecha_no_conforme" />

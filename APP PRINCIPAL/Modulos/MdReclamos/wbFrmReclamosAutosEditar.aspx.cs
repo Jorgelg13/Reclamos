@@ -73,7 +73,7 @@ public partial class Modulos_MdReclamos_wbFrmReclamosAutosEditar : System.Web.UI
 
         if (ddlestado.SelectedValue == "2" || ddlestado.SelectedValue == "3")
         {
-            Response.Redirect("/Default.aspx");
+            Response.Redirect("/Modulos/Dashboard/DashboardCabina.aspx");
         }
     }
 

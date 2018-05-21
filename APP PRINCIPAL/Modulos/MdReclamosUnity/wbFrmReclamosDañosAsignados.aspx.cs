@@ -260,6 +260,15 @@ public partial class Modulos_MdReclamos_wbFrmReclamosDañosAsignados : System.We
         }
     }
 
+    public void enviarNotificacion()
+    {
+        string telefono = Utils.TelefonoGestor(ddlGestor);
+        string mensaje = Constantes.ASIGNACION_DANOS(ddlGestor, poliza, telefono);
+
+        notificacion.CorreoReclamos(txtCorreo.Text.Trim(), mensaje, "Asignacion de Reclamo");
+        insertarComentarios("Registro de envio de correo de notificacion: \n\n" + mensaje);
+    }
+
     //guardar informacion del reclamo para aperturarlo y darle despues seguimiento
     protected void txtGuardar_Click(object sender, EventArgs e)
     {
@@ -299,11 +308,14 @@ public partial class Modulos_MdReclamos_wbFrmReclamosDañosAsignados : System.We
             reclamo.complicado = complicado;
             reclamo.prioritario = prioritario;
             reclamo.compromiso_pago = compromiso_pago;
+            reclamo.b_carta_cierre_interno = false;
+            reclamo.b_carta_declinado = false;
+            reclamo.b_carta_envio_cheque = false;
             reclamo.id_taller = Convert.ToInt16(ddlTaller.SelectedValue);
             reclamo.fecha_visualizar = DateTime.Now;
             reclamo.fecha_apertura_reclamo = DateTime.Now;  
             DBReclamos.SaveChanges();
-            enviarNoficacion();
+           // enviarNoficacion();
 
             if(txtTelefono.Text != "")
             {
@@ -316,17 +328,8 @@ public partial class Modulos_MdReclamos_wbFrmReclamosDañosAsignados : System.We
         catch (Exception ex)
         {
             Utils.ShowMessage(this.Page, "A ocurrido un error al insertar los datos", "Nota..!", "error");
-            Email.EnviarERROR("Error ocasionado al usuario: " + userlogin + " en el registro con el id: " + id + "\n\n" + ex.Message, "Error en apertura de reclamos de daños");
+            Email.EnviarERROR("Error en apertura de reclamos de daños","Error ocasionado al usuario: " + userlogin + " en el registro con el id: " + id + "\n\n" + ex.Message);
         }
-    }
-
-    public void enviarNotificacion()
-    {
-        string telefono = Utils.TelefonoGestor(ddlGestor);
-        string mensaje = Constantes.ASIGNACION_DANOS(ddlGestor, poliza, telefono); 
-
-        notificacion.CorreoReclamos(txtCorreo.Text.Trim(), mensaje, "Asignacion de Reclamo");
-        insertarComentarios("Registro de envio de correo de notificacion: \n\n" + mensaje);
     }
 
     //actualizar datos de un reclamo que se ingreso de forma manual y por lo tanto no tiene todos sus datos completos

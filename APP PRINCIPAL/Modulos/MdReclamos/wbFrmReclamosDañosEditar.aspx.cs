@@ -112,7 +112,7 @@ public partial class Modulos_MdReclamos_wbFrmReclamosDañosEditar : System.Web.U
 
         if (ddlestado.SelectedValue == "2" || ddlestado.SelectedValue == "3")
         {
-            Response.Redirect("/Default.aspx");
+            Response.Redirect("/Modulos/Dashboard/DashboardCabina.aspx");
         }
     }
 
