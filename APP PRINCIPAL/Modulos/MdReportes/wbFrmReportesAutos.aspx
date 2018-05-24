@@ -10,7 +10,7 @@
                     <h3 class="panel-title"><b style="font-size: 16px;">Seleccione los campos</b></h3>
                 </div>
                 <div class="panel-body scrolling-table-container" style="height: 525px; max-height: 600px;">
-                    <asp:CheckBox runat="server" Visible="false" AutoPostBack="true" Text="Todos" ID="checkTodos" OnCheckedChanged="checkTodos_CheckedChanged"/>
+                    <asp:CheckBox runat="server" AutoPostBack="true" Text="Todos" ID="checkTodos" OnCheckedChanged="checkTodos_CheckedChanged"/>
                     <asp:CheckBoxList ID="checkCampos" runat="server" Height="141px" Width="147px">
                         <asp:ListItem Value="reclamo_auto.estado_auto_unity as [Estado Auto]">Estado Auto</asp:ListItem>
                         <asp:ListItem Value="auto_reclamo.poliza as Poliza">Poliza</asp:ListItem>

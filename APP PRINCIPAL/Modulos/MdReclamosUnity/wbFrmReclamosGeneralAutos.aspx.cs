@@ -11,9 +11,11 @@ using System.IO;
 public partial class Modulos_MdReclamosUnity_wbFrmReclamosGeneralAutos : System.Web.UI.Page
 {
     Utils llenado = new Utils();
+    string idRecibido;
 
     protected void Page_Load(object sender, EventArgs e)
     {
+        idRecibido = Request.QueryString[0].ToString();
         string reclamosSeguimiento = "SELECT reclamo_auto.id, " +
              " reclamo_auto.estado_unity as [Estado Unity]," +
              " reclamo_auto.usuario_unity as [Usuario Unity]," +
@@ -33,7 +35,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosGeneralAutos : System.
              " reclamo_auto.boleta as Boleta," +
              " reclamo_auto.titular  as Titular," +
              " Convert(varchar(10),reclamo_auto.fecha, 103) As [Fecha Siniestro]," +
-             " reclamo_auto.fecha_commit as [Fecha Creacion],"+
+             " reclamo_auto.fecha_commit as [Fecha Creacion]," +
              " reclamo_auto.ubicacion as Ubicacion," +
              " reclamo_auto.reportante as Reportante," +
              " reclamo_auto.piloto as Piloto," +
@@ -47,16 +49,43 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosGeneralAutos : System.
              " INNER JOIN reclamo_auto ON reclamo_auto.id_auto_reclamo = auto_reclamo.id " +
              " INNER JOIN gestores on reclamo_auto.id_gestor = gestores.id" +
              " INNER JOIN talleres on reclamo_auto.id_taller = talleres.id" +
-             " INNER JOIN analistas on reclamo_auto.id_analista = analistas.id" +
-             " INNER JOIN cabina ON reclamo_auto.id_cabina = cabina.id " +
-             " INNER JOIN sucursal ON cabina.id_sucursal = sucursal.id " +
-             " INNER JOIN empresa ON sucursal.id_empresa = empresa.id " +
-             " INNER JOIN pais ON empresa.id_pais = pais.id " +
-             " INNER JOIN usuario ON reclamo_auto.id_usuario = usuario.id " +
-             " where (estado_unity = 'Seguimiento' ) ";
+             " INNER JOIN analistas on reclamo_auto.id_analista = analistas.id";
+             //" INNER JOIN cabina ON reclamo_auto.id_cabina = cabina.id " +
+             //" INNER JOIN sucursal ON cabina.id_sucursal = sucursal.id " +
+             //" INNER JOIN empresa ON sucursal.id_empresa = empresa.id " +
+             // " INNER JOIN pais ON empresa.id_pais = pais.id " +
+             //" INNER JOIN usuario ON reclamo_auto.id_usuario = usuario.id ";
 
-        //funciones que llenan los grid con los registros
-        llenado.llenarGrid(reclamosSeguimiento, GridGeneral);
+
+        if (idRecibido == "1")
+        {
+            reclamosSeguimiento += " where reclamo_auto.estado_auto_unity = 'Pendiente Asegurado'  and  reclamo_auto.estado_unity = 'Seguimiento' ";
+            llenado.llenarGrid(reclamosSeguimiento, GridGeneral);
+        }
+
+        else if (idRecibido == "2")
+        {
+            reclamosSeguimiento += " where reclamo_auto.estado_auto_unity = 'Proceso Legal'  and  reclamo_auto.estado_unity = 'Seguimiento' ";
+            llenado.llenarGrid(reclamosSeguimiento, GridGeneral);
+        }
+
+        else if (idRecibido == "3")
+        {
+            reclamosSeguimiento += " where reclamo_auto.estado_auto_unity = 'Espera afectado'  and  reclamo_auto.estado_unity = 'Seguimiento' ";
+            llenado.llenarGrid(reclamosSeguimiento, GridGeneral);
+        }
+
+        else if (idRecibido == "4")
+        {
+            reclamosSeguimiento += " where reclamo_auto.estado_auto_unity = 'Reparacion'  and  reclamo_auto.estado_unity = 'Seguimiento' ";
+            llenado.llenarGrid(reclamosSeguimiento, GridGeneral);
+        }
+
+        else if (idRecibido == "5")
+        {
+            reclamosSeguimiento += " where reclamo_auto.estado_unity = 'Seguimiento' ";
+            llenado.llenarGrid(reclamosSeguimiento, GridGeneral);
+        }
     }
 
     protected void GridGeneral_SelectedIndexChanged(object sender, EventArgs e)

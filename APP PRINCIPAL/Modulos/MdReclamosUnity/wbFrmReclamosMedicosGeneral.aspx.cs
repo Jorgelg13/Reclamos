@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Web.UI;
-using System.IO;
 
 public partial class Modulos_MdReclamosUnity_wbFrmReclamosMedicosGeneral : System.Web.UI.Page
 {
@@ -43,7 +42,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosMedicosGeneral : Syste
 
         if (idRecibido == "1")
         {
-            seleccionarRegistros += " where reclamos_medicos.estado_unity = 'Seguimiento' and tipo = 'I'  ";
+            seleccionarRegistros += " where reclamos_medicos.estado_unity = 'Seguimiento'";
             llenado.llenarGrid(seleccionarRegistros, GridGeneral);
         }
 

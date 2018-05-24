@@ -9,7 +9,7 @@
                 </div>
                 <div class="panel-body">
                     <h1>
-                        <a href="/Modulos/MdReclamos/wbFrmReclamosAutosGeneral.aspx" style="font-size: 100px;" class="fa fa-car " aria-hidden="true"><span>   </span><asp:Label ID="totalReclamosAutos" runat="server" aria-hidden="true" ForeColor="#797D7F"></asp:Label></a>
+                        <a href="/Modulos/MdReclamos/wbFrmReclamosAutosGeneral.aspx" style="font-size: 90px;" class="fa fa-car "><span></span><asp:Label ID="totalReclamosAutos" runat="server" ForeColor="#797D7F"></asp:Label></a>
                         <br />
                     </h1>
                 </div>
@@ -22,13 +22,12 @@
                 </div>
                 <div class="panel-body">
                     <h1>
-                        <a href="/Modulos/MdReclamos/wbFrmReclamosDañosGeneral.aspx" style="font-size: 100px;" class="fa fa-exclamation-triangle" aria-hidden="true"><span>   </span><asp:Label ID="totalReclamosDaños" runat="server" aria-hidden="true" ForeColor="#797D7F"></asp:Label></a>
+                        <a href="/Modulos/MdReclamos/wbFrmReclamosDañosGeneral.aspx" style="font-size: 90px;" class="fa fa-exclamation-triangle"><span></span><asp:Label ID="totalReclamosDaños" runat="server" ForeColor="#797D7F"></asp:Label></a>
                     </h1>
                 </div>
             </div>
         </div>
     </div>
-
     <div class="container menu-cuadrado btn-acciones-laterales">
         <div class="col-md-6 col-lg-6" >
             <div class="panel panel-info" style="height: 200px;">
@@ -37,7 +36,7 @@
                 </div>
                 <div class="panel-body">
                     <h1>
-                        <a href="/Modulos/MdReclamos/wbFrmReclamosMedicosGeneral.aspx" style="font-size: 100px;" class="fa fa-heartbeat" aria-hidden="true"><span>    </span><asp:Label ID="totalReclamosMedicos" runat="server" aria-hidden="true" ForeColor="#797D7F"></asp:Label></a>
+                        <a href="/Modulos/MdReclamos/wbFrmReclamosMedicosGeneral.aspx" style="font-size: 90px;" class="fa fa-heartbeat"><span></span><asp:Label ID="totalReclamosMedicos" runat="server" aria-hidden="true" ForeColor="#797D7F"></asp:Label></a>
                     </h1>
                 </div>
             </div>
@@ -49,7 +48,7 @@
                 </div>
                 <div class="panel-body">
                     <h1>
-                        <a href="/Modulos/MdReclamos/wbFrmAutorizacionesGenerales.aspx" style="font-size: 100px;" class=" fa fa-medkit" aria-hidden="true"><span>    </span><asp:Label ID="totalReclamosAutorizaciones" runat="server" Style="padding-left: 10px;" aria-hidden="true" ForeColor="#797D7F"></asp:Label></a>
+                        <a href="/Modulos/MdReclamos/wbFrmAutorizacionesGenerales.aspx" style="font-size: 90px;" class=" fa fa-medkit"><span></span><asp:Label ID="totalReclamosAutorizaciones" runat="server" Style="padding-left: 10px;"  ForeColor="#797D7F"></asp:Label></a>
                         <br />
                     </h1>
                 </div>

@@ -315,7 +315,7 @@ public partial class Modulos_MdReclamos_wbFrmReclamosDañosAsignados : System.We
             reclamo.fecha_visualizar = DateTime.Now;
             reclamo.fecha_apertura_reclamo = DateTime.Now;  
             DBReclamos.SaveChanges();
-           // enviarNoficacion();
+            enviarNoficacion();
 
             if(txtTelefono.Text != "")
             {

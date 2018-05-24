@@ -66,7 +66,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesAutos : System.Web.UI.
         if(checkSinFiltro.Checked)
         {
             string listado;
-            listado = "Select distinct reclamo_auto.id, ";
+            listado = "Select reclamo_auto.id, ";
             //recorre la lista de checks que seleccionaron para generar el reporte
             for (int i = 0; i < checkCampos.Items.Count; i++)
             {

@@ -44,23 +44,49 @@ public partial class DashboardUnity : System.Web.UI.Page
     {
         try
         {
-            var autos = DBReclamos.reclamo_auto.Where(c => c.estado_unity == "Seguimiento").Count();
+            Double autos = DBReclamos.reclamo_auto.Where(c => c.estado_unity == "Seguimiento").Count();
             totalReclamosAutos.Text = autos.ToString();
 
-            var danios = DBReclamos.reclamos_varios.Where(d => d.estado_unity == "Seguimiento").Count();
+            Double danios = DBReclamos.reclamos_varios.Where(d => d.estado_unity == "Seguimiento").Count();
             totalReclamosDaños.Text = danios.ToString();
 
-            var medicos = DBReclamos.reclamos_medicos.Where(m => m.estado_unity == "Seguimiento" && m.reg_reclamos_medicos.tipo == "I").Count();
-            lnTotalIndividuales.Text = "Individuales: " + medicos.ToString();
+            Double medicos = DBReclamos.reclamos_medicos.Where(m => m.estado_unity == "Seguimiento" && m.reg_reclamos_medicos.tipo == "I").Count();
+            lnTotalIndividuales.Text = "I: " + medicos.ToString();
 
-            var medicosC = DBReclamos.reclamos_medicos.Where(m => m.estado_unity == "Seguimiento" && m.reg_reclamos_medicos.tipo == "C").Count();
-            lnColectivos.Text = "Colectivos:  " + medicosC.ToString();
+            Double medicosC = DBReclamos.reclamos_medicos.Where(m => m.estado_unity == "Seguimiento" && m.reg_reclamos_medicos.tipo == "C").Count();
+            lnColectivos.Text = "C:  " + medicosC.ToString();
 
-            var total = DBReclamos.reclamos_medicos.Where(m => m.estado_unity == "Seguimiento").Count();
+            Double total = DBReclamos.reclamos_medicos.Where(m => m.estado_unity == "Seguimiento").Count();
             lnTotal.Text = "Total:  " + total.ToString();
 
-            var estadoAsegurado = DBReclamos.reclamos_medicos.Where(m => m.id_estado == 4 && m.estado_unity == "Seguimiento"  && m.reg_reclamos_medicos.tipo == "I" ).Count();
-            lnPendienteDocumentacion.Text = "E. Asegurado:  " + estadoAsegurado.ToString();
+            Double estadoAsegurado = DBReclamos.reclamos_medicos.Where(m => m.id_estado == 4 && m.estado_unity == "Seguimiento"  && m.reg_reclamos_medicos.tipo == "I" ).Count();
+            lnPendienteDocumentacion.Text = "E.A :  " + estadoAsegurado.ToString();
+
+            //total de reclamos de autos por estado
+            Double pendienteAseguradoAutos = DBReclamos.reclamo_auto.Where(a => a.estado_auto_unity == "Pendiente Asegurado" && a.estado_unity == "Seguimiento").Count();
+            lnPendienteAseguradoAuto.Text = "P.A:  " + pendienteAseguradoAutos.ToString() + " = " + Math.Round((pendienteAseguradoAutos/autos) *100,2).ToString() + "%";
+
+            Double procesolegal = DBReclamos.reclamo_auto.Where(a => a.estado_auto_unity == "Proceso legal" && a.estado_unity == "Seguimiento").Count();
+            lnlProcesoLegalAutos.Text = "P.L:  " + procesolegal.ToString() + " = " + Math.Round((procesolegal / autos) *100, 2).ToString() + "%";
+
+            Double esperaAfectado = DBReclamos.reclamo_auto.Where(a => a.estado_auto_unity == "Espera afectado" && a.estado_unity == "Seguimiento").Count();
+            lnlEsperaAfectado.Text = "E.A:  " + esperaAfectado.ToString() + " = " + Math.Round((esperaAfectado / autos) *100, 2).ToString() + "%";
+
+            Double pendienteCompania = DBReclamos.reclamo_auto.Where(a => a.estado_auto_unity == "Reparacion" && a.estado_unity == "Seguimiento").Count();
+            lnlPendienteCompania.Text = "RE:  " + pendienteCompania.ToString() + " = " + Math.Round((pendienteCompania / autos) * 100, 2).ToString() + "%";
+
+            //total de reclamos de estado de daños
+            Double pendiente = DBReclamos.reclamos_varios.Where(a => a.estado_reclamo_unity == "Pendiente asegurado" && a.estado_unity == "Seguimiento").Count();
+            lnPendienteAsegurado.Text = "P.A:  " + pendiente.ToString() + " = " + Math.Round((pendienteCompania / danios) * 100, 2).ToString() + "%";
+
+            Double inactivo = DBReclamos.reclamos_varios.Where(a => a.estado_reclamo_unity == "Inactivo" && a.estado_unity == "Seguimiento").Count();
+            lnInactivo.Text = "I:  " + inactivo.ToString() + " = " + Math.Round((inactivo / danios) * 100, 2).ToString() + "%";
+
+            Double ajuste = DBReclamos.reclamos_varios.Where(a => a.estado_reclamo_unity == "Ajuste" && a.estado_unity == "Seguimiento").Count();
+            lnAjuste.Text = "A:  " + ajuste.ToString() + " = " + Math.Round((ajuste / danios) * 100, 2).ToString() + "%";
+
+            Double finiquito = DBReclamos.reclamos_varios.Where(a => a.estado_reclamo_unity == "Pendiente Finiquito" && a.estado_unity == "Seguimiento").Count();
+            lnFiniquito.Text = "P.F:  " + finiquito.ToString() + " = " + Math.Round((finiquito / danios) * 100, 2).ToString() + "%";
         }
 
         catch (Exception ex)
@@ -120,5 +146,47 @@ public partial class DashboardUnity : System.Web.UI.Page
     protected void lnPendienteDocumentacion_Click(object sender, EventArgs e)
     {
         Response.Redirect("/Modulos/MdReclamosUnity/wbFrmReclamosMedicosGeneral.aspx?id=5", false);
+    }
+
+    //autos
+    protected void lnPendienteAseguradoAuto_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("/Modulos/MdReclamosUnity/wbFrmReclamosGeneralAutos.aspx?id=1", false);
+    }
+
+    protected void lnlProcesoLegalAutos_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("/Modulos/MdReclamosUnity/wbFrmReclamosGeneralAutos.aspx?id=2", false);
+    }
+
+    protected void lnlEsperaAfectado_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("/Modulos/MdReclamosUnity/wbFrmReclamosGeneralAutos.aspx?id=3", false);
+    }
+
+    protected void lnlPendienteCompania_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("/Modulos/MdReclamosUnity/wbFrmReclamosGeneralAutos.aspx?id=4", false);
+    }
+
+    //daños varios
+    protected void lnPendienteAsegurado_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("/Modulos/MdReclamosUnity/wbFrmReclamosDañosGeneral.aspx?id=1", false);
+    }
+
+    protected void lnInactivo_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("/Modulos/MdReclamosUnity/wbFrmReclamosDañosGeneral.aspx?id=2", false);
+    }
+
+    protected void lnAjuste_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("/Modulos/MdReclamosUnity/wbFrmReclamosDañosGeneral.aspx?id=3", false);
+    }
+
+    protected void lnFiniquito_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("/Modulos/MdReclamosUnity/wbFrmReclamosDañosGeneral.aspx?id=4", false);
     }
 }

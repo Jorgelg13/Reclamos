@@ -366,7 +366,6 @@
                                     </div>
                                 </div>
                             </div>
-
                             <%------------------------------------------------ imprimir memo para aseguradora ------------------------------------------%>
                             <div id="imprimirEnvioAseg" style="display: none" class="form-inline">
                                 <br />
