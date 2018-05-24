@@ -5,8 +5,6 @@ using System.Configuration;
 
 public class conexionBD
 {
-
-
     public SqlConnection conexion = new SqlConnection();
 
     public SqlConnection ObtenerConexionReclamos()

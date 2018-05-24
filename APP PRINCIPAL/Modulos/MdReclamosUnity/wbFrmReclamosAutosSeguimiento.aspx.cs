@@ -773,7 +773,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosAutosSeguimiento : Sys
 
             if(chEnviarSMS.Checked && txtTelefono.Text != "")
             {
-                Utils.SMS_reclamos_autos(txtTelefono.Text, "UNITY: Estimad@ cliente Reclamo "+id+" su vehículo en proceso de presupuesto y ajuste en taller de su elección", userlogin, id);
+                Utils.SMS_reclamos_autos(txtTelefono.Text, "UNITY: Estimad@ cliente ID "+id+" su vehículo en proceso de presupuesto y ajuste en taller de su elección", userlogin, id);
             }
 
             llenado.llenarGrid(comentarios, GridComentarios);
@@ -845,7 +845,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosAutosSeguimiento : Sys
 
             if(chEnviarSMS.Checked && txtTelefono.Text != "")
             {
-                Utils.SMS_reclamos_autos(txtTelefono.Text, "UNITY: Estimad@ cliente reclamo "+id+" esta en proceso de ajuste y liquidacion en la compañia de seguros.", userlogin, id);
+                Utils.SMS_reclamos_autos(txtTelefono.Text, "UNITY: Estimad@ cliente ID "+id+" esta en proceso de ajuste y liquidacion en la compañia de seguros.", userlogin, id);
             }
 
             llenado.llenarGrid(comentarios,GridComentarios);
@@ -855,7 +855,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosAutosSeguimiento : Sys
         {
             if (chEnviarSMS.Checked && txtTelefono.Text != "")
             {
-                Utils.SMS_reclamos_autos(txtTelefono.Text, "UNITY: Estimad@ cliente su reclamo "+id+" esta en proceso de emision de cheque en la compañia de seguros.", userlogin, id);
+                Utils.SMS_reclamos_autos(txtTelefono.Text, "UNITY: Estimad@ cliente su ID "+id+" esta en proceso de emision de cheque en la compañia de seguros.", userlogin, id);
             }
 
             llenado.llenarGrid(comentarios, GridComentarios);
@@ -869,12 +869,12 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosAutosSeguimiento : Sys
 
                 if (destino_cheque.destino == "Ruta")
                 {
-                    Utils.SMS_reclamos_autos(txtTelefono.Text, "UNITY: Estimad@ cliente  cheque del reclamo ID " + id + " se encuentra en ruta para la entrega en direccion registrada.", userlogin, id);
+                    Utils.SMS_reclamos_autos(txtTelefono.Text, "UNITY: Estimad@ cliente cheque del reclamo ID " + id + " se encuentra en ruta para la entrega en direccion registrada.", userlogin, id);
                 }
 
                 else if(destino_cheque.destino == "Recepcion")
                 {
-                    Utils.SMS_reclamos_autos(txtTelefono.Text, "UNITY: Estimad@ cliente cheque del reclamo "+id+" se encuentra listo en  recepcion Unity favor pasar a recogerlo.", userlogin, id);
+                    Utils.SMS_reclamos_autos(txtTelefono.Text, "UNITY: Estimad@ cliente cheque del reclamo "+id+" se encuentra listo en recepcion Unity favor pasar a recogerlo.", userlogin, id);
                 }
 
                 else if (destino_cheque.destino == "Escritura de pago")
@@ -992,7 +992,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosAutosSeguimiento : Sys
                 noConforme.fecha_no_conforme = DateTime.Now;
                 noConforme.observacion_no_conforme = txtObservacionesNoConf.Text;
                 DBReclamos.SaveChanges();
-                agregarComentario("Este reclamo a sido encontrado como no conforme, catalogado como " + ddlNoConforme.SelectedValue + ". " + txtObservacionesNoConf.Text);
+                agregarComentario("Este reclamo ha sido encontrado como no conforme, catalogado como " + ddlNoConforme.SelectedValue + ". " + txtObservacionesNoConf.Text);
                 llenado.llenarGrid(comentarios, GridComentarios);
                 Utils.ShowMessage(this.Page, "Reclamo Actualizado como producto no conforme.", "Excelente", "info");
             }

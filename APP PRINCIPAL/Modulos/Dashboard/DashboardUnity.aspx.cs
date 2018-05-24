@@ -93,7 +93,7 @@ public partial class DashboardUnity : System.Web.UI.Page
 
         catch(Exception ex)
         {
-            Response.Write(ex);
+            Email.EnviarERROR("Error en conteo de reclamos de unity fuera de tiempo ", ex.ToString());
         }
     }
 

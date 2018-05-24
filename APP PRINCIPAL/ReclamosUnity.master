@@ -70,7 +70,7 @@
                                  <li><a href="/Modulos/MdReclamosUnity/wbFrmReclamosAsignadosUnity.aspx">Mis Reclamos Asignados</a></li>
                                 <li><a href="/Modulos/MdReclamosUnity/wbFrmReclamosEnSeguimiento.aspx">Mis Reclamos En seguimiento</a></li>
                                 <li><a href="/Modulos/MdReclamosUnity/wbFrmBusquedaReclamos.aspx">Busqueda Reclamo</a></li>
-                                <li><a data-toggle="modal" data-target=".bs-example-modal-sm">Busqueda por ID</a></li>
+                                <li><a data-toggle="modal" data-target="#BuscarAuto">Busqueda por ID</a></li>
                             </ul>
                         </li>
                         <li class="dropdown">
@@ -79,7 +79,7 @@
                                 <li><a href="/Modulos/MdReclamosUnity/wbFrmReclamosDañosAsignados.aspx">Mis Reclamos Asignados</a></li>
                                 <li><a href="/Modulos/MdReclamosUnity/wbFrmRecDañosSeguimiento.aspx">Mis Reclamos En Seguimiento</a></li>
                                 <li><a href="/Modulos/MdReclamosUnity/wbFrmBusquedaReclamosDaños.aspx">Busqueda Reclamo</a></li> 
-                                <li><a data-toggle="modal" data-target=".bs-example-modal-sm2">Busqueda por ID</a></li>
+                                <li><a data-toggle="modal" data-target="#BuscarDanios">Busqueda por ID</a></li>
                             </ul>
                         </li>
                         <li class="dropdown">
@@ -89,7 +89,7 @@
                                 <li><a href="/Modulos/MdReclamosUnity/wbFrmRecMedSeguimiento.aspx">Reclamos en seguimiento</a></li>
                                 <li><a href="/Modulos/MdReclamosUnity/wbFrmBusquedaReclamosMedicos.aspx">Busqueda Reclamo</a></li>
                                 <li><a href="/Modulos/MdReclamosUnity/wbFrmAsignarChequeGM.aspx">Ingresar Cheque</a></li>
-                                <li><a data-toggle="modal" data-target=".bs-example-modal-sm3">Busqueda por ID</a></li>
+                                <li><a data-toggle="modal" data-target="#BuscarGastosMedicos">Busqueda por ID</a></li>
                             </ul>
                         </li>
                         <li class="dropdown">
@@ -115,12 +115,11 @@
             </nav>
         <div>
            <%-- modal para la busqueda de un reclamo de auto--%>
-            <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+            <div class="modal fade" id="BuscarAuto">
                     <div class="modal-content form-inline">
-                        <div class="modal-dialog modal-sm" role="document">
+                        <div class="modal-dialog modal-sm">
                             <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times</span></button>
-                                <h4 class="modal-title" id="ModalCobertura1"><b>Buscar Por Id Del Reclamo</b></h4>
+                                <h4 class="modal-title"><b>Buscar Por Id Del Reclamo</b></h4>
                             </div>
                         <asp:TextBox ID="txtBusquedaId" type="number" CssClass="form-control" runat="server"></asp:TextBox>
                         <asp:Button ID="btnBuscarId" runat="server" CssClass="btn btn-primary" Text="Buscar" OnClick="btnBuscarId_Click" />
@@ -129,12 +128,11 @@
             </div>
 
                <%-- modal para la busqueda de un reclamo de daños--%>
-            <div class="modal fade bs-example-modal-sm2" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+            <div class="modal fade" id="BuscarDanios">
                     <div class="modal-content form-inline">
-                        <div class="modal-dialog modal-sm" role="document">
+                        <div class="modal-dialog modal-sm">
                             <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times</span></button>
-                                <h4 class="modal-title" id="ModalReclamosVarios"><b>Buscar Por ID Del Reclamo</b></h4>
+                                <h4 class="modal-title"><b>Buscar Por ID Del Reclamo</b></h4>
                             </div>
                         <asp:TextBox ID="txtReclamosVarios" type="number" CssClass="form-control" runat="server"></asp:TextBox>
                         <asp:Button ID="btnBuscarReclamosVarios" runat="server" CssClass="btn btn-primary" Text="Buscar" OnClick="btnBuscarReclamosVarios_Click"/>
@@ -142,12 +140,11 @@
                 </div>
             </div>
                <%-- modal para la busqueda de un reclamo de gastos medicos--%>
-            <div class="modal fade bs-example-modal-sm3" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+            <div class="modal fade" id="BuscarGastosMedicos">
                     <div class="modal-content form-inline">
-                        <div class="modal-dialog modal-sm" role="document">
+                        <div class="modal-dialog modal-sm">
                             <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times</span></button>
-                                <h4 class="modal-title" id="ModalReclamosMedicos"><b>Buscar Por ID Del Reclamo</b></h4>
+                                <h4 class="modal-title"><b>Buscar Por ID Del Reclamo</b></h4>
                             </div>
                         <asp:TextBox ID="txtBuscarReclamoMedico" type="number" CssClass="form-control" runat="server"></asp:TextBox>
                         <asp:Button ID="btnReclamoMedico" runat="server" CssClass="btn btn-primary" Text="Buscar" OnClick="btnReclamoMedico_Click"/>
@@ -167,6 +164,8 @@
         <script type="text/javascript" src="<%= ResolveUrl("/Scripts/FlipClock/compiled/flipclock.min.js") %>"></script>
         <script type="text/javascript" src="<%= ResolveUrl("/Scripts/app.js") %>"></script>
         <script type="text/javascript" src="<%= ResolveUrl("Scripts/contador.js") %>"></script>
+<%--        <script type="text/javascript" src="<%= ResolveUrl("Modulos/MdReclamosUnity/Resources/dynamsoft.webtwain.initiate.js") %>"></script>
+        <script type="text/javascript" src="<%= ResolveUrl("Modulos/MdReclamosUnity/Resources/dynamsoft.webtwain.config.js") %>"></script>--%>
            <asp:ContentPlaceHolder ID="ContentJs" runat="server">
             </asp:ContentPlaceHolder>  
     </form>

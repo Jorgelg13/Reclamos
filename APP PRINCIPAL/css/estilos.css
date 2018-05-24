@@ -425,6 +425,12 @@ a {
     padding: 0px;
 }
 
+.btn-acciones-laterales2, .btn-acciones-laterales2 i {
+        text-align: center;
+        padding: 0px;
+        font-size: 40px;
+    }
+
 
 /*cuadricula para las tablas*/
 .detalle {

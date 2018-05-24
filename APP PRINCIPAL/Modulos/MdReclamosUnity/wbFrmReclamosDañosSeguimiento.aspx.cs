@@ -167,7 +167,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosDañosSeguimiento : Sy
         }
         catch(Exception ex)
         {
-            Response.Write(ex);
+           // Response.Write(ex);
             Utils.ShowMessage(this.Page, "El id seleccionado no tiene ningun seguimiento " + ex.Message, "Error.. !", "error");
         }
     }
@@ -739,16 +739,13 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosDañosSeguimiento : Sy
         lblCartaAsesorReclamo.Text = registro.gestores.nombre;
     }
 
-    private void IngresarCartas()
-    {
-        var bandera = DBReclamos.reclamos_varios.Find(id);
-    }
-
-    //asignar valor al modelo de la carta
+    //generar modelo de carta de envio de cheque
     protected void chEnvioCarta_CheckedChanged(object sender, EventArgs e)
     {
         if (chEnvioCarta.Checked)
         {
+            chCartaCierre.Checked = false;
+            chCartaDeclinado.Checked = false;
             var buscarCarta = DBReclamos.cartas.Where(ca => ca.tipo == "envio cheque" && ca.modulo == "daños" && ca.id_reclamo == id).Count();
 
             if (buscarCarta == 1)
@@ -764,8 +761,6 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosDañosSeguimiento : Sy
                 DatosCarta();
                 PnDetallePago.Visible = true;
                 lblMemo.Text = cartaEnvioCheque;
-                chCartaCierre.Checked = false;
-                chCartaDeclinado.Checked = false;
             }
         }
         else
@@ -777,10 +772,14 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosDañosSeguimiento : Sy
 
         this.Page.ClientScript.RegisterStartupScript(this.Page.GetType(), "show_modal", "$('#Editor').modal('show');", addScriptTags: true);
     }
+
+    //generar carta de declinacion de reclamo
     protected void chCartaDeclinado_CheckedChanged(object sender, EventArgs e)
     {
         if (chCartaDeclinado.Checked)
         {
+            chCartaCierre.Checked = false;
+            chEnvioCarta.Checked = false;
             var buscarCarta = DBReclamos.cartas.Where(ca => ca.tipo == "declinado" && ca.modulo == "daños" && ca.id_reclamo == id).Count();
 
             if (buscarCarta == 1)
@@ -796,8 +795,6 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosDañosSeguimiento : Sy
                 PnDetallePago.Visible = false;
                 DatosCarta();
                 lblMemo.Text = cartaDeclinado;
-                chCartaCierre.Checked = false;
-                chEnvioCarta.Checked = false;
             }
         }
         else
@@ -809,10 +806,14 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosDañosSeguimiento : Sy
 
         this.Page.ClientScript.RegisterStartupScript(this.Page.GetType(), "show_modal", "$('#Editor').modal('show');", addScriptTags: true);
     }
+
+    //generar carta de cierre interno
     protected void chCartaCierre_CheckedChanged(object sender, EventArgs e)
     {
         if (chCartaCierre.Checked)
         {
+            chCartaDeclinado.Checked = false;
+            chEnvioCarta.Checked = false;
             var buscarCarta = DBReclamos.cartas.Where(ca => ca.tipo == "cierre interno" && ca.modulo == "daños" && ca.id_reclamo == id).Count();
 
             if(buscarCarta == 1)
@@ -828,8 +829,6 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosDañosSeguimiento : Sy
                 PnDetallePago.Visible = false;
                 DatosCarta();
                 lblMemo.Text = cartaCierreInterno;
-                chCartaDeclinado.Checked = false;
-                chEnvioCarta.Checked = false;
             }
         }
         else
@@ -882,7 +881,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosDañosSeguimiento : Sy
                 noConforme.fecha_no_conforme = DateTime.Now;
                 noConforme.observacion_no_conforme = txtObservacionesNoConf.Text;
                 DBReclamos.SaveChanges();
-                agregarComentario("Este reclamo a sido encontrado como no conforme, catalogado como " + ddlNoConforme.SelectedValue + ". " + txtObservacionesNoConf.Text);
+                agregarComentario("Este reclamo ha sido encontrado como no conforme, catalogado como " + ddlNoConforme.SelectedValue + ". " + txtObservacionesNoConf.Text);
                 llenado.llenarGrid(comentarios, GridComentarios);
                 Utils.ShowMessage(this.Page, "Reclamo Actualizado como producto no conforme.", "Excelente", "info");
             }
@@ -908,23 +907,6 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosDañosSeguimiento : Sy
     {
         ddlTipoCierre.Enabled = true;
         ddlEstadoReclamo.SelectedValue = "Cierre";
-    }
-
-    protected void checkmostrar_CheckedChanged(object sender, EventArgs e)
-    {
-        if (checkmostrar.Checked)
-        {
-            var mostrar = DBReclamos.cartas.Select(m => new { m.contenido, m.id_reclamo }).Where(ma => ma.id_reclamo == id).First();
-            txtContenidoCarta.Text = mostrar.contenido;
-            panelPrincipal.Visible = false;
-            Panelsecundario.Visible = true;
-            lblcarta.Text = txtContenidoCarta.Text;
-        }
-        else
-        {
-            panelPrincipal.Visible = true;
-            Panelsecundario.Visible = false;
-        }
     }
 
     //envio de sms manual

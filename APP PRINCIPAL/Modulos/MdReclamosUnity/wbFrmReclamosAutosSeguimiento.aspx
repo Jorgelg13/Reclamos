@@ -340,6 +340,7 @@
                                 <asp:ListItem Value="Ruta">Ruta</asp:ListItem>
                                 <asp:ListItem Value="Recepcion">Recepcion</asp:ListItem>
                                 <asp:ListItem Value="Escritura de pago">Escritura de pago</asp:ListItem>
+                                <asp:ListItem Value="No Aplica">No Aplica</asp:ListItem>
                             </asp:DropDownList>
                         </div>
                         <div class="form-group col-sm-12 col-md-6 col-lg-6">
@@ -363,23 +364,23 @@
                     </div>
                     <div class="modal-body">
                         <div class="form-group">
-                            <label for="message-text" class="control-label">Correo de:</label>
+                            <label>Correo de:</label>
                             <asp:TextBox runat="server" ID="txtFrom" Enabled="true" Style="width: 100%" autocomplete="off" class="form-control" placeholder="Correo Electronico"></asp:TextBox>
                         </div>
                         <div class="form-group">
-                            <label for="message-text" class="control-label">Correo Del Destinatario:</label>
+                            <label>Correo Del Destinatario:</label>
                             <asp:TextBox ID="txtDestinatario" Style="width: 100%" CssClass="form-control" AutoComplete="off" runat="server"></asp:TextBox>
                         </div>
                         <div class="form-group">
-                            <label for="recipient-name" class="control-label">Cuerpo del correo:</label>
+                            <label>Cuerpo del correo:</label>
                             <asp:TextBox ID="txtMensaje" Style="width: 100%" autocomplete="off" class="form-control" TextMode="multiline" Columns="50" Rows="3" placeholder="Cuerpo de mensaje" runat="server" />
                         </div>
                         <div class="form-group">
-                            <label for="recipient-name" class="control-label">Asunto :</label>
+                            <label>Asunto :</label>
                             <asp:TextBox ID="txtAsunto" Style="width: 100%" CssClass="form-control" AutoComplete="off" runat="server"></asp:TextBox>
                         </div>
                         <div class="form-group">
-                            <label for="message-text" class="control-label">Contraseña de su correo:</label>
+                            <label>Contraseña de su correo:</label>
                             <asp:TextBox ID="txtContrasena" type="password" Style="width: 100%" CssClass="form-control" AutoComplete="off" runat="server"></asp:TextBox>
                         </div>
                     </div>
@@ -400,7 +401,7 @@
                     </div>
                     <div class="modal-body">
                         <div class="form-group">
-                            <label for="message-text" class="control-label">Comentario:</label>
+                            <label>Comentario:</label>
                             <asp:TextBox ID="txtComentarios" Style="width: 99%" autocomplete="off" class="form-control" TextMode="multiline" Columns="50" Rows="3" placeholder="Comentarios Del Reclamo" runat="server"></asp:TextBox>
                         </div>
                     </div>
@@ -463,7 +464,7 @@
                     </div>
                     <div class="modal-body">
                         <div class="form-group">
-                            <label for="message-text" class="control-label">Proxima Fecha:</label>
+                            <label>Proxima Fecha:</label>
                             <asp:TextBox ID="txtProximaFecha" CssClass="form-control" autocomplete="off" Style="height: 20px;" Width="100%" type="date" runat="server"></asp:TextBox>
                         </div>
                     </div>
@@ -484,15 +485,15 @@
                     <div class="modal-body">
                         <div class="form-group">
                             <div class="form-group">
-                                <label for="message-text">Nombre Contacto:</label>
+                                <label>Nombre Contacto:</label>
                                 <asp:TextBox ID="txtContacto" Style="width: 100%" CssClass="form-control" AutoComplete="off" runat="server"></asp:TextBox>
                             </div>
                             <div class="form-group">
-                                <label for="message-text">Correo:</label>
+                                <label>Correo:</label>
                                 <asp:TextBox ID="txtCorreoContacto" Style="width: 100%" CssClass="form-control" AutoComplete="off" runat="server"></asp:TextBox>
                             </div>
                             <div class="form-group">
-                                <label for="message-text">Telefono:</label>
+                                <label>Telefono:</label>
                                 <asp:TextBox ID="txtTelefono" MaxLength="8" Style="width: 100%" CssClass="form-control" AutoComplete="off" runat="server"></asp:TextBox>
                             </div>
                         </div>
@@ -514,19 +515,19 @@
                     <div class="modal-body">
                         <div class="form-group">
                             <div class="form-group">
-                                <label for="message-text">Nombre:</label>
+                                <label>Nombre:</label>
                                 <asp:TextBox ID="txtNombreTaller" Style="width: 100%" CssClass="form-control" AutoComplete="off" runat="server"></asp:TextBox>
                             </div>
                             <div class="form-group">
-                                <label for="message-text">Direccion:</label>
+                                <label>Direccion:</label>
                                 <asp:TextBox ID="txtDireccionTaller" Style="width: 100%" CssClass="form-control" AutoComplete="off" runat="server"></asp:TextBox>
                             </div>
                             <div class="form-group">
-                                <label for="message-text">Telefono:</label>
+                                <label>Telefono:</label>
                                 <asp:TextBox ID="txtTelefonoTaller" Style="width: 100%" CssClass="form-control" AutoComplete="off" runat="server"></asp:TextBox>
                             </div>
                             <div class="form-group">
-                                <label for="message-text">Correo:</label>
+                                <label>Correo:</label>
                                 <asp:TextBox ID="txtCorreoTaller" Style="width: 100%" CssClass="form-control" AutoComplete="off" runat="server"></asp:TextBox>
                             </div>
                         </div>
@@ -547,15 +548,15 @@
                     <div class="modal-body">
                         <div class="form-group">
                             <div class="form-group">
-                                <label for="message-text">Nombre:</label>
+                                <label>Nombre:</label>
                                 <asp:TextBox ID="txtNombreAnalista" Style="width: 100%" CssClass="form-control" AutoComplete="off" runat="server"></asp:TextBox>
                             </div>
                             <div class="form-group">
-                                <label for="message-text">Telefono:</label>
+                                <label>Telefono:</label>
                                 <asp:TextBox ID="txtTelefonoAnalista" Style="width: 100%" CssClass="form-control" AutoComplete="off" runat="server"></asp:TextBox>
                             </div>
                             <div class="form-group">
-                                <label for="message-text">Correo:</label>
+                                <label>Correo:</label>
                                 <asp:TextBox ID="txtCorreoAnalista" Style="width: 100%" CssClass="form-control" AutoComplete="off" runat="server"></asp:TextBox>
                             </div>
                         </div>
@@ -627,14 +628,12 @@
                 </div>
             </div>
         </div>
-
         <%-- data source con las conexiones a las tablas de la bd reclamos--%>
         <asp:SqlDataSource ID="SqlDataSourceGestores" runat="server" ConnectionString="<%$ ConnectionStrings:reclamosConnectionString %>" SelectCommand="SELECT [id], [nombre] FROM [gestores] where tipo = 'autos'"></asp:SqlDataSource>
         <asp:SqlDataSource ID="SqlDataSourceAnalistas" runat="server" ConnectionString="<%$ ConnectionStrings:reclamosConnectionString %>" SelectCommand="SELECT [id], [nombre] FROM [analistas] "></asp:SqlDataSource>
         <asp:SqlDataSource ID="SqlDataSourceEstadosAutos" runat="server" ConnectionString="<%$ ConnectionStrings:reclamosConnectionString %>" SelectCommand="SELECT [descripcion], [dias_revision] FROM [estados_reclamos_unity] where tipo = 'auto'"></asp:SqlDataSource>
         <asp:SqlDataSource ID="SqlDataSourceTalleres" runat="server" ConnectionString="<%$ ConnectionStrings:reclamosConnectionString %>" SelectCommand="SELECT [id], [nombre] FROM [talleres]"></asp:SqlDataSource>
         <asp:SqlDataSource ID="selecionarCobertura" runat="server" ConnectionString="<%$ ConnectionStrings:reclamosConnectionString %>" SelectCommand="SELECT [id], [cobertura] FROM [coberturas] where tipo = 'autos'"></asp:SqlDataSource>
-
 
         <!-- modal para mostrar el editor de envio de cartas -->
         <div class="modal fade" id="Editor" data-keyboard="false" data-backdrop="static">
@@ -737,7 +736,9 @@
                             <div style="padding-top: 30px; text-align: justify; font-size:11px;">
                                 <p>
                                     <b>
-                                        <i>Contar con clientes satisfechos es nuestro principal objetivo, cualquier sugerencia de mejora a nuestro proceso de envío de documentos o cualquier inconformidad en la recepción del mismo, escríbanos a calidad@promotoresdeseguros.com, en donde revisaremos la información para darle una respuesta oportuna.
+                                        <i>Contar con clientes satisfechos es nuestro principal objetivo, cualquier sugerencia de mejora a nuestro proceso de envío de documentos 
+                                            o cualquier inconformidad en la recepción del mismo, escríbanos a calidad@unitypromotores.com, en donde revisaremos la información 
+                                            para darle una respuesta oportuna.
                                         </i>
                                     </b>
                                 </p>

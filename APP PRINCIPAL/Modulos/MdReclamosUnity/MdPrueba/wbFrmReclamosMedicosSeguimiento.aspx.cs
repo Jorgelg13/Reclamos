@@ -1050,7 +1050,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosMedicosSeguimientos : 
                 noConforme.fecha_no_conforme = DateTime.Now;
                 noConforme.observacion_no_conforme = txtObservacionesNoConf.Text;
                 DBReclamos.SaveChanges();
-                agregarComentario("Este reclamo ha sido encontrado como no conforme, catalogado como " + ddlNoConforme.SelectedValue + ". " + txtObservacionesNoConf.Text);
+                agregarComentario("Este reclamo a sido encontrado como no conforme, catalogado como " + ddlNoConforme.SelectedValue + ". " + txtObservacionesNoConf.Text);
                 llenado.llenarGrid(comentarios, GridComentarios);
                 Utils.ShowMessage(this.Page, "Reclamo Actualizado como producto no conforme.", "Excelente", "info");
             }

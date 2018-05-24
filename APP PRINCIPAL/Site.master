@@ -441,7 +441,6 @@
                 </div>
             </div>
         </nav>
-
         <script language="javascript"> 
             function ventanaSecundaria(URL) {
                 window.open(URL, "ventana1", "width=800,height=600,scrollbars=NO")

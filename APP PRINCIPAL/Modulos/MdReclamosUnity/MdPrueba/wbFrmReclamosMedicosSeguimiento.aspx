@@ -113,6 +113,50 @@
                                         <asp:LinkButton ID="linkGuardarDetalleGMedico" OnClick="btnguardarDetalle_Click" title="Guardar detalle de gasto medico" runat="server" Style="font-size: 30px; width: 100%;"><i class="fa fa-floppy-o" aria-hidden="true"></i></asp:LinkButton>
                                     </div>
                                     <asp:Label ID="lblTotal" Style="font-size: 20px; padding-left: 20px;" runat="server"></asp:Label>
+                                   <%-- <br />
+                                    <br />
+                                    <br />
+                                    <br />
+                                    <div id="dwtcontrolContainer"></div>
+                                    <input type="button" value="Scan" onclick="AcquireImage();" />
+                                    <input type="button" value="subir" onclick="UploadImage();" />
+                                    <script type="text/javascript">
+                                        var DWObject;
+                                        function AcquireImage() {
+                                            DWObject = Dynamsoft.WebTwainEnv.GetWebTwain('dwtcontrolContainer');
+                                            DWObject.IfDisableSourceAfterAcquire = true;
+                                            DWObject.SelectSource();
+                                            DWObject.OpenSource();
+                                            DWObject.AcquireImage();
+                                        }
+
+                                        function OnHttpUploadSuccess() {
+                                            console.log('successful');
+                                        }
+                                        function OnHttpUploadFailure(errorCode, errorString, sHttpResponse) {
+                                            alert(errorString + sHttpResponse);
+                                        }
+                                       
+                                        function UploadImage() {
+                                            if (DWObject) {
+                                                // If no image in buffer, return the function
+                                                if (DWObject.HowManyImagesInBuffer == 0)
+                                                    return;
+
+                                                var strHTTPServer = "reclamosgt.unitypromotores.com"; //The name of the HTTP server. For example: "www.dynamsoft.com";
+
+                                                var strActionPage = "/SaveToFile.aspx";
+                                                DWObject.IfSSL = false; // Set whether SSL is used
+                                                DWObject.HTTPPort = 80;
+
+                                                var Digital = new Date();
+                                                var uploadfilename = $('#ContentPlaceHolder1_lblIdOculto'); // Uses milliseconds according to local time as the file name
+
+                                                DWObject.HTTPUploadAllThroughPostAsPDF(strHTTPServer, strActionPage, uploadfilename + ".pdf", OnHttpUploadSuccess, OnHttpUploadFailure);
+                                                
+                                            }
+                                        }             
+                                    </script>--%>
                                 </div>
                             </div>
                         </div>
