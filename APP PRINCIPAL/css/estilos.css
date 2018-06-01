@@ -476,6 +476,6 @@ a {
 
 /**estilos para tamaño de botones en opciones multiples en autos y daños*/
 .tamano-botones > div > a > i {
-    font-size: 30px;
+    font-size: 35px;
+    margin-bottom: 10px;
 }
-

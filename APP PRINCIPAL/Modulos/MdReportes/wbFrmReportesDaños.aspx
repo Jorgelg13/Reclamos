@@ -13,6 +13,7 @@
                     <asp:CheckBox Text="Todos" runat="server" id="checkTodos" AutoPostBack="true" OnCheckedChanged="checkTodos_CheckedChanged"/>
                     <asp:CheckBoxList ID="checkCampos" runat="server" Height="141px" Width="147px">
                         <asp:ListItem Value="reclamos_varios.estado_unity as [Estado Reclamo]">Estado Reclamo</asp:ListItem>
+                        <asp:ListItem Value="reclamos_varios.estado_reclamo_unity as [Estado Reclamo Unity]">Estado Reclamo Unity</asp:ListItem>
                         <asp:ListItem Value="reg_reclamo_varios.poliza as Poliza">Poliza</asp:ListItem>
                         <asp:ListItem Value="reg_reclamo_varios.asegurado as Asegurado">Asegurado</asp:ListItem>
                         <asp:ListItem Value="reg_reclamo_varios.cliente as Cliente">Cliente</asp:ListItem>
@@ -48,7 +49,6 @@
                         <asp:ListItem Value="contactos_reclamos_varios.nombre as [Nombre Contactos]">Contacto</asp:ListItem>
                         <asp:ListItem Value="contactos_reclamos_varios.telefono as [Telefono Contacto]">Telefono Contacto</asp:ListItem>
                         <asp:ListItem Value="reclamos_varios.observaciones as Observaciones">Observaciones</asp:ListItem>
-                        <asp:ListItem Value="reclamos_varios.estado_reclamo_unity as [Estado Reclamo Unity]">Estado Reclamo Unity</asp:ListItem>
                         <asp:ListItem Value="reclamos_varios.prioritario as Prioritario">Prioritario</asp:ListItem>
                         <asp:ListItem Value="reclamos_varios.complicado as Complicado">Complicado</asp:ListItem>
                         <asp:ListItem Value="reclamos_varios.compromiso_pago as Compromiso">Compromiso </asp:ListItem>
@@ -88,6 +88,7 @@
                             <label for="message-text" class="control-label">Seleccionar Busqueda:</label>
                             <asp:DropDownList ID="ddlElegir" runat="server" Style="width: 100%" CssClass="form-control" AutoPostBack="true" OnSelectedIndexChanged="ddlElegir_SelectedIndexChanged">
                                 <asp:ListItem Value="reg_reclamo_varios.poliza">Poliza</asp:ListItem>
+                                <asp:ListItem Value="reclamos_varios.estado_reclamo_unity">Estado Reclamo</asp:ListItem>
                                 <asp:ListItem Value="gestores.nombre">Gestor</asp:ListItem>
                                 <asp:ListItem Value="reg_reclamo_varios.aseguradora ">Aseguradora</asp:ListItem>
                                 <asp:ListItem Value="reg_reclamo_varios.asegurado">Asegurado</asp:ListItem>
@@ -110,6 +111,7 @@
                                 <asp:ListItem Value="Seguimiento">Seguimiento</asp:ListItem>
                                 <asp:ListItem Value="Todos">Todos</asp:ListItem>
                                 <asp:ListItem Value="reclamos_varios.estado_unity= 'Seguimiento'">Pendientes</asp:ListItem>
+                                <asp:ListItem>Estado</asp:ListItem>
                             </asp:DropDownList>
                         </div>
                         <div class="form-group" style="width: 15%">

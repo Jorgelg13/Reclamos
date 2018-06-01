@@ -112,43 +112,33 @@ public partial class Modulos_MdReclamos_wbFrmReclamosDañosAsignados : System.We
     }
 
     //seleccionar el correo electronico del ejecutivo que tiene asignada la poliza
-    private void seleccionarCorreo(short cod)
-    {
-        try
-        {
-            string selectCorreo = "select correo from ejecutivos where codigo = " + codigo + " ";
-            SqlDataAdapter da = new SqlDataAdapter(selectCorreo, obj.ObtenerConexionReclamos());
-            DataTable dt = new DataTable();
-            da.Fill(dt);
-            correo = dt.Rows[0][0].ToString();
-            obj.conexion.Close();
-        }
+    //private void seleccionarCorreo(short cod)
+    //{
+    //    try
+    //    {
+    //        var selectCorreo = DBReclamos.ejecutivos.Where(e => e.codigo == Convert.ToInt16(codigo)).First();
+    //        correo = selectCorreo.correo;
+    //    }
 
-        catch (Exception)
-        {
-            Response.Write("<Script>setTimeout(function () { toastr.warning('No se a podido seleccionar el correo del ejecutivo de la cuenta..', 'Error!');  }, 200);</script>");
-        }
-
-        finally
-        {
-            obj.DescargarConexion();
-        }
-    }
+    //    catch (Exception)
+    //    {
+    //    }
+    //}
 
     //seleccionar el correo del gestor asignado
-    private void seleccionarCorreoGestor()
-    {
-        try
-        {
-            var correo_gestor = DBReclamos.gestores.Select(g => new { g.correo, g.usuario }).Where(usu => usu.usuario == userlogin).First();
-            correoGestor = correo_gestor.correo.ToString();
-        }
+    //private void seleccionarCorreoGestor()
+    //{
+    //    try
+    //    {
+    //        var correo_gestor = DBReclamos.gestores.Select(g => new { g.correo, g.usuario }).Where(usu => usu.usuario == userlogin).First();
+    //        correoGestor = correo_gestor.correo.ToString();
+    //    }
 
-        catch (Exception)
-        {
-            Utils.ShowMessage(this.Page, "No se a podido seleccionar el correo del Gestor", "Nota..!", "warning");
-        }
-    }
+    //    catch (Exception)
+    //    {
+    //        Utils.ShowMessage(this.Page, "No se a podido seleccionar el correo del Gestor", "Nota..!", "warning");
+    //    }
+    //}
 
     //seleccionar los checks y darles valor a las variables para ser almacenadas
     private void opcionesChecked()
@@ -368,7 +358,7 @@ public partial class Modulos_MdReclamos_wbFrmReclamosDañosAsignados : System.We
     {
         codigo = GridReclamosDaños.SelectedRow.Cells[26].Text;
         bool insertar = true;
-        seleccionarCorreoGestor();
+        correoGestor = Utils.seleccionarCorreoGestor(userlogin);
         cuerpo = Constantes.NOTIFICACION_EJECUTIVO(fechaCreacion, asegurado, poliza, ddlGestor, id);
         asunto = "Notificacion Siniestro";
 
@@ -378,12 +368,12 @@ public partial class Modulos_MdReclamos_wbFrmReclamosDañosAsignados : System.We
         }
         else
         {
-            seleccionarCorreo(Convert.ToInt16(codigo));
+            correo = Utils.seleccionarCorreo(Convert.ToInt16(codigo));
         }
 
         try
         {
-            notificacion.enviarcorreo2("reclamosgt@unitypromotores.com", "123$456R", correo, cuerpo, asunto, correoGestor);
+            notificacion.enviarcorreo2(correo, cuerpo, asunto, correoGestor);
         }
 
         catch (SmtpException)

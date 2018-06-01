@@ -6,6 +6,8 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Net;
 using System.Net.Mail;
+using System.Globalization;
+using System.IO;
 
 public partial class Modulos_MdReclamosUnity_wbFrmReclamosAutosSeguimiento : System.Web.UI.Page
 {
@@ -35,6 +37,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosAutosSeguimiento : Sys
         idRecibido = Convert.ToString(Request.QueryString[0]).ToString();
         lblID.Text = idRecibido;
         id = Int32.Parse(idRecibido);
+        Session.Add("id_RA", id.ToString());
         var auto = DBReclamos.reclamo_auto.Find(id);
 
         //variables que contienen los formatos de las cartas a ser impresass
@@ -75,12 +78,12 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosAutosSeguimiento : Sys
         {
             var reclamo = DBReclamos.reclamo_auto.Find(id);
             //detalle del vehiculo
-            txtPlaca.Text = reclamo.auto_reclamo.placa;
-            txtMarca.Text = reclamo.auto_reclamo.marca;
-            txtColor.Text = reclamo.auto_reclamo.color;
+            txtPlaca.Text  = reclamo.auto_reclamo.placa;
+            txtMarca.Text  = reclamo.auto_reclamo.marca;
+            txtColor.Text  = reclamo.auto_reclamo.color;
             txtModelo.Text = reclamo.auto_reclamo.modelo;
             txtChasis.Text = reclamo.auto_reclamo.chasis;
-            txtMotor.Text = reclamo.auto_reclamo.motor;
+            txtMotor.Text  = reclamo.auto_reclamo.motor;
             txtPropietario.Text = reclamo.auto_reclamo.propietario;
 
             //listado de detalle de poliza
@@ -117,14 +120,15 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosAutosSeguimiento : Sys
             txtFechaSiniestro.Text  = reclamo.fecha.ToString();
             lblNumeroPoliza.Text    = reclamo.auto_reclamo.poliza;
             lblNombreAsegurado.Text = reclamo.auto_reclamo.poliza;
-            lblDireccionAsegurado.Text = reclamo.auto_reclamo.direccion;
             lblIdReclamo.Text       = "<b>ID:</b>" + reclamo.id;
             txtNumReclamo.Text      = reclamo.num_reclamo;
             lblEstadoAuto.Text      = reclamo.estado_auto_unity;
-            lblProximaFecha.Text    = "Proxima Fecha:" + Convert.ToDateTime(reclamo.fecha_visualizar).ToString("dd/MM/yyyy");
             lblEstadoReclamo.Text   = reclamo.estado_unity;
+            lblDireccionAsegurado.Text = reclamo.auto_reclamo.direccion;
+            lblDocumento.Text = String.IsNullOrEmpty(reclamo.documentos) ? "" : reclamo.documentos.Replace("\\", "/");
+            lblProximaFecha.Text = "Proxima Fecha:" + Convert.ToDateTime(reclamo.fecha_visualizar).ToString("dd/MM/yyyy");
 
-            if(reclamo.estado_unity == "Cerrado")
+            if (reclamo.estado_unity == "Cerrado")
             {
                 lblEstadoReclamo.ForeColor = System.Drawing.Color.Red;
             }
@@ -158,9 +162,9 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosAutosSeguimiento : Sys
             }
         }
 
-        catch (Exception)
+        catch (Exception ex)
         {
-            Utils.ShowMessage(this.Page, "El id ingresado o seleccionado no es valido o no tiene seguimiento", "A ocurrido un error", "erorr");
+            Utils.ShowMessage(this.Page, "El id ingresado o seleccionado no es valido o no tiene seguimiento " + ex.Message , "A ocurrido un error", "erorr");
         }
     }
 
@@ -169,15 +173,15 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosAutosSeguimiento : Sys
     {
         try
         {
-            var contacto = DBReclamos.contacto_auto.Select(c => new { c.correo, c.telefono, c.contacto, c.id_reclamo_auto }).Where(contac => contac.id_reclamo_auto == id).First();
+            var contacto = DBReclamos.contacto_auto.Where(contac => contac.id_reclamo_auto == id).First();
             txtContacto.Text = contacto.contacto;
             txtTelefono.Text = contacto.telefono;
             txtCorreoContacto.Text = contacto.correo;
         }
 
-        catch (Exception)
+        catch (Exception ex)
         {
-            Utils.ShowMessage(this.Page, "No se pudieron traer los datos del contaco.", "Nota..", "warning");
+            Utils.ShowMessage(this.Page, "No se pudieron traer los datos del contaco. " + ex.Message, "Nota..", "warning");
         }
     }
 
@@ -202,9 +206,9 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosAutosSeguimiento : Sys
             Utils.ShowMessage(this.Page, "Comentario ingresado con exito..", "Excelente..", "success");
             txtComentarios.Text = "";
         }
-        catch (Exception)
+        catch (Exception ex)
         {
-            Utils.ShowMessage(this.Page, "Error Al ingresar el comentario", "Error..", "error");
+            Utils.ShowMessage(this.Page, "Error Al ingresar el comentario " + ex.Message, "Error..", "error");
         }
     }
 
@@ -245,34 +249,25 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosAutosSeguimiento : Sys
     //metodo para verificar que opciones fueron seleccionadas o deseleccionadas para luego ser actualizadas
     private void opcionesChecked()
     {
-        if (CheckComplicado.Checked)
-        {
-            complicado = true;
-        }
-        if (checkCompromiso.Checked)
-        {
-            compromiso_pago = true;
-        }
-        if (checkPrioritario.Checked)
-        {
-            prioritario = true;
-        }
-        if (ChecKAutoAlquiler.Checked)
-        {
-            alquiler = true;
-        }
-        if (CheckPerdida.Checked)
-        {
-            perdidaTotal = true;
-        }
-        if(checkCerrarReclamo.Checked)
-        {
-            estado = "Cerrado";
-        }
-        if(checkCierreInterno.Checked)
-        {
-            cierre_interno = true;
-        }
+        if (CheckComplicado.Checked) complicado        = true;
+        if (checkCompromiso.Checked) compromiso_pago   = true;
+        if (checkPrioritario.Checked) prioritario      = true;
+        if (ChecKAutoAlquiler.Checked) alquiler        = true;
+        if (CheckPerdida.Checked) perdidaTotal         = true;
+        if (checkCierreInterno.Checked) cierre_interno = true;
+        if (checkCerrarReclamo.Checked) estado = "Cerrado";
+    }
+
+    private void actualizar_fecha_seguimiento()
+    {
+        var seguimiento = DBReclamos.reclamo_auto.Find(id);
+        var dias_revision = DBReclamos.estados_reclamos_unity.Where(es => es.descripcion == ddlEstadoAuto.SelectedItem.Text && es.tipo == "auto").First();
+        dias = Convert.ToInt32(dias_revision.dias_revision);
+
+        DateTime fecha = DateTime.Now;
+
+        seguimiento.fecha_visualizar = fecha.AddDays(dias);
+        DBReclamos.SaveChanges();
     }
 
     //evento para actualizar la informacion del reclamo
@@ -287,31 +282,26 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosAutosSeguimiento : Sys
             bitacora.fecha = DateTime.Now;
             bitacora.id_reclamo_auto = id;
             DBReclamos.bitacora_estados_autos.Add(bitacora);
+            actualizar_fecha_seguimiento();
         }
 
         try
         {
-            var total_dias = DBReclamos.estados_reclamos_unity.ToList().Where(d => d.descripcion == ddlEstadoAuto.SelectedItem.Text).First();
-            dias = Convert.ToInt16(total_dias.dias_revision);
-
-            var fecha = DBReclamos.reclamo_auto.Select(r => new { r.fecha_visualizar, r.id }).Where(re => re.id == id).First();
-            DateTime fecha_v = Convert.ToDateTime(fecha.fecha_visualizar);
-
             var reclamo = DBReclamos.reclamo_auto.Find(id);
-            reclamo.estado_unity = estado;
-            reclamo.num_reclamo = txtNumReclamo.Text;
-            reclamo.complicado = complicado;
-            reclamo.prioritario = prioritario;
-            reclamo.compromiso_pago = compromiso_pago;
-            reclamo.perdida_total = perdidaTotal;
-            reclamo.alquiler_auto = alquiler;
-            reclamo.id_gestor = Convert.ToInt16(ddlGestor.SelectedValue);
-            reclamo.id_analista = Convert.ToInt16(ddlAnalista.SelectedValue);
+            if (reclamo.fecha_visualizar <= DateTime.Now) actualizar_fecha_seguimiento();
+            reclamo.estado_unity      = estado;
+            reclamo.num_reclamo       = txtNumReclamo.Text;
+            reclamo.complicado        = complicado;
+            reclamo.prioritario       = prioritario;
+            reclamo.compromiso_pago   = compromiso_pago;
+            reclamo.perdida_total     = perdidaTotal;
+            reclamo.alquiler_auto     = alquiler;
+            reclamo.id_gestor         = Convert.ToInt16(ddlGestor.SelectedValue);
+            reclamo.id_analista       = Convert.ToInt16(ddlAnalista.SelectedValue);
             reclamo.estado_auto_unity = ddlEstadoAuto.SelectedItem.Text;
-            reclamo.id_taller = Convert.ToInt16(ddlTaller.SelectedValue);
-            reclamo.observaciones = txtObservaciones.Text;
-            reclamo.cierre_interno = cierre_interno;
-            reclamo.fecha_visualizar = fecha_v.AddDays(dias);
+            reclamo.id_taller         = Convert.ToInt16(ddlTaller.SelectedValue);
+            reclamo.observaciones     = txtObservaciones.Text;
+            reclamo.cierre_interno    = cierre_interno;
             DBReclamos.SaveChanges();
             DatosReclamo(id);
             llenado.llenarGrid(estados_autos,GridEstadosAuto);
@@ -319,7 +309,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosAutosSeguimiento : Sys
         }
         catch (Exception ex)
         {
-            Utils.ShowMessage(this.Page, "No se a podido actualizar el registro", "Nota..", "error");
+            Utils.ShowMessage(this.Page, "No se a podido actualizar el registro", "Nota.. " + ex.Message, "error");
             Email.EnviarERROR("Error de reclamo en seguimiento de autos","Error ocasionado al usuario: " + userlogin + " en el registro con el id: " + id + "\n\n" + ex);
         }
 
@@ -331,7 +321,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosAutosSeguimiento : Sys
         if(checkCerrarReclamo.Checked)
         {
             cerrarReclamo();
-            Response.Redirect("/Modulos/MdReclamosUnity/wbFrmReclamosEnSeguimiento.aspx");
+            Response.Redirect("/Modulos/MdReclamosUnity/wbFrmReclamosEnSeguimiento.aspx", false);
         }
     }
 
@@ -344,19 +334,16 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosAutosSeguimiento : Sys
             cerrar.fecha_cierre_reclamo = DateTime.Now;
             DBReclamos.SaveChanges();
         }
-        catch (Exception)
+        catch (Exception ex)
         {
-            Utils.ShowMessage(this.Page, "No se a podido cerrar el reclamo", "Nota..", "error");
+            Utils.ShowMessage(this.Page, "No se a podido cerrar el reclamo " + ex.Message, "Nota..", "error");
         }
     }
 
     private void CierreInterno()
     {
         var cierreInterno = DBReclamos.reclamo_auto.Find(id);
-
-        var fecha = DBReclamos.reclamo_auto.Select(r => new { r.fecha_visualizar, r.id }).Where(re => re.id == id).First();
-        DateTime fecha_v = Convert.ToDateTime(fecha.fecha_visualizar);
-
+        DateTime fecha_v = Convert.ToDateTime(cierreInterno.fecha_visualizar);
         cierreInterno.fecha_visualizar = fecha_v.AddDays(60);
         DBReclamos.SaveChanges();
         DatosReclamo(id);
@@ -364,11 +351,10 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosAutosSeguimiento : Sys
 
     //envio de correo en caso de alquiler de un vehiculo al asegurado
     private void alquilerVehiculo()
-    {
+    {   
         txtDestinatario.Text = txtCorreoContacto.Text;
-        //mensaje personalizado de un alquiler de vehiculo        
-        txtMensaje.Text = Constantes.ALQUILER_VEHICULO(); 
-            txtAsunto.Text = "Alquiler De Vehiculo ";
+        txtMensaje.Text      = Constantes.ALQUILER_VEHICULO(); 
+        txtAsunto.Text       = "Alquiler De Vehiculo ";
     }
 
     //envio de correo al ejecutivo notificando que existe una perdida total del vehiculo
@@ -433,21 +419,13 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosAutosSeguimiento : Sys
         string coberturaAfectada;
         try
         {
-            if (txtCoberturaAfectada.Text != "")
-            {
-                coberturaAfectada = txtCoberturaAfectada.Text;
-            }
-            else
-            {
-                coberturaAfectada = ddlSeleccionarCobertura.SelectedItem.ToString();
-            }
-
+            coberturaAfectada = String.IsNullOrEmpty(txtCoberturaAfectada.Text) ? ddlSeleccionarCobertura.SelectedItem.ToString() : txtCoberturaAfectada.Text;
             coberturas_afectadas cobertura = new coberturas_afectadas();
             cobertura.cobertura = coberturaAfectada;
-            cobertura.limite1 = Convert.ToDecimal(txtLimite1.Text);
-            cobertura.limite2 = Convert.ToDecimal(txtlimite2.Text);
+            cobertura.limite1   = Convert.ToDecimal(txtLimite1.Text);
+            cobertura.limite2   = Convert.ToDecimal(txtlimite2.Text);
             cobertura.deducible = Convert.ToDecimal(txtDeducible.Text);
-            cobertura.prima = Convert.ToDecimal(txtPrima.Text);
+            cobertura.prima     = Convert.ToDecimal(txtPrima.Text);
             cobertura.id_reclamo_auto = id;
             DBReclamos.coberturas_afectadas.Add(cobertura);
             DBReclamos.SaveChanges();
@@ -455,15 +433,16 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosAutosSeguimiento : Sys
             llenado.llenarGrid(coberturas, GridCoberturasAfectadas);
             SeleccionarCoberturas(id);
             Utils.ShowMessage(this.Page, "Cobertura insertada con exito","Excelente..", "success");
-            txtLimite1.Text = "0.00";
-            txtlimite2.Text = "0.00";
+
+            txtLimite1.Text   = "0.00";
+            txtlimite2.Text   = "0.00";
             txtDeducible.Text = "0.00";
-            txtPrima.Text = "0.00";
+            txtPrima.Text     = "0.00";
             txtCoberturaAfectada.Text = "";
         }
-        catch (Exception)
+        catch (Exception ex)
         {
-            Utils.ShowMessage(this.Page, "No se a podido agregar la cobertura", "Nota..!", "error");
+            Utils.ShowMessage(this.Page, "No se a podido agregar la cobertura." + ex.Message, "Nota..!", "error");
         }
     }
 
@@ -479,9 +458,9 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosAutosSeguimiento : Sys
             DBReclamos.SaveChanges();
             Utils.ShowMessage(this.Page, "Contacto actualizado con exito", "Excelente..!", "success");
         }
-        catch (Exception)
+        catch (Exception ex)
         {
-            Utils.ShowMessage(this.Page, "No se a podido actualizar el contacto", "Error..!", "error");
+            Utils.ShowMessage(this.Page, "No se a podido actualizar el contacto. " + ex.Message, "Error..!", "error");
         }
     }
 
@@ -509,28 +488,28 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosAutosSeguimiento : Sys
 
         if(checkIva.Checked == true)
         {
-            iva = monto / 1.12 * 0.12;
+            iva   = monto / 1.12 * 0.12;
             monto = monto - iva;
         }
         
-        monto = (monto - Convert.ToDouble(txtPagoDeducible.Text));
+        monto   = (monto - Convert.ToDouble(txtPagoDeducible.Text));
         timbres = monto * 0.03;
-        monto = monto - timbres;
-        total = (monto - Convert.ToDouble(txtPrimasPago.Text));
+        monto   = monto - timbres;
+        total   = (monto - Convert.ToDouble(txtPrimasPago.Text));
 
         try
         {
             detalle_pagos_reclamos_autos pago = new detalle_pagos_reclamos_autos();
             pago.cobertura_pagada = ddlCoberturas.SelectedItem.Text;
-            pago.monto = Convert.ToDecimal(txtMonto.Text);
-            pago.iva = Convert.ToDecimal(iva);
-            pago.deducible = Convert.ToDecimal(txtPagoDeducible.Text);
-            pago.timbres = Convert.ToDecimal(timbres);
-            pago.primas = Convert.ToDecimal(txtPrimasPago.Text);
-            pago.total = Convert.ToDecimal(total);
-            pago.fecha = DateTime.Now;
-            pago.destino = ddlDestino.SelectedValue;
-            pago.id_reclamo_auto = id;
+            pago.monto            = Convert.ToDecimal(txtMonto.Text);
+            pago.iva              = Convert.ToDecimal(iva);
+            pago.deducible        = Convert.ToDecimal(txtPagoDeducible.Text);
+            pago.timbres          = Convert.ToDecimal(timbres);
+            pago.primas           = Convert.ToDecimal(txtPrimasPago.Text);
+            pago.total            = Convert.ToDecimal(total);
+            pago.fecha            = DateTime.Now;
+            pago.destino          = ddlDestino.SelectedValue;
+            pago.id_reclamo_auto  = id;
             DBReclamos.detalle_pagos_reclamos_autos.Add(pago);
             DBReclamos.SaveChanges();
 
@@ -538,8 +517,8 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosAutosSeguimiento : Sys
             lblPagoTotal.Text = "<b>TOTAL : </b>" + total.ToString("N2");
             Utils.ShowMessage(this.Page, "Pago realizado con exito", "Excelente", "success");
             txtPagoDeducible.Text = "0.00";
-            txtPrimasPago.Text = "0.00";
-            txtMonto.Text = "0.00";
+            txtPrimasPago.Text    = "0.00";
+            txtMonto.Text         = "0.00";
         }
         catch (Exception)
         {
@@ -551,33 +530,35 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosAutosSeguimiento : Sys
     protected void GridPagosReclamos_SelectedIndexChanged(object sender, EventArgs e)
     {
         int id_pago = Convert.ToInt32(GridPagosReclamos.SelectedRow.Cells[1].Text);
-        var pago = DBReclamos.detalle_pagos_reclamos_autos.Find(id_pago);
-        txtMonto.Text = pago.monto.ToString();
-        txtIva.Text = pago.iva.ToString();
+
+        var pago              = DBReclamos.detalle_pagos_reclamos_autos.Find(id_pago);
+        txtMonto.Text         = pago.monto.ToString();
+        txtIva.Text           = pago.iva.ToString();
         txtPagoDeducible.Text = pago.deducible.ToString();
-        txtTimbres.Text = pago.timbres.ToString();
-        txtPrimasPago.Text = pago.primas.ToString();
-        txtTotal.Text = pago.total.ToString();
+        txtTimbres.Text       = pago.timbres.ToString();
+        txtPrimasPago.Text    = pago.primas.ToString();
+        txtTotal.Text         = pago.total.ToString();
         ddlDestino.SelectedValue = ddlDestino.SelectedValue = String.IsNullOrEmpty(pago.destino) ? "" : pago.destino;
-        txtIva.Enabled = true;
+        txtIva.Enabled     = true;
         txtTimbres.Enabled = true;
-        txtTotal.Enabled = true;
-        btnPago.Enabled = false;
+        txtTotal.Enabled   = true;
+        btnPago.Enabled    = false;
         btnActualizarPagos.Enabled = true;
+
         this.Page.ClientScript.RegisterStartupScript(this.Page.GetType(), "show_modal", "$('#IngresarLiquidacion').modal('show');", addScriptTags: true);
     }
 
     protected void btnActualizarPagos_Click(object sender, EventArgs e)
-    {
-        int id_pago = Convert.ToInt32(GridPagosReclamos.SelectedRow.Cells[1].Text);
-        var pago = DBReclamos.detalle_pagos_reclamos_autos.Find(id_pago);
-        pago.monto = Convert.ToDecimal(txtMonto.Text);
-        pago.iva = Convert.ToDecimal(txtIva.Text);
+    { 
+        int id_pago    = Convert.ToInt32(GridPagosReclamos.SelectedRow.Cells[1].Text);
+        var pago       = DBReclamos.detalle_pagos_reclamos_autos.Find(id_pago);
+        pago.monto     = Convert.ToDecimal(txtMonto.Text);
+        pago.iva       = Convert.ToDecimal(txtIva.Text);
         pago.deducible = Convert.ToDecimal(txtPagoDeducible.Text);
-        pago.timbres = Convert.ToDecimal(txtTimbres.Text);
-        pago.primas = Convert.ToDecimal(txtPrimasPago.Text);
-        pago.total = Convert.ToDecimal(txtTotal.Text);
-        pago.destino = ddlDestino.SelectedValue;
+        pago.timbres   = Convert.ToDecimal(txtTimbres.Text);
+        pago.primas    = Convert.ToDecimal(txtPrimasPago.Text);
+        pago.total     = Convert.ToDecimal(txtTotal.Text);
+        pago.destino   = ddlDestino.SelectedValue;
         DBReclamos.SaveChanges();
         llenado.llenarGrid(pagos, GridPagosReclamos);
     }
@@ -585,7 +566,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosAutosSeguimiento : Sys
     //salir del reclamo y me redirecciona a los reclamos en seguimiento
     protected void linkSalir_Click(object sender, EventArgs e)
     {
-        Response.Redirect("/Modulos/MdReclamosUnity/wbFrmReclamosEnSeguimiento.aspx");
+        Response.Redirect("/Modulos/MdReclamosUnity/wbFrmReclamosEnSeguimiento.aspx", false);
     }
 
     //seleccionar  el deducible de la cobertura afectada.
@@ -599,7 +580,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosAutosSeguimiento : Sys
 
         catch (Exception ex)
         {
-            Response.Write(ex);
+            //Response.Write(ex);
         }
     }
     //evento para cambiar la fecha que se desea q se muestre el reclamo
@@ -610,11 +591,11 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosAutosSeguimiento : Sys
             var update_fecha = DBReclamos.reclamo_auto.Find(id);
             update_fecha.fecha_visualizar = Convert.ToDateTime(txtProximaFecha.Text);
             DBReclamos.SaveChanges();
-            Response.Redirect("/Modulos/MdReclamosUnity/wbFrmReclamosEnSeguimiento.aspx");
+            DatosReclamo(id);
         }
-        catch(Exception)
+        catch(Exception ex)
         {
-            Utils.ShowMessage(this.Page, "No se a podido actualizar la fecha a visualizar", "Nota..!", "warning");
+            Utils.ShowMessage(this.Page, "No se a podido actualizar la fecha a visualizar. " + ex.Message, "Nota..!", "warning");
         }
     }
     
@@ -634,10 +615,10 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosAutosSeguimiento : Sys
 
         }
 
-        lblCartaFecha.Text = DateTime.Now.ToString("D");
-        lblCartaVehiculo.Text = registro.auto_reclamo.placa + " " + registro.auto_reclamo.marca + " " + registro.auto_reclamo.modelo;
-        lblCartaid.Text = "ID :" + registro.id.ToString();
-        lblCartaPoliza.Text = registro.auto_reclamo.poliza;
+        lblCartaFecha.Text     = DateTime.Now.ToString("D");
+        lblCartaVehiculo.Text  = registro.auto_reclamo.placa + " " + registro.auto_reclamo.marca + " " + registro.auto_reclamo.modelo;
+        lblCartaid.Text        = "ID :" + registro.id.ToString();
+        lblCartaPoliza.Text    = registro.auto_reclamo.poliza;
         lblCartaAsegurado.Text = registro.auto_reclamo.asegurado;
         lblCartaEjecutivo.Text = registro.auto_reclamo.ejecutivo;
     }
@@ -669,9 +650,9 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosAutosSeguimiento : Sys
 
             }
         }
-        catch (Exception err)
+        catch (Exception)
         {
-            Response.Write(err);
+
         }
     }
 
@@ -910,23 +891,23 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosAutosSeguimiento : Sys
     {
         if(checkDatosAutos.Checked)
         {
-            txtPlaca.Enabled = true;
-            txtMarca.Enabled = true;
-            txtColor.Enabled = true;
-            txtModelo.Enabled = true;
-            txtChasis.Enabled = true;
-            txtMotor.Enabled = true;
+            txtPlaca.Enabled   = true;
+            txtMarca.Enabled   = true;
+            txtColor.Enabled   = true;
+            txtModelo.Enabled  = true;
+            txtChasis.Enabled  = true;
+            txtMotor.Enabled   = true;
             txtPropietario.Enabled = true;
         }
 
         else
         {
-            txtPlaca.Enabled = false;
-            txtMarca.Enabled = false;
-            txtColor.Enabled = false;
+            txtPlaca.Enabled  = false;
+            txtMarca.Enabled  = false;
+            txtColor.Enabled  = false;
             txtModelo.Enabled = false;
             txtChasis.Enabled = false;
-            txtMotor.Enabled = false;
+            txtMotor.Enabled  = false;
             txtPropietario.Enabled = false;
         }       
     }
@@ -936,20 +917,20 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosAutosSeguimiento : Sys
         try
         {
             var auto = DBReclamos.reclamo_auto.Find(id);
-            auto.auto_reclamo.placa = txtPlaca.Text;
-            auto.auto_reclamo.marca = txtMarca.Text;
-            auto.auto_reclamo.color = txtColor.Text;
+            auto.auto_reclamo.placa  = txtPlaca.Text;
+            auto.auto_reclamo.marca  = txtMarca.Text;
+            auto.auto_reclamo.color  = txtColor.Text;
             auto.auto_reclamo.modelo = txtModelo.Text;
             auto.auto_reclamo.chasis = txtChasis.Text;
-            auto.auto_reclamo.motor = txtMotor.Text;
+            auto.auto_reclamo.motor  = txtMotor.Text;
             auto.auto_reclamo.propietario = txtPropietario.Text;
             DBReclamos.SaveChanges();
             Utils.ShowMessage(this.Page, "Datos del auto actualizados", "Excelente..!", "success");
         }
 
-        catch(Exception)
+        catch(Exception ex)
         {
-            Utils.ShowMessage(this.Page, "No se pudieron actualizar los datos", "Error..!", "error");
+            Utils.ShowMessage(this.Page, "No se pudieron actualizar los datos del auto. " + ex.Message, "Error..!", "error");
         }
     }
 
@@ -960,20 +941,20 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosAutosSeguimiento : Sys
 
     private void BitacoraReclamo()
     {
-        var bitacora = DBReclamos.reclamo_auto.Find(id);
-        BitPoliza.Text = bitacora.auto_reclamo.poliza;
-        BitAsegurado.Text = bitacora.auto_reclamo.asegurado;
-        BitEjecutivo.Text = bitacora.auto_reclamo.ejecutivo;
+        var bitacora        = DBReclamos.reclamo_auto.Find(id);
+        BitPoliza.Text      = bitacora.auto_reclamo.poliza;
+        BitAsegurado.Text   = bitacora.auto_reclamo.asegurado;
+        BitEjecutivo.Text   = bitacora.auto_reclamo.ejecutivo;
         BitAseguradora.Text = bitacora.auto_reclamo.aseguradora;
         BitContratante.Text = bitacora.auto_reclamo.contratante;
         BitEstado.Text = bitacora.auto_reclamo.estado_poliza;
 
-        BitPlaca.Text = bitacora.auto_reclamo.placa;
-        BitMarca.Text = bitacora.auto_reclamo.marca;
-        BitColor.Text = bitacora.auto_reclamo.color;
+        BitPlaca.Text  = bitacora.auto_reclamo.placa;
+        BitMarca.Text  = bitacora.auto_reclamo.marca;
+        BitColor.Text  = bitacora.auto_reclamo.color;
         BitModelo.Text = bitacora.auto_reclamo.modelo;
         BitChasis.Text = bitacora.auto_reclamo.chasis;
-        BitMotor.Text = bitacora.auto_reclamo.motor;
+        BitMotor.Text  = bitacora.auto_reclamo.motor;
 
         llenado.llenarGrid(llamadas, Bitllamadas);
         llenado.llenarGrid(comentarios, BitSeguimiento);
@@ -1008,9 +989,9 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosAutosSeguimiento : Sys
             }
 
         }
-        catch (Exception)
+        catch (Exception ex)
         {
-            Utils.ShowMessage(this.Page, "No se a podido actualizar el reclamo como no conforme.", "Error", "error");
+            Utils.ShowMessage(this.Page, "No se a podido actualizar el reclamo como no conforme. " + ex.Message, "Error", "error");
         }
     }
 
@@ -1154,6 +1135,57 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosAutosSeguimiento : Sys
         catch (Exception ex)
         {
             Utils.ShowMessage(this.Page, "Error al guardar la carta" + ex.Message, "Error", "error");
+        }
+    }
+
+    protected void btnSubir_Click(object sender, EventArgs e)
+    {
+        //String path = @"C:\Reclamos\ReclamosAutos";
+        String path = @"E:\ReclamosScanner\files\ReclamosAutos";
+        DateTimeFormatInfo formatoFecha = CultureInfo.CurrentCulture.DateTimeFormat;
+        DateTime fecha = DateTime.Now;
+        String RD;
+        String mes = formatoFecha.GetMonthName(fecha.Month);
+        String anio = fecha.Year.ToString();
+        String nombreArchivo = SubirArchivo.FileName;
+        var reclamo = DBReclamos.reclamo_auto.Find(id);
+
+        try
+        {
+            if (SubirArchivo.HasFile)
+            {
+                if (String.IsNullOrEmpty(reclamo.documentos))
+                {
+                    RD = anio + "\\" + mes + "\\" + "RD" + id;
+                }
+
+                else
+                {
+                    RD = reclamo.documentos;
+                }
+
+                if (Directory.Exists(path + "\\" + RD))
+                {
+                    SubirArchivo.SaveAs(path + "\\" + RD + "\\" + nombreArchivo);
+                    Utils.ShowMessage(this.Page, "Archivo Subido con exito ", "Excelente..", "success");
+                    reclamo.documentos = RD;
+                    DBReclamos.SaveChanges();
+                }
+
+                else
+                {
+                    DirectoryInfo di = Directory.CreateDirectory(path + "\\" + RD);
+                    SubirArchivo.SaveAs(path + "\\" + RD + "\\" + nombreArchivo);
+                    Utils.ShowMessage(this.Page, "Archivo Subido con exito ", "Excelente..", "success");
+                    reclamo.documentos = RD;
+                    DBReclamos.SaveChanges();
+                }
+            }
+        }
+
+        catch (Exception ex)
+        {
+            Utils.ShowMessage(this.Page, "No se a podido subir el archivo " + ex, "Error..", "error");
         }
     }
 }

@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data;
 using System.Data.SqlClient;
@@ -137,6 +133,6 @@ public partial class Modulos_MdReclamosUnity_wbFrmBusquedaReclamos : System.Web.
     {
         int id;
         id = Convert.ToInt32(GridBusquedaGeneral.SelectedRow.Cells[1].Text);
-        Response.Redirect("/Modulos/MdReclamosUnity/wbFrmReclamosAutosSeguimiento.aspx?ID_reclamo=" + id);
+        Response.Redirect("/Modulos/MdReclamosUnity/wbFrmReclamosAutosSeguimiento.aspx?ID_reclamo=" + id,false);
     }
 }

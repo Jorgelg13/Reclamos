@@ -1,11 +1,11 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="wbGastosMedicos.aspx.cs" Inherits="Modulos_MdScanner_wbGastosMedicos" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="wbReclamosAutos.aspx.cs" Inherits="Modulos_MdScanner_wbReclamosAutos" %>
 
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Scanear Documentos</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>Escanear Documentos</title>
 </head>
 <body style="background-color: #131B4D;">
     <form id="form1" runat="server">
@@ -14,9 +14,11 @@
         <br />
         <fieldset style="color: white;">
             <legend>Elija el archivo que desea escanear</legend>
-            <input type="radio" name="tipo" value="Expedientes" checked="checked" />Expedientes<br />
-            <input type="radio" name="tipo" value="Complementos" />Complementos<br />
-            <input type="radio" name="tipo" value="Liquidacion" />Liquidacion<br />
+            <input type="radio" name="tipo" value="Formulario" checked="checked" />Formulario<br />
+            <input type="radio" name="tipo" value="Expedientes" />Expedientes<br />
+            <input type="radio" name="tipo" value="Cartas" />Cartas<br />
+            <input type="radio" name="tipo" value="Cheques" />Cheques<br />
+            <input type="radio" name="tipo" value="Imagenes" />Imagenes<br />
             <br />
             <input type="button" value="Escanear" onclick="AcquireImage();" />
             <input type="button" value="Guardar" onclick="UploadImage();" />
@@ -93,8 +95,8 @@
                         return;
 
                     var server = "reclamosgt.unitypromotores.com"; 
-                   // var server = "http://localhost:4000";
-                    var pagina = "/Modulos/MdScanner/GuardarArchivoRM.aspx";
+                    //var server = "http://localhost:4000";
+                    var pagina = "/Modulos/MdScanner/GuardarArchivoRA.aspx";
                     DWObject.IfSSL = false;
                     DWObject.HTTPPort = 80;
                     var archivo = $('input:radio[name=tipo]:checked').val();

@@ -91,7 +91,7 @@
                             <asp:DropDownList ID="ddlElegir" runat="server" Style="width: 100%" AutoPostBack="true" CssClass="form-control" OnSelectedIndexChanged="ddlElegir_SelectedIndexChanged">
                                 <asp:ListItem Value="auto_reclamo.asegurado">Asegurado</asp:ListItem>
                                 <asp:ListItem Value="auto_reclamo.cliente">No.Cliente</asp:ListItem>
-                                <asp:ListItem Value="auto_reclamo.estado_poliza ">Estatus</asp:ListItem>
+                                <asp:ListItem Value="reclamo_auto.estado_auto_unity">Estado Auto</asp:ListItem>
                                 <asp:ListItem Value="gestores.nombre">Gestor</asp:ListItem>
                                 <asp:ListItem Value="reclamo_auto.ajustador">Ajustador</asp:ListItem>
                                 <asp:ListItem Value="auto_reclamo.ejecutivo">Ejecutivo</asp:ListItem>
@@ -115,6 +115,7 @@
                                 <asp:ListItem Value="Todos">Todos</asp:ListItem>
                                 <asp:ListItem Value="Nuevos">Nuevos</asp:ListItem>
                                 <asp:ListItem Value="Pendientes">Pendientes</asp:ListItem>
+                                <asp:ListItem Value="Estado">Estado</asp:ListItem>
                             </asp:DropDownList>
                         </div>
                         <div class="form-group" style="width: 15%">

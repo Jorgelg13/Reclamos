@@ -87,30 +87,10 @@ public partial class Modulos_MdReclamosUnity_wbFrmRecDañosSeguimiento : System.
         }
     }
     //metodo para actualizar la fecha a la actual
-    private void fechaVisualizar(int id)
-    {
-        try
-        {
-            cmd.CommandText = "update reclamos_varios set fecha_visualizar = getdate() where id =" + id + " ";
-            cmd.Connection = objeto.ObtenerConexionReclamos();
-            cmd.ExecuteNonQuery();
-            objeto.conexion.Close();
-        }
-        catch (Exception)
-        {
-            //Response.Write();
-        }
-        finally
-        {
-            objeto.DescargarConexion();
-        }
-    }
-
     protected void GridReclamosSeguimiento_SelectedIndexChanged(object sender, EventArgs e)
     {
         int id1;
         id1 = Convert.ToInt32(GridReclamosSeguimiento.SelectedRow.Cells[1].Text);
-        fechaVisualizar(id1);
         Response.Redirect("/Modulos/MdReclamosUnity/wbFrmReclamosDañosSeguimiento.aspx?ID_reclamo=" + id1, false);
     }
 

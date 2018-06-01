@@ -59,7 +59,7 @@
                     <br />
                     <div class="form-inline">
                         <div class="form-group" style="width: 20%">
-                            <label for="message-text" class="control-label">Seleccionar Busqueda:</label>
+                            <label>Seleccionar Busqueda:</label>
                             <asp:DropDownList ID="ddlElegir" runat="server" Style="width: 100%" AutoPostBack="true" CssClass="form-control" OnSelectedIndexChanged="ddlElegir_SelectedIndexChanged" >
                                 <asp:ListItem Value="aut.reportante">Reportante</asp:ListItem>
                                 <asp:ListItem Value="reg.asegurado">Asegurado</asp:ListItem>
@@ -68,13 +68,13 @@
                             </asp:DropDownList>
                         </div>
                         <div class="form-group" style="width: 25%">
-                            <label for="message-text" class="control-label">Registros a buscar:</label>
+                            <label>Registros a buscar:</label>
                             <asp:TextBox ID="txtBuscar" CssClass="form-control" Style="width: 100%" placeholder="Escriba su busqueda" runat="server"></asp:TextBox>
                             <asp:DropDownList ID="ddlBuscar" Visible="false" runat="server" Style="width: 100%" CssClass="form-control">
                             </asp:DropDownList>
                         </div>
                         <div class="form-group" style="width: 20%">
-                            <label for="message-text" class="control-label">Estado:</label>
+                            <label>Estado:</label>
                             <asp:DropDownList ID="ddlEstado" runat="server" Style="width: 100%" CssClass="form-control">
                                 <asp:ListItem Value=" in ('Cerrado','Aseguradora', 'Asegurado', 'Revision', 'Enviado')">Todas</asp:ListItem>
                                 <asp:ListItem Value=" = 'Cerrado'">Cerradas</asp:ListItem>
@@ -85,25 +85,23 @@
                             </asp:DropDownList>
                         </div>
                         <div class="form-group" style="width: 15%">
-                            <label for="message-text" class="control-label">Fecha Inicio:</label>
+                            <label>Fecha Inicio:</label>
                             <asp:TextBox ID="txtFechaInicio" Height="34px" type="date" CssClass="form-control" Style="width: 100%" placeholder="Escriba su busqueda" runat="server"></asp:TextBox>
                         </div>
                         <div class="form-group" style="width: 15%">
-                            <label for="message-text" class="control-label">Fecha Fin:</label>
+                            <label>Fecha Fin:</label>
                             <asp:TextBox ID="txtFechaFin" type="date" Height="34px" CssClass="form-control" Style="width: 100%" placeholder="Escriba su busqueda" runat="server"></asp:TextBox>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
         <%-- ------------------------ modal ver el detalle de eficiencia ------------------------------------------%>
-        <div class="modal fade" id="ModalDetalle" tabindex="-1" role="dialog" aria-labelledby="ModalDetalle2" data-keyboard="false" data-backdrop="static">
-            <div class="modal-dialog" role="document">
+        <div class="modal fade" id="ModalDetalle" data-keyboard="false" data-backdrop="static">
+            <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title" id="ModalComentario1"><b>Detalle del reporte autorizaciones</b></h4>
+                        <h4 class="modal-title"><b>Detalle del reporte autorizaciones</b></h4>
                     </div>
                     <div class="modal-body">
                         <div class="scrolling-table-container" style="overflow-y: auto;">
@@ -126,7 +124,6 @@
                 </div>
             </div>
         </div>
-
         <%-- botones circulares con las opciones multiples --%>
         <div id="container-floating">
             <div class="nd4 nds" data-toggle="tooltip" data-placement="left" data-original-title="Simone">
@@ -144,7 +141,6 @@
             </div>
         </div>
     </div>
-
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentJs" Runat="Server">
 </asp:Content>

@@ -513,4 +513,36 @@ public class Utils
 
         }
     }
+
+
+    //seleccionar correo de ejecutivos que tienen asignado una poliza
+    public static string seleccionarCorreo(short cod)
+    {
+        try
+        {
+            string correo;
+            var selectCorreo = DBReclamos.ejecutivos.Where(e => e.codigo == Convert.ToInt16(cod)).First();
+            return correo = selectCorreo.correo;
+        }
+
+        catch (Exception)
+        {
+            return "no existe";
+        }
+    }
+
+    public static string seleccionarCorreoGestor(string usuario)
+    {
+        try
+        {
+            string correoGestor;
+            var correo_gestor = DBReclamos.gestores.Select(g => new { g.correo, g.usuario }).Where(usu => usu.usuario == usuario).First();
+            return correoGestor = correo_gestor.correo.ToString();
+        }
+
+        catch (Exception)
+        {
+            return "no existe";
+        }
+    }
 }

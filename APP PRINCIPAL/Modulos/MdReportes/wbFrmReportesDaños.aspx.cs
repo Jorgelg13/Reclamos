@@ -111,7 +111,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesDaños : System.Web.UI
             }
 
             string listado;
-            listado = "Select reclamos_varios.id, ";
+            listado = "Select distinct reclamos_varios.id, ";
             for (int i = 0; i < checkCampos.Items.Count; i++)
             {
                 if (checkCampos.Items[i].Selected)
@@ -150,6 +150,13 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesDaños : System.Web.UI
                   " where (" + ddlElegir.SelectedValue + " like  '%"+ buscar +"%') and ("+ddlEstado.SelectedValue+") ", GridCamposSeleccion);
                 Conteo();
                 Eficiencia();
+            }
+
+            else if (ddlEstado.SelectedItem.Text == "Estado")
+            {
+                llenado.llenarGrid(listado.Substring(0, (listado.Length - 2)) + Join +
+                  " where (" + ddlElegir.SelectedValue + " like  '%" + ddlBuscar.SelectedItem.Text + "%') and (estado_unity = 'Seguimiento') ", GridCamposSeleccion);
+                Conteo();
             }
         }
     }
@@ -243,6 +250,16 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesDaños : System.Web.UI
         {
             ddlBuscar.Visible = false;
             txtBuscar.Visible = true;
+        }
+
+        if(ddlElegir.SelectedItem.Text == "Estado Reclamo")
+        {
+            ddlBuscar.DataSource = DBReclamos.estados_reclamos_unity.ToList().Where(es => es.tipo == "daños");
+            ddlBuscar.DataTextField = "descripcion";
+            ddlBuscar.DataValueField = "id";
+            ddlBuscar.DataBind();
+            txtBuscar.Visible = false;
+            ddlBuscar.Visible = true;
         }
     }
 

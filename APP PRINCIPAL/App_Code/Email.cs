@@ -75,13 +75,15 @@ public class Email
     }
 
 
-    public bool enviarcorreo2(string from, string password, string to, string mensaje, string asunto, string copia)
+    public bool enviarcorreo2( string para, string mensaje, string asunto, string copia)
     {
         try
         {
+            string from = "reclamosgt@unitypromotores.com";
+            string password = "123$456R";
             m.To.Clear();
             m.From = new MailAddress(from);
-            m.To.Add(new MailAddress(to));
+            m.To.Add(new MailAddress(para));
             m.Bcc.Add(copia);
             m.Body = mensaje;
             m.Subject = asunto;

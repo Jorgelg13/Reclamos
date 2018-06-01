@@ -24,6 +24,7 @@
         <asp:Label ID="lblRamoMemo" Visible="false" runat="server"></asp:Label>
         <asp:Label ID="lblIdOculto" Style="display: none;" runat="server"></asp:Label>
         <asp:TextBox ID="txtTiempo" Style="display: none;" runat="server"></asp:TextBox>
+        <asp:Label ID="lblDocumento" Style="display: none;" runat="server"></asp:Label>
 
         <div class="panel panel-info col-sm-12 col-md-9 col-lg-9">
             <asp:Panel ID="panelPrincipal" runat="server">
@@ -58,31 +59,31 @@
                                     <asp:CheckBox ID="checkMoneda" automplete="false" AutoPostBack="true" runat="server" Style="padding-left: 12%;" Text="Cambiar Moneda" OnCheckedChanged="checkMoneda_CheckedChanged" />
                                 </div>
                                 <div class="panel-body">
-                                    <div style="height: auto; overflow-x: auto;">
-                                        <asp:GridView ID="GridDetalleM" CssClass="table bs-table tablaDetalleAuto table-responsive table-hover" runat="server" CellPadding="4" ForeColor="#333333" GridLines="None" AutoGenerateColumns="False" DataKeyNames="ID" DataSourceID="detalle_gasto_medico" OnSelectedIndexChanged="GridDetalleM_SelectedIndexChanged">
-                                            <Columns>
-                                                <asp:CommandField SelectText="Eliminar" ShowSelectButton="True" />
-                                                <asp:BoundField DataField="Descripcion" HeaderText="Descripcion" SortExpression="Descripcion" />
-                                                <asp:BoundField DataField="Fecha" HeaderText="Fecha" SortExpression="fecha" />
-                                                <asp:BoundField DataField="No. Factura" HeaderText="No. Factura" SortExpression="Factura" />
-                                                <asp:BoundField DataField="Cantidad" HeaderText="Cantidad" SortExpression="Cantidad" DataFormatString="{0:0,0.00}">
-                                                    <HeaderStyle HorizontalAlign="Center" Wrap="True" />
-                                                    <ItemStyle Wrap="True" />
-                                                </asp:BoundField>
-                                                <asp:BoundField DataField="moneda" HeaderText="Moneda" SortExpression="Moneda" />
-                                                <asp:BoundField DataField="ID" HeaderText="ID" ReadOnly="True" SortExpression="ID">
-                                                    <ControlStyle ForeColor="White" />
-                                                    <HeaderStyle ForeColor="White" />
-                                                    <ItemStyle ForeColor="White" />
-                                                </asp:BoundField>
-                                            </Columns>
-                                            <FooterStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" />
-                                            <HeaderStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" />
-                                            <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
-                                            <RowStyle BackColor="#EFF3FB" />
-                                            <SelectedRowStyle BackColor="#D1DDF1" Font-Bold="True" ForeColor="#333333" />
-                                        </asp:GridView>
-                                    </div>
+                                            <div style="height: auto; overflow-x: auto;">
+                                                <asp:GridView ID="GridDetalleM" CssClass="table bs-table tablaDetalleAuto table-responsive table-hover" runat="server" CellPadding="4" ForeColor="#333333" GridLines="None" AutoGenerateColumns="False" DataKeyNames="ID" DataSourceID="detalle_gasto_medico" OnSelectedIndexChanged="GridDetalleM_SelectedIndexChanged">
+                                                    <Columns>
+                                                        <asp:CommandField SelectText="Eliminar" ShowSelectButton="True" />
+                                                        <asp:BoundField DataField="Descripcion" HeaderText="Descripcion" SortExpression="Descripcion" />
+                                                        <asp:BoundField DataField="Fecha" HeaderText="Fecha" SortExpression="fecha" />
+                                                        <asp:BoundField DataField="No. Factura" HeaderText="No. Factura" SortExpression="Factura" />
+                                                        <asp:BoundField DataField="Cantidad" HeaderText="Cantidad" SortExpression="Cantidad" DataFormatString="{0:0,0.00}">
+                                                            <HeaderStyle HorizontalAlign="Center" Wrap="True" />
+                                                            <ItemStyle Wrap="True" />
+                                                        </asp:BoundField>
+                                                        <asp:BoundField DataField="moneda" HeaderText="Moneda" SortExpression="Moneda" />
+                                                        <asp:BoundField DataField="ID" HeaderText="ID" ReadOnly="True" SortExpression="ID">
+                                                            <ControlStyle ForeColor="White" />
+                                                            <HeaderStyle ForeColor="White" />
+                                                            <ItemStyle ForeColor="White" />
+                                                        </asp:BoundField>
+                                                    </Columns>
+                                                    <FooterStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" />
+                                                    <HeaderStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" />
+                                                    <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
+                                                    <RowStyle BackColor="#EFF3FB" />
+                                                    <SelectedRowStyle BackColor="#D1DDF1" Font-Bold="True" ForeColor="#333333" />
+                                                </asp:GridView>
+                                            </div>
                                     <div class="form-group col-md-6 col-lg-3 col-sm-12">
                                         Tipo:
                                         <asp:DropDownList CssClass="form-control" ID="ddlDetalleGasto" Style="width: 100%" Height="32px" runat="server">
@@ -110,7 +111,7 @@
                                     </div>
                                     <div class="form-group col-md-6 col-lg-1 col-sm-12">
                                         <label style="color: white">Guardar</label>
-                                        <asp:LinkButton ID="linkGuardarDetalleGMedico" OnClick="btnguardarDetalle_Click" title="Guardar detalle de gasto medico" runat="server" Style="font-size: 30px; width: 100%;"><i class="fa fa-floppy-o" aria-hidden="true"></i></asp:LinkButton>
+                                        <asp:LinkButton ID="linkGuardarDetalleGMedico" OnClick="btnguardarDetalle_Click" title="Guardar detalle de gasto medico" runat="server" Style="font-size: 30px; width: 100%;"><i class="fa fa-floppy-o"></i></asp:LinkButton>
                                     </div>
                                     <asp:Label ID="lblTotal" Style="font-size: 20px; padding-left: 20px;" runat="server"></asp:Label>
                                 </div>
@@ -657,7 +658,10 @@
                             <a title="Producto No Conforme" role="button" data-toggle="modal" data-target="#ModalNoconforme" style="color: red"><i class="fa fa-frown-o"></i></a>
                         </div>
                          <div class="col-xs-3 col-md-3 col-sm-4 col-lg-3">
-                            <a href="javascript:Scaner()" title="Escanear Documentos" role="button"><i class="fa fa-clipboard"></i></a>
+                            <a href="javascript:Scaner()" title="Escanear Documentos" role="button"><i class="fa fa-file-pdf-o"></i></a>
+                        </div>
+                         <div class="col-xs-3 col-md-3 col-sm-4 col-lg-3">
+                            <a href="javascript:buscador()" title="Buscador de documentos" role="button"><i class="fa fa-search"></i></a>
                         </div>
                         <div class="col-xs-3 col-md-3 col-sm-4 col-lg-3">
                             <asp:LinkButton ID="linkRegresar" role="button" OnClick="Regresar_Click" title="Regresar a reclamos en seguimiento" runat="server"><i class="fa fa-arrow-left"></i></asp:LinkButton>
@@ -670,46 +674,7 @@
             </div>
         </div>
     </div>
-    <%------------------ datos de la poliza y del asegurado  ------------------- --%>
-    <div class="col-sm-12 col-md-3 col-lg-3">
-        <div class="panel panel-info">
-            <div class="panel-heading" role="tab" id="headingThree">
-                <h4 class="panel-title">
-                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree"><b>Datos de la Poliza</b>
-                    </a>
-                </h4>
-            </div>
-            <div id="collapseThree" class="panel-collapse collapse in" role="tabpanel" aria-expanded="true">
-                <div class="panel-body">
-                    <asp:Label ID="lblAsegurado2" runat="server"></asp:Label>
-                    <br />
-                    <asp:Label ID="lblPoliza2" runat="server"></asp:Label>
-                    <br />
-                    <asp:Label ID="lblRamo" runat="server"></asp:Label>
-                    <br />
-                    <asp:Label ID="tipo" Text="Tipo: " runat="server"></asp:Label>
-                    <asp:Label ID="lblTipo" runat="server"></asp:Label>
-                    <br />
-                    <asp:Label ID="lblClase" runat="server"></asp:Label>
-                    <br />
-                    <asp:Label ID="lblEjecutivo" runat="server"></asp:Label>
-                    <br />
-                    <asp:Label ID="lblAseguradora2" runat="server"></asp:Label>
-                    <br />
-                    <asp:Label ID="lblContratante" runat="server"></asp:Label>
-                    <br />
-                    <asp:Label ID="lblEstado" runat="server"></asp:Label>
-                    <br />
-                    <asp:Label ID="lblVip" runat="server"></asp:Label>
-                    <br />
-                    <asp:Label ID="lblMoneda" runat="server"></asp:Label>
-                    <br />
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <%-- panel lateral con informacion de la poliza--%>
+     <%-- panel lateral con informacion de la poliza--%>
     <div class="col-sm-12 col-md-3 col-lg-3">
         <div class="panel panel-info">
             <div class="panel-heading" role="tab" id="headingFour">
@@ -760,7 +725,44 @@
             </div>
         </div>
     </div>
-
+    <%------------------ datos de la poliza y del asegurado  ------------------- --%>
+    <div class="col-sm-12 col-md-3 col-lg-3">
+        <div class="panel panel-info">
+            <div class="panel-heading" role="tab" id="headingThree">
+                <h4 class="panel-title">
+                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree"><b>Datos de la Poliza</b>
+                    </a>
+                </h4>
+            </div>
+            <div id="collapseThree" class="panel-collapse collapse in" role="tabpanel" aria-expanded="true">
+                <div class="panel-body">
+                    <asp:Label ID="lblAsegurado2" runat="server"></asp:Label>
+                    <br />
+                    <asp:Label ID="lblPoliza2" runat="server"></asp:Label>
+                    <br />
+                    <asp:Label ID="lblRamo" runat="server"></asp:Label>
+                    <br />
+                    <asp:Label ID="tipo" Text="Tipo: " runat="server"></asp:Label>
+                    <asp:Label ID="lblTipo" runat="server"></asp:Label>
+                    <br />
+                    <asp:Label ID="lblClase" runat="server"></asp:Label>
+                    <br />
+                    <asp:Label ID="lblEjecutivo" runat="server"></asp:Label>
+                    <br />
+                    <asp:Label ID="lblAseguradora2" runat="server"></asp:Label>
+                    <br />
+                    <asp:Label ID="lblContratante" runat="server"></asp:Label>
+                    <br />
+                    <asp:Label ID="lblEstado" runat="server"></asp:Label>
+                    <br />
+                    <asp:Label ID="lblVip" runat="server"></asp:Label>
+                    <br />
+                    <asp:Label ID="lblMoneda" runat="server"></asp:Label>
+                    <br />
+                </div>
+            </div>
+        </div>
+    </div>
     <%------------------------ Confirmacion de cierre -------------------%>
     <div class="modal fade" id="CierreReclamo">
         <div class="modal-dialog modal-sm">
@@ -958,7 +960,7 @@
             </div>
         </div>
     </div>
-    </asp:Panel>
+   </asp:Panel>
     <%-- ------------------------ modal para ingresar un nuevo comentario ------------------------------------------%>
     <div class="modal fade" id="ModalComentario" data-keyboard="false" data-backdrop="static">
         <div class="modal-dialog">
@@ -999,7 +1001,6 @@
             </div>
         </div>
     </div>
-
     <%--------------------------------- modal para mostrar seleccion para producto no conforme --------------------------------%>
     <div class="modal fade" id="ModalNoconforme">
         <div class="modal-dialog">
@@ -1061,9 +1062,20 @@
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentJs" runat="Server">
      <script> 
          var id = $('#ContentPlaceHolder1_lblIdOculto').text();
+         var ruta = $('#ContentPlaceHolder1_lblDocumento').text();
             function Scaner() {
-                window.open('/Modulos/MdScanner/wbGastosMedicos.aspx?id='+id+'', "ventana1", "width=300,height=320,scrollbars=NO")
-            }
-        </script>
+                window.open('/Modulos/MdScanner/wbGastosMedicos.aspx?id='+id+'', "ventana1", "width=300,height=500,scrollbars=NO")
+         }
+
+         function documento() {
+             window.open('http://52.34.115.100:5556/files/GastosMedicos/'+ruta+'', "ventana1", "width=700,height=800,scrollbars=NO")
+         }
+
+         function buscador() {
+             var alto = $(window).height() - 200;
+             var ancho = $(window).width() - 700;
+             window.open('http://52.34.115.100:5556/explorador.html#files%2FGastosMedicos/'+ ruta, "ventana1", "width=" + ancho + ",height=" + alto + ",scrollbars=NO")
+         }
+      </script>
 </asp:Content>
 

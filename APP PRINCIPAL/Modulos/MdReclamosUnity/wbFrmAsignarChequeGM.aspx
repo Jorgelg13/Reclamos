@@ -27,20 +27,19 @@
         </div>
     </div>
     <%-- modal para verificacion de envio de correo --%>
-    <div class="modal fade bs-example-modal-sm" tabindex="-1" id="ingresar-cheque" role="dialog" aria-labelledby="mySmallModalLabel">
-        <div class="modal-dialog" role="document">
+    <div class="modal fade" id="ingresar-cheque">
+        <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                     <h4 class="modal-title"><b>Ingreso De Cheque..</b></h4>
                 </div>
                 <div class="modal-body form-inline">
                           <div class="form-group" style="width: 33%">
-                            <label for="message-text" class="control-label">Monto del cheque:</label>
+                            <label>Monto del cheque:</label>
                             <asp:TextBox ID="txtMontoCheque" Text="0.00" Style="width: 100%" CssClass="form-control" AutoComplete="off" runat="server" placeholder="Monto Total"></asp:TextBox>
                         </div>
                         <div class="form-group" style="width: 33%">
-                            <label for="message-text" class="control-label">Banco:</label>
+                            <label>Banco:</label>
                             <asp:DropDownList CssClass="form-control" ID="ddlBanco" Style="width: 100%" Height="34px" runat="server">
                                 <asp:ListItem>---</asp:ListItem>
                                 <asp:ListItem>Banco Industrial</asp:ListItem>
@@ -56,7 +55,7 @@
                             </asp:DropDownList>
                         </div>
                         <div class="form-group" style="width: 32%">
-                            <label for="recipient-name" class="control-label">No Cheque:</label>
+                            <label>No Cheque:</label>
                             <asp:TextBox ID="txtNumeroCheque" Style="width: 100%" autocomplete="off" class="form-control" placeholder="Numero de cheque" runat="server"></asp:TextBox>
                         </div>
                 <div class="modal-footer">

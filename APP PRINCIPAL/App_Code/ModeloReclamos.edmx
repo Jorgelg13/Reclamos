@@ -604,6 +604,7 @@
           <Property Name="b_carta_cierre_interno" Type="bit" />
           <Property Name="b_carta_declinado" Type="bit" />
           <Property Name="b_carta_envio_cheque" Type="bit" />
+          <Property Name="documentos" Type="varchar" MaxLength="150" />
         </EntityType>
         <EntityType Name="reclamos_medicos">
           <Key>
@@ -656,6 +657,7 @@
           <Property Name="fecha_no_conforme" Type="datetime" />
           <Property Name="fecha_cierre_no_conforme" Type="datetime" />
           <Property Name="observacion_no_conforme" Type="varchar" MaxLength="500" />
+          <Property Name="documento" Type="varchar" MaxLength="300" />
         </EntityType>
         <EntityType Name="reclamos_varios">
           <Key>
@@ -708,6 +710,8 @@
           <Property Name="b_carta_cierre_interno" Type="bit" />
           <Property Name="b_carta_declinado" Type="bit" />
           <Property Name="b_carta_envio_cheque" Type="bit" />
+          <Property Name="reserva" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="documentos" Type="varchar" MaxLength="150" />
         </EntityType>
         <EntityType Name="reg_reclamo_varios">
           <Key>
@@ -2927,6 +2931,9 @@ FROM [dbo].[v_producto_no_conforme] AS [v_producto_no_conforme]</DefiningQuery>
           <Property Name="fecha_no_conforme" Type="DateTime" Precision="3" />
           <Property Name="fecha_cierre_no_conforme" Type="DateTime" Precision="3" />
           <Property Name="observacion_no_conforme" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="b_carta_cierre_interno" Type="Boolean" />
+          <Property Name="b_carta_declinado" Type="Boolean" />
+          <Property Name="b_carta_envio_cheque" Type="Boolean" />
           <NavigationProperty Name="analistas" Relationship="reclamosModel.FK_reclamo_auto_analistas" FromRole="reclamo_auto" ToRole="analistas" />
           <NavigationProperty Name="auto_reclamo" Relationship="reclamosModel.FK__reclamo_a__id_au__300424B4" FromRole="reclamo_auto" ToRole="auto_reclamo" />
           <NavigationProperty Name="bitacora_autos_unity" Relationship="reclamosModel.FK_bitacora_autos_unity_reclamo_auto" FromRole="reclamo_auto" ToRole="bitacora_autos_unity" />
@@ -2941,9 +2948,7 @@ FROM [dbo].[v_producto_no_conforme] AS [v_producto_no_conforme]</DefiningQuery>
           <NavigationProperty Name="gestores" Relationship="reclamosModel.FK_reclamo_auto_gestores" FromRole="reclamo_auto" ToRole="gestores" />
           <NavigationProperty Name="usuario" Relationship="reclamosModel.FK__reclamo_a__id_us__440B1D61" FromRole="reclamo_auto" ToRole="usuario" />
           <NavigationProperty Name="talleres" Relationship="reclamosModel.FK_reclamo_auto_talleres" FromRole="reclamo_auto" ToRole="talleres" />
-          <Property Name="b_carta_cierre_interno" Type="Boolean" />
-          <Property Name="b_carta_declinado" Type="Boolean" />
-          <Property Name="b_carta_envio_cheque" Type="Boolean" />
+          <Property Name="documentos" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="reclamos_medicos">
           <Key>
@@ -2996,6 +3001,7 @@ FROM [dbo].[v_producto_no_conforme] AS [v_producto_no_conforme]</DefiningQuery>
           <Property Name="fecha_no_conforme" Type="DateTime" Precision="3" />
           <Property Name="fecha_cierre_no_conforme" Type="DateTime" Precision="3" />
           <Property Name="observacion_no_conforme" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="documento" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="bitacora_reclamos_medicos" Relationship="reclamosModel.FK__bitacora___id_re__3A81B327" FromRole="reclamos_medicos" ToRole="bitacora_reclamos_medicos" />
           <NavigationProperty Name="cabina" Relationship="reclamosModel.FK__reclamos___id_ca__4E88ABD4" FromRole="reclamos_medicos" ToRole="cabina" />
           <NavigationProperty Name="comentarios_reclamos_medicos" Relationship="reclamosModel.FK_comentarios_reclamos_medicos_reclamos_medicos" FromRole="reclamos_medicos" ToRole="comentarios_reclamos_medicos" />
@@ -3054,6 +3060,9 @@ FROM [dbo].[v_producto_no_conforme] AS [v_producto_no_conforme]</DefiningQuery>
           <Property Name="fecha_no_conforme" Type="DateTime" Precision="3" />
           <Property Name="fecha_cierre_no_conforme" Type="DateTime" Precision="3" />
           <Property Name="observacion_no_conforme" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="b_carta_cierre_interno" Type="Boolean" />
+          <Property Name="b_carta_declinado" Type="Boolean" />
+          <Property Name="b_carta_envio_cheque" Type="Boolean" />
           <NavigationProperty Name="analistas" Relationship="reclamosModel.FK_reclamos_varios_analistas" FromRole="reclamos_varios" ToRole="analistas" />
           <NavigationProperty Name="bitacora_estados_reclamos_varios" Relationship="reclamosModel.FK_bitacora_estados_reclamos_varios_reclamos_varios" FromRole="reclamos_varios" ToRole="bitacora_estados_reclamos_varios" />
           <NavigationProperty Name="bitacora_reclamos_varios" Relationship="reclamosModel.FK__bitacora___id_re__47DBAE45" FromRole="reclamos_varios" ToRole="bitacora_reclamos_varios" />
@@ -3066,9 +3075,8 @@ FROM [dbo].[v_producto_no_conforme] AS [v_producto_no_conforme]</DefiningQuery>
           <NavigationProperty Name="reg_reclamo_varios" Relationship="reclamosModel.FK__reclamos___id_re__5441852A" FromRole="reclamos_varios" ToRole="reg_reclamo_varios" />
           <NavigationProperty Name="usuario" Relationship="reclamosModel.FK__reclamos___id_us__5535A963" FromRole="reclamos_varios" ToRole="usuario" />
           <NavigationProperty Name="talleres" Relationship="reclamosModel.FK_reclamos_varios_talleres" FromRole="reclamos_varios" ToRole="talleres" />
-          <Property Name="b_carta_cierre_interno" Type="Boolean" />
-          <Property Name="b_carta_declinado" Type="Boolean" />
-          <Property Name="b_carta_envio_cheque" Type="Boolean" />
+          <Property Name="reserva" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="documentos" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="reg_reclamo_varios">
           <Key>
@@ -4657,6 +4665,7 @@ FROM [dbo].[v_producto_no_conforme] AS [v_producto_no_conforme]</DefiningQuery>
           <EntitySetMapping Name="reclamo_auto">
             <EntityTypeMapping TypeName="reclamosModel.reclamo_auto">
               <MappingFragment StoreEntitySet="reclamo_auto">
+                <ScalarProperty Name="documentos" ColumnName="documentos" />
                 <ScalarProperty Name="b_carta_envio_cheque" ColumnName="b_carta_envio_cheque" />
                 <ScalarProperty Name="b_carta_declinado" ColumnName="b_carta_declinado" />
                 <ScalarProperty Name="b_carta_cierre_interno" ColumnName="b_carta_cierre_interno" />
@@ -4712,6 +4721,7 @@ FROM [dbo].[v_producto_no_conforme] AS [v_producto_no_conforme]</DefiningQuery>
           <EntitySetMapping Name="reclamos_medicos">
             <EntityTypeMapping TypeName="reclamosModel.reclamos_medicos">
               <MappingFragment StoreEntitySet="reclamos_medicos">
+                <ScalarProperty Name="documento" ColumnName="documento" />
                 <ScalarProperty Name="observacion_no_conforme" ColumnName="observacion_no_conforme" />
                 <ScalarProperty Name="fecha_cierre_no_conforme" ColumnName="fecha_cierre_no_conforme" />
                 <ScalarProperty Name="fecha_no_conforme" ColumnName="fecha_no_conforme" />
@@ -4765,6 +4775,8 @@ FROM [dbo].[v_producto_no_conforme] AS [v_producto_no_conforme]</DefiningQuery>
           <EntitySetMapping Name="reclamos_varios">
             <EntityTypeMapping TypeName="reclamosModel.reclamos_varios">
               <MappingFragment StoreEntitySet="reclamos_varios">
+                <ScalarProperty Name="documentos" ColumnName="documentos" />
+                <ScalarProperty Name="reserva" ColumnName="reserva" />
                 <ScalarProperty Name="b_carta_envio_cheque" ColumnName="b_carta_envio_cheque" />
                 <ScalarProperty Name="b_carta_declinado" ColumnName="b_carta_declinado" />
                 <ScalarProperty Name="b_carta_cierre_interno" ColumnName="b_carta_cierre_interno" />

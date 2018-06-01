@@ -6,31 +6,17 @@ using System.Data.SqlClient;
 public partial class Modulos_MdReclamosUnity_wbFrmReclamosEnSeguimiento : System.Web.UI.Page
 {
     String userlogin = HttpContext.Current.User.Identity.Name; //usuario que esta en session
+    ReclamosEntities DBReclamos = new ReclamosEntities();
     conexionBD objeto = new conexionBD();
     SqlCommand cmd = new SqlCommand();
     Utils llenado = new Utils();
-    string reclamosGeneral;
-
-    private void fechaVisualizar(int id)
-    {
-        try
-        {
-            cmd.CommandText = "update reclamo_auto set fecha_visualizar = getdate() where id =" + id + " ";
-            cmd.Connection = objeto.ObtenerConexionReclamos();
-            cmd.ExecuteNonQuery();
-            objeto.conexion.Close();
-        }
-        catch (Exception)
-        {
-            //Response.Write();
-        }
-        finally
-        {
-            objeto.DescargarConexion();
-        }
-    }
+    string reclamosGeneral, estadosR;
+ 
     protected void Page_Load(object sender, EventArgs e)
     {
+        estadosR = "select count(*) as total, estado_auto_unity from reclamo_auto where usuario_unity = 'nsierra' and fecha_visualizar >= GETDATE() and estado_unity != 'Cerrado' " +
+            "group by estado_auto_unity ";
+
         reclamosGeneral = "SELECT reclamo_auto.id, " +
           " reclamo_auto.estado_unity as [Estado Unity]," +
           " reclamo_auto.usuario_unity as [Usuario Unity]," +
@@ -110,7 +96,6 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosEnSeguimiento : System
     {
         int id1;
         id1 = Convert.ToInt32(GridReclamosSeguimiento.SelectedRow.Cells[1].Text);
-        fechaVisualizar(id1);
         Response.Redirect("/Modulos/MdReclamosUnity/wbFrmReclamosAutosSeguimiento.aspx?ID_reclamo=" + id1,false);
     }
 
@@ -158,7 +143,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosEnSeguimiento : System
     protected void DDLTipo_SelectedIndexChanged(object sender, EventArgs e)
     {
         string reclamosSeguimiento2 = reclamosGeneral +
-               " where (reclamo_auto.estado_auto_unity = '"+ DDLTipo.SelectedItem +"' and reclamo_auto.usuario_unity = '" + userlogin + "' and estado_unity != 'Cerrado' ) ";
+               " where (reclamo_auto.estado_auto_unity = '" + DDLTipo.SelectedItem + "' and reclamo_auto.usuario_unity = '" + userlogin + "' and estado_unity != 'Cerrado' ) ";
 
         llenado.llenarGrid(reclamosSeguimiento2, GridReclamosEstado);
         GridReclamosSeguimiento.Visible = false;

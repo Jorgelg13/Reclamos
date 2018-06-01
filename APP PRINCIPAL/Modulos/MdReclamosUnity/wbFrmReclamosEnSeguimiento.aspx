@@ -4,11 +4,6 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <div class="container-fluid">
-        <div>
-            <asp:Label ID="lblId" runat="server" Visible="false"></asp:Label>
-            <asp:Label ID="LblUsuario" runat="server" Text="Label" Visible="false"></asp:Label>
-            <asp:Label ID="lblPlaca" runat="server" Text="Label" Visible="false"></asp:Label>
-        </div>
         <div class="panel panel-default col-sm-12">
             <ul class="nav nav-tabs" role="tablist">
                 <li role="presentation" class="home">
@@ -34,7 +29,7 @@
                     <br />
                     <%--reclamos en seguimiento--%>
                     <div class="scrolling-table-container">
-                        <asp:GridView ID="GridReclamosSeguimiento" OnRowDataBound="GridReclamosSeguimiento_RowDataBound" runat="server" CssClass="table bs-table table-responsive table-hover" AutoGenerateColumns="True" CellPadding="4" ForeColor="#333333" GridLines="None" OnSelectedIndexChanged="GridReclamosSeguimiento_SelectedIndexChanged">
+                        <asp:GridView ID="GridReclamosSeguimiento" runat="server" CssClass="table bs-table table-responsive table-hover" AutoGenerateColumns="True" CellPadding="4" ForeColor="#333333" GridLines="None" OnSelectedIndexChanged="GridReclamosSeguimiento_SelectedIndexChanged">
                             <AlternatingRowStyle BackColor="White" />
                             <Columns>
                                 <asp:CommandField ShowSelectButton="True">
@@ -42,12 +37,9 @@
                                     <ItemStyle HorizontalAlign="Left" Wrap="False" />
                                 </asp:CommandField>
                             </Columns>
-                            <EditRowStyle BackColor="#2461BF" />
-                            <FooterStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" />
                             <HeaderStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" HorizontalAlign="Center" Wrap="False" />
                             <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
                             <RowStyle BackColor="#EFF3FB" HorizontalAlign="Left" Wrap="False" />
-                            <SelectedRowStyle BackColor="#D1DDF1" Font-Bold="True" ForeColor="#333333" />
                         </asp:GridView>
                         <%--------------gridview de reclamos por estado ----------------------------%>
                         <asp:GridView ID="GridReclamosEstado" OnRowDataBound="GridReclamosSeguimiento_RowDataBound" runat="server" CssClass="table bs-table table-responsive table-hover" AutoGenerateColumns="True" CellPadding="4" ForeColor="#333333" GridLines="None" OnSelectedIndexChanged="GridReclamosEstado_SelectedIndexChanged">
@@ -58,16 +50,12 @@
                                     <ItemStyle HorizontalAlign="Left" Wrap="False" />
                                 </asp:CommandField>
                             </Columns>
-                            <EditRowStyle BackColor="#2461BF" />
-                            <FooterStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" />
                             <HeaderStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" HorizontalAlign="Center" Wrap="False" />
                             <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
                             <RowStyle BackColor="#EFF3FB" HorizontalAlign="Left" Wrap="False" />
-                            <SelectedRowStyle BackColor="#D1DDF1" Font-Bold="True" ForeColor="#333333" />
                         </asp:GridView>
                     </div>
                 </div>
-
                 <%--    seccion de reclamos Prioritarios--%>
                 <div role="tabpanel" class="tab-pane" id="profile">
                     <div class="scrolling-table-container">
@@ -79,16 +67,12 @@
                                     <ItemStyle HorizontalAlign="Left" Wrap="False" />
                                 </asp:CommandField>
                             </Columns>
-                            <EditRowStyle BackColor="#2461BF" />
-                            <FooterStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" />
                             <HeaderStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" HorizontalAlign="Center" Wrap="False" />
                             <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
                             <RowStyle BackColor="#EFF3FB" HorizontalAlign="Left" Wrap="False" />
-                            <SelectedRowStyle BackColor="#D1DDF1" Font-Bold="True" ForeColor="#333333" />
                         </asp:GridView>
                     </div>
                 </div>
-
                 <%-- seccion de reclamos complicados--%>
                 <div role="tabpanel" class="tab-pane" id="coberturas">
                     <div class="scrolling-table-container">
@@ -100,16 +84,12 @@
                                     <ItemStyle HorizontalAlign="Left" Wrap="False" />
                                 </asp:CommandField>
                             </Columns>
-                            <EditRowStyle BackColor="#2461BF" />
-                            <FooterStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" />
                             <HeaderStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" HorizontalAlign="Center" Wrap="False" />
                             <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
                             <RowStyle BackColor="#EFF3FB" HorizontalAlign="Left" Wrap="False" />
-                            <SelectedRowStyle BackColor="#D1DDF1" Font-Bold="True" ForeColor="#333333" />
                         </asp:GridView>
                     </div>
                 </div>
-
                 <%--seccion de reclamos por gestor --%>
                 <div role="tabpanel" class="tab-pane" id="ingreso-datos">
                     <br />
@@ -127,12 +107,9 @@
                                     <ItemStyle HorizontalAlign="Left" Wrap="False" />
                                 </asp:CommandField>
                             </Columns>
-                            <EditRowStyle BackColor="#2461BF" />
-                            <FooterStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" />
                             <HeaderStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" HorizontalAlign="Center" Wrap="False" />
                             <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
                             <RowStyle BackColor="#EFF3FB" HorizontalAlign="Left" Wrap="False" />
-                            <SelectedRowStyle BackColor="#D1DDF1" Font-Bold="True" ForeColor="#333333" />
                         </asp:GridView>
                     </div>
                 </div>

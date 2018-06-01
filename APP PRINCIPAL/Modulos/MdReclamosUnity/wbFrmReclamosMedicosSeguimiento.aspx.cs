@@ -31,6 +31,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosMedicosSeguimientos : 
     {
         idRecibido = Convert.ToString(Request.QueryString[0]).ToString();
         id = Int32.Parse(idRecibido);
+        Session.Add("id_RM", id.ToString());
         lblId.Text = "<b>No.</b>" + id.ToString();
         labelID.Text = "<b>ID: </b>" + id.ToString();
         lblFechaEnvioCliente.Text = thisDay.ToString("D");
@@ -130,6 +131,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosMedicosSeguimientos : 
             lblVip.Text = "<b>VIP:</b>                     " + reclamo.reg_reclamos_medicos.vip;
             lblMoneda.Text = "<b>Moneda:</b>               " + reclamo.reg_reclamos_medicos.moneda;
             lblProductoNoConforme.Text = "<b>Producto No Conforme Asignado: </b>" + reclamo.detalle_no_conforme;
+            lblDocumento.Text = String.IsNullOrEmpty(reclamo.documento) ? "" : reclamo.documento.Replace("\\", "/");
 
             //si el reclamo esta cerrado colocar el estado en rojo
             if (ddlEstado.SelectedItem.Text == "Cerrado") lblEstadoReclamo.ForeColor = System.Drawing.Color.Red;
@@ -141,6 +143,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosMedicosSeguimientos : 
             //memo envio aseguradora
             lblCartaDestinatario.Text = "Depto de reclamos de " + reclamo.reg_reclamos_medicos.aseguradora;
             lblCartaEjecutivo.Text = reclamo.reg_reclamos_medicos.ejecutivo;
+
             lblCartaPoliza.Text = reclamo.reg_reclamos_medicos.poliza;
             lblCartaContratante.Text = reclamo.empresa;
             lblCartaId.Text = reclamo.id.ToString();

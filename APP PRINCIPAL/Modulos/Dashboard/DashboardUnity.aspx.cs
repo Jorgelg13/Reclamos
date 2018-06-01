@@ -57,7 +57,7 @@ public partial class DashboardUnity : System.Web.UI.Page
             lnColectivos.Text = "C:  " + medicosC.ToString();
 
             Double total = DBReclamos.reclamos_medicos.Where(m => m.estado_unity == "Seguimiento").Count();
-            lnTotal.Text = "Total:  " + total.ToString();
+            lnTotal.Text =  total.ToString();
 
             Double estadoAsegurado = DBReclamos.reclamos_medicos.Where(m => m.id_estado == 4 && m.estado_unity == "Seguimiento"  && m.reg_reclamos_medicos.tipo == "I" ).Count();
             lnPendienteDocumentacion.Text = "E.A :  " + estadoAsegurado.ToString();
@@ -77,7 +77,7 @@ public partial class DashboardUnity : System.Web.UI.Page
 
             //total de reclamos de estado de daños
             Double pendiente = DBReclamos.reclamos_varios.Where(a => a.estado_reclamo_unity == "Pendiente asegurado" && a.estado_unity == "Seguimiento").Count();
-            lnPendienteAsegurado.Text = "P.A:  " + pendiente.ToString() + " = " + Math.Round((pendienteCompania / danios) * 100, 2).ToString() + "%";
+            lnPendienteAsegurado.Text = "P.A:  " + pendiente.ToString() + " = " + Math.Round((pendiente / danios) * 100, 2).ToString() + "%";
 
             Double inactivo = DBReclamos.reclamos_varios.Where(a => a.estado_reclamo_unity == "Inactivo" && a.estado_unity == "Seguimiento").Count();
             lnInactivo.Text = "I:  " + inactivo.ToString() + " = " + Math.Round((inactivo / danios) * 100, 2).ToString() + "%";

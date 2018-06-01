@@ -689,6 +689,7 @@ public partial class reclamo_auto
     public Nullable<bool> b_carta_cierre_interno { get; set; }
     public Nullable<bool> b_carta_declinado { get; set; }
     public Nullable<bool> b_carta_envio_cheque { get; set; }
+    public string documentos { get; set; }
 
     public virtual analistas analistas { get; set; }
     public virtual auto_reclamo auto_reclamo { get; set; }
@@ -764,6 +765,7 @@ public partial class reclamos_medicos
     public Nullable<System.DateTime> fecha_no_conforme { get; set; }
     public Nullable<System.DateTime> fecha_cierre_no_conforme { get; set; }
     public string observacion_no_conforme { get; set; }
+    public string documento { get; set; }
 
     public virtual ICollection<bitacora_reclamos_medicos> bitacora_reclamos_medicos { get; set; }
     public virtual cabina cabina { get; set; }
@@ -834,6 +836,8 @@ public partial class reclamos_varios
     public Nullable<bool> b_carta_cierre_interno { get; set; }
     public Nullable<bool> b_carta_declinado { get; set; }
     public Nullable<bool> b_carta_envio_cheque { get; set; }
+    public Nullable<decimal> reserva { get; set; }
+    public string documentos { get; set; }
 
     public virtual analistas analistas { get; set; }
     public virtual ICollection<bitacora_estados_reclamos_varios> bitacora_estados_reclamos_varios { get; set; }

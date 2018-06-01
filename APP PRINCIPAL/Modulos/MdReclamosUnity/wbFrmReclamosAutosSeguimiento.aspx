@@ -4,7 +4,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <div class="">
-        <asp:Label ID="lblID" runat="server" Text="Label" Visible="false"></asp:Label>
+        <asp:Label ID="lblID" runat="server" Style="display: none;"></asp:Label>
         <div class="panel panel-default col-sm-12">
             <div class="img-float-right" style="float: right; padding-top: 15px;">
                 <asp:Label runat="server" ID="lblProximaFecha" Style="padding-right: 30px; font-size: 16px;"></asp:Label>
@@ -36,9 +36,10 @@
                 <asp:Label ID="lblNumeroPoliza" Visible="false" runat="server"></asp:Label>
                 <asp:Label ID="lblDireccionAsegurado" Visible="false" runat="server"></asp:Label>
                 <asp:Label ID="lblEstadoAuto" Visible="false" runat="server"></asp:Label>
-                <asp:Label ID="lblBanderaCierreInterno" runat="server" style="display:none;"></asp:Label>
-                <asp:Label ID="lblBanderaDeclinado" runat="server" style="display:none;"></asp:Label>
-                <asp:Label ID="lblBanderaEnvioCheque" runat="server" style="display:none;"></asp:Label>
+                <asp:Label ID="lblBanderaCierreInterno" runat="server" Style="display: none;"></asp:Label>
+                <asp:Label ID="lblBanderaDeclinado" runat="server" Style="display: none;"></asp:Label>
+                <asp:Label ID="lblBanderaEnvioCheque" runat="server" Style="display: none;"></asp:Label>
+                <asp:Label ID="lblDocumento" runat="server" Style="display: none;"></asp:Label>
             </div>
             <%---------------------------------------------------------------------------------------------------%>
             <div class="tab-content">
@@ -256,6 +257,15 @@
                                 <a title="Enviar notificacion SMS" data-toggle="modal" role="button" data-target="#ModalSMS"><i class="fa fa-comments"></i></a>
                             </div>
                             <div class="col-xs-3 col-md-2 col-sm-2 col-lg-1">
+                                <a title="Subir archivo al repositorio" data-toggle="modal" role="button" data-target="#ModalAdjuntar"><i class="fa fa-cloud-upload"></i></a>
+                            </div>
+                            <div class="col-xs-3 col-md-2 col-sm-2 col-lg-1">
+                                <a href="javascript:Scaner()" title="Escanear Documentos" role="button"><i class="fa fa-file-pdf-o"></i></a>
+                            </div>
+                            <div class="col-xs-3 col-md-2 col-sm-2 col-lg-1">
+                                <a href="javascript:buscador()" title="Buscador de documentos" role="button"><i class="fa fa-search"></i></a>
+                            </div>
+                            <div class="col-xs-3 col-md-2 col-sm-2 col-lg-1">
                                 <asp:LinkButton ID="linkRegresar" OnClick="linkRegresar_Click" title="Regresar a reclamos en seguimiento" runat="server" Style="text-align: center;"><i class="fa fa-arrow-left"></i></asp:LinkButton>
                             </div>
                         </div>
@@ -457,7 +467,7 @@
         </div>
         <%--------------------------------- modal para programar la proxima fecha para que aparezca el reclamo --------------------------------%>
         <div class="modal fade" id="ModalProximaFecha">
-            <div class="modal-dialog">
+            <div class="modal-dialog modal-sm">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h4 class="modal-title"><b>Proxima Fecha A Mostrar</b></h4>
@@ -594,7 +604,6 @@
                 </div>
             </div>
         </div>
-
         <%--------------------------------- modal para mostrar seleccion para producto no conforme --------------------------------%>
         <div class="modal fade" id="ModalNoconforme">
             <div class="modal-dialog">
@@ -648,106 +657,106 @@
                     <a href="javascript:void(0)" onclick="$('.note-editable').print()" style="font-size: 40px; padding-left: 15px;"><i class="fa fa-print" aria-hidden="true"></i></a>
                     <asp:LinkButton ID="lnkGuardarCarta" OnClick="lnkGuardarCarta_Click" title="Guardar Carta" runat="server" Style="font-size: 40px; text-align: center;"><i class="fa fa-floppy-o" aria-hidden="true"></i></asp:LinkButton>
                     <asp:Panel runat="server" ID="panelPrincipal">
-                     <div style="display: none;" id="MemosReclamos" class="tipo_letra">
-                        <div class="img-float-left" style="float: left; padding-top: 70px;">
-                            <p>
-                                Guatemala
-                                <asp:Label ID="lblCartaFecha" runat="server"></asp:Label>
-                                <br />
-                                <asp:Label ID="lblCartaid" runat="server"></asp:Label>
-                                <br />
-                                Señor(a)
-                                <br />
-                                <asp:Label ID="lblCartaAsegurado" runat="server"></asp:Label>
-                                <br />
-                                Presente
-                            </p>
-                        </div>
-                        <div>
-                            <table style="width: 100%">
-                                <tr>
-                                    <td><b>Referencia:</b></td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>Asunto: Nombre del asunto</td>
-                                </tr>
-                                <tr>
-                                    <td>Vehiculo :<asp:Label ID="lblCartaVehiculo" runat="server"></asp:Label></td>
-                                </tr>
-                                <tr>
-                                    <td>Poliza :<asp:Label ID="lblCartaPoliza" runat="server"></asp:Label></td>
-                                    <td></td>
-                                </tr>
-                            </table>
-                        </div>
-                        <p style="padding-top: 20px;">
-                            Estimado(@):
-                                <br />
-                            !Reciba un cordial saludo¡
-                        </p>
-                        <!-- aqui inicia el cambio entre formato -->
-                        <div style="padding-top: 5px;">
-                            <div style="text-align: justify;">
-                                <asp:Label ID="lblMemo" runat="server"></asp:Label>
-                            </div>
-                            <asp:Panel runat="server" ID="PnDetallePago" Visible="false">
-                                <table style="width: 30%; margin-left: 285px;" class="estilos-tabla">
-                                    <tr class="estilos-tabla">
-                                        <th>Monto Reclamado</th>
-                                        <th></th>
-                                    </tr>
-                                    <tr class="estilos-tabla">
-                                        <td>Monto Sin Iva</td>
-                                        <td>0.00</td>
-                                    </tr>
-                                    <tr class="estilos-tabla">
-                                        <td>Deducible</td>
-                                        <td>0.00</td>
-                                    </tr>
-                                    <tr class="estilos-tabla">
-                                        <td>Subtotal</td>
-                                        <td>0.00</td>
-                                    </tr>
-                                    <tr class="estilos-tabla">
-                                        <td>(-)Timbres</td>
-                                        <td>0.00</td>
-                                    </tr>
-                                    <tr class="estilos-tabla">
-                                        <td>Total a Liquidar</td>
-                                        <td>0.00</td>
-                                    </tr>
-                                </table>
-                            </asp:Panel>
-                            <br />
-                            <!--hasta aqui se mantiene el formato -->
-                            <div style="padding-top: 10px;">
-                                <table style="width: 100%">
-                                    <tr>
-                                        <td>
-                                            <asp:Label ID="lblCartaEjecutivo" runat="server"></asp:Label></td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <asp:Label ID="lblCartaCorreoEjecutivo" runat="server"></asp:Label></td>
-                                    </tr>
-                                </table>
-                            </div>
-                            <div style="padding-top: 30px; text-align: justify; font-size:11px;">
+                        <div style="display: none;" id="MemosReclamos" class="tipo_letra">
+                            <div class="img-float-left" style="float: left; padding-top: 70px;">
                                 <p>
-                                    <b>
-                                        <i>Contar con clientes satisfechos es nuestro principal objetivo, cualquier sugerencia de mejora a nuestro proceso de envío de documentos 
-                                            o cualquier inconformidad en la recepción del mismo, escríbanos a calidad@unitypromotores.com, en donde revisaremos la información 
-                                            para darle una respuesta oportuna.
-                                        </i>
-                                    </b>
+                                    Guatemala
+                                <asp:Label ID="lblCartaFecha" runat="server"></asp:Label>
+                                    <br />
+                                    <asp:Label ID="lblCartaid" runat="server"></asp:Label>
+                                    <br />
+                                    Señor(a)
+                                <br />
+                                    <asp:Label ID="lblCartaAsegurado" runat="server"></asp:Label>
+                                    <br />
+                                    Presente
                                 </p>
                             </div>
+                            <div>
+                                <table style="width: 100%">
+                                    <tr>
+                                        <td><b>Referencia:</b></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Asunto: Nombre del asunto</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Vehiculo :<asp:Label ID="lblCartaVehiculo" runat="server"></asp:Label></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Poliza :<asp:Label ID="lblCartaPoliza" runat="server"></asp:Label></td>
+                                        <td></td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <p style="padding-top: 20px;">
+                                Estimado(@):
+                                <br />
+                                !Reciba un cordial saludo¡
+                            </p>
+                            <!-- aqui inicia el cambio entre formato -->
+                            <div style="padding-top: 5px;">
+                                <div style="text-align: justify;">
+                                    <asp:Label ID="lblMemo" runat="server"></asp:Label>
+                                </div>
+                                <asp:Panel runat="server" ID="PnDetallePago" Visible="false">
+                                    <table style="width: 30%; margin-left: 285px;" class="estilos-tabla">
+                                        <tr class="estilos-tabla">
+                                            <th>Monto Reclamado</th>
+                                            <th></th>
+                                        </tr>
+                                        <tr class="estilos-tabla">
+                                            <td>Monto Sin Iva</td>
+                                            <td>0.00</td>
+                                        </tr>
+                                        <tr class="estilos-tabla">
+                                            <td>Deducible</td>
+                                            <td>0.00</td>
+                                        </tr>
+                                        <tr class="estilos-tabla">
+                                            <td>Subtotal</td>
+                                            <td>0.00</td>
+                                        </tr>
+                                        <tr class="estilos-tabla">
+                                            <td>(-)Timbres</td>
+                                            <td>0.00</td>
+                                        </tr>
+                                        <tr class="estilos-tabla">
+                                            <td>Total a Liquidar</td>
+                                            <td>0.00</td>
+                                        </tr>
+                                    </table>
+                                </asp:Panel>
+                                <br />
+                                <!--hasta aqui se mantiene el formato -->
+                                <div style="padding-top: 10px;">
+                                    <table style="width: 100%">
+                                        <tr>
+                                            <td>
+                                                <asp:Label ID="lblCartaEjecutivo" runat="server"></asp:Label></td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <asp:Label ID="lblCartaCorreoEjecutivo" runat="server"></asp:Label></td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <div style="padding-top: 30px; text-align: justify; font-size: 11px;">
+                                    <p>
+                                        <b>
+                                            <i>Contar con clientes satisfechos es nuestro principal objetivo, cualquier sugerencia de mejora a nuestro proceso de envío de documentos 
+                                            o cualquier inconformidad en la recepción del mismo, escríbanos a calidad@unitypromotores.com, en donde revisaremos la información 
+                                            para darle una respuesta oportuna.
+                                            </i>
+                                        </b>
+                                    </p>
+                                </div>
+                            </div>
+                            <p style="text-align: right; padding-top: 20px;">RE-DA-F-05/Ver.01</p>
                         </div>
-                        <p style="text-align: right; padding-top: 20px;">RE-DA-F-05/Ver.01</p>
-                    </div>
                     </asp:Panel>
-                    <asp:Panel runat="server" ID="Panelsecundario" style="display:none">
+                    <asp:Panel runat="server" ID="Panelsecundario" Style="display: none">
                         <asp:Label runat="server" ID="lblcarta"></asp:Label>
                     </asp:Panel>
                 </div>
@@ -791,6 +800,25 @@
                     <div class="modal-footer">
                         <button type="button" class="btn btn-warning" data-dismiss="modal">Cancelar</button>
                         <asp:Button ID="btnEnviarSMS" CssClass="btn btn-primary" OnClick="btnEnviarSMS_Click" runat="server" Text="Enviar" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <%--------------------------------- modal para adjuntar archivos --------------------------------%>
+        <div class="modal fade" id="ModalAdjuntar">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title"><b>Subir Archivos</b></h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <asp:FileUpload ID="SubirArchivo" runat="server" />
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-warning" data-dismiss="modal">Cerrar</button>
+                        <asp:Button ID="btnSubir" CssClass="btn btn-primary" runat="server" Text="Subir" OnClick="btnSubir_Click" />
                     </div>
                 </div>
             </div>
@@ -899,7 +927,7 @@
 
             $('#<%=txtContenidoCarta.ClientID%>').val($('#MemosReclamos').html());
 
-              $('.note-editable').keyup(function () {
+            $('.note-editable').keyup(function () {
                 $('#<%=txtContenidoCarta.ClientID%>').val($('.note-editable').html());
             });
 
@@ -945,6 +973,19 @@
         $('#<%=txtTelefono.ClientID%>').on('input', function () {
             this.value = this.value.replace(/[^0-9]/g, '');
         });
+    </script>
+    <script>
+        var id = $('#ContentPlaceHolder1_lblID').text();
+        var ruta = $('#ContentPlaceHolder1_lblDocumento').text();
+        function Scaner() {
+            window.open('/Modulos/MdScanner/wbReclamosAutos.aspx?id=' + id + '', "ventana1", "width=300,height=500,scrollbars=NO")
+        }
+
+        function buscador() {
+            var alto = $(window).height() - 200;
+            var ancho = $(window).width() - 700;
+            window.open('http://52.34.115.100:5556/explorador.html#files%2FReclamosAutos/' + ruta, "ventana1", "width=" + ancho + ",height=" + alto + ",scrollbars=NO")
+        }
     </script>
 </asp:Content>
 

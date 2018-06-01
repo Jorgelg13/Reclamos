@@ -174,6 +174,14 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesAutos : System.Web.UI.
                 Conteo();
                 Eficiencia();
             }
+
+            else if (ddlEstado.SelectedItem.Text == "Estado")
+            {
+                llenado.llenarGrid(listado.Substring(0, (listado.Length - 2)) + Join +
+                  " where (" + ddlElegir.SelectedValue + " like '%" + ddlBuscar.SelectedItem.Text + "%') and (estado_unity = 'Seguimiento') ", GridCamposSeleccion);
+                Conteo();
+                Eficiencia();
+            }
         }
     }
 
@@ -243,6 +251,17 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesAutos : System.Web.UI.
         {
             ddlBuscar.Visible = false;
             txtBuscar.Visible = true;
+        }
+
+        if (ddlElegir.SelectedItem.Text == "Estado Auto")
+        {
+            ddlBuscar.DataSource = DBReclamos.estados_reclamos_unity.ToList().Where(es => es.tipo == "auto");
+            ddlBuscar.DataValueField = "id";
+            ddlBuscar.DataTextField = "descripcion";
+            ddlBuscar.DataBind();
+
+            txtBuscar.Visible = false;
+            ddlBuscar.Visible = true;
         }
     }
 

@@ -123,7 +123,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmBusquedaReclamosDaños : Syste
     {
         int id;
         id = Convert.ToInt32(GridBusquedaGeneral.SelectedRow.Cells[1].Text);
-        Response.Redirect("/Modulos/MdReclamosUnity/wbFrmReclamosDañosSeguimiento.aspx?ID_reclamo=" + id);
+        Response.Redirect("/Modulos/MdReclamosUnity/wbFrmReclamosDañosSeguimiento.aspx?ID_reclamo=" + id, false);
     }
 
     protected void btnBuscar_Click(object sender, EventArgs e)

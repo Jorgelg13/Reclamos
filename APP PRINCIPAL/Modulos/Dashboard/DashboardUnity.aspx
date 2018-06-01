@@ -60,18 +60,18 @@
                     <p style="text-align: center; font-size: 16px;"><b>Reclamos por estados de autos</b></p>
                 </div>
                 <div class="panel-body" style="text-align:center; padding:10px;">
-                    <h2>
+                    <h3>
                         <asp:LinkButton ID="lnPendienteAseguradoAuto" OnClick="lnPendienteAseguradoAuto_Click" ToolTip="Reclamos en estado pendiente asegurado" runat="server" ForeColor="#797D7F"></asp:LinkButton>
-                    </h2>
-                    <h2>
+                    </h3>
+                    <h3>
                         <asp:LinkButton ID="lnlProcesoLegalAutos" OnClick="lnlProcesoLegalAutos_Click" ToolTip="Reclamos en estado proceso legal" runat="server" ForeColor="#797D7F"></asp:LinkButton>
-                     </h2>
-                    <h2>
+                     </h3>
+                    <h3>
                         <asp:LinkButton ID="lnlEsperaAfectado" OnClick="lnlEsperaAfectado_Click" ToolTip="Reclamos en estado espera afectado" runat="server" ForeColor="#797D7F"></asp:LinkButton>
-                     </h2>
-                    <h2>
+                     </h3>
+                    <h3>
                         <asp:LinkButton ID="lnlPendienteCompania" OnClick="lnlPendienteCompania_Click" ToolTip="Reclamos en estado reparacion" runat="server" ForeColor="#797D7F"></asp:LinkButton>
-                    </h2>
+                    </h3>
                 </div>
             </div>
         </div>
@@ -81,18 +81,18 @@
                     <p style="text-align: center; font-size: 16px;"><b>Reclamos por estados de daños</b></p>
                 </div>
                 <div class="panel-body" style="text-align:center; padding:10px;">
-                    <h2>
+                    <h3>
                         <asp:LinkButton ID="lnPendienteAsegurado" OnClick="lnPendienteAsegurado_Click" ToolTip="Reclamos en estado pendiente asegurado" runat="server" ForeColor="#797D7F"></asp:LinkButton>
-                    </h2>
-                    <h2>
+                    </h3>
+                    <h3>
                         <asp:LinkButton ID="lnInactivo" OnClick="lnInactivo_Click" ToolTip ="Reclamos en estado inactivo" runat="server" ForeColor="#797D7F"></asp:LinkButton>
-                    </h2>
-                    <h2>
+                    </h3>
+                    <h3>
                         <asp:LinkButton ID="lnAjuste" OnClick="lnAjuste_Click" ToolTip="Reclamos en estado ajuste" runat="server" ForeColor="#797D7F"></asp:LinkButton>
-                   </h2>
-                    <h2>
+                   </h3>
+                    <h3>
                         <asp:LinkButton ID="lnFiniquito" OnClick="lnFiniquito_Click" ToolTip="Reclamos en estado pendiente finiquito" runat="server" ForeColor="#797D7F"></asp:LinkButton>
-                    </h2>
+                    </h3>
                 </div>
             </div>
         </div>
@@ -102,18 +102,18 @@
                     <p style="text-align: center; font-size: 16px;"><b>Reclamos Individuales y colectivos</b></p>
                 </div>
                 <div class="panel-body">
-                    <h2>
+                    <h3>
                         <asp:LinkButton ID="lnTotalIndividuales" OnClick="lnTotalIndividuales_Click" ToolTip="Reclamos Individuales en total" runat="server" ForeColor="#797D7F"></asp:LinkButton>/
                         <asp:LinkButton ID="lnIndividualesFueraTiempo" OnClick="lnIndividualesFueraTiempo_Click" runat="server" Style="color: red" ToolTip="Reclamos individuales fuera de tiempo"></asp:LinkButton>
-                    </h2>
-                    <h2>
+                    </h3>
+                    <h3>
                         <asp:LinkButton ID="lnColectivos" OnClick="lnColectivos_Click" runat="server" ToolTip="Reclamos de colectivos en total" ForeColor="#797D7F"></asp:LinkButton>/
                         <asp:LinkButton ID="lnColectivosFueraTiempo" OnClick="lnColectivosFueraTiempo_Click" runat="server" Style="color: red" ToolTip="Reclamos de colectivos fuera de tiempo"></asp:LinkButton>
-                    </h2>
-                    <h2>
+                    </h3>
+                    <h3>
                         <asp:LinkButton ID="lnPendienteDocumentacion" OnClick="lnPendienteDocumentacion_Click" runat="server" ToolTip="Reclamos de gastos medicos en total" ForeColor="#797D7F"></asp:LinkButton>/
                         <asp:LinkButton ID="lnPendienteDocumentacionFueraTiempo" runat="server" Style="color: red" ToolTip="Reclamos de gastos medicos en total fuera de tiempo"></asp:LinkButton>
-                    </h2>
+                    </h3>
                 </div>
             </div>
         </div>
