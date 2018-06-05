@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 /// <summary>
 /// Descripción breve de Cartas
@@ -17,7 +14,7 @@ public class Cartas
 
     public static string CARTA_ENVIO_CHEQUE_DANOS(reclamos_varios reg)
     {
-        return "<p>Adjunto encontrará el cheque No. (Número de cheque) por la cantidad de Q. (Monto del cheque), cubriendo el reclamo por " + reg.version + ", evento ocurrido en fecha " + reg.fecha_commit.ToString("dd/MM/yyyy") + ", amparado bajo la póliza No. " + reg.reg_reclamo_varios.poliza + "  a  nombre de " + reg.reg_reclamo_varios.asegurado + ". <p>" +
+        return "<p>Adjunto encontrará el cheque No. (Número de cheque) a nombre de (Nombre indicado en el cheque) por la cantidad de Q.(Monto del cheque), cubriendo el reclamo por " + reg.version + ", evento ocurrido en fecha " + reg.fecha_commit.ToString("dd/MM/yyyy") + ".<p>" +
             "<p>La liquidación se efectuó de la siguiente manera</p>";
     }
 

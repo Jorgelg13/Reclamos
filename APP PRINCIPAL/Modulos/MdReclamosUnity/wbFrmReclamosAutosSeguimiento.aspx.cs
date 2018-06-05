@@ -1130,8 +1130,12 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosAutosSeguimiento : Sys
                 Utils.Guardar_cartas_autos(txtContenidoCarta, "envio cheque", "autos", id, chCartaCierre, chCartaDeclinado, chEnvioCarta);
             }
 
+            chCartaCierre.Checked    = false;
+            chCartaDeclinado.Checked = false;
+            chEnvioCarta.Checked     = false;
             Utils.ShowMessage(this.Page, "Carta Guardada con exito", "Excelente", "success");
         }
+
         catch (Exception ex)
         {
             Utils.ShowMessage(this.Page, "Error al guardar la carta" + ex.Message, "Error", "error");

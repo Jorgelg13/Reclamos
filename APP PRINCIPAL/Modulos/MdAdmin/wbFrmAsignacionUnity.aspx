@@ -8,27 +8,31 @@
             <div class="tab-content">
                 <div class="panel-body">
                     <div class=" form-inline">
-                        <asp:Label ID="Label1" class="form-control" runat="server" Text="Fecha Inicio:   "></asp:Label>
+                        <asp:Label ID="Label1"  runat="server" Text="Fecha Inicio:   "></asp:Label>
                         <asp:TextBox ID="fechaInicio" CssClass="form-control" Height="34px" type="date" runat="server"></asp:TextBox>
-                        <asp:Label ID="Label2" runat="server" class="form-control" Text="Fecha Final:   "></asp:Label>
+                        <asp:Label ID="Label2" runat="server" Text="Fecha Final:   "></asp:Label>
                         <asp:TextBox ID="fechaFinal" CssClass="form-control" Height="34px" type="date" runat="server"></asp:TextBox>
                         <asp:Button runat="server" Text="Buscar" ID="btnBuscar" class="btn btn-primary" />
-                        <asp:SqlDataSource ID="SqlDataSourceUsuarios" runat="server" ConnectionString="<%$ ConnectionStrings:reclamosConnectionString %>" SelectCommand="SELECT [id], [usuario] FROM [gestores] where tipo = 'autos'"></asp:SqlDataSource>
-                        <asp:Label ID="Label3" class="form-control" runat="server" Text="Asignar Reclamo a:"></asp:Label>
-                        <asp:DropDownList CssClass="form-control" ID="DDLusuario" runat="server" DataSourceID="SqlDataSourceUsuarios" DataTextField="usuario" DataValueField="id">
+                        <asp:SqlDataSource ID="SqlDataSourceUsuarios" runat="server" ConnectionString="<%$ ConnectionStrings:reclamosConnectionString %>" SelectCommand="SELECT [nombre], [usuario] FROM [gestores] where tipo = 'autos'"></asp:SqlDataSource>
+                        <asp:Label ID="Label3" runat="server" Text="Asignar Reclamo a:"></asp:Label>
+                        <asp:DropDownList CssClass="form-control" ID="DDLusuario" runat="server" DataSourceID="SqlDataSourceUsuarios" DataTextField="nombre" DataValueField="usuario">
                         </asp:DropDownList>
                         <asp:Button ID="bntAsignar" runat="server" Text="Asignar" CssClass="btn btn-primary" OnClick="bntAsignar_Click"/>
                     </div>
                     <br />
                     <div class="scrolling-table-container">
-                        <asp:GridView ID="GridAsignacionAutos" CssClass="table bs-table table-responsive table-hover" runat="server" AutoGenerateColumns="False" CellPadding="4" DataSourceID="SqlDataSourceAutos" ForeColor="#333333" GridLines="None" DataKeyNames="id">
+                        <asp:GridView ID="GridAsignacionAutos" CssClass="table table-responsive table-hover" runat="server" AutoGenerateColumns="False" DataSourceID="SqlDataSourceAutos" GridLines="None">
                             <AlternatingRowStyle BackColor="White" />
                             <Columns>
-                                  <asp:TemplateField HeaderText="Seleccionar">
-                                        <ItemTemplate>
-                                            <asp:CheckBox ID="checkAsignar" runat="server" />
-                                        </ItemTemplate>
-                                    </asp:TemplateField>
+                               <asp:TemplateField HeaderText="Seleccionar">
+                                    <ItemTemplate>
+                                    <asp:CheckBox ID="checkAsignar" runat="server" />
+                                    </ItemTemplate>
+                                </asp:TemplateField>
+                                <asp:BoundField DataField="id" HeaderText="id" SortExpression="id" InsertVisible="False" ReadOnly="True">
+                                    <HeaderStyle HorizontalAlign="Center" Wrap="False" />
+                                    <ItemStyle HorizontalAlign="Center" Wrap="False" />
+                                </asp:BoundField>
                                 <asp:BoundField DataField="usuario_unity" HeaderText="Usuario Unity" SortExpression="usuario_unity">
                                     <HeaderStyle HorizontalAlign="Center" Wrap="False" />
                                     <ItemStyle HorizontalAlign="Left" Wrap="False" />
@@ -125,10 +129,6 @@
                                     <HeaderStyle HorizontalAlign="Center" Wrap="False" />
                                     <ItemStyle HorizontalAlign="Left" Wrap="False" />
                                 </asp:BoundField>
-                                <asp:BoundField DataField="edad" HeaderText="Edad" SortExpression="edad">
-                                    <HeaderStyle HorizontalAlign="Center" Wrap="False" />
-                                    <ItemStyle HorizontalAlign="Left" Wrap="False" />
-                                </asp:BoundField>
                                 <asp:BoundField DataField="version" HeaderText="version" SortExpression="version">
                                     <HeaderStyle HorizontalAlign="Center" Wrap="False" />
                                     <ItemStyle HorizontalAlign="Left" Wrap="False" />
@@ -141,36 +141,14 @@
                                     <HeaderStyle HorizontalAlign="Center" Wrap="False" />
                                     <ItemStyle HorizontalAlign="Left" Wrap="False" />
                                 </asp:BoundField>
-                                <asp:BoundField DataField="cabina" HeaderText="Cabina" SortExpression="cabina">
-                                    <HeaderStyle HorizontalAlign="Center" Wrap="False" />
-                                    <ItemStyle HorizontalAlign="Left" Wrap="False" />
-                                </asp:BoundField>
-                                <asp:BoundField DataField="sucursal" HeaderText="Sucursal" SortExpression="sucursal">
-                                    <HeaderStyle HorizontalAlign="Center" Wrap="False" />
-                                    <ItemStyle HorizontalAlign="Left" Wrap="False" />
-                                </asp:BoundField>
-                                <asp:BoundField DataField="empresa" HeaderText="Empresa" SortExpression="empresa">
-                                    <HeaderStyle HorizontalAlign="Center" Wrap="False" />
-                                    <ItemStyle HorizontalAlign="Left" Wrap="False" />
-                                </asp:BoundField>
-                                <asp:BoundField DataField="pais" HeaderText="Pais" SortExpression="pais">
-                                    <HeaderStyle HorizontalAlign="Center" Wrap="False" />
-                                    <ItemStyle HorizontalAlign="Left" Wrap="False" />
-                                </asp:BoundField>
                                 <asp:BoundField DataField="usuario" HeaderText="Usuario" SortExpression="usuario">
                                     <HeaderStyle HorizontalAlign="Center" Wrap="False" />
                                     <ItemStyle HorizontalAlign="Left" Wrap="False" />
                                 </asp:BoundField>
-                                <asp:BoundField DataField="id" HeaderText="id" SortExpression="id" InsertVisible="False" ReadOnly="True">
-                                    <HeaderStyle HorizontalAlign="Center" Wrap="False" />
-                                    <ItemStyle HorizontalAlign="Center" Wrap="False" />
-                                </asp:BoundField>
                             </Columns>
-                            <FooterStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" />
                             <HeaderStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" />
                             <PagerStyle BackColor="#ACD6F2" ForeColor="White" HorizontalAlign="Center" />
                             <RowStyle BackColor="#EFF3FB" />
-                            <SelectedRowStyle BackColor="#D1DDF1" Font-Bold="True" ForeColor="#333333" />
                         </asp:GridView>
                         <asp:SqlDataSource ID="SqlDataSourceAutos" runat="server" ConnectionString="<%$ ConnectionStrings:reclamosConnectionString %>" SelectCommand="SELECT
                                 reclamo_auto.id,
@@ -209,7 +187,6 @@
                                 empresa.nombre as empresa,
                                 pais.nombre as pais,
                                 usuario.nombre as usuario
-
                                 FROM
                                 auto_reclamo
                                 INNER JOIN reclamo_auto ON reclamo_auto.id_auto_reclamo = auto_reclamo.id

@@ -18,7 +18,7 @@
                         </div>
                         <br />
                         <div class="scrolling-table-container">
-                            <asp:GridView ID="GridGestores" CssClass="table bs-table tablaDetalleAuto table-responsive table-hover" runat="server" CellPadding="4" ForeColor="#333333" GridLines="None" AutoGenerateColumns="False" DataKeyNames="id" DataSourceID="SqlDataSourceGestores">
+                            <asp:GridView ID="GridGestores" CssClass="table bs-table tablaDetalleAuto table-responsive table-hover" runat="server" GridLines="None" AutoGenerateColumns="False" DataKeyNames="id" DataSourceID="SqlDataSourceGestores">
                                 <AlternatingRowStyle BackColor="White" />
                                 <Columns>
                                     <asp:CommandField ShowEditButton="True" />
@@ -41,7 +41,6 @@
                                     <asp:CheckBoxField DataField="estado" HeaderText="Estado" SortExpression="estado" />
                                 </Columns>
                                 <EditRowStyle BackColor="#2461BF" />
-                                <FooterStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" />
                                 <HeaderStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" />
                                 <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
                                 <RowStyle BackColor="#EFF3FB" />

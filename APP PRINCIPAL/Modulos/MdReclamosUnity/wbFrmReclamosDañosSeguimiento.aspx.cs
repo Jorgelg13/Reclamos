@@ -718,7 +718,6 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosDañosSeguimiento : Sy
         lblCartaPoliza.Text        = registro.reg_reclamo_varios.poliza;
         lblCartaNumeroReclamo.Text = registro.num_reclamo;
         lblCartaAsegurado.Text     = registro.reg_reclamo_varios.asegurado;
-        lblCartaEjecutivo.Text     = registro.reg_reclamo_varios.ejecutivo;
         lblCartaAsesorReclamo.Text = registro.gestores.nombre;
     }
 
@@ -752,7 +751,6 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosDañosSeguimiento : Sy
             panelPrincipal.Visible = true;
             Panelsecundario.Visible = false;
         }
-
         this.Page.ClientScript.RegisterStartupScript(this.Page.GetType(), "show_modal", "$('#Editor').modal('show');", addScriptTags: true);
     }
 
@@ -786,7 +784,6 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosDañosSeguimiento : Sy
             panelPrincipal.Visible = true;
             Panelsecundario.Visible = false;
         }
-
         this.Page.ClientScript.RegisterStartupScript(this.Page.GetType(), "show_modal", "$('#Editor').modal('show');", addScriptTags: true);
     }
 
@@ -820,7 +817,6 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosDañosSeguimiento : Sy
             panelPrincipal.Visible = true;
             Panelsecundario.Visible = false;
         }
-
         this.Page.ClientScript.RegisterStartupScript(this.Page.GetType(), "show_modal", "$('#Editor').modal('show');", addScriptTags: true);
     }
 
@@ -843,6 +839,9 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosDañosSeguimiento : Sy
                 Utils.Guardar_cartas(txtContenidoCarta, "envio cheque", "daños", id, chCartaCierre, chCartaDeclinado, chEnvioCarta, Response);
             }
 
+            chCartaCierre.Checked = false;
+            chCartaDeclinado.Checked = false;
+            chEnvioCarta.Checked = false;
             Utils.ShowMessage(this.Page, "Carta Guardada con exito", "Excelente", "success");
         }
         catch (Exception ex)

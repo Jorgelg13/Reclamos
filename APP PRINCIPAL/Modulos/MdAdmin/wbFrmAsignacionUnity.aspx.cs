@@ -27,21 +27,21 @@ public partial class Modulos_MdAdmin_wbFrmAsignacionUnity : System.Web.UI.Page
         foreach (GridViewRow row in GridAsignacionAutos.Rows)
         {
             CheckBox checkAsig = (CheckBox)row.FindControl("checkAsignar");
-            String reclamo = Convert.ToString(row.Cells[34].Text);
+            String reclamo = Convert.ToString(row.Cells[1].Text);
             int id = Convert.ToInt32(reclamo);
             if (checkAsig.Checked)
             {
                 try
                 {
                     var asignar = DBReclamos.reclamo_auto.Find(id);
-                    asignar.usuario_unity = DDLusuario.SelectedItem.Text;
+                    asignar.usuario_unity = DDLusuario.SelectedValue;
                     DBReclamos.SaveChanges();
                     GridAsignacionAutos.DataBind();
                     Utils.ShowMessage(this.Page, "Reclamos asignados exitosamente", "Excelente", "success");
                 }
                 catch (Exception ex)
                 {
-                    Response.Write(ex);
+                    Utils.ShowMessage(this.Page, "No se a podido asigar el reclamo" + ex.Message, "Excelente", "success");
                 }
             }
         }

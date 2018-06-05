@@ -2,6 +2,7 @@
 using System.Web;
 using System.Web.UI.WebControls;
 using System.Data.SqlClient;
+using System.Web.UI;
 
 public partial class Modulos_MdReclamosUnity_wbFrmRecDañosSeguimiento : System.Web.UI.Page
 {
@@ -9,10 +10,13 @@ public partial class Modulos_MdReclamosUnity_wbFrmRecDañosSeguimiento : System.
     conexionBD objeto = new conexionBD();
     SqlCommand cmd = new SqlCommand();
     Utils llenado = new Utils();
-    String selectGeneral;
+    String selectGeneral, EstadosAgrupados,estado,reclamosSeguimiento;
+    int total;
 
     protected void Page_Load(object sender, EventArgs e)
     {
+        EstadosAgrupados = "select count(*) as Total, estado_reclamo_unity as Estado from reclamos_varios where usuario_unity = '"+userlogin+"' and estado_unity = 'Seguimiento' group by estado_reclamo_unity ";
+
         selectGeneral = "SELECT " +
                 "dbo.reclamos_varios.id as ID," +
                 "dbo.reg_reclamo_varios.poliza as Poliza," +
@@ -58,8 +62,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmRecDañosSeguimiento : System.
                 //"dbo.empresa.nombre as empresa," +
                 //"dbo.pais.nombre as pais," +
                 //"dbo.usuario.nombre as usuario, " +
-                "Convert(varchar(20),dbo.reclamos_varios.fecha_visualizar, 103) as [Fecha Visualizar], " +
-                "CASE WHEN CONVERT(date, reclamos_varios.fecha_visualizar, 110) < CONVERT(date, GETDATE(), 110)  THEN 0 ELSE 1 END AS mostrar " +
+                "Convert(varchar(20),dbo.reclamos_varios.fecha_visualizar, 103) as [Fecha Visualizar] " +
                 "FROM " +
                 "dbo.reg_reclamo_varios " +
                 "INNER JOIN dbo.reclamos_varios ON dbo.reclamos_varios.id_reg_reclamos_varios = dbo.reg_reclamo_varios.id "+
@@ -70,9 +73,6 @@ public partial class Modulos_MdReclamosUnity_wbFrmRecDañosSeguimiento : System.
                 //"INNER JOIN dbo.pais ON dbo.empresa.id_pais = dbo.pais.id " +
                 //"INNER JOIN dbo.usuario ON dbo.reclamos_varios.id_usuario = dbo.usuario.id ";
 
-        string reclamosSeguimiento = selectGeneral +
-                " where (reclamos_varios.usuario_unity = '" + userlogin + "' and reclamos_varios.fecha_visualizar <= getdate() and reclamos_varios.estado_unity != 'Cerrado' ) ";
-
         string reclamosPrioritarios = selectGeneral +
                " where ((reclamos_varios.prioritario = 'true') and (reclamos_varios.usuario_unity = '" + userlogin + "' and reclamos_varios.estado_unity != 'Cerrado' ))";
 
@@ -81,7 +81,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmRecDañosSeguimiento : System.
 
         if(!IsPostBack)
         {
-            llenado.llenarGrid(reclamosSeguimiento, GridReclamosSeguimiento);
+            llenado.llenarGrid(EstadosAgrupados, GridReclamosSeguimiento);
             llenado.llenarGrid(reclamosPrioritarios, GridPrioritarios);
             llenado.llenarGrid(reclamosComplicados, GridComplicados);
         }
@@ -89,9 +89,10 @@ public partial class Modulos_MdReclamosUnity_wbFrmRecDañosSeguimiento : System.
     //metodo para actualizar la fecha a la actual
     protected void GridReclamosSeguimiento_SelectedIndexChanged(object sender, EventArgs e)
     {
-        int id1;
-        id1 = Convert.ToInt32(GridReclamosSeguimiento.SelectedRow.Cells[1].Text);
-        Response.Redirect("/Modulos/MdReclamosUnity/wbFrmReclamosDañosSeguimiento.aspx?ID_reclamo=" + id1, false);
+        estado = GridReclamosSeguimiento.SelectedRow.Cells[2].Text;
+        reclamosSeguimiento = selectGeneral +
+               " where (reclamos_varios.usuario_unity = '" + userlogin + "' and reclamos_varios.estado_unity = 'Seguimiento' and reclamos_varios.estado_reclamo_unity = '"+estado+"') ";
+        llenado.llenarGrid(reclamosSeguimiento, GridReclamosEstado);
     }
 
     protected void GridPrioritarios_SelectedIndexChanged(object sender, EventArgs e)
@@ -126,22 +127,40 @@ public partial class Modulos_MdReclamosUnity_wbFrmRecDañosSeguimiento : System.
     protected void GridReclamosSeguimiento_RowDataBound(object sender, GridViewRowEventArgs e)
     {
         if (e.Row.RowType == DataControlRowType.DataRow)
-            if (e.Row.Cells[15].Text == "0")
+            if (Convert.ToDateTime(e.Row.Cells[14].Text) >= DateTime.Today)
             {
-                for (int _xCell = 0; _xCell <= e.Row.Cells.Count - 1; _xCell++)
+                for (int cell = 0; cell <= e.Row.Cells.Count - 1; cell++)
                 {
-                    e.Row.Cells[_xCell].ForeColor = System.Drawing.Color.Red;
+                    e.Row.CssClass = "pendientes";
                 }
             }
-    }
 
-    protected void DDLTipo_SelectedIndexChanged(object sender, EventArgs e)
-    {
-        string reclamosPorEstado = selectGeneral +
-              " where (reclamos_varios.estado_reclamo_unity = '" + DDLTipo.SelectedItem + "' and reclamos_varios.usuario_unity = '" + userlogin + "' and reclamos_varios.estado_unity != 'Cerrado' ) ";
+        if (e.Row.RowType == DataControlRowType.DataRow)
+            if (Convert.ToDateTime(e.Row.Cells[14].Text) < DateTime.Today)
+            {
+                for (int cell = 0; cell <= e.Row.Cells.Count - 1; cell++)
+                {
+                    e.Row.CssClass = "atrasados";
+                }
+            }
 
-        llenado.llenarGrid(reclamosPorEstado, GridReclamosEstado);
-        GridReclamosSeguimiento.Visible = false;
+        if (e.Row.RowType == DataControlRowType.DataRow)
+            if (Convert.ToDateTime(e.Row.Cells[14].Text) == DateTime.Today.AddDays(2) || Convert.ToDateTime(e.Row.Cells[14].Text) == DateTime.Today.AddDays(1))
+            {
+                for (int cell = 0; cell <= e.Row.Cells.Count - 1; cell++)
+                {
+                    e.Row.CssClass = "precaucion";
+                }
+            }
+
+        if (e.Row.RowType == DataControlRowType.DataRow)
+            if (Convert.ToDateTime(e.Row.Cells[14].Text) == DateTime.Today)
+            {
+                for (int cell = 0; cell <= e.Row.Cells.Count - 1; cell++)
+                {
+                    e.Row.CssClass = "ver-hoy"; //azules
+                }
+            }
     }
 
     protected void ddlgestor_SelectedIndexChanged(object sender, EventArgs e)
@@ -159,4 +178,29 @@ public partial class Modulos_MdReclamosUnity_wbFrmRecDañosSeguimiento : System.
         llenado.llenarGrid(Prioritarios, GridPrioritarios);
         llenado.llenarGrid(Complicados, GridComplicados);
     }
+
+    protected void GridReclamosSeguimiento_RowDataBound1(object sender, GridViewRowEventArgs e)
+    {
+        try
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                total += Convert.ToInt32(DataBinder.Eval(e.Row.DataItem, "Total"));
+            }
+            else if (e.Row.RowType == DataControlRowType.Footer)
+            {
+                e.Row.Cells[0].Text = "TOTAL:";
+                e.Row.Cells[1].Text = total.ToString();
+                e.Row.Cells[1].HorizontalAlign = HorizontalAlign.Left;
+                e.Row.Font.Bold = true;
+            }
+        }
+        catch (Exception ex)
+        {
+            Utils.ShowMessage(this.Page, "Error al realizar el conteo de reclamos" + ex.Message, "Error..", "error");
+        }
+    }
 }
+
+
+

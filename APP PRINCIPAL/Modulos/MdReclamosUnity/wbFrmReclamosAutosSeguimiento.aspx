@@ -787,7 +787,7 @@
             </div>
         </div>
         <%-- modal para envio manual de sms --%>
-        <div class="modal fade " tabindex="-1" id="ModalSMS" data-backdrop="static">
+        <div class="modal fade " id="ModalSMS" data-backdrop="static">
             <div class="modal-dialog modal-sm">
                 <div class="modal-content">
                     <div class="modal-header">

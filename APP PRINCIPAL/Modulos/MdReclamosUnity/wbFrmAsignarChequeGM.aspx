@@ -8,7 +8,7 @@
             <div class="panel-heading">Listado De Reclamos Pendientes de ingresar cheque</div>
             <div class="panel-body">
                 <div class="scrolling-table-container">
-                    <asp:GridView ID="GridGeneral" runat="server" CssClass="table bs-table table-responsive table-hover" AutoGenerateColumns="True" CellPadding="4" ForeColor="#333333" GridLines="None" OnSelectedIndexChanged="GridGeneral_SelectedIndexChanged" AllowCustomPaging="True" AllowPaging="True" PageSize="3000">
+                    <asp:GridView ID="GridGeneral" runat="server" CssClass="table bs-table table-responsive table-hover" AutoGenerateColumns="True" GridLines="None" OnSelectedIndexChanged="GridGeneral_SelectedIndexChanged" PageSize="3000">
                         <AlternatingRowStyle BackColor="White" />
                         <Columns>
                             <asp:CommandField ShowSelectButton="True">
@@ -16,7 +16,6 @@
                                 <ItemStyle HorizontalAlign="Left" Wrap="False" />
                             </asp:CommandField>
                         </Columns>
-                        <FooterStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" />
                         <HeaderStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" HorizontalAlign="Center" Wrap="False" />
                         <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
                         <RowStyle BackColor="#EFF3FB" HorizontalAlign="Left" Wrap="False" />

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Web.UI;
-using System.IO;
 using System.Linq;
 using System.Data;
 using System.Web;
@@ -260,6 +259,10 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesDaños : System.Web.UI
             ddlBuscar.DataBind();
             txtBuscar.Visible = false;
             ddlBuscar.Visible = true;
+        }
+        else if(ddlElegir.SelectedItem.Text == "Gestor")
+        {
+            Gestores();
         }
     }
 

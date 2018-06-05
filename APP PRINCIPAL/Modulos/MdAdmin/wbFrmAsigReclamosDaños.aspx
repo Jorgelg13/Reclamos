@@ -13,17 +13,21 @@
                         <asp:Label ID="Label2" runat="server" class="form-control" Text="Fecha Final:   "></asp:Label>
                         <asp:TextBox ID="fechaFinal" CssClass="form-control" Height="34px" type="date" runat="server"></asp:TextBox>
                         <asp:Button runat="server" Text="Buscar" ID="btnBuscar" class="btn btn-primary" />
-                        <asp:SqlDataSource ID="SqlDataSourceUsuarios" runat="server" ConnectionString="<%$ ConnectionStrings:reclamosConnectionString %>" SelectCommand="SELECT [id], usuario FROM [gestores] where tipo = 'Daños varios'"></asp:SqlDataSource>
+                        <asp:SqlDataSource ID="SqlDataSourceUsuarios" runat="server" ConnectionString="<%$ ConnectionStrings:reclamosConnectionString %>" SelectCommand="SELECT [usuario], nombre FROM [gestores] where tipo = 'Daños varios'"></asp:SqlDataSource>
                         <asp:Label ID="Label3" class="form-control" runat="server" Text="Asignar Reclamo a:"></asp:Label>
-                        <asp:DropDownList CssClass="form-control" ID="DDLusuario" runat="server" DataSourceID="SqlDataSourceUsuarios" DataTextField="usuario" DataValueField="id">
+                        <asp:DropDownList CssClass="form-control" ID="DDLusuario" runat="server" DataSourceID="SqlDataSourceUsuarios" DataTextField="nombre" DataValueField="usuario">
                         </asp:DropDownList>
                     </div>
                     <br />
                     <div class="scrolling-table-container">
-                        <asp:GridView ID="GridAsigDaños" CssClass="table bs-table table-responsive table-hover" runat="server" AutoGenerateColumns="False" CellPadding="4" DataSourceID="SqlDataSourceDaños" ForeColor="#333333" GridLines="None" DataKeyNames="id" OnSelectedIndexChanged="GridAsigDaños_SelectedIndexChanged">
+                        <asp:GridView ID="GridAsigDaños" CssClass="table bs-table table-responsive table-hover" runat="server" AutoGenerateColumns="False" DataSourceID="SqlDataSourceDaños" GridLines="None" DataKeyNames="id" OnSelectedIndexChanged="GridAsigDaños_SelectedIndexChanged">
                             <AlternatingRowStyle BackColor="White" />
                             <Columns>
                                 <asp:CommandField SelectText="Asignar" ShowSelectButton="True" />
+                                 <asp:BoundField DataField="id" HeaderText="id" InsertVisible="False" ReadOnly="True" SortExpression="id">
+                                    <HeaderStyle HorizontalAlign="Center" Wrap="False" />
+                                    <ItemStyle HorizontalAlign="Center" Wrap="False" />
+                                </asp:BoundField>
                                 <asp:BoundField DataField="usuario_unity" HeaderText="Usuario Unity" SortExpression="usuario_unity">
                                     <HeaderStyle HorizontalAlign="Center" Wrap="False" />
                                     <ItemStyle HorizontalAlign="Left" Wrap="False" />
@@ -113,22 +117,6 @@
                                     <ItemStyle HorizontalAlign="Left" Wrap="False" />
                                 </asp:BoundField>
                                 <asp:BoundField DataField="fecha_commit" HeaderText="Fecha Commit" SortExpression="fecha_commit">
-                                    <HeaderStyle HorizontalAlign="Center" Wrap="False" />
-                                    <ItemStyle HorizontalAlign="Left" Wrap="False" />
-                                </asp:BoundField>
-                                <asp:BoundField DataField="cabina" HeaderText="Cabina" SortExpression="cabina">
-                                    <HeaderStyle HorizontalAlign="Center" Wrap="False" />
-                                    <ItemStyle HorizontalAlign="Left" Wrap="False" />
-                                </asp:BoundField>
-                                <asp:BoundField DataField="sucursal" HeaderText="Sucursal" SortExpression="sucursal">
-                                    <HeaderStyle HorizontalAlign="Center" Wrap="False" />
-                                    <ItemStyle HorizontalAlign="Left" Wrap="False" />
-                                </asp:BoundField>
-                                <asp:BoundField DataField="empresa" HeaderText="Empresa" SortExpression="empresa">
-                                    <HeaderStyle HorizontalAlign="Center" Wrap="False" />
-                                    <ItemStyle HorizontalAlign="Left" Wrap="False" />
-                                </asp:BoundField>
-                                <asp:BoundField DataField="pais" HeaderText="Pais" SortExpression="pais">
                                     <HeaderStyle HorizontalAlign="Center" Wrap="False" />
                                     <ItemStyle HorizontalAlign="Left" Wrap="False" />
                                 </asp:BoundField>

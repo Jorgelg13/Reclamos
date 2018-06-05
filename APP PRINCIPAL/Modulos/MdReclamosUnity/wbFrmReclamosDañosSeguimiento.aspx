@@ -613,12 +613,9 @@
                                             <table style="width: 100%">
                                                 <tr>
                                                     <td style="text-align: center">
-                                                        <asp:Label ID="lblCartaEjecutivo" runat="server"></asp:Label></td>
-                                                    <td style="text-align: center">
                                                         <asp:Label ID="lblCartaAsesorReclamo" runat="server"></asp:Label></td>
                                                 </tr>
                                                 <tr>
-                                                    <td style="text-align: center">Ejecutivo de Cuenta</td>
                                                     <td style="text-align: center">Asesor de Reclamos Daños</td>
                                                 </tr>
                                             </table>
@@ -632,7 +629,7 @@
                                             </b>
                                         </p>
                                     </div>
-                                    <p style="text-align: right; padding-top: 20px;">RE-DA-F-05/Ver.01</p>
+                                    <p style="text-align: right; padding-top: 20px;">RE-DA-F-05/Ver.02</p>
                                 </div>
                             </asp:Panel>
                             <asp:Panel runat="server" ID="Panelsecundario" Style="display: none">
@@ -788,7 +785,8 @@
                             <div class="modal-header">
                                 <h4 class="modal-title"><b>Desea Enviar Notificacion SMS..</b></h4>
                             </div>
-                            <div class="modal-body">
+                            <div class="modal-body" style="font-size:70px; text-align:center;">
+                                <a><i class="fa fa-comments"></i></a>
                                 <asp:TextBox ID="txtSMS" Style="width: 99%" autocomplete="off" class="form-control" TextMode="multiline"
                                     Columns="50" Rows="8" runat="server" Visible="false"></asp:TextBox>
                             </div>

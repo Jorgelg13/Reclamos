@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Web.UI;
+using System.Web.UI.WebControls;
 
 public partial class Modulos_MdReclamosUnity_wbFrmReclamosMedicosGeneral : System.Web.UI.Page
 {
@@ -26,11 +27,10 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosMedicosGeneral : Syste
           "dbo.reg_reclamos_medicos.estado_poliza as [Estado Poliza]," +
           "dbo.reg_reclamos_medicos.vip as VIP," +
           "dbo.reg_reclamos_medicos.moneda as Moneda," +
-          "dbo.cabina.nombre as Cabina," +
-          "dbo.sucursal.nombre as Sucursal," +
-          "dbo.empresa.nombre as Empresa," +
-          "dbo.pais.nombre as Pais, " +
-          "CASE WHEN CONVERT(date, reclamos_medicos.fecha_visualizar, 110) < CONVERT(date, GETDATE(), 110)  THEN 0 ELSE 1 END AS mostrar, " +
+          //"dbo.cabina.nombre as Cabina," +
+          //"dbo.sucursal.nombre as Sucursal," +
+          //"dbo.empresa.nombre as Empresa," +
+          //"dbo.pais.nombre as Pais, " +
           "Convert(varchar(10),dbo.reclamos_medicos.fecha_visualizar, 103) As [Fecha Visualizar] " +
           "FROM " +
           " dbo.reg_reclamos_medicos " +
@@ -50,7 +50,6 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosMedicosGeneral : Syste
         {
             seleccionarRegistros += " where reclamos_medicos.fecha_visualizar < GETDATE() and estado_unity != 'Cerrado' and tipo = 'I' ";
             llenado.llenarGrid(seleccionarRegistros, GridGeneral);
-            GridGeneral.ForeColor = System.Drawing.Color.Red;
         }
 
         else if (idRecibido == "3")
@@ -63,7 +62,6 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosMedicosGeneral : Syste
         {
             seleccionarRegistros += " where reclamos_medicos.fecha_visualizar < GETDATE() and estado_unity != 'Cerrado' and tipo = 'C' ";
             llenado.llenarGrid(seleccionarRegistros, GridGeneral);
-            GridGeneral.ForeColor = System.Drawing.Color.Red;
         }
         
         else if(idRecibido == "5")
@@ -89,5 +87,17 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosMedicosGeneral : Syste
     public override void VerifyRenderingInServerForm(Control control)
     {
         //base.VerifyRenderingInServerForm(control);
+    }
+
+    protected void GridGeneral_RowDataBound(object sender, System.Web.UI.WebControls.GridViewRowEventArgs e)
+    {
+        if (e.Row.RowType == DataControlRowType.DataRow)
+            if (Convert.ToDateTime(e.Row.Cells[16].Text) <= DateTime.Today)
+            {
+                for (int cell = 0; cell <= e.Row.Cells.Count - 1; cell++)
+                {
+                    e.Row.CssClass = "atrasados";
+                }
+            }
     }
 }

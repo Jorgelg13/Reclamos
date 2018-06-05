@@ -21,28 +21,22 @@
             </ul>
             <div class="tab-content">
                 <div role="tabpanel" class="tab-pane" id="home">
-                    <br />
-                    <div class="form-inline">
-                        <asp:DropDownList CssClass="form-control" AutoPostBack="True" ID="DDLTipo" Style="width: 15%" Height="34px" runat="server" CausesValidation="True" OnSelectedIndexChanged="DDLTipo_SelectedIndexChanged" DataSourceID="SqlDataSourceEstados" DataTextField="descripcion" DataValueField="id">
-                        </asp:DropDownList>
-                    </div>
-                    <br />
-                    <%--reclamos en seguimiento--%>
-                    <div class="scrolling-table-container">
-                        <asp:GridView ID="GridReclamosSeguimiento" runat="server" CssClass="table bs-table table-responsive table-hover" AutoGenerateColumns="True" CellPadding="4" ForeColor="#333333" GridLines="None" OnSelectedIndexChanged="GridReclamosSeguimiento_SelectedIndexChanged">
-                            <AlternatingRowStyle BackColor="White" />
+                    <div class="col-sm-12 col-md-3 col-lg-3 scrolling-table-container">
+                        <asp:GridView ID="GridReclamosSeguimiento" runat="server" ShowFooter="true" CssClass="table table-hover" GridLines="None" OnRowDataBound="GridReclamosSeguimiento_RowDataBound1" OnSelectedIndexChanged="GridReclamosSeguimiento_SelectedIndexChanged">
                             <Columns>
-                                <asp:CommandField ShowSelectButton="True">
+                                <asp:CommandField ShowSelectButton="True" SelectText="Mostrar">
                                     <HeaderStyle HorizontalAlign="Center" Wrap="False" />
                                     <ItemStyle HorizontalAlign="Left" Wrap="False" />
                                 </asp:CommandField>
                             </Columns>
                             <HeaderStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" HorizontalAlign="Center" Wrap="False" />
-                            <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
-                            <RowStyle BackColor="#EFF3FB" HorizontalAlign="Left" Wrap="False" />
+                            <RowStyle HorizontalAlign="Left" Wrap="False" />
+                            <FooterStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" />
+                            <SelectedRowStyle BackColor="#afcaf7" Font-Bold="True" ForeColor="#333333" />
                         </asp:GridView>
-                        <%--------------gridview de reclamos por estado ----------------------------%>
-                        <asp:GridView ID="GridReclamosEstado" OnRowDataBound="GridReclamosSeguimiento_RowDataBound" runat="server" CssClass="table bs-table table-responsive table-hover" AutoGenerateColumns="True" CellPadding="4" ForeColor="#333333" GridLines="None" OnSelectedIndexChanged="GridReclamosEstado_SelectedIndexChanged">
+                    </div>
+                    <div class="col-sm-12 col-md-9 col-lg-9 scrolling-table-container">
+                        <asp:GridView ID="GridReclamosEstado" OnRowDataBound="GridReclamosSeguimiento_RowDataBound" runat="server" CssClass="table table-responsive table-hover" AutoGenerateColumns="True" GridLines="None" OnSelectedIndexChanged="GridReclamosEstado_SelectedIndexChanged">
                             <AlternatingRowStyle BackColor="White" />
                             <Columns>
                                 <asp:CommandField ShowSelectButton="True">
@@ -52,7 +46,7 @@
                             </Columns>
                             <HeaderStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" HorizontalAlign="Center" Wrap="False" />
                             <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
-                            <RowStyle BackColor="#EFF3FB" HorizontalAlign="Left" Wrap="False" />
+                            <RowStyle HorizontalAlign="Left" Wrap="False" />
                         </asp:GridView>
                     </div>
                 </div>
@@ -115,9 +109,33 @@
                 </div>
             </div>
         </div>
+       <a title="Simbologia de colores" style="font-size:50px;" data-toggle="modal" role="button" data-target="#ModalColores"><i class="fa fa-info-circle" aria-hidden="true"></i></a>
     </div>
+       <%-- Informacion de colores --%>
+        <div class="modal fade " id="ModalColores" data-backdrop="static">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title"><b>Simbología de colores...</b></h4>
+                    </div>
+                    <div class="modal-body form-inline">
+                        <label>Pendientes</label>
+                        <asp:TextBox ID="txtrojo" style="background-color:#f7c6be; width:100%;" class="form-control" runat="server"></asp:TextBox>
+                         <label>En tiempo</label>
+                        <asp:TextBox ID="txtverde" style="background-color:#8ace8e; width:100%;" class="form-control" runat="server"></asp:TextBox>
+                         <label>Proximos atrasados</label>
+                        <asp:TextBox ID="txtAmarillo" style="background-color:#f9f595; width:100%;" class="form-control" runat="server"></asp:TextBox>
+                         <label>Reclamos a ver hoy</label>
+                        <asp:TextBox ID="txtAzul" style="background-color:#afcaf7; width:100%;" class="form-control" runat="server"></asp:TextBox>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-warning" data-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     <asp:SqlDataSource ID="SqlDataSourceGestores" runat="server" ConnectionString="<%$ ConnectionStrings:reclamosConnectionString %>" SelectCommand="SELECT [id], [nombre] FROM [gestores] where tipo = 'autos' "></asp:SqlDataSource>
-    <asp:SqlDataSource ID="SqlDataSourceEstados" runat="server" ConnectionString="<%$ ConnectionStrings:reclamosConnectionString %>" SelectCommand="SELECT [id], [descripcion] FROM [estados_reclamos_unity]"></asp:SqlDataSource>
 </asp:Content>
 
 

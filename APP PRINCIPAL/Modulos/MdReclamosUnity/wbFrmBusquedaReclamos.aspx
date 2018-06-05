@@ -23,7 +23,7 @@
                     <asp:Button runat="server" Text="Buscar" ID="btnBuscar" class="btn btn-primary" OnClick="btnBuscar_Click" />
                 </div>
                 <div class="scrolling-table-container">
-                    <asp:GridView ID="GridBusquedaGeneral" runat="server" AllowPaging="true" CssClass="table bs-table table-responsive table-hover" AutoGenerateColumns="true" CellPadding="4" ForeColor="#333333" GridLines="None" OnPageIndexChanging="GridBusquedaGeneral_PageIndexChanging" PageSize="5000" OnSelectedIndexChanged="GridBusquedaGeneral_SelectedIndexChanged">
+                    <asp:GridView ID="GridBusquedaGeneral" runat="server" AllowPaging="true" CssClass="table bs-table table-responsive table-hover" AutoGenerateColumns="true" GridLines="None" OnPageIndexChanging="GridBusquedaGeneral_PageIndexChanging" PageSize="5000" OnSelectedIndexChanged="GridBusquedaGeneral_SelectedIndexChanged">
                         <AlternatingRowStyle BackColor="White" />
                         <Columns>
                             <asp:CommandField ShowSelectButton="True">
@@ -31,7 +31,6 @@
                                 <ItemStyle HorizontalAlign="Left" Wrap="False" />
                             </asp:CommandField>
                         </Columns>
-                        <FooterStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" />
                         <HeaderStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" HorizontalAlign="Center" Wrap="False" />
                         <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
                         <RowStyle BackColor="#EFF3FB" HorizontalAlign="Left" Wrap="False" />

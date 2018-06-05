@@ -220,7 +220,6 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosMedicosSeguimientos : 
     {
         seleccionarCorreo();
 
-        bool insertar = true;
         try
         {
             string from = correo;
@@ -232,15 +231,10 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosMedicosSeguimientos : 
             Utils.ShowMessage(this.Page, "Correo Enviado con exito", "Excelente..!", "success");
         }
 
-        catch (SmtpException)
+        catch (SmtpException ex)
         {
-            Utils.ShowMessage(this.Page, "Erorr de autenticacion digite bien su contraseña", "Nota..!", "warning");
-            insertar = false;
-        }
-
-        if (insertar == true)
-        {
-            agregarComentario("Destinatario: " +txtDestinatario.Text + " Asunto: " +txtAsunto.Text + " Cuerpo del mensaje: " + txtMensaje.Text);
+            Utils.ShowMessage(this.Page, "Erorr de autenticacion digite bien su contraseña." + ex.Message, "Nota..!", "warning");
+            agregarComentario("Destinatario: " + txtDestinatario.Text + " Asunto: " + txtAsunto.Text + " Cuerpo del mensaje: " + txtMensaje.Text);
             varciarCorreo();
         }
     }
