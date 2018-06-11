@@ -12,8 +12,8 @@
                 <div class="panel-body scrolling-table-container" style="height: 525px; max-height: 600px;">
                     <asp:CheckBox Text="Todos" runat="server" id="checkTodos" AutoPostBack="true" OnCheckedChanged="checkTodos_CheckedChanged"/>
                     <asp:CheckBoxList ID="checkCampos" runat="server" Height="141px" Width="147px">
-                        <asp:ListItem Value="reclamos_varios.estado_unity as [Estado Reclamo]">Estado Reclamo</asp:ListItem>
-                        <asp:ListItem Value="reclamos_varios.estado_reclamo_unity as [Estado Reclamo Unity]">Estado Reclamo Unity</asp:ListItem>
+                        <asp:ListItem Value="reclamos_varios.estado_unity as [Estado Reclamo]">Estado</asp:ListItem>
+                        <asp:ListItem Value="reclamos_varios.estado_reclamo_unity as [Estado Reclamo Unity]">Estado Unity</asp:ListItem>
                         <asp:ListItem Value="reg_reclamo_varios.poliza as Poliza">Poliza</asp:ListItem>
                         <asp:ListItem Value="reg_reclamo_varios.asegurado as Asegurado">Asegurado</asp:ListItem>
                         <asp:ListItem Value="reg_reclamo_varios.cliente as Cliente">Cliente</asp:ListItem>

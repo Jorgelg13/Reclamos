@@ -204,16 +204,6 @@ public class Utils
         return exito;
     }
 
-    public static string TelefonoGestor(DropDownList gestor)
-    {
-
-        string telefono;
-        var numero = DBReclamos.gestores.Select(t => new { t.telefono, t.nombre }).Where(tel => tel.nombre == gestor.SelectedItem.Text).First();
-        telefono = numero.telefono.ToString();
-        return telefono;
-
-    }
-
     public static void ShowMessage(Page page, string message, string title, string type = "info")
     {
         page.ClientScript.RegisterStartupScript(page.GetType(), "toastr_message",
@@ -514,6 +504,13 @@ public class Utils
         }
     }
 
+    public static string TelefonoGestor(DropDownList gestor)
+    {
+        string telefono;
+        var numero = DBReclamos.gestores.Where(tel => tel.nombre == gestor.SelectedItem.Text).First();
+        telefono = numero.telefono.ToString();
+        return telefono;
+    }
 
     //seleccionar correo de ejecutivos que tienen asignado una poliza
     public static string seleccionarCorreo(short cod)
@@ -521,7 +518,7 @@ public class Utils
         try
         {
             string correo;
-            var selectCorreo = DBReclamos.ejecutivos.Where(e => e.codigo == Convert.ToInt16(cod)).First();
+            var selectCorreo = DBReclamos.ejecutivos.Where(e => e.codigo == cod).First();
             return correo = selectCorreo.correo;
         }
 

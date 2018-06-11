@@ -32,7 +32,7 @@ public partial class Modulos_MdReclamos_wbFrmAutorizacionManual : System.Web.UI.
         ddlAseguradora.DataBind();
     }
 
-    protected void btnGuardarAutorizacion_Click(object sender, EventArgs e)
+    public void guardar()
     {
         idCabina = (string)(Session["id_cabina"]);
         idUsuario = (string)(Session["id_usuario"]);
@@ -94,15 +94,21 @@ public partial class Modulos_MdReclamos_wbFrmAutorizacionManual : System.Web.UI.
 
                     ultimoIdRegMedico = registro.id.ToString();
                     ultimoIdAutorizacion = autorizacion.id.ToString();
-                    Response.Redirect("/Modulos/MdReclamos/wbFrmAutorizacionesEditar.aspx?ID_reclamo=" + ultimoIdAutorizacion + "&ultimaAutorizacion=" + ultimoIdRegMedico + "&poliza=" + poliza);
+                    Utils.ShowMessage(this.Page, "La autorizacion a sido guardada con exito, puede seguir agregando mas autorizaciones de este asegurado", "Excelente..", "success");
                 }
             }
 
-            catch (Exception)
+            catch (Exception ex)
             {
-                Utils.ShowMessage(this.Page, "No se a podido ingresar el registro", "Error..!", "error");
+                Utils.ShowMessage(this.Page, "No se a podido ingresar el registro.." + ex.Message, "Error..!", "error");
             }
         }
+    }
+
+    protected void btnGuardarAutorizacion_Click(object sender, EventArgs e)
+    {
+        guardar();
+        Response.Redirect("/Modulos/MdReclamos/wbFrmAutorizacionesEditar.aspx?ID_reclamo=" + ultimoIdAutorizacion + "&ultimaAutorizacion=" + ultimoIdRegMedico + "&poliza=" + poliza);
     }
 
     public void obtenerID()
@@ -119,5 +125,10 @@ public partial class Modulos_MdReclamos_wbFrmAutorizacionManual : System.Web.UI.
         {
             Utils.ShowMessage(this.Page, "No se an podido obtener las variables de sesion", "Error", "error");
         }
+    }
+
+    protected void btnAgregarNueva_Click(object sender, EventArgs e)
+    {
+        guardar();
     }
 }

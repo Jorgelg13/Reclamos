@@ -11,6 +11,7 @@ public partial class DashboardUnity : System.Web.UI.Page
     Email util = new Email();
     Utils comprobar = new Utils();
     conexionBD obj = new conexionBD();
+    Double individualesFT,colectivosFT;
 
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -20,8 +21,8 @@ public partial class DashboardUnity : System.Web.UI.Page
         }
 
         ObtenerID();
-        Conteo();
         ReclamosMedicosFueraTiempo();
+        Conteo();
     }
 
     public void ObtenerID()
@@ -50,14 +51,16 @@ public partial class DashboardUnity : System.Web.UI.Page
             Double danios = DBReclamos.reclamos_varios.Where(d => d.estado_unity == "Seguimiento").Count();
             totalReclamosDaños.Text = danios.ToString();
 
+            Double total = DBReclamos.reclamos_medicos.Where(m => m.estado_unity == "Seguimiento").Count();
+            lnTotal.Text = total.ToString();
+
             Double medicos = DBReclamos.reclamos_medicos.Where(m => m.estado_unity == "Seguimiento" && m.reg_reclamos_medicos.tipo == "I").Count();
             lnTotalIndividuales.Text = "I: " + medicos.ToString();
+            lbIndividualesFT.Text = " = "+ Math.Round((individualesFT / medicos) *100, 2).ToString() + "%"; 
 
             Double medicosC = DBReclamos.reclamos_medicos.Where(m => m.estado_unity == "Seguimiento" && m.reg_reclamos_medicos.tipo == "C").Count();
             lnColectivos.Text = "C:  " + medicosC.ToString();
-
-            Double total = DBReclamos.reclamos_medicos.Where(m => m.estado_unity == "Seguimiento").Count();
-            lnTotal.Text =  total.ToString();
+            lbColectivosFT.Text = " = " + Math.Round((colectivosFT / medicosC) * 100, 2).ToString() + "%";
 
             Double estadoAsegurado = DBReclamos.reclamos_medicos.Where(m => m.id_estado == 4 && m.estado_unity == "Seguimiento"  && m.reg_reclamos_medicos.tipo == "I" ).Count();
             lnPendienteDocumentacion.Text = "E.A :  " + estadoAsegurado.ToString();
@@ -112,8 +115,10 @@ public partial class DashboardUnity : System.Web.UI.Page
             DataTable dt = new DataTable();
             da.Fill(dt);
             lnIndividualesFueraTiempo.Text = dt.Rows[0][0].ToString();
+            individualesFT = Convert.ToDouble(dt.Rows[0][0].ToString());
             lnColectivosFueraTiempo.Text = dt.Rows[0][1].ToString();
-            lnTotalFueraTiempo.Text = dt.Rows[0][2].ToString();
+            colectivosFT = Convert.ToDouble(dt.Rows[0][1].ToString());
+            //lnTotalFueraTiempo.Text = dt.Rows[0][2].ToString();
             obj.conexion.Close();
         }
 

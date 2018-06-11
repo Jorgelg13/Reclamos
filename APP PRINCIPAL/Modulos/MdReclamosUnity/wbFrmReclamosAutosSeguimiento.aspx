@@ -638,10 +638,10 @@
             </div>
         </div>
         <%-- data source con las conexiones a las tablas de la bd reclamos--%>
-        <asp:SqlDataSource ID="SqlDataSourceGestores" runat="server" ConnectionString="<%$ ConnectionStrings:reclamosConnectionString %>" SelectCommand="SELECT [id], [nombre] FROM [gestores] where tipo = 'autos'"></asp:SqlDataSource>
-        <asp:SqlDataSource ID="SqlDataSourceAnalistas" runat="server" ConnectionString="<%$ ConnectionStrings:reclamosConnectionString %>" SelectCommand="SELECT [id], [nombre] FROM [analistas] "></asp:SqlDataSource>
+        <asp:SqlDataSource ID="SqlDataSourceGestores" runat="server" ConnectionString="<%$ ConnectionStrings:reclamosConnectionString %>" SelectCommand="SELECT [id], [nombre] FROM [gestores] where tipo = 'autos' and estado = 'true'"></asp:SqlDataSource>
+        <asp:SqlDataSource ID="SqlDataSourceAnalistas" runat="server" ConnectionString="<%$ ConnectionStrings:reclamosConnectionString %>" SelectCommand="SELECT [id], [nombre] FROM [analistas] where estado = 'true' "></asp:SqlDataSource>
         <asp:SqlDataSource ID="SqlDataSourceEstadosAutos" runat="server" ConnectionString="<%$ ConnectionStrings:reclamosConnectionString %>" SelectCommand="SELECT [descripcion], [dias_revision] FROM [estados_reclamos_unity] where tipo = 'auto'"></asp:SqlDataSource>
-        <asp:SqlDataSource ID="SqlDataSourceTalleres" runat="server" ConnectionString="<%$ ConnectionStrings:reclamosConnectionString %>" SelectCommand="SELECT [id], [nombre] FROM [talleres]"></asp:SqlDataSource>
+        <asp:SqlDataSource ID="SqlDataSourceTalleres" runat="server" ConnectionString="<%$ ConnectionStrings:reclamosConnectionString %>" SelectCommand="SELECT [id], [nombre] FROM [talleres] where estado = 'true'"></asp:SqlDataSource>
         <asp:SqlDataSource ID="selecionarCobertura" runat="server" ConnectionString="<%$ ConnectionStrings:reclamosConnectionString %>" SelectCommand="SELECT [id], [cobertura] FROM [coberturas] where tipo = 'autos'"></asp:SqlDataSource>
 
         <!-- modal para mostrar el editor de envio de cartas -->
@@ -978,7 +978,7 @@
         var id = $('#ContentPlaceHolder1_lblID').text();
         var ruta = $('#ContentPlaceHolder1_lblDocumento').text();
         function Scaner() {
-            window.open('/Modulos/MdScanner/wbReclamosAutos.aspx?id=' + id + '', "ventana1", "width=300,height=500,scrollbars=NO")
+            window.open('/Modulos/MdScanner/wbReclamosAutos.aspx?id=' + id + '', "ventana1", "width=350,height=550,scrollbars=NO")
         }
 
         function buscador() {

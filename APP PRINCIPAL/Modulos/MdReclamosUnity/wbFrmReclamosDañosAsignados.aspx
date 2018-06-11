@@ -170,7 +170,7 @@
                                 <br />
                                 <br />
                                 <label style="width: 15%">Ejecutivo</label>
-                                <asp:DropDownList ID="ddlEjecutivos" class="form-control" Style="width: 60%" runat="server"></asp:DropDownList>
+                                <asp:DropDownList ID="ddlEjecutivos" class="form-control" Style="width: 80%" runat="server"></asp:DropDownList>
                                 <br />
                                 <br />
                                 <label style="width: 15%">Aseguradora</label>

@@ -90,7 +90,7 @@ public partial class Modulos_MdReclamos_wbFrmReclamosDañosAsignados : System.We
         ddlTaller.DataValueField = "id";
         ddlTaller.DataBind();
 
-        ddlGestor.DataSource = DBReclamos.gestores.ToList().Where(gestores => gestores.tipo == "Daños varios");
+        ddlGestor.DataSource = DBReclamos.gestores.ToList().Where(gestores => gestores.tipo == "Daños varios" && gestores.estado==true);
         ddlGestor.DataTextField = "nombre";
         ddlGestor.DataValueField = "id";
         ddlGestor.DataBind();
@@ -250,15 +250,6 @@ public partial class Modulos_MdReclamos_wbFrmReclamosDañosAsignados : System.We
         }
     }
 
-    public void enviarNotificacion()
-    {
-        string telefono = Utils.TelefonoGestor(ddlGestor);
-        string mensaje = Constantes.ASIGNACION_DANOS(ddlGestor, poliza, telefono);
-
-        notificacion.CorreoReclamos(txtCorreo.Text.Trim(), mensaje, "Asignacion de Reclamo");
-        insertarComentarios("Registro de envio de correo de notificacion: \n\n" + mensaje);
-    }
-
     //guardar informacion del reclamo para aperturarlo y darle despues seguimiento
     protected void txtGuardar_Click(object sender, EventArgs e)
     {
@@ -277,9 +268,6 @@ public partial class Modulos_MdReclamos_wbFrmReclamosDañosAsignados : System.We
             bitacora.id_reclamos_varios = id;
             bitacora.fecha = DateTime.Now;
             DBReclamos.bitacora_estados_reclamos_varios.Add(bitacora);
-
-            if (txtComentarios.Text != "") insertarComentarios(txtComentarios.Text);
-            if (txtCorreo.Text != "") enviarNotificacion();
 
             contactos_reclamos_varios contacto = new contactos_reclamos_varios();
             contacto.nombre = txtContacto.Text.ToString();
@@ -305,9 +293,11 @@ public partial class Modulos_MdReclamos_wbFrmReclamosDañosAsignados : System.We
             reclamo.fecha_visualizar = DateTime.Now;
             reclamo.fecha_apertura_reclamo = DateTime.Now;  
             DBReclamos.SaveChanges();
+            if (txtComentarios.Text != "") insertarComentarios(txtComentarios.Text);
+            if (txtCorreo.Text != "") enviarNotificacion();
             enviarNoficacion();
 
-            if(txtTelefono.Text != "")
+            if (txtTelefono.Text != "")
             {
                 Utils.SMS_reclamos_danios(txtTelefono.Text, "UNITY: Estimad@ cliente recibimos su aviso de siniestro, su asesor asignado " +
                     "es " + ddlGestor.SelectedItem + " Tel " + reclamo.gestores.telefono + " número de ID " + id + " ", userlogin, id);
@@ -317,7 +307,7 @@ public partial class Modulos_MdReclamos_wbFrmReclamosDañosAsignados : System.We
         }
         catch (Exception ex)
         {
-            Utils.ShowMessage(this.Page, "A ocurrido un error al insertar los datos", "Nota..!", "error");
+            Utils.ShowMessage(this.Page, "A ocurrido un error al insertar los datos " + ex.Message, "Nota..!", "error");
             Email.EnviarERROR("Error en apertura de reclamos de daños","Error ocasionado al usuario: " + userlogin + " en el registro con el id: " + id + "\n\n" + ex.Message);
         }
     }
@@ -327,7 +317,7 @@ public partial class Modulos_MdReclamos_wbFrmReclamosDañosAsignados : System.We
     {
         try
         {
-            int id_reg = Convert.ToInt32(GridReclamosDaños.SelectedRow.Cells[29].Text);
+            int id_reg = Convert.ToInt32(GridReclamosDaños.SelectedRow.Cells[25].Text);
             var registro = DBReclamos.reg_reclamo_varios.Find(id_reg);
             registro.poliza = txtPoliza.Text.ToString();
             registro.cliente = Convert.ToInt32(txtCliente.Text);
@@ -340,52 +330,50 @@ public partial class Modulos_MdReclamos_wbFrmReclamosDañosAsignados : System.We
             registro.suma_asegurada = Convert.ToDecimal(txtSumaAsegurada.Text);
             registro.gestor = Convert.ToInt16(ddlEjecutivos.SelectedValue);
             DBReclamos.SaveChanges();
-
             llenado.llenarGrid(ReclamosAsignados, GridReclamosDaños);
             txtCliente.Text = "";
             txtPoliza.Text = "";
             txtSumaAsegurada.Text = "";
             txtContratante.Text = "";
+            Utils.ShowMessage(this.Page, "Datos actualizados con exito", "Excelente..!", "success");
         }
-        catch (Exception)
+        catch (Exception ex)
         {
-            Utils.ShowMessage(this.Page, "A ocurrido un error al actualizar el registro", "Error..!", "error");
+            Utils.ShowMessage(this.Page, "A ocurrido un error al actualizar el registro " + ex.Message, "Error..!", "error");
         }
+    }
+
+    public void enviarNotificacion()
+    {
+        string telefono = Utils.TelefonoGestor(ddlGestor);
+        string mensaje = Constantes.ASIGNACION_DANOS(ddlGestor, poliza, telefono);
+
+        notificacion.CorreoReclamos(txtCorreo.Text.Trim(), mensaje, "Asignacion de Reclamo");
+        insertarComentarios("Registro de envio de correo de notificacion: \n\n" + mensaje);
     }
 
     //enviar notificacion al correo electronico del ejecutivo
     public void enviarNoficacion()
     {
         codigo = GridReclamosDaños.SelectedRow.Cells[26].Text;
-        bool insertar = true;
         correoGestor = Utils.seleccionarCorreoGestor(userlogin);
         cuerpo = Constantes.NOTIFICACION_EJECUTIVO(fechaCreacion, asegurado, poliza, ddlGestor, id);
         asunto = "Notificacion Siniestro";
 
-        if (codigo == "&nbsp;")
-        {
-          
-        }
-        else
-        {
-            correo = Utils.seleccionarCorreo(Convert.ToInt16(codigo));
-        }
+        if (codigo == "&nbsp;") { }
+        else{ correo = Utils.seleccionarCorreo(Convert.ToInt16(codigo)); }
 
         try
         {
             notificacion.enviarcorreo2(correo, cuerpo, asunto, correoGestor);
+            correoComentario = HttpUtility.HtmlDecode("Destinatario: " + correo + " Asunto:" + asunto + " Cuerpo del mensaje: " + cuerpo);
+            insertarComentarios(correoComentario);
+            DBReclamos.SaveChanges();
         }
 
         catch (SmtpException)
         {
-            insertar = false;
-        }
 
-        if (insertar == true)
-        {
-            correoComentario = HttpUtility.HtmlDecode("Destinatario: " + correo + " Asunto:" + asunto + " Cuerpo del mensaje: " + cuerpo);
-            insertarComentarios(correoComentario);
-            DBReclamos.SaveChanges();
         }
     }
 

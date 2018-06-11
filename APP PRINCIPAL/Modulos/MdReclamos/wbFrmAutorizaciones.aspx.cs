@@ -52,8 +52,9 @@ public partial class Modulos_MdReclamos_wbFrmAutorizaciones : System.Web.UI.Page
         }
     }
 
-    protected void btnGuardarAutorizacion_Click(object sender, EventArgs e)
+    public void guardar()
     {
+
         obtenerDatosPoliza();
 
         if (poliza == null)
@@ -65,7 +66,7 @@ public partial class Modulos_MdReclamos_wbFrmAutorizaciones : System.Web.UI.Page
         {
             try
             {
-                if(checkTramiteDirecto.Checked)
+                if (checkTramiteDirecto.Checked)
                 {
                     tramiteDirecto = true;
                 }
@@ -86,7 +87,7 @@ public partial class Modulos_MdReclamos_wbFrmAutorizaciones : System.Web.UI.Page
                 {
                     reg_reclamos_medicos reg = new reg_reclamos_medicos();
                     var sec_registro = DBReclamos.pa_sec_registros_medicos();
-                    long ? id_registro = sec_registro.Single();
+                    long? id_registro = sec_registro.Single();
                     reg.id = Convert.ToInt64(id_registro);
                     reg.asegurado = asegurado.ToString();
                     reg.poliza = poliza.ToString();
@@ -104,7 +105,7 @@ public partial class Modulos_MdReclamos_wbFrmAutorizaciones : System.Web.UI.Page
 
                     autorizaciones autorizacion = new autorizaciones();
                     var results = DBReclamos.pa_sec_autorizaciones();
-                    long ? id_autorizacion = results.Single();
+                    long? id_autorizacion = results.Single();
                     autorizacion.id = Convert.ToInt64(id_autorizacion);
                     autorizacion.reportante = txtReportante.Text;
                     autorizacion.tipo_consulta = DDLTipo.SelectedItem.ToString();
@@ -120,20 +121,25 @@ public partial class Modulos_MdReclamos_wbFrmAutorizaciones : System.Web.UI.Page
                     autorizacion.fecha_completa_commit = DateTime.Now;
                     autorizacion.hora_commit = DateTimeOffset.Now.TimeOfDay;
                     autorizacion.reg_reclamos_medicos = reg;
-              
                     DBReclamos.autorizaciones.Add(autorizacion);
                     DBReclamos.SaveChanges();
 
                     ultimoIdRegMedico = reg.id.ToString();
                     ultimoIdAutorizacion = autorizacion.id.ToString();
-                    Response.Redirect("/Modulos/MdReclamos/wbFrmAutorizacionesEditar.aspx?ID_reclamo=" + ultimoIdAutorizacion + "&ultimaAutorizacion=" + ultimoIdRegMedico + "&poliza=" + poliza);
+                    Utils.ShowMessage(this.Page, "La autorizacion a sido guardada con exito, puede seguir agregando mas autorizaciones de este asegurado", "Excelente..", "success");
                 }
             }
-            catch (Exception )
+            catch (Exception ex)
             {
-                Utils.ShowMessage(this.Page, "Error en insercion", "Nota..!", "warning");
+                Utils.ShowMessage(this.Page, "Error en insercion.. " + ex.Message, "Nota..!", "error");
             }
         }
+    }
+
+    protected void btnGuardarAutorizacion_Click(object sender, EventArgs e)
+    {
+        guardar();
+        Response.Redirect("/Modulos/MdReclamos/wbFrmAutorizacionesEditar.aspx?ID_reclamo=" + ultimoIdAutorizacion + "&ultimaAutorizacion=" + ultimoIdRegMedico + "&poliza=" + poliza);
     }
 
     protected void GridAutorizaciones_SelectedIndexChanged(object sender, EventArgs e)
@@ -206,5 +212,10 @@ public partial class Modulos_MdReclamos_wbFrmAutorizaciones : System.Web.UI.Page
     protected void btnBuscar_Click(object sender, EventArgs e)
     {
         llenarGrid();
+    }
+
+    protected void btnAgregarNueva_Click(object sender, EventArgs e)
+    {
+        guardar();
     }
 }

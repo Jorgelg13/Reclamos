@@ -1,17 +1,15 @@
 ﻿using System;
 using System.Web;
 using System.Web.UI.WebControls;
-using System.Data.SqlClient;
 using System.Web.UI;
+
 
 public partial class Modulos_MdReclamosUnity_wbFrmRecDañosSeguimiento : System.Web.UI.Page
 {
     String userlogin = HttpContext.Current.User.Identity.Name; //usuario que esta en session
-    conexionBD objeto = new conexionBD();
-    SqlCommand cmd = new SqlCommand();
     Utils llenado = new Utils();
     String selectGeneral, EstadosAgrupados,estado,reclamosSeguimiento;
-    int total;
+    int id, total;
 
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -26,8 +24,8 @@ public partial class Modulos_MdReclamosUnity_wbFrmRecDañosSeguimiento : System.
                 "dbo.reg_reclamo_varios.contratante as Contratante," +
                 "dbo.reg_reclamo_varios.ejecutivo as Ejecutivo," +//6
                 "dbo.reg_reclamo_varios.ramo as Ramo," +
-                "dbo.reg_reclamo_varios.status as Estatus," +//8
-                "dbo.reg_reclamo_varios.tipo as Tipo," +
+                "dbo.reg_reclamo_varios.status as Estatus," +
+                "dbo.reg_reclamo_varios.tipo as Tipo," +//10
                 //"dbo.reg_reclamo_varios.direccion as Direccion," +//10
                 //"dbo.reg_reclamo_varios.vip as VIP," +
                 //"dbo.reg_reclamo_varios.suma_asegurada as [Suma Asegurada]," +//12
@@ -49,7 +47,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmRecDañosSeguimiento : System.
                 //"dbo.reclamos_varios.id_taller as Taller, " +
                 //"dbo.reclamos_varios.id_analista as Analista, " +
                 //"dbo.reclamos_varios.observaciones as Observaciones," + //30
-                //"dbo.reclamos_varios.estado_reclamo_unity as [Estado Reclamo], " + //31
+                //dbo.reclamos_varios.estado_reclamo_unity as [Estado Reclamo], " + //31
                 //"dbo.reclamos_varios.prioritario, " + //32
                 //"dbo.reclamos_varios.complicado, " +//33
                 //"dbo.reclamos_varios.compromiso_pago, " + //34
@@ -74,16 +72,20 @@ public partial class Modulos_MdReclamosUnity_wbFrmRecDañosSeguimiento : System.
                 //"INNER JOIN dbo.usuario ON dbo.reclamos_varios.id_usuario = dbo.usuario.id ";
 
         string reclamosPrioritarios = selectGeneral +
-               " where ((reclamos_varios.prioritario = 'true') and (reclamos_varios.usuario_unity = '" + userlogin + "' and reclamos_varios.estado_unity != 'Cerrado' ))";
+               " where ((reclamos_varios.prioritario = 'true') and (reclamos_varios.usuario_unity = '" + userlogin + "' and reclamos_varios.estado_unity = 'Seguimiento' ))";
 
         string reclamosComplicados = selectGeneral +
-               " where ((reclamos_varios.complicado = 'true') and (reclamos_varios.usuario_unity = '" + userlogin + "' and reclamos_varios.estado_unity != 'Cerrado' ))";
+               " where ((reclamos_varios.complicado = 'true') and (reclamos_varios.usuario_unity = '" + userlogin + "' and reclamos_varios.estado_unity = 'Seguimiento' ))";
 
-        if(!IsPostBack)
+        string inactivos = selectGeneral +
+              " where usuario_unity = '" + userlogin + "' and estado_unity = 'Seguimiento' and DATEDIFF(DAY, fecha_visualizar, GETDATE()) >= 43  and estado_reclamo_unity = 'Pendiente Asegurado' ";
+
+        if (!IsPostBack)
         {
             llenado.llenarGrid(EstadosAgrupados, GridReclamosSeguimiento);
             llenado.llenarGrid(reclamosPrioritarios, GridPrioritarios);
             llenado.llenarGrid(reclamosComplicados, GridComplicados);
+            llenado.llenarGrid(inactivos, GridInactivos);
         }
     }
     //metodo para actualizar la fecha a la actual
@@ -91,36 +93,38 @@ public partial class Modulos_MdReclamosUnity_wbFrmRecDañosSeguimiento : System.
     {
         estado = GridReclamosSeguimiento.SelectedRow.Cells[2].Text;
         reclamosSeguimiento = selectGeneral +
-               " where (reclamos_varios.usuario_unity = '" + userlogin + "' and reclamos_varios.estado_unity = 'Seguimiento' and reclamos_varios.estado_reclamo_unity = '"+estado+"') ";
+               " where (reclamos_varios.usuario_unity = '" + userlogin + "' and reclamos_varios.estado_unity = 'Seguimiento' and reclamos_varios.estado_reclamo_unity like '"+estado+"') ";
         llenado.llenarGrid(reclamosSeguimiento, GridReclamosEstado);
     }
 
     protected void GridPrioritarios_SelectedIndexChanged(object sender, EventArgs e)
     {
-        int id2;
-        id2 = Convert.ToInt32(GridPrioritarios.SelectedRow.Cells[1].Text);
-        Response.Redirect("/Modulos/MdReclamosUnity/wbFrmReclamosDañosSeguimiento.aspx?ID_reclamo=" + id2, false);
+        id = Convert.ToInt32(GridPrioritarios.SelectedRow.Cells[1].Text);
+        Response.Redirect("/Modulos/MdReclamosUnity/wbFrmReclamosDañosSeguimiento.aspx?ID_reclamo=" + id, false);
     }
 
     protected void GridComplicados_SelectedIndexChanged(object sender, EventArgs e)
     {
-        int id3;
-        id3 = Convert.ToInt32(GridComplicados.SelectedRow.Cells[1].Text);
-        Response.Redirect("/Modulos/MdReclamosUnity/wbFrmReclamosDañosSeguimiento.aspx?ID_reclamo=" + id3, false);
+        id = Convert.ToInt32(GridComplicados.SelectedRow.Cells[1].Text);
+        Response.Redirect("/Modulos/MdReclamosUnity/wbFrmReclamosDañosSeguimiento.aspx?ID_reclamo=" + id, false);
     }
 
     protected void GridReclamosEstado_SelectedIndexChanged(object sender, EventArgs e)
     {
-        int id4;
-        id4 = Convert.ToInt32(GridReclamosEstado.SelectedRow.Cells[1].Text);
-        Response.Redirect("/Modulos/MdReclamosUnity/wbFrmReclamosDañosSeguimiento.aspx?ID_reclamo=" + id4, false);
+        id = Convert.ToInt32(GridReclamosEstado.SelectedRow.Cells[1].Text);
+        Response.Redirect("/Modulos/MdReclamosUnity/wbFrmReclamosDañosSeguimiento.aspx?ID_reclamo=" + id, false);
     }
 
     protected void GridReclamosGeneral_SelectedIndexChanged(object sender, EventArgs e)
     {
-        int id5;
-        id5 = Convert.ToInt32(GridReclamosGeneral.SelectedRow.Cells[1].Text);
-        Response.Redirect("/Modulos/MdReclamosUnity/wbFrmReclamosDañosSeguimiento.aspx?ID_reclamo=" + id5, false);
+        id = Convert.ToInt32(GridReclamosGeneral.SelectedRow.Cells[1].Text);
+        Response.Redirect("/Modulos/MdReclamosUnity/wbFrmReclamosDañosSeguimiento.aspx?ID_reclamo=" + id, false);
+    }
+
+    protected void GridInactivos_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        id = Convert.ToInt32(GridInactivos.SelectedRow.Cells[1].Text);
+        Response.Redirect("/Modulos/MdReclamosUnity/wbFrmReclamosDañosSeguimiento.aspx?ID_reclamo=" + id, false);
     }
 
     //funcion que coloca en rojo los registros que no se an abierto en el dia

@@ -1064,7 +1064,7 @@
          var id = $('#ContentPlaceHolder1_lblIdOculto').text();
          var ruta = $('#ContentPlaceHolder1_lblDocumento').text();
             function Scaner() {
-                window.open('/Modulos/MdScanner/wbGastosMedicos.aspx?id='+id+'', "ventana1", "width=300,height=500,scrollbars=NO")
+                window.open('/Modulos/MdScanner/wbGastosMedicos.aspx?id='+id+'', "ventana1", "width=350,height=550,scrollbars=NO")
          }
 
          function documento() {

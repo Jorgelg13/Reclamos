@@ -84,7 +84,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosDañosSeguimiento : Sy
         ddlTaller.DataValueField = "id";
         ddlTaller.DataBind();
 
-        ddlGestor.DataSource = DBReclamos.gestores.ToList().Where(gestores => gestores.tipo == "Daños varios");
+        ddlGestor.DataSource = DBReclamos.gestores.ToList().Where(gestores => gestores.tipo == "Daños varios" && gestores.estado == true);
         ddlGestor.DataTextField = "nombre";
         ddlGestor.DataValueField = "id";
         ddlGestor.DataBind();
@@ -827,16 +827,19 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosDañosSeguimiento : Sy
             if (chCartaCierre.Checked)
             {
                 Utils.Guardar_cartas(txtContenidoCarta, "cierre interno", "daños", id, chCartaCierre, chCartaDeclinado, chEnvioCarta, Response);
+                datosReclamo(id);
             }
 
             else if (chCartaDeclinado.Checked)
             {
                 Utils.Guardar_cartas(txtContenidoCarta, "declinado", "daños", id, chCartaCierre, chCartaDeclinado, chEnvioCarta, Response);
+                datosReclamo(id);
             }
 
             else if (chEnvioCarta.Checked)
             {
                 Utils.Guardar_cartas(txtContenidoCarta, "envio cheque", "daños", id, chCartaCierre, chCartaDeclinado, chEnvioCarta, Response);
+                datosReclamo(id);
             }
 
             chCartaCierre.Checked = false;

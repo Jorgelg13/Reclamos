@@ -75,17 +75,17 @@ public partial class Modulos_MdReclamos_wbFrmReclamosAsignadosUnity : System.Web
 
     public void llenarListas()
     {
-        ddlTaller.DataSource = DBReclamos.talleres.ToList();
+        ddlTaller.DataSource = DBReclamos.talleres.ToList().Where(ta => ta.estado == true);
         ddlTaller.DataTextField = "nombre";
         ddlTaller.DataValueField = "id";
         ddlTaller.DataBind();
 
-        ddlAnalista.DataSource = DBReclamos.analistas.ToList().Where(a => a.tipo == "Autos");
+        ddlAnalista.DataSource = DBReclamos.analistas.ToList().Where(a => a.tipo == "Autos" && a.estado == true);
         ddlAnalista.DataTextField = "nombre";
         ddlAnalista.DataValueField = "id";
         ddlAnalista.DataBind();
 
-        ddlGestor.DataSource = DBReclamos.gestores.ToList().Where(an => an.tipo == "autos" && an.estado == true);
+        ddlGestor.DataSource = DBReclamos.gestores.ToList().Where(ges => ges.tipo == "autos" && ges.estado == true);
         ddlGestor.DataTextField ="nombre";
         ddlGestor.DataValueField = "id";
         ddlGestor.DataBind();  

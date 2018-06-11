@@ -680,7 +680,6 @@
                                     <b><span style="font-size: 20px">Estados y Tiempo del reclamo</span></b>
                                     <asp:GridView ID="GridEstados" CssClass="table bs-table table-responsive table-hover" runat="server" AutoGenerateColumns="true" CellPadding="4" ForeColor="#333333" GridLines="None">
                                         <AlternatingRowStyle BackColor="White" />
-                                        <FooterStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" />
                                         <HeaderStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" HorizontalAlign="Center" Wrap="False" />
                                         <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
                                         <RowStyle BackColor="#EFF3FB" HorizontalAlign="Left" Wrap="False" />
@@ -997,7 +996,7 @@
         var id = $('#ContentPlaceHolder1_lblID').text();
         var ruta = $('#ContentPlaceHolder1_lblDocumento').text();
         function Scaner() {
-            window.open('/Modulos/MdScanner/wbReclamosVarios.aspx?id=' + id + '', "ventana1", "width=300,height=500,scrollbars=NO")
+            window.open('/Modulos/MdScanner/wbReclamosVarios.aspx?id=' + id + '', "ventana1", "width=350,height=550,scrollbars=NO")
         }
 
         function buscador() {
