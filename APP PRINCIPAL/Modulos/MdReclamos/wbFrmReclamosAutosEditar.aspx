@@ -186,7 +186,7 @@
             <asp:ControlParameter ControlID="txtBusquedaAuto" Name="propietario" PropertyName="Text" />
         </SelectParameters>
     </asp:SqlDataSource>
-    <asp:SqlDataSource ID="SqlDataSource1CoberturaEditar" runat="server" ConnectionString="<%$ ConnectionStrings:reclamosConnectionString %>" SelectCommand="select *from viewCoberturasAutos where (placa like '%' + @placa + '%')">
+    <asp:SqlDataSource ID="SqlDataSource1CoberturaEditar" runat="server" ConnectionString="<%$ ConnectionStrings:reclamosConnectionString %>" SelectCommand="select top 10 *from viewCoberturasAutos where (placa like '%' + @placa + '%')">
         <SelectParameters>
             <asp:ControlParameter ControlID="txtBusquedaAuto" Name="placa" PropertyName="Text" Type="String" />
         </SelectParameters>

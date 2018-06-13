@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="ResultadoEncuesta.aspx.cs" Inherits="MdBitacora_ResultadoEncuesta" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true"  EnableEventValidation="false" CodeFile="ResultadoEncuesta.aspx.cs" Inherits="MdBitacora_ResultadoEncuesta" %>
 
 <!DOCTYPE html>
 
@@ -17,19 +17,18 @@
 </head>
 <body>
     <form id="form1" runat="server">
-        <div class="jumbotron titulo-cabecera" style="height: 115px; background-color: #087fca">
+        <div class="jumbotron titulo-cabecera" style="height: 100px; background-color: #087fca">
             <h2 style="width: 781px; padding-bottom: 20px;">Resultado De Encuesta</h2>
             <header>
                 <div class="content-wrapper">
                     <div class="float-right">
                         <div class="img-float-right" style="float: right;">
-                            <img src="../imgUnity/Unity%20Promotores-%20Logo%20en%20blanco.png" style="margin-top: -90px; width: 235px;" />
+                            <img src="../imgUnity/Unity%20Promotores-%20Logo%20en%20blanco.png" style="margin-top: -105px; width: 235px;" />
                         </div>
                     </div>
                 </div>
             </header>
         </div>
-        <br />
         <br />
         <div class="form-group col-lg-2 col-md-2 col-sm-12">
             <label for="message-text" class="control-label">Fecha Inicio:</label>
@@ -52,14 +51,16 @@
                 <asp:ListItem Value="Transactel">Transactel</asp:ListItem>
                 <asp:ListItem Value="Credomatic">Credomatic</asp:ListItem>
                 <asp:ListItem Value="Caja-de-ahorro">Caja de ahorro</asp:ListItem>
+                <asp:ListItem Value="Consulto Seguro">Consulto Seguro</asp:ListItem>
             </asp:DropDownList>
         </div>
         <div class="form-group  col-lg-2 col-md-2 col-sm-12">
             <asp:Button runat="server" ID="btnBuscar" BackColor="#087fca" Style="margin-top: 24px;" Text="Buscar" CssClass="btn btn-primary" OnClick="btnBuscar_Click1" />
         </div>
+        <asp:Panel runat="server" ID="PnPrincipal">
         <div class="col-sm-12 col-md-12 col-lg-12">
             <br />
-            <div class="scrolling-table-container col-sm-12 col-md-6 col-lg-6">
+            <div class="scrolling-table-container col-sm-12 col-md-9 col-lg-9">
                 <b style="font-size: 20px">
                     <asp:Label runat="server" ID="lblTotalEncuestas"></asp:Label>
                 </b>
@@ -69,10 +70,10 @@
                     <FooterStyle BackColor="#087fca" Font-Bold="True" ForeColor="White" />
                     <HeaderStyle BackColor="#087fca" Font-Bold="True" ForeColor="White" HorizontalAlign="Center" Wrap="False" />
                     <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
-                    <RowStyle BackColor="#EFF3FB" />
+                    <RowStyle BackColor="#EFF3FB" Wrap="false" />
                 </asp:GridView>
             </div>
-            <div class="scrolling-table-container col-sm-12 col-md-6 col-lg-6">
+            <div class="scrolling-table-container col-sm-12 col-md-3 col-lg-3">
                 <b style="font-size: 20px">
                     <asp:Label runat="server" ID="lblAgrupados"></asp:Label>
                 </b>
@@ -86,12 +87,12 @@
             </div>
         </div>
         <br />
-        <br />
         <div style="margin-top: 30%; padding-left: 20px;">
-            <p><b>PREGUNTA 1: En una calificación de 1 a 10 ¿con base en su experiencia con Unity Promotores, usted recomendaría a un familiar o amigo el servicio de Unity Promotores? </b></p>
+            <p><b>PREGUNTA 1: En una calificacion de 1 a 10 ¿con base en su experiencia con Unity Promotores, usted recomendaria a un familiar o amigo el servicio de Unity Promotores? </b></p>
             <p><b>PREGUNTA 2: En su experiencia, por favor calificar mi servicio, de 1 A 10, en donde 10 es excelente</b></p>
             <p><b>PREGUNTA 3: En su experiencia, por favor calificar el servicio de la aseguradora, de 1 a 10, en donde 10 es excelente</b></p>
         </div>
+      </asp:Panel>
         <%--archivos javascripts que se utilizan en el sistema--%>
         <script src="../Scripts/jquery-3.1.1.min.js"></script>
         <script src="../bootstrap/js/bootstrap.min.js"></script>

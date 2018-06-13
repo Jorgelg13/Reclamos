@@ -310,7 +310,7 @@
         var pregunta3 = 0;
         var clasificacion3 = '';
         var comentario3 = '';
-        var valor = $.get("id");
+        var valor = 'Consulto Seguro';
 
         $(function () {
             var Page = (function () {
@@ -337,7 +337,7 @@
                             return false;
                         });
 
-                        //------------------------------  funciones para cambiar al alegir una marcacion de estrellas de la pregunta numero 1
+//------------------------------  funciones para cambiar al alegir una marcacion de estrellas de la pregunta numero 1
                         $('.preguntaUno').on('click', function (event) {
                             pregunta1 = $(this).attr('data-value');
                             var $dot = $(this);
@@ -395,7 +395,7 @@
                             return false;
                         });
 
-                        //------------------------------  funciones para cambiar al alegir una marcacion de la pregunta numero 2 ---------------------------------
+//------------------------------  funciones para cambiar al alegir una marcacion de la pregunta numero 2 ---------------------------------
                         $('.preguntaDos').on('click', function (event) {
                             pregunta2 = $(this).attr('data-value');
                             var $dot = $(this);
@@ -453,7 +453,7 @@
                             return false;
                         });
 
-                        //------------------------------  funciones para cambiar al alegir una marcacion de la pregunta numero 3
+ //------------------------------  funciones para cambiar al alegir una marcacion de la pregunta numero 3
                         $('.preguntaTres').on('click', function (event) {
                             pregunta3 = $(this).attr('data-value');
                             var $dot = $(this);
@@ -526,7 +526,7 @@
                         $('.nueva-encuesta').on('click', function (event) {
                             window.location.reload();
                         });
-                        //------------------------------------------------------------------------------------
+//------------------------------------------------------------------------------------
 
                         $nav.each(function (i) {
 
@@ -552,7 +552,7 @@
             $.post("http://192.168.81.225:9595/api/v1/encuesta/guardar",
                 {
                     "empresa": valor,
-                    "servicio": "servicio",
+                    "servicio": valor,
                     "pregunta1": pregunta1,
                     "comentario1": comentario1,
                     "clasificacion1": clasificacion1,
