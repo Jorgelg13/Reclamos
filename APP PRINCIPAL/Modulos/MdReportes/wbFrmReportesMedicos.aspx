@@ -150,13 +150,15 @@
                     </div>
                     <div class="panel-body" style="height: 520px;">
                         <div class="scrolling-table-container" style="overflow-y: auto;">
-                            <asp:GridView ID="GridPromedioAseguradora" runat="server" OnRowDataBound="GridPromedioAseguradora_RowDataBound" CssClass="table bs-table table-responsive table-hover" AutoGenerateColumns="True" ShowFooter="true" CellPadding="4" ForeColor="#333333" GridLines="None">
+                          <asp:Panel ID="PanelPromedioAseguradora" runat="server">
+                             <asp:GridView ID="GridPromedioAseguradora" runat="server" OnRowDataBound="GridPromedioAseguradora_RowDataBound" CssClass="table bs-table table-responsive " AutoGenerateColumns="True" ShowFooter="true" ForeColor="#333333" GridLines="None">
                                 <AlternatingRowStyle BackColor="White" />
                                 <FooterStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" />
                                 <HeaderStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" HorizontalAlign="Center" Wrap="False" />
                                 <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
                                 <RowStyle BackColor="#EFF3FB" HorizontalAlign="Left" Wrap="False" />
-                            </asp:GridView>
+                             </asp:GridView>
+                            </asp:Panel>
                         </div>
                         <asp:Label ID="lblTotalPonderados" runat="server"></asp:Label>
                         <asp:LinkButton ID="linKRegresar" OnClick="linKRegresar_Click" title="Regresar al reporte" runat="server" Style="padding-left: 20px; font-size: 70px; text-align: center; color: lightblue"><i class="fa fa-arrow-circle-o-left" aria-hidden="true"></i></asp:LinkButton>
@@ -297,22 +299,21 @@
         </asp:Panel>
 
         <%-- ------------------------ modal ver el detalle de eficiencia ------------------------------------------%>
-        <div class="modal fade" id="ModalDetalle" tabindex="-1" role="dialog" aria-labelledby="ModalDetalle2" data-keyboard="false" data-backdrop="static">
-            <div class="modal-dialog" role="document">
+        <div class="modal fade" id="ModalDetalle" data-keyboard="false" data-backdrop="static">
+            <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                         <h4 class="modal-title" id="ModalComentario1"><b>Detalle del reporte seleccionado</b></h4>
                     </div>
                     <div class="modal-body">
-                        <div class="form-group">
-                            <asp:GridView ID="GridEficiencia" runat="server" CssClass="table bs-table table-responsive table-hover" AutoGenerateColumns="True" CellPadding="4" ForeColor="#333333" GridLines="None" AllowCustomPaging="True" AllowPaging="True" ShowFooter="true">
+                        <div class="form-group scrolling-table-container">
+                            <asp:GridView ID="GridEficiencia" runat="server" CssClass="table bs-table table-responsive table-hover" OnRowDataBound="GridEficiencia_RowDataBound" AutoGenerateColumns="True" ForeColor="#333333" GridLines="None" AllowCustomPaging="True" ShowFooter="true">
                                 <AlternatingRowStyle BackColor="White" />
                                 <Columns>
                                 </Columns>
                                 <FooterStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" />
                                 <HeaderStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" HorizontalAlign="Center" Wrap="False" />
-                                <PagerSettings PageButtonCount="30" />
                                 <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
                                 <RowStyle BackColor="#EFF3FB" HorizontalAlign="Left" Wrap="False" />
                             </asp:GridView>
@@ -343,5 +344,60 @@
             </div>
         </div>
     </div>
+</asp:Content>
+<asp:Content runat="server" ContentPlaceHolderID="ContentJs" ID="JS">
+    <script>
+        try {
+            $('#ContentPlaceHolder1_GridCicloCliente tr').each(function (index) {
+                $tr = $(this);
+                if (index > 0) {
+                        $td = $tr[0].cells[3];
+                    $td.innerText = $td.innerText + ' %';
+                    $td.className = 'alinearNumeros';
+                }
+            });
+        } catch (ex) {
+        }
+
+        try {
+            $('#ContentPlaceHolder1_GridPromedioAseguradora tr').each(function (index) {
+                $tr = $(this);
+                if (index > 0) {
+                    $td = $tr[0].cells[3];
+                    $td.innerText = $td.innerText + ' %';
+                    $td.className = 'alinearNumeros';
+                }
+            });
+        } catch (ex) {
+        }
+
+        try {
+            $('#ContentPlaceHolder1_GridEjecutivosKPI tr').each(function (index) {
+                $tr = $(this);
+                if (index > 0) {
+                    $td = $tr[0].cells[3];
+                    $td.innerText = $td.innerText + ' %';
+                    $td.className = 'alinearNumeros';
+
+                    $td = $tr[0].cells[2];
+                    $td.innerText = $td.innerText + ' hrs';
+                }
+            });
+        } catch (ex) {
+        }
+
+         try {
+            $('#ContentPlaceHolder1_GridEficiencia tr').each(function (index) {
+                $tr = $(this);
+                if (index > 0) {
+                    $td = $tr[0].cells[5];
+                    $td.innerText = $td.innerText + ' %';
+                    $td.className = 'alinearNumeros';
+                }
+            });
+        } catch (ex) {
+        }
+        
+    </script>
 </asp:Content>
 

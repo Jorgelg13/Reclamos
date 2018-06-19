@@ -5,7 +5,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
     <asp:Panel runat="server" ID="PnPrincipal" Visible="false">
          <div class="container-fluid">
-            <div class="col-lg-3">
+            <div class="col-lg-3 col-md-3 col-sm-12">
                 <div class="panel panel-info">
                     <div class="panel-heading">
                         <h3 class="panel-title"><b style="font-size: 16px;">Buscar y Actualizar</b></h3>
@@ -35,7 +35,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-9">
+            <div class="col-lg-9 col-md-9 col-sm-12">
                 <div class="panel panel-info">
                     <div class="panel-heading">
                         <h3 class="panel-title"><b style="font-size:16px;">Estados</b></h3>
@@ -62,6 +62,16 @@
         </div>
     </asp:Panel>
 </asp:Content>
-<asp:Content ID="Content3" ContentPlaceHolderID="ContentJs" Runat="Server">
+<asp:Content runat="server" ContentPlaceHolderID="ContentJs" ID="JS">
+    <script>
+        try {
+            $('#ContentPlaceHolder1_gridEstados tr').each(function (index) {
+                $tr = $(this);
+                   $td = $tr[0].cells[1];
+                   $td.remove();
+            });
+        } catch (ex) {
+        }
+    </script>
 </asp:Content>
 

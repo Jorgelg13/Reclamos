@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Web.UI;
-using System.IO;
 using System.Web.UI.WebControls;
 using System.Linq;
 using System.Web;
@@ -13,11 +12,11 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesMedicos : System.Web.U
     String Join;
     conexionBD obj = new conexionBD();
     ReclamosEntities DBReclamos = new ReclamosEntities();
-    int kpiCliente = 17;
-    int kpiAseguradora = 15;
-    int kpiUnity = 48;
-    int TotalReclamos;
-    double totalPromedio, totalPromedioPonderado, totalPromedioEjecucion;
+    int kpiCliente = 18; //dias
+    int kpiAseguradora = 15; //dias
+    int kpiUnity = 72; //horas
+    int TotalReclamos, totalPromedioUsuario, totalPendientes, totalNuevos, totalCerrados, totalFueraTiempo;
+    Double totalPromedio, totalPromedioPonderado, totalPromedioEjecucion;
     String buscar, eficienciaGestores;
     String tipo_reclamo = "I";
     protected void Page_Load(object sender, EventArgs e)
@@ -34,12 +33,14 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesMedicos : System.Web.U
         //    btnMostrarEficiencia.Visible = true;
         //}
 
-        eficienciaGestores = "select rs.nombre,rs.Pendientes,rs.Nuevos,rs.Cerrados, " +
-            "CAST(cast((rs.Cerrados * 100) / ((rs.Pendientes * 1.0) + nuevos) as float) as varchar) + '%' as Ejecucion from " +
-            "(select r.nombre, Pendientes = (select COUNT(*) from reclamos_medicos where estado_unity = 'Seguimiento' and usuario_unity = r.usuario) ," +
-            "Nuevos = (select COUNT(*) from reclamos_medicos where Convert(date, fecha_apertura, 112) between '"+txtFechaInicio.Text+"' and '"+txtFechaFin.Text+"' and usuario_unity = r.usuario), " +
-            "Cerrados = (select COUNT(*) from reclamos_medicos where Convert(date, fecha_cierre, 112) between '"+txtFechaInicio.Text+"' and '"+txtFechaFin.Text+"' and estado_unity = 'Cerrado' and usuario_unity = r.usuario) " +
-            "from (select id, usuario, nombre from gestores where tipo = 'medicos') as r) rs where rs.Pendientes != 0 order by Ejecucion desc";
+        eficienciaGestores = "select rs.nombre as Nombre, rs.Pendientes,rs.Nuevos,rs.Cerrados, rs.Fuera_de_tiempo, cast((rs.Cerrados * 100) / ((rs.Pendientes) + nuevos) as varchar) as Ejecucion " +
+            "from (select r.nombre, " +
+            "Pendientes = (select COUNT(*) from reclamos_medicos where estado_unity = 'Seguimiento' and usuario_unity = r.usuario) , " +
+            "Nuevos = (select COUNT(*) from reclamos_medicos where Convert(date, fecha_apertura, 112) between '"+txtFechaInicio.Text+"' and '"+txtFechaFin.Text+"' and usuario_unity = r.usuario),  " +
+            "Cerrados = (select COUNT(*) from reclamos_medicos where Convert(date, fecha_cierre, 112) between '"+txtFechaInicio.Text + "' and '" + txtFechaFin.Text + "'  and estado_unity = 'Cerrado' and usuario_unity = r.usuario), " +
+            "Fuera_de_tiempo = (select count(*) from reclamos_medicos where DATEDIFF(day, fecha_envio_aseg, fecha_recepcion_cheque) > 15 and usuario_unity = r.usuario and estado_unity = 'Cerrado' and Convert(date, fecha_cierre, 112) between '" + txtFechaInicio.Text + "' and '" + txtFechaFin.Text + "') " +
+            "from(select id, usuario, nombre from gestores where tipo = 'medicos') as r) rs " +
+            "where rs.Pendientes != 0 order by Ejecucion";
 
         //variable que contiene todos los joins que se hacen en el query del reporte
         lblKpiAseguradora.Text = "KPI Aseguradora " + kpiAseguradora.ToString() + " Dias";
@@ -98,7 +99,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesMedicos : System.Web.U
         else
         {
 
-            if (ddlElegir.SelectedItem.Text == "Usuario")
+            if (ddlElegir.SelectedItem.Text == "Usuario" || ddlElegir.SelectedItem.Text == "Aseguradora")
             {
                 buscar = ddlBuscar.SelectedValue;
             }
@@ -226,15 +227,14 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesMedicos : System.Web.U
             "where(reclamos_medicos.estado_unity = 'Cerrado') and (Convert(date,reclamos_medicos.fecha_cierre, 112) between '" + txtFechaInicio.Text + "' and '" + txtFechaFin.Text + "') and (" + ddlTipoReclamo.SelectedValue + " ) group by reg_reclamos_medicos.aseguradora " +
             "select " +
             "aseguradora as Aseguradora, " +
-            "total_reclamos as [Total_Reclamos], " +
-            "ISNULL(promedio_dias, 0) as [Promedio_Dias], " +
-            "ISNULL(total_reclamos * promedio_dias, 0) as [Promedio_Ponderado], " +
-            "case when(ISNULL(promedio_dias, 0)) = 0 then 0 else cast((" + kpiAseguradora + " / (promedio_dias * 1.0)) * 100 as decimal(5, 2)) end as Ejecucion " +
-            "from #cicloAseguradora ORDER BY [Promedio_Dias]";
+            "total_reclamos as Total_Reclamos, " +
+            "ISNULL(promedio_dias, 0) as Promedio_Dias, " +
+            "case when(ISNULL(promedio_dias, 0)) = 0 then 0 else cast((" + kpiAseguradora + " / (promedio_dias * 1.0)) * 100 as decimal) end as Ejecucion " +
+            "from #cicloAseguradora ORDER BY Promedio_Dias";
 
         llenado.llenarGrid(promedio_aseguradora, GridPromedioAseguradora);
     }
-
+    //ciclo de cliente
     public void CicloCliente()
     {
         string ciclo_cliente = "select " +
@@ -249,13 +249,12 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesMedicos : System.Web.U
             "Aseguradora, " +
             "total_reclamos as Total_Reclamos," +
             "promedio as Promedio_Dias, " +
-            "isnull(total_reclamos * promedio, 0) as Promedio_Ponderado," +
             "case when(isnull(total_reclamos, 0)) = 0 then 0 else cast(("+kpiCliente+" / (promedio * 1.0)) * 100 as decimal) end as Ejecucion " +
             "from #cicloCliente order by Promedio_Dias";
 
         llenado.llenarGrid(ciclo_cliente, GridCicloCliente);
     }
-
+    //ciclo del ejecutivo....
     public void cicloEjecutivoKPI()
     {
         if(ddlTipoReclamo.SelectedItem.Text == "Colectivos")
@@ -265,9 +264,9 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesMedicos : System.Web.U
 
         string ejecutivoKPI = "select " +
             "count(*) total_reclamos," +
-            "sum(DATEDIFF(MINUTE, reclamos_medicos.fecha_completa_commit, reclamos_medicos.fecha_cierre) - DATEDIFF(MINUTE, reclamos_medicos.fecha_envio_aseg, reclamos_medicos.fecha_recepcion_cheque)) as total_resta," +
+            //"sum(DATEDIFF(MINUTE, reclamos_medicos.fecha_completa_commit, reclamos_medicos.fecha_cierre) - DATEDIFF(MINUTE, reclamos_medicos.fecha_envio_aseg, reclamos_medicos.fecha_recepcion_cheque)) as total_resta," +
             "AVG(DATEDIFF(MINUTE, reclamos_medicos.fecha_completa_commit, reclamos_medicos.fecha_cierre) - DATEDIFF(MINUTE, reclamos_medicos.fecha_envio_aseg, reclamos_medicos.fecha_recepcion_cheque)) as promedio, " +
-            "promedio_segundos = AVG(DATEDIFF(SECOND, reclamos_medicos.fecha_completa_commit, reclamos_medicos.fecha_cierre) - DATEDIFF(MINUTE, reclamos_medicos.fecha_envio_aseg, reclamos_medicos.fecha_recepcion_cheque)), " +
+            //"promedio_segundos = AVG(DATEDIFF(SECOND, reclamos_medicos.fecha_completa_commit, reclamos_medicos.fecha_cierre) - DATEDIFF(MINUTE, reclamos_medicos.fecha_envio_aseg, reclamos_medicos.fecha_recepcion_cheque)), " +
             "reclamos_medicos.usuario_unity " +
             "into #ciclo_ejecutivoKPI " +
             "from reclamos_medicos " +
@@ -276,10 +275,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesMedicos : System.Web.U
             "select " +
             "usuario_unity as Usuario, " +
             "total_reclamos as Total_Reclamos," +
-            "CONCAT( " +
-            "promedio / 60, ':', " +
-            "promedio % 60, ':', " +
-            "promedio_segundos % 60) as [Promedio por usuario], " +
+            " isnull(promedio, 0) / 60  Promedio_por_usuario," +
             "case when(isnull(total_reclamos, 0)) = 0 then 0 else ROUND( cast( ("+kpiUnity+" / ( (promedio / 60.0) * 1.0)) * 100 as float ),2,0) end as Ejecucion " +
             "from #ciclo_ejecutivoKPI";
 
@@ -287,6 +283,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesMedicos : System.Web.U
         lblEjecutivoKpi.Text = "KPI Ejecutivo " + kpiUnity.ToString() + " Horas";
     }
 
+    //ciclos del ejecutivo desde la apertura al cierre
     public void CicloEjecutivo()
     {
         string cicloEjecutivo = "select count(*) total_reclamos," +
@@ -381,7 +378,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesMedicos : System.Web.U
             {
                 TotalReclamos += Convert.ToInt32(DataBinder.Eval(e.Row.DataItem, "[Total_Reclamos]"));
                 totalPromedio += Convert.ToDouble(DataBinder.Eval(e.Row.DataItem, "[Promedio_dias]"));
-                totalPromedioPonderado += Convert.ToDouble(DataBinder.Eval(e.Row.DataItem, "[Promedio_ponderado]"));
+                totalPromedioEjecucion += Convert.ToDouble(DataBinder.Eval(e.Row.DataItem, "[Ejecucion]"));
             }
             else if (e.Row.RowType == DataControlRowType.Footer)
             {
@@ -390,16 +387,12 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesMedicos : System.Web.U
                 e.Row.Cells[1].HorizontalAlign = HorizontalAlign.Left;
                 e.Row.Font.Bold = true;
 
-                e.Row.Cells[2].Text =  (totalPromedioPonderado / TotalReclamos).ToString("N2");
+                e.Row.Cells[2].Text = (totalPromedio).ToString("N2");
                 e.Row.Cells[2].HorizontalAlign = HorizontalAlign.Left;
                 e.Row.Font.Bold = true;
 
-                e.Row.Cells[3].Text = totalPromedioPonderado.ToString();
+                e.Row.Cells[3].Text = (totalPromedioEjecucion / Convert.ToDouble(GridPromedioAseguradora.Rows.Count)).ToString("N2");
                 e.Row.Cells[3].HorizontalAlign = HorizontalAlign.Left;
-                e.Row.Font.Bold = true;
-
-                e.Row.Cells[4].Text = (kpiAseguradora / (totalPromedioPonderado / TotalReclamos) *100).ToString("N2") + "%";
-                e.Row.Cells[4].HorizontalAlign = HorizontalAlign.Left;
                 e.Row.Font.Bold = true;
             }
         }
@@ -417,25 +410,22 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesMedicos : System.Web.U
             {
                 TotalReclamos += Convert.ToInt32(DataBinder.Eval(e.Row.DataItem, "[Total_Reclamos]"));
                 totalPromedio += Convert.ToDouble(DataBinder.Eval(e.Row.DataItem, "[Promedio_dias]"));
-                totalPromedioPonderado += Convert.ToDouble(DataBinder.Eval(e.Row.DataItem, "[Promedio_ponderado]"));
+                totalPromedioEjecucion += Convert.ToDouble(DataBinder.Eval(e.Row.DataItem, "[Ejecucion]"));
             }
             else if (e.Row.RowType == DataControlRowType.Footer)
             {
                 e.Row.Cells[0].Text = "TOTALES:";
+
                 e.Row.Cells[1].Text = TotalReclamos.ToString();
                 e.Row.Cells[1].HorizontalAlign = HorizontalAlign.Left;
                 e.Row.Font.Bold = true;
 
-                e.Row.Cells[2].Text = (totalPromedioPonderado / TotalReclamos).ToString("N2");
+                e.Row.Cells[2].Text = (totalPromedio / Convert.ToDouble(GridCicloCliente.Rows.Count)).ToString("N2");
                 e.Row.Cells[2].HorizontalAlign = HorizontalAlign.Left;
                 e.Row.Font.Bold = true;
 
-                e.Row.Cells[3].Text = totalPromedioPonderado.ToString();
+                e.Row.Cells[3].Text = (totalPromedioEjecucion / Convert.ToDouble(GridCicloCliente.Rows.Count)).ToString("N2");
                 e.Row.Cells[3].HorizontalAlign = HorizontalAlign.Left;
-                e.Row.Font.Bold = true;
-
-                e.Row.Cells[4].Text = (kpiAseguradora / (totalPromedioPonderado / TotalReclamos) * 100).ToString("N2") + "%";
-                e.Row.Cells[4].HorizontalAlign = HorizontalAlign.Left;
                 e.Row.Font.Bold = true;
             }
         }
@@ -452,6 +442,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesMedicos : System.Web.U
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
                 TotalReclamos += Convert.ToInt32(DataBinder.Eval(e.Row.DataItem, "[Total_Reclamos]"));
+                totalPromedioUsuario += Convert.ToInt32(DataBinder.Eval(e.Row.DataItem, "[Promedio_por_usuario]"));
                 totalPromedioEjecucion += Convert.ToDouble(DataBinder.Eval(e.Row.DataItem, "[Ejecucion]"));
             }
             else if (e.Row.RowType == DataControlRowType.Footer)
@@ -461,14 +452,60 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesMedicos : System.Web.U
                 e.Row.Cells[1].HorizontalAlign = HorizontalAlign.Left;
                 e.Row.Font.Bold = true;
 
-                e.Row.Cells[4].Text = (kpiUnity / (totalPromedioEjecucion / TotalReclamos) * 100).ToString("N2") + "%";
-                e.Row.Cells[4].HorizontalAlign = HorizontalAlign.Left;
+                e.Row.Cells[2].Text = (totalPromedioUsuario / GridEjecutivosKPI.Rows.Count).ToString();
+                e.Row.Cells[2].HorizontalAlign = HorizontalAlign.Left;
+                e.Row.Font.Bold = true;
+
+                e.Row.Cells[3].Text = (totalPromedioEjecucion/ Convert.ToDouble(GridEjecutivosKPI.Rows.Count)).ToString("N2");
+                e.Row.Cells[3].HorizontalAlign = HorizontalAlign.Left;
                 e.Row.Font.Bold = true;
             }
         }
         catch (Exception)
         {
            // Response.Write(err);
+        }
+    }
+
+    protected void GridEficiencia_RowDataBound(object sender, GridViewRowEventArgs e)
+    {
+        try
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                totalPendientes += Convert.ToInt32(DataBinder.Eval(e.Row.DataItem, "[Pendientes]"));
+                totalNuevos += Convert.ToInt32(DataBinder.Eval(e.Row.DataItem, "[Nuevos]"));
+                totalCerrados += Convert.ToInt32(DataBinder.Eval(e.Row.DataItem, "[Cerrados]"));
+                totalFueraTiempo += Convert.ToInt32(DataBinder.Eval(e.Row.DataItem, "[Fuera_de_tiempo]"));
+                totalPromedioEjecucion += Convert.ToDouble(DataBinder.Eval(e.Row.DataItem, "[Ejecucion]"));
+            }
+            else if (e.Row.RowType == DataControlRowType.Footer)
+            {
+                e.Row.Cells[0].Text = "TOTALES:";
+                e.Row.Cells[1].Text = totalPendientes.ToString();
+                e.Row.Cells[1].HorizontalAlign = HorizontalAlign.Left;
+                e.Row.Font.Bold = true;
+
+                e.Row.Cells[2].Text = totalNuevos.ToString();
+                e.Row.Cells[2].HorizontalAlign = HorizontalAlign.Left;
+                e.Row.Font.Bold = true;
+
+                e.Row.Cells[3].Text = totalCerrados.ToString();
+                e.Row.Cells[3].HorizontalAlign = HorizontalAlign.Left;
+                e.Row.Font.Bold = true;
+
+                e.Row.Cells[4].Text = totalFueraTiempo.ToString();
+                e.Row.Cells[4].HorizontalAlign = HorizontalAlign.Left;
+                e.Row.Font.Bold = true;
+
+                e.Row.Cells[5].Text = (totalPromedioEjecucion / Convert.ToDouble(GridEficiencia.Rows.Count)).ToString("N2");
+                e.Row.Cells[5].HorizontalAlign = HorizontalAlign.Left;
+                e.Row.Font.Bold = true;
+            }
+        }
+        catch (Exception)
+        {
+            // Response.Write(err);
         }
     }
 
@@ -486,7 +523,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesMedicos : System.Web.U
         {
             ddlBuscar.DataSource = DBReclamos.aseguradoras.ToList();
             ddlBuscar.DataTextField = "aseguradora";
-            ddlBuscar.DataValueField = "codigo";
+            ddlBuscar.DataValueField = "aseguradora";
             ddlBuscar.DataBind();
         }
     }

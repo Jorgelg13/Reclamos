@@ -153,11 +153,6 @@ public partial class Modulos_MdReclamos_wbFrmReclamosAsignadosUnity : System.Web
                 agregarComentario(txtComentarios.Text);
             }
 
-            if (txtCorreo.Text != "")
-            {
-                enviarNotificacion();
-            }
-
             insertarEstado(id);
             insertarCoberturas();
 
@@ -192,12 +187,16 @@ public partial class Modulos_MdReclamos_wbFrmReclamosAsignadosUnity : System.Web
             {
                 Utils.SMS_reclamos_autos(txtTelefono.Text, "UNITY: Estimad@ cliente recibimos aviso del reclamo "+reclamo.id+" asesor asignado: "+ddlGestor.SelectedItem+" Tel: "+reclamo.gestores.telefono+".", userlogin, id);
             }
+            if (txtCorreo.Text != "")
+            {
+                enviarNotificacion();
+            }
             Response.Redirect("/Modulos/MdReclamosUnity/wbFrmReclamosAutosSeguimiento.aspx?ID_reclamo=" + id, false);
         }
         catch (Exception ex)
         {
             Utils.ShowMessage(this.Page, "No se a podido ingresar ese registro..", "Nota..!", "error");
-            Email.EnviarERROR("Error en apertura de reclamos de autos","Error ocasionado al usuario: " + userlogin + " en el registro con el id: " + id +  "\n\n" + ex);
+            Email.EnviarERROR("Error en apertura de reclamos de autos","Error ocasionado al usuario: " + userlogin + " en el registro con el id: " + id +  "\n\n" + ex.Message);
         }
     }
 

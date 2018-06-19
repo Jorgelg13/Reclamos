@@ -147,6 +147,8 @@
                                         <li class="dropdown-submenu"></li>
                                         <li><a href="javascript:excel('/pdf/Copagos/AMICELCO COPAGOS.xlsx')">Amicelco</a></li>
                                         <li><a href="javascript:excel('/pdf/Copagos/CAJA DE AHORRO COPAGOS.xlsx')">Caja de Ahorro</a></li>
+                                        <li><a href="javascript:excel('/pdf/Copagos/CopagosAlmo.xls')">Almo</a></li>
+                                        <li><a href="javascript:excel('/pdf/Copagos/CopagosAsetec.xls')">Asetec</a></li>
                                         <li><a href="javascript:excel('/pdf/Copagos/COEX Y AFILIADAS COPAGOS.xlsx')">Coex y Afiliadas</a></li>
                                         <li><a href="javascript:ventanaSecundaria('/pdf/Copagos/Agropecuaria Popoyan POLIZA 856-VDGM.pdf')">Agropecuaria Popoyan</a></li>
                                         <li><a href="javascript:ventanaSecundaria('/pdf/Copagos/Alfa Uno POLIZA 962-001.pdf')">Alfa Uno</a></li>

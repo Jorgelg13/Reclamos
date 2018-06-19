@@ -72,7 +72,17 @@
             </div>
         </div>
 </asp:Content>
-<asp:Content ID="Content3" ContentPlaceHolderID="ContentJs" runat="Server">
+<asp:Content runat="server" ContentPlaceHolderID="ContentJs" ID="JS">
+    <script>
+        try {
+            $('#ContentPlaceHolder1_GridAnalistas tr').each(function (index) {
+                $tr = $(this);
+                   $td = $tr[0].cells[1];
+                   $td.remove();
+            });
+        } catch (ex) {
+        }
+    </script>
 </asp:Content>
 
 

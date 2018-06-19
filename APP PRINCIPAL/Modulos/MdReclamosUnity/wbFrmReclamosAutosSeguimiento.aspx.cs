@@ -1144,8 +1144,8 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosAutosSeguimiento : Sys
 
     protected void btnSubir_Click(object sender, EventArgs e)
     {
-        //String path = @"C:\Reclamos\ReclamosAutos";
-        String path = @"E:\ReclamosScanner\files\ReclamosAutos";
+        String path = @"C:\Reclamos\ReclamosAutos";
+        //String path = @"E:\ReclamosScanner\files\ReclamosAutos";
         DateTimeFormatInfo formatoFecha = CultureInfo.CurrentCulture.DateTimeFormat;
         DateTime fecha = DateTime.Now;
         String RD;

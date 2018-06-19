@@ -10,7 +10,7 @@
                     <h3 class="panel-title"><b style="font-size: 16px;">Seleccione los campos</b></h3>
                 </div>
                 <div class="panel-body scrolling-table-container" style="height: 525px; max-height: 600px;">
-                    <asp:CheckBox Text="Todos" runat="server" id="checkTodos" AutoPostBack="true" OnCheckedChanged="checkTodos_CheckedChanged"/>
+                    <asp:CheckBox Text="Todos" runat="server" ID="checkTodos" AutoPostBack="true" OnCheckedChanged="checkTodos_CheckedChanged" />
                     <asp:CheckBoxList ID="checkCampos" runat="server" Height="141px" Width="147px">
                         <asp:ListItem Value="reclamos_varios.estado_unity as [Estado Reclamo]">Estado</asp:ListItem>
                         <asp:ListItem Value="reclamos_varios.estado_reclamo_unity as [Estado Reclamo Unity]">Estado Unity</asp:ListItem>
@@ -65,7 +65,9 @@
         <div class="col-sm-10">
             <div class="panel panel-info">
                 <div class="panel-heading">
-                    <h3 class="panel-title"><b style="font-size: 16px;">Tabla con campos seleccionados <spam style="margin-left:100px">Total de registros: </spam><asp:Label ID="lblConteo" runat="server" Style="font-size: 20px;"></asp:Label></b></h3>
+                    <h3 class="panel-title"><b style="font-size: 16px;">Tabla con campos seleccionados
+                        <spam style="margin-left: 100px">Total de registros: </spam>
+                        <asp:Label ID="lblConteo" runat="server" Style="font-size: 20px;"></asp:Label></b></h3>
                 </div>
                 <div class="panel-body" style="height: 520px;">
                     <div class="scrolling-table-container" style="overflow-y: auto;">
@@ -80,8 +82,8 @@
                         </asp:GridView>
                     </div>
                     <br />
-                    <asp:CheckBox ID="checkSinFiltro" AutoPostBack="true" runat="server" Text="Sin Ningun Filtro" OnCheckedChanged="checkSinFiltro_CheckedChanged" />
-                    <asp:Button ID="btnMostrarEficiencia" OnClientClick="return false;" data-toggle="modal" data-target="#ModalDetalle" style="margin-left:20px" runat="server" Text="Eficiencia" />
+                    <asp:CheckBox ID="checkSinFiltro" Checked="true" AutoPostBack="true" runat="server" Text="Sin Ningun Filtro" OnCheckedChanged="checkSinFiltro_CheckedChanged" />
+                    <asp:Button ID="btnMostrarEficiencia" OnClientClick="return false;" data-toggle="modal" data-target="#ModalDetalle" Style="margin-left: 20px" runat="server" Text="Eficiencia" />
                     <br />
                     <div class="form-inline">
                         <div class="form-group" style="width: 20%">
@@ -126,35 +128,16 @@
                 </div>
             </div>
         </div>
-
-        
         <%-- ------------------------ modal ver el detalle de eficiencia ------------------------------------------%>
-        <div class="modal fade" id="ModalDetalle" tabindex="-1" role="dialog" aria-labelledby="ModalDetalle2" data-keyboard="false" data-backdrop="static">
-            <div class="modal-dialog" role="document">
+        <div class="modal fade" id="ModalDetalle" data-keyboard="false" data-backdrop="static">
+            <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title" id="ModalComentario1"><b>Detalle del reporte seleccionado</b></h4>
+                        <h4 class="modal-title"><b>Detalle del reporte seleccionado</b></h4>
                     </div>
                     <div class="modal-body">
                         <div class="form-group">
-<%--                            <table style="width: 100%" class="table table-responsive table-hover" runat="server" id="tbl">
-                                <tr>
-                                    <th>Gestor</th>
-                                    <th>Pendientes</th>
-                                    <th>Nuevos</th>
-                                    <th>Cerrados</th>
-                                    <th>Eficiencia</th>
-                                </tr>
-                                <tr>
-                                    <td><asp:Label ID="lblGestor" runat="server"></asp:Label></td>
-                                    <td><asp:Label ID="lblPendientes" runat="server"></asp:Label></td>
-                                    <td><asp:Label ID="lblNuevos" runat="server"></asp:Label></td>
-                                    <td><asp:Label ID="lblCerrados" runat="server"></asp:Label></td>
-                                    <td><asp:Label ID="lblEficiencia" runat="server"></asp:Label></td>
-                                </tr>
-                            </table>--%>
-                            <asp:GridView ID="GridEficiencia" runat="server" CssClass="table bs-table table-responsive table-hover" AutoGenerateColumns="True" CellPadding="4" ForeColor="#333333" GridLines="None" OnRowDataBound="GridEficiencia_RowDataBound" ShowFooter="true">
+                            <asp:GridView ID="GridEficiencia" runat="server" CssClass="table bs-table table-responsive table-hover" AutoGenerateColumns="True" ForeColor="#333333" GridLines="None" OnRowDataBound="GridEficiencia_RowDataBound" ShowFooter="true">
                                 <AlternatingRowStyle BackColor="White" />
                                 <Columns>
                                 </Columns>
@@ -172,8 +155,6 @@
                 </div>
             </div>
         </div>
-
-
         <%-- botones circulares con las opciones multiples --%>
         <div id="container-floating">
             <div class="nd4 nds" data-toggle="tooltip" data-placement="left" data-original-title="Simone">
@@ -192,4 +173,20 @@
         </div>
     </div>
 </asp:Content>
+<asp:Content runat="server" ContentPlaceHolderID="ContentJs" ID="JS">
+    <script>
+        try {
+            $('#ContentPlaceHolder1_GridEficiencia tr').each(function (index) {
+                $tr = $(this);
+                if (index > 0) {
+                        $td = $tr[0].cells[4];
+                    $td.innerText = $td.innerText + ' %';
+                    $td.className = 'alinearNumeros';
+                }
+            });
+        } catch (ex) {
+        }
+    </script>
+</asp:Content>
+
 

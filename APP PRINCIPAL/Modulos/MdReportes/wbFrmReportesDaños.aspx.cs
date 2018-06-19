@@ -12,7 +12,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesDaños : System.Web.UI
     String Join;
     String buscar;
     String EficienciaGestor;
-    int Pendientes, Nuevos, Cerrados;
+    int Pendientes, Nuevos, Cerrados, Ejecucion;
     conexionBD obj = new conexionBD();
     ReclamosEntities DBReclamos = new ReclamosEntities();
     
@@ -21,6 +21,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesDaños : System.Web.UI
         if(!IsPostBack)
         {
             Gestores();
+            checkSinFiltro_CheckedChanged(sender, e);
         }
 
         if(userlogin == "jsagastume" || userlogin == "jlaj" || userlogin == "jwiesner" || userlogin == "jpazos" || userlogin =="cmejia")
@@ -33,7 +34,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesDaños : System.Web.UI
         }
 
         EficienciaGestor = "select rs.nombre as Usuario, rs.Pendientes, rs.Nuevos, rs.Cerrados , " +
-            "CAST(cast((rs.Cerrados * 100) / ((rs.Pendientes * 1.0) + nuevos) as decimal(4, 2)) as varchar) + '%' as Ejecucion " +
+            "CAST(cast((rs.Cerrados * 100) / (rs.Pendientes + nuevos) as decimal) as varchar) as Ejecucion " +
             "from(select r.nombre," +
             "Pendientes = (select COUNT(*) from reclamos_varios where estado_unity = 'Seguimiento' and id_gestor = r.id)," +
             "Nuevos = (select COUNT(*) from reclamos_varios where fecha_apertura_reclamo between '"+txtFechaInicio.Text+"' and '"+txtFechaFin.Text+"' and id_gestor = r.id), " +
@@ -74,28 +75,28 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesDaños : System.Web.UI
             //si seleccionarion cerrado ejecuta este query 
             if (ddlEstado.SelectedItem.Text == "Cerrado")
             {
-                llenado.llenarGrid(listado.Substring(0, (listado.Length - 2)) + Join + " where (reclamos_varios.fecha_cierre_reclamo between '" + txtFechaInicio.Text + "' and '" + txtFechaFin.Text + "') and (reclamos_varios.estado_unity = '" + ddlEstado.SelectedItem + "') ", GridCamposSeleccion);
-                Conteo();
+                llenado.llenarGrid(listado.Substring(0, (listado.Length - 2)) + Join + " where (reclamos_varios.fecha_cierre_reclamo between '" + txtFechaInicio.Text + "' and '" + txtFechaFin.Text + "') " +
+                    "and (reclamos_varios.estado_unity = '" + ddlEstado.SelectedItem + "') ", GridCamposSeleccion);
             }
             else if(ddlEstado.SelectedItem.Text == "Seguimiento")
             {
                 llenado.llenarGrid(listado.Substring(0, (listado.Length - 2)) + Join +
                   " where (reclamos_varios.fecha_apertura_reclamo between '" + txtFechaInicio.Text + "' and '" + txtFechaFin.Text + "') and (reclamos_varios.estado_unity = '" + ddlEstado.SelectedItem + "') " +
                  "", GridCamposSeleccion);
-                Conteo();
             }
             else if (ddlEstado.SelectedItem.Text == "Todos")
             {
                 llenado.llenarGrid(listado.Substring(0, (listado.Length - 2)) + Join +
                   " where (reclamos_varios.fecha_apertura_reclamo between '" + txtFechaInicio.Text + "' and '" + txtFechaFin.Text + "') " +
                  "", GridCamposSeleccion);
-                Conteo();
             }
             else if (ddlEstado.SelectedItem.Text == "Pendientes")
             {
                 llenado.llenarGrid(listado.Substring(0, (listado.Length - 2)) + Join + " where "+ ddlEstado.SelectedValue + " ", GridCamposSeleccion);
-                Conteo();
             }
+
+            Conteo();
+            Eficiencia();
         }
 
         else
@@ -122,41 +123,38 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesDaños : System.Web.UI
             if (ddlEstado.SelectedItem.Text == "Cerrado")
             {
                 llenado.llenarGrid(listado.Substring(0, (listado.Length - 2)) + Join +
-                  " where (" + ddlElegir.SelectedValue + " like '%" + buscar + "%') and (reclamos_varios.fecha_cierre_reclamo between '" + txtFechaInicio.Text + "' and '" + txtFechaFin.Text + "') and (reclamos_varios.estado_unity = '" + ddlEstado.SelectedItem + "')  ", GridCamposSeleccion);
-                Conteo();
-                Eficiencia();
+                  " where (" + ddlElegir.SelectedValue + " like '%" + buscar + "%') and (reclamos_varios.fecha_cierre_reclamo between '" + txtFechaInicio.Text + "' and '" + txtFechaFin.Text + "') " +
+                  "and (reclamos_varios.estado_unity = '" + ddlEstado.SelectedItem + "')  ", GridCamposSeleccion);
             }
 
             else if(ddlEstado.SelectedItem.Text == "Seguimiento")
             {
                 llenado.llenarGrid(listado.Substring(0, (listado.Length - 2)) + Join +
-                  " where (" + ddlElegir.SelectedValue + " like '%" + buscar + "%') and (reclamos_varios.fecha_apertura_reclamo between '" + txtFechaInicio.Text + "' and '" + txtFechaFin.Text + "') and (reclamos_varios.estado_unity = '" + ddlEstado.SelectedItem + "')  ", GridCamposSeleccion);
-                Conteo();
-                Eficiencia();
+                  " where (" + ddlElegir.SelectedValue + " like '%" + buscar + "%') and (reclamos_varios.fecha_apertura_reclamo between '" + txtFechaInicio.Text + "' and '" + txtFechaFin.Text + "') " +
+                  "and (reclamos_varios.estado_unity = '" + ddlEstado.SelectedItem + "')  ", GridCamposSeleccion);
             }
 
             else if (ddlEstado.SelectedItem.Text == "Todos")
             {
                 llenado.llenarGrid(listado.Substring(0, (listado.Length - 2)) + Join +
-                  " where (" + ddlElegir.SelectedValue + " like '%" + buscar + "%') and (reclamos_varios.fecha_apertura_reclamo between '" + txtFechaInicio.Text + "' and '" + txtFechaFin.Text + "') ", GridCamposSeleccion);
-                Conteo();
-                Eficiencia();
+                  " where (" + ddlElegir.SelectedValue + " like '%" + buscar + "%') and (reclamos_varios.fecha_apertura_reclamo between '" + txtFechaInicio.Text + "' " +
+                  "and '" + txtFechaFin.Text + "') ", GridCamposSeleccion);
             }
 
             else if (ddlEstado.SelectedItem.Text == "Pendientes")
             {
                 llenado.llenarGrid(listado.Substring(0, (listado.Length - 2)) + Join +
                   " where (" + ddlElegir.SelectedValue + " like  '%"+ buscar +"%') and ("+ddlEstado.SelectedValue+") ", GridCamposSeleccion);
-                Conteo();
-                Eficiencia();
             }
 
             else if (ddlEstado.SelectedItem.Text == "Estado")
             {
                 llenado.llenarGrid(listado.Substring(0, (listado.Length - 2)) + Join +
                   " where (" + ddlElegir.SelectedValue + " like  '%" + ddlBuscar.SelectedItem.Text + "%') and (estado_unity = 'Seguimiento') ", GridCamposSeleccion);
-                Conteo();
             }
+
+            Conteo();
+            Eficiencia();
         }
     }
 
@@ -169,7 +167,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesDaños : System.Web.UI
 
         catch (Exception ex)
         {
-            Response.Write(ex);
+            Utils.ShowMessage(this.Page, "No se a podido generar la eficiencia debido a un error " + ex.Message, "Error..!", "success");
         }
     }
 
@@ -191,7 +189,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesDaños : System.Web.UI
 
     protected void linkSalir_Click(object sender, EventArgs e)
     {
-        Response.Redirect("/Modulos/MdReclamosUnity/wbFrmRecDañosSeguimiento.aspx");
+        Response.Redirect("/Modulos/MdReclamosUnity/wbFrmRecDañosSeguimiento.aspx", false);
     }
 
     public override void VerifyRenderingInServerForm(Control control)
@@ -283,6 +281,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesDaños : System.Web.UI
                 Pendientes += Convert.ToInt32(DataBinder.Eval(e.Row.DataItem, "[Pendientes]"));
                 Nuevos += Convert.ToInt32(DataBinder.Eval(e.Row.DataItem, "[Nuevos]"));
                 Cerrados += Convert.ToInt32(DataBinder.Eval(e.Row.DataItem, "[Cerrados]"));
+                Ejecucion += Convert.ToInt32(DataBinder.Eval(e.Row.DataItem, "[Ejecucion]"));
             }
             else if (e.Row.RowType == DataControlRowType.Footer)
             {
@@ -297,6 +296,10 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesDaños : System.Web.UI
 
                 e.Row.Cells[3].Text = Cerrados.ToString();
                 e.Row.Cells[3].HorizontalAlign = HorizontalAlign.Left;
+                e.Row.Font.Bold = true;
+
+                e.Row.Cells[4].Text = (Ejecucion / GridEficiencia.Rows.Count).ToString();
+                e.Row.Cells[4].HorizontalAlign = HorizontalAlign.Left;
                 e.Row.Font.Bold = true;
             }
         }

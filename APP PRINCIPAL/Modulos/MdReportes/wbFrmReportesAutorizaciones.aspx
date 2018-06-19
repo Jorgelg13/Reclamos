@@ -1,16 +1,16 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/ReclamosUnity.master" AutoEventWireup="true" CodeFile="wbFrmReportesAutorizaciones.aspx.cs" Inherits="Modulos_MdReclamosUnity_wbFrmReportesAutorizaciones" %>
 
-<asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
 </asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
-        <div class="container-fluid">
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
+    <div class="container-fluid">
         <div class="col-sm-2">
             <div class="panel panel-info">
                 <div class="panel-heading">
                     <h3 class="panel-title"><b style="font-size: 16px;">Seleccione los campos</b></h3>
                 </div>
                 <div class="panel-body scrolling-table-container" style="height: 525px; max-height: 600px;">
-                   <asp:CheckBox ID="CheckTodos" Text="Seleccionar Todos" AutoPostBack="true" runat="server" OnCheckedChanged="CheckTodos_CheckedChanged" />
+                    <asp:CheckBox ID="CheckTodos" Text="Seleccionar Todos" AutoPostBack="true" runat="server" OnCheckedChanged="CheckTodos_CheckedChanged" />
                     <asp:CheckBoxList ID="checkCampos" runat="server" Height="141px" Width="147px">
                         <asp:ListItem Value="aut.reportante as Reportante">Reportante</asp:ListItem>
                         <asp:ListItem Value="aut.tipo_consulta as [Tipo Consulta]">Tipo Consulta</asp:ListItem>
@@ -38,7 +38,9 @@
         <div class="col-sm-10">
             <div class="panel panel-info">
                 <div class="panel-heading">
-                    <h3 class="panel-title"><b style="font-size: 16px;">Tabla con campos seleccionados <spam style="margin-left:100px">Total de registros: </spam><asp:Label ID="lblConteo" runat="server" Style="font-size: 20px;"></asp:Label></b></h3>
+                    <h3 class="panel-title"><b style="font-size: 16px;">Tabla con campos seleccionados
+                        <spam style="margin-left: 100px">Total de registros: </spam>
+                        <asp:Label ID="lblConteo" runat="server" Style="font-size: 20px;"></asp:Label></b></h3>
                 </div>
                 <div class="panel-body" style="height: 520px;">
                     <div class="scrolling-table-container" style="overflow-y: auto;">
@@ -54,13 +56,14 @@
                         </asp:GridView>
                     </div>
                     <br />
-                    <asp:CheckBox ID="checkSinFiltro" runat="server" Text="Sin Ningun Filtro" AutoPostBack="true" OnCheckedChanged="checkSinFiltro_CheckedChanged" />
-                    <asp:Button ID="btnMostrarEficiencia" OnClientClick="return false;" data-toggle="modal" data-target="#ModalDetalle" style="margin-left:20px" runat="server" Text="Eficiencia" />
-                    <br />
+                    <div class="form-inline">
+                        <asp:CheckBox ID="checkSinFiltro" runat="server" Text="Sin Ningun Filtro" AutoPostBack="true" OnCheckedChanged="checkSinFiltro_CheckedChanged" />
+                        <asp:Button ID="btnMostrarEficiencia" OnClientClick="return false;" data-toggle="modal" data-target="#ModalDetalle" Style="margin-left: 20px" runat="server" Text="Eficiencia" />
+                    </div>
                     <div class="form-inline">
                         <div class="form-group" style="width: 20%">
                             <label>Seleccionar Busqueda:</label>
-                            <asp:DropDownList ID="ddlElegir" runat="server" Style="width: 100%" AutoPostBack="true" CssClass="form-control" OnSelectedIndexChanged="ddlElegir_SelectedIndexChanged" >
+                            <asp:DropDownList ID="ddlElegir" runat="server" Style="width: 100%" AutoPostBack="true" CssClass="form-control" OnSelectedIndexChanged="ddlElegir_SelectedIndexChanged">
                                 <asp:ListItem Value="aut.reportante">Reportante</asp:ListItem>
                                 <asp:ListItem Value="reg.asegurado">Asegurado</asp:ListItem>
                                 <asp:ListItem Value="reg.poliza">Poliza</asp:ListItem>
@@ -100,26 +103,29 @@
         <div class="modal fade" id="ModalDetalle" data-keyboard="false" data-backdrop="static">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title"><b>Detalle del reporte autorizaciones</b></h4>
-                    </div>
-                    <div class="modal-body">
-                        <div class="scrolling-table-container" style="overflow-y: auto;">
-                            <asp:GridView ID="GridEficiencia" runat="server" CssClass="table bs-table table-responsive table-hover" AutoGenerateColumns="true" CellPadding="4" ForeColor="#333333" GridLines="None" AllowCustomPaging="True" AllowPaging="True" PageSize="3000" ShowFooter="true" OnRowDataBound="GridPromedioAseguradora_RowDataBound">
-                                <AlternatingRowStyle BackColor="White" />
-                                <Columns>
-                                </Columns>
-                                <FooterStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" />
-                                <HeaderStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" HorizontalAlign="Center" Wrap="False" />
-                                <PagerSettings PageButtonCount="30" />
-                                <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
-                                <RowStyle BackColor="#EFF3FB" HorizontalAlign="Left" Wrap="False" />
-                            </asp:GridView>
+                    <asp:Panel runat="server" ID="PnEficiencia">
+                        <div class="modal-header">
+                            <h4 class="modal-title"><b>Detalle del reporte autorizaciones</b></h4>
                         </div>
-                    </div>
+                        <div class="modal-body">
+                            <div class="scrolling-table-container" style="overflow-y: auto;">
+                                <asp:GridView ID="GridEficiencia" runat="server" CssClass="table bs-table table-responsive table-hover" AutoGenerateColumns="true" CellPadding="4" ForeColor="#333333" GridLines="None" AllowCustomPaging="True" AllowPaging="True" PageSize="3000" ShowFooter="true" OnRowDataBound="GridEficiencia_RowDataBound">
+                                    <AlternatingRowStyle BackColor="White" />
+                                    <Columns>
+                                    </Columns>
+                                    <FooterStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" />
+                                    <HeaderStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" HorizontalAlign="Center" Wrap="False" />
+                                    <PagerSettings PageButtonCount="30" />
+                                    <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
+                                    <RowStyle BackColor="#EFF3FB" HorizontalAlign="Left" Wrap="False" />
+                                </asp:GridView>
+                            </div>
+                            <asp:Label runat="server" ID="NombreAseguradora" Style="font-size: 20px;"></asp:Label>
+                        </div>
+                    </asp:Panel>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-warning" data-dismiss="modal">Cerrar</button>
-                        <asp:Button ID="btnExportarEficiencia" runat="server" Text="Descargar" OnClick="btnExportarEficiencia_Click" CssClass="btn btn-success"  />
+                        <asp:Button ID="btnExportarEficiencia" runat="server" Text="Descargar" OnClick="btnExportarEficiencia_Click" CssClass="btn btn-success" />
                     </div>
                 </div>
             </div>
@@ -127,7 +133,7 @@
         <%-- botones circulares con las opciones multiples --%>
         <div id="container-floating">
             <div class="nd4 nds" data-toggle="tooltip" data-placement="left" data-original-title="Simone">
-                <asp:LinkButton ID="linkSalir" OnClick="linkSalir_Click" CssClass="letter" ToolTip="salir"  runat="server"><i class="fa fa-times" aria-hidden="true"></i></asp:LinkButton>
+                <asp:LinkButton ID="linkSalir" OnClick="linkSalir_Click" CssClass="letter" ToolTip="salir" runat="server"><i class="fa fa-times" aria-hidden="true"></i></asp:LinkButton>
             </div>
             <div class="nd3 nds" data-toggle="tooltip" data-placement="left" data-original-title="contract@gmail.com">
                 <asp:LinkButton ID="btnExportar" OnClick="btnExportar_Click" CssClass="letter" ToolTip="Exportar a excel" runat="server"><i class="fa fa-file-excel-o" aria-hidden="true"></i></asp:LinkButton>
@@ -142,6 +148,6 @@
         </div>
     </div>
 </asp:Content>
-<asp:Content ID="Content3" ContentPlaceHolderID="ContentJs" Runat="Server">
+<asp:Content ID="Content3" ContentPlaceHolderID="ContentJs" runat="Server">
 </asp:Content>
 

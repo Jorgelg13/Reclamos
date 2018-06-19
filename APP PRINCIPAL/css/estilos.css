@@ -496,3 +496,9 @@ a {
 .ver-hoy {
     background-color: #afcaf7 !important;
 }
+
+
+/*alinear columnas de gridviews*/
+.alinearNumeros{
+    text-align:right;
+}

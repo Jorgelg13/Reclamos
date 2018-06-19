@@ -478,6 +478,8 @@ public partial class encuesta
     public int id { get; set; }
     public string empresa { get; set; }
     public Nullable<short> pregunta1 { get; set; }
+    public string clasificacion1 { get; set; }
+    public string comentario1 { get; set; }
     public Nullable<short> pregunta2 { get; set; }
     public Nullable<short> pregunta3 { get; set; }
     public string comentario { get; set; }

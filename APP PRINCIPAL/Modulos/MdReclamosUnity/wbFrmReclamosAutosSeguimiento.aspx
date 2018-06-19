@@ -350,6 +350,7 @@
                                 <asp:ListItem Value="Ruta">Ruta</asp:ListItem>
                                 <asp:ListItem Value="Recepcion">Recepcion</asp:ListItem>
                                 <asp:ListItem Value="Escritura de pago">Escritura de pago</asp:ListItem>
+                                <asp:ListItem Value="Entrega Personal">Entrega Personal</asp:ListItem>
                                 <asp:ListItem Value="No Aplica">No Aplica</asp:ListItem>
                             </asp:DropDownList>
                         </div>

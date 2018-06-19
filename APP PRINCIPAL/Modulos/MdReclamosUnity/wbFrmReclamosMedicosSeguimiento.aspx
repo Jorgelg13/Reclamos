@@ -473,7 +473,7 @@
                                     <br />
                                     <p><b>Nota:</b></p>
                                     <p>
-                                        <asp:Label align="justify" ID="lblCartaObservacion" runat="server"></asp:Label>
+                                        <asp:Label ID="lblCartaObservacion" runat="server"></asp:Label>
                                     </p>
                                 </div>
                             </div>
@@ -948,6 +948,7 @@
                                 <asp:ListItem Value="1">En Ruta</asp:ListItem>
                                 <asp:ListItem Value="2">Recepcion</asp:ListItem>
                                 <asp:ListItem Value="3">Correo</asp:ListItem>
+                                <asp:ListItem Value="4">Cerrado Porque no Procede</asp:ListItem>
                             </asp:DropDownList>
                         </div>
                     </div>

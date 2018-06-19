@@ -14,8 +14,8 @@ public partial class Modulos_MdCatalogos_wbAseguradoras : System.Web.UI.Page
         //if (userlogin == "nsierra" || userlogin == "cmejia" || userlogin == "jlaj") PnPrincipal.Visible = true;
         if (!IsPostBack)
         {
-            gridEstados.DataSource = DBReclamos.aseguradoras.ToList();
-            gridEstados.DataBind();
+            GridAseguradoras.DataSource = DBReclamos.aseguradoras.ToList();
+            GridAseguradoras.DataBind();
         }
     }
 
@@ -35,7 +35,7 @@ public partial class Modulos_MdCatalogos_wbAseguradoras : System.Web.UI.Page
                 DBReclamos.aseguradoras.Add(aseguradora);
                 DBReclamos.SaveChanges();
                 Utils.ShowMessage(this.Page, "Registro guardado con exito", "Excelente..!", "success");
-                gridEstados.DataBind();
+                GridAseguradoras.DataBind();
                 txtDescripcion.Text = "";
                 txtDias.Text = "";
             }
@@ -52,7 +52,7 @@ public partial class Modulos_MdCatalogos_wbAseguradoras : System.Web.UI.Page
         try
         {
             int id2;
-            id2 = Convert.ToInt32(gridEstados.SelectedRow.Cells[1].Text);
+            id2 = Convert.ToInt32(GridAseguradoras.SelectedRow.Cells[1].Text);
             var actualizar = DBReclamos.aseguradoras.Find(id2);
             actualizar.aseguradora = txtDescripcion.Text;
             actualizar.total_dias_rc_medicos = Convert.ToInt16(txtDias.Text);
@@ -61,8 +61,8 @@ public partial class Modulos_MdCatalogos_wbAseguradoras : System.Web.UI.Page
             Guardar.Visible = true;
             txtDescripcion.Text = "";
             txtDias.Text = "";
-            gridEstados.DataSource = DBReclamos.aseguradoras.ToList();
-            gridEstados.DataBind();
+            GridAseguradoras.DataSource = DBReclamos.aseguradoras.ToList();
+            GridAseguradoras.DataBind();
             Utils.ShowMessage(this.Page, "aseguradora actualizada con exito", "Excelente", "success");
         }
         catch (Exception ex)
@@ -73,7 +73,7 @@ public partial class Modulos_MdCatalogos_wbAseguradoras : System.Web.UI.Page
 
     protected void GridGeneral_SelectedIndexChanged(object sender, EventArgs e)
     {
-        id = Convert.ToInt32(gridEstados.SelectedRow.Cells[1].Text);
+        id = Convert.ToInt32(GridAseguradoras.SelectedRow.Cells[1].Text);
         var aseguradora = DBReclamos.aseguradoras.Find(id);
         txtDescripcion.Text = aseguradora.aseguradora;
         txtDias.Text = aseguradora.total_dias_rc_medicos.ToString();
@@ -85,6 +85,6 @@ public partial class Modulos_MdCatalogos_wbAseguradoras : System.Web.UI.Page
     protected void buscar_Click(object sender, EventArgs e)
     {
         Utils llenado = new Utils();
-        llenado.llenarGrid("select *from aseguradoras where aseguradora like '%" + txtbuscar.Text + "%'", gridEstados);
+        llenado.llenarGrid("select *from aseguradoras where aseguradora like '%" + txtbuscar.Text + "%'", GridAseguradoras);
     }
 }

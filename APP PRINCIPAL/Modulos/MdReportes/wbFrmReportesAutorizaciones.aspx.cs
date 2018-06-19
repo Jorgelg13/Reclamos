@@ -11,8 +11,10 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesAutorizaciones : Syste
     Utils llenado = new Utils();
     String Join;
     conexionBD obj = new conexionBD();
+    DataTable dt = new DataTable();
     ReclamosEntities DBReclamos = new ReclamosEntities();
     int TotalReclamos;
+    Double TotalPromedioHoras, TotalGrid;
     String buscar, eficienciaGestores;
 
     protected void Page_Load(object sender, EventArgs e)
@@ -52,6 +54,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesAutorizaciones : Syste
                 llenado.llenarGrid(listado.Substring(0, (listado.Length - 2)) + Join + " where (Convert(date,aut.fecha_completa_cierre, 112) between '" + txtFechaInicio.Text + "' and '" + txtFechaFin.Text + "')  and aut.tipo_estado = 'Cerrado'", GridCamposSeleccion);
                 Conteo();
                 eficiencia();
+                NombreAseguradora.Text = "Aseguradoras en general";
             }
             //si seleccionaron cualquier otra opcion de tipo de estado
             else if (ddlEstado.SelectedValue != "Cerrado")
@@ -60,6 +63,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesAutorizaciones : Syste
                 " where (Convert(date,aut.fecha_completa_commit,112) between '" + txtFechaInicio.Text + "' and '" + txtFechaFin.Text + "') and tipo_estado "+ddlEstado.SelectedValue+" ", GridCamposSeleccion);
                 Conteo();
                 eficiencia();
+                NombreAseguradora.Text = "Aseguradoras en general";
             }
         }
 
@@ -68,6 +72,8 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesAutorizaciones : Syste
             if (ddlElegir.SelectedItem.Text == "Aseguradora")
             {
                 buscar = ddlBuscar.SelectedValue;
+                eficienciaPorAseguradora();
+                NombreAseguradora.Text = ddlBuscar.SelectedValue;
             }
             else
             {
@@ -162,42 +168,6 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesAutorizaciones : Syste
         }
     }
 
-    //funcion para realizar una sumatoria y colocar el total en la parte de abajo del grid
-
-    protected void GridPromedioAseguradora_RowDataBound(object sender, GridViewRowEventArgs e)
-    {
-        try
-        {
-            if (e.Row.RowType == DataControlRowType.DataRow)
-            {
-                TotalReclamos += Convert.ToInt32(DataBinder.Eval(e.Row.DataItem, "[total]"));
-            }
-            else if (e.Row.RowType == DataControlRowType.Footer)
-            {
-                e.Row.Cells[0].Text = "TOTALES:";
-                e.Row.Cells[1].Text = TotalReclamos.ToString();
-                e.Row.Cells[1].HorizontalAlign = HorizontalAlign.Left;
-                e.Row.Font.Bold = true;
-
-                //e.Row.Cells[2].Text = (totalPromedioPonderado / TotalReclamos).ToString("N2");
-                //e.Row.Cells[2].HorizontalAlign = HorizontalAlign.Left;
-                //e.Row.Font.Bold = true;
-
-                //e.Row.Cells[3].Text = totalPromedioPonderado.ToString();
-                //e.Row.Cells[3].HorizontalAlign = HorizontalAlign.Left;
-                //e.Row.Font.Bold = true;
-
-                //e.Row.Cells[4].Text = (kpiAseguradora / (totalPromedioPonderado / TotalReclamos) * 100).ToString("N2") + "%";
-                //e.Row.Cells[4].HorizontalAlign = HorizontalAlign.Left;
-                //e.Row.Font.Bold = true;
-            }
-        }
-        catch (Exception err)
-        {
-            Response.Write(err);
-        }
-    }
-
     protected void ddlElegir_SelectedIndexChanged(object sender, EventArgs e)
     {
         if (ddlElegir.SelectedItem.Text == "Usuario" || ddlElegir.SelectedItem.Text == "Aseguradora")
@@ -214,7 +184,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesAutorizaciones : Syste
 
     protected void btnExportarEficiencia_Click(object sender, EventArgs e)
     {
-        Utils.ExportarExcel(GridEficiencia, Response, "Eficiencia Autorizaciones");
+        Utils.ExportarExcel(PnEficiencia, Response, "Eficiencia Autorizaciones del " + txtFechaInicio.Text + " al " + txtFechaFin.Text);
     }
 
     public void aseguradoras()
@@ -229,8 +199,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesAutorizaciones : Syste
     {
         try
         {
-            conexionBD obj = new conexionBD();
-            DataTable dt = new DataTable();
+
             SqlCommand comando = new SqlCommand("pa_kpi_autirizaciones", obj.ObtenerConexionReclamos());
             comando.CommandType = CommandType.StoredProcedure;
             comando.Parameters.AddWithValue("@fechaInicio", txtFechaInicio.Text);
@@ -244,7 +213,59 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesAutorizaciones : Syste
 
         catch(Exception ex)
         {
-            Utils.ShowMessage(this.Page, "Error al generar la eficiencia de autoriazaciones" + ex.Message, "Error..", "error");
+            Utils.ShowMessage(this.Page, "Error al generar la eficiencia de autorizaciones" + ex.Message, "Error..", "error");
+        }
+    }
+
+    public void eficienciaPorAseguradora()
+    {
+        try
+        {
+            SqlCommand comando = new SqlCommand("pa_kpi_autorizaciones_aseguradora", obj.ObtenerConexionReclamos());
+            comando.CommandType = CommandType.StoredProcedure;
+            comando.Parameters.AddWithValue("@fechaInicio", txtFechaInicio.Text);
+            comando.Parameters.AddWithValue("@fechaFin", txtFechaFin.Text);
+            comando.Parameters.AddWithValue("@aseguradora", ddlBuscar.SelectedValue);
+            comando.ExecuteNonQuery();
+            SqlDataAdapter sda = new SqlDataAdapter(comando);
+            sda.Fill(dt);
+            GridEficiencia.DataSource = dt;
+            GridEficiencia.DataBind();
+        }
+
+        catch (Exception ex)
+        {
+            Utils.ShowMessage(this.Page, "Error al generar la eficiencia de autorizaciones" + ex.Message, "Error..", "error");
+        }
+    }
+
+    //funcion para realizar una sumatoria y colocar el total en la parte de abajo del Grid
+    protected void GridEficiencia_RowDataBound(object sender, GridViewRowEventArgs e)
+    {
+        try
+        {
+            TotalGrid = Convert.ToDouble(GridEficiencia.Rows.Count);
+
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                TotalReclamos += Convert.ToInt32(DataBinder.Eval(e.Row.DataItem, "[total]"));
+                TotalPromedioHoras += Convert.ToDouble(DataBinder.Eval(e.Row.DataItem, "[Promedio Horas]"));
+            }
+            else if (e.Row.RowType == DataControlRowType.Footer)
+            {
+                e.Row.Cells[0].Text = "TOTALES:";
+                e.Row.Cells[1].Text = TotalReclamos.ToString();
+                e.Row.Cells[1].HorizontalAlign = HorizontalAlign.Left;
+                e.Row.Font.Bold = true;
+
+                e.Row.Cells[2].Text = (TotalPromedioHoras / TotalGrid).ToString("N2");
+                e.Row.Cells[2].HorizontalAlign = HorizontalAlign.Left;
+                e.Row.Font.Bold = true;
+            }
+        }
+        catch (Exception err)
+        {
+            Response.Write(err);
         }
     }
 }

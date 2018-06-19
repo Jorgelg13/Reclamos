@@ -11,7 +11,7 @@
     <link href="../css/toastr.min.css" rel="stylesheet" />
     <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
     <link href="../css/GridviewScroll.css" rel="stylesheet" />
-    <link href="../FlipClock/compiled/flipclock.css" rel="stylesheet" />
+    <link href="../Scripts/FlipClock/compiled/flipclock.css" rel="stylesheet" />
     <link href="../css/estilosContador.css" rel="stylesheet" />
     <title>Consulta Reclamos</title>
 </head>
@@ -23,7 +23,7 @@
                 <div class="content-wrapper">
                     <div class="float-right">
                         <div class="img-float-right" style="float: right;">
-                            <img src="../imgUnity/Unity%20Promotores-%20Logo%20en%20blanco.png" style="margin-top: -90px; width: 235px;">
+                            <img src="../imgUnity/Unity%20Promotores-%20Logo%20en%20blanco.png" style="margin-top: -90px; width: 235px;" />
                         </div>
                     </div>
                 </div>
@@ -45,12 +45,13 @@
             </div>
         </div>
     </asp:Panel>
-    <div class="container-fluid">
+    <div>
         <%-- labels ocultos --%>
         <asp:Label ID="lblClaseOculto" Visible="false" runat="server"></asp:Label>
         <asp:Label ID="lblRamoMemo" Visible="false" runat="server"></asp:Label>
         <asp:Label ID="lblIdOculto" Visible="false" runat="server"></asp:Label>
         <asp:TextBox ID="txtTiempo" Style="display: none;" runat="server"></asp:TextBox>
+        <asp:Label ID="lblDocumento" Style="display: none;" runat="server"></asp:Label>
 
         <div class="panel panel-info col-sm-12 col-md-9 col-lg-9">
             <asp:Panel ID="panelPrincipal" runat="server">
@@ -73,45 +74,45 @@
                             <a href="#ingreso-datos" aria-controls="llamadas" role="tab" data-toggle="tab">Tiempo Reclamo</a>
                         </li>
                     </ul>
-                  <%------------------------------------------------ detalle de gastos medicos ----------------------------------------------%>
-                    <div class="tab-content" style=" height:700px; overflow-x:auto;">
+ <%------------------------------------------------ detalle de gastos medicos ----------------------------------------------%>
+                    <div class="tab-content" style="height: 700px; overflow-x: auto;">
                         <div role="tabpanel" class="tab-pane active" id="home">
                             <div class="panel panel-info col-sm-12 col-md-12 col-lg-12 panel-cuadrado">
                                 <div class="panel-heading panel-memos">
-                                  <b>Detalle De Gastos Medicos</b>
+                                    <b>Detalle De Gastos Medicos</b>
                                     <b>
-                                      <asp:Label ID="txtFechaModificado"  runat="server" Style="padding-left: 15%;"></asp:Label>
+                                        <asp:Label ID="txtFechaModificado" runat="server" Style="padding-left: 15%;"></asp:Label>
                                     </b>
                                     <asp:CheckBox ID="checkMoneda" automplete="false" AutoPostBack="true" runat="server" Style="padding-left: 12%;" Text="Cambiar Moneda" OnCheckedChanged="checkMoneda_CheckedChanged" />
                                 </div>
                                 <div class="panel-body">
-                                    <div style="height: auto; overflow-x: auto;">
-                                        <asp:GridView ID="GridDetalleM" CssClass="table bs-table tablaDetalleAuto table-responsive table-hover" runat="server" CellPadding="4" ForeColor="#333333" GridLines="None" AutoGenerateColumns="False" DataKeyNames="ID" DataSourceID="detalle_gasto_medico" OnSelectedIndexChanged="GridDetalleM_SelectedIndexChanged">
-                                            <Columns>
-                                                <asp:CommandField SelectText="Eliminar" ShowSelectButton="True" />
-                                                <asp:BoundField DataField="Descripcion" HeaderText="Descripcion" SortExpression="Descripcion" />
-                                                <asp:BoundField DataField="Fecha" HeaderText="Fecha" SortExpression="fecha" />
-                                                <asp:BoundField DataField="No. Factura" HeaderText="No. Factura" SortExpression="Factura" />
-                                                <asp:BoundField DataField="Cantidad" HeaderText="Cantidad" SortExpression="Cantidad" DataFormatString="{0:0,0.00}">
-                                                    <HeaderStyle HorizontalAlign="Center" Wrap="True" />
-                                                    <ItemStyle Wrap="True" />
-                                                </asp:BoundField>
-                                                <asp:BoundField DataField="moneda" HeaderText="Moneda" SortExpression="Moneda" />
-                                                <asp:BoundField DataField="ID" HeaderText="ID" ReadOnly="True" SortExpression="ID">
-                                                    <ControlStyle ForeColor="White" />
-                                                    <HeaderStyle ForeColor="White" />
-                                                    <ItemStyle ForeColor="White" />
-                                                </asp:BoundField>
-                                            </Columns>
-                                            <FooterStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" />
-                                            <HeaderStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" />
-                                            <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
-                                            <RowStyle BackColor="#EFF3FB" />
-                                            <SelectedRowStyle BackColor="#D1DDF1" Font-Bold="True" ForeColor="#333333" />
-                                        </asp:GridView>
-                                    </div>
-                                    <div class="form-inline">
-                                        <asp:DropDownList CssClass="form-control" ID="ddlDetalleGasto" Style="width: 18%" Height="34px" runat="server">
+                                            <div style="height: auto; overflow-x: auto;">
+                                                <asp:GridView ID="GridDetalleM" CssClass="table bs-table tablaDetalleAuto table-responsive table-hover" runat="server" CellPadding="4" ForeColor="#333333" GridLines="None" AutoGenerateColumns="False" DataKeyNames="ID" DataSourceID="detalle_gasto_medico" OnSelectedIndexChanged="GridDetalleM_SelectedIndexChanged">
+                                                    <Columns>
+                                                        <asp:BoundField DataField="Descripcion" HeaderText="Descripcion" SortExpression="Descripcion" />
+                                                        <asp:BoundField DataField="Fecha" HeaderText="Fecha" SortExpression="fecha" />
+                                                        <asp:BoundField DataField="No. Factura" HeaderText="No. Factura" SortExpression="Factura" />
+                                                        <asp:BoundField DataField="Cantidad" HeaderText="Cantidad" SortExpression="Cantidad" DataFormatString="{0:0,0.00}">
+                                                            <HeaderStyle HorizontalAlign="Center" Wrap="True" />
+                                                            <ItemStyle Wrap="True" />
+                                                        </asp:BoundField>
+                                                        <asp:BoundField DataField="moneda" HeaderText="Moneda" SortExpression="Moneda" />
+                                                        <asp:BoundField DataField="ID" HeaderText="ID" ReadOnly="True" SortExpression="ID">
+                                                            <ControlStyle ForeColor="White" />
+                                                            <HeaderStyle ForeColor="White" />
+                                                            <ItemStyle ForeColor="White" />
+                                                        </asp:BoundField>
+                                                    </Columns>
+                                                    <FooterStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" />
+                                                    <HeaderStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" />
+                                                    <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
+                                                    <RowStyle BackColor="#EFF3FB" />
+                                                    <SelectedRowStyle BackColor="#D1DDF1" Font-Bold="True" ForeColor="#333333" />
+                                                </asp:GridView>
+                                            </div>
+                                    <div class="form-group col-md-6 col-lg-3 col-sm-12">
+                                        Tipo:
+                                        <asp:DropDownList CssClass="form-control" ID="ddlDetalleGasto" Style="width: 100%" Height="32px" runat="server">
                                             <asp:ListItem Value="1">Medicamentos</asp:ListItem>
                                             <asp:ListItem Value="2">Laboratorios y examenes especiales</asp:ListItem>
                                             <asp:ListItem Value="3">Procedimientos Ambulatorios</asp:ListItem>
@@ -122,75 +123,82 @@
                                             <asp:ListItem Value="8">Dental</asp:ListItem>
                                             <asp:ListItem Value="9">Otros</asp:ListItem>
                                         </asp:DropDownList>
-                                        <asp:TextBox ID="txtAgregarGasto" Text="0.00" CssClass="form-control" Style="width: 10%" runat="server"></asp:TextBox>
-                                        <asp:TextBox runat="server" ID="txtNumFactura" autocomplete="false" Style="width: 17%" placeholder="Numero de factura" class="form-control"></asp:TextBox>
-                                        <label for="message-text" class="control-label">Fecha De Gasto:</label>
-                                        <asp:TextBox runat="server" type="date" ID="txtFechaGasto" autocomplete="false" Style="width: 18%; height: 34px;" class="form-control"></asp:TextBox>
-                                        <asp:LinkButton ID="linkGuardarDetalleGMedico" Enabled="false" OnClick="btnguardarDetalle_Click" title="Guardar detalle de gasto medico" runat="server" Style="font-size: 30px; width: 10%;"><i class="fa fa-floppy-o" aria-hidden="true"></i></asp:LinkButton>
-                                        <asp:Label ID="lblTotal" Style="font-size: 20px; padding-left: 20px;" runat="server"></asp:Label>
                                     </div>
+                                    <div class="form-group col-md-6 col-lg-2 col-sm-12">
+                                        Cantidad:
+                                        <asp:TextBox ID="txtAgregarGasto" Text="0.00" CssClass="form-control" Style="width: 100%" runat="server"></asp:TextBox>
+                                    </div>
+                                    <div class="form-group col-md-6 col-lg-3 col-sm-12">
+                                        No. Factura:
+                                        <asp:TextBox runat="server" ID="txtNumFactura" autocomplete="false" Style="width: 100%" placeholder="Numero de factura" class="form-control"></asp:TextBox>
+                                    </div>
+                                    <div class="form-group col-md-6 col-lg-2 col-sm-12">
+                                        Fecha de gasto:<asp:TextBox runat="server" type="date" ID="txtFechaGasto" autocomplete="false" Style="width: 100%; height: 34px;" class="form-control"></asp:TextBox>
+                                    </div>
+                                    <div class="form-group col-md-6 col-lg-1 col-sm-12">
+                                        <label style="color: white">Guardar</label>
+                                        <asp:LinkButton ID="linkGuardarDetalleGMedico" visible="false" OnClick="btnguardarDetalle_Click" title="Guardar detalle de gasto medico" runat="server" Style="font-size: 30px; width: 100%;"><i class="fa fa-floppy-o"></i></asp:LinkButton>
+                                    </div>
+                                    <asp:Label ID="lblTotal" Style="font-size: 20px; padding-left: 20px;" runat="server"></asp:Label>
                                 </div>
                             </div>
                         </div>
-                       <%----------------------- detalle para envio de memos a asegurado y aseguradora --------------------%>
-                       <div role="tabpanel" class="tab-pane active " id="coberturas">
+                        <%----------------------- detalle para envio de memos a asegurado y aseguradora --------------------%>
+                        <div role="tabpanel" class="tab-pane active " id="coberturas">
                             <div class="panel panel-info col-sm-12 col-md-12 col-lg-12 panel-cuadrado">
                                 <div class="panel-heading panel-memos">
                                     <b>Detalle para envio de memos</b>
-                                    <asp:CheckBox ID="checkAgregar" AutoPostBack="true" Text="Generar Memo Al Cliente" Enabled="false" title="Generar Memo para el cliente" runat="server" Style="padding-left: 10%;" OnCheckedChanged="checkAgregar_CheckedChanged" />
-                                    <asp:CheckBox ID="CheckMemoAseguradora" AutoPostBack="true" Text="Generar Memo Aseguradora" Enabled="false" title="Generar Memo para la aseguradora" runat="server" Style="padding-left: 10%;" OnCheckedChanged="CheckMemoAseguradora_CheckedChanged" />
+                                    <asp:CheckBox ID="checkAgregar" AutoPostBack="true" Text="Generar Memo Al Cliente" title="Generar Memo para el cliente" runat="server" Style="padding-left: 10%;" OnCheckedChanged="checkAgregar_CheckedChanged" />
+                                    <asp:CheckBox ID="CheckMemoAseguradora" AutoPostBack="true" Text="Generar Memo Aseguradora" title="Generar Memo para la aseguradora" runat="server" Style="padding-left: 10%;" OnCheckedChanged="CheckMemoAseguradora_CheckedChanged" />
                                 </div>
                                 <div class="panel-body">
                                     <div style="height: 170px; overflow-x: auto;">
-                                        <div class="form-inline">
-                                            <div class="form-group" style="width: 48%; padding-top: 10px;">
-                                                <label for="message-text" class="control-label">Detalle para el cliente:</label>
-                                                <asp:TextBox ID="txtdetalle" Style="width: 100%" autocomplete="off" class="form-control" TextMode="multiline" Columns="50" Rows="3" runat="server" />
-                                            </div>
-                                            <div class="form-group" style="width: 48%; padding-top: 10px;">
-                                                <label for="message-text" class="control-label">Observaciones para memo de aseguradora:</label>
-                                                <asp:TextBox ID="txtObservaciones" Style="width: 100%" autocomplete="off" class="form-control" TextMode="multiline" Columns="50" Rows="3" runat="server" />
-                                            </div>
+                                        <div class="form-group col-sm-12 col-md-6 col-lg-6">
+                                            <label>Detalle para el cliente:</label>
+                                            <asp:TextBox ID="txtdetalle" Style="width: 100%" autocomplete="off" class="form-control" TextMode="multiline" Columns="50" Rows="3" runat="server" />
                                         </div>
-                                        <div class="form-inline">
-                                            <div class="form-group" style="width: 30%;">
-                                                <label for="message-text" class="control-label">Elegir una direccion:</label>
-                                                <asp:DropDownList CssClass="form-control" ID="ddlDirecciones" Style="width: 97%; height: 34px;" runat="server"></asp:DropDownList>
-                                            </div>
-                                            <div class="form-group" style="width: 35%; padding-top: 10px;">
-                                                <label for="message-text" class="control-label">Direccion Manual:</label>
-                                                <asp:TextBox ID="txtDireccion" Style="width: 95%" autocomplete="off" class="form-control" placeholder="Si no existe la direccion puede escribirla aqui" runat="server" />
-                                            </div>
-                                            <div class="form-group" style="width: 32%; padding-top: 10px;">
-                                                <label for="message-text" class="control-label">Ejecutivo:</label>
-                                                <asp:TextBox ID="txtEjecutivo" Style="width: 95%" class="form-control" placeholder="Nombre de ejecutivo para memos" runat="server" />
-                                            </div>
+                                        <div class="form-group col-sm-12 col-md-6 col-lg-6">
+                                            <label>Observaciones para memo de aseguradora:</label>
+                                            <asp:TextBox ID="txtObservaciones" Style="width: 100%" autocomplete="off" class="form-control" TextMode="multiline" Columns="50" Rows="3" runat="server" />
+                                        </div>
+                                        <div class="form-group col-sm-12 col-md-4 col-lg-4">
+                                            <label>Elegir una direccion:</label>
+                                            <asp:DropDownList CssClass="form-control" ID="ddlDirecciones" Style="width: 97%; height: 32px;" runat="server"></asp:DropDownList>
+                                        </div>
+                                        <div class="form-group col-sm-12 col-md-4 col-lg-4">
+                                            <label>Direccion Manual:</label>
+                                            <asp:TextBox ID="txtDireccion" Style="width: 95%" autocomplete="off" class="form-control" placeholder="Si no existe la direccion puede escribirla aqui" runat="server" />
+                                        </div>
+                                        <div class="form-group col-sm-12 col-md-4 col-lg-4">
+                                            <label>Ejecutivo:</label>
+                                            <asp:TextBox ID="txtEjecutivo" Style="width: 95%" class="form-control" placeholder="Nombre de ejecutivo para memos" runat="server" />
+                                        </div>
+                                        <div class="form-group col-sm-12 col-md-4 col-lg-4">
+                                            <label>Contacto:</label>
+                                            <asp:TextBox ID="txtContacto" Visible="false" Style="width: 95%" class="form-control" placeholder="Contacto" runat="server" />
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                           <%----------------------------------------------- seccion de pagos y desglose del cheque del reclamo -----------------------%>
-                           <div class="panel panel-info col-sm-12 col-md-12 col-lg-12 panel-cuadrado">
-                                   <div class="panel-heading panel-memos">
-                                       <h4 class="panel-title">
-                                           <b>Detalle de liquidación</b>
-                                       </h4>
-                                   </div>
-                                   <div class="panel-body">
-                                       <div style="height: auto; overflow-x: auto;">
-                                           <asp:GridView ID="GridPagos" runat="server" CssClass="table bs-table tablaDetalleAuto table-responsive table-hover" AutoGenerateColumns="True" OnSelectedIndexChanged="GridPagos_SelectedIndexChanged">
-                                               <Columns>
-                                                   <asp:CommandField ShowSelectButton="True" />
-                                               </Columns>
-                                               <FooterStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" />
-                                               <HeaderStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" />
-                                               <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
-                                               <RowStyle BackColor="#EFF3FB" />
-                                               <SelectedRowStyle BackColor="#D1DDF1" Font-Bold="True" ForeColor="#333333" />
-                                           </asp:GridView>
-                                       </div>
-                                   </div>
-                               </div>
+                            <%----------------------------------------------- seccion de pagos y desglose del cheque del reclamo -----------------------%>
+                            <div class="panel panel-info col-sm-12 col-md-12 col-lg-12 panel-cuadrado">
+                                <div class="panel-heading panel-memos">
+                                    <h4 class="panel-title">
+                                        <b>Detalle de liquidación</b>
+                                    </h4>
+                                </div>
+                                <div class="panel-body">
+                                    <div style="height: auto; overflow-x: auto;">
+                                        <asp:GridView ID="GridPagos" runat="server" CssClass="table bs-table tablaDetalleAuto table-responsive table-hover" AutoGenerateColumns="True" OnSelectedIndexChanged="GridPagos_SelectedIndexChanged">
+                                            <FooterStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" />
+                                            <HeaderStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" />
+                                            <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
+                                            <RowStyle BackColor="#EFF3FB" />
+                                            <SelectedRowStyle BackColor="#D1DDF1" Font-Bold="True" ForeColor="#333333" />
+                                        </asp:GridView>
+                                    </div>
+                                </div>
+                            </div>
                             <%---------------------------------------- seccion de comentarios del reclamo ---------------------------------------------%>
                             <div class="panel panel-info col-sm-12 col-md-12 col-lg-12 panel-cuadrado">
                                 <div class="panel-heading panel-memos">
@@ -227,22 +235,22 @@
                                     <table style="width: 100%">
                                         <tr>
                                             <td>
-                                                <asp:Label Style="font-size: 13px;" runat="server" for="message-text" class="control-label">Asegurado Titular:</asp:Label>
-                                                <asp:Label Style="font-size: 13px;" runat="server" for="message-text" ID="lblAsegurado" class="control-label"></asp:Label>
+                                                <asp:Label Style="font-size: 13px;" runat="server">Asegurado Titular:</asp:Label>
+                                                <asp:Label Style="font-size: 13px;" runat="server" ID="lblAsegurado"></asp:Label>
                                             </td>
                                             <td>
-                                                <asp:Label Style="font-size: 13px;" runat="server" for="message-text" class="control-label">Aseguradora: </asp:Label>
-                                                <asp:Label Style="font-size: 13px;" runat="server" for="message-text" ID="lblAseguradora" class="control-label"></asp:Label>
+                                                <asp:Label Style="font-size: 13px;" runat="server">Aseguradora: </asp:Label>
+                                                <asp:Label Style="font-size: 13px;" runat="server" ID="lblAseguradora"></asp:Label>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>
-                                                <asp:Label Style="font-size: 13px;" runat="server" for="message-text" class="control-label">Poliza:</asp:Label>
-                                                <asp:Label Style="font-size: 13px;" runat="server" for="message-text" ID="lblpoliza" class="control-label"></asp:Label>
+                                                <asp:Label Style="font-size: 13px;" runat="server">Poliza:</asp:Label>
+                                                <asp:Label Style="font-size: 13px;" runat="server" ID="lblpoliza"></asp:Label>
                                             </td>
                                             <td>
-                                                <asp:Label Style="font-size: 13px;" runat="server" for="message-text" class="control-label">Empresa:</asp:Label>
-                                                <asp:Label Style="font-size: 13px;" runat="server" for="message-text" ID="lblEmpresa" class="control-label"></asp:Label>
+                                                <asp:Label Style="font-size: 13px;" runat="server">Empresa:</asp:Label>
+                                                <asp:Label Style="font-size: 13px;" runat="server" ID="lblEmpresa"></asp:Label>
                                             </td>
                                         </tr>
                                     </table>
@@ -277,7 +285,7 @@
                                 </div>
                             </div>
                         </div>
-                      <br />
+                        <br />
                         <%------------------------------------------------ mostrar tiempos del reclamo ------------------------------------------%>
                         <div role="tabpanel" class="tab-pane" id="ingreso-datos">
                             <div class="col-md-4 col-lg-3">
@@ -353,10 +361,10 @@
                                         </div>
                                     </div>
                                 </div>
-                                 <div class="col-sm-12 col-md-3 col-lg-3">
+                                <div class="col-sm-12 col-md-3 col-lg-3">
                                     <div class="panel panel-info">
                                         <div class="panel-heading cabeceras">
-                                            <p style="text-align: center; font-size: 16px;"><b>Revision de cheque</b></p>
+                                            <p style="text-align: center; font-size: 16px;"><b>Envio de cheque</b></p>
                                         </div>
                                         <div class="panel-body">
                                             <a title="fecha en que se envio el cheque al asegurado" style="font-size: 70px; text-align: center;"><i class="fa fa-paper-plane-o" aria-hidden="true"></i></a>
@@ -382,7 +390,6 @@
                                     </div>
                                 </div>
                             </div>
-
                             <%------------------------------------------------ imprimir memo para aseguradora ------------------------------------------%>
                             <div id="imprimirEnvioAseg" style="display: none" class="form-inline">
                                 <br />
@@ -489,7 +496,7 @@
                                     <br />
                                     <p><b>Nota:</b></p>
                                     <p>
-                                        <asp:Label align="justify" ID="lblCartaObservacion" runat="server"></asp:Label>
+                                        <asp:Label ID="lblCartaObservacion" runat="server"></asp:Label>
                                     </p>
                                 </div>
                             </div>
@@ -508,26 +515,28 @@
                                 <asp:Label ID="lblFechaEnvioCliente" runat="server"></asp:Label>
                             </p>
                             <div class="form-inline" style="padding-top: 30px;">
-                                <table style="width: 85%; font-size: 13px;">
+                                <table style="width: 60%; font-size: 13px;">
                                     <tr>
                                         <th>
-                                            <asp:Label ID="lblMemoPara" Text="Para:" runat="server"></asp:Label></th>
+                                            <asp:Label ID="lblMemoPara" Text="Para:" runat="server"></asp:Label>
+                                        </th>
                                         <td>
                                             <asp:Label ID="lblMemoAsegurado" runat="server"></asp:Label>
                                         </td>
                                     </tr>
                                     <tr>
-                                        <th>Contratante: </th>
+                                        <th>Para: 
+                                        </th>
                                         <td>
                                             <asp:Label ID="lblMemoContratante" runat="server"></asp:Label>
                                         </td>
                                     </tr>
                                     <tr>
-                                        <th>Dirección</th>
+                                        <th>Dirección
+                                        </th>
                                         <td>
                                             <asp:Label ID="lblMemoDireccion" runat="server"></asp:Label>
                                         </td>
-                                        <td></td>
                                     </tr>
                                     <tr>
                                         <th>De:</th>
@@ -557,7 +566,7 @@
                                         <th></th>
                                     </tr>
                                     <tr>
-                                        <td style="padding-left:5px;">Póliza:</td>
+                                        <td style="padding-left: 5px;">Póliza:</td>
                                         <td><b>
                                             <asp:Label ID="lblMemoPoliza" runat="server"></asp:Label></b></td>
                                     </tr>
@@ -569,11 +578,18 @@
                                     <tr>
                                         <td style="padding-left: 5px;">Asegurado:</td>
                                         <td><b>
-                                            <asp:Label ID="lblMemoTitular" runat="server"></asp:Label></b></td>
+                                            <asp:Label ID="lblMemoTitular" runat="server"></asp:Label></b>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding-left: 5px;">Dependiente:</td>
+                                        <td><b>
+                                            <asp:Label ID="LblMemoDependiente" runat="server"></asp:Label></b>
+                                        </td>
                                     </tr>
                                 </table>
                                 <br />
-                                <p>Adjuntamos la papelería correspondiente al reclamo en referencia, de acuerdo al detalle acontinuación:</p>
+                                <p>Adjuntamos la papelería correspondiente al reclamo en referencia, de acuerdo al siguiente detalle:</p>
                                 <p>
                                     Fecha del reclamo :
                                 <asp:Label ID="lblFechaGastoMedico" runat="server"></asp:Label>
@@ -614,27 +630,134 @@
                                 <br />
                                 <p>__________________________________</p>
                                 <p>Atentamente</p>
-                                <p>
-                                    <asp:Label ID="Label11" runat="server"></asp:Label>
-                                </p>
                                 <br />
                                 <br />
                             </div>
                         </div>
                     </div>
                 </div>
+        </div>
+    </div>
+    <%------------------ botones laterales grandes  ------------------- --%>
+    <div class="col-sm-12 col-md-3 col-lg-3">
+        <div class="panel panel-info">
+            <div class="panel-heading" role="tab" id="Opciones">
+                <h4 class="panel-title">
+                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFive"><b>Opciones Multiples</b>
+                    </a>
+                </h4>
+            </div>
+            <div id="collapseFive" class="panel-collapse collapse in" role="tabpanel" aria-expanded="true">
+                <div class="panel-body">
+                    <div class="btn-acciones-laterales2">
+                        <div class="col-xs-3 col-md-3 col-sm-4 col-lg-3">
+                            <a onclick="printDiv('imprimir')" role="button" title="Imprimir El Formulario de documentos"><i class="fa fa-print"></i></a>
+                        </div>
+                        <div class="col-xs-3 col-md-3 col-sm-4 col-lg-3">
+                            <a role="button"  title="Enviar un correo electronico"><i class="fa fa-envelope-o"></i></a>
+                        </div>
+                        <div class="col-xs-3 col-md-3 col-sm-4 col-lg-3">
+                            <a title="Agregar un comentario" role="button" ><i class="fa fa-pencil-square-o"></i></a>
+                        </div>
+                        <div class="col-xs-3 col-md-3 col-sm-4 col-lg-3">
+                            <a title="Realizar Liquidacion" role="button" ><i class="fa fa-money"></i></a>
+                        </div>
+                        <div class="col-xs-3 col-md-3 col-sm-4 col-lg-3">
+                            <asp:LinkButton ID="btnGuardar" role="button" OnClick="btnActualizar_Click" title="Actualizar Informacion" Enabled="false" runat="server"><i class="fa fa-floppy-o"></i></asp:LinkButton>
+                        </div>
+                        <div class="col-xs-3 col-md-3 col-sm-4 col-lg-3">
+                            <a onclick="printDiv('imprimirEnvioAseg')" role="button" title="Imprimir Memo a la aseguradora" data-toggle="modal"><i class="fa fa-paper-plane"></i></a>
+                        </div>
+                        <div class="col-xs-3 col-md-3 col-sm-4 col-lg-3">
+                            <a onclick="printDiv('imprimirEnvioCliente')" role="button" title="Imprimir Memo al cliente" data-toggle="modal"><i class="fa fa-users"></i></a>
+                        </div>
+                        <div class="col-xs-3 col-md-3 col-sm-2 col-lg-3">
+                            <a title="Programar proxima fecha de seguimiento" role="button" ><i class="fa fa-calendar-check-o"></i></a>
+                        </div>
+                        <div class="col-xs-3 col-md-3 col-sm-4 col-lg-3">
+                            <a title="Enviar Notificacion por falta de documentos" role="button" ><i class="fa fa-comments"></i></a>
+                        </div>
+                        <div class="col-xs-3 col-md-3 col-sm-4 col-lg-3">
+                            <a title="Producto No Conforme" role="button" style="color: red"><i class="fa fa-frown-o"></i></a>
+                        </div>
+                         <div class="col-xs-3 col-md-3 col-sm-4 col-lg-3">
+                            <a title="Escanear Documentos" role="button"><i class="fa fa-file-pdf-o"></i></a>
+                        </div>
+                         <div class="col-xs-3 col-md-3 col-sm-4 col-lg-3">
+                            <a href="javascript:buscador()" title="Buscador de documentos" role="button"><i class="fa fa-search"></i></a>
+                        </div>
+                        <div class="col-xs-3 col-md-3 col-sm-4 col-lg-3">
+                            <asp:LinkButton ID="linkRegresar" role="button" OnClick="Regresar_Click" title="Regresar a reclamos en seguimiento" runat="server"><i class="fa fa-arrow-left"></i></asp:LinkButton>
+                        </div>
+                        <div class="col-xs-3 col-md-3 col-sm-4 col-lg-3">
+                            <a title="Cerrar El Reclamo" role="button"><i class="fa fa-lock" aria-hidden="true"></i></a>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
+    </div>
+     <%-- panel lateral con informacion de la poliza--%>
+    <div class="col-sm-12 col-md-3 col-lg-3">
+        <div class="panel panel-info">
+            <div class="panel-heading" role="tab" id="headingFour">
+                <h4 class="panel-title">
+                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFour"><b>Editar Datos Del Asegurado</b>
+                    </a>
+                </h4>
+            </div>
+            <div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+                <div class="panel-body">
+                    <div class="form-group col-sm-12 col-md-12 col-lg-12">
+                        <label>Asegurado:</label>
+                        <asp:TextBox runat="server" ID="txtAsegurado" autocomplete="false" Style="width: 100%" class="form-control" placeholder="Asegurado"></asp:TextBox>
+                    </div>
+                    <div class="form-group col-sm-12 col-md-12 col-lg-12">
+                        <label>Aseguradora:</label>
+                        <asp:TextBox runat="server" ID="txtAseguradora" autocomplete="false" Style="width: 100%" class="form-control" placeholder="Aseguradora"></asp:TextBox>
+                    </div>
+                    <div class="form-group col-sm-12 col-md-6 col-lg-6">
+                        <label>Poliza:</label>
+                        <asp:TextBox runat="server" ID="txtPoliza" autocomplete="false" Style="width: 100%" class="form-control" placeholder="Poliza"></asp:TextBox>
+                    </div>
+                    <div class="form-group col-sm-12 col-md-6 col-lg-6">
+                        <label>Telefono:</label>
+                        <asp:TextBox runat="server" ID="txtTelefono" autocomplete="false" Style="width: 100%" class="form-control" placeholder="Telefono"></asp:TextBox>
+                    </div>
+                    <div class="form-group col-sm-12 col-md-12 col-lg-12">
+                        <label>Correo:</label>
+                        <asp:TextBox runat="server" ID="txtCorreo" autocomplete="false" Style="width: 100%" class="form-control" placeholder="Correo"></asp:TextBox>
+                    </div>
+                    <div class="form-group col-sm-12 col-md-6 col-lg-6">
+                        <label>Tipo Reclamo:</label>
+                        <asp:DropDownList CssClass="form-control" ID="DDLTipo" Style="width: 100%" Height="34px" runat="server">
+                            <asp:ListItem>Vida</asp:ListItem>
+                            <asp:ListItem>Gastos Medicos</asp:ListItem>
+                        </asp:DropDownList>
+                    </div>
+                    <div class="form-group col-sm-12 col-md-6 col-lg-6">
+                        <label>Estado:</label>
+                        <asp:DropDownList CssClass="form-control" ID="ddlEstado" AutoPostBack="true" OnSelectedIndexChanged="ddlEstado_SelectedIndexChanged" Style="width: 100%" Height="34px" runat="server">
+                            <asp:ListItem Value="8">--</asp:ListItem>
+                            <asp:ListItem Value="4">Asegurado</asp:ListItem>
+                            <asp:ListItem Value="5">Aseguradora</asp:ListItem>
+                            <asp:ListItem Value="2">Cerrado</asp:ListItem>
+                        </asp:DropDownList>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <%------------------ datos de la poliza y del asegurado  ------------------- --%>
     <div class="col-sm-12 col-md-3 col-lg-3">
         <div class="panel panel-info">
             <div class="panel-heading" role="tab" id="headingThree">
                 <h4 class="panel-title">
-                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree"><b>Datos de la Poliza</b>
+                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree"><b>Datos de la Poliza</b>
                     </a>
                 </h4>
             </div>
-            <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+            <div id="collapseThree" class="panel-collapse collapse in" role="tabpanel" aria-expanded="true">
                 <div class="panel-body">
                     <asp:Label ID="lblAsegurado2" runat="server"></asp:Label>
                     <br />
@@ -642,6 +765,7 @@
                     <br />
                     <asp:Label ID="lblRamo" runat="server"></asp:Label>
                     <br />
+                    <asp:Label ID="tipo" Text="Tipo: " runat="server"></asp:Label>
                     <asp:Label ID="lblTipo" runat="server"></asp:Label>
                     <br />
                     <asp:Label ID="lblClase" runat="server"></asp:Label>
@@ -662,168 +786,20 @@
             </div>
         </div>
     </div>
-
-    <%-- panel lateral con informacion de la poliza--%>
-    <div class="col-sm-12 col-md-3 col-lg-3">
-        <div class="panel panel-info">
-            <div class="panel-heading" role="tab" id="headingFour">
-                <h4 class="panel-title">
-                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="false" aria-controls="collapseFour"><b>Editar Datos Del Asegurado</b>
-                    </a>
-                </h4>
-            </div>
-            <div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
-                <div class="panel-body">
-                    <div class="panel-body form-inline">
-                        <div class="form-group" style="width: 98%; padding-top: 10px;">
-                            <label for="message-text" class="control-label">Asegurado:</label>
-                            <asp:TextBox runat="server" ID="txtAsegurado" autocomplete="false" Style="width: 100%" class="form-control" placeholder="Asegurado"></asp:TextBox>
-                        </div>
-                        <div class="form-group" style="width: 98%; padding-top: 10px;">
-                            <label for="message-text" class="control-label">Aseguradora:</label>
-                            <asp:TextBox runat="server" ID="txtAseguradora" autocomplete="false" Style="width: 100%" class="form-control" placeholder="Aseguradora"></asp:TextBox>
-                        </div>
-                        <div class="form-group" style="width: 50%; padding-top: 10px;">
-                            <label for="message-text" class="control-label">Poliza:</label>
-                            <asp:TextBox runat="server" ID="txtPoliza" autocomplete="false" Style="width: 100%" class="form-control" placeholder="Poliza"></asp:TextBox>
-                        </div>
-                        <div class="form-group" style="width: 48%; padding-top: 10px;">
-                            <label for="message-text" class="control-label">Telefono:</label>
-                            <asp:TextBox runat="server" ID="txtTelefono" autocomplete="false" Style="width: 100%" class="form-control" placeholder="Telefono"></asp:TextBox>
-                        </div>
-                        <div class="form-group" style="width: 98%; padding-top: 10px;">
-                            <label for="message-text" class="control-label">Correo:</label>
-                            <asp:TextBox runat="server" ID="txtCorreo" autocomplete="false" Style="width: 100%" class="form-control" placeholder="Correo"></asp:TextBox>
-                        </div>
-                        <div class="form-group" style="width: 50%; padding-top: 10px;">
-                            <label for="message-text" class="control-label">Tipo Reclamo:</label>
-                            <asp:DropDownList CssClass="form-control" ID="DDLTipo" Style="width: 100%" Height="34px" runat="server">
-                                <asp:ListItem>Vida</asp:ListItem>
-                                <asp:ListItem>Gastos Medicos</asp:ListItem>
-                            </asp:DropDownList>
-                        </div>
-                        <div class="form-group" style="width: 48%; padding-top: 10px;">
-                            <label for="message-text" class="control-label">Estado:</label>
-                            <asp:DropDownList CssClass="form-control" ID="ddlEstado" Style="width: 100%" Height="34px" runat="server">
-                                <asp:ListItem Value="4">Asegurado</asp:ListItem>
-                                <asp:ListItem Value="5">Aseguradora</asp:ListItem>
-                                <asp:ListItem Value="2">Cerrado</asp:ListItem>
-                            </asp:DropDownList>
-                        </div>
-                        <br />
-                    </div>
+    <%------------------------ Confirmacion de cierre -------------------%>
+    <div class="modal fade" id="CierreReclamo">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title"><b>Desea Cerrar El Reclamo..</b></h4>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-warning" data-dismiss="modal">Cancelar</button>
+                    <asp:Button ID="btnCerrarReclamo" CssClass="btn btn-primary" runat="server" Text="Cerrar" OnClick="btnCerrarReclamo_Click" />
                 </div>
             </div>
         </div>
     </div>
-    <%------------------ botones laterales grandes  ------------------- --%>
-    <div class="btn-acciones-laterales">
-        <div class="col-md-1 col-sm-4 col-lg-1">
-            <div class="panel panel-info">
-                <div class="panel-heading">
-                </div>
-                <div class="panel-body">
-                    <a title="Imprimir El Formulario de documentos" style="font-size: 40px;"><i class="fa fa-print" aria-hidden="true"></i></a>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-1 col-sm-4 col-lg-1">
-            <div class="panel panel-info">
-                <div class="panel-heading">
-                </div>
-                <div class="panel-body">
-                    <a title="Enviar un correo electronico"  style="font-size: 40px;"><i class="fa fa-envelope-o" aria-hidden="true"></i></a>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-1 col-sm-4 col-lg-1">
-            <div class="panel panel-info">
-                <div class="panel-heading">
-                </div>
-                <div class="panel-body">
-                    <a title="Agregar un comentario" style="font-size: 40px;"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-1 col-sm-4 col-lg-1">
-            <div class="panel panel-info">
-                <div class="panel-heading">
-                </div>
-                <div class="panel-body">
-                    <a title="Realizar Liquidacion" style="font-size: 40px; text-align: center;"><i class="fa fa-money" aria-hidden="true"></i></a>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-1 col-sm-4 col-lg-1">
-            <div class="panel panel-info">
-                <div class="panel-heading">
-                </div>
-                <div class="panel-body">
-                    <asp:LinkButton ID="btnGuardar" Enabled="false"  title="Actualizar Informacion" runat="server" Style="font-size: 40px; text-align: center;"><i class="fa fa-floppy-o" aria-hidden="true"></i></asp:LinkButton>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-1 col-sm-4 col-lg-1">
-            <div class="panel panel-info">
-                <div class="panel-heading">
-                </div>
-                <div class="panel-body">
-                    <a title="Imprimir Memo a la aseguradora" data-toggle="modal" style="font-size: 40px; text-align: center;"><i class="fa fa-paper-plane" aria-hidden="true"></i></a>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-1 col-sm-4 col-lg-1">
-            <div class="panel panel-info">
-                <div class="panel-heading">
-                </div>
-                <div class="panel-body">
-                    <a  title="Imprimir Memo al cliente" data-toggle="modal" style="font-size: 40px; text-align: center;"><i class="fa fa-users" aria-hidden="true"></i></a>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-1 col-sm-2 col-lg-1">
-            <div class="panel panel-info">
-                <div class="panel-heading">
-                </div>
-                <div class="panel-body">
-                    <a title="Proxima fecha a mostrar" style="font-size: 40px; text-align: center;"><i class="fa fa-calendar-check-o" aria-hidden="true"></i></a>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-1 col-sm-4 col-lg-1">
-            <div class="panel panel-info">
-                <div class="panel-heading">
-                </div>
-                <div class="panel-body">
-                    <asp:LinkButton ID="linkRegresar" OnClick="Regresar_Click" title="Regresar a reclamos en seguimiento" runat="server" Style="font-size: 40px; text-align: center;"><i class="fa fa-arrow-left" aria-hidden="true"></i></asp:LinkButton>
-                </div>
-            </div>
-        </div>
-          <div class="col-md-1 col-sm-4 col-lg-1">
-            <div class="panel panel-info">
-                <div class="panel-heading">
-                </div>
-                <div class="panel-body">
-                      <a title="Cerrar El Reclamo" style="font-size: 40px; text-align: center;"><i class="fa fa-lock" aria-hidden="true"></i></a>
-                </div>
-            </div>
-        </div>
-    </div>
-        <%------------------------ Confirmacion de cierre -------------------%>
-        <div class="modal fade bs-example-modal-sm" tabindex="-1" id="CierreReclamo" role="dialog" aria-labelledby="mySmallModalLabel">
-            <div class="modal-dialog modal-sm" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title"><b>Desea Cerrar El Reclamo..</b></h4>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-warning" data-dismiss="modal">Cancelar</button>
-                        <asp:Button ID="btnCerrarReclamo" CssClass="btn btn-primary" runat="server" Text="Cerrar" OnClick="btnCerrarReclamo_Click"/>
-                    </div>
-                </div>
-            </div>
-        </div>
     <%------------------------------------------------ funcion javascript para imprimir un div en especifico ------------------------------------------%>
     <script>
         function printDiv(imprimir) {
@@ -837,28 +813,28 @@
     </script>
     <%--------------------------  modal para enviar correos electronicos a los clientes -----------------------------%>
     <div>
-        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" data-keyboard="false" data-backdrop="static">
-            <div class="modal-dialog" role="document">
+        <div class="modal fade" id="exampleModal" data-keyboard="false" data-backdrop="static">
+            <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title" id="exampleModalLabel"><b>Enviar Correo Electronico</b></h4>
+                        <h4 class="modal-title"><b>Enviar Correo Electronico</b></h4>
                     </div>
                     <div class="modal-body">
                         <div class="form-group">
-                            <label for="message-text" class="control-label">Correo Del Destinatario:</label>
+                            <label>Correo Del Destinatario:</label>
                             <asp:TextBox ID="txtDestinatario" Style="width: 100%" CssClass="form-control" AutoComplete="off" runat="server"></asp:TextBox>
                         </div>
                         <div class="form-group">
-                            <label for="recipient-name" class="control-label">Cuerpo del correo:</label>
+                            <label>Cuerpo del correo:</label>
                             <asp:TextBox ID="txtMensaje" Style="width: 100%" autocomplete="off" class="form-control" TextMode="multiline" Columns="50" Rows="3" placeholder="Cuerpo de mensaje" runat="server" />
                         </div>
                         <div class="form-group">
-                            <label for="recipient-name" class="control-label">Asunto :</label>
+                            <label>Asunto :</label>
                             <asp:TextBox ID="txtAsunto" Style="width: 100%" CssClass="form-control" AutoComplete="off" runat="server"></asp:TextBox>
                         </div>
                         <div class="form-group">
-                            <label for="recipient-name" class="control-label">Contraseña:</label>
+                            <label>Contraseña:</label>
                             <asp:TextBox ID="txtPassword" type="password" Style="width: 100%; font-size: 30px;" CssClass="form-control" AutoComplete="off" runat="server"></asp:TextBox>
                         </div>
                     </div>
@@ -870,22 +846,20 @@
         </div>
     </div>
     <%--------------------------  modal para realizar una liquidacion ---------------------------------%>
-
-    <div class="modal fade" id="modalPago" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" data-keyboard="false" data-backdrop="static">
-        <div class="modal-dialog" role="document">
+    <div class="modal fade" id="modalPago" data-keyboard="false" data-backdrop="static">
+        <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="modalpago1"><b>Realizar una liquidacion</b></h4>
+                    <h4 class="modal-title"><b>Realizar una liquidacion</b></h4>
                 </div>
                 <div class="modal-body">
                     <div class="form-inline">
                         <div class="form-group" style="width: 33%">
-                            <label for="message-text" class="control-label">Monto del cheque:</label>
+                            <label>Monto del cheque:</label>
                             <asp:TextBox ID="txtMontoCheque" Text="0.00" Style="width: 100%" CssClass="form-control" AutoComplete="off" runat="server" placeholder="Monto Total"></asp:TextBox>
                         </div>
                         <div class="form-group" style="width: 33%">
-                            <label for="message-text" class="control-label">Banco:</label>
+                            <label>Banco:</label>
                             <asp:DropDownList CssClass="form-control" ID="ddlBanco" Style="width: 100%" Height="34px" runat="server">
                                 <asp:ListItem>---</asp:ListItem>
                                 <asp:ListItem>Banco Industrial</asp:ListItem>
@@ -901,36 +875,36 @@
                             </asp:DropDownList>
                         </div>
                         <div class="form-group" style="width: 32%">
-                            <label for="recipient-name" class="control-label">No Cheque:</label>
+                            <label>No Cheque:</label>
                             <asp:TextBox ID="txtNumeroCheque" Style="width: 100%" autocomplete="off" class="form-control" placeholder="Numero de cheque" runat="server"></asp:TextBox>
                         </div>
                     </div>
                     <br />
                     <div class="form-inline">
                         <div class="form-group" style="width: 48%">
-                            <label for="message-text" class="control-label">Total Reclamado:</label>
+                            <label>Total Reclamado:</label>
                             <asp:TextBox ID="txtReclamado" Text="0.00" Style="width: 100%" CssClass="form-control" AutoComplete="off" runat="server" placeholder="Total Reclamado"></asp:TextBox>
                         </div>
                         <div class="form-group" style="width: 50%">
-                            <label for="recipient-name" class="control-label">Total Aprobado:</label>
+                            <label>Total Aprobado:</label>
                             <asp:TextBox ID="txtAprobado" Text="0.00" Style="width: 100%" autocomplete="off" class="form-control" placeholder="Total Aprobado" runat="server"></asp:TextBox>
                         </div>
                     </div>
                     <br />
                     <div class="form-inline">
                         <div class="form-group" style="width: 48%">
-                            <label for="recipient-name" class="control-label">Total No Cubierto:</label>
+                            <label>Total No Cubierto:</label>
                             <asp:TextBox ID="txtNoCubiertos" Text="0.00" Style="width: 100%" autocomplete="off" class="form-control" placeholder="Total no Cubierto" runat="server"></asp:TextBox>
                         </div>
                         <div class="form-group" style="width: 50%">
-                            <label for="recipient-name" class="control-label">Deducible:</label>
+                            <label>Deducible:</label>
                             <asp:TextBox ID="txtDeducible" Text="0.00" Style="width: 100%" autocomplete="off" class="form-control" placeholder="Deducible" runat="server"></asp:TextBox>
                         </div>
                     </div>
                     <br />
                     <div class="form-inline">
                         <div class="form-group" style="width: 48%; padding-top: 10px;">
-                            <label for="recipient-name" class="control-label">Coaseguro:</label>
+                            <label>Coaseguro:</label>
                             <asp:DropDownList CssClass="form-control" ID="ddlCoaseguro" Style="width: 100%" Height="34px" runat="server">
                                 <asp:ListItem Value="0.15">15%</asp:ListItem>
                                 <asp:ListItem Value="0.16">16%</asp:ListItem>
@@ -956,7 +930,7 @@
                             </asp:DropDownList>
                         </div>
                         <div class="form-group" style="width: 50%; padding-top: 10px;">
-                            <label for="recipient-name" class="control-label">Timbres:</label>
+                            <label>Timbres:</label>
                             <asp:DropDownList CssClass="form-control" ID="ddlTimbres" Style="width: 100%" Height="34px" runat="server">
                                 <asp:ListItem Value="0.03">3%</asp:ListItem>
                                 <asp:ListItem Value="0.04">4%</asp:ListItem>
@@ -967,36 +941,36 @@
                     </div>
                     <div class="form-inline">
                         <div class="form-group" style="width: 32%; padding-top: 10px;">
-                            <asp:Label for="recipient-name" Visible="false" class="control-label" ID="lblTotalCoaseguro" Text="Total Coaseguro" runat="server"></asp:Label>
+                            <asp:Label Visible="false" ID="lblTotalCoaseguro" Text="Total Coaseguro" runat="server"></asp:Label>
                             <asp:TextBox ID="txtTotalCoaseguro" Visible="false" Style="width: 100%" autocomplete="off" class="form-control" placeholder="Total Coaseguro" runat="server"></asp:TextBox>
                         </div>
                         <div class="form-group" style="width: 32%; padding-top: 10px;">
-                            <asp:Label for="recipient-name" Visible="false" class="control-label" ID="lblTotalTimbres" Text="Total Timbres" runat="server"></asp:Label>
+                            <asp:Label Visible="false" ID="lblTotalTimbres" Text="Total Timbres" runat="server"></asp:Label>
                             <asp:TextBox ID="txtTotalTimbres" Visible="false" Style="width: 100%" autocomplete="off" class="form-control" placeholder="Total Timbres" runat="server"></asp:TextBox>
                         </div>
                         <div class="form-group" style="width: 34%; padding-top: 10px;">
-                            <asp:Label for="recipient-name" Visible="false" class="control-label" ID="lblTotalLiquidacion" Text="Total" runat="server"></asp:Label>
+                            <asp:Label Visible="false" ID="lblTotalLiquidacion" Text="Total" runat="server"></asp:Label>
                             <asp:TextBox ID="txtTotal" Visible="false" Style="width: 100%" Text="0.00" autocomplete="off" class="form-control" placeholder="Total" runat="server"></asp:TextBox>
                         </div>
                     </div>
                     <div class="form-inline">
                         <div class="form-group" style="width: 32%; padding-top: 10px;">
-                            <label for="recipient-name" class="control-label">Moneda:</label>
+                            <label>Moneda:</label>
                             <asp:DropDownList CssClass="form-control" ID="ddlMoneda" Style="width: 100%" Height="34px" runat="server">
                                 <asp:ListItem>Quetzales</asp:ListItem>
                                 <asp:ListItem>Dollares</asp:ListItem>
                             </asp:DropDownList>
                         </div>
                         <div class="form-group" style="width: 32%; padding-top: 10px;">
-                            <label for="message-text" class="control-label">Fecha Envio Cheque:</label>
+                            <label>Fecha Envio Cheque:</label>
                             <asp:TextBox runat="server" type="date" ID="txtFechaEnvioCheque" autocomplete="false" Style="width: 100%; height: 34px;" class="form-control"></asp:TextBox>
                         </div>
                         <div class="form-group" style="width: 34%; padding-top: 10px;">
-                            <label for="recipient-name" class="control-label">Destino:</label>
+                            <label>Destino:</label>
                             <asp:DropDownList CssClass="form-control" ID="ddlDestino" Style="width: 100%" Height="34px" runat="server">
-                                <asp:ListItem>En Ruta</asp:ListItem>
-                                <asp:ListItem>Recepcion</asp:ListItem>
-                                <asp:ListItem>Correo</asp:ListItem>
+                                <asp:ListItem Value="1">En Ruta</asp:ListItem>
+                                <asp:ListItem Value="2">Recepcion</asp:ListItem>
+                                <asp:ListItem Value="3">Correo</asp:ListItem>
                             </asp:DropDownList>
                         </div>
                     </div>
@@ -1009,18 +983,17 @@
             </div>
         </div>
     </div>
-    </asp:Panel>
+   </asp:Panel>
     <%-- ------------------------ modal para ingresar un nuevo comentario ------------------------------------------%>
-    <div class="modal fade" id="ModalComentario" tabindex="-1" role="dialog" aria-labelledby="ModalComentario1" data-keyboard="false" data-backdrop="static">
-        <div class="modal-dialog" role="document">
+    <div class="modal fade" id="ModalComentario" data-keyboard="false" data-backdrop="static">
+        <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="ModalComentario1"><b>Agregar Comentario</b></h4>
+                    <h4 class="modal-title"><b>Agregar Comentario</b></h4>
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
-                        <label for="message-text" class="control-label">Comentario:</label>
+                        <label>Comentario:</label>
                         <asp:TextBox ID="txtComentarios" Style="width: 99%" autocomplete="off" class="form-control" TextMode="multiline" Columns="50" Rows="6" placeholder="Comentarios Del Reclamo" runat="server"></asp:TextBox>
                     </div>
                 </div>
@@ -1032,22 +1005,68 @@
         </div>
     </div>
     <%----------------------  modal para mostrar el reclamo en una proxima fecha -----------------------%>
-    <div class="modal fade bs-example-modal-sm" id="ModalProximaFecha" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
-        <div class="modal-dialog modal-sm" role="document">
+    <div class="modal fade" id="ModalProximaFecha">
+        <div class="modal-dialog modal-sm">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                     <h4 class="modal-title"><b>Proxima Fecha A Mostrar</b></h4>
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
-                        <label for="message-text" class="control-label">Proxima Fecha:</label>
+                        <label>Proxima Fecha:</label>
                         <asp:TextBox ID="txtProximaFecha" CssClass="form-control" autocomplete="off" Width="100%" type="date" runat="server"></asp:TextBox>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-warning" data-dismiss="modal">Cerrar</button>
                     <asp:Button ID="btnGuardarProximaFecha" CssClass="btn btn-primary" runat="server" Text="Guardar" OnClick="btnGuardarProximaFecha_Click" />
+                </div>
+            </div>
+        </div>
+    </div>
+    <%--------------------------------- modal para mostrar seleccion para producto no conforme --------------------------------%>
+    <div class="modal fade" id="ModalNoconforme">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title"><b>Seleccionar opcion de producto no conforme</b></h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-inline">
+                        <asp:DropDownList ID="ddlNoConforme" class="form-control" Style="width: 60%; height: 30px;" runat="server">
+                            <asp:ListItem Value="Cartas hacia la SAT con errores">Cartas hacia la SAT con errores</asp:ListItem>
+                            <asp:ListItem Value="Cheques con datos incorrectos">Cheques con datos incorrectos</asp:ListItem>
+                            <asp:ListItem Value="Declinaciones con Datos incorrectos">Declinaciones con Datos incorrectos</asp:ListItem>
+                            <asp:ListItem Value="Nombre del asegurado incorrecto">Nombre del asegurado incorrecto</asp:ListItem>
+                            <asp:ListItem Value="Facturas de deducible con datos erróneos ">Facturas de deducible con datos erróneos </asp:ListItem>
+                        </asp:DropDownList>
+                        <asp:DropDownList ID="ddlEstadoNoConforme" class="form-control" Style="width: 30%; height: 30px;" runat="server">
+                            <asp:ListItem Value="Abierto">Abierto</asp:ListItem>
+                            <asp:ListItem Value="Cerrado">Cerrado</asp:ListItem>
+                        </asp:DropDownList>
+                    </div>
+                    <br />
+                    <asp:TextBox ID="txtObservacionesNoConf" Style="width: 99%" autocomplete="off" class="form-control" TextMode="multiline" Columns="50" Rows="3" placeholder="Comentarios del producto no conforme" runat="server"></asp:TextBox>
+                    <br />
+                    <asp:Label runat="server" ID="lblProductoNoConforme"></asp:Label>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-warning" data-dismiss="modal">Cerrar</button>
+                    <asp:Button ID="btnProductoNoConforme" OnClick="btnProductoNoConforme_Click" CssClass="btn btn-primary" runat="server" Text="Guardar" />
+                </div>
+            </div>
+        </div>
+    </div>
+    <%-- modal para notificacion de sms --%>
+    <div class="modal fade" id="confirmar-sms">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title"><b>Enviar Notificacion por falta de Documentos</b></h4>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-warning" data-dismiss="modal">Cancelar</button>
+                    <asp:Button ID="btnEnviarSMS" CssClass="btn btn-primary" runat="server" Text="Enviar" OnClick="btnEnviarSMS_Click" />
                 </div>
             </div>
         </div>
@@ -1070,7 +1089,7 @@
         <script src="../Scripts/gridviewScroll.min.js"></script>
         <script src="../Scripts/summernote.min.js"></script>
         <script src="../Scripts/jQuery.print.min.js"></script>
-        <script src="../FlipClock/compiled/flipclock.min.js"></script>
+        <script src="../Scripts/FlipClock/compiled/flipclock.min.js"></script>
         <script src="../Scripts/app.js"></script>
            <script>
             $(document).ready(function () {
@@ -1100,6 +1119,23 @@
                 }
             });
     </script>
+     <script> 
+         var id = $('#lblIdOculto').text();
+         var ruta = $('#lblDocumento').text();
+            function Scaner() {
+                window.open('/Modulos/MdScanner/wbGastosMedicos.aspx?id='+id+'', "ventana1", "width=350,height=550,scrollbars=NO")
+         }
+
+         function documento() {
+             window.open('http://52.34.115.100:5556/files/GastosMedicos/'+ruta+'', "ventana1", "width=700,height=800,scrollbars=NO")
+         }
+
+         function buscador() {
+             var alto = $(window).height() - 200;
+             var ancho = $(window).width() - 700;
+             window.open('http://52.34.115.100:5556/explorador.html#files%2FGastosMedicos/'+ ruta, "ventana1", "width=" + ancho + ",height=" + alto + ",scrollbars=NO")
+         }
+      </script>
     </form>
 </body>
 </html>

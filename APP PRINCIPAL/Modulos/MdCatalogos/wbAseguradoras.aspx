@@ -36,7 +36,7 @@
                     </div>
                     <div class="panel-body" style="height: 430px;">
                         <div class="scrolling-table-container" style="overflow-y: auto;">
-                            <asp:GridView ID="gridEstados" runat="server" CssClass="table table-responsive table-hover" OnSelectedIndexChanged="GridGeneral_SelectedIndexChanged" AutoGenerateColumns="True" GridLines="None" AllowCustomPaging="True" AllowPaging="True" PageSize="300">
+                            <asp:GridView ID="GridAseguradoras" runat="server" CssClass="table table-responsive table-hover" OnSelectedIndexChanged="GridGeneral_SelectedIndexChanged" AutoGenerateColumns="True" GridLines="None" AllowCustomPaging="True" AllowPaging="True" PageSize="300">
                                 <AlternatingRowStyle BackColor="White" />
                                 <Columns>
                                     <asp:CommandField ShowSelectButton="True" SelectText="Editar">
@@ -56,6 +56,17 @@
         </div>
     </asp:Panel>
 </asp:Content>
-<asp:Content ID="Content3" ContentPlaceHolderID="ContentJs" Runat="Server">
+<asp:Content runat="server" ContentPlaceHolderID="ContentJs" ID="JS">
+    <script>
+        try {
+            $('#ContentPlaceHolder1_GridAseguradoras tr').each(function (index) {
+                $tr = $(this);
+                   $td = $tr[0].cells[1];
+                   $td.remove();
+            });
+        } catch (ex) {
+        }
+    </script>
 </asp:Content>
+
 
