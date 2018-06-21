@@ -27,8 +27,8 @@ public partial class analistas
 {
     public analistas()
     {
-        this.reclamo_auto = new HashSet<reclamo_auto>();
         this.reclamos_varios = new HashSet<reclamos_varios>();
+        this.reclamo_auto = new HashSet<reclamo_auto>();
     }
 
     public int id { get; set; }
@@ -39,8 +39,8 @@ public partial class analistas
     public Nullable<bool> estado { get; set; }
     public string tipo { get; set; }
 
-    public virtual ICollection<reclamo_auto> reclamo_auto { get; set; }
     public virtual ICollection<reclamos_varios> reclamos_varios { get; set; }
+    public virtual ICollection<reclamo_auto> reclamo_auto { get; set; }
 }
 
 public partial class aseguradoras
@@ -230,10 +230,10 @@ public partial class cabina
     public cabina()
     {
         this.autorizaciones = new HashSet<autorizaciones>();
-        this.reclamo_auto = new HashSet<reclamo_auto>();
         this.reclamos_medicos = new HashSet<reclamos_medicos>();
         this.reclamos_varios = new HashSet<reclamos_varios>();
         this.usuario = new HashSet<usuario>();
+        this.reclamo_auto = new HashSet<reclamo_auto>();
     }
 
     public int id { get; set; }
@@ -244,10 +244,10 @@ public partial class cabina
 
     public virtual ICollection<autorizaciones> autorizaciones { get; set; }
     public virtual sucursal sucursal { get; set; }
-    public virtual ICollection<reclamo_auto> reclamo_auto { get; set; }
     public virtual ICollection<reclamos_medicos> reclamos_medicos { get; set; }
     public virtual ICollection<reclamos_varios> reclamos_varios { get; set; }
     public virtual ICollection<usuario> usuario { get; set; }
+    public virtual ICollection<reclamo_auto> reclamo_auto { get; set; }
 }
 
 public partial class cartas
@@ -476,12 +476,17 @@ public partial class empresa
 public partial class encuesta
 {
     public int id { get; set; }
+    public string servicio { get; set; }
     public string empresa { get; set; }
     public Nullable<short> pregunta1 { get; set; }
     public string clasificacion1 { get; set; }
     public string comentario1 { get; set; }
     public Nullable<short> pregunta2 { get; set; }
+    public string clasificacion2 { get; set; }
+    public string comentario2 { get; set; }
     public Nullable<short> pregunta3 { get; set; }
+    public string clasificacion3 { get; set; }
+    public string comentario3 { get; set; }
     public string comentario { get; set; }
     public Nullable<System.DateTime> fecha { get; set; }
 }
@@ -499,17 +504,17 @@ public partial class estado
 {
     public estado()
     {
-        this.reclamo_auto = new HashSet<reclamo_auto>();
         this.reclamos_medicos = new HashSet<reclamos_medicos>();
         this.reclamos_varios = new HashSet<reclamos_varios>();
+        this.reclamo_auto = new HashSet<reclamo_auto>();
     }
 
     public int id { get; set; }
     public string nombre { get; set; }
 
-    public virtual ICollection<reclamo_auto> reclamo_auto { get; set; }
     public virtual ICollection<reclamos_medicos> reclamos_medicos { get; set; }
     public virtual ICollection<reclamos_varios> reclamos_varios { get; set; }
+    public virtual ICollection<reclamo_auto> reclamo_auto { get; set; }
 }
 
 public partial class estados_reclamos_unity
@@ -580,8 +585,8 @@ public partial class gestores
 {
     public gestores()
     {
-        this.reclamo_auto = new HashSet<reclamo_auto>();
         this.reclamos_varios = new HashSet<reclamos_varios>();
+        this.reclamo_auto = new HashSet<reclamo_auto>();
     }
 
     public short id { get; set; }
@@ -592,8 +597,8 @@ public partial class gestores
     public string usuario { get; set; }
     public string tipo { get; set; }
 
-    public virtual ICollection<reclamo_auto> reclamo_auto { get; set; }
     public virtual ICollection<reclamos_varios> reclamos_varios { get; set; }
+    public virtual ICollection<reclamo_auto> reclamo_auto { get; set; }
 }
 
 public partial class pais
@@ -692,17 +697,19 @@ public partial class reclamo_auto
     public Nullable<bool> b_carta_declinado { get; set; }
     public Nullable<bool> b_carta_envio_cheque { get; set; }
     public string documentos { get; set; }
+    public string asignado_por { get; set; }
+    public Nullable<System.DateTime> fecha_asignacion { get; set; }
 
-    public virtual analistas analistas { get; set; }
-    public virtual auto_reclamo auto_reclamo { get; set; }
     public virtual ICollection<bitacora_autos_unity> bitacora_autos_unity { get; set; }
     public virtual ICollection<bitacora_estados_autos> bitacora_estados_autos { get; set; }
     public virtual ICollection<bitacora_reclamo_auto> bitacora_reclamo_auto { get; set; }
-    public virtual cabina cabina { get; set; }
     public virtual ICollection<coberturas_afectadas> coberturas_afectadas { get; set; }
     public virtual ICollection<comentarios_reclamos_autos> comentarios_reclamos_autos { get; set; }
     public virtual ICollection<contacto_auto> contacto_auto { get; set; }
     public virtual ICollection<detalle_pagos_reclamos_autos> detalle_pagos_reclamos_autos { get; set; }
+    public virtual analistas analistas { get; set; }
+    public virtual auto_reclamo auto_reclamo { get; set; }
+    public virtual cabina cabina { get; set; }
     public virtual estado estado { get; set; }
     public virtual gestores gestores { get; set; }
     public virtual usuario usuario { get; set; }
@@ -840,6 +847,8 @@ public partial class reclamos_varios
     public Nullable<bool> b_carta_envio_cheque { get; set; }
     public Nullable<decimal> reserva { get; set; }
     public string documentos { get; set; }
+    public string asignado_por { get; set; }
+    public Nullable<System.DateTime> fecha_asignacion { get; set; }
 
     public virtual analistas analistas { get; set; }
     public virtual ICollection<bitacora_estados_reclamos_varios> bitacora_estados_reclamos_varios { get; set; }
@@ -915,26 +924,6 @@ public partial class reg_reclamos_medicos
     public virtual ICollection<reclamos_medicos> reclamos_medicos { get; set; }
 }
 
-public partial class resguardos
-{
-    public int id { get; set; }
-    public string asegurado { get; set; }
-    public string telefono { get; set; }
-    public string aseguradora { get; set; }
-    public string bien_asegurado { get; set; }
-    public string placa { get; set; }
-    public string marca { get; set; }
-    public string modelo { get; set; }
-    public string motor { get; set; }
-    public string propietario { get; set; }
-    public string color { get; set; }
-    public string chasis { get; set; }
-    public string usuario { get; set; }
-    public string estado { get; set; }
-    public Nullable<System.DateTime> fecha_commit { get; set; }
-    public Nullable<System.TimeSpan> hora_commit { get; set; }
-}
-
 public partial class sucursal
 {
     public sucursal()
@@ -963,8 +952,8 @@ public partial class talleres
 {
     public talleres()
     {
-        this.reclamo_auto = new HashSet<reclamo_auto>();
         this.reclamos_varios = new HashSet<reclamos_varios>();
+        this.reclamo_auto = new HashSet<reclamo_auto>();
     }
 
     public int id { get; set; }
@@ -974,8 +963,8 @@ public partial class talleres
     public string correo { get; set; }
     public Nullable<bool> estado { get; set; }
 
-    public virtual ICollection<reclamo_auto> reclamo_auto { get; set; }
     public virtual ICollection<reclamos_varios> reclamos_varios { get; set; }
+    public virtual ICollection<reclamo_auto> reclamo_auto { get; set; }
 }
 
 public partial class usuario
@@ -983,9 +972,9 @@ public partial class usuario
     public usuario()
     {
         this.autorizaciones = new HashSet<autorizaciones>();
-        this.reclamo_auto = new HashSet<reclamo_auto>();
         this.reclamos_medicos = new HashSet<reclamos_medicos>();
         this.reclamos_varios = new HashSet<reclamos_varios>();
+        this.reclamo_auto = new HashSet<reclamo_auto>();
     }
 
     public int id { get; set; }
@@ -1005,9 +994,9 @@ public partial class usuario
 
     public virtual ICollection<autorizaciones> autorizaciones { get; set; }
     public virtual cabina cabina1 { get; set; }
-    public virtual ICollection<reclamo_auto> reclamo_auto { get; set; }
     public virtual ICollection<reclamos_medicos> reclamos_medicos { get; set; }
     public virtual ICollection<reclamos_varios> reclamos_varios { get; set; }
+    public virtual ICollection<reclamo_auto> reclamo_auto { get; set; }
 }
 
 public partial class v_producto_no_conforme
@@ -1140,6 +1129,24 @@ public partial class vistaReclamosMedicos
     public string moneda { get; set; }
     public string certificado { get; set; }
     public Nullable<int> cliente { get; set; }
+}
+
+public partial class pa_cargar_asegurados_Result
+{
+    public Nullable<int> ErrorNumber { get; set; }
+    public string ErrorMessage { get; set; }
+}
+
+public partial class pa_cargar_autos_Result
+{
+    public Nullable<int> ErrorNumber { get; set; }
+    public string ErrorMessage { get; set; }
+}
+
+public partial class pa_cargar_danios_varios_Result
+{
+    public Nullable<int> ErrorNumber { get; set; }
+    public string ErrorMessage { get; set; }
 }
 
 public partial class pa_reclamos_autos_Result
@@ -1310,6 +1317,12 @@ public partial class pa_ReportesDaños_Result
     public string empresa { get; set; }
     public string pais { get; set; }
     public string usuario { get; set; }
+}
+
+public partial class pa_vista_movil_Result
+{
+    public Nullable<int> ErrorNumber { get; set; }
+    public string ErrorMessage { get; set; }
 }
 
 public partial class promedio_aseguradoras_Result

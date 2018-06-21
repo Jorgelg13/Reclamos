@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/ReclamosUnity.master" AutoEventWireup="true" CodeFile="wbFrmReclamosEnSeguimiento.aspx.cs" Inherits="Modulos_MdReclamosUnity_wbFrmReclamosEnSeguimiento" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/ReclamosUnity.master"  AutoEventWireup="true" EnableEventValidation="false"  CodeFile="wbFrmReclamosEnSeguimiento.aspx.cs" Inherits="Modulos_MdReclamosUnity_wbFrmReclamosEnSeguimiento" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
 </asp:Content>
@@ -17,6 +17,9 @@
                 </li>
                 <li role="presentation" class="ingreso-datos">
                     <a href="#ingreso-datos" aria-controls="ingreso-datos" role="tab" data-toggle="tab" style="font-size: 18px;">R. por Gestor</a>
+                </li>
+                 <li role="presentation" class="alarmas">
+                    <a href="#alarmas" aria-controls="alarmas" role="tab" data-toggle="tab" style="font-size: 18px;">Alarmas</a>
                 </li>
             </ul>
             <div class="tab-content">
@@ -90,6 +93,7 @@
                     <div class="form-inline">
                         <asp:DropDownList CssClass="form-control" AutoPostBack="True" ID="ddlgestor" Style="width: 15%" Height="34px" runat="server" CausesValidation="True" OnSelectedIndexChanged="ddlGestor_SelectedIndexChanged" DataSourceID="SqlDataSourceGestores" DataTextField="nombre" DataValueField="id">
                         </asp:DropDownList>
+                         <asp:LinkButton ID="lnDescargarTotalGestor" OnClick="lnDescargarTotalGestor_Click" title="Descargar en excel" runat="server" Style="font-size: 30px; color:green"><i class="fa fa-file-excel-o"></i></asp:LinkButton>
                     </div>
                     <br />
                     <div class="scrolling-table-container">
@@ -107,6 +111,31 @@
                         </asp:GridView>
                     </div>
                 </div>
+
+                <div role="tabpanel" class="tab-pane" id="alarmas">
+                    <div class="scrolling-table-container">
+                       <asp:Panel runat="server" ID="PnAlarmas" Visible="false">
+                        <div class="form-inline">
+                           <asp:DropDownList runat="server" CssClass="form-control" ID="ddlAlarmaGestor" AutoPostBack="true" OnSelectedIndexChanged="ddlAlarmaGestor_SelectedIndexChanged" DataSourceID="SqlDataSourceGestores" DataTextField="nombre" DataValueField="id"></asp:DropDownList>
+                            <asp:label runat="server" ID="lblTotalAlarmas" style="font-size:25px; margin-left:15px;"></asp:label>
+                           <asp:LinkButton ID="linkDescargar" OnClick="linkDescargar_Click" title="Descargar en excel" runat="server" Style="font-size: 30px; text-align: center; color:green"><i class="fa fa-file-excel-o"></i></asp:LinkButton>
+                        </div>
+                           <br />
+                            <asp:GridView ID="GridAlarmas" OnRowDataBound="GridReclamosSeguimiento_RowDataBound" OnSelectedIndexChanged="GridAlarmas_SelectedIndexChanged" runat="server" CssClass="table table-responsive" AutoGenerateColumns="True" ForeColor="#333333" GridLines="None">
+                                <AlternatingRowStyle BackColor="White" />
+                                <Columns>
+                                    <asp:CommandField ShowSelectButton="True">
+                                        <HeaderStyle HorizontalAlign="Center" Wrap="False" />
+                                        <ItemStyle HorizontalAlign="Left" Wrap="False" />
+                                    </asp:CommandField>
+                                </Columns>
+                                <HeaderStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" HorizontalAlign="Center" Wrap="False" />
+                                <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
+                                <RowStyle BackColor="#EFF3FB" HorizontalAlign="Left" Wrap="False" />
+                            </asp:GridView>
+                        </asp:Panel>
+                    </div>
+                </div>
             </div>
         </div>
        <a title="Simbologia de colores" style="font-size:50px;" data-toggle="modal" role="button" data-target="#ModalColores"><i class="fa fa-info-circle" aria-hidden="true"></i></a>
@@ -116,7 +145,6 @@
             <div class="modal-dialog modal-sm">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                         <h4 class="modal-title"><b>Simbología de colores...</b></h4>
                     </div>
                     <div class="modal-body form-inline">

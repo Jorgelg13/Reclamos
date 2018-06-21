@@ -151,6 +151,8 @@
                                     <asp:ListItem Value="Cambio de corredor">Cambio de corredor</asp:ListItem>
                                     <asp:ListItem Value="Otros">Otros</asp:ListItem>
                                 </asp:DropDownList>
+                                <label>Monto de reserva:</label>
+                                <asp:TextBox runat="server" ID="txtReserva" Text="0.00" CssClass="form-control" placeholder="Monto de Reserva"></asp:TextBox>
                             </div>
                         </div>
                         <%------------------------------- opciones multiples de los combobox -------------------------%>
@@ -174,7 +176,7 @@
                                 <br />
                                 <div>
                                     <label style="width: 15%">Gestor:</label>
-                                    <asp:DropDownList CssClass="form-control" ID="ddlGestor" Style="width: 80%" Height="34px" runat="server" AutoPostBack="True"></asp:DropDownList>
+                                    <asp:DropDownList CssClass="form-control" ID="ddlGestor" OnSelectedIndexChanged="ddlGestor_SelectedIndexChanged" Style="width: 80%" Height="34px" runat="server" AutoPostBack="True"></asp:DropDownList>
                                 </div>
                             </div>
                         </div>
@@ -293,11 +295,6 @@
                         </asp:GridView>
                         <div class="form-group">
                             <asp:Label ID="lblPagoTotal" Style="display: none" runat="server"></asp:Label>
-                            <b>
-                                <label>Monto de reserva:</label>
-                                <asp:TextBox runat="server" ID="txtReserva" CssClass="form-control" placeholder="Monto de Reserva"></asp:TextBox>
-                                <br />
-                            </b>
                         </div>
                     </div>
                     <div class="col-sm-12 col-md-6 col-lg-6 scrolling-table-container">
@@ -611,11 +608,15 @@
                                         </p>
                                         <div style="padding-top: 30px;">
                                             <table style="width: 100%">
-                                                <tr>
+                                                 <tr>
                                                     <td style="text-align: center">
-                                                        <asp:Label ID="lblCartaAsesorReclamo" runat="server"></asp:Label></td>
+                                                        <asp:Label ID="lblCartaEjecutivo" runat="server"></asp:Label></td>
+                                                     <td style="text-align: center">
+                                                        <asp:Label ID="lblCartaAsesorReclamo" runat="server"></asp:Label>
+                                                    </td>
                                                 </tr>
                                                 <tr>
+                                                     <td style="text-align: center">Ejecutivo de la cuenta</td>
                                                     <td style="text-align: center">Asesor de Reclamos Daños</td>
                                                 </tr>
                                             </table>

@@ -73,7 +73,6 @@ public partial class ReclamosEntities : DbContext
     public DbSet<reclamos_varios> reclamos_varios { get; set; }
     public DbSet<reg_reclamo_varios> reg_reclamo_varios { get; set; }
     public DbSet<reg_reclamos_medicos> reg_reclamos_medicos { get; set; }
-    public DbSet<resguardos> resguardos { get; set; }
     public DbSet<sucursal> sucursal { get; set; }
     public DbSet<sysdiagrams> sysdiagrams { get; set; }
     public DbSet<talleres> talleres { get; set; }
@@ -309,5 +308,42 @@ public partial class ReclamosEntities : DbContext
     public virtual ObjectResult<Nullable<int>> pa_sec_cartas()
     {
         return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("pa_sec_cartas");
+    }
+
+    public virtual int pa_kpi_autorizaciones_aseguradora(Nullable<System.DateTime> fechaInicio, Nullable<System.DateTime> fechaFin, string aseguradora)
+    {
+        var fechaInicioParameter = fechaInicio.HasValue ?
+            new ObjectParameter("fechaInicio", fechaInicio) :
+            new ObjectParameter("fechaInicio", typeof(System.DateTime));
+
+        var fechaFinParameter = fechaFin.HasValue ?
+            new ObjectParameter("fechaFin", fechaFin) :
+            new ObjectParameter("fechaFin", typeof(System.DateTime));
+
+        var aseguradoraParameter = aseguradora != null ?
+            new ObjectParameter("aseguradora", aseguradora) :
+            new ObjectParameter("aseguradora", typeof(string));
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pa_kpi_autorizaciones_aseguradora", fechaInicioParameter, fechaFinParameter, aseguradoraParameter);
+    }
+
+    public virtual ObjectResult<pa_cargar_asegurados_Result> pa_cargar_asegurados()
+    {
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<pa_cargar_asegurados_Result>("pa_cargar_asegurados");
+    }
+
+    public virtual ObjectResult<pa_cargar_autos_Result> pa_cargar_autos()
+    {
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<pa_cargar_autos_Result>("pa_cargar_autos");
+    }
+
+    public virtual ObjectResult<pa_cargar_danios_varios_Result> pa_cargar_danios_varios()
+    {
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<pa_cargar_danios_varios_Result>("pa_cargar_danios_varios");
+    }
+
+    public virtual ObjectResult<pa_vista_movil_Result> pa_vista_movil()
+    {
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<pa_vista_movil_Result>("pa_vista_movil");
     }
 }

@@ -198,7 +198,7 @@
                                 <br />
                                 <div class="form-inline">
                                     <label style="width: 15%">Gestor:</label>
-                                    <asp:DropDownList CssClass="form-control" ID="ddlGestor" Style="width: 80%" Height="34px" runat="server" AutoPostBack="True" DataSourceID="SqlDataSourceGestores" DataTextField="nombre" DataValueField="id"></asp:DropDownList>
+                                    <asp:DropDownList CssClass="form-control" ID="ddlGestor" Style="width: 80%" Height="34px" runat="server" OnSelectedIndexChanged="ddlGestor_SelectedIndexChanged" AutoPostBack="True" DataSourceID="SqlDataSourceGestores" DataTextField="nombre" DataValueField="id"></asp:DropDownList>
                                 </div>
                             </div>
                         </div>

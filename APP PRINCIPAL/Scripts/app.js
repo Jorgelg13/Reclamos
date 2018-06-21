@@ -45,6 +45,10 @@ $(document).ready(function () {
         $.cookie('tab', 'ingreso-datos');
     });
 
+    $('.alarmas').click(function () {
+        $.cookie('tab', 'alarmas');
+    });
+
 
     // funcion para mantener la pantalla en el mismo tab 
     setTimeout(function () {
@@ -57,6 +61,8 @@ $(document).ready(function () {
         $('#profile').removeClass('active');
         $('.ingreso-datos').removeClass('active');
         $('#ingreso-datos').removeClass('active');
+        $('.alarmas').removeClass('active');
+        $('#alarmas').removeClass('active');
 
         if (tab) {
             $('#' + tab).addClass('active');

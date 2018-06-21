@@ -317,7 +317,7 @@
                                 <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
                                 <RowStyle BackColor="#EFF3FB" HorizontalAlign="Left" Wrap="False" />
                             </asp:GridView>
-                            <p style="font-size:20px"><b>Eficiencia Calificada sobre 90%</b></p>
+                            <p style="font-size:20px"><b>Eficiencia Calificada sobre 80%</b></p>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -349,7 +349,9 @@
     <script>
         try {
             $('#ContentPlaceHolder1_GridCicloCliente tr').each(function (index) {
-                $tr = $(this);
+                 $tr = $(this);
+                 $td = $tr[0].cells[3];
+                 $td.remove();
                 if (index > 0) {
                         $td = $tr[0].cells[3];
                     $td.innerText = $td.innerText + ' %';
@@ -361,11 +363,14 @@
 
         try {
             $('#ContentPlaceHolder1_GridPromedioAseguradora tr').each(function (index) {
-                $tr = $(this);
+                   $tr = $(this);
+                   $td = $tr[0].cells[3];
+                   $td.remove();
                 if (index > 0) {
                     $td = $tr[0].cells[3];
                     $td.innerText = $td.innerText + ' %';
                     $td.className = 'alinearNumeros';
+
                 }
             });
         } catch (ex) {

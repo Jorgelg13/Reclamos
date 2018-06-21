@@ -165,7 +165,7 @@
             </div>
         </div>
     </div>
-    <asp:SqlDataSource ID="SqlDataSourceCoberturas" runat="server" ConnectionString="<%$ ConnectionStrings:reclamosConnectionString %>" SelectCommand="SELECT [descr], [limite1], [limite2], [deducible], [prima], [sumaaseg] FROM [viewCoberturasAutos] where chasis= @chasis">
+    <asp:SqlDataSource ID="SqlDataSourceCoberturas" runat="server" ConnectionString="<%$ ConnectionStrings:reclamosConnectionString %>" SelectCommand="SELECT top 30 [descr], [limite1], [limite2], [deducible], [prima], [sumaaseg] FROM [viewCoberturasAutos] where chasis= @chasis">
         <SelectParameters>
             <asp:ControlParameter ControlID="lblChasis" Name="chasis" PropertyName="Text" />
         </SelectParameters>

@@ -40,6 +40,9 @@
                         <li role="presentation" class="coberturas">
                             <a href="#coberturas" aria-controls="settings" role="tab" data-toggle="tab">Seguimiento</a>
                         </li>
+                       <li role="presentation" class="alarmas">
+                            <a href="#alarmas" aria-controls="alarmas" role="tab" data-toggle="tab">Comentarios</a>
+                        </li>
                         <li role="presentation" class="profile">
                             <a href="#profile" aria-controls="llamadas" role="tab" data-toggle="tab">Impresion De Boleta</a>
                         </li>
@@ -126,28 +129,28 @@
                                     <asp:CheckBox ID="CheckMemoAseguradora" AutoPostBack="true" Text="Generar Memo Aseguradora" title="Generar Memo para la aseguradora" runat="server" Style="padding-left: 10%;" OnCheckedChanged="CheckMemoAseguradora_CheckedChanged" />
                                 </div>
                                 <div class="panel-body">
-                                    <div style="height: 170px; overflow-x: auto;">
+                                    <div style="height: 210px;">
                                         <div class="form-group col-sm-12 col-md-6 col-lg-6">
                                             <label>Detalle para el cliente:</label>
-                                            <asp:TextBox ID="txtdetalle" Style="width: 100%" autocomplete="off" class="form-control" TextMode="multiline" Columns="50" Rows="3" runat="server" />
+                                            <asp:TextBox ID="txtdetalle" Style="width: 100%" autocomplete="off" class="form-control" TextMode="multiline" Columns="50" Rows="5" runat="server" />
                                         </div>
                                         <div class="form-group col-sm-12 col-md-6 col-lg-6">
                                             <label>Observaciones para memo de aseguradora:</label>
-                                            <asp:TextBox ID="txtObservaciones" Style="width: 100%" autocomplete="off" class="form-control" TextMode="multiline" Columns="50" Rows="3" runat="server" />
+                                            <asp:TextBox ID="txtObservaciones" Style="width: 100%" autocomplete="off" class="form-control" TextMode="multiline" Columns="50" Rows="5" runat="server" />
                                         </div>
-                                        <div class="form-group col-sm-12 col-md-4 col-lg-4">
+                                        <div class="form-group col-sm-12 col-md-3 col-lg-3">
                                             <label>Elegir una direccion:</label>
                                             <asp:DropDownList CssClass="form-control" ID="ddlDirecciones" Style="width: 97%; height: 32px;" runat="server"></asp:DropDownList>
                                         </div>
-                                        <div class="form-group col-sm-12 col-md-4 col-lg-4">
+                                        <div class="form-group col-sm-12 col-md-3 col-lg-3">
                                             <label>Direccion Manual:</label>
                                             <asp:TextBox ID="txtDireccion" Style="width: 95%" autocomplete="off" class="form-control" placeholder="Si no existe la direccion puede escribirla aqui" runat="server" />
                                         </div>
-                                        <div class="form-group col-sm-12 col-md-4 col-lg-4">
+                                        <div class="form-group col-sm-12 col-md-3 col-lg-3">
                                             <label>Ejecutivo:</label>
                                             <asp:TextBox ID="txtEjecutivo" Style="width: 95%" class="form-control" placeholder="Nombre de ejecutivo para memos" runat="server" />
                                         </div>
-                                        <div class="form-group col-sm-12 col-md-4 col-lg-4">
+                                        <div class="form-group col-sm-12 col-md-3 col-lg-3">
                                             <label>Contacto:</label>
                                             <asp:TextBox ID="txtContacto" Visible="false" Style="width: 95%" class="form-control" placeholder="Contacto" runat="server" />
                                         </div>
@@ -159,6 +162,9 @@
                                 <div class="panel-heading panel-memos">
                                     <h4 class="panel-title">
                                         <b>Detalle de liquidación</b>
+                                         <asp:Label ID="lblNumReclamo" Text="No. Reclamo:" runat="server" Style="padding-left: 60px; font-size: 14px;"></asp:Label>
+                                    <asp:TextBox Style="width: 20%" ID="txtNumReclamo" Enabled="false" runat="server"></asp:TextBox>
+                                    <asp:CheckBox ID="checkHabilitar" automplete="false" AutoPostBack="true" runat="server" Text="Habilitar" OnCheckedChanged="checkHabilitar_CheckedChanged" />
                                     </h4>
                                 </div>
                                 <div class="panel-body">
@@ -176,25 +182,17 @@
                                     </div>
                                 </div>
                             </div>
-                            <%---------------------------------------- seccion de comentarios del reclamo ---------------------------------------------%>
-                            <div class="panel panel-info col-sm-12 col-md-12 col-lg-12 panel-cuadrado">
-                                <div class="panel-heading panel-memos">
-                                    <b>Comentarios del reclamo</b>
-                                    <asp:Label ID="lblNumReclamo" Text="No. Reclamo:" runat="server" Style="padding-left: 60px; font-size: 14px;"></asp:Label>
-                                    <asp:TextBox Style="width: 20%" ID="txtNumReclamo" Enabled="false" runat="server"></asp:TextBox>
-                                    <asp:CheckBox ID="checkHabilitar" automplete="false" AutoPostBack="true" runat="server" Text="Habilitar" OnCheckedChanged="checkHabilitar_CheckedChanged" />
-                                </div>
-                                <div class="panel-body">
-                                    <div style="height: 230px; overflow-x: auto; overflow-y: auto;">
-                                        <asp:GridView ID="GridComentarios" CssClass="table bs-table tablaDetalleAuto table-responsive table-hover" runat="server" CellPadding="3" BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" OnRowDataBound="GridComentarios_RowDataBound">
-                                            <FooterStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" />
-                                            <HeaderStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" />
-                                            <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
-                                            <RowStyle BackColor="#EFF3FB" />
-                                            <SelectedRowStyle BackColor="#D1DDF1" Font-Bold="True" ForeColor="#333333" />
-                                        </asp:GridView>
-                                    </div>
-                                </div>
+                        </div>
+                    <%---------------------------------------- seccion de comentarios del reclamo ---------------------------------------------%>
+                        <div role="tabpanel" class="tab-pane" id="alarmas">
+                            <div class="scrolling-table-container">
+                                <asp:GridView ID="GridComentarios" CssClass="table bs-table tablaDetalleAuto table-responsive table-hover" runat="server" CellPadding="3" BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" OnRowDataBound="GridComentarios_RowDataBound">
+                                    <FooterStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" />
+                                    <HeaderStyle BackColor="#131B4D" Font-Bold="True" Wrap="false" ForeColor="White" />
+                                    <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
+                                    <RowStyle BackColor="#EFF3FB" />
+                                    <SelectedRowStyle BackColor="#D1DDF1" Font-Bold="True" ForeColor="#333333" />
+                                </asp:GridView>
                             </div>
                         </div>
                         <%------------------------------------------     imprimir el formulario de datos    ----------------------------%>
@@ -478,7 +476,6 @@
                                 </div>
                             </div>
                         </div>
-
                         <%------------------------------------------------ imprimir memo para el cliente ------------------------------------------%>
                         <div id="imprimirEnvioCliente" style="display: none" class="form-inline">
                             <br />
@@ -789,7 +786,6 @@
         }
     </script>
     <%--------------------------  modal para enviar correos electronicos a los clientes -----------------------------%>
-    <div>
         <div class="modal fade" id="exampleModal" data-keyboard="false" data-backdrop="static">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -821,7 +817,6 @@
                 </div>
             </div>
         </div>
-    </div>
     <%--------------------------  modal para realizar una liquidacion ---------------------------------%>
     <div class="modal fade" id="modalPago" data-keyboard="false" data-backdrop="static">
         <div class="modal-dialog">

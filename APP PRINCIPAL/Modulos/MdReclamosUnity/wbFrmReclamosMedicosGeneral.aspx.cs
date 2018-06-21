@@ -94,10 +94,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosMedicosGeneral : Syste
         if (e.Row.RowType == DataControlRowType.DataRow)
             if (Convert.ToDateTime(e.Row.Cells[16].Text) <= DateTime.Today)
             {
-                for (int cell = 0; cell <= e.Row.Cells.Count - 1; cell++)
-                {
-                    e.Row.CssClass = "atrasados";
-                }
+                e.Row.Attributes.Add("style", "background-color: #f7c6be"); //rojos
             }
     }
 }

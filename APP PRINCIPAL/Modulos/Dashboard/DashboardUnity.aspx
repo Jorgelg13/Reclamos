@@ -101,7 +101,7 @@
                 <div class="panel-heading">
                     <p style="text-align: center; font-size: 16px;"><b>Reclamos Individuales y colectivos</b></p>
                 </div>
-                <div class="panel-body">
+                <div class="panel-body" style="text-align:center; padding:10px;">
                     <h3>
                         <asp:LinkButton ID="lnTotalIndividuales" OnClick="lnTotalIndividuales_Click" ToolTip="Reclamos Individuales en total" runat="server" ForeColor="#797D7F"></asp:LinkButton>/
                         <asp:LinkButton ID="lnIndividualesFueraTiempo" OnClick="lnIndividualesFueraTiempo_Click" runat="server" Style="color: red" ToolTip="Reclamos individuales fuera de tiempo"></asp:LinkButton>
@@ -110,7 +110,12 @@
                     <h3>
                         <asp:LinkButton ID="lnColectivos" OnClick="lnColectivos_Click" runat="server" ToolTip="Reclamos de colectivos en total" ForeColor="#797D7F"></asp:LinkButton>/
                         <asp:LinkButton ID="lnColectivosFueraTiempo" OnClick="lnColectivosFueraTiempo_Click" runat="server" Style="color: red" ToolTip="Reclamos de colectivos fuera de tiempo"></asp:LinkButton>
-                         <asp:Label ID="lbColectivosFT" runat="server"></asp:Label>
+                        <asp:Label ID="lbColectivosFT" runat="server"></asp:Label>
+                    </h3>
+                    <h3>
+                        <asp:LinkButton ID="lnTotalGastosMedicos"  runat="server" ToolTip="Reclamos de gastos medicos en total" ForeColor="#797D7F"></asp:LinkButton> /
+                        <asp:LinkButton ID="LnTotalFtGastosMedios" runat="server" Style="color: red" ToolTip="Reclamos de gastos medicos en total fuera de tiempo"></asp:LinkButton>
+                        <asp:Label ID="lbltotalFt" runat="server"></asp:Label>
                     </h3>
                     <h3>
                         <asp:LinkButton ID="lnPendienteDocumentacion" OnClick="lnPendienteDocumentacion_Click" runat="server" ToolTip="Reclamos de gastos medicos en total" ForeColor="#797D7F"></asp:LinkButton>

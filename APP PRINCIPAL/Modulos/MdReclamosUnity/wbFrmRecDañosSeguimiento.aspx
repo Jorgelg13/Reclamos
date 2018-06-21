@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/ReclamosUnity.master" AutoEventWireup="true" CodeFile="wbFrmRecDañosSeguimiento.aspx.cs" Inherits="Modulos_MdReclamosUnity_wbFrmRecDañosSeguimiento" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/ReclamosUnity.master" AutoEventWireup="true" EnableEventValidation="false" CodeFile="wbFrmRecDañosSeguimiento.aspx.cs" Inherits="Modulos_MdReclamosUnity_wbFrmRecDañosSeguimiento" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
 </asp:Content>
@@ -21,10 +21,13 @@
                 <li role="presentation" class="inactivos">
                     <a href="#inactivos" aria-controls="ingreso-datos" role="tab" data-toggle="tab" style="font-size: 18px;">Proximos Inactivos</a>
                 </li>
+                <li role="presentation" class="alarmas">
+                    <a href="#alarmas" aria-controls="alarmas" role="tab" data-toggle="tab" style="font-size: 18px;">Alarmas</a>
+                </li>
             </ul>
             <div class="tab-content">
                 <div role="tabpanel" class="tab-pane" id="home">
-                      <div class="col-sm-12 col-md-3 col-lg-3 scrolling-table-container">
+                    <div class="col-sm-12 col-md-3 col-lg-3 scrolling-table-container">
                         <asp:GridView ID="GridReclamosSeguimiento" runat="server" CssClass="table table-responsive table-hover" GridLines="None" ShowFooter="true" OnRowDataBound="GridReclamosSeguimiento_RowDataBound1" OnSelectedIndexChanged="GridReclamosSeguimiento_SelectedIndexChanged">
                             <AlternatingRowStyle BackColor="White" />
                             <Columns>
@@ -112,9 +115,9 @@
                         </asp:GridView>
                     </div>
                 </div>
-                 <div role="tabpanel" class="tab-pane" id="inactivos">
-                      <div class="scrolling-table-container">
-                        <asp:GridView ID="GridInactivos"  runat="server" CssClass="table bs-table table-responsive table-hover" OnSelectedIndexChanged="GridInactivos_SelectedIndexChanged" AutoGenerateColumns="True" GridLines="None">
+                <div role="tabpanel" class="tab-pane" id="inactivos">
+                    <div class="scrolling-table-container">
+                        <asp:GridView ID="GridInactivos" runat="server" CssClass="table bs-table table-responsive table-hover" OnSelectedIndexChanged="GridInactivos_SelectedIndexChanged" AutoGenerateColumns="True" GridLines="None">
                             <AlternatingRowStyle BackColor="White" />
                             <Columns>
                                 <asp:CommandField ShowSelectButton="True">
@@ -129,10 +132,35 @@
                         </asp:GridView>
                     </div>
                 </div>
+                <!--Alarmas del reclamo -->
+                <div role="tabpanel" class="tab-pane" id="alarmas">
+                    <div class="scrolling-table-container">
+                        <asp:Panel runat="server" ID="PnAlarmas" Visible="false">
+                            <div class="form-inline">
+                                <asp:DropDownList runat="server" CssClass="form-control" ID="ddlAlarmaGestor" AutoPostBack="true" DataSourceID="SqlDataSourceGestores" DataTextField="nombre" DataValueField="id" OnSelectedIndexChanged="ddlAlarmaGestor_SelectedIndexChanged"></asp:DropDownList>
+                                <asp:Label runat="server" ID="lblTotalAlarmas" Style="font-size: 25px; margin-left: 15px;"></asp:Label>
+                                <asp:LinkButton ID="linkDescargar" OnClick="linkDescargar_Click" title="Descargar en excel" runat="server" Style="font-size: 30px; text-align: center; color: green"><i class="fa fa-file-excel-o"></i></asp:LinkButton>
+                            </div>
+                            <br />
+                            <asp:GridView ID="GridAlarmas" runat="server" CssClass="table table-responsive" AutoGenerateColumns="True" OnRowDataBound="GridReclamosSeguimiento_RowDataBound" OnSelectedIndexChanged="GridAlarmas_SelectedIndexChanged" ForeColor="#333333" GridLines="None">
+                                <AlternatingRowStyle BackColor="White" />
+                                <Columns>
+                                    <asp:CommandField ShowSelectButton="True">
+                                        <HeaderStyle HorizontalAlign="Center" Wrap="False" />
+                                        <ItemStyle HorizontalAlign="Left" Wrap="False" />
+                                    </asp:CommandField>
+                                </Columns>
+                                <HeaderStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" HorizontalAlign="Center" Wrap="False" />
+                                <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
+                                <RowStyle BackColor="#EFF3FB" HorizontalAlign="Left" Wrap="False" />
+                            </asp:GridView>
+                        </asp:Panel>
+                    </div>
+                </div>
             </div>
-         <a title="Simbologia de colores" style="font-size:50px;" data-toggle="modal" role="button" data-target="#ModalColores"><i class="fa fa-info-circle" aria-hidden="true"></i></a>
-    </div>
-       <%-- Informacion de colores --%>
+            <a title="Simbologia de colores" style="font-size: 50px;" data-toggle="modal" role="button" data-target="#ModalColores"><i class="fa fa-info-circle" aria-hidden="true"></i></a>
+        </div>
+        <%-- Informacion de colores --%>
         <div class="modal fade " id="ModalColores" data-backdrop="static">
             <div class="modal-dialog modal-sm">
                 <div class="modal-content">
@@ -142,13 +170,13 @@
                     </div>
                     <div class="modal-body form-inline">
                         <label>Pendientes</label>
-                        <asp:TextBox ID="txtrojo" style="background-color:#f7c6be; width:100%;" class="form-control" runat="server"></asp:TextBox>
-                         <label>En tiempo</label>
-                        <asp:TextBox ID="txtverde" style="background-color:#8ace8e; width:100%;" class="form-control" runat="server"></asp:TextBox>
-                         <label>Proximos atrasados</label>
-                        <asp:TextBox ID="txtAmarillo" style="background-color:#f9f595; width:100%;" class="form-control" runat="server"></asp:TextBox>
-                         <label>Reclamos a ver hoy</label>
-                        <asp:TextBox ID="txtAzul" style="background-color:#afcaf7; width:100%;" class="form-control" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="txtrojo" Style="background-color: #f7c6be; width: 100%;" class="form-control" runat="server"></asp:TextBox>
+                        <label>En tiempo</label>
+                        <asp:TextBox ID="txtverde" Style="background-color: #8ace8e; width: 100%;" class="form-control" runat="server"></asp:TextBox>
+                        <label>Proximos atrasados</label>
+                        <asp:TextBox ID="txtAmarillo" Style="background-color: #f9f595; width: 100%;" class="form-control" runat="server"></asp:TextBox>
+                        <label>Reclamos a ver hoy</label>
+                        <asp:TextBox ID="txtAzul" Style="background-color: #afcaf7; width: 100%;" class="form-control" runat="server"></asp:TextBox>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-warning" data-dismiss="modal">Cerrar</button>

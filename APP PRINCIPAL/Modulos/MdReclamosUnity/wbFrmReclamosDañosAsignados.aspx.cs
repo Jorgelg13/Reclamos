@@ -291,7 +291,8 @@ public partial class Modulos_MdReclamos_wbFrmReclamosDañosAsignados : System.We
             reclamo.b_carta_envio_cheque = false;
             reclamo.id_taller = Convert.ToInt16(ddlTaller.SelectedValue);
             reclamo.fecha_visualizar = DateTime.Now;
-            reclamo.fecha_apertura_reclamo = DateTime.Now;  
+            reclamo.fecha_apertura_reclamo = DateTime.Now;
+            reclamo.reserva = 0;
             DBReclamos.SaveChanges();
             if (txtComentarios.Text != "") insertarComentarios(txtComentarios.Text);
             if (txtCorreo.Text != "") enviarNotificacion();

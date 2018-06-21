@@ -480,24 +480,6 @@ a {
     margin-bottom: 10px;
 }
 
-/*Colores para grid*/
-.pendientes {
-    background-color: #8ace8e !important;
-}
-
-.precaucion {
-    background-color: #f9f595 !important;
-}
-
-.atrasados {
-    background-color: #f7c6be !important;
-}
-
-.ver-hoy {
-    background-color: #afcaf7 !important;
-}
-
-
 /*alinear columnas de gridviews*/
 .alinearNumeros{
     text-align:right;

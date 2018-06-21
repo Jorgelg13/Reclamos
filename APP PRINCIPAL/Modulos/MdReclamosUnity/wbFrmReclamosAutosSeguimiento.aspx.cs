@@ -1192,4 +1192,23 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosAutosSeguimiento : Sys
             Utils.ShowMessage(this.Page, "No se a podido subir el archivo " + ex, "Error..", "error");
         }
     }
+
+    //metodo para reasignar un reclamo
+    protected void ddlGestor_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        try
+        {
+            var usuario = DBReclamos.gestores.Find(Convert.ToInt32(ddlGestor.SelectedValue));
+            var reclamo = DBReclamos.reclamo_auto.Find(id);
+            reclamo.usuario_unity = usuario.usuario;
+            reclamo.id_gestor = usuario.id;
+            DBReclamos.SaveChanges();
+            Utils.ShowMessage(this.Page, "Reclamo Reasignado con exito a usuario "+ddlGestor.SelectedItem.Text+"", "Excelente..", "success");
+        }
+
+        catch(Exception ex)
+        {
+            Utils.ShowMessage(this.Page, "Este Reclamo No pudo ser Reasignado" + ex.Message, "ERROR..", "error");
+        }
+    }
 }

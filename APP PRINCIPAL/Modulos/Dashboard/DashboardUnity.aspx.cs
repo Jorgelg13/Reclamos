@@ -54,42 +54,49 @@ public partial class DashboardUnity : System.Web.UI.Page
             Double total = DBReclamos.reclamos_medicos.Where(m => m.estado_unity == "Seguimiento").Count();
             lnTotal.Text = total.ToString();
 
+            //total de reclamos medicos por tiempo
             Double medicos = DBReclamos.reclamos_medicos.Where(m => m.estado_unity == "Seguimiento" && m.reg_reclamos_medicos.tipo == "I").Count();
             lnTotalIndividuales.Text = "I: " + medicos.ToString();
-            lbIndividualesFT.Text = " = "+ Math.Round((individualesFT / medicos) *100, 2).ToString() + "%"; 
+            lbIndividualesFT.Text = " = " + ((1 - (individualesFT / medicos)) * 100).ToString("N2") + "%";
 
             Double medicosC = DBReclamos.reclamos_medicos.Where(m => m.estado_unity == "Seguimiento" && m.reg_reclamos_medicos.tipo == "C").Count();
             lnColectivos.Text = "C:  " + medicosC.ToString();
-            lbColectivosFT.Text = " = " + Math.Round((colectivosFT / medicosC) * 100, 2).ToString() + "%";
+            lbColectivosFT.Text = " = " + (( 1 - (colectivosFT / medicosC)) * 100).ToString("N2") + "%";
+
+            Double TotalRecMedicos = medicos + medicosC;
+            Double TotalFtMedicos = Convert.ToDouble(colectivosFT) + Convert.ToDouble(individualesFT);
+            lnTotalGastosMedicos.Text = TotalRecMedicos.ToString();
+            LnTotalFtGastosMedios.Text = TotalFtMedicos.ToString();
+            lbltotalFt.Text = " = " + ((1 - (TotalFtMedicos / TotalRecMedicos)) * 100).ToString("N2") + "%";
 
             Double estadoAsegurado = DBReclamos.reclamos_medicos.Where(m => m.id_estado == 4 && m.estado_unity == "Seguimiento"  && m.reg_reclamos_medicos.tipo == "I" ).Count();
             lnPendienteDocumentacion.Text = "E.A :  " + estadoAsegurado.ToString();
 
             //total de reclamos de autos por estado
             Double pendienteAseguradoAutos = DBReclamos.reclamo_auto.Where(a => a.estado_auto_unity == "Pendiente Asegurado" && a.estado_unity == "Seguimiento").Count();
-            lnPendienteAseguradoAuto.Text = "P.A:  " + pendienteAseguradoAutos.ToString() + " = " + Math.Round((pendienteAseguradoAutos/autos) *100,2).ToString() + "%";
+            lnPendienteAseguradoAuto.Text = "P.A:  " + pendienteAseguradoAutos.ToString() + " = " + ((pendienteAseguradoAutos/autos) *100).ToString("N2") + "%";
 
             Double procesolegal = DBReclamos.reclamo_auto.Where(a => a.estado_auto_unity == "Proceso legal" && a.estado_unity == "Seguimiento").Count();
-            lnlProcesoLegalAutos.Text = "P.L:  " + procesolegal.ToString() + " = " + Math.Round((procesolegal / autos) *100, 2).ToString() + "%";
+            lnlProcesoLegalAutos.Text = "P.L:  " + procesolegal.ToString() + " = " + ((procesolegal / autos) *100).ToString("N2") + "%";
 
             Double esperaAfectado = DBReclamos.reclamo_auto.Where(a => a.estado_auto_unity == "Espera afectado" && a.estado_unity == "Seguimiento").Count();
-            lnlEsperaAfectado.Text = "E.A:  " + esperaAfectado.ToString() + " = " + Math.Round((esperaAfectado / autos) *100, 2).ToString() + "%";
+            lnlEsperaAfectado.Text = "E.A:  " + esperaAfectado.ToString() + " = " + ((esperaAfectado / autos) *100).ToString("N2") + "%";
 
             Double pendienteCompania = DBReclamos.reclamo_auto.Where(a => a.estado_auto_unity == "Reparacion" && a.estado_unity == "Seguimiento").Count();
-            lnlPendienteCompania.Text = "RE:  " + pendienteCompania.ToString() + " = " + Math.Round((pendienteCompania / autos) * 100, 2).ToString() + "%";
+            lnlPendienteCompania.Text = "RE:  " + pendienteCompania.ToString() + " = " + ((pendienteCompania / autos) * 100).ToString("N2") + "%";
 
             //total de reclamos de estado de daños
             Double pendiente = DBReclamos.reclamos_varios.Where(a => a.estado_reclamo_unity == "Pendiente asegurado" && a.estado_unity == "Seguimiento").Count();
-            lnPendienteAsegurado.Text = "P.A:  " + pendiente.ToString() + " = " + Math.Round((pendiente / danios) * 100, 2).ToString() + "%";
+            lnPendienteAsegurado.Text = "P.A:  " + pendiente.ToString() + " = " + ((pendiente / danios) * 100).ToString("N2") + "%";
 
             Double inactivo = DBReclamos.reclamos_varios.Where(a => a.estado_reclamo_unity == "Inactivo" && a.estado_unity == "Seguimiento").Count();
-            lnInactivo.Text = "I:  " + inactivo.ToString() + " = " + Math.Round((inactivo / danios) * 100, 2).ToString() + "%";
+            lnInactivo.Text = "I:  " + inactivo.ToString() + " = " + ((inactivo / danios) * 100).ToString("N2") + "%";
 
             Double ajuste = DBReclamos.reclamos_varios.Where(a => a.estado_reclamo_unity == "Ajuste" && a.estado_unity == "Seguimiento").Count();
-            lnAjuste.Text = "A:  " + ajuste.ToString() + " = " + Math.Round((ajuste / danios) * 100, 2).ToString() + "%";
+            lnAjuste.Text = "A:  " + ajuste.ToString() + " = " + ((ajuste / danios) * 100).ToString("N2") + "%";
 
             Double finiquito = DBReclamos.reclamos_varios.Where(a => a.estado_reclamo_unity == "Pendiente Finiquito" && a.estado_unity == "Seguimiento").Count();
-            lnFiniquito.Text = "P.F:  " + finiquito.ToString() + " = " + Math.Round((finiquito / danios) * 100, 2).ToString() + "%";
+            lnFiniquito.Text = "P.F:  " + finiquito.ToString() + " = " + ((finiquito / danios) * 100).ToString("N2") + "%";
         }
 
         catch (Exception ex)

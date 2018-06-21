@@ -8,15 +8,21 @@ public partial class Modulos_MdReclamosUnity_wbFrmRecDañosSeguimiento : System.
 {
     String userlogin = HttpContext.Current.User.Identity.Name; //usuario que esta en session
     Utils llenado = new Utils();
-    String selectGeneral, EstadosAgrupados,estado,reclamosSeguimiento;
+    String selectGeneral, EstadosAgrupados,estado,reclamosSeguimiento, alarmas;
     int id, total;
 
     protected void Page_Load(object sender, EventArgs e)
     {
+        if (userlogin == "cmejia" || userlogin == "jlaj" || userlogin == "jsagastume")
+        {
+            PnAlarmas.Visible = true;
+        }
+
         EstadosAgrupados = "select count(*) as Total, estado_reclamo_unity as Estado from reclamos_varios where usuario_unity = '"+userlogin+"' and estado_unity = 'Seguimiento' group by estado_reclamo_unity ";
 
         selectGeneral = "SELECT " +
                 "dbo.reclamos_varios.id as ID," +
+                "gestores.nombre as Gestor," +
                 "dbo.reg_reclamo_varios.poliza as Poliza," +
                 "dbo.reg_reclamo_varios.asegurado as Asegurado," +
                 "dbo.reg_reclamo_varios.cliente as Cliente," +
@@ -26,33 +32,8 @@ public partial class Modulos_MdReclamosUnity_wbFrmRecDañosSeguimiento : System.
                 "dbo.reg_reclamo_varios.ramo as Ramo," +
                 "dbo.reg_reclamo_varios.status as Estatus," +
                 "dbo.reg_reclamo_varios.tipo as Tipo," +//10
-                //"dbo.reg_reclamo_varios.direccion as Direccion," +//10
-                //"dbo.reg_reclamo_varios.vip as VIP," +
-                //"dbo.reg_reclamo_varios.suma_asegurada as [Suma Asegurada]," +//12
-                //"dbo.reg_reclamo_varios.moneda as Moneda," +
-                //"dbo.reclamos_varios.boleta as boleta," +
-                //"dbo.reclamos_varios.titular as Titular," +
                 "dbo.reclamos_varios.reportante as Reportante," +
-                //"dbo.reclamos_varios.telefono as Telefono," +
-                //"dbo.reclamos_varios.ajustador as Ajustador," +
-                //"dbo.reclamos_varios.version as Version," +
-                //"dbo.reclamos_varios.ubicacion as Ubicacion," +
-                //"dbo.reclamos_varios.hora as Hora," +
-                //"dbo.reclamos_varios.fecha as Fecha," +
-                //"dbo.reclamos_varios.hora_commit as [Hora Commit]," +
                 "Convert(varchar(20),dbo.reclamos_varios.fecha_commit, 103) as [Fecha Creacion]," +
-                //"dbo.reclamos_varios.hora_cierre as [Hora Cierre]," +
-                //"dbo.reclamos_varios.fecha_cierre as [Fecha Cierre]," +
-                //"dbo.reclamos_varios.id_gestor as Gestor, " + //27
-                //"dbo.reclamos_varios.id_taller as Taller, " +
-                //"dbo.reclamos_varios.id_analista as Analista, " +
-                //"dbo.reclamos_varios.observaciones as Observaciones," + //30
-                //dbo.reclamos_varios.estado_reclamo_unity as [Estado Reclamo], " + //31
-                //"dbo.reclamos_varios.prioritario, " + //32
-                //"dbo.reclamos_varios.complicado, " +//33
-                //"dbo.reclamos_varios.compromiso_pago, " + //34
-                //"dbo.reclamos_varios.num_reclamo, " +
-                "gestores.nombre as Gestor," +//37
                 //"gestores.telefono, " +//38
                 //"gestores.correo, " +//39
                 //"dbo.cabina.nombre as cabina," +
@@ -80,14 +61,19 @@ public partial class Modulos_MdReclamosUnity_wbFrmRecDañosSeguimiento : System.
         string inactivos = selectGeneral +
               " where usuario_unity = '" + userlogin + "' and estado_unity = 'Seguimiento' and DATEDIFF(DAY, fecha_visualizar, GETDATE()) >= 43  and estado_reclamo_unity = 'Pendiente Asegurado' ";
 
+        alarmas = selectGeneral + " where reclamos_varios.estado_unity = 'Seguimiento' and  convert(date, reclamos_varios.fecha_visualizar,112) < getdate() order by gestores.nombre, reclamos_varios.fecha_visualizar";
+
         if (!IsPostBack)
         {
             llenado.llenarGrid(EstadosAgrupados, GridReclamosSeguimiento);
             llenado.llenarGrid(reclamosPrioritarios, GridPrioritarios);
             llenado.llenarGrid(reclamosComplicados, GridComplicados);
             llenado.llenarGrid(inactivos, GridInactivos);
+            llenado.llenarGrid(alarmas, GridAlarmas);
+            lblTotalAlarmas.Text = "Total de reclamos: " + GridAlarmas.Rows.Count.ToString();
         }
     }
+
     //metodo para actualizar la fecha a la actual
     protected void GridReclamosSeguimiento_SelectedIndexChanged(object sender, EventArgs e)
     {
@@ -127,56 +113,50 @@ public partial class Modulos_MdReclamosUnity_wbFrmRecDañosSeguimiento : System.
         Response.Redirect("/Modulos/MdReclamosUnity/wbFrmReclamosDañosSeguimiento.aspx?ID_reclamo=" + id, false);
     }
 
+    protected void GridAlarmas_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        id = Convert.ToInt32(GridAlarmas.SelectedRow.Cells[1].Text);
+        Response.Redirect("/Modulos/MdReclamosUnity/wbFrmReclamosDañosSeguimiento.aspx?ID_reclamo=" + id, false);
+    }
+
     //funcion que coloca en rojo los registros que no se an abierto en el dia
     protected void GridReclamosSeguimiento_RowDataBound(object sender, GridViewRowEventArgs e)
     {
         if (e.Row.RowType == DataControlRowType.DataRow)
             if (Convert.ToDateTime(e.Row.Cells[14].Text) >= DateTime.Today)
             {
-                for (int cell = 0; cell <= e.Row.Cells.Count - 1; cell++)
-                {
-                    e.Row.CssClass = "pendientes";
-                }
+                e.Row.Attributes.Add("style", "background-color: #8ace8e "); //verdes
             }
 
         if (e.Row.RowType == DataControlRowType.DataRow)
             if (Convert.ToDateTime(e.Row.Cells[14].Text) < DateTime.Today)
             {
-                for (int cell = 0; cell <= e.Row.Cells.Count - 1; cell++)
-                {
-                    e.Row.CssClass = "atrasados";
-                }
+               e.Row.Attributes.Add("style", "background-color: #f7c6be"); //rojos
             }
 
         if (e.Row.RowType == DataControlRowType.DataRow)
             if (Convert.ToDateTime(e.Row.Cells[14].Text) == DateTime.Today.AddDays(2) || Convert.ToDateTime(e.Row.Cells[14].Text) == DateTime.Today.AddDays(1))
             {
-                for (int cell = 0; cell <= e.Row.Cells.Count - 1; cell++)
-                {
-                    e.Row.CssClass = "precaucion";
-                }
+               e.Row.Attributes.Add("style", "background-color: #f9f595"); //amarillos
             }
 
         if (e.Row.RowType == DataControlRowType.DataRow)
             if (Convert.ToDateTime(e.Row.Cells[14].Text) == DateTime.Today)
             {
-                for (int cell = 0; cell <= e.Row.Cells.Count - 1; cell++)
-                {
-                    e.Row.CssClass = "ver-hoy"; //azules
-                }
+                e.Row.Attributes.Add("style", "background-color: #afcaf7"); //azules
             }
     }
 
     protected void ddlgestor_SelectedIndexChanged(object sender, EventArgs e)
     {
         String reclamosGestor = selectGeneral +
-              "where ( reclamos_varios.id_gestor = " + ddlgestor.SelectedValue + " and reclamos_varios.estado_unity = 'Seguimiento')";
+              "where ( reclamos_varios.id_gestor = " + ddlgestor.SelectedValue + " and reclamos_varios.estado_unity = 'Seguimiento') order by reclamos_varios.fecha_visualizar";
 
         String Prioritarios = selectGeneral +
-             " where ((reclamos_varios.prioritario = 'true') and (reclamos_varios.id_gestor = " + ddlgestor.SelectedValue + " and reclamos_varios.estado_unity = 'Seguimiento' ))";
+             " where ((reclamos_varios.prioritario = 'true') and (reclamos_varios.id_gestor = " + ddlgestor.SelectedValue + " and reclamos_varios.estado_unity = 'Seguimiento')) order by reclamos_varios.fecha_visualizar";
 
         String Complicados = selectGeneral +
-             " where ((reclamos_varios.complicado = 'true') and (reclamos_varios.id_gestor = " + ddlgestor.SelectedValue + " and reclamos_varios.estado_unity = 'Seguimiento' ))";
+             " where ((reclamos_varios.complicado = 'true') and (reclamos_varios.id_gestor = " + ddlgestor.SelectedValue + " and reclamos_varios.estado_unity = 'Seguimiento' )) order by reclamos_varios.fecha_visualizar";
 
         llenado.llenarGrid(reclamosGestor, GridReclamosGeneral);
         llenado.llenarGrid(Prioritarios, GridPrioritarios);
@@ -203,6 +183,25 @@ public partial class Modulos_MdReclamosUnity_wbFrmRecDañosSeguimiento : System.
         {
             Utils.ShowMessage(this.Page, "Error al realizar el conteo de reclamos" + ex.Message, "Error..", "error");
         }
+    }
+
+    protected void ddlAlarmaGestor_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        alarmas = selectGeneral + " where reclamos_varios.estado_unity = 'Seguimiento' and id_gestor = " + ddlAlarmaGestor.SelectedValue + " and " +
+            " convert(date, reclamos_varios.fecha_visualizar, 112) < getdate() order by reclamos_varios.fecha_visualizar ";
+        llenado.llenarGrid(alarmas, GridAlarmas);
+        GridAlarmas.DataBind();
+        lblTotalAlarmas.Text = "Total de reclamos: " + GridAlarmas.Rows.Count.ToString();
+    }
+
+    public override void VerifyRenderingInServerForm(Control control)
+    {
+        //base.VerifyRenderingInServerForm(control);
+    }
+
+    protected void linkDescargar_Click(object sender, EventArgs e)
+    {
+        Utils.ExportarExcel(PnAlarmas, Response, "Alarmas de reclamos daños");
     }
 }
 

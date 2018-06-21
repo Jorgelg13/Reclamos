@@ -71,7 +71,6 @@
                                 <li><a href="/Modulos/MdReclamos/wbFrmReclamoAutoManual.aspx">Reclamo manual</a></li>
                                 <li><a href="/Modulos/MdReclamos/wbFrmReclamosAbiertos.aspx">Mis Reclamos Abiertos</a></li>
                                 <li><a href="/Modulos/MdReclamos/wbFrmReclamosAutosGeneral.aspx">Reclamos En General</a></li>
-                                <li><a href="/Modulos/MdReclamos/wbFrmCrearResguardos.aspx">Crear Un Resguardo</a></li>
                                 <li><a href="/Modulos/MdReclamos/wbFrmBitacoras.aspx">Ver Registros Anteriores</a></li>
                                 <li><a href="/Modulos/MdReclamosUnity/wbFrmReclamosAsignadosUnity.aspx">Mis Reclamos Asignados</a></li>
                             </ul>

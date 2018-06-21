@@ -23,7 +23,7 @@ public class Utils
         string[] arreglo = search.Split(" ".ToCharArray());
         string sql = "";
         string colSearch = "";
-        string join = "";
+        //string join = "";
         string colView = "*";
 
         if (arreglo.Length > 0)
@@ -498,7 +498,7 @@ public class Utils
 
             DBReclamos.SaveChanges();
         }
-        catch (Exception ex)
+        catch (Exception)
         {
 
         }

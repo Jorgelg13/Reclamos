@@ -332,16 +332,17 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosDañosSeguimiento : Sy
         {
             var reclamo = DBReclamos.reclamos_varios.Find(id);
             if(reclamo.fecha_visualizar <= DateTime.Now) actualizar_fecha_seguimiento();
-            reclamo.estado_unity = estado;
-            reclamo.num_reclamo = txtNumReclamo.Text.ToString();
-            reclamo.num_contrato = txtContrato.Text;
-            reclamo.complicado = complicado;
-            reclamo.prioritario = prioritario;
+            reclamo.estado_unity  = estado;
+            reclamo.num_reclamo   = txtNumReclamo.Text.ToString();
+            reclamo.num_contrato  = txtContrato.Text;
+            reclamo.complicado    = complicado;
+            reclamo.prioritario   = prioritario;
             reclamo.compromiso_pago = compromiso_pago;
-            reclamo.id_taller = Convert.ToInt16(ddlGestor.SelectedValue);
-            reclamo.id_analista = Convert.ToInt16(ddlAnalista.SelectedValue);
-            reclamo.id_taller = Convert.ToInt16(ddlTaller.SelectedValue);
+            reclamo.id_taller     = Convert.ToInt16(ddlGestor.SelectedValue);
+            reclamo.id_analista   = Convert.ToInt16(ddlAnalista.SelectedValue);
+            reclamo.id_taller     = Convert.ToInt16(ddlTaller.SelectedValue);
             reclamo.estado_reclamo_unity = ddlEstadoReclamo.SelectedItem.Text;
+            reclamo.reserva       =Convert.ToDecimal(txtReserva.Text); 
             reclamo.observaciones = txtObservaciones.Text.ToString();
 
             if (checkCerrarReclamo.Checked)
@@ -719,6 +720,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosDañosSeguimiento : Sy
         lblCartaNumeroReclamo.Text = registro.num_reclamo;
         lblCartaAsegurado.Text     = registro.reg_reclamo_varios.asegurado;
         lblCartaAsesorReclamo.Text = registro.gestores.nombre;
+        lblCartaEjecutivo.Text = registro.reg_reclamo_varios.ejecutivo;
     }
 
     //generar modelo de carta de envio de cheque
@@ -953,6 +955,25 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosDañosSeguimiento : Sy
         catch(Exception ex)
         {
             Utils.ShowMessage(this.Page, "No se a podido subir el archivo " + ex, "Error..", "error");
+        }
+    }
+
+    //metodo para reasignar un reclamo 
+    protected void ddlGestor_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        try
+        {
+            var usuario = DBReclamos.gestores.Find(Convert.ToInt32(ddlGestor.SelectedValue));
+            var reclamo = DBReclamos.reclamos_varios.Find(id);
+            reclamo.usuario_unity = usuario.usuario;
+            reclamo.id_gestor = usuario.id;
+            DBReclamos.SaveChanges();
+            Utils.ShowMessage(this.Page, "Reclamo Reasignado con exito a usuario " + ddlGestor.SelectedItem.Text + "", "Excelente..", "success");
+        }
+
+        catch (Exception ex)
+        {
+            Utils.ShowMessage(this.Page, "Este Reclamo No pudo ser Reasignado" + ex.Message, "ERROR..", "error");
         }
     }
 }

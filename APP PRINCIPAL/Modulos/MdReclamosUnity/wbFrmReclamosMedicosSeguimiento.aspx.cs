@@ -308,6 +308,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosMedicosSeguimientos : 
             }
 
             DevolverDatos(id);
+            DevolverDatos(id);
             Utils.ShowMessage(this.Page, "Datos actualizados", "Excelente..!", "success");
         }
         else
