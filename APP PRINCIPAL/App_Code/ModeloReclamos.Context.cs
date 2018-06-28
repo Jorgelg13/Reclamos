@@ -57,6 +57,7 @@ public partial class ReclamosEntities : DbContext
     public DbSet<direcciones> direcciones { get; set; }
     public DbSet<direcciones_clientes_gm> direcciones_clientes_gm { get; set; }
     public DbSet<documentos_medicos> documentos_medicos { get; set; }
+    public DbSet<documentos_solicitados> documentos_solicitados { get; set; }
     public DbSet<ejecutivos> ejecutivos { get; set; }
     public DbSet<empresa> empresa { get; set; }
     public DbSet<encuesta> encuesta { get; set; }
@@ -76,6 +77,7 @@ public partial class ReclamosEntities : DbContext
     public DbSet<sucursal> sucursal { get; set; }
     public DbSet<sysdiagrams> sysdiagrams { get; set; }
     public DbSet<talleres> talleres { get; set; }
+    public DbSet<tipo_documentos> tipo_documentos { get; set; }
     public DbSet<usuario> usuario { get; set; }
     public DbSet<viewCoberturasAutos> viewCoberturasAutos { get; set; }
     public DbSet<vistaBusquedaPolizaMovil> vistaBusquedaPolizaMovil { get; set; }
@@ -345,5 +347,15 @@ public partial class ReclamosEntities : DbContext
     public virtual ObjectResult<pa_vista_movil_Result> pa_vista_movil()
     {
         return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<pa_vista_movil_Result>("pa_vista_movil");
+    }
+
+    public virtual ObjectResult<Nullable<int>> pa_sec_tipo_documentos()
+    {
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("pa_sec_tipo_documentos");
+    }
+
+    public virtual ObjectResult<Nullable<long>> pa_sec_documentos_solicitados()
+    {
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<long>>("pa_sec_documentos_solicitados");
     }
 }

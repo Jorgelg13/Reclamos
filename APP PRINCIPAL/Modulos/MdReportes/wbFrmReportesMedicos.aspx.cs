@@ -368,6 +368,11 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesMedicos : System.Web.U
         Utils.ExportarExcel(GridPromedioAseguradora,Response, "Reporte Ciclo Aseguradora");
     }
 
+    protected void LinkButton1_Click(object sender, EventArgs e)
+    {
+        Utils.ExportarExcel(GridEjecutivosKPI, Response, "Reporte Ciclo Unity");
+    }
+
     protected void linkCicloEjecutivo_Click(object sender, EventArgs e)
     {
         Utils.ExportarExcel(PnCicloEjecutivo, Response, "Ciclos Ejecutivos");

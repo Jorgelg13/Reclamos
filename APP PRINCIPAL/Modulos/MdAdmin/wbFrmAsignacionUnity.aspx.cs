@@ -21,7 +21,7 @@ public partial class Modulos_MdAdmin_wbFrmAsignacionUnity : System.Web.UI.Page
     {
         if (!comprobar.verificarUsuario(userlogin))
         {
-            Response.Redirect("/portada.aspx");
+            Response.Redirect("/portada.aspx", false);
         }
 
         asignados = "select count(*) as Total, usuario_unity as Usuario from reclamo_auto  where convert(date, fecha_asignacion,112) between " +
@@ -31,6 +31,7 @@ public partial class Modulos_MdAdmin_wbFrmAsignacionUnity : System.Web.UI.Page
             "reclamo_auto.usuario_unity as Usuario," +
             "reclamo_auto.estado_unity as Estado," +
             "reclamo_auto.asignado_por as [Asignado por],"+
+            "auto_reclamo.asegurado as Asegurado," +
             "auto_reclamo.poliza as Poliza," +
             "auto_reclamo.placa as Placa," +
             "auto_reclamo.marca as Marca," +
@@ -43,7 +44,6 @@ public partial class Modulos_MdAdmin_wbFrmAsignacionUnity : System.Web.UI.Page
             "auto_reclamo.aseguradora as Aseguradora," +
             "auto_reclamo.contratante as Contratante," +
             "auto_reclamo.estado_poliza," +
-            "auto_reclamo.asegurado as Asegurado," +
             "reclamo_auto.boleta as Boleta," +
             "reclamo_auto.titular as Titular," +
             "reclamo_auto.hora as Hora," +

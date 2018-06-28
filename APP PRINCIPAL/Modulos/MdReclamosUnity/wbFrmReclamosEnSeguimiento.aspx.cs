@@ -52,6 +52,11 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosEnSeguimiento : System
         string reclamosPrioritarios = reclamosGeneral +
                     " where ((reclamo_auto.prioritario = 'true') and (reclamo_auto.usuario_unity = '" + userlogin + "' and reclamo_auto.estado_unity != 'Cerrado' ))";
 
+        //query con el que se muestran los reclamos proximos a ser inactivados.
+        string inactivos = reclamosGeneral +
+              " where reclamo_auto.usuario_unity = '" + userlogin + "' and reclamo_auto.estado_unity = 'Seguimiento' and DATEDIFF(DAY, reclamo_auto.fecha_visualizar, GETDATE()) >= 43  " +
+              "and reclamo_auto.estado_auto_unity = 'Pendiente Asegurado' ";
+
         alarmas = reclamosGeneral + " where reclamo_auto.estado_unity = 'Seguimiento' and  convert(date, reclamo_auto.fecha_visualizar,112) < getdate() order by reclamo_auto.usuario_unity, reclamo_auto.fecha_visualizar";
 
         if(!IsPostBack)
@@ -60,6 +65,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosEnSeguimiento : System
             llenado.llenarGrid(estadosAgrupados, GridReclamosSeguimiento);
             llenado.llenarGrid(reclamosComplicados, GridComplicados);
             llenado.llenarGrid(reclamosPrioritarios, GridPrioritarios);
+            llenado.llenarGrid(inactivos, GridInactivos);
             llenado.llenarGrid(alarmas, GridAlarmas);
             lblTotalAlarmas.Text = "   Total de reclamos: " + GridAlarmas.Rows.Count.ToString();
         }
@@ -95,6 +101,12 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosEnSeguimiento : System
     protected void GridReclamosEstado_SelectedIndexChanged(object sender, EventArgs e)
     {
         id = Convert.ToInt32(GridReclamosEstado.SelectedRow.Cells[1].Text);
+        Response.Redirect("/Modulos/MdReclamosUnity/wbFrmReclamosAutosSeguimiento.aspx?ID_reclamo=" + id, false);
+    }
+
+    protected void GridInactivos_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        id = Convert.ToInt32(GridInactivos.SelectedRow.Cells[1].Text);
         Response.Redirect("/Modulos/MdReclamosUnity/wbFrmReclamosAutosSeguimiento.aspx?ID_reclamo=" + id, false);
     }
 

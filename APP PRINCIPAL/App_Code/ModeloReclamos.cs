@@ -27,8 +27,8 @@ public partial class analistas
 {
     public analistas()
     {
-        this.reclamos_varios = new HashSet<reclamos_varios>();
         this.reclamo_auto = new HashSet<reclamo_auto>();
+        this.reclamos_varios = new HashSet<reclamos_varios>();
     }
 
     public int id { get; set; }
@@ -39,8 +39,8 @@ public partial class analistas
     public Nullable<bool> estado { get; set; }
     public string tipo { get; set; }
 
-    public virtual ICollection<reclamos_varios> reclamos_varios { get; set; }
     public virtual ICollection<reclamo_auto> reclamo_auto { get; set; }
+    public virtual ICollection<reclamos_varios> reclamos_varios { get; set; }
 }
 
 public partial class aseguradoras
@@ -230,10 +230,10 @@ public partial class cabina
     public cabina()
     {
         this.autorizaciones = new HashSet<autorizaciones>();
+        this.reclamo_auto = new HashSet<reclamo_auto>();
         this.reclamos_medicos = new HashSet<reclamos_medicos>();
         this.reclamos_varios = new HashSet<reclamos_varios>();
         this.usuario = new HashSet<usuario>();
-        this.reclamo_auto = new HashSet<reclamo_auto>();
     }
 
     public int id { get; set; }
@@ -244,10 +244,10 @@ public partial class cabina
 
     public virtual ICollection<autorizaciones> autorizaciones { get; set; }
     public virtual sucursal sucursal { get; set; }
+    public virtual ICollection<reclamo_auto> reclamo_auto { get; set; }
     public virtual ICollection<reclamos_medicos> reclamos_medicos { get; set; }
     public virtual ICollection<reclamos_varios> reclamos_varios { get; set; }
     public virtual ICollection<usuario> usuario { get; set; }
-    public virtual ICollection<reclamo_auto> reclamo_auto { get; set; }
 }
 
 public partial class cartas
@@ -449,6 +449,17 @@ public partial class documentos_medicos
     public string tipo { get; set; }
 }
 
+public partial class documentos_solicitados
+{
+    public int id { get; set; }
+    public Nullable<int> documento { get; set; }
+    public Nullable<int> id_reclamo { get; set; }
+    public string tipo { get; set; }
+    public Nullable<System.DateTime> fecha { get; set; }
+
+    public virtual tipo_documentos tipo_documentos { get; set; }
+}
+
 public partial class ejecutivos
 {
     public int id { get; set; }
@@ -504,17 +515,17 @@ public partial class estado
 {
     public estado()
     {
+        this.reclamo_auto = new HashSet<reclamo_auto>();
         this.reclamos_medicos = new HashSet<reclamos_medicos>();
         this.reclamos_varios = new HashSet<reclamos_varios>();
-        this.reclamo_auto = new HashSet<reclamo_auto>();
     }
 
     public int id { get; set; }
     public string nombre { get; set; }
 
+    public virtual ICollection<reclamo_auto> reclamo_auto { get; set; }
     public virtual ICollection<reclamos_medicos> reclamos_medicos { get; set; }
     public virtual ICollection<reclamos_varios> reclamos_varios { get; set; }
-    public virtual ICollection<reclamo_auto> reclamo_auto { get; set; }
 }
 
 public partial class estados_reclamos_unity
@@ -585,8 +596,8 @@ public partial class gestores
 {
     public gestores()
     {
-        this.reclamos_varios = new HashSet<reclamos_varios>();
         this.reclamo_auto = new HashSet<reclamo_auto>();
+        this.reclamos_varios = new HashSet<reclamos_varios>();
     }
 
     public short id { get; set; }
@@ -597,8 +608,8 @@ public partial class gestores
     public string usuario { get; set; }
     public string tipo { get; set; }
 
-    public virtual ICollection<reclamos_varios> reclamos_varios { get; set; }
     public virtual ICollection<reclamo_auto> reclamo_auto { get; set; }
+    public virtual ICollection<reclamos_varios> reclamos_varios { get; set; }
 }
 
 public partial class pais
@@ -684,8 +695,10 @@ public partial class reclamo_auto
     public Nullable<bool> alquiler_auto { get; set; }
     public Nullable<int> id_taller { get; set; }
     public Nullable<bool> cierre_interno { get; set; }
-    public Nullable<System.DateTime> fecha_visualizar { get; set; }
+    public string asignado_por { get; set; }
+    public Nullable<System.DateTime> fecha_asignacion { get; set; }
     public Nullable<System.DateTime> fecha_apertura_reclamo { get; set; }
+    public Nullable<System.DateTime> fecha_visualizar { get; set; }
     public Nullable<System.DateTime> fecha_cierre_reclamo { get; set; }
     public Nullable<bool> acs { get; set; }
     public string detalle_no_conforme { get; set; }
@@ -697,19 +710,18 @@ public partial class reclamo_auto
     public Nullable<bool> b_carta_declinado { get; set; }
     public Nullable<bool> b_carta_envio_cheque { get; set; }
     public string documentos { get; set; }
-    public string asignado_por { get; set; }
-    public Nullable<System.DateTime> fecha_asignacion { get; set; }
+    public Nullable<bool> robo { get; set; }
 
+    public virtual analistas analistas { get; set; }
+    public virtual auto_reclamo auto_reclamo { get; set; }
     public virtual ICollection<bitacora_autos_unity> bitacora_autos_unity { get; set; }
     public virtual ICollection<bitacora_estados_autos> bitacora_estados_autos { get; set; }
     public virtual ICollection<bitacora_reclamo_auto> bitacora_reclamo_auto { get; set; }
+    public virtual cabina cabina { get; set; }
     public virtual ICollection<coberturas_afectadas> coberturas_afectadas { get; set; }
     public virtual ICollection<comentarios_reclamos_autos> comentarios_reclamos_autos { get; set; }
     public virtual ICollection<contacto_auto> contacto_auto { get; set; }
     public virtual ICollection<detalle_pagos_reclamos_autos> detalle_pagos_reclamos_autos { get; set; }
-    public virtual analistas analistas { get; set; }
-    public virtual auto_reclamo auto_reclamo { get; set; }
-    public virtual cabina cabina { get; set; }
     public virtual estado estado { get; set; }
     public virtual gestores gestores { get; set; }
     public virtual usuario usuario { get; set; }
@@ -831,6 +843,8 @@ public partial class reclamos_varios
     public Nullable<bool> prioritario { get; set; }
     public Nullable<bool> complicado { get; set; }
     public Nullable<bool> compromiso_pago { get; set; }
+    public string asignado_por { get; set; }
+    public Nullable<System.DateTime> fecha_asignacion { get; set; }
     public Nullable<System.DateTime> fecha_visualizar { get; set; }
     public Nullable<System.DateTime> fecha_apertura_reclamo { get; set; }
     public Nullable<System.DateTime> fecha_cierre_reclamo { get; set; }
@@ -847,8 +861,6 @@ public partial class reclamos_varios
     public Nullable<bool> b_carta_envio_cheque { get; set; }
     public Nullable<decimal> reserva { get; set; }
     public string documentos { get; set; }
-    public string asignado_por { get; set; }
-    public Nullable<System.DateTime> fecha_asignacion { get; set; }
 
     public virtual analistas analistas { get; set; }
     public virtual ICollection<bitacora_estados_reclamos_varios> bitacora_estados_reclamos_varios { get; set; }
@@ -952,8 +964,8 @@ public partial class talleres
 {
     public talleres()
     {
-        this.reclamos_varios = new HashSet<reclamos_varios>();
         this.reclamo_auto = new HashSet<reclamo_auto>();
+        this.reclamos_varios = new HashSet<reclamos_varios>();
     }
 
     public int id { get; set; }
@@ -963,8 +975,25 @@ public partial class talleres
     public string correo { get; set; }
     public Nullable<bool> estado { get; set; }
 
-    public virtual ICollection<reclamos_varios> reclamos_varios { get; set; }
     public virtual ICollection<reclamo_auto> reclamo_auto { get; set; }
+    public virtual ICollection<reclamos_varios> reclamos_varios { get; set; }
+}
+
+public partial class tipo_documentos
+{
+    public tipo_documentos()
+    {
+        this.documentos_solicitados = new HashSet<documentos_solicitados>();
+    }
+
+    public int id { get; set; }
+    public string descripcion { get; set; }
+    public string tipo { get; set; }
+    public string usuario { get; set; }
+    public Nullable<System.DateTime> fecha { get; set; }
+    public Nullable<bool> estado { get; set; }
+
+    public virtual ICollection<documentos_solicitados> documentos_solicitados { get; set; }
 }
 
 public partial class usuario
@@ -972,9 +1001,9 @@ public partial class usuario
     public usuario()
     {
         this.autorizaciones = new HashSet<autorizaciones>();
+        this.reclamo_auto = new HashSet<reclamo_auto>();
         this.reclamos_medicos = new HashSet<reclamos_medicos>();
         this.reclamos_varios = new HashSet<reclamos_varios>();
-        this.reclamo_auto = new HashSet<reclamo_auto>();
     }
 
     public int id { get; set; }
@@ -994,9 +1023,9 @@ public partial class usuario
 
     public virtual ICollection<autorizaciones> autorizaciones { get; set; }
     public virtual cabina cabina1 { get; set; }
+    public virtual ICollection<reclamo_auto> reclamo_auto { get; set; }
     public virtual ICollection<reclamos_medicos> reclamos_medicos { get; set; }
     public virtual ICollection<reclamos_varios> reclamos_varios { get; set; }
-    public virtual ICollection<reclamo_auto> reclamo_auto { get; set; }
 }
 
 public partial class v_producto_no_conforme

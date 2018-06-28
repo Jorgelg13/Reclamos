@@ -18,16 +18,14 @@
             </div>
         </div>
     </asp:Panel>
-    <div>
         <%-- labels ocultos --%>
         <asp:Label ID="lblClaseOculto" Visible="false" runat="server"></asp:Label>
         <asp:Label ID="lblRamoMemo" Visible="false" runat="server"></asp:Label>
         <asp:Label ID="lblIdOculto" Style="display: none;" runat="server"></asp:Label>
         <asp:TextBox ID="txtTiempo" Style="display: none;" runat="server"></asp:TextBox>
         <asp:Label ID="lblDocumento" Style="display: none;" runat="server"></asp:Label>
-
+        <asp:Panel ID="panelPrincipal" runat="server">
         <div class="panel panel-info col-sm-12 col-md-9 col-lg-9">
-            <asp:Panel ID="panelPrincipal" runat="server">
                 <div class="panel-body">
                     <div class="img-float-right" style="float: right; padding-top: 15px;">
                         <asp:Label runat="server" ID="lblEstadoReclamo" Style="padding-right: 100px; font-size: 20px;">Estado: </asp:Label>
@@ -51,7 +49,7 @@
                         </li>
                     </ul>
                     <%------------------------------------------------ detalle de gastos medicos ----------------------------------------------%>
-                    <div class="tab-content" style="height: 700px; overflow-x: auto;">
+                    <div class="tab-content" style="height: 700px;">
                         <div role="tabpanel" class="tab-pane active" id="home">
                             <div class="panel panel-info col-sm-12 col-md-12 col-lg-12 panel-cuadrado">
                                 <div class="panel-heading panel-memos">
@@ -378,7 +376,7 @@
                                 </div>
                                 <br />
                                 <br />
-                                <asp:Label Style="font-size: 20px; padding-left: 130px;" runat="server"><b>Envío Aseguradora</b></asp:Label>
+                                <asp:Label ID="lblTituloMemoAseguradora" Style="font-size: 20px; padding-left: 130px;" runat="server"><b></b></asp:Label>
                                 <div class="form-inline" style="padding-top: 90px;">
                                     <table style="width: 85%">
                                         <tr>
@@ -611,7 +609,6 @@
                     </div>
                 </div>
         </div>
-    </div>
     <%------------------ botones laterales grandes  ------------------- --%>
     <div class="col-sm-12 col-md-3 col-lg-3">
         <div class="panel panel-info">
@@ -659,6 +656,9 @@
                         </div>
                          <div class="col-xs-3 col-md-3 col-sm-4 col-lg-3">
                             <a href="javascript:buscador()" title="Buscador de documentos" role="button"><i class="fa fa-search"></i></a>
+                        </div>
+                        <div class="col-xs-3 col-md-3 col-sm-4 col-lg-3">
+                            <a title="Subir archivo al repositorio" data-toggle="modal" role="button" data-target="#ModalAdjuntar"><i class="fa fa-cloud-upload"></i></a>
                         </div>
                         <div class="col-xs-3 col-md-3 col-sm-4 col-lg-3">
                             <asp:LinkButton ID="linkRegresar" role="button" OnClick="Regresar_Click" title="Regresar a reclamos en seguimiento" runat="server"><i class="fa fa-arrow-left"></i></asp:LinkButton>
@@ -760,6 +760,7 @@
             </div>
         </div>
     </div>
+</asp:Panel>
     <%------------------------ Confirmacion de cierre -------------------%>
     <div class="modal fade" id="CierreReclamo">
         <div class="modal-dialog modal-sm">
@@ -956,7 +957,6 @@
             </div>
         </div>
     </div>
-   </asp:Panel>
     <%-- ------------------------ modal para ingresar un nuevo comentario ------------------------------------------%>
     <div class="modal fade" id="ModalComentario" data-keyboard="false" data-backdrop="static">
         <div class="modal-dialog">
@@ -977,6 +977,25 @@
             </div>
         </div>
     </div>
+       <%--------------------------------- modal para adjuntar archivos --------------------------------%>
+        <div class="modal fade" id="ModalAdjuntar">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title"><b>Subir Archivos</b></h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <asp:FileUpload ID="SubirArchivo" runat="server" />
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-warning" data-dismiss="modal">Cerrar</button>
+                        <asp:Button ID="btnSubir" CssClass="btn btn-primary" runat="server" Text="Subir"  OnClick="btnSubir_Click"/>
+                    </div>
+                </div>
+            </div>
+        </div>
     <%----------------------  modal para mostrar el reclamo en una proxima fecha -----------------------%>
     <div class="modal fade" id="ModalProximaFecha">
         <div class="modal-dialog modal-sm">
@@ -1021,7 +1040,7 @@
                     <br />
                     <asp:TextBox ID="txtObservacionesNoConf" Style="width: 99%" autocomplete="off" class="form-control" TextMode="multiline" Columns="50" Rows="3" placeholder="Comentarios del producto no conforme" runat="server"></asp:TextBox>
                     <br />
-                    <asp:Label runat="server" ID="lblProductoNoConforme"></asp:Label>
+                    <asp:CheckBox runat="server" Text="Generar Memo" id="chGenerarMemoProductoNoConforme" AutoPostBack="true" OnCheckedChanged="chGenerarMemoProductoNoConforme_CheckedChanged"/>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-warning" data-dismiss="modal">Cerrar</button>

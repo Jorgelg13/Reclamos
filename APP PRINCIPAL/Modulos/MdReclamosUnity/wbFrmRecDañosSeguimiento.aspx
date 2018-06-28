@@ -108,7 +108,6 @@
                                     <ItemStyle HorizontalAlign="Left" Wrap="False" />
                                 </asp:CommandField>
                             </Columns>
-                            <EditRowStyle BackColor="#2461BF" />
                             <HeaderStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" HorizontalAlign="Center" Wrap="False" />
                             <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
                             <RowStyle BackColor="#EFF3FB" HorizontalAlign="Left" Wrap="False" />
@@ -125,7 +124,6 @@
                                     <ItemStyle HorizontalAlign="Left" Wrap="False" />
                                 </asp:CommandField>
                             </Columns>
-                            <EditRowStyle BackColor="#2461BF" />
                             <HeaderStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" HorizontalAlign="Center" Wrap="False" />
                             <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
                             <RowStyle BackColor="#EFF3FB" HorizontalAlign="Left" Wrap="False" />

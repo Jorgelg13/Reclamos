@@ -6,6 +6,8 @@ using System.Web.UI.WebControls;
 using System.Data;
 using System.Data.SqlClient;
 using System.Net.Mail;
+using System.Globalization;
+using System.IO;
 
 public partial class Modulos_MdReclamosUnity_wbFrmReclamosMedicosSeguimientos : System.Web.UI.Page
 {
@@ -130,7 +132,6 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosMedicosSeguimientos : 
             lblEstado.Text = "<b>Estado:</b>               " + reclamo.reg_reclamos_medicos.estado_poliza;
             lblVip.Text = "<b>VIP:</b>                     " + reclamo.reg_reclamos_medicos.vip;
             lblMoneda.Text = "<b>Moneda:</b>               " + reclamo.reg_reclamos_medicos.moneda;
-            lblProductoNoConforme.Text = "<b>Producto No Conforme Asignado: </b>" + reclamo.detalle_no_conforme;
             lblDocumento.Text = String.IsNullOrEmpty(reclamo.documento) ? "" : reclamo.documento.Replace("\\", "/");
 
             //si el reclamo esta cerrado colocar el estado en rojo
@@ -786,6 +787,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosMedicosSeguimientos : 
  
         if (CheckMemoAseguradora.Checked)
         {
+            lblTituloMemoAseguradora.Text = "Envío Aseguradora";
             lblCartaObservacion.Text = txtObservaciones.Text.Replace("\n", "<br/>");;
             lblCartaEjecutivo.Text = rec.reg_reclamos_medicos.ejecutivo;
             lblCartaEjecutivo2.Text = rec.reg_reclamos_medicos.ejecutivo;
@@ -1068,5 +1070,62 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosMedicosSeguimientos : 
         {
             Utils.ShowMessage(this.Page, "No se a podido actualizar el reclamo como no conforme.", "Error", "error");
         }
+    }
+
+    protected void btnSubir_Click(object sender, EventArgs e)
+    {
+        //String path = @"C:\Reclamos\GastosMedicos";
+        String path = @"E:\ReclamosScanner\files\GastosMedicos";
+        DateTimeFormatInfo formatoFecha = CultureInfo.CurrentCulture.DateTimeFormat;
+        DateTime fecha = DateTime.Now;
+        String RM;
+        String mes = formatoFecha.GetMonthName(fecha.Month);
+        String anio = fecha.Year.ToString();
+        String nombreArchivo = SubirArchivo.FileName;
+        var reclamo = DBReclamos.reclamos_medicos.Find(id);
+
+        try
+        {
+            if (SubirArchivo.HasFile)
+            {
+                if (String.IsNullOrEmpty(reclamo.documento))
+                {
+                    RM = anio + "\\" + mes + "\\" + "RM" + id;
+                }
+
+                else
+                {
+                    RM = reclamo.documento;
+                }
+
+                if (Directory.Exists(path + "\\" + RM))
+                {
+                    SubirArchivo.SaveAs(path + "\\" + RM + "\\" + nombreArchivo);
+                    Utils.ShowMessage(this.Page, "Archivo Subido con exito ", "Excelente..", "success");
+                    reclamo.documento = RM;
+                    DBReclamos.SaveChanges();
+                }
+
+                else
+                {
+                    DirectoryInfo di = Directory.CreateDirectory(path + "\\" + RM);
+                    SubirArchivo.SaveAs(path + "\\" + RM + "\\" + nombreArchivo);
+                    Utils.ShowMessage(this.Page, "Archivo Subido con exito ", "Excelente..", "success");
+                    reclamo.documento = RM;
+                    DBReclamos.SaveChanges();
+                }
+            }
+        }
+
+        catch (Exception ex)
+        {
+            Utils.ShowMessage(this.Page, "No se a podido subir el archivo " + ex, "Error..", "error");
+        }
+    }
+
+    protected void chGenerarMemoProductoNoConforme_CheckedChanged(object sender, EventArgs e)
+    {
+        lblTituloMemoAseguradora.Text = "Producto No Conforme";
+        lblCartaObservacion.Text = txtObservacionesNoConf.Text;
     }
 }

@@ -3,7 +3,6 @@ using System.Web;
 using System.Web.UI.WebControls;
 using System.Web.UI;
 
-
 public partial class Modulos_MdReclamosUnity_wbFrmRecDañosSeguimiento : System.Web.UI.Page
 {
     String userlogin = HttpContext.Current.User.Identity.Name; //usuario que esta en session
@@ -23,6 +22,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmRecDañosSeguimiento : System.
         selectGeneral = "SELECT " +
                 "dbo.reclamos_varios.id as ID," +
                 "gestores.nombre as Gestor," +
+                "dbo.reclamos_varios.estado_reclamo_unity as Estado," +
                 "dbo.reg_reclamo_varios.poliza as Poliza," +
                 "dbo.reg_reclamo_varios.asegurado as Asegurado," +
                 "dbo.reg_reclamo_varios.cliente as Cliente," +
@@ -123,25 +123,25 @@ public partial class Modulos_MdReclamosUnity_wbFrmRecDañosSeguimiento : System.
     protected void GridReclamosSeguimiento_RowDataBound(object sender, GridViewRowEventArgs e)
     {
         if (e.Row.RowType == DataControlRowType.DataRow)
-            if (Convert.ToDateTime(e.Row.Cells[14].Text) >= DateTime.Today)
+            if (Convert.ToDateTime(e.Row.Cells[15].Text) >= DateTime.Today)
             {
                 e.Row.Attributes.Add("style", "background-color: #8ace8e "); //verdes
             }
 
         if (e.Row.RowType == DataControlRowType.DataRow)
-            if (Convert.ToDateTime(e.Row.Cells[14].Text) < DateTime.Today)
+            if (Convert.ToDateTime(e.Row.Cells[15].Text) < DateTime.Today)
             {
                e.Row.Attributes.Add("style", "background-color: #f7c6be"); //rojos
             }
 
         if (e.Row.RowType == DataControlRowType.DataRow)
-            if (Convert.ToDateTime(e.Row.Cells[14].Text) == DateTime.Today.AddDays(2) || Convert.ToDateTime(e.Row.Cells[14].Text) == DateTime.Today.AddDays(1))
+            if (Convert.ToDateTime(e.Row.Cells[15].Text) == DateTime.Today.AddDays(2) || Convert.ToDateTime(e.Row.Cells[14].Text) == DateTime.Today.AddDays(1))
             {
                e.Row.Attributes.Add("style", "background-color: #f9f595"); //amarillos
             }
 
         if (e.Row.RowType == DataControlRowType.DataRow)
-            if (Convert.ToDateTime(e.Row.Cells[14].Text) == DateTime.Today)
+            if (Convert.ToDateTime(e.Row.Cells[15].Text) == DateTime.Today)
             {
                 e.Row.Attributes.Add("style", "background-color: #afcaf7"); //azules
             }

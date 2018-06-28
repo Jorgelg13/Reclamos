@@ -161,8 +161,7 @@ public partial class Modulos_MdReclamos_wbFrmReclamosAutos : System.Web.UI.Page
             }
             catch (Exception ex )
             {
-                //Response.Write(ex);
-               Utils.ShowMessage(this.Page, "A ocurrido un error inesperado intentelo de nuevo", "Error", "error");
+               Utils.ShowMessage(this.Page, "A ocurrido un error inesperado intentelo de nuevo" + ex.Message, "Error", "error");
             }
         }
     }

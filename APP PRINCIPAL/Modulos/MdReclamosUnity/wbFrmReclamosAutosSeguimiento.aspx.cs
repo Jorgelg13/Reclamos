@@ -25,8 +25,9 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosAutosSeguimiento : Sys
     bool complicado = false;
     bool compromiso_pago = false;
     bool cierre_interno = false;
+    bool robo = false;
     String estado = "Seguimiento";//esta variable es la que se utiliza para cambiar el estado a cerrado de un reclamo.
-    string idRecibido, comentarios, pagos, llamadas, coberturas, datosAccidente,estados_autos;
+    string idRecibido, comentarios, pagos, llamadas, coberturas, datosAccidente,estados_autos,documentos, doc_solicitados;
     String cartaDeclinacionReclamo, cartaEnvioCheque, cartaCierreInterno, mensaje;
     int id, dias; 
     //variables para calculos de pagos de reclamos
@@ -52,6 +53,8 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosAutosSeguimiento : Sys
         datosAccidente = Consultas.DATOS_ACCIDENTE_AUTOS(id);
         comentarios    = Consultas.COMENTARIOS_AUTOS(id);
         estados_autos  = Consultas.ESTADOS_AUTOS(id);
+        documentos     = Consultas.SOLICITUD_DOCUMENTOS("Autos");
+        doc_solicitados = Consultas.DOCUMENTOS_SOLICITADOS(id, "Autos");
 
         if (!IsPostBack)
         {
@@ -66,6 +69,8 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosAutosSeguimiento : Sys
             llenado.llenarGrid(datosAccidente, GridDatosAccidente);
             llenado.llenarGrid(comentarios, GridComentarios);
             llenado.llenarGrid(estados_autos, GridEstadosAuto);
+            llenado.llenarGrid(documentos, GridDocumentos);
+            llenado.llenarGrid(doc_solicitados, GridDocSeleccionados);
             tiempo();
         }
     }
@@ -140,6 +145,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosAutosSeguimiento : Sys
             ChecKAutoAlquiler.Checked  = reclamo.alquiler_auto.Value;
             CheckPerdida.Checked       = reclamo.perdida_total.Value;
             checkCierreInterno.Checked = reclamo.cierre_interno.Value;
+            CheckRobo.Checked          = reclamo.robo.Value;
 
             //informacion del taller asignado
             txtNombreTaller.Text      = reclamo.talleres.nombre;
@@ -255,7 +261,8 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosAutosSeguimiento : Sys
         if (ChecKAutoAlquiler.Checked) alquiler        = true;
         if (CheckPerdida.Checked) perdidaTotal         = true;
         if (checkCierreInterno.Checked) cierre_interno = true;
-        if (checkCerrarReclamo.Checked) estado = "Cerrado";
+        if (CheckRobo.Checked) robo                    = true;
+        if (checkCerrarReclamo.Checked) estado         = "Cerrado";
     }
 
     private void actualizar_fecha_seguimiento()
@@ -295,6 +302,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosAutosSeguimiento : Sys
             reclamo.prioritario       = prioritario;
             reclamo.compromiso_pago   = compromiso_pago;
             reclamo.perdida_total     = perdidaTotal;
+            reclamo.robo              = robo;
             reclamo.alquiler_auto     = alquiler;
             reclamo.id_gestor         = Convert.ToInt16(ddlGestor.SelectedValue);
             reclamo.id_analista       = Convert.ToInt16(ddlAnalista.SelectedValue);
@@ -362,18 +370,14 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosAutosSeguimiento : Sys
     {
         try
         {
-            String correoGestor = "select gst_correo from gestores where gst_nombre = '"+ txtEjecutivo.Text +"' ";
-            SqlDataAdapter da = new SqlDataAdapter(correoGestor, objeto.ObtenerConexionSeguro());
-            DataTable dt = new DataTable();
-            da.Fill(dt);
-            txtDestinatario.Text = dt.Rows[0][0].ToString();
+            var ejecutivo = DBReclamos.ejecutivos.Where(co => co.gestor == txtEjecutivo.Text).First();
+            txtDestinatario.Text = ejecutivo.correo;
         }
-        catch (Exception)
+        catch (Exception ex)
         {
 
         }
 
-        //mensaje personalizado de una perdida total.           
         txtMensaje.Text = Constantes.PERDIDA_TOTAL_AUTO(txtPlaca, txtMarca, txtModelo, lblNombreAsegurado, lblNumeroPoliza);
         txtAsunto.Text = "Perdida Total en vehiculo ";
     }
@@ -387,27 +391,76 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosAutosSeguimiento : Sys
         txtAsunto.Text = "";
     }
 
-    //ejecucion de metodos en evento del check de perdida total
-    protected void CheckPerdida_CheckedChanged(object sender, EventArgs e)
+    protected void ChecKAutoAlquiler_CheckedChanged(object sender, EventArgs e)
     {
-        if(CheckPerdida.Checked)
+        if (ChecKAutoAlquiler.Checked)
         {
-            envioPerdidaTotal();
+            alquilerVehiculo();
+            this.Page.ClientScript.RegisterStartupScript(this.Page.GetType(), "show_modal", "$('#ModalCorreo').modal('show');", addScriptTags: true);
         }
+
         else
         {
             vaciarFormulario();
         }
     }
 
-    //ejecucion del metodo alquiler de vehiculo del metodo alquilervehiculo
-    protected void ChecKAutoAlquiler_CheckedChanged(object sender, EventArgs e)
+    protected void checkCierreInterno_CheckedChanged(object sender, EventArgs e)
     {
-        if(ChecKAutoAlquiler.Checked)
+        if (checkCierreInterno.Checked)
         {
-            alquilerVehiculo();
+            ddlEstadoAuto.SelectedValue = "Inactivo";
         }
-        else 
+
+        else
+        {
+            vaciarFormulario();
+        }
+    }
+
+    protected void checkCerrarReclamo_CheckedChanged(object sender, EventArgs e)
+    {
+        if (checkCerrarReclamo.Checked)
+        {
+            ddlEstadoAuto.SelectedValue = "Cerrado";
+        }
+
+        else
+        {
+            vaciarFormulario();
+        }
+    }
+
+    protected void CheckRobo_CheckedChanged(object sender, EventArgs e)
+    {
+        if(CheckRobo.Checked)
+        {
+            try
+            {
+                var ejecutivo = DBReclamos.ejecutivos.Where(co => co.gestor == txtEjecutivo.Text).First();
+                txtDestinatario.Text = ejecutivo.correo;
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
+
+        this.Page.ClientScript.RegisterStartupScript(this.Page.GetType(), "show_modal", "$('#ModalCorreo').modal('show');", addScriptTags: true);
+        txtMensaje.Text = Constantes.ROBO_AUTO(txtPlaca, txtMarca, txtModelo, lblNombreAsegurado, lblNumeroPoliza);
+        txtAsunto.Text = "Robo de vehiculo ";
+    }
+
+    //ejecucion de metodos en evento del check de perdida total
+    protected void CheckPerdida_CheckedChanged(object sender, EventArgs e)
+    {
+        if(CheckPerdida.Checked)
+        {
+            envioPerdidaTotal();
+            this.Page.ClientScript.RegisterStartupScript(this.Page.GetType(), "show_modal", "$('#ModalCorreo').modal('show');", addScriptTags: true);
+        }
+
+        else
         {
             vaciarFormulario();
         }
@@ -603,10 +656,10 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosAutosSeguimiento : Sys
     public void DatosCarta()
     {
         var registro = DBReclamos.reclamo_auto.Find(id);
-        var contacto = DBReclamos.contacto_auto.Select(c => new { c.correo, c.telefono, c.contacto, c.id_reclamo_auto }).Where(contac => contac.id_reclamo_auto == id).First();
+        var contacto = DBReclamos.contacto_auto.ToList().Where(contac => contac.id_reclamo_auto == id).First();
         try
         {
-            var ejecutivo = DBReclamos.ejecutivos.Select(e => new { e.gestor, e.correo, e.codigo }).Where(ej => ej.codigo == registro.auto_reclamo.numero_gestor).First();
+            var ejecutivo = DBReclamos.ejecutivos.ToList().Where(ej => ej.codigo == registro.auto_reclamo.numero_gestor).First();
             lblCartaCorreoEjecutivo.Text = ejecutivo.correo;
         }
 
@@ -942,12 +995,15 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosAutosSeguimiento : Sys
     private void BitacoraReclamo()
     {
         var bitacora        = DBReclamos.reclamo_auto.Find(id);
+        BitNumReclamo.Text  = bitacora.num_reclamo.ToString();
         BitPoliza.Text      = bitacora.auto_reclamo.poliza;
         BitAsegurado.Text   = bitacora.auto_reclamo.asegurado;
         BitEjecutivo.Text   = bitacora.auto_reclamo.ejecutivo;
         BitAseguradora.Text = bitacora.auto_reclamo.aseguradora;
         BitContratante.Text = bitacora.auto_reclamo.contratante;
-        BitEstado.Text = bitacora.auto_reclamo.estado_poliza;
+        BitEstado.Text      = bitacora.auto_reclamo.estado_poliza;
+        bitAnalista.Text    = bitacora.analistas.nombre;
+        bitContacto.Text    = txtContacto.Text;
 
         BitPlaca.Text  = bitacora.auto_reclamo.placa;
         BitMarca.Text  = bitacora.auto_reclamo.marca;
@@ -993,11 +1049,6 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosAutosSeguimiento : Sys
         {
             Utils.ShowMessage(this.Page, "No se a podido actualizar el reclamo como no conforme. " + ex.Message, "Error", "error");
         }
-    }
-
-    protected void checkCerrarReclamo_CheckedChanged(object sender, EventArgs e)
-    {
-        ddlEstadoAuto.SelectedValue = "Cerrado";
     }
 
     //envio de sms manual
@@ -1144,8 +1195,8 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosAutosSeguimiento : Sys
 
     protected void btnSubir_Click(object sender, EventArgs e)
     {
-        String path = @"C:\Reclamos\ReclamosAutos";
-        //String path = @"E:\ReclamosScanner\files\ReclamosAutos";
+        //String path = @"C:\Reclamos\ReclamosAutos";
+        String path = @"E:\ReclamosScanner\files\ReclamosAutos";
         DateTimeFormatInfo formatoFecha = CultureInfo.CurrentCulture.DateTimeFormat;
         DateTime fecha = DateTime.Now;
         String RD;
@@ -1210,5 +1261,44 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosAutosSeguimiento : Sys
         {
             Utils.ShowMessage(this.Page, "Este Reclamo No pudo ser Reasignado" + ex.Message, "ERROR..", "error");
         }
+    }
+
+    private void seleccionarDocumentos()
+    {
+        String documento ="";
+        int idDocumento;
+        foreach (GridViewRow row in GridDocumentos.Rows)
+        {
+            idDocumento = Convert.ToInt32(row.Cells[1].Text);
+            CheckBox check = (CheckBox)row.FindControl("chElegir");
+            if (check.Checked)
+            {
+                try
+                {
+                    documentos_solicitados nuevo = new documentos_solicitados();
+                    var sec_registro = DBReclamos.pa_sec_documentos_solicitados();
+                    long? id_registro = sec_registro.Single();
+                    nuevo.id = Convert.ToInt32(id_registro);
+                    nuevo.documento = idDocumento;
+                    nuevo.id_reclamo = id;
+                    nuevo.tipo = "Autos";
+                    nuevo.fecha = DateTime.Now;
+                    DBReclamos.documentos_solicitados.Add(nuevo);
+                    DBReclamos.SaveChanges();
+                    documento +=  Server.HtmlDecode(row.Cells[2].Text) + Environment.NewLine;
+                }
+                catch (Exception ex)
+                {
+                    Utils.ShowMessage(this.Page, "No se agregar los documentos seleccionados" + ex.Message, "Excelente", "success");
+                }
+            }
+        }
+        llenado.llenarGrid(doc_solicitados,GridDocSeleccionados);
+        agregarComentario("Documentos Solicitados: \n\n" +documento);
+    }
+
+    protected void btnGuardarDocumentos_Click(object sender, EventArgs e)
+    {
+        seleccionarDocumentos();
     }
 }

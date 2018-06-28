@@ -132,7 +132,13 @@ public class Constantes
 
     public static string PERDIDA_TOTAL_AUTO(TextBox placa, TextBox marca, TextBox modelo, Label asegurado, Label poliza)
     {
-        return "Estimado Ejecutivo \n\n Por este medio hacemos de su conocimiento que recibimos notificación de pérdida total,  del vehículo Placa: " + placa.Text + ", " +
+        return "Estimado Ejecutivo: \n\n Por este medio hacemos de su conocimiento que recibimos notificación de pérdida total, del vehículo Placa: " + placa.Text + ", " +
+            "Marca: " + marca.Text + ", Modelo: " + modelo.Text + ", propiedad del asegurado " + asegurado.Text + " póliza " + poliza.Text + ". Saludos";
+    }
+
+    public static string ROBO_AUTO(TextBox placa, TextBox marca, TextBox modelo, Label asegurado, Label poliza)
+    {
+        return "Estimado Ejecutivo: \n\n Por este medio hacemos de su conocimiento que recibimos notificación de Robo, del vehículo Placa: " + placa.Text + ", " +
             "Marca: " + marca.Text + ", Modelo: " + modelo.Text + ",  propiedad del asegurado " + asegurado.Text + " póliza " + poliza.Text + " . Saludos";
     }
 

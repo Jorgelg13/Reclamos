@@ -167,11 +167,13 @@
                                 <br />
                                 <asp:CheckBox ID="CheckPerdida" runat="server" Text="Perdida Total" AutoPostBack="True" OnCheckedChanged="CheckPerdida_CheckedChanged" />
                                 <br />
+                                <asp:CheckBox ID="CheckRobo" runat="server" Text="Robo" AutoPostBack="True" OnCheckedChanged="CheckRobo_CheckedChanged"/>
+                                <br />
                                 <asp:CheckBox ID="ChecKAutoAlquiler" runat="server" Text="Alquiler De Auto" AutoPostBack="True" OnCheckedChanged="ChecKAutoAlquiler_CheckedChanged" />
                                 <br />
                                 <asp:CheckBox ID="checkCompromiso" runat="server" Text="Compromiso De Pago" />
                                 <br />
-                                <asp:CheckBox ID="checkCierreInterno" runat="server" Text="Cierre Interno" />
+                                <asp:CheckBox ID="checkCierreInterno" runat="server" Text="Cierre Interno" AutoPostBack="true" OnCheckedChanged="checkCierreInterno_CheckedChanged"/>
                                 <br />
                                 <asp:CheckBox ID="checkCerrarReclamo" runat="server" Text="Cerrar Reclamo" AutoPostBack="True" OnCheckedChanged="checkCerrarReclamo_CheckedChanged" />
                             </div>
@@ -224,7 +226,7 @@
                                 <a title="Agregar un comentario" data-toggle="modal" role="button" data-target="#ModalComentario"><i class="fa fa-pencil-square-o"></i></a>
                             </div>
                             <div class="col-xs-3 col-md-2 col-sm-2 col-lg-1">
-                                <a data-toggle="modal" title="Enviar un correo electronico" role="button" data-target="#exampleModal"><i class="fa fa-envelope-o"></i></a>
+                                <a data-toggle="modal" title="Enviar un correo electronico" role="button" data-target="#ModalCorreo"><i class="fa fa-envelope-o"></i></a>
                             </div>
                             <div class="col-xs-3 col-md-2 col-sm-2 col-lg-1">
                                 <a title="Configurar Proxima fecha a mostrar" data-toggle="modal" role="button" data-target="#ModalProximaFecha" style="text-align: center;"><i class="fa fa-calendar-check-o"></i></a>
@@ -264,6 +266,12 @@
                             </div>
                             <div class="col-xs-3 col-md-2 col-sm-2 col-lg-1">
                                 <a href="javascript:buscador()" title="Buscador de documentos" role="button"><i class="fa fa-search"></i></a>
+                            </div>
+                            <div class="col-xs-3 col-md-2 col-sm-2 col-lg-1">
+                                <a title="Solicitud de documentos" id="solicitudDoc" data-toggle="modal" role="button" data-target="#SolicitudDocumentos"><i class="fa fa-list-ul"></i></a>
+                            </div>
+                             <div class="col-xs-3 col-md-2 col-sm-2 col-lg-1">
+                                <a title="Ver Documentos Solicitados" id="DocSolicitados" data-toggle="modal" role="button" data-target="#SolicitudDocumentos"><i class="fa fa-files-o"></i></a>
                             </div>
                             <div class="col-xs-3 col-md-2 col-sm-2 col-lg-1">
                                 <asp:LinkButton ID="linkRegresar" OnClick="linkRegresar_Click" title="Regresar a reclamos en seguimiento" runat="server" Style="text-align: center;"><i class="fa fa-arrow-left"></i></asp:LinkButton>
@@ -367,7 +375,7 @@
             </div>
         </div>
         <%--------------------------  modal para enviar correos electronicos a los clientes ---------------------------------%>
-        <div class="modal fade" id="exampleModal" data-keyboard="false" data-backdrop="static">
+        <div class="modal fade" id="ModalCorreo" data-keyboard="false" data-backdrop="static">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -605,6 +613,47 @@
                 </div>
             </div>
         </div>
+           </div>
+        <%-------------------- Solicitud de documentos --------------------%>
+        <div class="modal fade" id="SolicitudDocumentos">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title"><b>Solicitud de documentos</b></h4>
+                    </div>
+                    <div class="modal-body">
+                        <div id="gvDocumentos" style="display:none" class="scrolling-table-container">
+                            <asp:GridView ID="GridDocumentos" CssClass="table bs-table table-responsive table-hover" runat="server" AutoGenerateColumns="true" ForeColor="#333333" GridLines="None">
+                                <Columns>
+                                    <asp:TemplateField HeaderText="Seleccionar">
+                                        <ItemTemplate>
+                                            <asp:CheckBox ID="chElegir" runat="server" />
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                </Columns>
+                                <AlternatingRowStyle BackColor="White" />
+                                <HeaderStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" HorizontalAlign="Center" Wrap="False" />
+                                <RowStyle BackColor="#EFF3FB" HorizontalAlign="Left" />
+                            </asp:GridView>
+                        </div>
+                         <div id="gvDocSolicitados" style="display: none" class="scrolling-table-container">
+                            <asp:GridView ID="GridDocSeleccionados" CssClass="table bs-table table-responsive table-hover" runat="server" AutoGenerateColumns="true" ForeColor="#333333" GridLines="None" CellPadding="4">
+                                <AlternatingRowStyle BackColor="White" />
+                                <HeaderStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" HorizontalAlign="Center" Wrap="False" />
+                                <RowStyle BackColor="#EFF3FB" HorizontalAlign="Left" />
+                            </asp:GridView>
+                        </div>
+                    </div>
+                    <div class="modal-footer form-inline">
+                        <input type="checkbox" id="ChMemoCliente"> Memo Cliente
+                        <input type="checkbox" id="ChMemoAnalista"> Memo Aseguradora
+                        <button type="button" class="btn btn-warning" data-dismiss="modal">Cerrar</button>
+                        <button type="button" id="ImprimirSolicitud" class="btn btn-primary">Imprimir</button>
+                        <asp:Button CssClass="btn btn-primary"  runat="server" OnClick="btnGuardarDocumentos_Click" ID="btnGuardarDocumentos" Text="Guardar" />
+                    </div>
+                </div>
+            </div>
+        </div>
         <%--------------------------------- modal para mostrar seleccion para producto no conforme --------------------------------%>
         <div class="modal fade" id="ModalNoconforme">
             <div class="modal-dialog">
@@ -824,7 +873,7 @@
                 </div>
             </div>
         </div>
-        <%------------------------------------------------ imprimir bitacora de seguimiento del reclamo ------------------------------------------%>
+ <%------------------------------------------------ imprimir bitacora de seguimiento del reclamo ------------------------------------------%>
         <div id="imprimirBitacora" style="display: none" class="form-inline">
             <br />
             <div class="img-float-right" style="float: right; padding-top: 50px;">
@@ -835,67 +884,70 @@
                 <p>PBX: 2326-3700, 2386-3700</p>
                 <p>www.unitypromotores.com</p>
             </div>
-            <asp:Label Style="font-size: 20px; padding-left: 130px;" runat="server"><b>Bitacora del reclamo</b></asp:Label>
+            <asp:Label id="TituloMemo" Style="font-size: 20px; padding-left: 110px;" runat="server">Bitacora del reclamo</asp:Label>
             <div class="form-inline" style="padding-top: 90px;">
                 <table style="width: 100%">
                     <tr>
+                        <td>Departamento:</td>
+                        <td>Reclamos Autos</td>
+                    </tr>
+                    <tr>
+                        <td id="MemoPara" style="display:none">Para: </td>
+                        <td id="analista" style="display:none"><asp:Label ID="bitAnalista" runat="server"></asp:Label></td>
+                        <td id="contacto" style="display:none"><asp:Label ID="bitContacto" runat="server"></asp:Label></td>
+                    </tr>
+                    <tr>
+                        <td id="NReclamo">Numero Reclamo:</td>
+                        <td><asp:Label ID="BitNumReclamo" runat="server"></asp:Label></td>
+                    </tr>
+                    <tr>
                         <td>Poliza:</td>
-                        <td>
-                            <asp:Label ID="BitPoliza" runat="server"></asp:Label></td>
+                        <td><asp:Label ID="BitPoliza" runat="server"></asp:Label></td>
                         <td>Placa</td>
-                        <td>
-                            <asp:Label ID="BitPlaca" runat="server"></asp:Label></td>
+                        <td><asp:Label ID="BitPlaca" runat="server"></asp:Label></td>
                     </tr>
                     <tr>
                         <td>Asegurado:</td>
-                        <td>
-                            <asp:Label ID="BitAsegurado" runat="server"></asp:Label></td>
+                        <td><asp:Label ID="BitAsegurado" runat="server"></asp:Label></td>
                         <td>Marca</td>
-                        <td>
-                            <asp:Label ID="BitMarca" runat="server"></asp:Label></td>
+                        <td><asp:Label ID="BitMarca" runat="server"></asp:Label></td>
                     </tr>
-                    <tr>
+                    <tr id="ocultarEjecutivo">
                         <td>Ejecutivo:</td>
-                        <td>
-                            <asp:Label ID="BitEjecutivo" runat="server"></asp:Label></td>
+                        <td><asp:Label ID="BitEjecutivo" runat="server"></asp:Label></td>
                         <td>Color</td>
-                        <td>
-                            <asp:Label ID="BitColor" runat="server"></asp:Label></td>
+                        <td><asp:Label ID="BitColor" runat="server"></asp:Label></td>
                     </tr>
                     <tr>
                         <td>Aseguradora:</td>
-                        <td>
-                            <asp:Label ID="BitAseguradora" runat="server"></asp:Label></td>
+                        <td><asp:Label ID="BitAseguradora" runat="server"></asp:Label></td>
                         <td>Modelo</td>
-                        <td>
-                            <asp:Label ID="BitModelo" runat="server"></asp:Label></td>
+                        <td><asp:Label ID="BitModelo" runat="server"></asp:Label></td>
                     </tr>
                     <tr>
                         <td>Contratante:</td>
-                        <td>
-                            <asp:Label ID="BitContratante" runat="server"></asp:Label></td>
+                        <td><asp:Label ID="BitContratante" runat="server"></asp:Label></td>
                         <td>Chasis</td>
-                        <td>
-                            <asp:Label ID="BitChasis" runat="server"></asp:Label></td>
+                        <td><asp:Label ID="BitChasis" runat="server"></asp:Label></td>
                     </tr>
-                    <tr>
+                    <tr id="EstadoPoliza">
                         <td>Estado:</td>
-                        <td>
-                            <asp:Label ID="BitEstado" runat="server"></asp:Label></td>
+                        <td><asp:Label ID="BitEstado" runat="server"></asp:Label></td>
                         <td>Motor</td>
-                        <td>
-                            <asp:Label ID="BitMotor" runat="server"></asp:Label></td>
+                        <td><asp:Label ID="BitMotor" runat="server"></asp:Label></td>
                     </tr>
                 </table>
                 <p>______________________________________________________________________________________________________________</p>
-                <p><b>Detalle llamadas en cabina:</b></p>
-                <asp:GridView ID="Bitllamadas" CssClass="table detalle" runat="server" CellPadding="4" ForeColor="#333333" GridLines="None" AutoGenerateColumns="True" OnRowDataBound="GridComentarios_RowDataBound">
-                </asp:GridView>
-                <br />
-                <p>______________________________________________________________________________________________________________</p>
-                <p><b>Detalle De Seguimiento en Unity:</b></p>
-                <asp:GridView ID="BitSeguimiento" CssClass="table detalle" runat="server" CellPadding="4" ForeColor="#333333" GridLines="None" AutoGenerateColumns="True" OnRowDataBound="GridComentarios_RowDataBound">
-                </asp:GridView>
+                <div id="bitacora">
+                    <p><b>Detalle llamadas en cabina:</b></p>
+                    <asp:GridView ID="Bitllamadas" CssClass="table detalle" runat="server" CellPadding="4" ForeColor="#333333" GridLines="None" AutoGenerateColumns="True" OnRowDataBound="GridComentarios_RowDataBound">
+                    </asp:GridView>
+                    <br />
+                    <p>______________________________________________________________________________________________________________</p>
+                    <p><b>Detalle De Seguimiento en Unity:</b></p>
+                    <asp:GridView ID="BitSeguimiento" CssClass="table detalle" runat="server" CellPadding="4" ForeColor="#333333" GridLines="None" AutoGenerateColumns="True" OnRowDataBound="GridComentarios_RowDataBound">
+                    </asp:GridView>
+                </div>
                 <br />
                 <p>Agradeciendo su pronta atención a la presente, quedamos de ustedes.</p>
                 <br />
@@ -932,7 +984,6 @@
                 $('#<%=txtContenidoCarta.ClientID%>').val($('.note-editable').html());
             });
 
-
             var clock;
             var tiempo = $('#ContentPlaceHolder1_txtTiempo').val();
             var tiempo2 = parseInt(tiempo)
@@ -967,7 +1018,7 @@
             document.body.innerHTML = contenido;
             window.print();
             document.body.innerHTML = contenidoOriginal;
-            window.location.reload(true);
+            window.location.href = "/Modulos/MdReclamosUnity/wbFrmReclamosAutosSeguimiento.aspx?ID_reclamo=" + $('#ContentPlaceHolder1_lblID').text();
         }
     </script>
     <script>
@@ -987,6 +1038,44 @@
             var ancho = $(window).width() - 700;
             window.open('http://52.34.115.100:5556/explorador.html#files%2FReclamosAutos/' + ruta, "ventana1", "width=" + ancho + ",height=" + alto + ",scrollbars=NO")
         }
+    </script>
+    <script>
+        $('#ImprimirSolicitud').on('click', function (event) {
+
+            if ($('#ChMemoCliente')[0].checked) {
+                $("#MemoPara").css("display", "");
+                $("#contacto").css("display", "");
+                $("#analista").css("display", "none");
+                EstadoPoliza
+            }
+
+            else if ($('#ChMemoAnalista')[0].checked) {
+                $("#MemoPara").css("display", "");
+                $("#contacto").css("display", "none");
+                $("#analista").css("display", "");
+            }
+            
+            $("#EstadoPoliza").css("display", "none");
+            $('#ContentPlaceHolder1_TituloMemo').text("Solicitud de Documentos");
+            $('#bitacora').html($('#gvDocSolicitados').html());
+            printDiv('imprimirBitacora');
+        });
+
+        $('#DocSolicitados').on('click', function (event) {
+            $("#gvDocumentos").css("display", "none");
+            $("#ContentPlaceHolder1_btnGuardarDocumentos").css("display", "none");
+            $("#ocultarEjecutivo").css("display", "none");
+            $("#ImprimirSolicitud").css("display", "");
+            $("#gvDocSolicitados").css("display", "");
+        });
+        
+        $('#solicitudDoc').on('click', function (event) {
+            $("#gvDocumentos").css("display", "");
+            $("#ocultarEjecutivo").css("display", "");
+            $("#ContentPlaceHolder1_btnGuardarDocumentos").css("display", "");
+            $("#ImprimirSolicitud").css("display", "none");
+            $("#gvDocSolicitados").css("display", "none");
+        });
     </script>
 </asp:Content>
 

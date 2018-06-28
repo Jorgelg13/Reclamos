@@ -120,7 +120,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesAutos : System.Web.UI.
             }
             string listado;
             
-            listado = "Select distinct reclamo_auto.id, ";
+            listado = "Select reclamo_auto.id, ";
             for (int i = 0; i < checkCampos.Items.Count; i++)
             {
                 if (checkCampos.Items[i].Selected)
@@ -179,7 +179,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesAutos : System.Web.UI.
     //link para salir y ponerse en los reclamos en seguimiento
     protected void linkSalir_Click(object sender, EventArgs e)
     {
-        Response.Redirect("/Modulos/MdReclamosUnity/wbFrmReclamosEnSeguimiento.aspx");
+        Response.Redirect("/Modulos/MdReclamosUnity/wbFrmReclamosEnSeguimiento.aspx", false);
     }
 
     public override void VerifyRenderingInServerForm(Control control)

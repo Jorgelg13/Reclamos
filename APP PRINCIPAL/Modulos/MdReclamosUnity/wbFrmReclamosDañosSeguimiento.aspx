@@ -242,6 +242,12 @@
                             <div class="col-xs-3 col-md-2 col-sm-2 col-lg-1">
                                 <a title="Subir archivo al repositorio" data-toggle="modal" role="button" data-target="#ModalAdjuntar"><i class="fa fa-cloud-upload"></i></a>
                             </div>
+                               <div class="col-xs-3 col-md-2 col-sm-2 col-lg-1">
+                                <a title="Solicitud de documentos" id="solicitudDoc" data-toggle="modal" role="button" data-target="#SolicitudDocumentos"><i class="fa fa-list-ul"></i></a>
+                            </div>
+                             <div class="col-xs-3 col-md-2 col-sm-2 col-lg-1">
+                                <a title="Ver Documentos Solicitados" id="DocSolicitados" data-toggle="modal" role="button" data-target="#SolicitudDocumentos"><i class="fa fa-files-o"></i></a>
+                            </div>
                             <div class="col-xs-3 col-md-2 col-sm-2 col-lg-1">
                                 <asp:LinkButton ID="linkRegresar" OnClick="linkSalir_Click" title="Regresar a reclamos en seguimiento" runat="server" Style="text-align: center;"><i class="fa fa-arrow-left"></i></asp:LinkButton>
                             </div>
@@ -848,6 +854,52 @@
                         </div>
                     </div>
                 </div>
+                <%-------------------- Solicitud de documentos --------------------%>
+                <div class="modal fade" id="SolicitudDocumentos">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title"><b>Solicitud de documentos</b></h4>
+                            </div>
+                            <div class="modal-body">
+                                <div id="gvDocumentos" style="display: none" class="scrolling-table-container">
+                                    <asp:GridView ID="GridDocumentos" CssClass="table bs-table table-responsive table-hover" runat="server" AutoGenerateColumns="true" ForeColor="#333333" GridLines="None">
+                                        <Columns>
+                                            <asp:TemplateField HeaderText="Seleccionar">
+                                                <ItemTemplate>
+                                                    <asp:CheckBox ID="chElegir" runat="server" />
+                                                </ItemTemplate>
+                                            </asp:TemplateField>
+                                        </Columns>
+                                        <AlternatingRowStyle BackColor="White" />
+                                        <HeaderStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" HorizontalAlign="Center" Wrap="False" />
+                                        <RowStyle BackColor="#EFF3FB" HorizontalAlign="Left" />
+                                    </asp:GridView>
+                                </div>
+                                <div id="gvDocSolicitados" style="display: none">
+                                    <div id="SaludoDocumentos" style="display: none; text-align: justify">
+                                        <br />
+                                        <p><b>Estimado Asegurado:</b></p>
+                                        <p>Un gusto saludarlo,  le informo que me ha sido asignada su reclamación para la presentación de documentos, así como seguimiento y finalización del mismo.  </p>
+                                        <p>De momento estamos a la espera de recibir la solicitud formal de documentos por parte del ajustador, sin embargo los documentos que normalmente se requieren en este tipo de siniestro son los siguientes: </p>
+                                    </div>
+                                    <br />
+                                    <asp:GridView ID="GridDocSeleccionados" CssClass="table detalle" runat="server" AutoGenerateColumns="true" ForeColor="#333333" GridLines="None" CellPadding="4">
+                                        <AlternatingRowStyle BackColor="White" />
+                                        <HeaderStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" HorizontalAlign="Center" Wrap="False" />
+                                        <RowStyle BackColor="#EFF3FB" HorizontalAlign="Left" />
+                                    </asp:GridView>
+                                    <asp:TextBox ID="txtSolicitudDocumentos" Style="width: 100%; border: 0px; text-align: justify;" autocomplete="off" CssClass="form-control" TextMode="multiline" Columns="50" Rows="30" runat="server" placeholder="Observaciones" />
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-warning" data-dismiss="modal">Cerrar</button>
+                                <button type="button" id="ImprimirSolicitud" class="btn btn-primary">Imprimir</button>
+                                <asp:Button CssClass="btn btn-primary" runat="server" ID="btnGuardarDocumentos" OnClick="btnGuardarDocumentos_Click" Text="Guardar" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <%------------------------------------------------ imprimir bitacora de seguimiento del reclamo ------------------------------------------%>
                 <div id="imprimirBitacora" style="display: none" class="form-inline">
                     <br />
@@ -860,56 +912,53 @@
                         <p>www.unitypromotores.com</p>
                     </div>
                     <br />
-                    <asp:Label Style="font-size: 20px; padding-left: 130px;" runat="server"><b>Bitacora del reclamo</b></asp:Label>
+                    <asp:Label  id="TituloMemo" Style="font-size: 20px; padding-left: 100px;" runat="server"><b>Bitacora del reclamo</b></asp:Label>
                     <div class="form-inline" style="padding-top: 90px;">
                         <table style="width: 100%">
                             <tr>
+                                <td>Departamento:</td>
+                                <td>Reclamos Daños</td>
+                            </tr>
+                             <tr>
+                                <td>Asesor Reclamo:</td>
+                                <td><asp:Label runat="server" ID ="bitAsesor"></asp:Label></td>
+                            </tr>
+                            <tr>
                                 <td>Poliza:</td>
-                                <td>
-                                    <asp:Label ID="BitPoliza" runat="server"></asp:Label></td>
+                                <td><asp:Label ID="BitPoliza" runat="server"></asp:Label></td>
                                 <td>ID</td>
-                                <td>
-                                    <asp:Label ID="BitId" runat="server"></asp:Label></td>
+                                <td><asp:Label ID="BitId" runat="server"></asp:Label></td>
                             </tr>
                             <tr>
                                 <td>Asegurado:</td>
-                                <td>
-                                    <asp:Label ID="BitAsegurado" runat="server"></asp:Label></td>
+                                <td><asp:Label ID="BitAsegurado" runat="server"></asp:Label></td>
                                 <td>Reportante</td>
-                                <td>
-                                    <asp:Label ID="BitReportante" runat="server"></asp:Label></td>
+                                <td><asp:Label ID="BitReportante" runat="server"></asp:Label></td>
                             </tr>
                             <tr>
                                 <td>Ejecutivo:</td>
-                                <td>
-                                    <asp:Label ID="BitEjecutivo" runat="server"></asp:Label></td>
+                                <td><asp:Label ID="BitEjecutivo" runat="server"></asp:Label></td>
                                 <td>Fecha Siniestro</td>
-                                <td>
-                                    <asp:Label ID="BitFecha" runat="server"></asp:Label></td>
+                                <td><asp:Label ID="BitFecha" runat="server"></asp:Label></td>
                             </tr>
                             <tr>
                                 <td>Aseguradora:</td>
-                                <td>
-                                    <asp:Label ID="BitAseguradora" runat="server"></asp:Label></td>
+                                <td><asp:Label ID="BitAseguradora" runat="server"></asp:Label></td>
                                 <td>No. Reclamo</td>
-                                <td>
-                                    <asp:Label ID="BitNumeroReclamo" runat="server"></asp:Label></td>
-                            </tr>
-                            <tr>
-                                <td>Estado:</td>
-                                <td>
-                                    <asp:Label ID="BitEstado" runat="server"></asp:Label></td>
+                                <td><asp:Label ID="BitNumeroReclamo" runat="server"></asp:Label></td>
                             </tr>
                         </table>
                         <p>______________________________________________________________________________________________________________</p>
-                        <p><b>Detalle llamadas en cabina:</b></p>
-                        <asp:GridView ID="Bitllamadas" CssClass="table detalle" runat="server" CellPadding="4" ForeColor="#333333" GridLines="None" AutoGenerateColumns="True" OnRowDataBound="GridComentarios_RowDataBound">
-                        </asp:GridView>
-                        <br />
-                        <p>______________________________________________________________________________________________________________</p>
-                        <p><b>Detalle De Seguimiento en Unity:</b></p>
-                        <asp:GridView ID="BitSeguimiento" CssClass="table detalle" runat="server" CellPadding="4" ForeColor="#333333" GridLines="None" AutoGenerateColumns="True" OnRowDataBound="GridComentarios_RowDataBound">
-                        </asp:GridView>
+                        <div id="bitacora">
+                            <p><b>Detalle llamadas en cabina:</b></p>
+                            <asp:GridView ID="Bitllamadas" CssClass="table detalle" runat="server" CellPadding="4" ForeColor="#333333" GridLines="None" AutoGenerateColumns="True" OnRowDataBound="GridComentarios_RowDataBound">
+                            </asp:GridView>
+                            <br />
+                            <p>______________________________________________________________________________________________________________</p>
+                            <p><b>Detalle De Seguimiento en Unity:</b></p>
+                            <asp:GridView ID="BitSeguimiento" CssClass="table detalle" runat="server" CellPadding="4" ForeColor="#333333" GridLines="None" AutoGenerateColumns="True" OnRowDataBound="GridComentarios_RowDataBound">
+                            </asp:GridView>
+                        </div>
                         <br />
                         <p>Agradeciendo su pronta atención a la presente, quedamos de ustedes.</p>
                         <br />
@@ -985,12 +1034,34 @@
             document.body.innerHTML = contenido;
             window.print();
             document.body.innerHTML = contenidoOriginal;
-            window.location.reload(true);
+           window.location.href = "/Modulos/MdReclamosUnity/wbFrmReclamosDañosSeguimiento.aspx?ID_reclamo=" + $('#ContentPlaceHolder1_lblID').text();
         }
     </script>
     <script>
         $('#<%=txtTelefono.ClientID%>').on('input', function () {
             this.value = this.value.replace(/[^0-9]/g, '');
+        });
+    </script>
+    <script>
+        $('#ImprimirSolicitud').on('click', function (event) {
+            $("#SaludoDocumentos").attr("style", "");
+            $('#ContentPlaceHolder1_TituloMemo').text("Solicitud de Documentos");
+            $('#bitacora').html($('#gvDocSolicitados').html());
+            printDiv('imprimirBitacora');
+        });
+
+        $('#DocSolicitados').on('click', function (event) {
+            $("#gvDocumentos").css("display", "none");
+            $("#ContentPlaceHolder1_btnGuardarDocumentos").css("display", "none");
+            $("#ImprimirSolicitud").css("display", "");
+            $("#gvDocSolicitados").css("display", "");
+        });
+        
+        $('#solicitudDoc').on('click', function (event) {
+            $("#gvDocumentos").css("display", "");
+            $("#ContentPlaceHolder1_btnGuardarDocumentos").css("display", "");
+            $("#ImprimirSolicitud").css("display", "none");
+            $("#gvDocSolicitados").css("display", "none");
         });
     </script>
     <script>

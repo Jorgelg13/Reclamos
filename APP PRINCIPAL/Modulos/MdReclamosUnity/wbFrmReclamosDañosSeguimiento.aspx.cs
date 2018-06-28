@@ -22,7 +22,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosDañosSeguimiento : Sy
     String estado = "Seguimiento"; //esta variable es la que se utiliza para cambiar el estado a cerrado de un reclamo.
     String poliza;
     String idRecibido, comentarios, pagos, llamadas, coberturas, datosSiniestro, estados, liquidaciones;
-    String estadoReclamo, cartaEnvioCheque, cartaCierreInterno, cartaDeclinado;
+    String estadoReclamo, cartaEnvioCheque, cartaCierreInterno, cartaDeclinado, documentos, doc_solicitados;
     int id, dias, idPago = 0;
     //variables para calculos de pagos de reclamos
     Double iva, monto_reclamado, mejora_tecnologica, tiempo_uso, infra_seguro, perdida_final_ajustada, perdidaConDeducible, deducible, valor_indemnizado, timbres, total;
@@ -35,16 +35,19 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosDañosSeguimiento : Sy
         Session.Add("id_RD", id.ToString());
         var reg = DBReclamos.reclamos_varios.Find(id);
 
-        cartaEnvioCheque = Cartas.CARTA_ENVIO_CHEQUE_DANOS(reg);
+        cartaEnvioCheque   = Cartas.CARTA_ENVIO_CHEQUE_DANOS(reg);
         cartaCierreInterno = Cartas.CARTA_CIERRE_INTERNO_DANOS(reg);
-        cartaDeclinado = Cartas.CARTA_DECLINADO_DANOS(reg);
+        cartaDeclinado     = Cartas.CARTA_DECLINADO_DANOS(reg);
+        txtSolicitudDocumentos.Text = Cartas.SOLICITUD_DOCUMENTOS();
 
-        datosSiniestro = Consultas.DATOS_SINIESTRO(id);
-        coberturas = Consultas.COBERTURAS(id);
-        llamadas = Consultas.LLAMADAS(id);
-        comentarios = Consultas.COMENTARIOS(id);
-        estados = Consultas.ESTADOS(id);
-        liquidaciones = Consultas.LIQUIDACIONES(id);
+        datosSiniestro     = Consultas.DATOS_SINIESTRO(id);
+        coberturas         = Consultas.COBERTURAS(id);
+        llamadas           = Consultas.LLAMADAS(id);
+        comentarios        = Consultas.COMENTARIOS(id);
+        estados            = Consultas.ESTADOS(id);
+        liquidaciones      = Consultas.LIQUIDACIONES(id);
+        documentos         = Consultas.SOLICITUD_DOCUMENTOS("Daños");
+        doc_solicitados    = Consultas.DOCUMENTOS_SOLICITADOS(id, "Daños");
 
         if (!IsPostBack)
         {
@@ -60,6 +63,8 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosDañosSeguimiento : Sy
             llenado.llenarGrid(comentarios, GridComentarios);
             llenado.llenarGrid(estados, GridEstados);
             llenado.llenarGrid(liquidaciones, GridLiquidaciones);
+            llenado.llenarGrid(documentos, GridDocumentos);
+            llenado.llenarGrid(doc_solicitados, GridDocSeleccionados);
             Tiempo();
             BitacoraReclamo();
             btnActualizarPagos.Enabled = false;
@@ -663,11 +668,11 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosDañosSeguimiento : Sy
     private void BitacoraReclamo()
     {
         var bitacora          = DBReclamos.reclamos_varios.Find(id);
+        bitAsesor.Text        = bitacora.gestores.nombre;
         BitPoliza.Text        = bitacora.reg_reclamo_varios.poliza;
         BitAsegurado.Text     = bitacora.reg_reclamo_varios.asegurado;
         BitEjecutivo.Text     = bitacora.reg_reclamo_varios.ejecutivo;
         BitAseguradora.Text   = bitacora.reg_reclamo_varios.aseguradora;
-        BitEstado.Text        = bitacora.reg_reclamo_varios.status;
         BitId.Text            = bitacora.id.ToString();
         BitReportante.Text    = bitacora.reportante;
         BitFecha.Text         = Convert.ToDateTime(bitacora.fecha).ToString("dd/MM/yyyy");
@@ -975,5 +980,44 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosDañosSeguimiento : Sy
         {
             Utils.ShowMessage(this.Page, "Este Reclamo No pudo ser Reasignado" + ex.Message, "ERROR..", "error");
         }
+    }
+
+    private void seleccionarDocumentos()
+    {
+        String documento = "";
+        int idDocumento;
+        foreach (GridViewRow row in GridDocumentos.Rows)
+        {
+            idDocumento = Convert.ToInt32(row.Cells[1].Text);
+            CheckBox check = (CheckBox)row.FindControl("chElegir");
+            if (check.Checked)
+            {
+                try
+                {
+                    documentos_solicitados nuevo = new documentos_solicitados();
+                    var sec_registro = DBReclamos.pa_sec_documentos_solicitados();
+                    long? id_registro = sec_registro.Single();
+                    nuevo.id = Convert.ToInt32(id_registro);
+                    nuevo.documento = idDocumento;
+                    nuevo.id_reclamo = id;
+                    nuevo.tipo = "Daños";
+                    nuevo.fecha = DateTime.Now;
+                    DBReclamos.documentos_solicitados.Add(nuevo);
+                    DBReclamos.SaveChanges();
+                    documento += Server.HtmlDecode(row.Cells[2].Text) + Environment.NewLine;
+                }
+                catch (Exception ex)
+                {
+                    Utils.ShowMessage(this.Page, "No se agregar los documentos seleccionados" + ex.Message, "Excelente", "success");
+                }
+            }
+        }
+        llenado.llenarGrid(doc_solicitados, GridDocSeleccionados);
+        agregarComentario("Documentos Solicitados: \n\n" + documento);
+    }
+
+    protected void btnGuardarDocumentos_Click(object sender, EventArgs e)
+    {
+        seleccionarDocumentos();
     }
 }

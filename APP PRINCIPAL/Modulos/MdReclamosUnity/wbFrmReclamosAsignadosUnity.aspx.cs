@@ -17,6 +17,7 @@ public partial class Modulos_MdReclamos_wbFrmReclamosAsignadosUnity : System.Web
     bool compromiso_pago = false;
     bool alquiler = false;
     bool perdidaTotal = false;
+    bool robo = false;
     int id, id_contacto;
     string id2;
    
@@ -175,6 +176,7 @@ public partial class Modulos_MdReclamos_wbFrmReclamosAsignadosUnity : System.Web
             reclamo.compromiso_pago = compromiso_pago;
             reclamo.alquiler_auto = alquiler;
             reclamo.perdida_total = perdidaTotal;
+            reclamo.robo = robo;
             reclamo.b_carta_cierre_interno = false;
             reclamo.b_carta_declinado = false;
             reclamo.b_carta_envio_cheque = false;

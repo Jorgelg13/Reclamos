@@ -18,6 +18,9 @@
                 <li role="presentation" class="ingreso-datos">
                     <a href="#ingreso-datos" aria-controls="ingreso-datos" role="tab" data-toggle="tab" style="font-size: 18px;">R. por Gestor</a>
                 </li>
+                <li role="presentation" class="inactivos">
+                    <a href="#inactivos" aria-controls="ingreso-datos" role="tab" data-toggle="tab" style="font-size: 18px;">Proximos Inactivos</a>
+                </li>
                  <li role="presentation" class="alarmas">
                     <a href="#alarmas" aria-controls="alarmas" role="tab" data-toggle="tab" style="font-size: 18px;">Alarmas</a>
                 </li>
@@ -111,7 +114,22 @@
                         </asp:GridView>
                     </div>
                 </div>
-
+                 <div role="tabpanel" class="tab-pane" id="inactivos">
+                    <div class="scrolling-table-container">
+                        <asp:GridView ID="GridInactivos" runat="server" CssClass="table bs-table table-responsive table-hover" OnSelectedIndexChanged="GridInactivos_SelectedIndexChanged" AutoGenerateColumns="True" GridLines="None">
+                            <AlternatingRowStyle BackColor="White" />
+                            <Columns>
+                                <asp:CommandField ShowSelectButton="True">
+                                    <HeaderStyle HorizontalAlign="Center" Wrap="False" />
+                                    <ItemStyle HorizontalAlign="Left" Wrap="False" />
+                                </asp:CommandField>
+                            </Columns>
+                            <HeaderStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" HorizontalAlign="Center" Wrap="False" />
+                            <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
+                            <RowStyle BackColor="#EFF3FB" HorizontalAlign="Left" Wrap="False" />
+                        </asp:GridView>
+                    </div>
+                </div>
                 <div role="tabpanel" class="tab-pane" id="alarmas">
                     <div class="scrolling-table-container">
                        <asp:Panel runat="server" ID="PnAlarmas" Visible="false">

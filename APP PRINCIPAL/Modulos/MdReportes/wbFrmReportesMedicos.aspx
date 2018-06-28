@@ -86,7 +86,7 @@
                              <asp:DropDownList ID="ddlCiclos" runat="server" Style="width: 25%" CssClass="form-control">
                                 <asp:ListItem Value="Ciclo Aseguradora">Ciclo Aseguradora</asp:ListItem>
                                 <asp:ListItem Value="Ciclo Cliente">Ciclo Cliente</asp:ListItem>
-                                <asp:ListItem Value="Ciclo Ejecutivo">Ciclo Ejecutivo</asp:ListItem>
+                                <asp:ListItem Value="Ciclo Ejecutivo">Ciclo Unity</asp:ListItem>
                                 <asp:ListItem Value="Ciclo Ejecutivo por etapa">Ciclo Ejecutivo por etapas</asp:ListItem>
                                 <asp:ListItem Value="Eficiencia">Eficiencia</asp:ListItem>
                             </asp:DropDownList>
@@ -218,7 +218,7 @@
                                 <RowStyle BackColor="#EFF3FB" HorizontalAlign="Left" Wrap="False" />
                             </asp:GridView>
                         </div>
-                        <asp:LinkButton ID="LinkButton1" title="Descargar en excel" runat="server" Style="font-size: 70px; text-align: center; color: green"><i class="fa fa-file-excel-o" aria-hidden="true"></i></asp:LinkButton>
+                        <asp:LinkButton ID="LinkButton1" OnClick="LinkButton1_Click" title="Descargar en excel" runat="server" Style="font-size: 70px; text-align: center; color: green"><i class="fa fa-file-excel-o" aria-hidden="true"></i></asp:LinkButton>
                         <asp:LinkButton ID="LinkButton2" OnClick="linKRegresar_Click" title="Regresar al reporte" runat="server" Style="padding-left: 20px; font-size: 70px; text-align: center; color: lightblue"><i class="fa fa-arrow-circle-o-left" aria-hidden="true"></i></asp:LinkButton>
                         <div class="img-float-right" style="float: right;">
                             <b>

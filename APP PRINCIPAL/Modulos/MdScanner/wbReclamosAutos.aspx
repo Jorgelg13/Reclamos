@@ -22,7 +22,7 @@
             <br />
             <input type="button" value="Escanear" onclick="AcquireImage();" />
             <input type="button" value="Guardar" onclick="UploadImage();" />
-            <input type="button" value="Cargar Archivos" onclick="LoadImage();" />
+            <input type="button" value="Cargar Imagenes" onclick="LoadImage();" />
         </fieldset>
         <script src="../MdReclamosUnity/Resources/dynamsoft.webtwain.initiate.js"></script>
         <script src="../MdReclamosUnity/Resources/dynamsoft.webtwain.config.js"></script>

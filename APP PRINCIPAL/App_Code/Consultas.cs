@@ -117,6 +117,16 @@ public class Consultas
         return "SELECT ber.estado as Estado, ber.fecha as Fecha, datediff(day, ber.fecha, (select top 1 fecha from bitacora_estados_autos ber2 where ber2.id > ber.id and ber2.id_reclamo_auto = " + ID + ")) as Dias " + "FROM bitacora_estados_autos as ber where id_reclamo_auto = " + ID + " ";
     }
 
+    public static string SOLICITUD_DOCUMENTOS(string tipo)
+    {
+        return "select id as ID, descripcion as Descripcion from tipo_documentos where tipo = '"+ tipo + "'";
+    }
+
+    public static string DOCUMENTOS_SOLICITADOS(int ID, string tipo)
+    {
+        return "select td.descripcion as Descripcion from documentos_solicitados as ds inner join tipo_documentos as td on td.id = ds.documento where id_reclamo = " + ID + " and ds.tipo = '"+tipo+"'";
+    }
+
     public static string DOCUMENTOS_GM(int ID)
     {
         return "select descripcion as Descripcion, comentarios as Comentarios, cantidad as Cantidad " +

@@ -141,7 +141,7 @@ function notificarme()
             var audio = new Audio("http://reclamosgt.unitypromotores.com/imgUnity/notificacion.mp3");
 
             notification.onclick = function () {
-                window.open("http://reclamosgt.unitypromotores.com/DashboardCabina.aspx");
+                window.open("http://reclamosgt.unitypromotores.com/Modulos/Dashboard/DashboardCabina.aspx");
                 this.close();
             }
 
@@ -155,11 +155,11 @@ function notificarme()
                 }
                 if (permission === "granted") {
                     var options = {
-                        body: "Descripción o cuerpo de la notificación",
-                        icon: "url_del_icono.jpg",
+                        body: "Has aceptado las notificaciones",
+                        icon:  "http://reclamosgt.unitypromotores.com/imgUnity/Unity.jpg",
                         dir: "ltr"
                     };
-                    var notification = new Notification("Hola :)", options);
+                    var notification = new Notification("Bienvenido :)", options);
                 }
             });
         }

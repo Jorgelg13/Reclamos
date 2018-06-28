@@ -54,10 +54,6 @@ public partial class Modulos_MdReclamos_wbFrmReclamosDañosAsignados : System.We
            "dbo.reclamos_varios.ajustador as Ajustador," +
            "dbo.reclamos_varios.version as Version," +
            "Convert(varchar(10),dbo.reclamos_varios.fecha_commit, 103) as [Fecha Creacion]," +//23
-           //"dbo.cabina.nombre as Cabina," +
-           //"dbo.sucursal.nombre as Sucursal," +
-           //"dbo.empresa.nombre as Empresa," +
-           //"dbo.pais.nombre as Pais," +
            "dbo.usuario.nombre as Usuario, " +
            "dbo.reg_reclamo_varios.id as id_registro," + //29
            "dbo.reg_reclamo_varios.gestor as [Codigo Ejecutivo] " +//30
@@ -110,35 +106,6 @@ public partial class Modulos_MdReclamos_wbFrmReclamosDañosAsignados : System.We
         ddlAseguradora.DataValueField = "id";
         ddlAseguradora.DataBind();
     }
-
-    //seleccionar el correo electronico del ejecutivo que tiene asignada la poliza
-    //private void seleccionarCorreo(short cod)
-    //{
-    //    try
-    //    {
-    //        var selectCorreo = DBReclamos.ejecutivos.Where(e => e.codigo == Convert.ToInt16(codigo)).First();
-    //        correo = selectCorreo.correo;
-    //    }
-
-    //    catch (Exception)
-    //    {
-    //    }
-    //}
-
-    //seleccionar el correo del gestor asignado
-    //private void seleccionarCorreoGestor()
-    //{
-    //    try
-    //    {
-    //        var correo_gestor = DBReclamos.gestores.Select(g => new { g.correo, g.usuario }).Where(usu => usu.usuario == userlogin).First();
-    //        correoGestor = correo_gestor.correo.ToString();
-    //    }
-
-    //    catch (Exception)
-    //    {
-    //        Utils.ShowMessage(this.Page, "No se a podido seleccionar el correo del Gestor", "Nota..!", "warning");
-    //    }
-    //}
 
     //seleccionar los checks y darles valor a las variables para ser almacenadas
     private void opcionesChecked()
@@ -309,7 +276,7 @@ public partial class Modulos_MdReclamos_wbFrmReclamosDañosAsignados : System.We
         catch (Exception ex)
         {
             Utils.ShowMessage(this.Page, "A ocurrido un error al insertar los datos " + ex.Message, "Nota..!", "error");
-            Email.EnviarERROR("Error en apertura de reclamos de daños","Error ocasionado al usuario: " + userlogin + " en el registro con el id: " + id + "\n\n" + ex.Message);
+            Email.EnviarERROR("Error en apertura de reclamos de daños","Error ocasionado al usuario: " + userlogin + " en el registro con el id: " + id + "\n\n " + ex.Message);
         }
     }
 

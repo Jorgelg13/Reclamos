@@ -399,6 +399,16 @@
           <Property Name="descripcion" Type="varchar" MaxLength="50" />
           <Property Name="tipo" Type="varchar" MaxLength="50" />
         </EntityType>
+        <EntityType Name="documentos_solicitados">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="documento" Type="int" />
+          <Property Name="id_reclamo" Type="int" />
+          <Property Name="tipo" Type="varchar" MaxLength="50" />
+          <Property Name="fecha" Type="datetime" />
+        </EntityType>
         <EntityType Name="ejecutivos">
           <Key>
             <PropertyRef Name="id" />
@@ -590,19 +600,20 @@
           <Property Name="tipo_servicio" Type="varchar" MaxLength="100" />
           <Property Name="id_gestor" Type="smallint" />
           <Property Name="id_analista" Type="int" />
+          <Property Name="id_taller" Type="int" />
           <Property Name="observaciones" Type="text" />
           <Property Name="estado_auto_unity" Type="varchar" MaxLength="75" />
+          <Property Name="robo" Type="bit" />
           <Property Name="complicado" Type="bit" />
           <Property Name="prioritario" Type="bit" />
           <Property Name="compromiso_pago" Type="bit" />
           <Property Name="perdida_total" Type="bit" />
           <Property Name="alquiler_auto" Type="bit" />
-          <Property Name="id_taller" Type="int" />
           <Property Name="cierre_interno" Type="bit" />
+          <Property Name="fecha_visualizar" Type="date" />
           <Property Name="asignado_por" Type="varchar" MaxLength="50" />
           <Property Name="fecha_asignacion" Type="datetime" />
           <Property Name="fecha_apertura_reclamo" Type="datetime" />
-          <Property Name="fecha_visualizar" Type="date" />
           <Property Name="fecha_cierre_reclamo" Type="datetime" />
           <Property Name="acs" Type="bit" />
           <Property Name="detalle_no_conforme" Type="varchar" MaxLength="100" />
@@ -797,6 +808,17 @@
           <Property Name="direccion" Type="varchar" MaxLength="50" />
           <Property Name="telefono" Type="varchar" MaxLength="50" />
           <Property Name="correo" Type="varchar" MaxLength="70" />
+          <Property Name="estado" Type="bit" />
+        </EntityType>
+        <EntityType Name="tipo_documentos">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="descripcion" Type="varchar" MaxLength="500" />
+          <Property Name="tipo" Type="varchar" MaxLength="50" />
+          <Property Name="usuario" Type="varchar" MaxLength="50" />
+          <Property Name="fecha" Type="datetime" />
           <Property Name="estado" Type="bit" />
         </EntityType>
         <EntityType Name="usuario">
@@ -1394,6 +1416,18 @@ advertencia 6002: La tabla o vista 'reclamos.dbo.v_producto_no_conforme' no tien
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_documentos">
+          <End Role="tipo_documentos" Type="Self.tipo_documentos" Multiplicity="0..1" />
+          <End Role="documentos_solicitados" Type="Self.documentos_solicitados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tipo_documentos">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="documentos_solicitados">
+              <PropertyRef Name="documento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_recibos_medicos_recibos_medicos">
           <End Role="reclamos_medicos" Type="Self.reclamos_medicos" Multiplicity="0..1" />
           <End Role="recibos_medicos" Type="Self.recibos_medicos" Multiplicity="*" />
@@ -1516,9 +1550,11 @@ advertencia 6002: La tabla o vista 'reclamos.dbo.v_producto_no_conforme' no tien
         <Function Name="pa_sec_auto_reclamo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="pa_sec_autorizaciones" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="pa_sec_cartas" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="pa_sec_documentos_solicitados" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="pa_sec_reclamo_auto" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="pa_sec_reclamos_medicos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="pa_sec_registros_medicos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="pa_sec_tipo_documentos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="pa_vista_movil" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="promedio_aseguradoras" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -1583,6 +1619,7 @@ advertencia 6002: La tabla o vista 'reclamos.dbo.v_producto_no_conforme' no tien
           <EntitySet Name="direcciones" EntityType="Self.direcciones" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="direcciones_clientes_gm" EntityType="Self.direcciones_clientes_gm" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="documentos_medicos" EntityType="Self.documentos_medicos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="documentos_solicitados" EntityType="Self.documentos_solicitados" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ejecutivos" EntityType="Self.ejecutivos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="empresa" EntityType="Self.empresa" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="encuesta" EntityType="Self.encuesta" Schema="dbo" store:Type="Tables" />
@@ -1602,6 +1639,7 @@ advertencia 6002: La tabla o vista 'reclamos.dbo.v_producto_no_conforme' no tien
           <EntitySet Name="sucursal" EntityType="Self.sucursal" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="talleres" EntityType="Self.talleres" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tipo_documentos" EntityType="Self.tipo_documentos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="usuario" EntityType="Self.usuario" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="viewCoberturasAutos" EntityType="Self.viewCoberturasAutos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="vistaBusquedaPolizaMovil" EntityType="Self.vistaBusquedaPolizaMovil" Schema="dbo" store:Type="Tables" />
@@ -1802,6 +1840,10 @@ FROM [dbo].[v_producto_no_conforme] AS [v_producto_no_conforme]</DefiningQuery>
             <End Role="reclamos_varios" EntitySet="reclamos_varios" />
             <End Role="detalle_pagos_reclamos_varios" EntitySet="detalle_pagos_reclamos_varios" />
           </AssociationSet>
+          <AssociationSet Name="FK_documentos" Association="Self.FK_documentos">
+            <End Role="tipo_documentos" EntitySet="tipo_documentos" />
+            <End Role="documentos_solicitados" EntitySet="documentos_solicitados" />
+          </AssociationSet>
           <AssociationSet Name="FK_recibos_medicos_recibos_medicos" Association="Self.FK_recibos_medicos_recibos_medicos">
             <End Role="reclamos_medicos" EntitySet="reclamos_medicos" />
             <End Role="recibos_medicos" EntitySet="recibos_medicos" />
@@ -1908,6 +1950,7 @@ FROM [dbo].[v_producto_no_conforme] AS [v_producto_no_conforme]</DefiningQuery>
           <FunctionImport Name="pa_cargar_autos" ReturnType="Collection(reclamosModel.pa_cargar_autos_Result)" />
           <FunctionImport Name="pa_cargar_danios_varios" ReturnType="Collection(reclamosModel.pa_cargar_danios_varios_Result)" />
           <FunctionImport Name="pa_vista_movil" ReturnType="Collection(reclamosModel.pa_vista_movil_Result)" />
+          <FunctionImport Name="pa_sec_tipo_documentos" ReturnType="Collection(Int32)" />
           <EntitySet Name="ajustadores" EntityType="reclamosModel.ajustadores" />
           <EntitySet Name="analistas" EntityType="reclamosModel.analistas" />
           <EntitySet Name="aseguradoras" EntityType="reclamosModel.aseguradoras" />
@@ -1939,6 +1982,7 @@ FROM [dbo].[v_producto_no_conforme] AS [v_producto_no_conforme]</DefiningQuery>
           <EntitySet Name="direcciones" EntityType="reclamosModel.direcciones" />
           <EntitySet Name="direcciones_clientes_gm" EntityType="reclamosModel.direcciones_clientes_gm" />
           <EntitySet Name="documentos_medicos" EntityType="reclamosModel.documentos_medicos" />
+          <EntitySet Name="documentos_solicitados" EntityType="reclamosModel.documentos_solicitados" />
           <EntitySet Name="ejecutivos" EntityType="reclamosModel.ejecutivos" />
           <EntitySet Name="empresa" EntityType="reclamosModel.empresa" />
           <EntitySet Name="encuesta" EntityType="reclamosModel.encuesta" />
@@ -1958,6 +2002,7 @@ FROM [dbo].[v_producto_no_conforme] AS [v_producto_no_conforme]</DefiningQuery>
           <EntitySet Name="sucursal" EntityType="reclamosModel.sucursal" />
           <EntitySet Name="sysdiagrams" EntityType="reclamosModel.sysdiagrams" />
           <EntitySet Name="talleres" EntityType="reclamosModel.talleres" />
+          <EntitySet Name="tipo_documentos" EntityType="reclamosModel.tipo_documentos" />
           <EntitySet Name="usuario" EntityType="reclamosModel.usuario" />
           <EntitySet Name="viewCoberturasAutos" EntityType="reclamosModel.viewCoberturasAutos" />
           <EntitySet Name="vistaBusquedaPolizaMovil" EntityType="reclamosModel.vistaBusquedaPolizaMovil" />
@@ -1965,9 +2010,17 @@ FROM [dbo].[v_producto_no_conforme] AS [v_producto_no_conforme]</DefiningQuery>
           <EntitySet Name="vistaReclamosMedicos" EntityType="reclamosModel.vistaReclamosMedicos" />
           <EntitySet Name="ViewBusquedaAuto" EntityType="reclamosModel.ViewBusquedaAuto" />
           <EntitySet Name="v_producto_no_conforme" EntityType="reclamosModel.v_producto_no_conforme" />
+          <AssociationSet Name="FK_reclamo_auto_analistas" Association="reclamosModel.FK_reclamo_auto_analistas">
+            <End Role="analistas" EntitySet="analistas" />
+            <End Role="reclamo_auto" EntitySet="reclamo_auto" />
+          </AssociationSet>
           <AssociationSet Name="FK_reclamos_varios_analistas" Association="reclamosModel.FK_reclamos_varios_analistas">
             <End Role="analistas" EntitySet="analistas" />
             <End Role="reclamos_varios" EntitySet="reclamos_varios" />
+          </AssociationSet>
+          <AssociationSet Name="FK__reclamo_a__id_au__300424B4" Association="reclamosModel.FK__reclamo_a__id_au__300424B4">
+            <End Role="auto_reclamo" EntitySet="auto_reclamo" />
+            <End Role="reclamo_auto" EntitySet="reclamo_auto" />
           </AssociationSet>
           <AssociationSet Name="FK__autorizac__id_ca__30F848ED" Association="reclamosModel.FK__autorizac__id_ca__30F848ED">
             <End Role="cabina" EntitySet="cabina" />
@@ -2012,6 +2065,10 @@ FROM [dbo].[v_producto_no_conforme] AS [v_producto_no_conforme]</DefiningQuery>
           <AssociationSet Name="FK__cabina__id_sucur__4E88ABD4" Association="reclamosModel.FK__cabina__id_sucur__4E88ABD4">
             <End Role="sucursal" EntitySet="sucursal" />
             <End Role="cabina" EntitySet="cabina" />
+          </AssociationSet>
+          <AssociationSet Name="FK__reclamo_a__id_ca__33D4B598" Association="reclamosModel.FK__reclamo_a__id_ca__33D4B598">
+            <End Role="cabina" EntitySet="cabina" />
+            <End Role="reclamo_auto" EntitySet="reclamo_auto" />
           </AssociationSet>
           <AssociationSet Name="FK__reclamos___id_ca__4E88ABD4" Association="reclamosModel.FK__reclamos___id_ca__4E88ABD4">
             <End Role="cabina" EntitySet="cabina" />
@@ -2065,6 +2122,10 @@ FROM [dbo].[v_producto_no_conforme] AS [v_producto_no_conforme]</DefiningQuery>
             <End Role="reclamos_varios" EntitySet="reclamos_varios" />
             <End Role="detalle_pagos_reclamos_varios" EntitySet="detalle_pagos_reclamos_varios" />
           </AssociationSet>
+          <AssociationSet Name="FK_nombre_documento" Association="reclamosModel.FK_nombre_documento">
+            <End Role="tipo_documentos" EntitySet="tipo_documentos" />
+            <End Role="documentos_solicitados" EntitySet="documentos_solicitados" />
+          </AssociationSet>
           <AssociationSet Name="FK__empresa__id_pais__4F7CD00D" Association="reclamosModel.FK__empresa__id_pais__4F7CD00D">
             <End Role="pais" EntitySet="pais" />
             <End Role="empresa" EntitySet="empresa" />
@@ -2072,6 +2133,10 @@ FROM [dbo].[v_producto_no_conforme] AS [v_producto_no_conforme]</DefiningQuery>
           <AssociationSet Name="FK__sucursal__id_emp__5BE2A6F2" Association="reclamosModel.FK__sucursal__id_emp__5BE2A6F2">
             <End Role="empresa" EntitySet="empresa" />
             <End Role="sucursal" EntitySet="sucursal" />
+          </AssociationSet>
+          <AssociationSet Name="FK__reclamo_a__id_es__38996AB5" Association="reclamosModel.FK__reclamo_a__id_es__38996AB5">
+            <End Role="estado" EntitySet="estado" />
+            <End Role="reclamo_auto" EntitySet="reclamo_auto" />
           </AssociationSet>
           <AssociationSet Name="FK__reclamos___id_es__4F7CD00D" Association="reclamosModel.FK__reclamos___id_es__4F7CD00D">
             <End Role="estado" EntitySet="estado" />
@@ -2081,6 +2146,10 @@ FROM [dbo].[v_producto_no_conforme] AS [v_producto_no_conforme]</DefiningQuery>
             <End Role="estado" EntitySet="estado" />
             <End Role="reclamos_varios" EntitySet="reclamos_varios" />
           </AssociationSet>
+          <AssociationSet Name="FK_reclamo_auto_gestores" Association="reclamosModel.FK_reclamo_auto_gestores">
+            <End Role="gestores" EntitySet="gestores" />
+            <End Role="reclamo_auto" EntitySet="reclamo_auto" />
+          </AssociationSet>
           <AssociationSet Name="FK_reclamos_varios_gestores" Association="reclamosModel.FK_reclamos_varios_gestores">
             <End Role="gestores" EntitySet="gestores" />
             <End Role="reclamos_varios" EntitySet="reclamos_varios" />
@@ -2088,6 +2157,14 @@ FROM [dbo].[v_producto_no_conforme] AS [v_producto_no_conforme]</DefiningQuery>
           <AssociationSet Name="FK_recibos_medicos_recibos_medicos" Association="reclamosModel.FK_recibos_medicos_recibos_medicos">
             <End Role="reclamos_medicos" EntitySet="reclamos_medicos" />
             <End Role="recibos_medicos" EntitySet="recibos_medicos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__reclamo_a__id_us__440B1D61" Association="reclamosModel.FK__reclamo_a__id_us__440B1D61">
+            <End Role="usuario" EntitySet="usuario" />
+            <End Role="reclamo_auto" EntitySet="reclamo_auto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_reclamo_auto_talleres" Association="reclamosModel.FK_reclamo_auto_talleres">
+            <End Role="talleres" EntitySet="talleres" />
+            <End Role="reclamo_auto" EntitySet="reclamo_auto" />
           </AssociationSet>
           <AssociationSet Name="FK__reclamos___id_re__3E52440B" Association="reclamosModel.FK__reclamos___id_re__3E52440B">
             <End Role="reg_reclamos_medicos" EntitySet="reg_reclamos_medicos" />
@@ -2109,34 +2186,7 @@ FROM [dbo].[v_producto_no_conforme] AS [v_producto_no_conforme]</DefiningQuery>
             <End Role="talleres" EntitySet="talleres" />
             <End Role="reclamos_varios" EntitySet="reclamos_varios" />
           </AssociationSet>
-          <AssociationSet Name="FK_reclamo_auto_analistas" Association="reclamosModel.FK_reclamo_auto_analistas">
-            <End Role="analistas" EntitySet="analistas" />
-            <End Role="reclamo_auto" EntitySet="reclamo_auto" />
-          </AssociationSet>
-          <AssociationSet Name="FK__reclamo_a__id_au__300424B4" Association="reclamosModel.FK__reclamo_a__id_au__300424B4">
-            <End Role="auto_reclamo" EntitySet="auto_reclamo" />
-            <End Role="reclamo_auto" EntitySet="reclamo_auto" />
-          </AssociationSet>
-          <AssociationSet Name="FK__reclamo_a__id_ca__33D4B598" Association="reclamosModel.FK__reclamo_a__id_ca__33D4B598">
-            <End Role="cabina" EntitySet="cabina" />
-            <End Role="reclamo_auto" EntitySet="reclamo_auto" />
-          </AssociationSet>
-          <AssociationSet Name="FK__reclamo_a__id_es__38996AB5" Association="reclamosModel.FK__reclamo_a__id_es__38996AB5">
-            <End Role="estado" EntitySet="estado" />
-            <End Role="reclamo_auto" EntitySet="reclamo_auto" />
-          </AssociationSet>
-          <AssociationSet Name="FK_reclamo_auto_gestores" Association="reclamosModel.FK_reclamo_auto_gestores">
-            <End Role="gestores" EntitySet="gestores" />
-            <End Role="reclamo_auto" EntitySet="reclamo_auto" />
-          </AssociationSet>
-          <AssociationSet Name="FK__reclamo_a__id_us__440B1D61" Association="reclamosModel.FK__reclamo_a__id_us__440B1D61">
-            <End Role="usuario" EntitySet="usuario" />
-            <End Role="reclamo_auto" EntitySet="reclamo_auto" />
-          </AssociationSet>
-          <AssociationSet Name="FK_reclamo_auto_talleres" Association="reclamosModel.FK_reclamo_auto_talleres">
-            <End Role="talleres" EntitySet="talleres" />
-            <End Role="reclamo_auto" EntitySet="reclamo_auto" />
-          </AssociationSet>
+          <FunctionImport Name="pa_sec_documentos_solicitados" ReturnType="Collection(Int64)" />
           </EntityContainer>
         <ComplexType Name="pa_reclamos_autos_Result">
           <Property Type="Int32" Name="secuencia" Nullable="true" />
@@ -2343,8 +2393,8 @@ FROM [dbo].[v_producto_no_conforme] AS [v_producto_no_conforme]</DefiningQuery>
           <Property Name="correo" Type="String" MaxLength="70" FixedLength="false" Unicode="false" />
           <Property Name="estado" Type="Boolean" />
           <Property Name="tipo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="reclamos_varios" Relationship="reclamosModel.FK_reclamos_varios_analistas" FromRole="analistas" ToRole="reclamos_varios" />
           <NavigationProperty Name="reclamo_auto" Relationship="reclamosModel.FK_reclamo_auto_analistas" FromRole="analistas" ToRole="reclamo_auto" />
+          <NavigationProperty Name="reclamos_varios" Relationship="reclamosModel.FK_reclamos_varios_analistas" FromRole="analistas" ToRole="reclamos_varios" />
         </EntityType>
         <EntityType Name="aseguradoras">
           <Key>
@@ -2532,10 +2582,10 @@ FROM [dbo].[v_producto_no_conforme] AS [v_producto_no_conforme]</DefiningQuery>
           <Property Name="id_sucursal" Type="Int32" Nullable="false" />
           <NavigationProperty Name="autorizaciones" Relationship="reclamosModel.FK__autorizac__id_ca__30F848ED" FromRole="cabina" ToRole="autorizaciones" />
           <NavigationProperty Name="sucursal" Relationship="reclamosModel.FK__cabina__id_sucur__4E88ABD4" FromRole="cabina" ToRole="sucursal" />
+          <NavigationProperty Name="reclamo_auto" Relationship="reclamosModel.FK__reclamo_a__id_ca__33D4B598" FromRole="cabina" ToRole="reclamo_auto" />
           <NavigationProperty Name="reclamos_medicos" Relationship="reclamosModel.FK__reclamos___id_ca__4E88ABD4" FromRole="cabina" ToRole="reclamos_medicos" />
           <NavigationProperty Name="reclamos_varios" Relationship="reclamosModel.FK__reclamos___id_ca__52593CB8" FromRole="cabina" ToRole="reclamos_varios" />
           <NavigationProperty Name="usuario" Relationship="reclamosModel.FK__usuario__id_cabi__5CD6CB2B" FromRole="cabina" ToRole="usuario" />
-          <NavigationProperty Name="reclamo_auto" Relationship="reclamosModel.FK__reclamo_a__id_ca__33D4B598" FromRole="cabina" ToRole="reclamo_auto" />
         </EntityType>
         <EntityType Name="cartas">
           <Key>
@@ -2742,6 +2792,17 @@ FROM [dbo].[v_producto_no_conforme] AS [v_producto_no_conforme]</DefiningQuery>
           <Property Name="descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="tipo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
+        <EntityType Name="documentos_solicitados">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="documento" Type="Int32" />
+          <Property Name="id_reclamo" Type="Int32" />
+          <Property Name="tipo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tipo_documentos" Relationship="reclamosModel.FK_nombre_documento" FromRole="documentos_solicitados" ToRole="tipo_documentos" />
+          <Property Name="fecha" Type="DateTime" Precision="3" />
+        </EntityType>
         <EntityType Name="ejecutivos">
           <Key>
             <PropertyRef Name="id" />
@@ -2797,9 +2858,9 @@ FROM [dbo].[v_producto_no_conforme] AS [v_producto_no_conforme]</DefiningQuery>
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="reclamo_auto" Relationship="reclamosModel.FK__reclamo_a__id_es__38996AB5" FromRole="estado" ToRole="reclamo_auto" />
           <NavigationProperty Name="reclamos_medicos" Relationship="reclamosModel.FK__reclamos___id_es__4F7CD00D" FromRole="estado" ToRole="reclamos_medicos" />
           <NavigationProperty Name="reclamos_varios" Relationship="reclamosModel.FK__reclamos___id_es__534D60F1" FromRole="estado" ToRole="reclamos_varios" />
-          <NavigationProperty Name="reclamo_auto" Relationship="reclamosModel.FK__reclamo_a__id_es__38996AB5" FromRole="estado" ToRole="reclamo_auto" />
         </EntityType>
         <EntityType Name="estados_reclamos_unity">
           <Key>
@@ -2878,8 +2939,8 @@ FROM [dbo].[v_producto_no_conforme] AS [v_producto_no_conforme]</DefiningQuery>
           <Property Name="estado" Type="Boolean" />
           <Property Name="usuario" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="tipo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="reclamos_varios" Relationship="reclamosModel.FK_reclamos_varios_gestores" FromRole="gestores" ToRole="reclamos_varios" />
           <NavigationProperty Name="reclamo_auto" Relationship="reclamosModel.FK_reclamo_auto_gestores" FromRole="gestores" ToRole="reclamo_auto" />
+          <NavigationProperty Name="reclamos_varios" Relationship="reclamosModel.FK_reclamos_varios_gestores" FromRole="gestores" ToRole="reclamos_varios" />
         </EntityType>
         <EntityType Name="pais">
           <Key>
@@ -2951,8 +3012,10 @@ FROM [dbo].[v_producto_no_conforme] AS [v_producto_no_conforme]</DefiningQuery>
           <Property Name="alquiler_auto" Type="Boolean" />
           <Property Name="id_taller" Type="Int32" />
           <Property Name="cierre_interno" Type="Boolean" />
-          <Property Name="fecha_visualizar" Type="DateTime" Precision="0" />
+          <Property Name="asignado_por" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="fecha_asignacion" Type="DateTime" Precision="3" />
           <Property Name="fecha_apertura_reclamo" Type="DateTime" Precision="3" />
+          <Property Name="fecha_visualizar" Type="DateTime" Precision="0" />
           <Property Name="fecha_cierre_reclamo" Type="DateTime" Precision="3" />
           <Property Name="acs" Type="Boolean" />
           <Property Name="detalle_no_conforme" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
@@ -2964,22 +3027,21 @@ FROM [dbo].[v_producto_no_conforme] AS [v_producto_no_conforme]</DefiningQuery>
           <Property Name="b_carta_declinado" Type="Boolean" />
           <Property Name="b_carta_envio_cheque" Type="Boolean" />
           <Property Name="documentos" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="analistas" Relationship="reclamosModel.FK_reclamo_auto_analistas" FromRole="reclamo_auto" ToRole="analistas" />
+          <NavigationProperty Name="auto_reclamo" Relationship="reclamosModel.FK__reclamo_a__id_au__300424B4" FromRole="reclamo_auto" ToRole="auto_reclamo" />
           <NavigationProperty Name="bitacora_autos_unity" Relationship="reclamosModel.FK_bitacora_autos_unity_reclamo_auto" FromRole="reclamo_auto" ToRole="bitacora_autos_unity" />
           <NavigationProperty Name="bitacora_estados_autos" Relationship="reclamosModel.FK_bitacora_estado_autos_reclamo_auto" FromRole="reclamo_auto" ToRole="bitacora_estados_autos" />
           <NavigationProperty Name="bitacora_reclamo_auto" Relationship="reclamosModel.FK__bitacora___id_re__3C69FB99" FromRole="reclamo_auto" ToRole="bitacora_reclamo_auto" />
+          <NavigationProperty Name="cabina" Relationship="reclamosModel.FK__reclamo_a__id_ca__33D4B598" FromRole="reclamo_auto" ToRole="cabina" />
           <NavigationProperty Name="coberturas_afectadas" Relationship="reclamosModel.FK_cobertuas_afectadas_reclamo_auto" FromRole="reclamo_auto" ToRole="coberturas_afectadas" />
           <NavigationProperty Name="comentarios_reclamos_autos" Relationship="reclamosModel.FK_comentarios_reclamos_autos_reclamo_auto" FromRole="reclamo_auto" ToRole="comentarios_reclamos_autos" />
           <NavigationProperty Name="contacto_auto" Relationship="reclamosModel.FK_contacto_auto_contacto_auto1" FromRole="reclamo_auto" ToRole="contacto_auto" />
           <NavigationProperty Name="detalle_pagos_reclamos_autos" Relationship="reclamosModel.FK_detalle_pago_reclamos_autos_reclamo_auto" FromRole="reclamo_auto" ToRole="detalle_pagos_reclamos_autos" />
-          <Property Name="asignado_por" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="fecha_asignacion" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="analistas" Relationship="reclamosModel.FK_reclamo_auto_analistas" FromRole="reclamo_auto" ToRole="analistas" />
-          <NavigationProperty Name="auto_reclamo" Relationship="reclamosModel.FK__reclamo_a__id_au__300424B4" FromRole="reclamo_auto" ToRole="auto_reclamo" />
-          <NavigationProperty Name="cabina" Relationship="reclamosModel.FK__reclamo_a__id_ca__33D4B598" FromRole="reclamo_auto" ToRole="cabina" />
           <NavigationProperty Name="estado" Relationship="reclamosModel.FK__reclamo_a__id_es__38996AB5" FromRole="reclamo_auto" ToRole="estado" />
           <NavigationProperty Name="gestores" Relationship="reclamosModel.FK_reclamo_auto_gestores" FromRole="reclamo_auto" ToRole="gestores" />
           <NavigationProperty Name="usuario" Relationship="reclamosModel.FK__reclamo_a__id_us__440B1D61" FromRole="reclamo_auto" ToRole="usuario" />
           <NavigationProperty Name="talleres" Relationship="reclamosModel.FK_reclamo_auto_talleres" FromRole="reclamo_auto" ToRole="talleres" />
+          <Property Name="robo" Type="Boolean" />
         </EntityType>
         <EntityType Name="reclamos_medicos">
           <Key>
@@ -3080,6 +3142,8 @@ FROM [dbo].[v_producto_no_conforme] AS [v_producto_no_conforme]</DefiningQuery>
           <Property Name="prioritario" Type="Boolean" />
           <Property Name="complicado" Type="Boolean" />
           <Property Name="compromiso_pago" Type="Boolean" />
+          <Property Name="asignado_por" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="fecha_asignacion" Type="DateTime" Precision="3" />
           <Property Name="fecha_visualizar" Type="DateTime" Precision="0" />
           <Property Name="fecha_apertura_reclamo" Type="DateTime" Precision="3" />
           <Property Name="fecha_cierre_reclamo" Type="DateTime" Precision="3" />
@@ -3108,8 +3172,6 @@ FROM [dbo].[v_producto_no_conforme] AS [v_producto_no_conforme]</DefiningQuery>
           <NavigationProperty Name="reg_reclamo_varios" Relationship="reclamosModel.FK__reclamos___id_re__5441852A" FromRole="reclamos_varios" ToRole="reg_reclamo_varios" />
           <NavigationProperty Name="usuario" Relationship="reclamosModel.FK__reclamos___id_us__5535A963" FromRole="reclamos_varios" ToRole="usuario" />
           <NavigationProperty Name="talleres" Relationship="reclamosModel.FK_reclamos_varios_talleres" FromRole="reclamos_varios" ToRole="talleres" />
-          <Property Name="asignado_por" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="fecha_asignacion" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="reg_reclamo_varios">
           <Key>
@@ -3190,8 +3252,20 @@ FROM [dbo].[v_producto_no_conforme] AS [v_producto_no_conforme]</DefiningQuery>
           <Property Name="telefono" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="correo" Type="String" MaxLength="70" FixedLength="false" Unicode="false" />
           <Property Name="estado" Type="Boolean" />
-          <NavigationProperty Name="reclamos_varios" Relationship="reclamosModel.FK_reclamos_varios_talleres" FromRole="talleres" ToRole="reclamos_varios" />
           <NavigationProperty Name="reclamo_auto" Relationship="reclamosModel.FK_reclamo_auto_talleres" FromRole="talleres" ToRole="reclamo_auto" />
+          <NavigationProperty Name="reclamos_varios" Relationship="reclamosModel.FK_reclamos_varios_talleres" FromRole="talleres" ToRole="reclamos_varios" />
+        </EntityType>
+        <EntityType Name="tipo_documentos">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="descripcion" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="tipo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="usuario" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="fecha" Type="DateTime" Precision="3" />
+          <Property Name="estado" Type="Boolean" />
+          <NavigationProperty Name="documentos_solicitados" Relationship="reclamosModel.FK_nombre_documento" FromRole="tipo_documentos" ToRole="documentos_solicitados" />
         </EntityType>
         <EntityType Name="usuario">
           <Key>
@@ -3213,9 +3287,9 @@ FROM [dbo].[v_producto_no_conforme] AS [v_producto_no_conforme]</DefiningQuery>
           <Property Name="codigo" Type="Int16" />
           <NavigationProperty Name="autorizaciones" Relationship="reclamosModel.FK__autorizac__id_us__412EB0B6" FromRole="usuario" ToRole="autorizaciones" />
           <NavigationProperty Name="cabina1" Relationship="reclamosModel.FK__usuario__id_cabi__5CD6CB2B" FromRole="usuario" ToRole="cabina" />
+          <NavigationProperty Name="reclamo_auto" Relationship="reclamosModel.FK__reclamo_a__id_us__440B1D61" FromRole="usuario" ToRole="reclamo_auto" />
           <NavigationProperty Name="reclamos_medicos" Relationship="reclamosModel.FK__reclamos___id_us__5165187F" FromRole="usuario" ToRole="reclamos_medicos" />
           <NavigationProperty Name="reclamos_varios" Relationship="reclamosModel.FK__reclamos___id_us__5535A963" FromRole="usuario" ToRole="reclamos_varios" />
-          <NavigationProperty Name="reclamo_auto" Relationship="reclamosModel.FK__reclamo_a__id_us__440B1D61" FromRole="usuario" ToRole="reclamo_auto" />
         </EntityType>
         <EntityType Name="viewCoberturasAutos">
           <Key>
@@ -3357,6 +3431,18 @@ FROM [dbo].[v_producto_no_conforme] AS [v_producto_no_conforme]</DefiningQuery>
           <Property Name="Tipo" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
           <Property Name="estado" Type="String" Nullable="false" MaxLength="7" FixedLength="false" Unicode="false" />
         </EntityType>
+        <Association Name="FK_reclamo_auto_analistas">
+          <End Type="reclamosModel.analistas" Role="analistas" Multiplicity="0..1" />
+          <End Type="reclamosModel.reclamo_auto" Role="reclamo_auto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="analistas">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="reclamo_auto">
+              <PropertyRef Name="id_analista" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_reclamos_varios_analistas">
           <End Type="reclamosModel.analistas" Role="analistas" Multiplicity="0..1" />
           <End Type="reclamosModel.reclamos_varios" Role="reclamos_varios" Multiplicity="*" />
@@ -3366,6 +3452,18 @@ FROM [dbo].[v_producto_no_conforme] AS [v_producto_no_conforme]</DefiningQuery>
             </Principal>
             <Dependent Role="reclamos_varios">
               <PropertyRef Name="id_analista" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__reclamo_a__id_au__300424B4">
+          <End Type="reclamosModel.auto_reclamo" Role="auto_reclamo" Multiplicity="1" />
+          <End Type="reclamosModel.reclamo_auto" Role="reclamo_auto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="auto_reclamo">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="reclamo_auto">
+              <PropertyRef Name="id_auto_reclamo" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -3498,6 +3596,18 @@ FROM [dbo].[v_producto_no_conforme] AS [v_producto_no_conforme]</DefiningQuery>
             </Principal>
             <Dependent Role="cabina">
               <PropertyRef Name="id_sucursal" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__reclamo_a__id_ca__33D4B598">
+          <End Type="reclamosModel.cabina" Role="cabina" Multiplicity="1" />
+          <End Type="reclamosModel.reclamo_auto" Role="reclamo_auto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cabina">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="reclamo_auto">
+              <PropertyRef Name="id_cabina" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -3657,6 +3767,18 @@ FROM [dbo].[v_producto_no_conforme] AS [v_producto_no_conforme]</DefiningQuery>
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_nombre_documento">
+          <End Type="reclamosModel.tipo_documentos" Role="tipo_documentos" Multiplicity="0..1" />
+          <End Type="reclamosModel.documentos_solicitados" Role="documentos_solicitados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tipo_documentos">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="documentos_solicitados">
+              <PropertyRef Name="documento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__empresa__id_pais__4F7CD00D">
           <End Type="reclamosModel.pais" Role="pais" Multiplicity="1" />
           <End Type="reclamosModel.empresa" Role="empresa" Multiplicity="*" />
@@ -3678,6 +3800,18 @@ FROM [dbo].[v_producto_no_conforme] AS [v_producto_no_conforme]</DefiningQuery>
             </Principal>
             <Dependent Role="sucursal">
               <PropertyRef Name="id_empresa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__reclamo_a__id_es__38996AB5">
+          <End Type="reclamosModel.estado" Role="estado" Multiplicity="1" />
+          <End Type="reclamosModel.reclamo_auto" Role="reclamo_auto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="estado">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="reclamo_auto">
+              <PropertyRef Name="id_estado" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -3705,6 +3839,18 @@ FROM [dbo].[v_producto_no_conforme] AS [v_producto_no_conforme]</DefiningQuery>
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_reclamo_auto_gestores">
+          <End Type="reclamosModel.gestores" Role="gestores" Multiplicity="0..1" />
+          <End Type="reclamosModel.reclamo_auto" Role="reclamo_auto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="gestores">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="reclamo_auto">
+              <PropertyRef Name="id_gestor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_reclamos_varios_gestores">
           <End Type="reclamosModel.gestores" Role="gestores" Multiplicity="0..1" />
           <End Type="reclamosModel.reclamos_varios" Role="reclamos_varios" Multiplicity="*" />
@@ -3726,6 +3872,30 @@ FROM [dbo].[v_producto_no_conforme] AS [v_producto_no_conforme]</DefiningQuery>
             </Principal>
             <Dependent Role="recibos_medicos">
               <PropertyRef Name="id_reclamo_medico" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__reclamo_a__id_us__440B1D61">
+          <End Type="reclamosModel.usuario" Role="usuario" Multiplicity="1" />
+          <End Type="reclamosModel.reclamo_auto" Role="reclamo_auto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuario">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="reclamo_auto">
+              <PropertyRef Name="id_usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_reclamo_auto_talleres">
+          <End Type="reclamosModel.talleres" Role="talleres" Multiplicity="0..1" />
+          <End Type="reclamosModel.reclamo_auto" Role="reclamo_auto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="talleres">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="reclamo_auto">
+              <PropertyRef Name="id_taller" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -3785,90 +3955,6 @@ FROM [dbo].[v_producto_no_conforme] AS [v_producto_no_conforme]</DefiningQuery>
               <PropertyRef Name="id" />
             </Principal>
             <Dependent Role="reclamos_varios">
-              <PropertyRef Name="id_taller" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_reclamo_auto_analistas">
-          <End Type="reclamosModel.analistas" Role="analistas" Multiplicity="0..1" />
-          <End Type="reclamosModel.reclamo_auto" Role="reclamo_auto" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="analistas">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="reclamo_auto">
-              <PropertyRef Name="id_analista" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__reclamo_a__id_au__300424B4">
-          <End Type="reclamosModel.auto_reclamo" Role="auto_reclamo" Multiplicity="1" />
-          <End Type="reclamosModel.reclamo_auto" Role="reclamo_auto" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="auto_reclamo">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="reclamo_auto">
-              <PropertyRef Name="id_auto_reclamo" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__reclamo_a__id_ca__33D4B598">
-          <End Type="reclamosModel.cabina" Role="cabina" Multiplicity="1" />
-          <End Type="reclamosModel.reclamo_auto" Role="reclamo_auto" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="cabina">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="reclamo_auto">
-              <PropertyRef Name="id_cabina" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__reclamo_a__id_es__38996AB5">
-          <End Type="reclamosModel.estado" Role="estado" Multiplicity="1" />
-          <End Type="reclamosModel.reclamo_auto" Role="reclamo_auto" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="estado">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="reclamo_auto">
-              <PropertyRef Name="id_estado" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_reclamo_auto_gestores">
-          <End Type="reclamosModel.gestores" Role="gestores" Multiplicity="0..1" />
-          <End Type="reclamosModel.reclamo_auto" Role="reclamo_auto" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="gestores">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="reclamo_auto">
-              <PropertyRef Name="id_gestor" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__reclamo_a__id_us__440B1D61">
-          <End Type="reclamosModel.usuario" Role="usuario" Multiplicity="1" />
-          <End Type="reclamosModel.reclamo_auto" Role="reclamo_auto" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="usuario">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="reclamo_auto">
-              <PropertyRef Name="id_usuario" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_reclamo_auto_talleres">
-          <End Type="reclamosModel.talleres" Role="talleres" Multiplicity="0..1" />
-          <End Type="reclamosModel.reclamo_auto" Role="reclamo_auto" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="talleres">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="reclamo_auto">
               <PropertyRef Name="id_taller" />
             </Dependent>
           </ReferentialConstraint>
@@ -4119,6 +4205,7 @@ FROM [dbo].[v_producto_no_conforme] AS [v_producto_no_conforme]</DefiningQuery>
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="pa_sec_tipo_documentos" FunctionName="reclamosModel.Store.pa_sec_tipo_documentos" />
           <EntitySetMapping Name="ajustadores">
             <EntityTypeMapping TypeName="reclamosModel.ajustadores">
               <MappingFragment StoreEntitySet="ajustadores">
@@ -4544,6 +4631,17 @@ FROM [dbo].[v_producto_no_conforme] AS [v_producto_no_conforme]</DefiningQuery>
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="documentos_solicitados">
+            <EntityTypeMapping TypeName="reclamosModel.documentos_solicitados">
+              <MappingFragment StoreEntitySet="documentos_solicitados">
+                <ScalarProperty Name="fecha" ColumnName="fecha" />
+                <ScalarProperty Name="tipo" ColumnName="tipo" />
+                <ScalarProperty Name="id_reclamo" ColumnName="id_reclamo" />
+                <ScalarProperty Name="documento" ColumnName="documento" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="ejecutivos">
             <EntityTypeMapping TypeName="reclamosModel.ejecutivos">
               <MappingFragment StoreEntitySet="ejecutivos">
@@ -4717,8 +4815,7 @@ FROM [dbo].[v_producto_no_conforme] AS [v_producto_no_conforme]</DefiningQuery>
           <EntitySetMapping Name="reclamo_auto">
             <EntityTypeMapping TypeName="reclamosModel.reclamo_auto">
               <MappingFragment StoreEntitySet="reclamo_auto">
-                <ScalarProperty Name="fecha_asignacion" ColumnName="fecha_asignacion" />
-                <ScalarProperty Name="asignado_por" ColumnName="asignado_por" />
+                <ScalarProperty Name="robo" ColumnName="robo" />
                 <ScalarProperty Name="documentos" ColumnName="documentos" />
                 <ScalarProperty Name="b_carta_envio_cheque" ColumnName="b_carta_envio_cheque" />
                 <ScalarProperty Name="b_carta_declinado" ColumnName="b_carta_declinado" />
@@ -4730,8 +4827,10 @@ FROM [dbo].[v_producto_no_conforme] AS [v_producto_no_conforme]</DefiningQuery>
                 <ScalarProperty Name="detalle_no_conforme" ColumnName="detalle_no_conforme" />
                 <ScalarProperty Name="acs" ColumnName="acs" />
                 <ScalarProperty Name="fecha_cierre_reclamo" ColumnName="fecha_cierre_reclamo" />
-                <ScalarProperty Name="fecha_apertura_reclamo" ColumnName="fecha_apertura_reclamo" />
                 <ScalarProperty Name="fecha_visualizar" ColumnName="fecha_visualizar" />
+                <ScalarProperty Name="fecha_apertura_reclamo" ColumnName="fecha_apertura_reclamo" />
+                <ScalarProperty Name="fecha_asignacion" ColumnName="fecha_asignacion" />
+                <ScalarProperty Name="asignado_por" ColumnName="asignado_por" />
                 <ScalarProperty Name="cierre_interno" ColumnName="cierre_interno" />
                 <ScalarProperty Name="id_taller" ColumnName="id_taller" />
                 <ScalarProperty Name="alquiler_auto" ColumnName="alquiler_auto" />
@@ -4829,8 +4928,6 @@ FROM [dbo].[v_producto_no_conforme] AS [v_producto_no_conforme]</DefiningQuery>
           <EntitySetMapping Name="reclamos_varios">
             <EntityTypeMapping TypeName="reclamosModel.reclamos_varios">
               <MappingFragment StoreEntitySet="reclamos_varios">
-                <ScalarProperty Name="fecha_asignacion" ColumnName="fecha_asignacion" />
-                <ScalarProperty Name="asignado_por" ColumnName="asignado_por" />
                 <ScalarProperty Name="documentos" ColumnName="documentos" />
                 <ScalarProperty Name="reserva" ColumnName="reserva" />
                 <ScalarProperty Name="b_carta_envio_cheque" ColumnName="b_carta_envio_cheque" />
@@ -4847,6 +4944,8 @@ FROM [dbo].[v_producto_no_conforme] AS [v_producto_no_conforme]</DefiningQuery>
                 <ScalarProperty Name="fecha_cierre_reclamo" ColumnName="fecha_cierre_reclamo" />
                 <ScalarProperty Name="fecha_apertura_reclamo" ColumnName="fecha_apertura_reclamo" />
                 <ScalarProperty Name="fecha_visualizar" ColumnName="fecha_visualizar" />
+                <ScalarProperty Name="fecha_asignacion" ColumnName="fecha_asignacion" />
+                <ScalarProperty Name="asignado_por" ColumnName="asignado_por" />
                 <ScalarProperty Name="compromiso_pago" ColumnName="compromiso_pago" />
                 <ScalarProperty Name="complicado" ColumnName="complicado" />
                 <ScalarProperty Name="prioritario" ColumnName="prioritario" />
@@ -4959,6 +5058,18 @@ FROM [dbo].[v_producto_no_conforme] AS [v_producto_no_conforme]</DefiningQuery>
                 <ScalarProperty Name="telefono" ColumnName="telefono" />
                 <ScalarProperty Name="direccion" ColumnName="direccion" />
                 <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tipo_documentos">
+            <EntityTypeMapping TypeName="reclamosModel.tipo_documentos">
+              <MappingFragment StoreEntitySet="tipo_documentos">
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="fecha" ColumnName="fecha" />
+                <ScalarProperty Name="usuario" ColumnName="usuario" />
+                <ScalarProperty Name="tipo" ColumnName="tipo" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -5127,6 +5238,7 @@ FROM [dbo].[v_producto_no_conforme] AS [v_producto_no_conforme]</DefiningQuery>
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="pa_sec_documentos_solicitados" FunctionName="reclamosModel.Store.pa_sec_documentos_solicitados" />
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
