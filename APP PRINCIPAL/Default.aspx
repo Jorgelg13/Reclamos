@@ -1,7 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Principal.master" AutoEventWireup="true" CodeFile="Default.aspx.cs" Inherits="seleccionar" %>
 
-<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
-</asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="FeaturedContent" runat="Server">
     <div class="menu-cuadrado btn-acciones-laterales">
         <div class="col-md-3 col-lg-3">
@@ -63,8 +61,6 @@
                 </div>
             </div>
         </div>
-    </div>
-    <div class="col-md-3 col-lg-3">
     </div>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="MainContent" runat="Server">

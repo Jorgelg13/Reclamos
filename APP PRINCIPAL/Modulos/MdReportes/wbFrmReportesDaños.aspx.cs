@@ -12,7 +12,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesDaños : System.Web.UI
     String Join;
     String buscar;
     String EficienciaGestor;
-    int Pendientes, Nuevos, Cerrados, Ejecucion;
+    Double Pendientes, Nuevos, Cerrados, Ejecucion;
     conexionBD obj = new conexionBD();
     ReclamosEntities DBReclamos = new ReclamosEntities();
     
@@ -36,9 +36,9 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesDaños : System.Web.UI
         EficienciaGestor = "select rs.nombre as Usuario, rs.Pendientes, rs.Nuevos, rs.Cerrados , " +
             "CAST(cast((rs.Cerrados * 100) / (rs.Pendientes + nuevos) as decimal) as varchar) as Ejecucion " +
             "from(select r.nombre," +
-            "Pendientes = (select COUNT(*) from reclamos_varios where estado_unity = 'Seguimiento' and id_gestor = r.id)," +
-            "Nuevos = (select COUNT(*) from reclamos_varios where fecha_apertura_reclamo between '"+txtFechaInicio.Text+"' and '"+txtFechaFin.Text+"' and id_gestor = r.id), " +
-            "Cerrados = (select COUNT(*) from reclamos_varios where fecha_cierre_reclamo between '"+txtFechaInicio.Text+"' and '"+txtFechaFin.Text+"' and estado_unity = 'Cerrado' and id_gestor = r.id) " +
+            "Pendientes = (select COUNT(*) from reclamos_varios where estado_unity = 'Seguimiento' and id_gestor = r.id and convert(date, fecha_apertura_reclamo, 112) < '"+txtFechaInicio.Text+"')," + // colocar rango en fecha de inicio que sea menor
+            "Nuevos = (select COUNT(*) from reclamos_varios where convert(date, fecha_apertura_reclamo, 112) between '"+txtFechaInicio.Text+"' and '"+txtFechaFin.Text+"' and id_gestor = r.id), " +
+            "Cerrados = (select COUNT(*) from reclamos_varios where convert(date, fecha_cierre_reclamo, 112) between '"+txtFechaInicio.Text+"' and '"+txtFechaFin.Text+"' and estado_unity = 'Cerrado' and id_gestor = r.id) " +
             "from(select id, usuario, nombre from gestores where tipo = 'daños varios') as r) rs where rs.Pendientes !=0";
 
         //variable que contiene todos los joins que se hacen en el query del reporte
@@ -75,19 +75,19 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesDaños : System.Web.UI
             //si seleccionarion cerrado ejecuta este query 
             if (ddlEstado.SelectedItem.Text == "Cerrado")
             {
-                llenado.llenarGrid(listado.Substring(0, (listado.Length - 2)) + Join + " where (reclamos_varios.fecha_cierre_reclamo between '" + txtFechaInicio.Text + "' and '" + txtFechaFin.Text + "') " +
+                llenado.llenarGrid(listado.Substring(0, (listado.Length - 2)) + Join + " where (convert(date, reclamos_varios.fecha_cierre_reclamo,112) between '" + txtFechaInicio.Text + "' and '" + txtFechaFin.Text + "') " +
                     "and (reclamos_varios.estado_unity = '" + ddlEstado.SelectedItem + "') ", GridCamposSeleccion);
             }
             else if(ddlEstado.SelectedItem.Text == "Seguimiento")
             {
                 llenado.llenarGrid(listado.Substring(0, (listado.Length - 2)) + Join +
-                  " where (reclamos_varios.fecha_apertura_reclamo between '" + txtFechaInicio.Text + "' and '" + txtFechaFin.Text + "') and (reclamos_varios.estado_unity = '" + ddlEstado.SelectedItem + "') " +
+                  " where (Convert(date,reclamos_varios.fecha_apertura_reclamo,112) between '" + txtFechaInicio.Text + "' and '" + txtFechaFin.Text + "') and (reclamos_varios.estado_unity = '" + ddlEstado.SelectedItem + "') " +
                  "", GridCamposSeleccion);
             }
             else if (ddlEstado.SelectedItem.Text == "Todos")
             {
                 llenado.llenarGrid(listado.Substring(0, (listado.Length - 2)) + Join +
-                  " where (reclamos_varios.fecha_apertura_reclamo between '" + txtFechaInicio.Text + "' and '" + txtFechaFin.Text + "') " +
+                  " where (Convert(date, reclamos_varios.fecha_apertura_reclamo,112) between '" + txtFechaInicio.Text + "' and '" + txtFechaFin.Text + "') " +
                  "", GridCamposSeleccion);
             }
             else if (ddlEstado.SelectedItem.Text == "Pendientes")
@@ -123,21 +123,21 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesDaños : System.Web.UI
             if (ddlEstado.SelectedItem.Text == "Cerrado")
             {
                 llenado.llenarGrid(listado.Substring(0, (listado.Length - 2)) + Join +
-                  " where (" + ddlElegir.SelectedValue + " like '%" + buscar + "%') and (reclamos_varios.fecha_cierre_reclamo between '" + txtFechaInicio.Text + "' and '" + txtFechaFin.Text + "') " +
+                  " where (" + ddlElegir.SelectedValue + " like '%" + buscar + "%') and (convert(date,reclamos_varios.fecha_cierre_reclamo,112) between '" + txtFechaInicio.Text + "' and '" + txtFechaFin.Text + "') " +
                   "and (reclamos_varios.estado_unity = '" + ddlEstado.SelectedItem + "')  ", GridCamposSeleccion);
             }
 
             else if(ddlEstado.SelectedItem.Text == "Seguimiento")
             {
                 llenado.llenarGrid(listado.Substring(0, (listado.Length - 2)) + Join +
-                  " where (" + ddlElegir.SelectedValue + " like '%" + buscar + "%') and (reclamos_varios.fecha_apertura_reclamo between '" + txtFechaInicio.Text + "' and '" + txtFechaFin.Text + "') " +
+                  " where (" + ddlElegir.SelectedValue + " like '%" + buscar + "%') and (convert(date, reclamos_varios.fecha_apertura_reclamo,112) between '" + txtFechaInicio.Text + "' and '" + txtFechaFin.Text + "') " +
                   "and (reclamos_varios.estado_unity = '" + ddlEstado.SelectedItem + "')  ", GridCamposSeleccion);
             }
 
             else if (ddlEstado.SelectedItem.Text == "Todos")
             {
                 llenado.llenarGrid(listado.Substring(0, (listado.Length - 2)) + Join +
-                  " where (" + ddlElegir.SelectedValue + " like '%" + buscar + "%') and (reclamos_varios.fecha_apertura_reclamo between '" + txtFechaInicio.Text + "' " +
+                  " where (" + ddlElegir.SelectedValue + " like '%" + buscar + "%') and (convert(date, reclamos_varios.fecha_apertura_reclamo,112) between '" + txtFechaInicio.Text + "' " +
                   "and '" + txtFechaFin.Text + "') ", GridCamposSeleccion);
             }
 
@@ -278,10 +278,10 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesDaños : System.Web.UI
         {
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
-                Pendientes += Convert.ToInt32(DataBinder.Eval(e.Row.DataItem, "[Pendientes]"));
-                Nuevos += Convert.ToInt32(DataBinder.Eval(e.Row.DataItem, "[Nuevos]"));
-                Cerrados += Convert.ToInt32(DataBinder.Eval(e.Row.DataItem, "[Cerrados]"));
-                Ejecucion += Convert.ToInt32(DataBinder.Eval(e.Row.DataItem, "[Ejecucion]"));
+                Pendientes += Convert.ToDouble(DataBinder.Eval(e.Row.DataItem, "[Pendientes]"));
+                Nuevos     += Convert.ToDouble(DataBinder.Eval(e.Row.DataItem, "[Nuevos]"));
+                Cerrados   += Convert.ToDouble(DataBinder.Eval(e.Row.DataItem, "[Cerrados]"));
+                Ejecucion  += Convert.ToDouble(DataBinder.Eval(e.Row.DataItem, "[Ejecucion]"));
             }
             else if (e.Row.RowType == DataControlRowType.Footer)
             {
@@ -298,7 +298,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesDaños : System.Web.UI
                 e.Row.Cells[3].HorizontalAlign = HorizontalAlign.Left;
                 e.Row.Font.Bold = true;
 
-                e.Row.Cells[4].Text = (Ejecucion / GridEficiencia.Rows.Count).ToString();
+                e.Row.Cells[4].Text = ((Cerrados / (Pendientes + Nuevos))*100).ToString("N2");
                 e.Row.Cells[4].HorizontalAlign = HorizontalAlign.Left;
                 e.Row.Font.Bold = true;
             }

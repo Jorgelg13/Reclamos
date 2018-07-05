@@ -22,7 +22,7 @@ public partial class ReclamosUnity : System.Web.UI.MasterPage
         }
         else
         {
-            Response.Redirect("/Modulos/MdReclamosUnity/wbFrmReclamosAutosSeguimiento.aspx?ID_reclamo=" + txtBusquedaId.Text);
+            Response.Redirect("/Modulos/MdReclamosUnity/wbFrmReclamosAutosSeguimiento.aspx?ID_reclamo=" + txtBusquedaId.Text, false);
         }
     }
 
@@ -34,7 +34,7 @@ public partial class ReclamosUnity : System.Web.UI.MasterPage
         }
         else
         {
-            Response.Redirect("/Modulos/MdReclamosUnity/wbFrmReclamosDañosSeguimiento.aspx?ID_reclamo=" + txtReclamosVarios.Text);
+            Response.Redirect("/Modulos/MdReclamosUnity/wbFrmReclamosDañosSeguimiento.aspx?ID_reclamo=" + txtReclamosVarios.Text, false);
         }
     }
 
@@ -46,7 +46,7 @@ public partial class ReclamosUnity : System.Web.UI.MasterPage
         }
         else
         {
-            Response.Redirect("/Modulos/MdReclamosUnity/wbFrmReclamosMedicosSeguimiento.aspx?Id_reclamo=" + txtBuscarReclamoMedico.Text);
+            Response.Redirect("/Modulos/MdReclamosUnity/wbFrmReclamosMedicosSeguimiento.aspx?Id_reclamo=" + txtBuscarReclamoMedico.Text, false);
         }
     }
 }

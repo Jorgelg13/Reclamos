@@ -11,7 +11,7 @@
                 </div>
                 <div class="panel-body">
                     <h1>
-                        <a href="/Modulos/MdReclamosUnity/wbFrmReclamosGeneralAutos.aspx?id=5" title="Total de reclamos de autos en seguimiento" style="font-size: 80px;" class="fa fa-car " aria-hidden="true"></a>
+                        <a href="/Modulos/MdReclamosUnity/wbFrmReclamosGeneralAutos.aspx?id=5" title="Total de reclamos de autos en seguimiento" style="font-size: 80px;" class="fa fa-car"></a>
                         <br />
                         <p style="text-align: center">
                             <asp:Label ID="totalReclamosAutos" runat="server" aria-hidden="true" ForeColor="#797D7F"></asp:Label>
@@ -103,18 +103,18 @@
                 </div>
                 <div class="panel-body" style="text-align:center; padding:10px;">
                     <h3>
-                        <asp:LinkButton ID="lnTotalIndividuales" OnClick="lnTotalIndividuales_Click" ToolTip="Reclamos Individuales en total" runat="server" ForeColor="#797D7F"></asp:LinkButton>/
-                        <asp:LinkButton ID="lnIndividualesFueraTiempo" OnClick="lnIndividualesFueraTiempo_Click" runat="server" Style="color: red" ToolTip="Reclamos individuales fuera de tiempo"></asp:LinkButton>
+                        I: <asp:LinkButton ID="lnIndividualesFueraTiempo" OnClick="lnIndividualesFueraTiempo_Click" runat="server" Style="color: red" ToolTip="Reclamos individuales fuera de tiempo"></asp:LinkButton>/
+                        <asp:LinkButton ID="lnTotalIndividuales" OnClick="lnTotalIndividuales_Click" ToolTip="Reclamos Individuales en total" runat="server" ForeColor="#797D7F"></asp:LinkButton>
                         <asp:Label ID="lbIndividualesFT" runat="server"></asp:Label>
                     </h3>
                     <h3>
-                        <asp:LinkButton ID="lnColectivos" OnClick="lnColectivos_Click" runat="server" ToolTip="Reclamos de colectivos en total" ForeColor="#797D7F"></asp:LinkButton>/
-                        <asp:LinkButton ID="lnColectivosFueraTiempo" OnClick="lnColectivosFueraTiempo_Click" runat="server" Style="color: red" ToolTip="Reclamos de colectivos fuera de tiempo"></asp:LinkButton>
+                        C: <asp:LinkButton ID="lnColectivosFueraTiempo" OnClick="lnColectivosFueraTiempo_Click" runat="server" Style="color: red" ToolTip="Reclamos de colectivos fuera de tiempo"></asp:LinkButton>/
+                        <asp:LinkButton ID="lnColectivos" OnClick="lnColectivos_Click" runat="server" ToolTip="Reclamos de colectivos en total" ForeColor="#797D7F"></asp:LinkButton>
                         <asp:Label ID="lbColectivosFT" runat="server"></asp:Label>
                     </h3>
                     <h3>
-                        <asp:LinkButton ID="lnTotalGastosMedicos"  runat="server" ToolTip="Reclamos de gastos medicos en total" ForeColor="#797D7F"></asp:LinkButton> /
-                        <asp:LinkButton ID="LnTotalFtGastosMedios" runat="server" Style="color: red" ToolTip="Reclamos de gastos medicos en total fuera de tiempo"></asp:LinkButton>
+                        T: <asp:LinkButton ID="LnTotalFtGastosMedios" runat="server" Style="color: red" ToolTip="Reclamos de gastos medicos en total fuera de tiempo"></asp:LinkButton>/
+                        <asp:LinkButton ID="lnTotalGastosMedicos"  runat="server" ToolTip="Reclamos de gastos medicos en total" ForeColor="#797D7F"></asp:LinkButton>
                         <asp:Label ID="lbltotalFt" runat="server"></asp:Label>
                     </h3>
                     <h3>

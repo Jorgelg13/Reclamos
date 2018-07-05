@@ -21,6 +21,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosDañosSeguimiento : Sy
     bool compromiso_pago = false;
     String estado = "Seguimiento"; //esta variable es la que se utiliza para cambiar el estado a cerrado de un reclamo.
     String poliza;
+    short codigo;
     String idRecibido, comentarios, pagos, llamadas, coberturas, datosSiniestro, estados, liquidaciones;
     String estadoReclamo, cartaEnvioCheque, cartaCierreInterno, cartaDeclinado, documentos, doc_solicitados;
     int id, dias, idPago = 0;
@@ -145,6 +146,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosDañosSeguimiento : Sy
             lblEstadoR.Text        = reclamo.estado_unity;
             txtReserva.Text        = reclamo.reserva.ToString();
             lblDocumento.Text      = String.IsNullOrEmpty(reclamo.documentos)? "": reclamo.documentos.Replace("\\","/");
+            codigo                 = Convert.ToInt16(reclamo.reg_reclamo_varios.gestor);
 
             if (reclamo.estado_unity == "Cerrado")
             {
@@ -355,6 +357,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosDañosSeguimiento : Sy
                 if (reclamo.estado_unity != "Cerrado")
                 {
                     cerrarReclamo();
+                    NotificacionCierre();
                 }
             }
 
@@ -1019,5 +1022,32 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosDañosSeguimiento : Sy
     protected void btnGuardarDocumentos_Click(object sender, EventArgs e)
     {
         seleccionarDocumentos();
+    }
+
+    public void NotificacionCierre()
+    {
+       
+        var reclamo = DBReclamos.reclamos_varios.Find(id);
+        codigo = Convert.ToInt16(reclamo.reg_reclamo_varios.gestor);
+        var pagoTotal = DBReclamos.detalle_pagos_reclamos_varios.Where(pa => pa.id_reclamos_varios == id).Count();
+
+        String correo = Utils.seleccionarCorreo(codigo);
+    
+        if (pagoTotal == 0)
+        {
+            string Opcion1 = "Estimado Ejecutivo: \n\n" +
+            "Por este medio hacemos de su conocimiento que  el reclamo ID " + id + " presentado por el Asegurado " + reclamo.reg_reclamo_varios.asegurado + 
+            " bajo la póliza No. " + reclamo.reg_reclamo_varios.poliza + ", se cerró en fecha " + DateTime.Now + ", sin pago debido a " + ddlTipoCierre.SelectedValue + ".";
+            notificacion.enviarcorreo2(correo, Opcion1, "Cierre Reclamo", reclamo.gestores.correo);
+        }
+
+        else
+        {
+            var pago = DBReclamos.detalle_pagos_reclamos_varios.Where(pa => pa.id_reclamos_varios == id).Single();
+            string Opcion2 = "Estimando Ejecutivo: \n\n " +
+             "Por este medio hacemos de su conocimiento que  el reclamo ID "+id+" presentado por el Asegurado "+reclamo.reg_reclamo_varios.asegurado +
+             " bajo la póliza No. "+reclamo.reg_reclamo_varios.poliza+", se cerró en fecha "+DateTime.Now+", por un monto pagado de "+ pago.valor_indemnizado.ToString() +".";
+             notificacion.enviarcorreo2(correo, Opcion2, "Cierre Reclamo", reclamo.gestores.correo);
+        }
     }
 }

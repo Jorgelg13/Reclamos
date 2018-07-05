@@ -10,7 +10,7 @@ public partial class ReportesDaños : System.Web.UI.Page
     }
     protected void btnBuscar_Click(object sender, EventArgs e)
     {
-        Utils.ReporteCabina(txtFechaInicio, txtFechaFin, "pa_ReportesDaños", Gridvarios);
+        Utils.Reportes(txtFechaInicio, txtFechaFin, "pa_ReportesDaños", Gridvarios);
     }
     protected void btnRegresar_Click(object sender, EventArgs e)
     {

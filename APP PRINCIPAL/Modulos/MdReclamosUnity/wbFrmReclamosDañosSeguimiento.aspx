@@ -890,6 +890,8 @@
                                         <RowStyle BackColor="#EFF3FB" HorizontalAlign="Left" />
                                     </asp:GridView>
                                     <asp:TextBox ID="txtSolicitudDocumentos" Style="width: 100%; border: 0px; text-align: justify;" autocomplete="off" CssClass="form-control" TextMode="multiline" Columns="50" Rows="30" runat="server" placeholder="Observaciones" />
+                                    <div id="ContenidoImpresion">
+                                    </div>
                                 </div>
                             </div>
                             <div class="modal-footer">
@@ -960,11 +962,6 @@
                             </asp:GridView>
                         </div>
                         <br />
-                        <p>Agradeciendo su pronta atención a la presente, quedamos de ustedes.</p>
-                        <br />
-                        <br />
-                        <p>__________________________________</p>
-                        <p>Atentamente</p>
                     </div>
                 </div>
                 <%-- data source con las conexiones a las tablas de la bd reclamos--%>
@@ -1034,7 +1031,7 @@
             document.body.innerHTML = contenido;
             window.print();
             document.body.innerHTML = contenidoOriginal;
-           window.location.href = "/Modulos/MdReclamosUnity/wbFrmReclamosDañosSeguimiento.aspx?ID_reclamo=" + $('#ContentPlaceHolder1_lblID').text();
+           window.location.href = window.location.href;
         }
     </script>
     <script>
@@ -1044,9 +1041,14 @@
     </script>
     <script>
         $('#ImprimirSolicitud').on('click', function (event) {
+            var contenido = $('#ContentPlaceHolder1_txtSolicitudDocumentos').val();
+            var final = contenido.replace(/\n/g, '<br\>');
+            $('#ContentPlaceHolder1_txtSolicitudDocumentos').css("display", "none");
+            $('#ContenidoImpresion').html(final);
             $("#SaludoDocumentos").attr("style", "");
             $('#ContentPlaceHolder1_TituloMemo').text("Solicitud de Documentos");
             $('#bitacora').html($('#gvDocSolicitados').html());
+
             printDiv('imprimirBitacora');
         });
 

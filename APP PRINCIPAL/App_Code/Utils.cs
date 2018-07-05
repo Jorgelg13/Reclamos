@@ -83,7 +83,7 @@ public class Utils
         }
     }
 
-    public static void ReporteCabina(TextBox fechainicio, TextBox fechafin, String reporte, GridView gridRepore)
+    public static void Reportes(TextBox fechainicio, TextBox fechafin, String reporte, GridView gridRepore)
     {
         try
         {

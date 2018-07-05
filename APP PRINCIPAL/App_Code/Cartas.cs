@@ -49,14 +49,14 @@ public class Cartas
             "Bien asegurado: \n" +
             "Deducible: \n" +
             "Valuación: \n\n" +
-            "RECOMENDACIONES EN CASO DE SINIESTRO:" +
-            "Informar de inmediato a nuestra cabina de emergencia 2386 - 3737 que esta disponible las 24 horas del día y los 365 días del año.\n\n" +
-            "Si la Aseguradora solicita visita de ajustador, indicar a las personas involucradas en la asistencia que no deben entregar ningún documento al ajustador; ya que éste procedimiento se hará  a través de su Corredor de Seguros Unity Promotores.\n\n" +
-            "Es importante que este al día con el pago de primas convenido.\n\n" +
-            "En todo aquel reclamo en el cual se reporten daños a bienes, éstos deberán ser resguardados por el asegurado, ya que en caso sea pagado el reclamo, los bienes pasaran a ser propiedad de la aseguradora.\n\n" +
-            "Nuestro seguimiento consta de 60 días posteriores a la fecha de aviso, en caso se supere este tiempo y no se obtengan los documentos necesarios para la reclamación, se estarán cerrando los reclamos internamente, esperando que al contar con los documentos completos los haga llegar a nuestras oficinas para continuar la reclamación ante la aseguradora.\n\n" +
-            "Si por falta de documentos se cierran los reclamos ante la aseguradora, muy importante que considere que toda gestión de reclamo tiene una prescripción de 2 años a partir de la fecha de siniestro.\n\n" +
-            "En caso de necesitar  información y/ o documentación adicional se informará oportunamente.";
+            "RECOMENDACIONES EN CASO DE SINIESTRO: \n" +
+            "1) Informar de inmediato a nuestra cabina de emergencia 2386 - 3737 que esta disponible las 24 horas del día y los 365 días del año.\n\n" +
+            "2) Si la Aseguradora solicita visita de ajustador, indicar a las personas involucradas en la asistencia que no deben entregar ningún documento al ajustador; ya que éste procedimiento se hará  a través de su Corredor de Seguros Unity Promotores.\n\n" +
+            "3) Es importante que este al día con el pago de primas convenido.\n\n" +
+            "4) En todo aquel reclamo en el cual se reporten daños a bienes, éstos deberán ser resguardados por el asegurado, ya que en caso sea pagado el reclamo, los bienes pasaran a ser propiedad de la aseguradora.\n\n" +
+            "5) Nuestro seguimiento consta de 60 días posteriores a la fecha de aviso, en caso se supere este tiempo y no se obtengan los documentos necesarios para la reclamación, se estarán cerrando los reclamos internamente, esperando que al contar con los documentos completos los haga llegar a nuestras oficinas para continuar la reclamación ante la aseguradora.\n\n" +
+            "6) Si por falta de documentos se cierran los reclamos ante la aseguradora, muy importante que considere que toda gestión de reclamo tiene una prescripción de 2 años a partir de la fecha de siniestro.\n\n" +
+            "7) En caso de necesitar  información y/ o documentación adicional se informará oportunamente.";
     }
     //cartas de reclamos de autos
 

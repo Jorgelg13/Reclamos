@@ -9,7 +9,7 @@ public partial class ReportesAutorizacionesAbiertas : System.Web.UI.Page
     }
     protected void btnBuscar_Click(object sender, EventArgs e)
     {
-        Utils.ReporteCabina(txtFechaInicio, txtFechaFin, "pa_reportesAutorizacionesAbiertas", GridReporteAutorizaciones);
+        Utils.Reportes(txtFechaInicio, txtFechaFin, "pa_reportesAutorizacionesAbiertas", GridReporteAutorizaciones);
     }
     protected void btnRegresar_Click(object sender, EventArgs e)
     {

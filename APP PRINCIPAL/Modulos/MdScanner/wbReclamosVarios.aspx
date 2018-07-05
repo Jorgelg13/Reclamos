@@ -15,6 +15,8 @@
         <fieldset style="color: white;">
             <legend>Elija el archivo que desea escanear</legend>
             <input type="radio" name="tipo" value="Expendientes" checked="checked" />Expendientes<br />
+            <input type="radio" name="tipo" value="Expendientes-2" checked="checked" />Expendientes 2<br />
+            <input type="radio" name="tipo" value="Expendientes-3" checked="checked" />Expendientes 3<br />
             <input type="radio" name="tipo" value="Imagenes"/>Imagenes<br />
             <input type="radio" name="tipo" value="Cartas"/>Cartas<br />
             <input type="radio" name="tipo" value="Cheques" />Cheques<br />

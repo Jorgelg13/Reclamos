@@ -55,6 +55,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosAutosSeguimiento : Sys
         estados_autos  = Consultas.ESTADOS_AUTOS(id);
         documentos     = Consultas.SOLICITUD_DOCUMENTOS("Autos");
         doc_solicitados = Consultas.DOCUMENTOS_SOLICITADOS(id, "Autos");
+        txtSolicitudDocumentos.Text = "Observaciones";
 
         if (!IsPostBack)
         {
@@ -995,6 +996,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosAutosSeguimiento : Sys
     private void BitacoraReclamo()
     {
         var bitacora        = DBReclamos.reclamo_auto.Find(id);
+        bitAsesor.Text      = bitacora.gestores.nombre;
         BitNumReclamo.Text  = bitacora.num_reclamo.ToString();
         BitPoliza.Text      = bitacora.auto_reclamo.poliza;
         BitAsegurado.Text   = bitacora.auto_reclamo.asegurado;

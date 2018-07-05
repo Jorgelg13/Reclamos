@@ -60,12 +60,10 @@
             <asp:Label ID="totalReclamosDaños" runat="server" hidden="true"  ></asp:Label>
             <asp:Label ID="totalReclamosMedicos" runat="server" hidden="true" ></asp:Label>
             <asp:Label ID="totalAutorizaciones" runat="server" hidden="true" ></asp:Label>
-
-                <!-- Collect the nav links, forms, and other content for toggling -->
-                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav">
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle fa fa-car" style="font-size: 16px;" aria-hidden="true" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Reclamos Autos <span class="caret"></span></a>
+                            <a href="#" class="dropdown-toggle fa fa-car" style="font-size: 16px;" aria-hidden="true" data-toggle="dropdown" role="button">Reclamos Autos <span class="caret"></span></a>
                             <ul class="dropdown-menu">
                                 <li><a href="/Modulos/MdReclamos/wbFrmReclamosAutos.aspx">Realizar Un Reclamo</a></li>
                                 <li><a href="/Modulos/MdReclamos/wbFrmReclamoAutoManual.aspx">Reclamo manual</a></li>
@@ -76,7 +74,7 @@
                             </ul>
                         </li>
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle fa fa-exclamation-triangle" style="font-size: 16px;" aria-hidden="true" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Reclamos Daños <span class="caret"></span></a>
+                            <a href="#" class="dropdown-toggle fa fa-exclamation-triangle" style="font-size: 16px;" data-toggle="dropdown" role="button">Reclamos Daños <span class="caret"></span></a>
                             <ul class="dropdown-menu">
                                 <li><a href="/Modulos/MdReclamos/wbFrmReclamosDaños.aspx">Realizar Un Reclamo</a></li>
                                 <li><a href="/Modulos/MdReclamos/wbFrmReclamoDañoManual.aspx">Reclamo manual</a></li>
@@ -86,7 +84,7 @@
                             </ul>
                         </li>
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle fa fa-heartbeat" aria-hidden="true" style="font-size: 16px;" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Reclamos Medicos <span class="caret"></span></a>
+                            <a href="#" class="dropdown-toggle fa fa-heartbeat" style="font-size: 16px;" data-toggle="dropdown" role="button">Reclamos Medicos <span class="caret"></span></a>
                             <ul class="dropdown-menu">
                                 <li><a href="/Modulos/MdReclamos/wbFrmReclamosMedicos.aspx">Realizar Un Reclamo</a></li>
                                 <li><a href="/Modulos/MdReclamos/wbFrmReclamoMedicoManual.aspx">Realizar Reclamo manual</a></li>
@@ -95,7 +93,7 @@
                             </ul>
                         </li>
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle fa fa-medkit" aria-hidden="true" style="font-size: 16px;" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Autorizaciones <span class="caret"></span></a>
+                            <a href="#" class="dropdown-toggle fa fa-medkit" style="font-size: 16px;" data-toggle="dropdown" role="button">Autorizaciones <span class="caret"></span></a>
                             <ul class="dropdown-menu">
                                 <li><a href="/Modulos/MdReclamos/wbFrmAutorizaciones.aspx">Realizar una Autorizacion</a></li>
                                 <li><a href="/Modulos/MdReclamos/wbFrmAutorizacionManual.aspx">Realizar Una autorizacion Manual</a></li>
@@ -104,7 +102,7 @@
                             </ul>
                         </li>
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle fa fa-line-chart" aria-hidden="true" style="font-size: 16px;" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Reportes <span class="caret"></span></a>
+                            <a href="#" class="dropdown-toggle fa fa-line-chart" style="font-size: 16px;" data-toggle="dropdown" role="button">Reportes <span class="caret"></span></a>
                             <ul class="dropdown-menu">
                                 <li><a href="/Modulos/MdReportes/ReportesAutos.aspx">Reportes Reclamos Autos</a></li>
                                 <li><a href="/Modulos/MdReportes/ReportesDaños.aspx">Reportes Reclamos Daños</a></li>
@@ -114,7 +112,7 @@
                             </ul>
                         </li>
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle fa fa-question-circle-o" aria-hidden="true" style="font-size: 18px;" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Opciones <span class="caret"></span></a>
+                            <a href="#" class="dropdown-toggle fa fa-question-circle-o" style="font-size: 18px;" data-toggle="dropdown" role="button">Opciones <span class="caret"></span></a>
                             <ul class="dropdown-menu">
                                 <li class="dropdown-submenu">
                                     <a tabindex="-1" href="#">Protocolos</a>
@@ -275,7 +273,7 @@
                                     </ul>
                                 </li>
                                 <li><a href="#">Directorio Regional</a></li>
-                                                                 <li class="dropdown-submenu">
+                                   <li class="dropdown-submenu">
                                     <a tabindex="-1" href="#">Formularios Aseguradoras</a>
                                     <ul class="dropdown-menu">
                                         <li class="dropdown-submenu"></li>
@@ -373,7 +371,6 @@
                                         </li>
                                     </ul>
                                 </li>
-
                                 <li class="dropdown-submenu">
                                     <a tabindex="-1" href="#">Formularios TC</a>
                                     <ul class="dropdown-menu">
@@ -414,7 +411,6 @@
                                 <li><a href="javascript:ventanaSecundaria('/pdf/textos/TEXTOS DE RESPUESTA.pdf')">Textos de respuesta</a></li>
                             </ul>
                         </li>
-
                         <li class="dropdown">
                             <a href="#" class="fa fa-cogs" aria-hidden="true" style="font-size: 18px;" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Admin <span class="caret"></span></a>
                             <ul class="dropdown-menu">
@@ -442,12 +438,12 @@
                 </div>
             </div>
         </nav>
-        <script language="javascript"> 
+        <script> 
             function ventanaSecundaria(URL) {
                 window.open(URL, "ventana1", "width=800,height=600,scrollbars=NO")
             }
         </script>
-        <script language="javascript"> 
+        <script> 
             function excel(URL) {
                 window.open(URL, "ventana1", "width=450,height=150,scrollbars=NO")
             }

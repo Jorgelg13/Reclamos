@@ -15,9 +15,10 @@ public partial class DashboardUnity : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
+
         if (!comprobar.verificarUsuario(userlogin))
         {
-            Response.Redirect("/portada.aspx");
+            Response.Redirect("/portada.aspx", false);
         }
 
         ObtenerID();
@@ -56,16 +57,16 @@ public partial class DashboardUnity : System.Web.UI.Page
 
             //total de reclamos medicos por tiempo
             Double medicos = DBReclamos.reclamos_medicos.Where(m => m.estado_unity == "Seguimiento" && m.reg_reclamos_medicos.tipo == "I").Count();
-            lnTotalIndividuales.Text = "I: " + medicos.ToString();
+            lnTotalIndividuales.Text = medicos.ToString();
             lbIndividualesFT.Text = " = " + ((1 - (individualesFT / medicos)) * 100).ToString("N2") + "%";
 
             Double medicosC = DBReclamos.reclamos_medicos.Where(m => m.estado_unity == "Seguimiento" && m.reg_reclamos_medicos.tipo == "C").Count();
-            lnColectivos.Text = "C:  " + medicosC.ToString();
+            lnColectivos.Text =  medicosC.ToString();
             lbColectivosFT.Text = " = " + (( 1 - (colectivosFT / medicosC)) * 100).ToString("N2") + "%";
 
             Double TotalRecMedicos = medicos + medicosC;
             Double TotalFtMedicos = Convert.ToDouble(colectivosFT) + Convert.ToDouble(individualesFT);
-            lnTotalGastosMedicos.Text = TotalRecMedicos.ToString();
+            lnTotalGastosMedicos.Text =  TotalRecMedicos.ToString();
             LnTotalFtGastosMedios.Text = TotalFtMedicos.ToString();
             lbltotalFt.Text = " = " + ((1 - (TotalFtMedicos / TotalRecMedicos)) * 100).ToString("N2") + "%";
 

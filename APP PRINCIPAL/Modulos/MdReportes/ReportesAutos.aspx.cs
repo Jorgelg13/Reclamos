@@ -9,7 +9,7 @@ public partial class ReportesAutos : System.Web.UI.Page
     }
     protected void btnBuscar_Click(object sender, EventArgs e)
     {
-        Utils.ReporteCabina(txtFechaInicio, txtFechaFin, "pa_ReportesAutos", GridAutos);
+        Utils.Reportes(txtFechaInicio, txtFechaFin, "pa_ReportesAutos", GridAutos);
     }
     protected void btnRegresar_Click(object sender, EventArgs e)
     {

@@ -167,13 +167,13 @@
                                 <br />
                                 <asp:CheckBox ID="CheckPerdida" runat="server" Text="Perdida Total" AutoPostBack="True" OnCheckedChanged="CheckPerdida_CheckedChanged" />
                                 <br />
-                                <asp:CheckBox ID="CheckRobo" runat="server" Text="Robo" AutoPostBack="True" OnCheckedChanged="CheckRobo_CheckedChanged"/>
+                                <asp:CheckBox ID="CheckRobo" runat="server" Text="Robo" AutoPostBack="True" OnCheckedChanged="CheckRobo_CheckedChanged" />
                                 <br />
                                 <asp:CheckBox ID="ChecKAutoAlquiler" runat="server" Text="Alquiler De Auto" AutoPostBack="True" OnCheckedChanged="ChecKAutoAlquiler_CheckedChanged" />
                                 <br />
                                 <asp:CheckBox ID="checkCompromiso" runat="server" Text="Compromiso De Pago" />
                                 <br />
-                                <asp:CheckBox ID="checkCierreInterno" runat="server" Text="Cierre Interno" AutoPostBack="true" OnCheckedChanged="checkCierreInterno_CheckedChanged"/>
+                                <asp:CheckBox ID="checkCierreInterno" runat="server" Text="Cierre Interno" AutoPostBack="true" OnCheckedChanged="checkCierreInterno_CheckedChanged" />
                                 <br />
                                 <asp:CheckBox ID="checkCerrarReclamo" runat="server" Text="Cerrar Reclamo" AutoPostBack="True" OnCheckedChanged="checkCerrarReclamo_CheckedChanged" />
                             </div>
@@ -270,7 +270,7 @@
                             <div class="col-xs-3 col-md-2 col-sm-2 col-lg-1">
                                 <a title="Solicitud de documentos" id="solicitudDoc" data-toggle="modal" role="button" data-target="#SolicitudDocumentos"><i class="fa fa-list-ul"></i></a>
                             </div>
-                             <div class="col-xs-3 col-md-2 col-sm-2 col-lg-1">
+                            <div class="col-xs-3 col-md-2 col-sm-2 col-lg-1">
                                 <a title="Ver Documentos Solicitados" id="DocSolicitados" data-toggle="modal" role="button" data-target="#SolicitudDocumentos"><i class="fa fa-files-o"></i></a>
                             </div>
                             <div class="col-xs-3 col-md-2 col-sm-2 col-lg-1">
@@ -613,348 +613,366 @@
                 </div>
             </div>
         </div>
-           </div>
-        <%-------------------- Solicitud de documentos --------------------%>
-        <div class="modal fade" id="SolicitudDocumentos">
-            <div class="modal-dialog modal-lg">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title"><b>Solicitud de documentos</b></h4>
+    </div>
+    <%-------------------- Solicitud de documentos --------------------%>
+    <div class="modal fade" id="SolicitudDocumentos">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title"><b>Solicitud de documentos</b></h4>
+                </div>
+                <div class="modal-body">
+                    <div id="gvDocumentos" style="display: none" class="scrolling-table-container">
+                        <asp:GridView ID="GridDocumentos" CssClass="table bs-table table-responsive table-hover" runat="server" AutoGenerateColumns="true" ForeColor="#333333" GridLines="None">
+                            <Columns>
+                                <asp:TemplateField HeaderText="Seleccionar">
+                                    <ItemTemplate>
+                                        <asp:CheckBox ID="chElegir" runat="server" />
+                                    </ItemTemplate>
+                                </asp:TemplateField>
+                            </Columns>
+                            <AlternatingRowStyle BackColor="White" />
+                            <HeaderStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" HorizontalAlign="Center" Wrap="False" />
+                            <RowStyle BackColor="#EFF3FB" HorizontalAlign="Left" />
+                        </asp:GridView>
                     </div>
-                    <div class="modal-body">
-                        <div id="gvDocumentos" style="display:none" class="scrolling-table-container">
-                            <asp:GridView ID="GridDocumentos" CssClass="table bs-table table-responsive table-hover" runat="server" AutoGenerateColumns="true" ForeColor="#333333" GridLines="None">
-                                <Columns>
-                                    <asp:TemplateField HeaderText="Seleccionar">
-                                        <ItemTemplate>
-                                            <asp:CheckBox ID="chElegir" runat="server" />
-                                        </ItemTemplate>
-                                    </asp:TemplateField>
-                                </Columns>
-                                <AlternatingRowStyle BackColor="White" />
-                                <HeaderStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" HorizontalAlign="Center" Wrap="False" />
-                                <RowStyle BackColor="#EFF3FB" HorizontalAlign="Left" />
-                            </asp:GridView>
-                        </div>
-                         <div id="gvDocSolicitados" style="display: none" class="scrolling-table-container">
-                            <asp:GridView ID="GridDocSeleccionados" CssClass="table bs-table table-responsive table-hover" runat="server" AutoGenerateColumns="true" ForeColor="#333333" GridLines="None" CellPadding="4">
-                                <AlternatingRowStyle BackColor="White" />
-                                <HeaderStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" HorizontalAlign="Center" Wrap="False" />
-                                <RowStyle BackColor="#EFF3FB" HorizontalAlign="Left" />
-                            </asp:GridView>
-                        </div>
+                    <div id="gvDocSolicitados" style="display: none">
+                        <asp:GridView ID="GridDocSeleccionados" CssClass="table detalle" runat="server" AutoGenerateColumns="true" ForeColor="#333333" GridLines="None" CellPadding="4">
+                            <AlternatingRowStyle BackColor="White" />
+                            <HeaderStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" HorizontalAlign="Center" Wrap="False" />
+                            <RowStyle BackColor="#EFF3FB" HorizontalAlign="Left" />
+                        </asp:GridView>
+                        <asp:TextBox ID="txtSolicitudDocumentos" Style="width: 100%; border: 0px; text-align: justify;" autocomplete="off" CssClass="form-control" TextMode="multiline" Columns="50" Rows="10" runat="server" />
+                        <div id="ContenidoImpresion"></div>
                     </div>
-                    <div class="modal-footer form-inline">
-                        <input type="checkbox" id="ChMemoCliente"> Memo Cliente
-                        <input type="checkbox" id="ChMemoAnalista"> Memo Aseguradora
+                </div>
+                <div class="modal-footer form-inline">
+                    <input type="checkbox" id="ChMemoCliente">
+                    Memo Cliente
+                        <input type="checkbox" id="ChMemoAnalista">
+                    Memo Aseguradora
                         <button type="button" class="btn btn-warning" data-dismiss="modal">Cerrar</button>
-                        <button type="button" id="ImprimirSolicitud" class="btn btn-primary">Imprimir</button>
-                        <asp:Button CssClass="btn btn-primary"  runat="server" OnClick="btnGuardarDocumentos_Click" ID="btnGuardarDocumentos" Text="Guardar" />
-                    </div>
+                    <button type="button" id="ImprimirSolicitud" class="btn btn-primary">Imprimir</button>
+                    <asp:Button CssClass="btn btn-primary" runat="server" OnClick="btnGuardarDocumentos_Click" ID="btnGuardarDocumentos" Text="Guardar" />
                 </div>
             </div>
         </div>
-        <%--------------------------------- modal para mostrar seleccion para producto no conforme --------------------------------%>
-        <div class="modal fade" id="ModalNoconforme">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title"><b>Seleccionar opcion de producto no conforme</b></h4>
+    </div>
+    <%--------------------------------- modal para mostrar seleccion para producto no conforme --------------------------------%>
+    <div class="modal fade" id="ModalNoconforme">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title"><b>Seleccionar opcion de producto no conforme</b></h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-inline">
+                        <asp:DropDownList ID="ddlNoConforme" class="form-control" Style="width: 65%; height: 30px;" runat="server">
+                            <asp:ListItem Value="Cartas hacia la SAT con errores">Cartas hacia la SAT con errores</asp:ListItem>
+                            <asp:ListItem Value="Cheques con datos incorrectos">Cheques con datos incorrectos</asp:ListItem>
+                            <asp:ListItem Value="Declinaciones con Datos incorrectos">Declinaciones con Datos incorrectos</asp:ListItem>
+                            <asp:ListItem Value="Nombre del asegurado incorrecto">Nombre del asegurado incorrecto</asp:ListItem>
+                            <asp:ListItem Value="Facturas de deducible con datos erróneos ">Facturas de deducible con datos erróneos </asp:ListItem>
+                        </asp:DropDownList>
+                        <asp:DropDownList ID="ddlEstadoNoConforme" class="form-control" Style="width: 30%; height: 30px;" runat="server">
+                            <asp:ListItem Value="Abierto">Abierto</asp:ListItem>
+                            <asp:ListItem Value="Cerrado">Cerrado</asp:ListItem>
+                        </asp:DropDownList>
                     </div>
-                    <div class="modal-body">
-                        <div class="form-inline">
-                            <asp:DropDownList ID="ddlNoConforme" class="form-control" Style="width: 65%; height: 30px;" runat="server">
-                                <asp:ListItem Value="Cartas hacia la SAT con errores">Cartas hacia la SAT con errores</asp:ListItem>
-                                <asp:ListItem Value="Cheques con datos incorrectos">Cheques con datos incorrectos</asp:ListItem>
-                                <asp:ListItem Value="Declinaciones con Datos incorrectos">Declinaciones con Datos incorrectos</asp:ListItem>
-                                <asp:ListItem Value="Nombre del asegurado incorrecto">Nombre del asegurado incorrecto</asp:ListItem>
-                                <asp:ListItem Value="Facturas de deducible con datos erróneos ">Facturas de deducible con datos erróneos </asp:ListItem>
-                            </asp:DropDownList>
-                            <asp:DropDownList ID="ddlEstadoNoConforme" class="form-control" Style="width: 30%; height: 30px;" runat="server">
-                                <asp:ListItem Value="Abierto">Abierto</asp:ListItem>
-                                <asp:ListItem Value="Cerrado">Cerrado</asp:ListItem>
-                            </asp:DropDownList>
-                        </div>
-                        <br />
-                        <asp:TextBox ID="txtObservacionesNoConf" Style="width: 99%" autocomplete="off" class="form-control" TextMode="multiline" Columns="50" Rows="3" placeholder="Comentarios del producto no conforme" runat="server"></asp:TextBox>
-                        <br />
-                        <asp:Label runat="server" ID="lblProductoNoConforme"></asp:Label>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-warning" data-dismiss="modal">Cerrar</button>
-                        <asp:Button ID="btnProductoNoConforme" OnClick="btnProductoNoConforme_Click" CssClass="btn btn-primary" runat="server" Text="Guardar" />
-                    </div>
+                    <br />
+                    <asp:TextBox ID="txtObservacionesNoConf" Style="width: 99%" autocomplete="off" class="form-control" TextMode="multiline" Columns="50" Rows="3" placeholder="Comentarios del producto no conforme" runat="server"></asp:TextBox>
+                    <br />
+                    <asp:Label runat="server" ID="lblProductoNoConforme"></asp:Label>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-warning" data-dismiss="modal">Cerrar</button>
+                    <asp:Button ID="btnProductoNoConforme" OnClick="btnProductoNoConforme_Click" CssClass="btn btn-primary" runat="server" Text="Guardar" />
                 </div>
             </div>
         </div>
-        <%-- data source con las conexiones a las tablas de la bd reclamos--%>
-        <asp:SqlDataSource ID="SqlDataSourceGestores" runat="server" ConnectionString="<%$ ConnectionStrings:reclamosConnectionString %>" SelectCommand="SELECT [id], [nombre] FROM [gestores] where tipo = 'autos' and estado = 'true'"></asp:SqlDataSource>
-        <asp:SqlDataSource ID="SqlDataSourceAnalistas" runat="server" ConnectionString="<%$ ConnectionStrings:reclamosConnectionString %>" SelectCommand="SELECT [id], [nombre] FROM [analistas] where estado = 'true' "></asp:SqlDataSource>
-        <asp:SqlDataSource ID="SqlDataSourceEstadosAutos" runat="server" ConnectionString="<%$ ConnectionStrings:reclamosConnectionString %>" SelectCommand="SELECT [descripcion], [dias_revision] FROM [estados_reclamos_unity] where tipo = 'auto'"></asp:SqlDataSource>
-        <asp:SqlDataSource ID="SqlDataSourceTalleres" runat="server" ConnectionString="<%$ ConnectionStrings:reclamosConnectionString %>" SelectCommand="SELECT [id], [nombre] FROM [talleres] where estado = 'true'"></asp:SqlDataSource>
-        <asp:SqlDataSource ID="selecionarCobertura" runat="server" ConnectionString="<%$ ConnectionStrings:reclamosConnectionString %>" SelectCommand="SELECT [id], [cobertura] FROM [coberturas] where tipo = 'autos'"></asp:SqlDataSource>
+    </div>
+    <%-- data source con las conexiones a las tablas de la bd reclamos--%>
+    <asp:SqlDataSource ID="SqlDataSourceGestores" runat="server" ConnectionString="<%$ ConnectionStrings:reclamosConnectionString %>" SelectCommand="SELECT [id], [nombre] FROM [gestores] where tipo = 'autos' and estado = 'true'"></asp:SqlDataSource>
+    <asp:SqlDataSource ID="SqlDataSourceAnalistas" runat="server" ConnectionString="<%$ ConnectionStrings:reclamosConnectionString %>" SelectCommand="SELECT [id], [nombre] FROM [analistas] where estado = 'true' "></asp:SqlDataSource>
+    <asp:SqlDataSource ID="SqlDataSourceEstadosAutos" runat="server" ConnectionString="<%$ ConnectionStrings:reclamosConnectionString %>" SelectCommand="SELECT [descripcion], [dias_revision] FROM [estados_reclamos_unity] where tipo = 'auto'"></asp:SqlDataSource>
+    <asp:SqlDataSource ID="SqlDataSourceTalleres" runat="server" ConnectionString="<%$ ConnectionStrings:reclamosConnectionString %>" SelectCommand="SELECT [id], [nombre] FROM [talleres] where estado = 'true'"></asp:SqlDataSource>
+    <asp:SqlDataSource ID="selecionarCobertura" runat="server" ConnectionString="<%$ ConnectionStrings:reclamosConnectionString %>" SelectCommand="SELECT [id], [cobertura] FROM [coberturas] where tipo = 'autos'"></asp:SqlDataSource>
 
-        <!-- modal para mostrar el editor de envio de cartas -->
-        <div class="modal fade" id="Editor" data-keyboard="false" data-backdrop="static">
-            <div class="modal-dialog modal-lg">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title" id="imprimircarta"><b>Impresion de cartas</b></h4>
-                    </div>
-                    <div id="summernote">
-                    </div>
-                    <a href="javascript:void(0)" onclick="$('.note-editable').print()" style="font-size: 40px; padding-left: 15px;"><i class="fa fa-print" aria-hidden="true"></i></a>
-                    <asp:LinkButton ID="lnkGuardarCarta" OnClick="lnkGuardarCarta_Click" title="Guardar Carta" runat="server" Style="font-size: 40px; text-align: center;"><i class="fa fa-floppy-o" aria-hidden="true"></i></asp:LinkButton>
-                    <asp:Panel runat="server" ID="panelPrincipal">
-                        <div style="display: none;" id="MemosReclamos" class="tipo_letra">
-                            <div class="img-float-left" style="float: left; padding-top: 70px;">
-                                <p>
-                                    Guatemala
+    <!-- modal para mostrar el editor de envio de cartas -->
+    <div class="modal fade" id="Editor" data-keyboard="false" data-backdrop="static">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="imprimircarta"><b>Impresion de cartas</b></h4>
+                </div>
+                <div id="summernote">
+                </div>
+                <a href="javascript:void(0)" onclick="$('.note-editable').print()" style="font-size: 40px; padding-left: 15px;"><i class="fa fa-print" aria-hidden="true"></i></a>
+                <asp:LinkButton ID="lnkGuardarCarta" OnClick="lnkGuardarCarta_Click" title="Guardar Carta" runat="server" Style="font-size: 40px; text-align: center;"><i class="fa fa-floppy-o" aria-hidden="true"></i></asp:LinkButton>
+                <asp:Panel runat="server" ID="panelPrincipal">
+                    <div style="display: none;" id="MemosReclamos" class="tipo_letra">
+                        <div class="img-float-left" style="float: left; padding-top: 70px;">
+                            <p>
+                                Guatemala
                                 <asp:Label ID="lblCartaFecha" runat="server"></asp:Label>
-                                    <br />
-                                    <asp:Label ID="lblCartaid" runat="server"></asp:Label>
-                                    <br />
-                                    Señor(a)
                                 <br />
-                                    <asp:Label ID="lblCartaAsegurado" runat="server"></asp:Label>
-                                    <br />
-                                    Presente
-                                </p>
+                                <asp:Label ID="lblCartaid" runat="server"></asp:Label>
+                                <br />
+                                Señor(a)
+                                <br />
+                                <asp:Label ID="lblCartaAsegurado" runat="server"></asp:Label>
+                                <br />
+                                Presente
+                            </p>
+                        </div>
+                        <div>
+                            <table style="width: 100%">
+                                <tr>
+                                    <td><b>Referencia:</b></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>Asunto: Nombre del asunto</td>
+                                </tr>
+                                <tr>
+                                    <td>Vehiculo :<asp:Label ID="lblCartaVehiculo" runat="server"></asp:Label></td>
+                                </tr>
+                                <tr>
+                                    <td>Poliza :<asp:Label ID="lblCartaPoliza" runat="server"></asp:Label></td>
+                                    <td></td>
+                                </tr>
+                            </table>
+                        </div>
+                        <p style="padding-top: 20px;">
+                            Estimado(@):
+                                <br />
+                            !Reciba un cordial saludo¡
+                        </p>
+                        <!-- aqui inicia el cambio entre formato -->
+                        <div style="padding-top: 5px;">
+                            <div style="text-align: justify;">
+                                <asp:Label ID="lblMemo" runat="server"></asp:Label>
                             </div>
-                            <div>
+                            <asp:Panel runat="server" ID="PnDetallePago" Visible="false">
+                                <table style="width: 30%; margin-left: 285px;" class="estilos-tabla">
+                                    <tr class="estilos-tabla">
+                                        <th>Monto Reclamado</th>
+                                        <th></th>
+                                    </tr>
+                                    <tr class="estilos-tabla">
+                                        <td>Monto Sin Iva</td>
+                                        <td>0.00</td>
+                                    </tr>
+                                    <tr class="estilos-tabla">
+                                        <td>Deducible</td>
+                                        <td>0.00</td>
+                                    </tr>
+                                    <tr class="estilos-tabla">
+                                        <td>Subtotal</td>
+                                        <td>0.00</td>
+                                    </tr>
+                                    <tr class="estilos-tabla">
+                                        <td>(-)Timbres</td>
+                                        <td>0.00</td>
+                                    </tr>
+                                    <tr class="estilos-tabla">
+                                        <td>Total a Liquidar</td>
+                                        <td>0.00</td>
+                                    </tr>
+                                </table>
+                            </asp:Panel>
+                            <br />
+                            <!--hasta aqui se mantiene el formato -->
+                            <div style="padding-top: 10px;">
                                 <table style="width: 100%">
                                     <tr>
-                                        <td><b>Referencia:</b></td>
-                                        <td></td>
+                                        <td>
+                                            <asp:Label ID="lblCartaEjecutivo" runat="server"></asp:Label></td>
                                     </tr>
                                     <tr>
-                                        <td>Asunto: Nombre del asunto</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Vehiculo :<asp:Label ID="lblCartaVehiculo" runat="server"></asp:Label></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Poliza :<asp:Label ID="lblCartaPoliza" runat="server"></asp:Label></td>
-                                        <td></td>
+                                        <td>
+                                            <asp:Label ID="lblCartaCorreoEjecutivo" runat="server"></asp:Label></td>
                                     </tr>
                                 </table>
                             </div>
-                            <p style="padding-top: 20px;">
-                                Estimado(@):
-                                <br />
-                                !Reciba un cordial saludo¡
-                            </p>
-                            <!-- aqui inicia el cambio entre formato -->
-                            <div style="padding-top: 5px;">
-                                <div style="text-align: justify;">
-                                    <asp:Label ID="lblMemo" runat="server"></asp:Label>
-                                </div>
-                                <asp:Panel runat="server" ID="PnDetallePago" Visible="false">
-                                    <table style="width: 30%; margin-left: 285px;" class="estilos-tabla">
-                                        <tr class="estilos-tabla">
-                                            <th>Monto Reclamado</th>
-                                            <th></th>
-                                        </tr>
-                                        <tr class="estilos-tabla">
-                                            <td>Monto Sin Iva</td>
-                                            <td>0.00</td>
-                                        </tr>
-                                        <tr class="estilos-tabla">
-                                            <td>Deducible</td>
-                                            <td>0.00</td>
-                                        </tr>
-                                        <tr class="estilos-tabla">
-                                            <td>Subtotal</td>
-                                            <td>0.00</td>
-                                        </tr>
-                                        <tr class="estilos-tabla">
-                                            <td>(-)Timbres</td>
-                                            <td>0.00</td>
-                                        </tr>
-                                        <tr class="estilos-tabla">
-                                            <td>Total a Liquidar</td>
-                                            <td>0.00</td>
-                                        </tr>
-                                    </table>
-                                </asp:Panel>
-                                <br />
-                                <!--hasta aqui se mantiene el formato -->
-                                <div style="padding-top: 10px;">
-                                    <table style="width: 100%">
-                                        <tr>
-                                            <td>
-                                                <asp:Label ID="lblCartaEjecutivo" runat="server"></asp:Label></td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <asp:Label ID="lblCartaCorreoEjecutivo" runat="server"></asp:Label></td>
-                                        </tr>
-                                    </table>
-                                </div>
-                                <div style="padding-top: 30px; text-align: justify; font-size: 11px;">
-                                    <p>
-                                        <b>
-                                            <i>Contar con clientes satisfechos es nuestro principal objetivo, cualquier sugerencia de mejora a nuestro proceso de envío de documentos 
+                            <div style="padding-top: 30px; text-align: justify; font-size: 11px;">
+                                <p>
+                                    <b>
+                                        <i>Contar con clientes satisfechos es nuestro principal objetivo, cualquier sugerencia de mejora a nuestro proceso de envío de documentos 
                                             o cualquier inconformidad en la recepción del mismo, escríbanos a calidad@unitypromotores.com, en donde revisaremos la información 
                                             para darle una respuesta oportuna.
-                                            </i>
-                                        </b>
-                                    </p>
-                                </div>
+                                        </i>
+                                    </b>
+                                </p>
                             </div>
-                            <p style="text-align: right; padding-top: 20px;">RE-DA-F-05/Ver.01</p>
                         </div>
-                    </asp:Panel>
-                    <asp:Panel runat="server" ID="Panelsecundario" Style="display: none">
-                        <asp:Label runat="server" ID="lblcarta"></asp:Label>
-                    </asp:Panel>
-                </div>
+                        <p style="text-align: right; padding-top: 20px;">RE-DA-F-05/Ver.01</p>
+                    </div>
+                </asp:Panel>
+                <asp:Panel runat="server" ID="Panelsecundario" Style="display: none">
+                    <asp:Label runat="server" ID="lblcarta"></asp:Label>
+                </asp:Panel>
             </div>
         </div>
+    </div>
 
-        <%-- modal para verificacion de envio de notificaciones --%>
-        <div class="modal" id="confirmar_envio_correo" data-keyboard="false" data-backdrop="static">
-            <div class="modal-dialog modal-sm">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title"><b>Desea Enviar Notificaciones</b></h4>
+    <%-- modal para verificacion de envio de notificaciones --%>
+    <div class="modal" id="confirmar_envio_correo" data-keyboard="false" data-backdrop="static">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title"><b>Desea Enviar Notificaciones</b></h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-inline">
+                        <a href="#" style="font-size: 40px;"><i class="fa fa-envelope-o" aria-hidden="true"></i></a>
+                        <asp:CheckBox runat="server" ID="chEnviarCorreo" Text="Enviar Correo Electronico" Style="margin-left: 15px;" />
+                        <a href="#" style="font-size: 40px;"><i class="fa fa fa-comments" aria-hidden="true"></i></a>
+                        <asp:CheckBox runat="server" ID="chEnviarSMS" Text="Enviar Mensaje SMS" Checked="true" Style="margin-left: 15px;" />
                     </div>
-                    <div class="modal-body">
-                        <div class="form-inline">
-                            <a href="#" style="font-size: 40px;"><i class="fa fa-envelope-o" aria-hidden="true"></i></a>
-                            <asp:CheckBox runat="server" ID="chEnviarCorreo" Text="Enviar Correo Electronico" Style="margin-left: 15px;" />
-                            <a href="#" style="font-size: 40px;"><i class="fa fa fa-comments" aria-hidden="true"></i></a>
-                            <asp:CheckBox runat="server" ID="chEnviarSMS" Text="Enviar Mensaje SMS" Checked="true" Style="margin-left: 15px;" />
-                        </div>
-                        <asp:TextBox ID="txtSMS" Style="width: 99%" autocomplete="off" class="form-control" TextMode="multiline" Columns="50" Rows="8" runat="server" Visible="false"></asp:TextBox>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-warning" data-dismiss="modal">Cancelar</button>
-                        <asp:Button ID="btnEnviarNotificacion" CssClass="btn btn-primary" runat="server" Text="Enviar" OnClick="enviar_notificaciones_click" />
-                    </div>
+                    <asp:TextBox ID="txtSMS" Style="width: 99%" autocomplete="off" class="form-control" TextMode="multiline" Columns="50" Rows="8" runat="server" Visible="false"></asp:TextBox>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-warning" data-dismiss="modal">Cancelar</button>
+                    <asp:Button ID="btnEnviarNotificacion" CssClass="btn btn-primary" runat="server" Text="Enviar" OnClick="enviar_notificaciones_click" />
                 </div>
             </div>
         </div>
-        <%-- modal para envio manual de sms --%>
-        <div class="modal fade " id="ModalSMS" data-backdrop="static">
-            <div class="modal-dialog modal-sm">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title"><b>Enviar Notificacion SMS..</b></h4>
-                    </div>
-                    <div class="modal-body">
-                        <asp:TextBox ID="TxtEnvioSms" Style="width: 99%" autocomplete="off" class="form-control" TextMode="multiline" Columns="50" Rows="5" runat="server"></asp:TextBox>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-warning" data-dismiss="modal">Cancelar</button>
-                        <asp:Button ID="btnEnviarSMS" CssClass="btn btn-primary" OnClick="btnEnviarSMS_Click" runat="server" Text="Enviar" />
-                    </div>
+    </div>
+    <%-- modal para envio manual de sms --%>
+    <div class="modal fade " id="ModalSMS" data-backdrop="static">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title"><b>Enviar Notificacion SMS..</b></h4>
+                </div>
+                <div class="modal-body">
+                    <asp:TextBox ID="TxtEnvioSms" Style="width: 99%" autocomplete="off" class="form-control" TextMode="multiline" Columns="50" Rows="5" runat="server"></asp:TextBox>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-warning" data-dismiss="modal">Cancelar</button>
+                    <asp:Button ID="btnEnviarSMS" CssClass="btn btn-primary" OnClick="btnEnviarSMS_Click" runat="server" Text="Enviar" />
                 </div>
             </div>
         </div>
-        <%--------------------------------- modal para adjuntar archivos --------------------------------%>
-        <div class="modal fade" id="ModalAdjuntar">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title"><b>Subir Archivos</b></h4>
+    </div>
+    <%--------------------------------- modal para adjuntar archivos --------------------------------%>
+    <div class="modal fade" id="ModalAdjuntar">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title"><b>Subir Archivos</b></h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <asp:FileUpload ID="SubirArchivo" runat="server" />
                     </div>
-                    <div class="modal-body">
-                        <div class="form-group">
-                            <asp:FileUpload ID="SubirArchivo" runat="server" />
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-warning" data-dismiss="modal">Cerrar</button>
-                        <asp:Button ID="btnSubir" CssClass="btn btn-primary" runat="server" Text="Subir" OnClick="btnSubir_Click" />
-                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-warning" data-dismiss="modal">Cerrar</button>
+                    <asp:Button ID="btnSubir" CssClass="btn btn-primary" runat="server" Text="Subir" OnClick="btnSubir_Click" />
                 </div>
             </div>
         </div>
- <%------------------------------------------------ imprimir bitacora de seguimiento del reclamo ------------------------------------------%>
-        <div id="imprimirBitacora" style="display: none" class="form-inline">
-            <br />
-            <div class="img-float-right" style="float: right; padding-top: 50px;">
-                <img src="../../imgUnity/Unity%20Promotores%20transparente.png" style="margin-top: -100px; width: 235px;">
-            </div>
-            <div class="img-float-left" style="float: left; padding-top: 10px;">
-                <p>Avenida Las Americas 22-23, Zona 14</p>
-                <p>PBX: 2326-3700, 2386-3700</p>
-                <p>www.unitypromotores.com</p>
-            </div>
-            <asp:Label id="TituloMemo" Style="font-size: 20px; padding-left: 110px;" runat="server">Bitacora del reclamo</asp:Label>
-            <div class="form-inline" style="padding-top: 90px;">
-                <table style="width: 100%">
-                    <tr>
-                        <td>Departamento:</td>
-                        <td>Reclamos Autos</td>
-                    </tr>
-                    <tr>
-                        <td id="MemoPara" style="display:none">Para: </td>
-                        <td id="analista" style="display:none"><asp:Label ID="bitAnalista" runat="server"></asp:Label></td>
-                        <td id="contacto" style="display:none"><asp:Label ID="bitContacto" runat="server"></asp:Label></td>
-                    </tr>
-                    <tr>
-                        <td id="NReclamo">Numero Reclamo:</td>
-                        <td><asp:Label ID="BitNumReclamo" runat="server"></asp:Label></td>
-                    </tr>
-                    <tr>
-                        <td>Poliza:</td>
-                        <td><asp:Label ID="BitPoliza" runat="server"></asp:Label></td>
-                        <td>Placa</td>
-                        <td><asp:Label ID="BitPlaca" runat="server"></asp:Label></td>
-                    </tr>
-                    <tr>
-                        <td>Asegurado:</td>
-                        <td><asp:Label ID="BitAsegurado" runat="server"></asp:Label></td>
-                        <td>Marca</td>
-                        <td><asp:Label ID="BitMarca" runat="server"></asp:Label></td>
-                    </tr>
-                    <tr id="ocultarEjecutivo">
-                        <td>Ejecutivo:</td>
-                        <td><asp:Label ID="BitEjecutivo" runat="server"></asp:Label></td>
-                        <td>Color</td>
-                        <td><asp:Label ID="BitColor" runat="server"></asp:Label></td>
-                    </tr>
-                    <tr>
-                        <td>Aseguradora:</td>
-                        <td><asp:Label ID="BitAseguradora" runat="server"></asp:Label></td>
-                        <td>Modelo</td>
-                        <td><asp:Label ID="BitModelo" runat="server"></asp:Label></td>
-                    </tr>
-                    <tr>
-                        <td>Contratante:</td>
-                        <td><asp:Label ID="BitContratante" runat="server"></asp:Label></td>
-                        <td>Chasis</td>
-                        <td><asp:Label ID="BitChasis" runat="server"></asp:Label></td>
-                    </tr>
-                    <tr id="EstadoPoliza">
-                        <td>Estado:</td>
-                        <td><asp:Label ID="BitEstado" runat="server"></asp:Label></td>
-                        <td>Motor</td>
-                        <td><asp:Label ID="BitMotor" runat="server"></asp:Label></td>
-                    </tr>
-                </table>
+    </div>
+    <%------------------------------------------------ imprimir bitacora de seguimiento del reclamo ------------------------------------------%>
+    <div id="imprimirBitacora" style="display: none" class="form-inline">
+        <br />
+        <div class="img-float-right" style="float: right; padding-top: 50px;">
+            <img src="../../imgUnity/Unity%20Promotores%20transparente.png" style="margin-top: -100px; width: 235px;">
+        </div>
+        <div class="img-float-left" style="float: left; padding-top: 10px;">
+            <p>Avenida Las Americas 22-23, Zona 14</p>
+            <p>PBX: 2326-3700, 2386-3700</p>
+            <p>www.unitypromotores.com</p>
+        </div>
+        <asp:Label ID="TituloMemo" Style="font-size: 20px; padding-left: 110px;" runat="server">Bitacora del reclamo</asp:Label>
+        <div class="form-inline" style="padding-top: 90px;">
+            <table style="width: 100%">
+                <tr>
+                    <td>Departamento:</td>
+                    <td>Reclamos Autos</td>
+                </tr>
+                <tr>
+                    <td id="MemoPara" style="display: none">Para: </td>
+                    <td id="analista" style="display: none">
+                        <asp:Label ID="bitAnalista" runat="server"></asp:Label></td>
+                    <td id="contacto" style="display: none">
+                        <asp:Label ID="bitContacto" runat="server"></asp:Label></td>
+                </tr>
+                <tr>
+                    <td>De:</td>
+                    <td>
+                        <asp:Label runat="server" ID="bitAsesor"></asp:Label></td>
+                </tr>
+                <tr>
+                    <td id="NReclamo">Numero Reclamo:</td>
+                    <td>
+                        <asp:Label ID="BitNumReclamo" runat="server"></asp:Label></td>
+                </tr>
+                <tr>
+                    <td>Poliza:</td>
+                    <td>
+                        <asp:Label ID="BitPoliza" runat="server"></asp:Label></td>
+                    <td>Placa</td>
+                    <td>
+                        <asp:Label ID="BitPlaca" runat="server"></asp:Label></td>
+                </tr>
+                <tr>
+                    <td>Asegurado:</td>
+                    <td>
+                        <asp:Label ID="BitAsegurado" runat="server"></asp:Label></td>
+                    <td>Marca</td>
+                    <td>
+                        <asp:Label ID="BitMarca" runat="server"></asp:Label></td>
+                </tr>
+                <tr id="ocultarEjecutivo">
+                    <td>Ejecutivo:</td>
+                    <td>
+                        <asp:Label ID="BitEjecutivo" runat="server"></asp:Label></td>
+                    <td>Color</td>
+                    <td>
+                        <asp:Label ID="BitColor" runat="server"></asp:Label></td>
+                </tr>
+                <tr>
+                    <td>Aseguradora:</td>
+                    <td>
+                        <asp:Label ID="BitAseguradora" runat="server"></asp:Label></td>
+                    <td>Modelo</td>
+                    <td>
+                        <asp:Label ID="BitModelo" runat="server"></asp:Label></td>
+                </tr>
+                <tr>
+                    <td>Contratante:</td>
+                    <td>
+                        <asp:Label ID="BitContratante" runat="server"></asp:Label></td>
+                    <td>Chasis</td>
+                    <td>
+                        <asp:Label ID="BitChasis" runat="server"></asp:Label></td>
+                </tr>
+                <tr id="EstadoPoliza">
+                    <td>Estado:</td>
+                    <td>
+                        <asp:Label ID="BitEstado" runat="server"></asp:Label></td>
+                    <td>Motor</td>
+                    <td>
+                        <asp:Label ID="BitMotor" runat="server"></asp:Label></td>
+                </tr>
+            </table>
+            <p>______________________________________________________________________________________________________________</p>
+            <div id="bitacora">
+                <p><b>Detalle llamadas en cabina:</b></p>
+                <asp:GridView ID="Bitllamadas" CssClass="table detalle" runat="server" CellPadding="4" ForeColor="#333333" GridLines="None" AutoGenerateColumns="True" OnRowDataBound="GridComentarios_RowDataBound">
+                </asp:GridView>
+                <br />
                 <p>______________________________________________________________________________________________________________</p>
-                <div id="bitacora">
-                    <p><b>Detalle llamadas en cabina:</b></p>
-                    <asp:GridView ID="Bitllamadas" CssClass="table detalle" runat="server" CellPadding="4" ForeColor="#333333" GridLines="None" AutoGenerateColumns="True" OnRowDataBound="GridComentarios_RowDataBound">
-                    </asp:GridView>
-                    <br />
-                    <p>______________________________________________________________________________________________________________</p>
-                    <p><b>Detalle De Seguimiento en Unity:</b></p>
-                    <asp:GridView ID="BitSeguimiento" CssClass="table detalle" runat="server" CellPadding="4" ForeColor="#333333" GridLines="None" AutoGenerateColumns="True" OnRowDataBound="GridComentarios_RowDataBound">
-                    </asp:GridView>
-                </div>
-                <br />
-                <p>Agradeciendo su pronta atención a la presente, quedamos de ustedes.</p>
-                <br />
-                <br />
-                <p>__________________________________</p>
-                <p>Atentamente</p>
+                <p><b>Detalle De Seguimiento en Unity:</b></p>
+                <asp:GridView ID="BitSeguimiento" CssClass="table detalle" runat="server" CellPadding="4" ForeColor="#333333" GridLines="None" AutoGenerateColumns="True" OnRowDataBound="GridComentarios_RowDataBound">
+                </asp:GridView>
             </div>
+            <br />
         </div>
     </div>
     <%-- botones circulares con opciones en la parte inferior derecha de la pantalla--%>
@@ -1054,7 +1072,12 @@
                 $("#contacto").css("display", "none");
                 $("#analista").css("display", "");
             }
-            
+
+            var contenido = $('#ContentPlaceHolder1_txtSolicitudDocumentos').val();
+            var final = contenido.replace(/\n/g, '<br\>');
+            $('#ContentPlaceHolder1_txtSolicitudDocumentos').css("display", "none");
+            $('#ContenidoImpresion').html(final);
+
             $("#EstadoPoliza").css("display", "none");
             $('#ContentPlaceHolder1_TituloMemo').text("Solicitud de Documentos");
             $('#bitacora').html($('#gvDocSolicitados').html());
@@ -1068,7 +1091,7 @@
             $("#ImprimirSolicitud").css("display", "");
             $("#gvDocSolicitados").css("display", "");
         });
-        
+
         $('#solicitudDoc').on('click', function (event) {
             $("#gvDocumentos").css("display", "");
             $("#ocultarEjecutivo").css("display", "");

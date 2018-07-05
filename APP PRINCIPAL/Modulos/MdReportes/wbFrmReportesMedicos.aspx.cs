@@ -166,7 +166,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesMedicos : System.Web.U
 
     protected void linkSalir_Click(object sender, EventArgs e)
     {
-        Response.Redirect("/Modulos/MdReclamosUnity/wbFrmRecMedSeguimiento.aspx");
+        Response.Redirect("/Modulos/MdReclamosUnity/wbFrmRecMedSeguimiento.aspx", false);
     }
 
     public override void VerifyRenderingInServerForm(Control control)
@@ -267,21 +267,17 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesMedicos : System.Web.U
             kpiUnity = 72;
         }
 
-        string ejecutivoKPI = "select " +
-            "count(*) total_reclamos," +
-            //"sum(DATEDIFF(MINUTE, reclamos_medicos.fecha_completa_commit, reclamos_medicos.fecha_cierre) - DATEDIFF(MINUTE, reclamos_medicos.fecha_envio_aseg, reclamos_medicos.fecha_recepcion_cheque)) as total_resta," +
-            "AVG(DATEDIFF(MINUTE, reclamos_medicos.fecha_completa_commit, reclamos_medicos.fecha_cierre) - DATEDIFF(MINUTE, reclamos_medicos.fecha_envio_aseg, reclamos_medicos.fecha_recepcion_cheque)) as promedio, " +
-            //"promedio_segundos = AVG(DATEDIFF(SECOND, reclamos_medicos.fecha_completa_commit, reclamos_medicos.fecha_cierre) - DATEDIFF(MINUTE, reclamos_medicos.fecha_envio_aseg, reclamos_medicos.fecha_recepcion_cheque)), " +
-            "reclamos_medicos.usuario_unity " +
+        string ejecutivoKPI = "select count(*) total_reclamos, " +
+            "AVG(DATEDIFF(HOUR, r.fecha_completa_commit, r.fecha_cierre) - DATEDIFF(HOUR, r.fecha_envio_aseg, r.fecha_recepcion_cheque)) as promedio, " +
+            "r.usuario_unity " +
             "into #ciclo_ejecutivoKPI " +
-            "from reclamos_medicos " +
-            "inner join reg_reclamos_medicos on reg_reclamos_medicos.id = reclamos_medicos.id_reg_reclamos_medicos " +
-            "where(reclamos_medicos.estado_unity = 'Cerrado') and (Convert(date,reclamos_medicos.fecha_cierre, 112) between '" + txtFechaInicio.Text + "' and '" + txtFechaFin.Text + "') and (" + ddlTipoReclamo.SelectedValue + ")  group by reclamos_medicos.usuario_unity " +
-            "select " +
-            "usuario_unity as Usuario, " +
-            "total_reclamos as Total_Reclamos," +
-            " isnull(promedio, 0) / 60  Promedio_por_usuario," +
-            "case when(isnull(total_reclamos, 0)) = 0 then 0 else ROUND( cast( ("+kpiUnity+" / ( (promedio / 60.0) * 1.0)) * 100 as float ),2,0) end as Ejecucion " +
+            "from reclamos_medicos as r " +
+            "inner join reg_reclamos_medicos on reg_reclamos_medicos.id = r.id_reg_reclamos_medicos " +
+            "where(r.estado_unity = 'Cerrado') and(Convert(date, r.fecha_cierre, 112) between '" + txtFechaInicio.Text + "' and '" + txtFechaFin.Text + "') " +
+            "and("+ ddlTipoReclamo.SelectedValue + ") group by r.usuario_unity " +
+            "select usuario_unity as Usuario, total_reclamos as Total_Reclamos, " +
+            "isnull(promedio, 0) as Promedio_usuario, " +
+            "ROUND(cast(("+kpiUnity+" / ((case when promedio = 0 then 1 else promedio end) * 1.0)) *100 as float ),2,0) as Ejecucion " +
             "from #ciclo_ejecutivoKPI";
 
         llenado.llenarGrid(ejecutivoKPI, GridEjecutivosKPI);
@@ -291,52 +287,51 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesMedicos : System.Web.U
     //ciclos del ejecutivo desde la apertura al cierre
     public void CicloEjecutivo()
     {
-        string cicloEjecutivo = "select count(*) total_reclamos," +
-            "sum(DATEDIFF(minute, reclamos_medicos.fecha_completa_commit, reclamos_medicos.fecha_asignacion)) as minutos," +
-            "promedio = AVG(DATEDIFF(minute,reclamos_medicos.fecha_completa_commit, reclamos_medicos.fecha_asignacion)), " +
-            "promedio_segundos = AVG(DATEDIFF(second, reclamos_medicos.fecha_completa_commit, reclamos_medicos.fecha_asignacion))," +
-            "reclamos_medicos.usuario_unity " +
+        string cicloEjecutivo = "select count(*) total_reclamos, promedio = AVG(DATEDIFF(minute, r.fecha_completa_commit, r.fecha_asignacion)), " +
+            "promedio_segundos = AVG(DATEDIFF(second, r.fecha_completa_commit, r.fecha_asignacion)), " +
+            "r.usuario_unity " +
             "into #ciclo_ejecutivo " +
-            "from reclamos_medicos " +
-            "inner join reg_reclamos_medicos on reg_reclamos_medicos.id = reclamos_medicos.id_reg_reclamos_medicos " +
-            "where (reclamos_medicos.estado_unity = 'Cerrado') and (Convert(date,reclamos_medicos.fecha_cierre, 112) between '" + txtFechaInicio.Text+"' and '"+txtFechaFin.Text+"') and (" +ddlTipoReclamo.SelectedValue+ ") group by reclamos_medicos.usuario_unity " +
-            "select CONCAT('0' + ':', promedio % 60, ':', promedio_segundos % 60) as [Promedio por usuario] ,total_reclamos as [Total R.], usuario_unity AS Usuario from #ciclo_ejecutivo";
+            "from reclamos_medicos as r " +
+            "inner join reg_reclamos_medicos on reg_reclamos_medicos.id = r.id_reg_reclamos_medicos " +
+            "where(r.estado_unity = 'Cerrado') and (Convert(date, r.fecha_cierre, 112) between '" + txtFechaInicio.Text + "' and '" + txtFechaFin.Text + "') " +
+            "and("+ddlTipoReclamo.SelectedValue+ ") group by r.usuario_unity " +
+            "select " +
+            "CONCAT(promedio / 60, ':', promedio % 60, ':', promedio_segundos % 60) as [Promedio usuario], " +
+            "total_reclamos as Total_Reclamos,"+
+            "usuario_unity AS Usuario from #ciclo_ejecutivo";
 
         string AsignacionApertura = "select count(*) total_reclamos," +
-            "sum(DATEDIFF(MINUTE, reclamos_medicos.fecha_asignacion, reclamos_medicos.fecha_apertura)) as minutos," +
-            "promedio_minutos = AVG(DATEDIFF(minute, reclamos_medicos.fecha_asignacion, reclamos_medicos.fecha_apertura))," +
-            "promedio_segundos = AVG(DATEDIFF(SECOND, reclamos_medicos.fecha_asignacion, reclamos_medicos.fecha_apertura))," +
-            "reclamos_medicos.usuario_unity " +
+            "promedio_minutos = AVG(DATEDIFF(minute, r.fecha_asignacion, r.fecha_apertura))," +
+            "promedio_segundos = AVG(DATEDIFF(SECOND, r.fecha_asignacion, r.fecha_apertura))," +
+            "r.usuario_unity " +
             "into #ciclo_ejecutivo2 " +
-            "from reclamos_medicos " +
-            "inner join reg_reclamos_medicos on reg_reclamos_medicos.id = reclamos_medicos.id_reg_reclamos_medicos " +
-            "where(reclamos_medicos.estado_unity = 'Cerrado') and (Convert(date,reclamos_medicos.fecha_cierre,112) between '" + txtFechaInicio.Text+"' and '"+txtFechaFin.Text+"') and (" +ddlTipoReclamo.SelectedValue+ ") group by reclamos_medicos.usuario_unity " +
-            "select CONCAT(promedio_minutos / 60, ':', promedio_minutos % 60, ':', promedio_segundos % 60) as [Promedio por usuario] ,total_reclamos as [Total R.], usuario_unity as Usuario from #ciclo_ejecutivo2";
+            "from reclamos_medicos as r " +
+            "inner join reg_reclamos_medicos on reg_reclamos_medicos.id = r.id_reg_reclamos_medicos " +
+            "where(r.estado_unity = 'Cerrado') and (Convert(date,r.fecha_cierre,112) between '" + txtFechaInicio.Text+"' and '"+txtFechaFin.Text+"') and (" +ddlTipoReclamo.SelectedValue+ ") group by r.usuario_unity " +
+            "select CONCAT(promedio_minutos / 60, ':', promedio_minutos % 60, ':', promedio_segundos % 60) as Promedio_usuario,total_reclamos as Total_Reclamos, usuario_unity as Usuario from #ciclo_ejecutivo2";
 
         string AperturaAseguradora = "select " +
             "count(*) total_reclamos," +
-            "sum(DATEDIFF(MINUTE, reclamos_medicos.fecha_apertura, reclamos_medicos.fecha_envio_aseg)) as minutos," +
-            "AVG(isnull(DATEDIFF(minute, reclamos_medicos.fecha_apertura, reclamos_medicos.fecha_envio_aseg), 0)) as promedio_minutos," +
-            "promedio_segundos = AVG(DATEDIFF(SECOND, reclamos_medicos.fecha_apertura, reclamos_medicos.fecha_envio_aseg))," +
-            "reclamos_medicos.usuario_unity " +
+            "promedio_minutos  = AVG(DATEDIFF(minute, r.fecha_apertura, r.fecha_envio_aseg))," +
+            "promedio_segundos = AVG(DATEDIFF(SECOND, r.fecha_apertura, r.fecha_envio_aseg))," +
+            "r.usuario_unity " +
             "into #ciclo_ejecutivo3 " +
-            "from reclamos_medicos " +
-            "inner join reg_reclamos_medicos  on reg_reclamos_medicos.id = reclamos_medicos.id_reg_reclamos_medicos " +
-            "where(reclamos_medicos.estado_unity = 'Cerrado') and (Convert(date,reclamos_medicos.fecha_cierre, 112) between '" + txtFechaInicio.Text+"' and '"+txtFechaFin.Text+ "') and (" +ddlTipoReclamo.SelectedValue+ ") group by reclamos_medicos.usuario_unity " +
+            "from reclamos_medicos as r " +
+            "inner join reg_reclamos_medicos  on reg_reclamos_medicos.id = r.id_reg_reclamos_medicos " +
+            "where(r.estado_unity = 'Cerrado') and (Convert(date,r.fecha_cierre, 112) between '" + txtFechaInicio.Text+"' and '"+txtFechaFin.Text+ "') and (" +ddlTipoReclamo.SelectedValue+ ") group by r.usuario_unity " +
             "select " +
-            "CONCAT(promedio_minutos / 60, ':', promedio_minutos % 60, ':', promedio_segundos % 60) as [Promedio por usuario]," +
-            "total_reclamos as [Total R.], usuario_unity as Usuario from #ciclo_ejecutivo3";
+            "CONCAT(promedio_minutos / 60, ':', promedio_minutos % 60, ':', promedio_segundos % 60) as Promedio_usuario," +
+            "total_reclamos as Total_Reclamos, usuario_unity as Usuario from #ciclo_ejecutivo3";
 
         string recepcionChequeCierre = "select " +
            "count(*) total_reclamos," +
-           "sum(DATEDIFF(MINUTE, reclamos_medicos.fecha_recepcion_cheque, reclamos_medicos.fecha_cierre)) as minutos," +
-           "AVG(isnull(DATEDIFF(MINUTE, reclamos_medicos.fecha_recepcion_cheque, reclamos_medicos.fecha_cierre), 0)) as promedio_minutos," +
-           "promedio_segundos = AVG(DATEDIFF(SECOND, reclamos_medicos.fecha_recepcion_cheque, reclamos_medicos.fecha_cierre))," +
-           "reclamos_medicos.usuario_unity " +
+           "promedio_minutos  = AVG(DATEDIFF(MINUTE, r.fecha_recepcion_cheque, r.fecha_cierre))," +
+           "promedio_segundos = AVG(DATEDIFF(SECOND, r.fecha_recepcion_cheque, r.fecha_cierre))," +
+           "r.usuario_unity " +
            "into #ciclo_ejecutivo3 " +
-           "from reclamos_medicos " +
-           "inner join reg_reclamos_medicos  on reg_reclamos_medicos.id = reclamos_medicos.id_reg_reclamos_medicos " +
-           "where(reclamos_medicos.estado_unity = 'Cerrado') and (Convert(date,reclamos_medicos.fecha_cierre, 112) between '" + txtFechaInicio.Text + "' and '" + txtFechaFin.Text + "') and (" + ddlTipoReclamo.SelectedValue + ") group by reclamos_medicos.usuario_unity " +
+           "from reclamos_medicos as r " +
+           "inner join reg_reclamos_medicos  on reg_reclamos_medicos.id = r.id_reg_reclamos_medicos " +
+           "where(r.estado_unity = 'Cerrado') and (Convert(date,r.fecha_cierre, 112) between '" + txtFechaInicio.Text + "' and '" + txtFechaFin.Text + "') and (" + ddlTipoReclamo.SelectedValue + ") group by r.usuario_unity " +
            "select " +
            "CONCAT(promedio_minutos / 60, ':', promedio_minutos % 60, ':', promedio_segundos % 60) as [Promedio por usuario]," +
            "total_reclamos as [Total R.], usuario_unity as Usuario from #ciclo_ejecutivo3";
@@ -461,7 +456,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesMedicos : System.Web.U
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
                 TotalReclamos += Convert.ToInt32(DataBinder.Eval(e.Row.DataItem, "[Total_Reclamos]"));
-                totalPromedioUsuario += Convert.ToInt32(DataBinder.Eval(e.Row.DataItem, "[Promedio_por_usuario]"));
+                totalPromedioUsuario += Convert.ToInt32(DataBinder.Eval(e.Row.DataItem, "[Promedio_usuario]"));
                 totalPromedioEjecucion += Convert.ToDouble(DataBinder.Eval(e.Row.DataItem, "[Ejecucion]"));
             }
             else if (e.Row.RowType == DataControlRowType.Footer)

@@ -117,47 +117,45 @@
                 </ul>
             </div>
         </nav>
-        <div>
-            <%-- modal para la busqueda de un reclamo de auto--%>
-            <div class="modal fade" id="BuscarAuto">
-                <div class="modal-content form-inline">
-                    <div class="modal-dialog modal-sm">
-                        <div class="modal-header">
-                            <h4 class="modal-title"><b>Buscar Por Id Del Reclamo</b></h4>
-                        </div>
-                        <asp:TextBox ID="txtBusquedaId" type="number" CssClass="form-control" runat="server"></asp:TextBox>
-                        <asp:Button ID="btnBuscarId" runat="server" CssClass="btn btn-primary" Text="Buscar" OnClick="btnBuscarId_Click" />
+        <%-- modal para la busqueda de un reclamo de auto--%>
+        <div class="modal fade" id="BuscarAuto">
+            <div class="modal-content form-inline">
+                <div class="modal-dialog modal-sm">
+                    <div class="modal-header">
+                        <h4 class="modal-title"><b>Buscar Por Id Del Reclamo</b></h4>
                     </div>
+                    <asp:TextBox ID="txtBusquedaId" type="number" CssClass="form-control" runat="server"></asp:TextBox>
+                    <asp:Button ID="btnBuscarId" runat="server" CssClass="btn btn-primary" Text="Buscar" OnClick="btnBuscarId_Click" />
                 </div>
             </div>
-
-            <%-- modal para la busqueda de un reclamo de daños--%>
-            <div class="modal fade" id="BuscarDanios">
-                <div class="modal-content form-inline">
-                    <div class="modal-dialog modal-sm">
-                        <div class="modal-header">
-                            <h4 class="modal-title"><b>Buscar Por ID Del Reclamo</b></h4>
-                        </div>
-                        <asp:TextBox ID="txtReclamosVarios" type="number" CssClass="form-control" runat="server"></asp:TextBox>
-                        <asp:Button ID="btnBuscarReclamosVarios" runat="server" CssClass="btn btn-primary" Text="Buscar" OnClick="btnBuscarReclamosVarios_Click" />
-                    </div>
-                </div>
-            </div>
-            <%-- modal para la busqueda de un reclamo de gastos medicos--%>
-            <div class="modal fade" id="BuscarGastosMedicos">
-                <div class="modal-content form-inline">
-                    <div class="modal-dialog modal-sm">
-                        <div class="modal-header">
-                            <h4 class="modal-title"><b>Buscar Por ID Del Reclamo</b></h4>
-                        </div>
-                        <asp:TextBox ID="txtBuscarReclamoMedico" type="number" CssClass="form-control" runat="server"></asp:TextBox>
-                        <asp:Button ID="btnReclamoMedico" runat="server" CssClass="btn btn-primary" Text="Buscar" OnClick="btnReclamoMedico_Click" />
-                    </div>
-                </div>
-            </div>
-            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
-            </asp:ContentPlaceHolder>
         </div>
+
+        <%-- modal para la busqueda de un reclamo de daños--%>
+        <div class="modal fade" id="BuscarDanios">
+            <div class="modal-content form-inline">
+                <div class="modal-dialog modal-sm">
+                    <div class="modal-header">
+                        <h4 class="modal-title"><b>Buscar Por ID Del Reclamo</b></h4>
+                    </div>
+                    <asp:TextBox ID="txtReclamosVarios" type="number" CssClass="form-control" runat="server"></asp:TextBox>
+                    <asp:Button ID="btnBuscarReclamosVarios" runat="server" CssClass="btn btn-primary" Text="Buscar" OnClick="btnBuscarReclamosVarios_Click" />
+                </div>
+            </div>
+        </div>
+        <%-- modal para la busqueda de un reclamo de gastos medicos--%>
+        <div class="modal fade" id="BuscarGastosMedicos">
+            <div class="modal-content form-inline">
+                <div class="modal-dialog modal-sm">
+                    <div class="modal-header">
+                        <h4 class="modal-title"><b>Buscar Por ID Del Reclamo</b></h4>
+                    </div>
+                    <asp:TextBox ID="txtBuscarReclamoMedico" type="number" CssClass="form-control" runat="server"></asp:TextBox>
+                    <asp:Button ID="btnReclamoMedico" runat="server" CssClass="btn btn-primary" Text="Buscar" OnClick="btnReclamoMedico_Click" />
+                </div>
+            </div>
+        </div>
+        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+        </asp:ContentPlaceHolder>
         <script type="text/javascript" src="<%= ResolveUrl("/Scripts/jquery-3.1.1.min.js") %>"></script>
         <script type="text/javascript" src="<%= ResolveUrl("/bootstrap/js/bootstrap.min.js") %>"></script>
         <script type="text/javascript" src="<%= ResolveUrl("/Scripts/jquery.cookie.min.js") %>"></script>
