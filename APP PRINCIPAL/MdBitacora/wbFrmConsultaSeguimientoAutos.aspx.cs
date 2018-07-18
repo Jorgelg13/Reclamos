@@ -305,7 +305,7 @@ public partial class MdBitacora_wbFrmConsultaSeguimientoAutos : System.Web.UI.Pa
         catch (Exception ex)
         {
             Utils.ShowMessage(this.Page, "No se a podido actualizar el registro", "Nota..", "error");
-            Email.EnviarERROR("Error ocasionado al usuario: " + userlogin + " en el registro con el id: " + id + "\n\n" + ex, "Error de reclamo en seguimiento de autos");
+            Email.ENVIAR_ERROR("Error ocasionado al usuario: " + userlogin + " en el registro con el id: " + id + "\n\n" + ex, "Error de reclamo en seguimiento de autos");
         }
 
         if (checkCerrarReclamo.Checked)

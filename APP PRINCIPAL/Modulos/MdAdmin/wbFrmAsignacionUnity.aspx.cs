@@ -35,33 +35,33 @@ public partial class Modulos_MdAdmin_wbFrmAsignacionUnity : System.Web.UI.Page
             "auto_reclamo.poliza as Poliza," +
             "auto_reclamo.placa as Placa," +
             "auto_reclamo.marca as Marca," +
-            "auto_reclamo.color as Color," +
-            "auto_reclamo.modelo as Modelo," +
-            "auto_reclamo.chasis as Chasis," +
-            "auto_reclamo.motor as Motor," +
+            //"auto_reclamo.color as Color," +
+            //"auto_reclamo.modelo as Modelo," +
+            //"auto_reclamo.chasis as Chasis," +
+            //"auto_reclamo.motor as Motor," +
             "auto_reclamo.propietario as Propietario," +
             "auto_reclamo.ejecutivo as Ejecutivo," +
             "auto_reclamo.aseguradora as Aseguradora," +
             "auto_reclamo.contratante as Contratante," +
-            "auto_reclamo.estado_poliza," +
+            //"auto_reclamo.estado_poliza," +
             "reclamo_auto.boleta as Boleta," +
             "reclamo_auto.titular as Titular," +
             "reclamo_auto.hora as Hora," +
             "reclamo_auto.fecha as Fecha," +
-            "reclamo_auto.fecha_commit as [Fecha Creacion]," +
-            "reclamo_auto.fecha_cierre as [Fecha Cierre Cabina]," +
+            //"reclamo_auto.fecha_commit as [Fecha Creacion]," +
+            //"reclamo_auto.fecha_cierre as [Fecha Cierre Cabina]," +
             "reclamo_auto.ubicacion as Ubicacion," +
             "reclamo_auto.reportante as Reportante," +
             "reclamo_auto.piloto as Piloto," +
-            "reclamo_auto.edad as Edad," +
+            //"reclamo_auto.edad as Edad," +
             "reclamo_auto.telefono as Telefono," +
             "reclamo_auto.ajustador as Ajustador," +
             "reclamo_auto.tipo_servicio as [Tipo Servicio]," +
-            //"reclamo_auto.version," +
-            "cabina.nombre as Cabina," +
-            "sucursal.nombre as Sucursal," +
-            "empresa.nombre as Empresa," +
-            "pais.nombre as Pais," +
+            "reclamo_auto.version," +
+            //"cabina.nombre as Cabina," +
+            //"sucursal.nombre as Sucursal," +
+            //"empresa.nombre as Empresa," +
+            //"pais.nombre as Pais," +
             "usuario.nombre as [usuario cabina] " +
             "FROM auto_reclamo " +
             "INNER JOIN reclamo_auto ON reclamo_auto.id_auto_reclamo = auto_reclamo.id " +

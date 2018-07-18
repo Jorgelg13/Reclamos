@@ -158,7 +158,7 @@ public partial class bitacora_consulta_movil
 
 public partial class bitacora_estados_autos
 {
-    public int id { get; set; }
+    public long id { get; set; }
     public string estado { get; set; }
     public Nullable<System.DateTime> fecha { get; set; }
     public Nullable<long> id_reclamo_auto { get; set; }
@@ -686,19 +686,20 @@ public partial class reclamo_auto
     public string tipo_servicio { get; set; }
     public Nullable<short> id_gestor { get; set; }
     public Nullable<int> id_analista { get; set; }
+    public Nullable<int> id_taller { get; set; }
     public string observaciones { get; set; }
     public string estado_auto_unity { get; set; }
     public Nullable<bool> complicado { get; set; }
     public Nullable<bool> prioritario { get; set; }
     public Nullable<bool> compromiso_pago { get; set; }
     public Nullable<bool> perdida_total { get; set; }
+    public Nullable<bool> robo { get; set; }
     public Nullable<bool> alquiler_auto { get; set; }
-    public Nullable<int> id_taller { get; set; }
     public Nullable<bool> cierre_interno { get; set; }
+    public Nullable<System.DateTime> fecha_visualizar { get; set; }
     public string asignado_por { get; set; }
     public Nullable<System.DateTime> fecha_asignacion { get; set; }
     public Nullable<System.DateTime> fecha_apertura_reclamo { get; set; }
-    public Nullable<System.DateTime> fecha_visualizar { get; set; }
     public Nullable<System.DateTime> fecha_cierre_reclamo { get; set; }
     public Nullable<bool> acs { get; set; }
     public string detalle_no_conforme { get; set; }
@@ -710,7 +711,17 @@ public partial class reclamo_auto
     public Nullable<bool> b_carta_declinado { get; set; }
     public Nullable<bool> b_carta_envio_cheque { get; set; }
     public string documentos { get; set; }
-    public Nullable<bool> robo { get; set; }
+    public Nullable<bool> problema_taller { get; set; }
+    public Nullable<bool> problema_cabina { get; set; }
+    public Nullable<bool> problema_ajustador { get; set; }
+    public string comentario_taller { get; set; }
+    public string comentario_ajustador { get; set; }
+    public string comentario_cabina { get; set; }
+    public Nullable<bool> problema_aseguradora { get; set; }
+    public Nullable<bool> problema_ejecutivo { get; set; }
+    public string comentario_aseguradora { get; set; }
+    public string comentario_ejecutivo { get; set; }
+    public Nullable<System.DateTime> fecha_problema { get; set; }
 
     public virtual analistas analistas { get; set; }
     public virtual auto_reclamo auto_reclamo { get; set; }
@@ -861,6 +872,17 @@ public partial class reclamos_varios
     public Nullable<bool> b_carta_envio_cheque { get; set; }
     public Nullable<decimal> reserva { get; set; }
     public string documentos { get; set; }
+    public Nullable<bool> problema_taller { get; set; }
+    public Nullable<bool> problema_cabina { get; set; }
+    public Nullable<bool> problema_ajustador { get; set; }
+    public Nullable<bool> problema_aseguradora { get; set; }
+    public Nullable<bool> problema_ejecutivo { get; set; }
+    public string comentario_taller { get; set; }
+    public string comentario_cabina { get; set; }
+    public string comentario_ajustador { get; set; }
+    public string comentario_aseguradora { get; set; }
+    public string comentario_ejecutivo { get; set; }
+    public Nullable<System.DateTime> fecha_problema { get; set; }
 
     public virtual analistas analistas { get; set; }
     public virtual ICollection<bitacora_estados_reclamos_varios> bitacora_estados_reclamos_varios { get; set; }

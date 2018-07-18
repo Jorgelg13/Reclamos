@@ -33,7 +33,7 @@
                                 </AnonymousTemplate>
                                 <LoggedInTemplate>
                                     <p>
-                                        Hola  <a runat="server" class="username fondo" href="/Account/Manage" title="Manage your account">
+                                        Hola  <a runat="server" class="username fondo" href="/Account/Manage" title="Cambiar Contraseña">
                                             <asp:LoginName runat="server" CssClass="username" />
                                         </a>!
                                 <asp:LoginStatus runat="server" LogoutAction="Redirect" CssClass="fondo" LogoutText="Cerrar sesión" LogoutPageUrl="~/" />
@@ -142,11 +142,18 @@
                                     <a tabindex="-1" href="#">Copagos</a>
                                     <ul class="dropdown-menu">
                                         <li class="dropdown-submenu"></li>
-                                        <li><a href="javascript:excel('/pdf/Copagos/AMICELCO COPAGOS.xlsx')">Amicelco</a></li>
-                                        <li><a href="javascript:excel('/pdf/Copagos/CAJA DE AHORRO COPAGOS.xlsx')">Caja de Ahorro</a></li>
-                                        <li><a href="javascript:excel('/pdf/Copagos/CopagosAlmo.xls')">Almo</a></li>
+                                        <li><a href="/pdf/Copagos/AMICELCO.xlsx">Amicelco</a></li>
+                                        <li><a href="/pdf/Copagos/ACEROS.xlsx">Aceros</a></li>
+                                        <li><a href="/pdf/Copagos/GRUPO ENTERO.xlsx">Grupo Entero</a></li>
+                                        <li><a href="/pdf/Copagos/LICORERA.xlsx">Licorera</a></li>
+                                        <li><a href="/pdf/Copagos/CAJA DE AHORRO.xlsx">Caja de Ahorro</a></li>
+                                        <li><a href="/pdf/Copagos/CopagosAlmo.xls">Almo</a></li>
+                                        <li><a href="/pdf/Copagos/OFFICE DEPOT.xlsX">Office Depot</a></li>
+                                        <li><a href="/pdf/Copagos/PANIFRESH.xlsx">Panifresh</a></li>
+                                        <li><a href="/pdf/Copagos/ROCHE.xlsx">Roche</a></li>
+                                        <li><a href="/pdf/Copagos/TRANSMETAL.xlsx">Transmetal</a></li>
                                         <li><a href="javascript:excel('/pdf/Copagos/CopagosAsetec.xls')">Asetec</a></li>
-                                        <li><a href="javascript:excel('/pdf/Copagos/COEX Y AFILIADAS COPAGOS.xlsx')">Coex y Afiliadas</a></li>
+                                        <li><a href="/pdf/Copagos/COEX Y AFILIADAS.xlsx">Coex y Afiliadas</a></li>
                                         <li><a href="javascript:ventanaSecundaria('/pdf/Copagos/Agropecuaria Popoyan POLIZA 856-VDGM.pdf')">Agropecuaria Popoyan</a></li>
                                         <li><a href="javascript:ventanaSecundaria('/pdf/Copagos/Alfa Uno POLIZA 962-001.pdf')">Alfa Uno</a></li>
                                         <li><a href="javascript:ventanaSecundaria('/pdf/Copagos/Aliprac POLIZA 55958.pdf')">Aliprac</a></li>
@@ -437,6 +444,13 @@
                     </ul>
                 </div>
             </div>
+         <div class="loading-screen" style="">
+            <div style="display: block; overflow-x: hidden; overflow-y: auto; opacity: 1; background: rgba(0, 0, 0, 0.55); position: fixed; top: 0; right: 0; bottom: 0; left: 0; z-index: 1050; transition: opacity .15s linear;">
+                <div class="modal-dialog">
+                    <img style='top: 45%; position: absolute; height: 100px; width: 100px; left: 45%;' src='http://gifimage.net/wp-content/uploads/2017/08/loading-gif-transparent-10.gif' />
+                </div>
+            </div>
+        </div>
         </nav>
         <script> 
             function ventanaSecundaria(URL) {
@@ -461,7 +475,28 @@
         <script type="text/javascript" src="<%= ResolveUrl("/Scripts/toastr.min.js") %>"></script>
         <script type="text/javascript" src="<%= ResolveUrl("/Scripts/jQuery.print.min.js") %>"></script>
         <script type="text/javascript" src="<%= ResolveUrl("/Scripts/app.js") %>"></script>
+        <script type='text/javascript'>
+            $(window).on('load', function () {
+                $('.loading-screen').attr('style', 'display:none');
+            });
+
+            $(function () {
+                $(':button,:submit').click(function () {
+
+                    $attrLogin = $('.loading-screen').attr('style');
+                    if ($attrLogin == "") {
+                        $('.loading-screen').attr('style', 'display:none');
+                    }
+                    else {
+                        if ($(this).attr('data-dismiss') != 'modal') {
+                            $('.loading-screen').attr('style', '');
+                        }
+                    }
+                });
+            });
+        </script>
         <asp:ContentPlaceHolder ID="contentJS" runat="server">
+
         </asp:ContentPlaceHolder>
     </form>
 </body>

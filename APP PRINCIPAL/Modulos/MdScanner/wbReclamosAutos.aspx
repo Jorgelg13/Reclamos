@@ -97,8 +97,8 @@
                     var server = "reclamosgt.unitypromotores.com"; 
                     //var server = "http://localhost:4000";
                     var pagina = "/Modulos/MdScanner/GuardarArchivoRA.aspx";
-                    DWObject.IfSSL = false;
-                    DWObject.HTTPPort = 80;
+                    DWObject.IfSSL = true;
+                    DWObject.HTTPPort = 443;
                     var archivo = $('input:radio[name=tipo]:checked').val();
                     DWObject.HTTPUploadAllThroughPostAsPDF(server, pagina, archivo + ".pdf", OnHttpUploadSuccess, OnHttpUploadFailure);
                 }

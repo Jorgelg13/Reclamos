@@ -513,7 +513,7 @@ public class Utils
     }
 
     //seleccionar correo de ejecutivos que tienen asignado una poliza
-    public static string seleccionarCorreo(short cod)
+    public static string seleccionarCorreo(int cod)
     {
         try
         {

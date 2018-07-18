@@ -75,6 +75,8 @@
                                 <asp:Label ID="lblVip" runat="server"></asp:Label>
                                 <br />
                                 <asp:Label ID="lblSumaAsegurada" runat="server"></asp:Label>
+                                <br />
+                                <asp:LinkButton runat="server" OnClick="lnEditarPoliza_Click" ID="lnEditarPoliza" title="Editar Datos" style="font-size:30px;"><i class="fa fa-pencil-square-o"></i></asp:LinkButton>
                             </div>
                         </div>
                     </div>
@@ -89,7 +91,6 @@
                             <div style="overflow-y: auto; overflow-x: auto;">
                                 <asp:GridView ID="GridCoberturasAfectadas" CssClass="table bs-table tablaDetalleAuto table-responsive table-hover" runat="server" AutoGenerateColumns="true" CellPadding="4" ForeColor="#333333" GridLines="None">
                                     <AlternatingRowStyle BackColor="White" />
-                                    <FooterStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" />
                                     <HeaderStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" HorizontalAlign="Center" />
                                     <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
                                     <RowStyle BackColor="#EFF3FB" />
@@ -107,7 +108,6 @@
                             <b><span style="font-size: 20px">LLamadas Realizadas en cabina:</span></b>
                             <asp:GridView ID="Gridllamadas" CssClass="table bs-table tablaDetalleAuto table-responsive table-hover" runat="server" AutoGenerateColumns="true" CellPadding="4" ForeColor="#333333" GridLines="None">
                                 <AlternatingRowStyle BackColor="White" />
-                                <FooterStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" />
                                 <HeaderStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" HorizontalAlign="Center" Wrap="False" />
                                 <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
                                 <RowStyle BackColor="#EFF3FB" />
@@ -117,7 +117,6 @@
                             <b><span style="font-size: 20px">Datos del incidente:</span></b>
                             <asp:GridView ID="GridDatosAccidente" CssClass="table bs-table tablaDetalleAuto table-responsive table-hover" runat="server" AutoGenerateColumns="true" CellPadding="4" ForeColor="#333333" GridLines="None">
                                 <AlternatingRowStyle BackColor="White" />
-                                <FooterStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" />
                                 <HeaderStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" HorizontalAlign="Center" Wrap="False" />
                                 <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
                                 <RowStyle BackColor="#EFF3FB" />
@@ -204,7 +203,7 @@
                                 <a data-toggle="modal" title="Enviar un correo electronico" role="button" data-target="#exampleModal"><i class="fa fa-envelope-o"></i></a>
                             </div>
                             <div class="col-xs-3 col-md-2 col-sm-2 col-lg-1">
-                                <a title="Configurar Proxima fecha a mostrar" data-toggle="modal" role="button" data-target="#ModalProximaFecha" style="text-align: center;"><i class="fa fa-calendar-check-o"></i></a>
+                                <a title="Configurar Proxima fecha a mostrar" data-toggle="modal" role="button" data-target="#ModalProximaFecha"><i class="fa fa-calendar-check-o"></i></a>
                             </div>
                             <div class="col-xs-3 col-md-2 col-sm-2 col-lg-1">
                                 <a title="Imprimir Memos" data-toggle="modal" role="button" data-target="#Editor"><i class="fa fa-print"></i></a>
@@ -225,7 +224,7 @@
                                 <a title="Bitacora del reclamo" onclick="printDiv('imprimirBitacora')" data-toggle="modal" role="button" data-target="#"><i class="fa fa-file"></i></a>
                             </div>
                             <div class="col-xs-3 col-md-2 col-sm-2 col-lg-1">
-                                <asp:LinkButton ID="linkGuardarR" title="Actualizar Informacion" OnClick="btnActualizar_Click" runat="server" Style="text-align: center;"><i class="fa fa-floppy-o"></i></asp:LinkButton>
+                                <asp:LinkButton ID="linkGuardarR" title="Actualizar Informacion" OnClick="btnActualizar_Click" runat="server"><i class="fa fa-floppy-o"></i></asp:LinkButton>
                             </div>
                             <div class="col-xs-3 col-md-2 col-sm-2 col-lg-1">
                                 <a title="Producto no conforme" data-toggle="modal" role="button" data-target="#ModalNoconforme"><i class="fa fa-frown-o" style="color: red"></i></a>
@@ -248,8 +247,11 @@
                              <div class="col-xs-3 col-md-2 col-sm-2 col-lg-1">
                                 <a title="Ver Documentos Solicitados" id="DocSolicitados" data-toggle="modal" role="button" data-target="#SolicitudDocumentos"><i class="fa fa-files-o"></i></a>
                             </div>
+                             <div class="col-xs-3 col-md-2 col-sm-2 col-lg-1">
+                                <a title="Problemas varios" data-toggle="modal" role="button" data-target="#ProblemasVarios"><i class="fa fa-exclamation-triangle"></i></a>
+                            </div>
                             <div class="col-xs-3 col-md-2 col-sm-2 col-lg-1">
-                                <asp:LinkButton ID="linkRegresar" OnClick="linkSalir_Click" title="Regresar a reclamos en seguimiento" runat="server" Style="text-align: center;"><i class="fa fa-arrow-left"></i></asp:LinkButton>
+                                <asp:LinkButton ID="linkRegresar" OnClick="linkSalir_Click" title="Regresar a reclamos en seguimiento" runat="server"><i class="fa fa-arrow-left"></i></asp:LinkButton>
                             </div>
                         </div>
                     </div>
@@ -273,7 +275,6 @@
                             <div style="height: 300px; overflow-x: auto;">
                                 <asp:GridView ID="GridComentarios" CssClass="table bs-table tablaDetalleAuto table-responsive table-hover" runat="server" AutoGenerateColumns="true"
                                     CellPadding="3" BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" OnRowDataBound="GridComentarios_RowDataBound">
-                                    <FooterStyle BackColor="White" ForeColor="black" />
                                     <HeaderStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" HorizontalAlign="Center" Wrap="False" />
                                     <PagerStyle BackColor="White" ForeColor="#000066" HorizontalAlign="Left" />
                                     <RowStyle ForeColor="#000066" HorizontalAlign="Left" Wrap="True" />
@@ -510,7 +511,7 @@
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-warning" data-dismiss="modal">Cerrar</button>
-                                <asp:Button ID="btnGuardarProximaFecha" CssClass="btn btn-primary" runat="server" Text="Guardar" OnClick="btnGuardarProximaFecha_Click" />
+                                <asp:Button ID="btnGuardarProximaFecha" Enabled="false" CssClass="btn btn-primary" runat="server" Text="Guardar" OnClick="btnGuardarProximaFecha_Click" />
                             </div>
                         </div>
                     </div>
@@ -854,6 +855,58 @@
                         </div>
                     </div>
                 </div>
+                <%-----------------------------------   modal para agregar datos manualmente a un reclamo que se creo de forma manual ---------------------------------------%>
+                <div class="modal fade" id="EditarPoliza">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title"><b>Actualizar Poliza</b></h4>
+                            </div>
+                            <div class="modal-body ">
+                                <div class="form-group col-lg-6 col-md-6 col-sm-12">
+                                    <label>Poliza:</label>
+                                    <asp:TextBox ID="txtPoliza" style="width:100%" CssClass="form-control" AutoComplete="off" runat="server"></asp:TextBox>
+                                </div>
+                                <div class="form-group col-lg-6 col-md-6 col-sm-12">
+                                    <label>Asegurado:</label>
+                                    <asp:TextBox ID="txtAsegurado" style="width:100%" CssClass="form-control" AutoComplete="off" runat="server"></asp:TextBox>
+                                </div>
+                                <div class="form-group col-lg-6 col-md-6 col-sm-12">
+                                    <label>Estado Poliza:</label>
+                                    <asp:DropDownList ID="ddlStatus" style="width:100%" class="form-control" runat="server">
+                                        <asp:ListItem>Renovacion</asp:ListItem>
+                                        <asp:ListItem>Nueva</asp:ListItem>
+                                        <asp:ListItem>Cancelada</asp:ListItem>
+                                    </asp:DropDownList>
+                                </div>
+                                <div class="form-group col-lg-6 col-md-6 col-sm-12">
+                                    <label>Ejecutivo:</label>
+                                    <asp:DropDownList ID="ddlEjecutivos" style="width:100%; height:32px" class="form-control"  runat="server"></asp:DropDownList>
+                                </div>
+                                <div class="form-group col-lg-6 col-md-6 col-sm-12">
+                                    <label>Aseguradora:</label>
+                                    <asp:DropDownList ID="ddlAseguradora" style="width:100%" class="form-control" runat="server"></asp:DropDownList>
+                                </div>
+                                <div class="form-group col-lg-6 col-md-6 col-sm-12">
+                                    <label>Suma Asegurada:</label>
+                                    <asp:TextBox ID="txtSumaAsegurada" style="width:100%" Text="0.00" autocomplete="off" class="form-control" runat="server"></asp:TextBox>
+                                </div>
+                                 <div class="form-group col-lg-6 col-md-6 col-sm-12">
+                                    <label>No. Cliente:</label>
+                                    <asp:TextBox ID="txtCliente" style="width:100%" Text="0" CssClass="form-control" AutoComplete="off" runat="server"></asp:TextBox>
+                                </div>
+                                 <div class="form-group col-lg-6 col-md-6 col-sm-12">
+                                    <label>Direccion:</label>
+                                    <asp:TextBox ID="txtDireccion" style="width:100%" autocomplete="off" class="form-control" runat="server"></asp:TextBox>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-warning" data-dismiss="modal">Cerrar</button>
+                                <asp:Button ID="btnActualizarPoliza" OnClick="btnActualizarPoliza_Click" CssClass="btn btn-primary" runat="server" Text="Guardar" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <%-------------------- Solicitud de documentos --------------------%>
                 <div class="modal fade" id="SolicitudDocumentos">
                     <div class="modal-dialog modal-lg">
@@ -898,6 +951,34 @@
                                 <button type="button" class="btn btn-warning" data-dismiss="modal">Cerrar</button>
                                 <button type="button" id="ImprimirSolicitud" class="btn btn-primary">Imprimir</button>
                                 <asp:Button CssClass="btn btn-primary" runat="server" ID="btnGuardarDocumentos" OnClick="btnGuardarDocumentos_Click" Text="Guardar" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <%--------------------------------- modal para adjuntar problemas varios --------------------------------%>
+                <div class="modal fade" id="ProblemasVarios">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title"><b>Comentar Problemas</b></h4>
+                            </div>
+                            <div class="modal-body">
+                                <div class="form-group">
+                                    <asp:CheckBox runat="server" ID="chTaller" Text="Problemas Con Taller" />
+                                    <asp:TextBox ID="txtProblemaTaller" Style="width: 99%" autocomplete="off" class="form-control" TextMode="multiline" Columns="50" Rows="3" placeholder="Observacion Taller" runat="server"></asp:TextBox>
+                                    <asp:CheckBox runat="server" ID="chAnalista" Text="Problemas con Ajustador" />
+                                    <asp:TextBox ID="txtProblemaAjustador" Style="width: 99%" autocomplete="off" class="form-control" TextMode="multiline" Columns="50" Rows="3" placeholder="Observacion para ajustador" runat="server"></asp:TextBox>
+                                    <asp:CheckBox runat="server" ID="chCabina" Text="Problemas con Cabina" />
+                                    <asp:TextBox ID="txtProblemaCabina" Style="width: 99%" autocomplete="off" class="form-control" TextMode="multiline" Columns="50" Rows="3" placeholder="Observacion para cabina" runat="server"></asp:TextBox>
+                                    <asp:CheckBox runat="server" ID="ChAseguradora" Text="Problemas con Aseguradora" />
+                                    <asp:TextBox ID="txtProblemaAseguradora" Style="width: 99%" autocomplete="off" class="form-control" TextMode="multiline" Columns="50" Rows="3" placeholder="Observacion para aseguradora" runat="server"></asp:TextBox>
+                                    <asp:CheckBox runat="server" ID="chEjecutivo" Text="Problemas con ejecutivo" />
+                                    <asp:TextBox ID="txtProblemaEjecutivo" Style="width: 99%" autocomplete="off" class="form-control" TextMode="multiline" Columns="50" Rows="3" placeholder="Observacion para ejecutivo" runat="server"></asp:TextBox>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-warning" data-dismiss="modal">Cerrar</button>
+                                <asp:Button ID="btnProblema" CssClass="btn btn-primary" runat="server" Text="Guardar" OnClick="btnProblema_Click" />
                             </div>
                         </div>
                     </div>

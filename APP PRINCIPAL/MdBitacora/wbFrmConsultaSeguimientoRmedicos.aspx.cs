@@ -227,7 +227,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosMedicosSeguimientos : 
             string to = txtDestinatario.Text;
             string mensaje = txtMensaje.Text;
             string asunto = txtAsunto.Text;
-            new Email().CorreoReclamos(to, mensaje, asunto);
+            new Email().NOTIFICACION(to, mensaje, asunto);
             Utils.ShowMessage(this.Page, "Correo Enviado con exito", "Excelente..!", "success");
         }
 
@@ -249,7 +249,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosMedicosSeguimientos : 
 
     protected void btnCancelar_Click(object sender, EventArgs e)
     {
-        Response.Redirect("/Default.aspx");
+        Response.Redirect("/Default.aspx",false);
     }
     //agregar un comentario nuevo
     private void agregarComentario(String descripcion)

@@ -4,6 +4,7 @@ using System.Web;
 using System.Web.UI.WebControls;
 using System.Data;
 using System.Net;
+using System.Net.Mail;
 
 public partial class Modulos_MdReclamos_wbFrmReclamosAsignadosUnity : System.Web.UI.Page
 {
@@ -20,7 +21,9 @@ public partial class Modulos_MdReclamos_wbFrmReclamosAsignadosUnity : System.Web
     bool robo = false;
     int id, id_contacto;
     string id2;
-   
+    String poliza, correoGestor, cuerpo, asunto, fechaCreacion, asegurado, correoComentario, codigo;
+    String correo = "reclamosgt@unitypromotores.com";
+
     protected void Page_Load(object sender, EventArgs e)
     {
         if (!comprobar.verificarUsuario(userlogin))
@@ -54,7 +57,8 @@ public partial class Modulos_MdReclamos_wbFrmReclamosAsignadosUnity : System.Web
                    "reclamo_auto.reportante as Reportante," +
                    "reclamo_auto.piloto as Piloto," +
                    "reclamo_auto.telefono as Telefono," +
-                   "reclamo_auto.ajustador as Ajustador " +
+                   "reclamo_auto.ajustador as Ajustador, " +
+                   "auto_reclamo.numero_gestor as Cod "+
                    "FROM auto_reclamo " +
                    "INNER JOIN reclamo_auto ON reclamo_auto.id_auto_reclamo = auto_reclamo.id " +
                    "where (usuario_unity = '" + userlogin + "') and(estado_unity = 'Sin Cerrar')";
@@ -67,10 +71,11 @@ public partial class Modulos_MdReclamos_wbFrmReclamosAsignadosUnity : System.Web
     {
         var gestor = DBReclamos.gestores.ToList().Where(ge => ge.usuario == userlogin && ge.tipo == "autos").First();
         ddlGestor.SelectedValue = gestor.id.ToString();
+
         obtenerRegistro();
         actualizarFecha(id);
 
-        string llamadas = "SELECT descripcion as Descripcion, Convert(varchar,fecha_commit, 103) as [Fecha Creacion], hora_commit as Hora, usuario as Usuario FROM bitacora_reclamo_auto WHERE id_reclamo = "+id2+"";
+        string llamadas = "SELECT descripcion as Descripcion, Convert(varchar,fecha_commit, 103) as [Fecha Creacion], hora_commit as Hora, usuario as Usuario FROM bitacora_reclamo_auto WHERE id_reclamo = "+lblId.Text+"";
         llenar.llenarGrid(llamadas, Gridllamadas);
     }
 
@@ -112,12 +117,14 @@ public partial class Modulos_MdReclamos_wbFrmReclamosAsignadosUnity : System.Web
     {
         try
         {
-            id2 = GridAsignacion.SelectedRow.Cells[1].Text;
-            lblId.Text = id2;
-            lblPlaca.Text = GridAsignacion.SelectedRow.Cells[5].Text.ToString();
+            lblId.Text     = GridAsignacion.SelectedRow.Cells[1].Text;
+            lblPlaca.Text  = GridAsignacion.SelectedRow.Cells[5].Text.ToString();
             lblChasis.Text = GridAsignacion.SelectedRow.Cells[9].Text.ToString();
-            lblMarca.Text = GridAsignacion.SelectedRow.Cells[6].Text.ToString();
+            lblMarca.Text  = GridAsignacion.SelectedRow.Cells[6].Text.ToString();
             lblModelo.Text = GridAsignacion.SelectedRow.Cells[8].Text.ToString();
+            poliza         = GridAsignacion.SelectedRow.Cells[4].Text.ToString();
+            asegurado      = GridAsignacion.SelectedRow.Cells[3].Text;
+            fechaCreacion  = GridAsignacion.SelectedRow.Cells[18].Text;
         }
 
         catch (Exception ex)
@@ -145,10 +152,10 @@ public partial class Modulos_MdReclamos_wbFrmReclamosAsignadosUnity : System.Web
     //metodo para guardar la apertura del reclamo
     protected void txtGuardar_Click(object sender, EventArgs e)
     {
-        id = Convert.ToInt32(lblId.Text);
         opcionesChecked();
         try
         {
+            id= Convert.ToInt32(GridAsignacion.SelectedRow.Cells[1].Text);
             if (txtComentarios.Text != "")
             {
                 agregarComentario(txtComentarios.Text);
@@ -165,21 +172,26 @@ public partial class Modulos_MdReclamos_wbFrmReclamosAsignadosUnity : System.Web
             DBReclamos.contacto_auto.Add(contacAuto);
 
             var reclamo = DBReclamos.reclamo_auto.Find(id);
-            reclamo.estado_unity = "Seguimiento";
-            reclamo.num_reclamo = txtNumReclamo.Text.ToString();
             reclamo.estado_auto_unity = "Asignacion";
-            reclamo.id_gestor = Convert.ToInt16(ddlGestor.SelectedValue);
-            reclamo.id_analista = Convert.ToInt16(ddlAnalista.SelectedValue);
-            reclamo.observaciones = txtObservaciones.Text.ToString();
-            reclamo.complicado = complicado;
-            reclamo.prioritario = prioritario;
+            reclamo.estado_unity   = "Seguimiento";
+            reclamo.num_reclamo    = txtNumReclamo.Text.ToString();
+            reclamo.id_gestor      = Convert.ToInt16(ddlGestor.SelectedValue);
+            reclamo.id_analista    = Convert.ToInt16(ddlAnalista.SelectedValue);
+            reclamo.observaciones  = txtObservaciones.Text.ToString();
+            reclamo.complicado     = complicado;
+            reclamo.prioritario    = prioritario;
             reclamo.compromiso_pago = compromiso_pago;
-            reclamo.alquiler_auto = alquiler;
-            reclamo.perdida_total = perdidaTotal;
-            reclamo.robo = robo;
+            reclamo.alquiler_auto  = alquiler;
+            reclamo.perdida_total  = perdidaTotal;
+            reclamo.robo           = robo;
             reclamo.b_carta_cierre_interno = false;
             reclamo.b_carta_declinado = false;
             reclamo.b_carta_envio_cheque = false;
+            reclamo.problema_ajustador = false;
+            reclamo.problema_cabina = false;
+            reclamo.problema_taller = false;
+            reclamo.problema_aseguradora = false;
+            reclamo.problema_ejecutivo = false;
             reclamo.id_taller = Convert.ToInt16(ddlTaller.SelectedValue);
             reclamo.fecha_apertura_reclamo = DateTime.Now;
             reclamo.fecha_cierre_reclamo = DateTime.Now;
@@ -193,12 +205,14 @@ public partial class Modulos_MdReclamos_wbFrmReclamosAsignadosUnity : System.Web
             {
                 enviarNotificacion();
             }
+
+            Notificacion();
             Response.Redirect("/Modulos/MdReclamosUnity/wbFrmReclamosAutosSeguimiento.aspx?ID_reclamo=" + id, false);
         }
         catch (Exception ex)
         {
             Utils.ShowMessage(this.Page, "No se a podido ingresar ese registro..", "Nota..!", "error");
-            Email.EnviarERROR("Error en apertura de reclamos de autos","Error ocasionado al usuario: " + userlogin + " en el registro con el id: " + id +  "\n\n" + ex.Message);
+            Email.ENVIAR_ERROR("Error en apertura de reclamos de autos","Error ocasionado al usuario: " + userlogin + " en el registro con el id: " + id +  "\n\n" + ex.Message);
         }
     }
 
@@ -246,28 +260,28 @@ public partial class Modulos_MdReclamos_wbFrmReclamosAsignadosUnity : System.Web
 
         catch (Exception)
         {
-            Utils.ShowMessage(this.Page, "No se a podido seleccionar el correo del ejecutivo de la cuenta..", "Nota..!", "error");
+            Utils.ShowMessage(this.Page, "No se a podido seleccionar el telefono del gestor del reclamo..", "Nota..!", "error");
         }
     }
     //enviar notificacion al cliente de la apertura del reclamo
     public void enviarNotificacion()
     {
-        seleccionarTelefonoGestor();
-        string mensaje = "Estimado asegurado: \n\n" +
-               " Mi nombre es " + ddlGestor.SelectedItem + ", soy la persona asignada para la atención del reclamo presentado por daños al vehículo" +
-               " Placas: " + lblPlaca.Text + " Marca: " + lblMarca.Text + " Año: " + lblModelo.Text + ", " +
-               " Mi teléfono directo es:  "+ lblTelefono.Text+"  para que pueda contactarme en cualquier consulta. \n" +
-               " Cualquier duda, estoy a la orden.";
+        string telefono = Utils.TelefonoGestor(ddlGestor);
+        string mensaje = Constantes.ASIGNACION_AUTOS(ddlGestor, lblPlaca.Text, lblMarca.Text, lblModelo.Text,telefono);
 
-        notificacion.CorreoReclamos(txtCorreo.Text.Trim(), mensaje, "Asignacion de Reclamo");
+        notificacion.NOTIFICACION(txtCorreo.Text.Trim(), mensaje, "Asignacion de Reclamo");
         agregarComentario("Registro de envio de correo de notificacion: \n\n" + mensaje);
     }
+
     //insertar el primero estado del auto su bitacora
     protected void insertarEstado(int id_estado)
     {
         try
         {
             bitacora_estados_autos estado = new bitacora_estados_autos();
+            var sec_registro = DBReclamos.pa_sec_estados_autos();
+            long? id_registro = sec_registro.Single();
+            estado.id = Convert.ToInt64(id_registro);
             estado.estado = "Asignacion";
             estado.id_reclamo_auto = id_estado;
             estado.fecha = DateTime.Now;
@@ -278,6 +292,39 @@ public partial class Modulos_MdReclamos_wbFrmReclamosAsignadosUnity : System.Web
             Utils.ShowMessage(this.Page, "A ocurrido un error al insertar el estado", "Error", "error");
         }
     }
+
+    public void Notificacion()
+    {
+        codigo = GridAsignacion.SelectedRow.Cells[24].Text;
+        poliza = GridAsignacion.SelectedRow.Cells[4].Text.ToString();
+        asegurado = GridAsignacion.SelectedRow.Cells[3].Text;
+        fechaCreacion = GridAsignacion.SelectedRow.Cells[18].Text;
+        correoGestor = Utils.seleccionarCorreoGestor(userlogin);
+        cuerpo = Constantes.NOTIFICACION_EJECUTIVO_AUTOS(fechaCreacion, asegurado, poliza, ddlGestor, lblPlaca.Text, lblMarca.Text,lblModelo.Text, id);
+        asunto = "Notificacion Siniestro Auto";
+
+        if (codigo == "&nbsp;" || codigo == null || codigo == "")
+        {
+
+        }
+
+        else
+        {
+            correo = Utils.seleccionarCorreo(Convert.ToInt32(codigo));
+            try
+            {
+                notificacion.NOTIFICACION_EJECUTIVO(correo.Trim(), cuerpo, asunto, correoGestor.Trim());
+                correoComentario = HttpUtility.HtmlDecode("Destinatario: " + correo + " Asunto:" + asunto + " Cuerpo del mensaje: " + cuerpo);
+                agregarComentario(correoComentario);
+            }
+
+            catch (SmtpException ex)
+            {
+                Utils.ShowMessage(this.Page, "No se a podido enviar la notificacion " + ex.Message, "Error..", "error");
+            }
+        }
+    }
+
     //agregar comentario a la bitacora de seguimiento del reclamo
     protected void agregarComentario(string descripcion)
     {
@@ -289,6 +336,7 @@ public partial class Modulos_MdReclamos_wbFrmReclamosAsignadosUnity : System.Web
             comentario.id_reclamo_auto = id;
             comentario.fecha = DateTime.Now;
             DBReclamos.comentarios_reclamos_autos.Add(comentario);
+            DBReclamos.SaveChanges();
         }
         catch (Exception)
         {

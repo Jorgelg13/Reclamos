@@ -60,7 +60,7 @@ public partial class _Default : Page
 
         catch(Exception ex)
         {
-            Email.EnviarERROR("Error en conteo de reclamos en cabina","Descripcion del error: " + ex);
+            Email.ENVIAR_ERROR("Error en conteo de reclamos en cabina","Descripcion del error: " + ex);
         }
     }
 }

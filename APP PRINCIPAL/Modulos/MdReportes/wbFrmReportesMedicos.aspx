@@ -83,7 +83,7 @@
                         <br />
                         <div class="form-inline">
                             <asp:CheckBox ID="checkSinFiltro" AutoPostBack="true" runat="server" Text="Sin Ningun Filtro" OnCheckedChanged="checkSinFiltro_CheckedChanged" />
-                             <asp:DropDownList ID="ddlCiclos" runat="server" Style="width: 25%" CssClass="form-control">
+                            <asp:DropDownList ID="ddlCiclos" runat="server" Style="width: 25%" CssClass="form-control">
                                 <asp:ListItem Value="Ciclo Aseguradora">Ciclo Aseguradora</asp:ListItem>
                                 <asp:ListItem Value="Ciclo Cliente">Ciclo Cliente</asp:ListItem>
                                 <asp:ListItem Value="Ciclo Ejecutivo">Ciclo Unity</asp:ListItem>
@@ -150,14 +150,14 @@
                     </div>
                     <div class="panel-body" style="height: 520px;">
                         <div class="scrolling-table-container" style="overflow-y: auto;">
-                          <asp:Panel ID="PanelPromedioAseguradora" runat="server">
-                             <asp:GridView ID="GridPromedioAseguradora" runat="server" OnRowDataBound="GridPromedioAseguradora_RowDataBound" CssClass="table bs-table table-responsive " AutoGenerateColumns="True" ShowFooter="true" ForeColor="#333333" GridLines="None">
-                                <AlternatingRowStyle BackColor="White" />
-                                <FooterStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" />
-                                <HeaderStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" HorizontalAlign="Center" Wrap="False" />
-                                <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
-                                <RowStyle BackColor="#EFF3FB" HorizontalAlign="Left" Wrap="False" />
-                             </asp:GridView>
+                            <asp:Panel ID="PanelPromedioAseguradora" runat="server">
+                                <asp:GridView ID="GridPromedioAseguradora" runat="server" OnRowDataBound="GridPromedioAseguradora_RowDataBound" CssClass="table bs-table table-responsive " AutoGenerateColumns="True" ShowFooter="true" ForeColor="#333333" GridLines="None">
+                                    <AlternatingRowStyle BackColor="White" />
+                                    <FooterStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" />
+                                    <HeaderStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" HorizontalAlign="Center" Wrap="False" />
+                                    <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
+                                    <RowStyle BackColor="#EFF3FB" HorizontalAlign="Left" Wrap="False" />
+                                </asp:GridView>
                             </asp:Panel>
                         </div>
                         <asp:Label ID="lblTotalPonderados" runat="server"></asp:Label>
@@ -200,7 +200,6 @@
                 </div>
             </div>
         </asp:Panel>
-
         <%----------------------------  ciclo de los reclamos por ejecutivo KPI  ---------------------%>
         <asp:Panel ID="PnCicloEjecutivoKPI" Visible="false" runat="server">
             <div class="col-sm-10">
@@ -236,7 +235,7 @@
                         <h3 class="panel-title"><b style="font-size: 16px;">Promedio Ejecutivo (Creacion / Asignacion)</b></h3>
                     </div>
                     <div class="panel-body" style="height: 270px; overflow-x: auto; overflow-y: auto;">
-                          <asp:LinkButton ID="linkRegresarReport" OnClick="linKRegresar_Click" title="Regresar al reporte" runat="server" Style="padding-left: 20px; font-size: 70px; text-align: center; color: lightblue"><i class="fa fa-arrow-circle-o-left" aria-hidden="true"></i></asp:LinkButton>
+                        <asp:LinkButton ID="linkRegresarReport" OnClick="linKRegresar_Click" title="Regresar al reporte" runat="server" Style="padding-left: 20px; font-size: 70px; text-align: center; color: lightblue"><i class="fa fa-arrow-circle-o-left" aria-hidden="true"></i></asp:LinkButton>
                         <asp:LinkButton ID="linkCicloEjecutivo" OnClick="linkCicloEjecutivo_Click" title="Descargar en excel" runat="server" Style="font-size: 70px; text-align: center; color: green"><i class="fa fa-file-excel-o" aria-hidden="true"></i></asp:LinkButton>
                         <asp:GridView ID="GridCicloEjecutivo" runat="server" CssClass="table bs-table table-responsive table-hover" AutoGenerateColumns="True" CellPadding="4" ForeColor="#333333" GridLines="None">
                             <AlternatingRowStyle BackColor="White" />
@@ -297,7 +296,6 @@
                 </div>
             </div>
         </asp:Panel>
-
         <%-- ------------------------ modal ver el detalle de eficiencia ------------------------------------------%>
         <div class="modal fade" id="ModalDetalle" data-keyboard="false" data-backdrop="static">
             <div class="modal-dialog modal-lg">
@@ -317,7 +315,7 @@
                                 <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
                                 <RowStyle BackColor="#EFF3FB" HorizontalAlign="Left" Wrap="False" />
                             </asp:GridView>
-                            <p style="font-size:20px"><b>Eficiencia Calificada sobre 80%</b></p>
+                            <p style="font-size: 20px"><b>Eficiencia Calificada sobre 80%</b></p>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -349,11 +347,11 @@
     <script>
         try {
             $('#ContentPlaceHolder1_GridCicloCliente tr').each(function (index) {
-                 $tr = $(this);
-                 $td = $tr[0].cells[3];
-                 $td.remove();
+                $tr = $(this);
+                $td = $tr[0].cells[3];
+                $td.remove();
                 if (index > 0) {
-                        $td = $tr[0].cells[3];
+                    $td = $tr[0].cells[3];
                     $td.innerText = $td.innerText + ' %';
                     $td.className = 'alinearNumeros';
                 }
@@ -363,9 +361,9 @@
 
         try {
             $('#ContentPlaceHolder1_GridPromedioAseguradora tr').each(function (index) {
-                   $tr = $(this);
-                   $td = $tr[0].cells[3];
-                   $td.remove();
+                $tr = $(this);
+                $td = $tr[0].cells[3];
+                $td.remove();
                 if (index > 0) {
                     $td = $tr[0].cells[3];
                     $td.innerText = $td.innerText + ' %';
@@ -391,7 +389,7 @@
         } catch (ex) {
         }
 
-         try {
+        try {
             $('#ContentPlaceHolder1_GridEficiencia tr').each(function (index) {
                 $tr = $(this);
                 if (index > 0) {
@@ -402,7 +400,7 @@
             });
         } catch (ex) {
         }
-        
+
     </script>
 </asp:Content>
 

@@ -6,32 +6,30 @@ using System.Net.Mail;
 public class Email
 {
     //variables utilizadas para el manejo del envio de correo electronico
-    MailMessage m = new MailMessage();
+    MailMessage mail = new MailMessage();
     SmtpClient smtp = new SmtpClient();
+    string from = "reclamosgt@unitypromotores.com";
+    string password = "123$456R";
 
     public Email()
     {
-        //
-        // TODO: Agregar aquí la lógica del constructor
-        //
+
     }
 
-    public bool CorreoReclamos( string para, string cuerpo, string asunto)
+    public bool NOTIFICACION( string para, string cuerpo, string asunto)
     {
         try
         {
-            string from = "reclamosgt@unitypromotores.com";
-            string password = "123$456R";
-            m.To.Clear();
-            m.From = new MailAddress(from);
-            m.To.Add(new MailAddress(para));
-            m.Body = cuerpo;
-            m.Subject = asunto;
+            mail.To.Clear();
+            mail.From = new MailAddress(from);
+            mail.To.Add(new MailAddress(para));
+            mail.Body = cuerpo;
+            mail.Subject = asunto;
             smtp.Host = "smtp.office365.com";
             smtp.Port = 587;
             smtp.Credentials = new NetworkCredential(from, password);
             smtp.EnableSsl = true;
-            smtp.Send(m);
+            smtp.Send(mail);
 
             return true;
         }
@@ -42,7 +40,7 @@ public class Email
         }
     }
 
-    public static bool EnviarERROR(string asunto, string cuerpo)
+    public static bool ENVIAR_ERROR(string asunto, string cuerpo)
     {
         try
         {
@@ -72,24 +70,22 @@ public class Email
     }
 
 
-    public bool enviarcorreo2( string para, string mensaje, string asunto, string copia)
+    public bool NOTIFICACION_EJECUTIVO( string para, string mensaje, string asunto, string copia)
     {
         try
         {
-            string from = "reclamosgt@unitypromotores.com";
-            string password = "123$456R";
-            m.To.Clear();
-            m.From = new MailAddress(from);
-            m.To.Add(new MailAddress(para));
-            m.Bcc.Add(copia);
-            m.Body = mensaje;
-            m.Subject = asunto;
-            m.IsBodyHtml = true;
+            mail.To.Clear();
+            mail.From = new MailAddress(from);
+            mail.To.Add(new MailAddress(para));
+            mail.Bcc.Add(copia);
+            mail.Body = mensaje;
+            mail.Subject = asunto;
+            mail.IsBodyHtml = true;
             smtp.Host = "smtp.office365.com";
             smtp.Port = 587;
             smtp.Credentials = new NetworkCredential(from, password);
             smtp.EnableSsl = true;
-            smtp.Send(m);
+            smtp.Send(mail);
 
             return true;
         }

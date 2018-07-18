@@ -34,14 +34,14 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosMedicosSeguimientos : 
         idRecibido = Convert.ToString(Request.QueryString[0]).ToString();
         id = Int32.Parse(idRecibido);
         Session.Add("id_RM", id.ToString());
-        lblId.Text = "<b>No.</b>" + id.ToString();
+        lblId.Text   = "<b>No.</b>" + id.ToString();
         labelID.Text = "<b>ID: </b>" + id.ToString();
         lblFechaEnvioCliente.Text = thisDay.ToString("D");
         lblIdOculto.Text = idRecibido;
 
         Documentos  = Consultas.DOCUMENTOS_GM(id);
         comentarios = Consultas.COMENTARIOS_GM(id);
-        pagos = Consultas.PAGOS_GM(id);
+        pagos       = Consultas.PAGOS_GM(id);
 
         if(Verificar())
         {
@@ -91,29 +91,29 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosMedicosSeguimientos : 
         {
             var reclamo = DBReclamos.reclamos_medicos.Find(id);
             //datos imprimir formulario para aseguardo
-            lblAsegurado.Text = "<ins>" + reclamo.reg_reclamos_medicos.asegurado + "</ins>";
-            lblAseguradora.Text = "<ins>" + reclamo.reg_reclamos_medicos.aseguradora + "</ins>";
-            lblpoliza.Text = "<ins>" + reclamo.reg_reclamos_medicos.poliza + "</ins>";
-            lblEmpresa.Text = "<ins>" + reclamo.empresa + "</ins>";
+            lblAsegurado.Text     = "<ins>" + reclamo.reg_reclamos_medicos.asegurado + "</ins>";
+            lblAseguradora.Text   = "<ins>" + reclamo.reg_reclamos_medicos.aseguradora + "</ins>";
+            lblpoliza.Text        = "<ins>" + reclamo.reg_reclamos_medicos.poliza + "</ins>";
+            lblEmpresa.Text       = "<ins>" + reclamo.empresa + "</ins>";
             lblfechaCreacion.Text = "<ins>" + reclamo.fecha_commit + "</ins>";
 
             if (reclamo.fecha_modificacion.ToString() != "") txtFechaModificado.Text = "Ultima Modificacion: " + reclamo.fecha_modificacion;
             if (reclamo.fecha_envio_cheque.ToString() != "") txtFechaEnvioCheque.Text = Convert.ToDateTime(reclamo.fecha_envio_cheque).ToString("yyyy/MM/dd").Replace("/", "-");
 
             //datos de informacion lateral que se puede modificar
-            txtAsegurado.Text = reclamo.reg_reclamos_medicos.asegurado;
-            txtAseguradora.Text = reclamo.reg_reclamos_medicos.aseguradora;
-            txtPoliza.Text = reclamo.reg_reclamos_medicos.poliza;
-            txtCorreo.Text = reclamo.correo;
-            txtTelefono.Text = reclamo.telefono;
-            txtDestinatario.Text = reclamo.correo;
-            DDLTipo.Text = reclamo.tipo_reclamo;
+            txtAsegurado.Text       = reclamo.reg_reclamos_medicos.asegurado;
+            txtAseguradora.Text     = reclamo.reg_reclamos_medicos.aseguradora;
+            txtPoliza.Text          = reclamo.reg_reclamos_medicos.poliza;
+            txtCorreo.Text          = reclamo.correo;
+            txtTelefono.Text        = reclamo.telefono;
+            txtDestinatario.Text    = reclamo.correo;
+            DDLTipo.Text            = reclamo.tipo_reclamo;
             ddlEstado.SelectedValue = reclamo.estado.id.ToString();
-            txtValorEstado.Text= reclamo.estado.id.ToString();
-            txtdetalle.Text = reclamo.detalle_cliente;
-            txtObservaciones.Text = reclamo.observacion;
+            txtValorEstado.Text     = reclamo.estado.id.ToString();
+            txtdetalle.Text         = reclamo.detalle_cliente;
+            txtObservaciones.Text   = reclamo.observacion;
+            txtNumReclamo.Text      = reclamo.num_reclamo;
             txtObservaciones.Text.Replace("<br/>", "\n");
-            txtNumReclamo.Text = reclamo.num_reclamo;
             ddlNoConforme.SelectedValue = String.IsNullOrEmpty(reclamo.detalle_no_conforme) ? "" : reclamo.detalle_no_conforme;
             txtObservacionesNoConf.Text = reclamo.observacion_no_conforme;
 
@@ -228,7 +228,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosMedicosSeguimientos : 
             string to = txtDestinatario.Text;
             string mensaje = txtMensaje.Text;
             string asunto = txtAsunto.Text;
-            new Email().CorreoReclamos(to, mensaje, asunto);
+            new Email().NOTIFICACION(to, mensaje, asunto);
             Utils.ShowMessage(this.Page, "Correo Enviado con exito", "Excelente..!", "success");
         }
 
@@ -242,9 +242,9 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosMedicosSeguimientos : 
     //vaciar el correo electronico
     public void varciarCorreo()
     {
-        txtMensaje.Text = "";
+        txtMensaje.Text  = "";
         txtPassword.Text = "";
-        txtAsunto.Text = "";
+        txtAsunto.Text   = "";
         txtDestinatario.Text = "";
     }
 
@@ -308,14 +308,15 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosMedicosSeguimientos : 
                 Response.Redirect("/Modulos/MdReclamosUnity/wbFrmRecMedSeguimiento.aspx",false);
             }
 
-            DevolverDatos(id);
-            DevolverDatos(id);
             Utils.ShowMessage(this.Page, "Datos actualizados", "Excelente..!", "success");
         }
+
         else
         {
             Utils.ShowMessage(this.Page, "No se pudieron actualizar los datos", "Error..!", "error");
         }
+
+        lblDocumento.Text = String.IsNullOrEmpty(reclamo.documento) ? "" : reclamo.documento.Replace("\\", "/");
     }
 
     //guardar detalle de un gasto medico 
@@ -679,7 +680,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosMedicosSeguimientos : 
     protected void Regresar_Click(object sender, EventArgs e)
     {
         actualizarReclamo();
-        Response.Redirect("//MdBitacora/DashboardUnity.aspx",false);
+        Response.Redirect("/Modulos/MdReclamosUnity/wbFrmRecMedSeguimiento.aspx", false);
     }
 
     //borra registros de detalles medicos
@@ -715,8 +716,9 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosMedicosSeguimientos : 
                 ddlEstado.SelectedValue = valor;
                 actualizarMemos();
                 lblMemoDetalleCliente.Text = txtdetalle.Text.Replace("\n", "<br/>");
-                lblFechaGastoMedico.Text = MinimaFechaGastoMedico;
-                lblMemoContratante.Text = txtContacto.Text + " <br /> " + RecMemoCliente.empresa;
+                lblFechaGastoMedico.Text   = MinimaFechaGastoMedico;
+                lblMemoContratante.Text    = txtContacto.Text + " <br /> " + RecMemoCliente.empresa;
+                lblMemoAsunto.Text         = "Reclamo No. " + txtNumReclamo.Text;
 
                 if (ddlDirecciones.Items.Count > 0)
                 {
@@ -789,8 +791,8 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosMedicosSeguimientos : 
         {
             lblTituloMemoAseguradora.Text = "Envío Aseguradora";
             lblCartaObservacion.Text = txtObservaciones.Text.Replace("\n", "<br/>");;
-            lblCartaEjecutivo.Text = rec.reg_reclamos_medicos.ejecutivo;
-            lblCartaEjecutivo2.Text = rec.reg_reclamos_medicos.ejecutivo;
+            lblCartaEjecutivo.Text   = rec.reg_reclamos_medicos.ejecutivo;
+            lblCartaEjecutivo2.Text  = rec.reg_reclamos_medicos.ejecutivo;
             string valor = (ddlEstado.SelectedValue == "2") ? "2" : "5";
             ddlEstado.SelectedValue = valor;
             actualizarMemos();
@@ -823,6 +825,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosMedicosSeguimientos : 
                 Utils.SMS_gastos_medicos(fechaEnvio.telefono, mensaje, userlogin, ddlEstado.SelectedItem.Text,id, fechaEnvio.reg_reclamos_medicos.tipo);
                 GridComentarios.DataBind();
             }
+
             catch (Exception)
             {
 
@@ -833,9 +836,10 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosMedicosSeguimientos : 
     public void actualizarMemos()
     {
         var update = DBReclamos.reclamos_medicos.Find(id);
-        update.observacion = txtObservaciones.Text;
+        update.observacion     = txtObservaciones.Text;
         update.detalle_cliente = txtdetalle.Text;
-        update.id_estado = Convert.ToInt32(ddlEstado.SelectedValue);
+        update.id_estado       = Convert.ToInt32(ddlEstado.SelectedValue);
+        update.num_reclamo     = txtNumReclamo.Text;
         DBReclamos.SaveChanges();
     }
 

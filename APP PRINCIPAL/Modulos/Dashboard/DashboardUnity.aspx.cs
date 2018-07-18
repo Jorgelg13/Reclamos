@@ -102,7 +102,7 @@ public partial class DashboardUnity : System.Web.UI.Page
 
         catch (Exception ex)
         {
-            Email.EnviarERROR("Error en conteo de reclamos de unity", ex.ToString());
+            Email.ENVIAR_ERROR("Error en conteo de reclamos de unity", ex.ToString());
         }
     }
 
@@ -132,7 +132,7 @@ public partial class DashboardUnity : System.Web.UI.Page
 
         catch(Exception ex)
         {
-            Email.EnviarERROR("Error en conteo de reclamos de unity fuera de tiempo ", ex.ToString());
+            Email.ENVIAR_ERROR("Error en conteo de reclamos de unity fuera de tiempo ", ex.ToString());
         }
     }
 

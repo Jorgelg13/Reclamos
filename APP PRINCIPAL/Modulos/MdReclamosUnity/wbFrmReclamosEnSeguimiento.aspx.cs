@@ -184,8 +184,8 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosEnSeguimiento : System
 
     protected void ddlAlarmaGestor_SelectedIndexChanged(object sender, EventArgs e)
     {
-        alarmas = reclamosGeneral + " where reclamo_auto.estado_unity = 'Seguimiento' and id_gestor = "+ddlAlarmaGestor.SelectedValue+" and " +
-            " convert(date, reclamo_auto.fecha_visualizar,112) < getdate() order reclamo_auto.fecha_visualizar  ";
+        alarmas = reclamosGeneral + " where reclamo_auto.estado_unity = 'Seguimiento' and reclamo_auto.id_gestor = "+ddlAlarmaGestor.SelectedValue+" and " +
+            " convert(date, reclamo_auto.fecha_visualizar,112) < getdate() order by reclamo_auto.fecha_visualizar ";
         llenado.llenarGrid(alarmas, GridAlarmas);
         GridAlarmas.DataBind();
         lblTotalAlarmas.Text = "   Total de reclamos: " + GridAlarmas.Rows.Count.ToString();

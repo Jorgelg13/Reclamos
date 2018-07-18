@@ -119,7 +119,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesAutorizaciones : Syste
 
     protected void linkSalir_Click(object sender, EventArgs e)
     {
-        Response.Redirect("/Modulos/MdReclamosUnity/wbFrmRecMedSeguimiento.aspx");
+        Response.Redirect("/Modulos/MdReclamosUnity/wbFrmRecMedSeguimiento.aspx", false);
     }
 
     public override void VerifyRenderingInServerForm(Control control)

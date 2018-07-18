@@ -358,4 +358,22 @@ public partial class ReclamosEntities : DbContext
     {
         return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<long>>("pa_sec_documentos_solicitados");
     }
+
+    public virtual int pa_eficiencia_pnc(Nullable<System.DateTime> fechainicio, Nullable<System.DateTime> fechaFin)
+    {
+        var fechainicioParameter = fechainicio.HasValue ?
+            new ObjectParameter("fechainicio", fechainicio) :
+            new ObjectParameter("fechainicio", typeof(System.DateTime));
+
+        var fechaFinParameter = fechaFin.HasValue ?
+            new ObjectParameter("fechaFin", fechaFin) :
+            new ObjectParameter("fechaFin", typeof(System.DateTime));
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pa_eficiencia_pnc", fechainicioParameter, fechaFinParameter);
+    }
+
+    public virtual ObjectResult<Nullable<long>> pa_sec_estados_autos()
+    {
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<long>>("pa_sec_estados_autos");
+    }
 }

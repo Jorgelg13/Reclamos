@@ -331,7 +331,7 @@ public partial class MdBitacora_wbFrmConsultaSeguimientoDaños : System.Web.UI.P
         catch (Exception ex)
         {
             Utils.ShowMessage(this.Page, "No se a podido actualizar el reclamo", "Error..!", "error");
-            Email.EnviarERROR("Error ocasionado al usuario: " + userlogin + " en el registro con el id: " + id + "\n\n" + ex, "Error en seguimiento de reclamos de daños");
+            Email.ENVIAR_ERROR("Error ocasionado al usuario: " + userlogin + " en el registro con el id: " + id + "\n\n" + ex, "Error en seguimiento de reclamos de daños");
         }
         if (checkCerrarReclamo.Checked)
         {

@@ -88,7 +88,7 @@ public partial class SiteMaster : MasterPage
 
         catch (Exception ex)
         {
-            Email.EnviarERROR("Descripcion del error: " + ex, "Error en conteo de reclamos en cabina");
+            Email.ENVIAR_ERROR("Descripcion del error: " + ex, "Error en conteo de reclamos en cabina");
         }
     }
 }

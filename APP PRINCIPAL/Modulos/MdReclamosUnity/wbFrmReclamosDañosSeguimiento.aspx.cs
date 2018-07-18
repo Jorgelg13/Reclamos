@@ -70,6 +70,11 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosDañosSeguimiento : Sy
             BitacoraReclamo();
             btnActualizarPagos.Enabled = false;
         }
+
+        if(userlogin== "cmejia")
+        {
+            btnGuardarProximaFecha.Enabled = true;
+        }
     }
 
     public void MostrarLiquidacion(int identificador)
@@ -170,6 +175,18 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosDañosSeguimiento : Sy
             txtEmpresaAnalista.Text  = reclamo.analistas.Empresa;
             txtTelefonoAnalista.Text = reclamo.analistas.telefono;
             txtCorreoAnalista.Text   = reclamo.analistas.correo;
+
+            //Problemas reportados de talleres, cabina y ajustadores
+            chAnalista.Checked = reclamo.problema_ajustador.Value;
+            chCabina.Checked = reclamo.problema_cabina.Value;
+            chTaller.Checked = reclamo.problema_taller.Value;
+            ChAseguradora.Checked = reclamo.problema_aseguradora.Value;
+            chEjecutivo.Checked = reclamo.problema_ejecutivo.Value;
+            txtProblemaAjustador.Text = reclamo.comentario_ajustador;
+            txtProblemaCabina.Text = reclamo.comentario_cabina;
+            txtProblemaTaller.Text = reclamo.comentario_taller;
+            txtProblemaAseguradora.Text = reclamo.comentario_aseguradora;
+            txtEjecutivo.Text = reclamo.comentario_ejecutivo;
 
             if (reclamo.no_conforme == false)
             {
@@ -368,7 +385,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosDañosSeguimiento : Sy
         catch (Exception ex)
         {
             Utils.ShowMessage(this.Page, "No se a podido actualizar el reclamo " + ex.Message , "Error..!", "error");
-            Email.EnviarERROR("Error en seguimiento de reclamos de daños", "Error ocasionado al usuario: " + userlogin + " en el registro con el id: " + id + "\n\n" + ex);
+            Email.ENVIAR_ERROR("Error en seguimiento de reclamos de daños", "Error ocasionado al usuario: " + userlogin + " en el registro con el id: " + id + "\n\n" + ex);
         }
     }
 
@@ -1038,7 +1055,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosDañosSeguimiento : Sy
             string Opcion1 = "Estimado Ejecutivo: \n\n" +
             "Por este medio hacemos de su conocimiento que  el reclamo ID " + id + " presentado por el Asegurado " + reclamo.reg_reclamo_varios.asegurado + 
             " bajo la póliza No. " + reclamo.reg_reclamo_varios.poliza + ", se cerró en fecha " + DateTime.Now + ", sin pago debido a " + ddlTipoCierre.SelectedValue + ".";
-            notificacion.enviarcorreo2(correo, Opcion1, "Cierre Reclamo", reclamo.gestores.correo);
+            notificacion.NOTIFICACION_EJECUTIVO(correo, Opcion1, "Cierre Reclamo", reclamo.gestores.correo);
         }
 
         else
@@ -1047,7 +1064,73 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosDañosSeguimiento : Sy
             string Opcion2 = "Estimando Ejecutivo: \n\n " +
              "Por este medio hacemos de su conocimiento que  el reclamo ID "+id+" presentado por el Asegurado "+reclamo.reg_reclamo_varios.asegurado +
              " bajo la póliza No. "+reclamo.reg_reclamo_varios.poliza+", se cerró en fecha "+DateTime.Now+", por un monto pagado de "+ pago.valor_indemnizado.ToString() +".";
-             notificacion.enviarcorreo2(correo, Opcion2, "Cierre Reclamo", reclamo.gestores.correo);
+             notificacion.NOTIFICACION_EJECUTIVO(correo, Opcion2, "Cierre Reclamo", reclamo.gestores.correo);
+        }
+    }
+
+    protected void lnEditarPoliza_Click(object sender, EventArgs e)
+    {
+        ddlAseguradora.DataSource = DBReclamos.aseguradoras.ToList();
+        ddlAseguradora.DataTextField = "aseguradora";
+        ddlAseguradora.DataValueField = "aseguradora";
+        ddlAseguradora.DataBind();
+
+        ddlEjecutivos.DataSource = DBReclamos.ejecutivos.ToList().OrderBy(eje => eje.gestor);
+        ddlEjecutivos.DataTextField = "gestor";
+        ddlEjecutivos.DataValueField = "codigo";
+        ddlEjecutivos.DataBind();
+        this.Page.ClientScript.RegisterStartupScript(this.Page.GetType(), "show_modal", "$('#EditarPoliza').modal('show');", addScriptTags: true);
+    }
+
+    protected void btnActualizarPoliza_Click(object sender, EventArgs e)
+    {
+        try
+        {
+            var reclamo = DBReclamos.reclamos_varios.Find(id);
+            reclamo.reg_reclamo_varios.poliza = txtPoliza.Text;
+            reclamo.reg_reclamo_varios.asegurado = txtAsegurado.Text;
+            reclamo.reg_reclamo_varios.estado_poliza = ddlStatus.SelectedItem.Text;
+            reclamo.reg_reclamo_varios.ejecutivo = ddlEjecutivos.SelectedItem.Text;
+            reclamo.reg_reclamo_varios.gestor = Convert.ToInt16(ddlEjecutivos.SelectedValue);
+            reclamo.reg_reclamo_varios.suma_asegurada = Convert.ToDecimal(txtSumaAsegurada.Text);
+            reclamo.reg_reclamo_varios.cliente = Convert.ToInt32(txtCliente.Text);
+            reclamo.reg_reclamo_varios.aseguradora = ddlAseguradora.SelectedValue;
+            reclamo.reg_reclamo_varios.direccion = txtDireccion.Text;
+            DBReclamos.SaveChanges();
+            datosReclamo(id);
+
+            Utils.ShowMessage(this.Page, "Excelente datos actualizados con exitos", "Excelente..", "success");
+        }
+
+        catch(Exception ex)
+        {
+            Utils.ShowMessage(this.Page, "No se pudieron actualizar los datos " + ex.Message, "Error..", "error");
+        }
+    }
+
+    protected void btnProblema_Click(object sender, EventArgs e)
+    {
+        try
+        {
+            var reclamo = DBReclamos.reclamos_varios.Find(id);
+            reclamo.problema_ajustador = chAnalista.Checked;
+            reclamo.problema_cabina = chCabina.Checked;
+            reclamo.problema_taller = chCabina.Checked;
+            reclamo.problema_aseguradora = ChAseguradora.Checked;
+            reclamo.problema_ejecutivo = chEjecutivo.Checked;
+            reclamo.comentario_taller = txtProblemaTaller.Text;
+            reclamo.comentario_ajustador = txtProblemaAjustador.Text;
+            reclamo.comentario_cabina = txtProblemaCabina.Text;
+            reclamo.comentario_aseguradora = txtProblemaAseguradora.Text;
+            reclamo.comentario_ejecutivo = txtProblemaEjecutivo.Text;
+            reclamo.fecha_problema = DateTime.Now;
+            DBReclamos.SaveChanges();
+            Utils.ShowMessage(this.Page, "observaciones agregadas con exito", "Excelente", "success");
+        }
+
+        catch (Exception ex)
+        {
+            Utils.ShowMessage(this.Page, "No se pudieron grabar las observaciones " + ex.Message, "Error", "error");
         }
     }
 }

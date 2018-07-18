@@ -263,7 +263,6 @@ public partial class Modulos_MdReclamos_wbFrmReclamosDañosAsignados : System.We
             DBReclamos.SaveChanges();
             if (txtComentarios.Text != "") insertarComentarios(txtComentarios.Text);
             if (txtCorreo.Text != "") enviarNotificacion();
-            enviarNoficacion();
 
             if (txtTelefono.Text != "")
             {
@@ -271,12 +270,14 @@ public partial class Modulos_MdReclamos_wbFrmReclamosDañosAsignados : System.We
                     "es " + ddlGestor.SelectedItem + " Tel " + reclamo.gestores.telefono + " número de ID " + id + " ", userlogin, id);
             }
 
+            enviarNoficacion();
+
             Response.Redirect("/Modulos/MdReclamosUnity/wbFrmReclamosDañosSeguimiento.aspx?ID_reclamo=" + id, false);
         }
         catch (Exception ex)
         {
             Utils.ShowMessage(this.Page, "A ocurrido un error al insertar los datos " + ex.Message, "Nota..!", "error");
-            Email.EnviarERROR("Error en apertura de reclamos de daños","Error ocasionado al usuario: " + userlogin + " en el registro con el id: " + id + "\n\n " + ex.Message);
+            Email.ENVIAR_ERROR("Error en apertura de reclamos de daños","Error ocasionado al usuario: " + userlogin + " en el registro con el id: " + id + "\n\n " + ex.Message);
         }
     }
 
@@ -316,7 +317,7 @@ public partial class Modulos_MdReclamos_wbFrmReclamosDañosAsignados : System.We
         string telefono = Utils.TelefonoGestor(ddlGestor);
         string mensaje = Constantes.ASIGNACION_DANOS(ddlGestor, poliza, telefono);
 
-        notificacion.CorreoReclamos(txtCorreo.Text.Trim(), mensaje, "Asignacion de Reclamo");
+        notificacion.NOTIFICACION(txtCorreo.Text.Trim(), mensaje, "Asignacion de Reclamo");
         insertarComentarios("Registro de envio de correo de notificacion: \n\n" + mensaje);
     }
 
@@ -328,26 +329,30 @@ public partial class Modulos_MdReclamos_wbFrmReclamosDañosAsignados : System.We
         cuerpo = Constantes.NOTIFICACION_EJECUTIVO(fechaCreacion, asegurado, poliza, ddlGestor, id);
         asunto = "Notificacion Siniestro";
 
-        if (codigo == "&nbsp;") { }
-        else{ correo = Utils.seleccionarCorreo(Convert.ToInt16(codigo)); }
-
-        try
+        if (codigo == "&nbsp;")
         {
-            notificacion.enviarcorreo2(correo, cuerpo, asunto, correoGestor);
-            correoComentario = HttpUtility.HtmlDecode("Destinatario: " + correo + " Asunto:" + asunto + " Cuerpo del mensaje: " + cuerpo);
-            insertarComentarios(correoComentario);
-            DBReclamos.SaveChanges();
         }
-
-        catch (SmtpException)
+        else
         {
+            correo = Utils.seleccionarCorreo(Convert.ToInt16(codigo));
+            try
+            {
+                notificacion.NOTIFICACION_EJECUTIVO(correo, cuerpo, asunto, correoGestor);
+                correoComentario = HttpUtility.HtmlDecode("Destinatario: " + correo + " Asunto:" + asunto + " Cuerpo del mensaje: " + cuerpo);
+                insertarComentarios(correoComentario);
+                DBReclamos.SaveChanges();
+            }
 
+            catch (SmtpException)
+            {
+
+            }
         }
     }
 
     //regresar a la pantalla principal
     protected void linkSalir_Click(object sender, EventArgs e)
     {
-        Response.Redirect("/Default.aspx");
+        Response.Redirect("/Default.aspx",false);
     }
 }

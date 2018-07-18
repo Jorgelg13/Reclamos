@@ -31,7 +31,6 @@
                                         <ItemStyle HorizontalAlign="Left" Wrap="False" />
                                     </asp:CommandField>
                                 </Columns>
-                                <FooterStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" />
                                 <HeaderStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" HorizontalAlign="Center" Wrap="False" />
                                 <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
                                 <RowStyle BackColor="#EFF3FB" HorizontalAlign="Left" Wrap="False" />
@@ -46,7 +45,6 @@
                         <div class="scrolling-table-container">
                             <asp:GridView ID="GridLlamadas" CssClass="table bs-table tablaDetalleAuto table-responsive table-hover" runat="server" AutoGenerateColumns="True" CellPadding="4" ForeColor="#333333" GridLines="None">
                                 <AlternatingRowStyle BackColor="White" />
-                                <FooterStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" />
                                 <HeaderStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" />
                                 <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
                                 <RowStyle BackColor="#EFF3FB" />
@@ -67,7 +65,6 @@
                                     </ItemTemplate>
                                 </asp:TemplateField>
                             </Columns>
-                            <FooterStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" />
                             <HeaderStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" />
                             <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
                             <RowStyle BackColor="#EFF3FB" />
@@ -110,15 +107,15 @@
                             <div class="panel-heading"><b style="font-size: 18px;">Datos Contacto</b></div>
                             <div class="panel-body">
                                 <div class="form-inline">
-                                    <label for="message-text" class="control-label">Nombre Contacto:</label>
+                                    <label>Nombre Contacto:</label>
                                     <asp:TextBox ID="txtContacto" Style="width: 95%" CssClass="form-control" AutoComplete="off" runat="server"></asp:TextBox>
                                     <br />
                                     <br />
-                                    <label for="message-text" class="control-label">Correo:</label>
+                                    <label>Correo:</label>
                                     <asp:TextBox ID="txtCorreo" Style="width: 95%" CssClass="form-control" AutoComplete="off" runat="server"></asp:TextBox>
                                     <br />
                                     <br />
-                                    <label for="message-text" class="control-label">Telefono:</label>
+                                    <label>Telefono:</label>
                                     <asp:TextBox ID="txtTelefono" maxlength="8" Style="width: 95%" CssClass="form-control" AutoComplete="off" runat="server"></asp:TextBox>
                                 </div>
                             </div>
@@ -137,14 +134,12 @@
                 </div>
             </div>
         </div>
-
         <%-----------------------------------   modal para agregar datos manualmente a un reclamo que se creo de forma manual ---------------------------------------%>
-        <div class="modal fade" id="ModalActualizar" tabindex="-1" role="dialog" aria-labelledby="ModalActualizarDatos">
-            <div class="modal-dialog" role="document">
+        <div class="modal fade" id="ModalActualizar" >
+            <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title" id="ModalActualizarDatos"><b>Agregar Datos que no fueron encontrados</b></h4>
+                        <h4 class="modal-title"><b>Agregar Datos que no fueron encontrados</b></h4>
                     </div>
                     <div class="modal-body ">
                         <div class="form-group">
@@ -200,7 +195,6 @@
                 </div>
             </div>
         </div>
-
         <%---------------------------------------  botones  circulares -------------------------------------%>
         <div id="container-floating">
             <div class="nd4 nds" data-toggle="tooltip" data-placement="left" data-original-title="Simone">

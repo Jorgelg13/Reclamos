@@ -64,7 +64,7 @@ public class Constantes
         return "<p>Estimado Ejecutivo:</p>" +
            "<p> Hacemos de su conocimiento que con fecha " + fecha + " ingreso un reclamo del Asegurado " + asegurado + " " +
            "bajo la poliza No. " + poliza + ", favor tomar nota para solicitar la rehabilitacion de la suma asegurada correspondiente, siempre y cuando la misma si aplique.</p>" +
-           "<p>La asesora de reclamos asignada es " + gestor.SelectedItem.Text + ".</p>" +
+           "<p>el asesor de reclamos asignado es " + gestor.SelectedItem.Text + ".</p>" +
            "<p>Para mas detalles puede consultar el reclamo con este id : " + id + " en el siguiente link </p>" +
            "<a href= \"http://reclamosgt.unitypromotores.com/MdBitacora/DashboardUnity.aspx\">Consulta Reclamos</a>" +
         "<p>Cualquier duda y/ o comentario al respecto quedamos a sus ordenes.</p>";
@@ -81,12 +81,12 @@ public class Constantes
 
     /////////////////////////////////////////////////////////
     //Textos para reclamos de autos 
-    public static string ASIGNACION_AUTOS(TextBox gestor, TextBox placa, TextBox marca, TextBox modelo, TextBox telefono)
+    public static string ASIGNACION_AUTOS(DropDownList gestor, string placa, string marca, string modelo, string telefono)
     {
         return "Estimado asegurado: \n\n" +
-                " Mi nombre es " + gestor.Text + ", soy la persona asignada para la atención del reclamo presentado por daños al vehículo" +
-                " Placas: " + placa.Text + " Marca: " + marca.Text + " Año: " + modelo.Text + ", " +
-                " Mi teléfono directo es:   " + telefono.Text + " para que pueda contactarme en cualquier consulta. \n" +
+                " Mi nombre es " + gestor.SelectedItem.Text + ", soy la persona asignada para la atención del reclamo presentado por daños al vehículo" +
+                " Placas: " + placa + " Marca: " + marca + " Año: " + modelo + ", " +
+                " Mi teléfono directo es:   " + telefono + " para que pueda contactarme en cualquier consulta. \n" +
                 " Solicito de su amable apoyo a manera que pueda confirmarme si ya cuenta con fecha para el ingreso de su vehículo al taller y así poderle apoyar en el proceso de su reclamo. \n\n" +
                 " Cualquier duda, estoy a la orden.";
     }
@@ -140,6 +140,17 @@ public class Constantes
     {
         return "Estimado Ejecutivo: \n\n Por este medio hacemos de su conocimiento que recibimos notificación de Robo, del vehículo Placa: " + placa.Text + ", " +
             "Marca: " + marca.Text + ", Modelo: " + modelo.Text + ",  propiedad del asegurado " + asegurado.Text + " póliza " + poliza.Text + " . Saludos";
+    }
+
+    public static string NOTIFICACION_EJECUTIVO_AUTOS(string fecha, string asegurado, string poliza, DropDownList gestor, string placa, string marca, string modelo, int id)
+    {
+        return "Estimado Ejecutivo: \n\n" +
+           "Hacemos de su conocimiento que con fecha " + fecha + " ingreso un reclamo del Asegurado " + asegurado + " " +
+           "por daños al vehiculo "+placa+ "  "+marca+ " "+modelo+ "  Según póliza No. " + poliza + "." +
+           "el asesor de reclamos asignado es " + gestor.SelectedItem.Text + " \n" +
+           "Para mas detalles puede consultar el reclamo con este id : " + id + " en el siguiente link \n\n" +
+           "<a href= \"http://reclamosgt.unitypromotores.com/MdBitacora/DashboardUnity.aspx\">Consulta Reclamos</a>" +
+        "Cualquier duda y/ o comentario al respecto quedamos a sus ordenes.";
     }
 
     //usuario logeado
