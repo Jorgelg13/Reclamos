@@ -165,16 +165,16 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosAutosSeguimiento : Sys
             txtCorreoAnalista.Text   = reclamo.analistas.correo;
 
             //Problemas reportados de talleres, cabina y ajustadores
-            chAnalista.Checked = reclamo.problema_ajustador.Value;
-            chCabina.Checked = reclamo.problema_cabina.Value;
-            chTaller.Checked = reclamo.problema_taller.Value;
+            chAnalista.Checked    = reclamo.problema_ajustador.Value;
+            chCabina.Checked      = reclamo.problema_cabina.Value;
+            chTaller.Checked      = reclamo.problema_taller.Value;
             ChAseguradora.Checked = reclamo.problema_aseguradora.Value;
-            chEjecutivo.Checked = reclamo.problema_ejecutivo.Value;
-            txtProblemaAjustador.Text = reclamo.comentario_ajustador;
-            txtProblemaCabina.Text = reclamo.comentario_cabina;
-            txtProblemaTaller.Text = reclamo.comentario_taller;
+            chEjecutivo.Checked   = reclamo.problema_ejecutivo.Value;
+            txtProblemaAjustador.Text   = reclamo.comentario_ajustador;
+            txtProblemaCabina.Text      = reclamo.comentario_cabina;
+            txtProblemaTaller.Text      = reclamo.comentario_taller;
             txtProblemaAseguradora.Text = reclamo.comentario_aseguradora;
-            txtEjecutivo.Text = reclamo.comentario_ejecutivo;
+            txtProblemaEjecutivo.Text   = reclamo.comentario_ejecutivo;
 
             if (reclamo.estado_unity == "Cerrado") checkCerrarReclamo.Checked = true;
 
@@ -608,10 +608,10 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosAutosSeguimiento : Sys
         txtPrimasPago.Text    = pago.primas.ToString();
         txtTotal.Text         = pago.total.ToString();
         ddlDestino.SelectedValue = ddlDestino.SelectedValue = String.IsNullOrEmpty(pago.destino) ? "" : pago.destino;
-        txtIva.Enabled     = true;
-        txtTimbres.Enabled = true;
-        txtTotal.Enabled   = true;
-        btnPago.Enabled    = false;
+        //txtIva.Enabled     = true;
+        //txtTimbres.Enabled = true;
+        //txtTotal.Enabled   = true;
+        //btnPago.Enabled    = false;
         btnActualizarPagos.Enabled = true;
 
         this.Page.ClientScript.RegisterStartupScript(this.Page.GetType(), "show_modal", "$('#IngresarLiquidacion').modal('show');", addScriptTags: true);
@@ -1315,8 +1315,6 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosAutosSeguimiento : Sys
         seleccionarDocumentos();
     }
 
-
-
     protected void lnEditarPoliza_Click(object sender, EventArgs e)
     {
         ddlAseguradora.DataSource = DBReclamos.aseguradoras.ToList();
@@ -1363,16 +1361,16 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosAutosSeguimiento : Sys
         try
         {
             var reclamo = DBReclamos.reclamo_auto.Find(id);
-            reclamo.problema_ajustador = chAnalista.Checked;
-            reclamo.problema_cabina = chCabina.Checked;
-            reclamo.problema_taller = chCabina.Checked;
-            reclamo.problema_aseguradora = ChAseguradora.Checked;
-            reclamo.problema_ejecutivo = chEjecutivo.Checked;
-            reclamo.comentario_taller = txtProblemaTaller.Text;
-            reclamo.comentario_ajustador = txtProblemaAjustador.Text;
-            reclamo.comentario_cabina = txtProblemaCabina.Text;
+            reclamo.problema_ajustador     = chAnalista.Checked;
+            reclamo.problema_cabina        = chCabina.Checked;
+            reclamo.problema_taller        = chCabina.Checked;
+            reclamo.problema_aseguradora   = ChAseguradora.Checked;
+            reclamo.problema_ejecutivo     = chEjecutivo.Checked;
+            reclamo.comentario_taller      = txtProblemaTaller.Text;
+            reclamo.comentario_ajustador   = txtProblemaAjustador.Text;
+            reclamo.comentario_cabina      = txtProblemaCabina.Text;
             reclamo.comentario_aseguradora = txtProblemaAseguradora.Text;
-            reclamo.comentario_ejecutivo = txtProblemaEjecutivo.Text;
+            reclamo.comentario_ejecutivo   = txtProblemaEjecutivo.Text;
             reclamo.fecha_problema = DateTime.Now;
             DBReclamos.SaveChanges();
             Utils.ShowMessage(this.Page, "observaciones agregadas con exito", "Excelente", "success");

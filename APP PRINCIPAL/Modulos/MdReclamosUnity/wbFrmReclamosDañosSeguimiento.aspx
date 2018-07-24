@@ -271,9 +271,9 @@
                             <asp:TextBox Style="width: 15%" ID="txtContrato" Enabled="false" runat="server"></asp:TextBox>
                             <asp:CheckBox ID="checkHabilitar" AutoPostBack="true" runat="server" OnCheckedChanged="checkHabilitar_CheckedChanged" />
                         </div>
-                        <div class="panel-body">
+                        <div class="panel-body" style="padding: 1px;">
                             <div style="height: 300px; overflow-x: auto;">
-                                <asp:GridView ID="GridComentarios" CssClass="table bs-table tablaDetalleAuto table-responsive table-hover" runat="server" AutoGenerateColumns="true"
+                                <asp:GridView ID="GridComentarios" CssClass="table bs-table tablaDetalleAuto table-responsive table-hover" style="padding-left:0px; margin-top:0px; padding-top:0px;" runat="server" AutoGenerateColumns="true"
                                     CellPadding="3" BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" OnRowDataBound="GridComentarios_RowDataBound">
                                     <HeaderStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" HorizontalAlign="Center" Wrap="False" />
                                     <PagerStyle BackColor="White" ForeColor="#000066" HorizontalAlign="Left" />
@@ -637,7 +637,7 @@
                                             </b>
                                         </p>
                                     </div>
-                                    <p style="text-align: right; padding-top: 20px;">RE-DA-F-05/Ver.02</p>
+                                    <p  style="text-align: right; padding-top: 20px;"><asp:label runat="server" ID="CodigoISO"></asp:label></p>
                                 </div>
                             </asp:Panel>
                             <asp:Panel runat="server" ID="Panelsecundario" Style="display: none">

@@ -99,7 +99,8 @@
                             <li><a href="/Modulos/MdReportes/wbFrmReportesMedicos.aspx">Reportes Reclamos Gastos Medicos</a></li>
                             <li><a href="/Modulos/MdReportes/wbFrmReportesAutorizaciones.aspx">Reportes de Autorizaciones</a></li>
                             <li><a href="/Modulos/MdReportes/wbFrmReporteNoConforme.aspx">Reporte Producto No Conforme</a></li>
-                            <li><a href="/Modulos/MdReportes/wbFrmReporteProblemas.aspx">Reporte de problemas</a></li>
+                            <li><a href="/Modulos/MdReportes/wbFrmReporteProblemas.aspx?id=1">Reporte de problemas Autos</a></li>
+                            <li><a href="/Modulos/MdReportes/wbFrmReporteProblemas.aspx?id=2">Reporte de problemas Daños</a></li>
                         </ul>
                     </li>
                     <li class="dropdown">

@@ -52,6 +52,7 @@
                 <asp:ListItem Value="Credomatic">Credomatic</asp:ListItem>
                 <asp:ListItem Value="Caja-de-ahorro">Caja de ahorro</asp:ListItem>
                 <asp:ListItem Value="Consulto Seguro">Consulto Seguro</asp:ListItem>
+                <asp:ListItem Value="Aceros">Aceros</asp:ListItem>
             </asp:DropDownList>
         </div>
         <div class="form-group  col-lg-2 col-md-2 col-sm-12">

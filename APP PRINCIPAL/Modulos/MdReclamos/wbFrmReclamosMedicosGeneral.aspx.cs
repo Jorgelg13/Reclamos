@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
 
 public partial class Modulos_MdReclamos_wbFrmReclamosMedicosGeneral : System.Web.UI.Page
 {
@@ -14,7 +10,7 @@ public partial class Modulos_MdReclamos_wbFrmReclamosMedicosGeneral : System.Web
     {
         if (!comprobar.verificarUsuario(userlogin))
         {
-            Response.Redirect("/Asignacion.aspx");
+            Response.Redirect("/Asignacion.aspx",false);
         }
     }
 }

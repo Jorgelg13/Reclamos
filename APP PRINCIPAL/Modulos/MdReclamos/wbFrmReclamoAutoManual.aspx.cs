@@ -24,11 +24,23 @@ public partial class Modulos_MdReclamos_wbFrmInsertarAutoManual : System.Web.UI.
     {
         if (!comprobar.verificarUsuario(userlogin))
         {
-            Response.Redirect("/Asignacion.aspx");
+            Response.Redirect("/Asignacion.aspx", false);
         }
         obtenerID();
+
+        if (!IsPostBack)
+        {
+            Aseguradoras();
+        }
     }
 
+    public void Aseguradoras()
+    {
+        ddlAseguradora.DataSource = DBReclamos.aseguradoras.ToList().OrderBy(a => a.aseguradora);
+        ddlAseguradora.DataTextField = "aseguradora";
+        ddlAseguradora.DataValueField = "aseguradora";
+        ddlAseguradora.DataBind();
+    }
     protected void txtGuardarReclamo_Click(object sender, EventArgs e)
     {
         idCabina = (string)(Session["id_cabina"]);
@@ -65,7 +77,7 @@ public partial class Modulos_MdReclamos_wbFrmInsertarAutoManual : System.Web.UI.
                 auto.marca = txtMarca.Text.ToString();
                 auto.poliza = txtPoliza.Text.ToString();
                 auto.ejecutivo = txtEjecutivo.Text.ToString();
-                auto.aseguradora = txtAseguradora.Text.ToString();
+                auto.aseguradora = ddlAseguradora.SelectedItem.Text;
                 auto.asegurado = txtEmpresa.Text;
 
                 reclamo_auto reclamo = new reclamo_auto();

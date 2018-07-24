@@ -63,7 +63,8 @@
                 </div>
             </div>
         </div>
-        <div class="col-sm-10">
+        <asp:Panel runat="server" ID="PnReporte">
+           <div class="col-sm-10">
             <div class="panel panel-info">
                 <div class="panel-heading">
                     <h3 class="panel-title"><b style="font-size: 16px;">Tabla con campos seleccionados <spam style="margin-left:100px">Total de registros: </spam><asp:Label ID="lblConteo" runat="server" Style="font-size: 20px;"></asp:Label></b></h3>
@@ -82,8 +83,17 @@
                         </asp:GridView>
                     </div>
                     <br />
-                    <asp:CheckBox ID="checkSinFiltro" Checked="true" AutoPostBack="true" runat="server" Text="Sin Ningun Filtro" OnCheckedChanged="checkSinFiltro_CheckedChanged" />
-                    <asp:Button ID="btnMostrarEficiencia" OnClientClick="return false;" data-toggle="modal" data-target="#ModalDetalle" style="margin-left:20px" runat="server" Text="Eficiencia" />
+                    <div class="form-inline">
+                        <asp:CheckBox ID="checkSinFiltro" Checked="true" AutoPostBack="true" runat="server" Text="Sin Ningun Filtro" OnCheckedChanged="checkSinFiltro_CheckedChanged" />
+                        <asp:DropDownList ID="ddlCiclos" runat="server" Style="width: 25%" CssClass="form-control">
+                            <asp:ListItem Value="Ciclo Total">Ciclo Total</asp:ListItem>
+                            <asp:ListItem Value="Ciclo Unity">Ciclo Unity</asp:ListItem>
+                            <asp:ListItem Value="Ciclo Cliente">Ciclo Cliente</asp:ListItem>
+                            <asp:ListItem Value="Ciclo Aseguradora">Ciclo Aseguradora</asp:ListItem>
+                        </asp:DropDownList>
+                        <asp:Button ID="Mostrar" CssClass="btn btn-primary" Style="margin-left: 20px" runat="server" Text="Mostrar" OnClick="Mostrar_Click" />
+                        <asp:Button ID="btnMostrarEficiencia" OnClientClick="return false;" data-toggle="modal" data-target="#ModalDetalle" Style="margin-left: 20px" runat="server" Text="Eficiencia" />
+                    </div>
                     <br />
                     <div class="form-inline">
                         <div class="form-group" style="width: 20%">
@@ -130,6 +140,33 @@
                 </div>
             </div>
         </div>
+        </asp:Panel>
+        <%----------------------------  ciclo de los reclamos  ---------------------%>
+        <asp:Panel ID="PnCiclos" Visible="false" runat="server">
+            <div class="col-sm-10">
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><b style="font-size: 16px;">Promedio Por Aseguradora</b></h3>
+                    </div>
+                    <div class="panel-body" style="height: 520px;">
+                        <div class="scrolling-table-container" style="overflow-y: auto;">
+                            <asp:GridView ID="GridCiclos" runat="server" CssClass="table bs-table table-responsive" OnRowDataBound="GridCiclos_RowDataBound" AutoGenerateColumns="True" ShowFooter="true" ForeColor="#333333" GridLines="None">
+                                <AlternatingRowStyle BackColor="White" />
+                                <FooterStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" />
+                                <HeaderStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" HorizontalAlign="Center" Wrap="False" />
+                                <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
+                                <RowStyle BackColor="#EFF3FB" HorizontalAlign="Left" Wrap="False" />
+                            </asp:GridView>
+                        </div>
+                        <asp:Label ID="lblTotalPonderados" runat="server"></asp:Label>
+                        <asp:LinkButton ID="linKRegresar" OnClick="linKRegresar_Click" title="Regresar al reporte" runat="server" Style="padding-left: 20px; font-size: 70px; text-align: center; color: lightblue"><i class="fa fa-arrow-circle-o-left" aria-hidden="true"></i></asp:LinkButton>
+                        <asp:LinkButton ID="linkDescarPromedio" OnClick="linkDescarPromedio_Click" title="Descargar en excel" runat="server" Style="font-size: 70px; text-align: center; color: green"><i class="fa fa-file-excel-o" aria-hidden="true"></i></asp:LinkButton>
+                        <b><asp:Label ID="lblTituloCiclo" Style="font-size: 25px; padding-left:50px;" runat="server"></asp:Label></b>
+                    </div>
+                </div>
+            </div>
+        </asp:Panel>
+
         <%-- ------------------------ modal ver el detalle de eficiencia ------------------------------------------%>
         <div class="modal fade" id="ModalDetalle" data-keyboard="false" data-backdrop="static">
             <div class="modal-dialog modal-lg">

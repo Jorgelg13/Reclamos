@@ -19,30 +19,30 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosDañosGeneral : System
           "dbo.reg_reclamo_varios.contratante as Contratante," +
           "dbo.reg_reclamo_varios.ejecutivo as Ejecutivo," +//6
           "dbo.reg_reclamo_varios.ramo as Ramo," +
-          "dbo.reg_reclamo_varios.status as Estatus," +//8
-          "dbo.reg_reclamo_varios.tipo as Tipo," +
+          //"dbo.reg_reclamo_varios.status as Estatus," +//8
+          //"dbo.reg_reclamo_varios.tipo as Tipo," +
           "dbo.reg_reclamo_varios.direccion as Direccion," +//10
-          "dbo.reg_reclamo_varios.vip as VIP," +
-          "dbo.reg_reclamo_varios.suma_asegurada as [Suma Asegurada]," +//12
-          "dbo.reg_reclamo_varios.moneda as Moneda," +
-          "dbo.reclamos_varios.boleta as boleta," +
+          //"dbo.reg_reclamo_varios.vip as VIP," +
+          //"dbo.reg_reclamo_varios.suma_asegurada as [Suma Asegurada]," +//12
+          //"dbo.reg_reclamo_varios.moneda as Moneda," +
+          //"dbo.reclamos_varios.boleta as boleta," +
           "dbo.reclamos_varios.titular as Titular," +
           "dbo.reclamos_varios.reportante as Reportante," +
           "dbo.reclamos_varios.telefono as Telefono," +
           "dbo.reclamos_varios.ajustador as Ajustador," +
           "dbo.reclamos_varios.ubicacion as Ubicacion," +
-          "dbo.reclamos_varios.hora as Hora," +
-          "dbo.reclamos_varios.fecha as Fecha," +
+          //"dbo.reclamos_varios.hora as Hora," +
+          //"dbo.reclamos_varios.fecha as Fecha," +
           "dbo.reclamos_varios.hora_commit as [Hora Creacion]," +
           "dbo.reclamos_varios.fecha_commit as [Fecha Creacion]," +
-          "dbo.reclamos_varios.id_gestor as Gestor, " + //27
-          "dbo.reclamos_varios.id_taller as Taller, " +
-          "dbo.reclamos_varios.id_analista as Analista, " +
+          //"dbo.reclamos_varios.id_gestor as Gestor, " + //27
+          //"dbo.reclamos_varios.id_taller as Taller, " +
+          //"dbo.reclamos_varios.id_analista as Analista, " +
           "dbo.reclamos_varios.estado_reclamo_unity as [Estado Reclamo], " + //31
-          "dbo.reclamos_varios.num_reclamo, " +
-          "gestores.nombre," +//37
-          "gestores.telefono, " +//38
-          "gestores.correo " +//39
+          "dbo.reclamos_varios.num_reclamo as [Numero Reclamo], " +
+          "gestores.nombre as Gestor " +//37
+          //"gestores.telefono, " +//38
+          //"gestores.correo " +//39
           "FROM " +
           "dbo.reg_reclamo_varios " +
           "INNER JOIN dbo.reclamos_varios ON dbo.reclamos_varios.id_reg_reclamos_varios = dbo.reg_reclamo_varios.id " +

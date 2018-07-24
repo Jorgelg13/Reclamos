@@ -280,7 +280,7 @@
 
         </div><!-- /slider-wrapper -->
     </div>
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
     <script type="text/javascript" src="js/jquery.ba-cond.min.js"></script>
     <script type="text/javascript" src="js/jquery.slitslider.js"></script>
     <script src="../../Scripts/toastr.min.js"></script>
@@ -569,8 +569,7 @@
                     function () {
                         toastr.success('Formulario enviado con exito', 'Excelente!');
                     }, 200);
-            })
-                .fail(function () {
+            }).fail(function () {
                     setTimeout(
                         function () {
                             toastr.error('No se a podido enviar el formulario', 'Error!');

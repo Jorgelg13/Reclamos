@@ -14,8 +14,10 @@
                 <div role="tabpanel" class="tab-pane active" id="profile">
                     <div class="panel-body form-inline">
                         <br />
-                        <asp:TextBox runat="server" ID="txtNombre" autocomplete="false" Style="width: 40%" class="form-control" placeholder="Nombre o Empresa"></asp:TextBox>
-                        <asp:TextBox runat="server" ID="txtDireccion" autocomplete="false" Style="width: 47%" class="form-control" placeholder="Direccion"></asp:TextBox>
+                        <asp:TextBox runat="server" ID="txtNombre" autocomplete="false" Style="width: 30%" class="form-control" placeholder="Nombre o Empresa"></asp:TextBox>
+                        <asp:TextBox runat="server" ID="txtDireccion" autocomplete="false" Style="width: 35%" class="form-control" placeholder="Direccion"></asp:TextBox>
+                        <asp:DropDownList CssClass="form-control" ID="ddlAseguradora" Style="width: 30%" Height="34px" runat="server">
+                        </asp:DropDownList>
                         <br />
                         <br />
                         <asp:TextBox runat="server" ID="txtPoliza" autocomplete="false" Style="width: 47%" class="form-control" placeholder="Poliza"></asp:TextBox>

@@ -13,6 +13,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesDaños : System.Web.UI
     String buscar;
     String EficienciaGestor;
     Double Pendientes, Nuevos, Cerrados, Ejecucion;
+    int Promedio, Total;
     conexionBD obj = new conexionBD();
     ReclamosEntities DBReclamos = new ReclamosEntities();
     
@@ -300,6 +301,87 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesDaños : System.Web.UI
 
                 e.Row.Cells[4].Text = ((Cerrados / (Pendientes + Nuevos))*100).ToString("N2");
                 e.Row.Cells[4].HorizontalAlign = HorizontalAlign.Left;
+                e.Row.Font.Bold = true;
+            }
+        }
+        catch (Exception err)
+        {
+            Response.Write(err);
+        }
+    }
+
+    protected void Mostrar_Click(object sender, EventArgs e)
+    {
+        if (ddlCiclos.SelectedValue == "Ciclo Total")
+        {
+            PnReporte.Visible = false;
+            PnCiclos.Visible = true;
+            Utils.Ciclos_Reclamos(txtFechaInicio, txtFechaFin, "pa_ciclos_reclamos_danios", GridCiclos, 4);
+            lblTituloCiclo.Text = "Ciclo Total";
+        }
+
+        else if (ddlCiclos.SelectedValue == "Ciclo Unity")
+        {
+            PnReporte.Visible = false;
+            PnCiclos.Visible = true;
+            Utils.Ciclos_Reclamos(txtFechaInicio, txtFechaFin, "pa_ciclos_reclamos_danios", GridCiclos, 1);
+            lblTituloCiclo.Text = "Ciclo Unity";
+        }
+
+        else if (ddlCiclos.SelectedValue == "Ciclo Cliente")
+        {
+            PnReporte.Visible = false;
+            PnCiclos.Visible = true;
+            Utils.Ciclos_Reclamos(txtFechaInicio, txtFechaFin, "pa_ciclos_reclamos_danios", GridCiclos, 2);
+            lblTituloCiclo.Text = "Ciclo Cliente";
+        }
+
+        else if (ddlCiclos.SelectedValue == "Ciclo Aseguradora")
+        {
+            PnReporte.Visible = false;
+            PnCiclos.Visible = true;
+            Utils.Ciclos_Reclamos(txtFechaInicio, txtFechaFin, "pa_ciclos_reclamos_danios", GridCiclos, 3);
+            lblTituloCiclo.Text = "Ciclo Aseguradora";
+        }
+
+
+        else if (ddlCiclos.SelectedValue == "Eficiencia")
+        {
+            Eficiencia();
+            Page.ClientScript.RegisterStartupScript(this.Page.GetType(), "show_modal", "$('#ModalDetalle').modal('show');", addScriptTags: true);
+        }
+    }
+
+    protected void linKRegresar_Click(object sender, EventArgs e)
+    {
+        PnReporte.Visible = true;
+        PnCiclos.Visible = false;
+    }
+
+    protected void linkDescarPromedio_Click(object sender, EventArgs e)
+    {
+        Utils.ExportarExcel(GridCiclos, Response, lblTituloCiclo.Text + " Reclamos autos del " + txtFechaInicio.Text + " al " + txtFechaFin.Text);
+    }
+
+    protected void GridCiclos_RowDataBound(object sender, GridViewRowEventArgs e)
+    {
+        try
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                Total += Convert.ToInt32(DataBinder.Eval(e.Row.DataItem, "[Total_Reclamos]"));
+                Promedio += Convert.ToInt32(DataBinder.Eval(e.Row.DataItem, "[Promedio_dias]"));
+            }
+            else if (e.Row.RowType == DataControlRowType.Footer)
+            {
+                e.Row.Cells[0].Text = "TOTALES:";
+
+                e.Row.Cells[1].Text = Total.ToString();
+                e.Row.Cells[1].HorizontalAlign = HorizontalAlign.Left;
+                e.Row.Font.Bold = true;
+
+                e.Row.Cells[2].Text = (Promedio / GridCiclos.Rows.Count).ToString();
+                e.Row.Cells[2].HorizontalAlign = HorizontalAlign.Left;
                 e.Row.Font.Bold = true;
             }
         }

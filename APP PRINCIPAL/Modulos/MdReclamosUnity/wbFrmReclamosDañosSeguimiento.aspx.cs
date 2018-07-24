@@ -177,16 +177,16 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosDañosSeguimiento : Sy
             txtCorreoAnalista.Text   = reclamo.analistas.correo;
 
             //Problemas reportados de talleres, cabina y ajustadores
-            chAnalista.Checked = reclamo.problema_ajustador.Value;
-            chCabina.Checked = reclamo.problema_cabina.Value;
-            chTaller.Checked = reclamo.problema_taller.Value;
+            chAnalista.Checked    = reclamo.problema_ajustador.Value;
+            chCabina.Checked      = reclamo.problema_cabina.Value;
+            chTaller.Checked      = reclamo.problema_taller.Value;
             ChAseguradora.Checked = reclamo.problema_aseguradora.Value;
-            chEjecutivo.Checked = reclamo.problema_ejecutivo.Value;
-            txtProblemaAjustador.Text = reclamo.comentario_ajustador;
-            txtProblemaCabina.Text = reclamo.comentario_cabina;
-            txtProblemaTaller.Text = reclamo.comentario_taller;
+            chEjecutivo.Checked   = reclamo.problema_ejecutivo.Value;
+            txtProblemaAjustador.Text   = reclamo.comentario_ajustador;
+            txtProblemaCabina.Text      = reclamo.comentario_cabina;
+            txtProblemaTaller.Text      = reclamo.comentario_taller;
             txtProblemaAseguradora.Text = reclamo.comentario_aseguradora;
-            txtEjecutivo.Text = reclamo.comentario_ejecutivo;
+            txtProblemaEjecutivo.Text           = reclamo.comentario_ejecutivo;
 
             if (reclamo.no_conforme == false)
             {
@@ -755,6 +755,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosDañosSeguimiento : Sy
         {
             chCartaCierre.Checked = false;
             chCartaDeclinado.Checked = false;
+            CodigoISO.Text = "RE-DA-F-03/Ver.02";
             var buscarCarta = DBReclamos.cartas.Where(ca => ca.tipo == "envio cheque" && ca.modulo == "daños" && ca.id_reclamo == id).Count();
 
             if (buscarCarta == 1)
@@ -788,6 +789,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosDañosSeguimiento : Sy
         {
             chCartaCierre.Checked = false;
             chEnvioCarta.Checked = false;
+            CodigoISO.Text = "RE-DA-F-05/Ver.02";
             var buscarCarta = DBReclamos.cartas.Where(ca => ca.tipo == "declinado" && ca.modulo == "daños" && ca.id_reclamo == id).Count();
 
             if (buscarCarta == 1)
@@ -821,6 +823,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosDañosSeguimiento : Sy
         {
             chCartaDeclinado.Checked = false;
             chEnvioCarta.Checked = false;
+            CodigoISO.Text = "RE-DA-F-04/Ver.02";
             var buscarCarta = DBReclamos.cartas.Where(ca => ca.tipo == "cierre interno" && ca.modulo == "daños" && ca.id_reclamo == id).Count();
 
             if (buscarCarta == 1)
@@ -1113,16 +1116,16 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosDañosSeguimiento : Sy
         try
         {
             var reclamo = DBReclamos.reclamos_varios.Find(id);
-            reclamo.problema_ajustador = chAnalista.Checked;
-            reclamo.problema_cabina = chCabina.Checked;
-            reclamo.problema_taller = chCabina.Checked;
-            reclamo.problema_aseguradora = ChAseguradora.Checked;
-            reclamo.problema_ejecutivo = chEjecutivo.Checked;
-            reclamo.comentario_taller = txtProblemaTaller.Text;
-            reclamo.comentario_ajustador = txtProblemaAjustador.Text;
-            reclamo.comentario_cabina = txtProblemaCabina.Text;
-            reclamo.comentario_aseguradora = txtProblemaAseguradora.Text;
-            reclamo.comentario_ejecutivo = txtProblemaEjecutivo.Text;
+            reclamo.problema_ajustador      = chAnalista.Checked;
+            reclamo.problema_cabina         = chCabina.Checked;
+            reclamo.problema_taller         = chCabina.Checked;
+            reclamo.problema_aseguradora    = ChAseguradora.Checked;
+            reclamo.problema_ejecutivo      = chEjecutivo.Checked;
+            reclamo.comentario_taller       = txtProblemaTaller.Text;
+            reclamo.comentario_ajustador    = txtProblemaAjustador.Text;
+            reclamo.comentario_cabina       = txtProblemaCabina.Text;
+            reclamo.comentario_aseguradora  = txtProblemaAseguradora.Text;
+            reclamo.comentario_ejecutivo    = txtProblemaEjecutivo.Text;
             reclamo.fecha_problema = DateTime.Now;
             DBReclamos.SaveChanges();
             Utils.ShowMessage(this.Page, "observaciones agregadas con exito", "Excelente", "success");

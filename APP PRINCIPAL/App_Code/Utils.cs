@@ -106,6 +106,30 @@ public class Utils
         }
     }
 
+    public static void Ciclos_Reclamos(TextBox fechainicio, TextBox fechafin, String reporte, GridView gridRepore, int tipo)
+    {
+        try
+        {
+            conexionBD obj = new conexionBD();
+            DataTable dt = new DataTable();
+            SqlCommand comando = new SqlCommand(reporte, obj.ObtenerConexionReclamos());
+            comando.CommandType = CommandType.StoredProcedure;
+            comando.Parameters.AddWithValue("@fechaInicio", fechainicio.Text);
+            comando.Parameters.AddWithValue("@fechaFin", fechafin.Text);
+            comando.Parameters.AddWithValue("@tipo", tipo);
+            comando.ExecuteNonQuery();
+            SqlDataAdapter sda = new SqlDataAdapter(comando);
+            sda.Fill(dt);
+            gridRepore.DataSource = dt;
+            gridRepore.DataBind();
+        }
+
+        catch (Exception ex)
+        {
+            throw ex;
+        }
+    }
+
     public void llenarGrid2(String Consulta, GridView tabla)
     {
         try

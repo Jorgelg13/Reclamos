@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
@@ -15,10 +14,15 @@ public partial class Modulos_MdReclamos_wbFrmReclamoDañoManual : System.Web.UI.
     {
         if (!comprobar.verificarUsuario(userlogin))
         {
-            Response.Redirect("/Asignacion.aspx");
+            Response.Redirect("/Asignacion.aspx",false);
         }
         obtenerID();
         txtReportante.Focus();
+
+        if(!IsPostBack)
+        {
+            Aseguradoras();
+        }
     }
 
     protected void btnGuardarReclamo_Click(object sender, EventArgs e)
@@ -50,6 +54,7 @@ public partial class Modulos_MdReclamos_wbFrmReclamoDañoManual : System.Web.UI.
                 registro.direccion = txtDireccion.Text.ToString();
                 registro.ejecutivo = txtEjecutivo.Text.ToString();
                 registro.asegurado = txtNombre.Text.ToString();
+                registro.aseguradora = ddlAseguradora.SelectedValue;
 
 
                 if (txtReportante.Text == "" || txtTelefono.Text == "" || txtFecha.Text == "")
@@ -106,5 +111,13 @@ public partial class Modulos_MdReclamos_wbFrmReclamoDañoManual : System.Web.UI.
         {
             Utils.ShowMessage(this.Page, "A ocurrido un error al traer las variables de session", "Nota..!", "warning");
         }
+    }
+
+    public void Aseguradoras()
+    {
+        ddlAseguradora.DataSource = DBReclamos.aseguradoras.ToList().OrderBy(a => a.aseguradora);
+        ddlAseguradora.DataTextField = "aseguradora";
+        ddlAseguradora.DataValueField = "aseguradora";
+        ddlAseguradora.DataBind();
     }
 }

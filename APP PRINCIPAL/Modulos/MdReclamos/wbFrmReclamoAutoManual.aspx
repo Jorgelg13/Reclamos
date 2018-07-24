@@ -17,7 +17,8 @@
                                 <br />
                                 <asp:TextBox runat="server" ID="txtPropietario" autocomplete="off" Style="width: 30%" class="form-control" placeholder="Nombre Propiertario"></asp:TextBox>
                                 <asp:TextBox runat="server" ID="txtPlaca" autocomplete="off" Style="width: 25%" class="form-control" placeholder="Placa"></asp:TextBox>
-                                <asp:TextBox runat="server" ID="txtAseguradora" autocomplete="off" Style="width: 40%" class="form-control" placeholder="Aseguradora"></asp:TextBox>
+                                <asp:DropDownList CssClass="form-control" ID="ddlAseguradora" Style="width: 40%" Height="34px" runat="server">
+                                </asp:DropDownList>
                                 <br />
                                 <br />
                                 <asp:TextBox runat="server" ID="txtEmpresa" autocomplete="off" Style="width: 25%" Height="34px" class="form-control" placeholder="Empresa"></asp:TextBox>

@@ -256,6 +256,11 @@ public partial class Modulos_MdReclamos_wbFrmReclamosDañosAsignados : System.We
             reclamo.b_carta_cierre_interno = false;
             reclamo.b_carta_declinado = false;
             reclamo.b_carta_envio_cheque = false;
+            reclamo.problema_ajustador = false;
+            reclamo.problema_aseguradora = false;
+            reclamo.problema_cabina = false;
+            reclamo.problema_ejecutivo = false;
+            reclamo.problema_taller = false;
             reclamo.id_taller = Convert.ToInt16(ddlTaller.SelectedValue);
             reclamo.fecha_visualizar = DateTime.Now;
             reclamo.fecha_apertura_reclamo = DateTime.Now;
