@@ -128,7 +128,6 @@
                             <AlternatingRowStyle BackColor="White" />
                             <Columns>
                                 <asp:BoundField DataField="descr" HeaderText="Descripcion" SortExpression="descr" />
-                                <asp:BoundField DataField="placa" HeaderText="Placa" SortExpression="placa" />
                                 <asp:BoundField DataField="limite1" HeaderText="Limite 1" SortExpression="limite1" />
                                 <asp:BoundField DataField="limite2" HeaderText="Limite 2" SortExpression="limite2" />
                                 <asp:BoundField DataField="deducible" HeaderText="Deducible" SortExpression="deducible" />
@@ -144,47 +143,47 @@
                 </div>
                 <div role="tabpanel" class="tab-pane" id="messages">
                     <div class="panel-body col-lg-12 col-md-12">
-                            <div class="form-group col-md-6 col-lg-4 col-sm-12">
-                                Reportante:<asp:TextBox runat="server" ID="txtReportante" Style="width: 100%" autocomplete="off" CssClass="form-control" placeholder="Reportante"></asp:TextBox>
-                            </div>
-                            <div class="form-group col-md-6 col-lg-4 col-sm-12">
-                                Telefono:<asp:TextBox runat="server" ID="txtTelefono" Style="width: 100%" autocomplete="off" class="form-control" placeholder="Telefono"></asp:TextBox>
-                            </div>
-                            <div class="form-group col-md-6 col-lg-4 col-sm-12">
-                                Ubicacion:<asp:TextBox runat="server" ID="txtUbicacion" Style="width: 100%" autocomplete="off" class="form-control" placeholder="Ubicacion"></asp:TextBox>
-                            </div>
-                            <div class="form-group col-md-6 col-lg-3 col-sm-12">
-                                Fecha Incidente:<asp:TextBox runat="server" type="date" ID="txtFecha" Style="width: 100%" Height="32px" class="form-control" placeholder="Fecha"></asp:TextBox>
-                            </div>
-                            <div class="form-group col-md-6 col-lg-3 col-sm-12">
-                                Hora Incidente:<asp:TextBox runat="server" type="time" ID="txtHora" Style="width: 100%" Height="32px" class="form-control" placeholder="Hora del incidente"></asp:TextBox>
-                            </div>
-                            <div class="form-group col-md-6 col-lg-3 col-sm-12">
-                                Piloto:<asp:TextBox runat="server" ID="txtpiloto" autocomplete="off" Style="width: 100%" class="form-control" placeholder="piloto"></asp:TextBox>
-                            </div>
-                            <div class="form-group col-md-6 col-lg-3 col-sm-12">
-                                Edad:<asp:TextBox runat="server" ID="txtEdad" autocomplete="off" type="number" Style="width: 100%" class="form-control" placeholder="edad piloto"></asp:TextBox>
-                            </div>
-                            <div class="form-group col-md-6 col-lg-3 col-sm-12">
-                                Boleta:<asp:TextBox runat="server" ID="txtBoleta" autocomplete="off" Style="width: 100%" class="form-control" placeholder="Numero de boleta"></asp:TextBox>
-                            </div>
-                            <div class="form-group col-md-6 col-lg-3 col-sm-12">
-                                Ajustador:<asp:TextBox runat="server" ID="txtAjustador" autocomplete="off" Style="width: 100%" class="form-control" placeholder="Ajustador"></asp:TextBox>
-                            </div>
-                            <div class="form-group col-md-6 col-lg-3 col-sm-12">
-                                Titular:<asp:TextBox runat="server" ID="txtTitular" autocomplete="off" Style="width: 100%" class="form-control" placeholder="Titular"></asp:TextBox>
-                            </div>
-                            <div class="form-group col-md-6 col-lg-3 col-sm-12">
-                                Tipo:<asp:DropDownList CssClass="form-control" ID="DDLTipo" Style="width: 100%" Height="34px" runat="server">
-                                    <asp:ListItem>Accidente</asp:ListItem>
-                                    <asp:ListItem>Asistencia Vehicular</asp:ListItem>
-                                    <asp:ListItem>Robo</asp:ListItem>
-                                    <asp:ListItem>Robo parcial</asp:ListItem>
-                                </asp:DropDownList>
-                            </div>
+                        <div class="form-group col-md-6 col-lg-4 col-sm-12">
+                            Reportante:<asp:TextBox runat="server" ID="txtReportante" Style="width: 100%" autocomplete="off" CssClass="form-control" placeholder="Reportante"></asp:TextBox>
+                        </div>
+                        <div class="form-group col-md-6 col-lg-4 col-sm-12">
+                            Telefono:<asp:TextBox runat="server" ID="txtTelefono" Style="width: 100%" autocomplete="off" class="form-control" placeholder="Telefono"></asp:TextBox>
+                        </div>
+                        <div class="form-group col-md-6 col-lg-4 col-sm-12">
+                            Ubicacion:<asp:TextBox runat="server" ID="txtUbicacion" Style="width: 100%" autocomplete="off" class="form-control" placeholder="Ubicacion"></asp:TextBox>
+                        </div>
+                        <div class="form-group col-md-6 col-lg-3 col-sm-12">
+                            Fecha Incidente:<asp:TextBox runat="server" type="date" ID="txtFecha" Style="width: 100%" Height="32px" class="form-control" placeholder="Fecha"></asp:TextBox>
+                        </div>
+                        <div class="form-group col-md-6 col-lg-3 col-sm-12">
+                            Hora Incidente:<asp:TextBox runat="server" type="time" ID="txtHora" Style="width: 100%" Height="32px" class="form-control" placeholder="Hora del incidente"></asp:TextBox>
+                        </div>
+                        <div class="form-group col-md-6 col-lg-3 col-sm-12">
+                            Piloto:<asp:TextBox runat="server" ID="txtpiloto" autocomplete="off" Style="width: 100%" class="form-control" placeholder="piloto"></asp:TextBox>
+                        </div>
+                        <div class="form-group col-md-6 col-lg-3 col-sm-12">
+                            Edad:<asp:TextBox runat="server" ID="txtEdad" autocomplete="off" type="number" Style="width: 100%" class="form-control" placeholder="edad piloto"></asp:TextBox>
+                        </div>
+                        <div class="form-group col-md-6 col-lg-3 col-sm-12">
+                            Boleta:<asp:TextBox runat="server" ID="txtBoleta" autocomplete="off" Style="width: 100%" class="form-control" placeholder="Numero de boleta"></asp:TextBox>
+                        </div>
+                        <div class="form-group col-md-6 col-lg-3 col-sm-12">
+                            Ajustador:<asp:TextBox runat="server" ID="txtAjustador" autocomplete="off" Style="width: 100%" class="form-control" placeholder="Ajustador"></asp:TextBox>
+                        </div>
+                        <div class="form-group col-md-6 col-lg-3 col-sm-12">
+                            Titular:<asp:TextBox runat="server" ID="txtTitular" autocomplete="off" Style="width: 100%" class="form-control" placeholder="Titular"></asp:TextBox>
+                        </div>
+                        <div class="form-group col-md-6 col-lg-3 col-sm-12">
+                            Tipo:<asp:DropDownList CssClass="form-control" ID="DDLTipo" Style="width: 100%" Height="34px" runat="server">
+                                <asp:ListItem>Accidente</asp:ListItem>
+                                <asp:ListItem>Asistencia Vehicular</asp:ListItem>
+                                <asp:ListItem>Robo</asp:ListItem>
+                                <asp:ListItem>Robo parcial</asp:ListItem>
+                            </asp:DropDownList>
+                        </div>
                         <div class="form-group col-md-12 col-lg-12 col-sm-12">
                             Version:<asp:TextBox runat="server" ID="txtVersion" autocomplete="off" Style="width: 100%" class="form-control" placeholder="Version"></asp:TextBox>
-                            <asp:Button runat="server" style="margin-top:15px;" Text="Guardar" ID="txtGuardarReclamo" class="btn btn-primary" OnClick="txtGuardarReclamo_Click" />
+                            <asp:Button runat="server" Style="margin-top: 15px;" Text="Guardar" ID="txtGuardarReclamo" class="btn btn-primary" OnClick="txtGuardarReclamo_Click" />
                         </div>
                     </div>
                 </div>
@@ -192,20 +191,23 @@
         </div>
     </div>
     <!-- Modal de asegurados VIP-->
-    <div class="modal fade" id="ModalVip" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-        <div class="modal-dialog" role="document">
+    <div class="modal fade" id="ModalVip">
+        <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myModalLabel"><b>Cliente Vip</b></h4>
+                    <h4 class="modal-title"><b>Cliente Vip</b></h4>
                 </div>
                 <div class="modal-body">
-                   <br />
-                   <img src="../../imgUnity/cliente-vip.png" style="height:150px; width:auto;"/>
+                    <br />
+                    <img src="../../imgUnity/cliente-vip.png" style="height: 150px; width: auto;" />
                     <br />
                     <ul>
-                        <li><h4>Estimado Asesor este es un cliente VIP para Unity</h4></li>
-                        <li><h4>Si la emergencia cuenta con lesionados/terceros o se reporte entre las 10PM y 6 AM enviar ajustador propio conjunto con el de la compañía.</h4></li>
+                        <li>
+                            <h4>Estimado Asesor este es un cliente VIP para Unity</h4>
+                        </li>
+                        <li>
+                            <h4>Si la emergencia cuenta con lesionados/terceros o se reporte entre las 10PM y 6 AM enviar ajustador propio conjunto con el de la compañía.</h4>
+                        </li>
                     </ul>
                 </div>
                 <div class="modal-footer">
@@ -224,7 +226,7 @@
             <asp:ControlParameter ControlID="txtBusqueda" Name="asegurado" PropertyName="Text" />
         </SelectParameters>
     </asp:SqlDataSource>
-    <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:reclamosConnectionString %>" SelectCommand="select *from viewCoberturasAutos WHERE (chasis like '%' + @chasis + '%') ">
+    <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:reclamosConnectionString %>" SelectCommand="select top 10 *from viewCoberturasAutos WHERE (chasis like '%' + @chasis + '%') ">
         <SelectParameters>
             <asp:ControlParameter ControlID="txtBusqueda" Name="chasis" PropertyName="Text" />
         </SelectParameters>

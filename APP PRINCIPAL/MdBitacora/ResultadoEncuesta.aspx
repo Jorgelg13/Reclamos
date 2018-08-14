@@ -51,7 +51,7 @@
                 <asp:ListItem Value="Transactel">Transactel</asp:ListItem>
                 <asp:ListItem Value="Credomatic">Credomatic</asp:ListItem>
                 <asp:ListItem Value="Caja-de-ahorro">Caja de ahorro</asp:ListItem>
-                <asp:ListItem Value="Consulto Seguro">Consulto Seguro</asp:ListItem>
+                <asp:ListItem Value="Consulto-Seguro">Consulto Seguro</asp:ListItem>
                 <asp:ListItem Value="Aceros">Aceros</asp:ListItem>
             </asp:DropDownList>
         </div>

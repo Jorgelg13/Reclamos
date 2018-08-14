@@ -47,15 +47,14 @@
             <%---------------------------------------------------------------------------------------------------%>
             <div class="tab-content">
                 <div role="tabpanel" class="tab-pane" id="home">
-                    <br />
                     <div class="panel panel-info col-sm-12 col-md-5 col-lg-5">
-                        <div class="panel-heading" role="tab" id="headingTwo">
+                        <div class="panel-heading" role="tab" >
                             <h4 class="panel-title">
                                 <b>Datos De La Poliza</b>
                             </h4>
                         </div>
                         <div class="panel-body">
-                            <div class="panel-body form-inline">
+                            <div class="panel-body">
                                 <asp:Label ID="lblPoliza" runat="server"></asp:Label>
                                 <br />
                                 <asp:Label ID="lblAsegurado" runat="server"></asp:Label>
@@ -82,14 +81,14 @@
                     </div>
                     <%--------------------------  Grid de coberturas afectadas--------------------------------%>
                     <div class="panel panel-info col-sm-12 col-md-7 col-lg-7">
-                        <div class="panel-heading" role="tab" id="headingTree">
+                        <div class="panel-heading" role="tab">
                             <h4 class="panel-title">
                                 <b>Coberturas Afectadas</b>
                             </h4>
                         </div>
                         <div class="panel-body">
                             <div style="overflow-y: auto; overflow-x: auto;">
-                                <asp:GridView ID="GridCoberturasAfectadas" CssClass="table bs-table tablaDetalleAuto table-responsive table-hover" runat="server" AutoGenerateColumns="true" CellPadding="4" ForeColor="#333333" GridLines="None">
+                                <asp:GridView ID="GridCoberturasAfectadas" CssClass="table bs-table tablaDetalleAuto table-responsive" runat="server" AutoGenerateColumns="true" CellPadding="4" ForeColor="#333333" GridLines="None">
                                     <AlternatingRowStyle BackColor="White" />
                                     <HeaderStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" HorizontalAlign="Center" />
                                     <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
@@ -212,10 +211,10 @@
                                 <a title="Datos del Contacto" data-toggle="modal" role="button" data-target="#ModalDatosContacto"><i class="fa fa-user"></i></a>
                             </div>
                             <div class="col-xs-3 col-md-2 col-sm-2 col-lg-1">
-                                <a title="Datos del taller" data-toggle="modal" role="button" data-target="#ModalTaller"><i class="fa fa-wrench"></i></a>
+                                <a title="Datos del taller" id="DatosTaller" data-toggle="modal" role="button" data-target="#ModalTaller"><i class="fa fa-wrench"></i></a>
                             </div>
                             <div class="col-xs-3 col-md-2 col-sm-2 col-lg-1">
-                                <a title="Datos del Analista" data-toggle="modal" role="button" data-target="#ModalAnalista"><i class="fa fa-male"></i></a>
+                                <a title="Datos del Analista" id="DatosAnalista" data-toggle="modal" role="button" data-target="#ModalTaller"><i class="fa fa-male"></i></a>
                             </div>
                             <div class="col-xs-3 col-md-2 col-sm-2 col-lg-1">
                                 <a title="tiempo total del reclamo" data-toggle="modal" role="button" data-target="#ModalTiempo"><i class="fa fa-clock-o"></i></a>
@@ -244,7 +243,7 @@
                                <div class="col-xs-3 col-md-2 col-sm-2 col-lg-1">
                                 <a title="Solicitud de documentos" id="solicitudDoc" data-toggle="modal" role="button" data-target="#SolicitudDocumentos"><i class="fa fa-list-ul"></i></a>
                             </div>
-                             <div class="col-xs-3 col-md-2 col-sm-2 col-lg-1">
+                            <div class="col-xs-3 col-md-2 col-sm-2 col-lg-1">
                                 <a title="Ver Documentos Solicitados" id="DocSolicitados" data-toggle="modal" role="button" data-target="#SolicitudDocumentos"><i class="fa fa-files-o"></i></a>
                             </div>
                              <div class="col-xs-3 col-md-2 col-sm-2 col-lg-1">
@@ -539,7 +538,7 @@
                                             <br />
                                             <br />
                                             Señor(a)
-                                    <br />
+                                            <br />
                                             <asp:Label ID="lblCartaCliente" runat="server"></asp:Label>
                                             <br />
                                             <asp:Label ID="lblCartaEmpresa" runat="server"></asp:Label>
@@ -674,6 +673,59 @@
                         </div>
                     </div>
                 </div>
+                    <%--------------------------------- modal para mostrar los datos del taller, y analista asignado --------------------------------%>
+                <div class="modal fade" id="ModalTaller">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title" style="display:none" id="TituloTaller"><b>Datos del Taller</b></h4>
+                                <h4 class="modal-title" style="display:none" id="TituloAnalista"><b>Datos Del Analista</b></h4>
+                            </div>
+                            <div class="modal-body">
+                                <div class="form-group" id="CTaller" style="display:none">
+                                    <div class="form-group">
+                                        <label>Nombre:</label>
+                                        <asp:TextBox ID="txtNombreTaller" Style="width: 100%" CssClass="form-control" AutoComplete="off" runat="server"></asp:TextBox>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Direccion:</label>
+                                        <asp:TextBox ID="txtDireccionTaller" Style="width: 100%" CssClass="form-control" AutoComplete="off" runat="server"></asp:TextBox>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Telefono:</label>
+                                        <asp:TextBox ID="txtTelefonoTaller" Style="width: 100%" CssClass="form-control" AutoComplete="off" runat="server"></asp:TextBox>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Correo:</label>
+                                        <asp:TextBox ID="txtCorreoTaller" Style="width: 100%" CssClass="form-control" AutoComplete="off" runat="server"></asp:TextBox>
+                                    </div>
+                                </div>
+                                <div class="form-group" id="CAnalista" style="display:none">
+                                    <div class="form-group">
+                                        <label>Nombre:</label>
+                                        <asp:TextBox ID="txtNombreAnalista" Style="width: 100%" CssClass="form-control" AutoComplete="off" runat="server"></asp:TextBox>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Empresa:</label>
+                                        <asp:TextBox ID="txtEmpresaAnalista" Style="width: 100%" CssClass="form-control" AutoComplete="off" runat="server"></asp:TextBox>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Telefono:</label>
+                                        <asp:TextBox ID="txtTelefonoAnalista" Style="width: 100%" CssClass="form-control" AutoComplete="off" runat="server"></asp:TextBox>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Correo:</label>
+                                        <asp:TextBox ID="txtCorreoAnalista" Style="width: 100%" CssClass="form-control" AutoComplete="off" runat="server"></asp:TextBox>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                               <button type="button" class="btn btn-warning" data-dismiss="modal">Cerrar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <%--------------------  Tiempo del reclamo --------------------%>
                 <div class="modal fade" id="ModalTiempo">
                     <div class="modal-dialog modal-lg">
@@ -692,72 +744,6 @@
                                         <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
                                         <RowStyle BackColor="#EFF3FB" HorizontalAlign="Left" Wrap="False" />
                                     </asp:GridView>
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-warning" data-dismiss="modal">Cerrar</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <%--------------------------------- modal para mostrar los datos del taller asignado --------------------------------%>
-                <div class="modal fade" id="ModalTaller">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h4 class="modal-title"><b>Datos del Taller</b></h4>
-                            </div>
-                            <div class="modal-body">
-                                <div class="form-group">
-                                    <div class="form-group">
-                                        <label>Nombre:</label>
-                                        <asp:TextBox ID="txtNombreTaller" Style="width: 100%" CssClass="form-control" AutoComplete="off" runat="server"></asp:TextBox>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Direccion:</label>
-                                        <asp:TextBox ID="txtDireccionTaller" Style="width: 100%" CssClass="form-control" AutoComplete="off" runat="server"></asp:TextBox>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Telefono:</label>
-                                        <asp:TextBox ID="txtTelefonoTaller" Style="width: 100%" CssClass="form-control" AutoComplete="off" runat="server"></asp:TextBox>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Correo:</label>
-                                        <asp:TextBox ID="txtCorreoTaller" Style="width: 100%" CssClass="form-control" AutoComplete="off" runat="server"></asp:TextBox>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-warning" data-dismiss="modal">Cerrar</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <%--------------------------------- modal para mostrar los datos Analista --------------------------------%>
-                <div class="modal fade" id="ModalAnalista">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h4 class="modal-title"><b>Datos Del Analista</b></h4>
-                            </div>
-                            <div class="modal-body">
-                                <div class="form-group">
-                                    <div class="form-group">
-                                        <label>Nombre:</label>
-                                        <asp:TextBox ID="txtNombreAnalista" Style="width: 100%" CssClass="form-control" AutoComplete="off" runat="server"></asp:TextBox>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Empresa:</label>
-                                        <asp:TextBox ID="txtEmpresaAnalista" Style="width: 100%" CssClass="form-control" AutoComplete="off" runat="server"></asp:TextBox>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Telefono:</label>
-                                        <asp:TextBox ID="txtTelefonoAnalista" Style="width: 100%" CssClass="form-control" AutoComplete="off" runat="server"></asp:TextBox>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Correo:</label>
-                                        <asp:TextBox ID="txtCorreoAnalista" Style="width: 100%" CssClass="form-control" AutoComplete="off" runat="server"></asp:TextBox>
-                                    </div>
                                 </div>
                             </div>
                             <div class="modal-footer">
@@ -829,28 +815,44 @@
                             <div class="modal-header">
                                 <h4 class="modal-title"><b>Seleccionar opcion de producto no conforme</b></h4>
                             </div>
-                            <div class="modal-body">
-                                <div class="form-inline">
-                                    <asp:DropDownList ID="ddlNoConforme" class="form-control" Style="width: 60%; height: 30px;" runat="server">
+                            <div class="modal-body col-lg-12">
+                                <div class="form-group col-lg-9 col-md-6 col-sm-12">
+                                    <asp:DropDownList ID="ddlNoConforme" class="form-control" Style="width: 100%; height: 30px;" runat="server">
                                         <asp:ListItem Value="Cartas hacia la SAT con errores">Cartas hacia la SAT con errores</asp:ListItem>
                                         <asp:ListItem Value="Cheques con datos incorrectos">Cheques con datos incorrectos</asp:ListItem>
                                         <asp:ListItem Value="Declinaciones con Datos incorrectos">Declinaciones con Datos incorrectos</asp:ListItem>
                                         <asp:ListItem Value="Nombre del asegurado incorrecto">Nombre del asegurado incorrecto</asp:ListItem>
                                         <asp:ListItem Value="Facturas de deducible con datos erróneos ">Facturas de deducible con datos erróneos </asp:ListItem>
                                     </asp:DropDownList>
-                                    <asp:DropDownList ID="ddlEstadoNoConforme" class="form-control" Style="width: 30%; height: 30px;" runat="server">
+                                </div>
+                                <div class="form-group col-lg-3 col-md-3 col-sm-12">
+                                    <asp:DropDownList ID="ddlEstadoNoConforme" class="form-control" Style="width: 100%; height: 30px;" runat="server">
                                         <asp:ListItem Value="Abierto">Abierto</asp:ListItem>
                                         <asp:ListItem Value="Cerrado">Cerrado</asp:ListItem>
                                     </asp:DropDownList>
                                 </div>
-                                <br />
-                                <asp:TextBox ID="txtObservacionesNoConf" Style="width: 99%" autocomplete="off" class="form-control" TextMode="multiline" Columns="50" Rows="3" placeholder="Comentarios del producto no conforme" runat="server"></asp:TextBox>
-                                <br />
-                                <asp:Label runat="server" ID="lblProductoNoConforme"></asp:Label>
+                                <div class="form-group col-lg-12 col-md-12 col-sm-12">
+                                    <asp:TextBox ID="txtObservacionesNoConf" Style="width: 100%" autocomplete="off" class="form-control" TextMode="multiline" Columns="50" Rows="3" placeholder="Comentarios del producto no conforme" runat="server"></asp:TextBox>
+                                </div>
+                                <div class="form-group col-lg-12 col-md-12 col-sm-12">
+                                    <asp:Label runat="server" ID="lblProductoNoConforme"></asp:Label>
+                                </div>
+                                <div class="form-group col-lg-12 col-md-12 col-sm-12">
+                                    <input type="checkbox" id="ChPNC" name="Memo">Generar Memo No Conforme
+                                </div>
+                                <div class="form-group col-lg-12 col-md-12 col-sm-12" id="ContenidoMemoPNC" style="display: none">
+                                    <asp:TextBox runat="server" ID="txtParaPNC" class="form-control" type="text" placeholder="Para" style="width: 100%"></asp:TextBox>
+                                    <br />
+                                    <asp:TextBox runat="server" ID="txtDireccionPNC" class="form-control" type="text" placeholder="Direccion" style="width: 100%"></asp:TextBox>
+                                    <br />
+                                    <asp:TextBox runat="server" ID="txtContenidoPNC" rows="4" cols="65"  TextMode="multiline" placeholder="Contenido" style="width: 100%" class="form-control"
+                                        Text="Estimado: Por este medio procedemos a devolver ___, debido a ____. "></asp:TextBox>
+                                </div>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-warning" data-dismiss="modal">Cerrar</button>
                                 <asp:Button ID="btnProductoNoConforme" OnClick="btnProductoNoConforme_Click" CssClass="btn btn-primary" runat="server" Text="Guardar" />
+                                <button id="ImprimirPNC" type="button" class="btn btn-primary" style="display:none" data-dismiss="modal">Imprimir</button>
                             </div>
                         </div>
                     </div>
@@ -995,7 +997,7 @@
                         <p>www.unitypromotores.com</p>
                     </div>
                     <br />
-                    <asp:Label  id="TituloMemo" Style="font-size: 20px; padding-left: 100px;" runat="server"><b>Bitacora del reclamo</b></asp:Label>
+                    <asp:Label id="TituloMemo" Style="font-size: 20px; padding-left: 100px;" runat="server"><b>Bitacora del reclamo</b></asp:Label>
                     <div class="form-inline" style="padding-top: 90px;">
                         <table style="width: 100%">
                             <tr>
@@ -1044,6 +1046,57 @@
                         </div>
                         <br />
                     </div>
+                </div>
+                <div id="MemoPNC" style="display: none">
+                    <br />
+                    <div class="img-float-right" style="float: right; padding-top: 50px;">
+                        <img src="../../imgUnity/Unity%20Promotores%20transparente.png" style="margin-top: -100px; width: 235px;">
+                    </div>
+                    <div class="img-float-left" style="float: left; padding-top: 5px;">
+                        <p>Avenida Las Americas 22-23, Zona 14</p>
+                        <p>PBX: 2326-3700, 2386-3700</p>
+                        <p>www.unitypromotores.com</p>
+                    </div>
+                    <label style="font-size: 20px; padding-left: 100px;" runat="server"><b>Memo De Envio</b></label>
+                    <br />
+                    <div style="padding-top: 90px;">
+                        <table style="width: 100%;">
+                            <tr>
+                                <td>Dirigido a:</td>
+                                <td>
+                                    <asp:Label runat="server" ID="ParaPNC"></asp:Label></td>
+                                <td>Asesor Reclamo:</td>
+                                <td>
+                                    <asp:Label runat="server" ID="AsesorPNC"></asp:Label></td>
+                            </tr>
+                            <tr>
+                                <td>Direccion:</td>
+                                <td>
+                                    <asp:Label runat="server" ID="DireccionPNC"></asp:Label></td>
+                                <td>ID:</td>
+                                <td>
+                                    <asp:Label runat="server" ID="IdPNC"></asp:Label></td>
+                            </tr>
+                            <tr>
+                                <td>Aseguradora:</td>
+                                <td>
+                                    <asp:Label runat="server" ID="AseguradoraPNC"></asp:Label></td>
+                                <td>Asegurado:</td>
+                                <td>
+                                    <asp:Label runat="server" ID="AseguradoPNC"></asp:Label></td>
+                            </tr>
+                            <tr>
+                                <td>Poliza:</td>
+                                <td>
+                                    <asp:Label runat="server" ID="PolizaPNC"></asp:Label></td>
+                            </tr>
+                        </table>
+                    </div>
+                    <p>___________________________________________________________________________________________________________</p>
+                    <asp:Label runat="server" ID="ContenidoPNC" Style="padding-top: 20px;"></asp:Label>
+                    <p style="padding-top: 60px;">Cordialmente,</p>
+                    <p>Asesor de reclamos</p>
+                    <asp:Label runat="server" ID="AsesorAsignadoPNC"></asp:Label>
                 </div>
                 <%-- data source con las conexiones a las tablas de la bd reclamos--%>
                 <asp:SqlDataSource ID="SqlDataSourceEstados" runat="server" ConnectionString="<%$ ConnectionStrings:reclamosConnectionString %>" SelectCommand="SELECT [id], [descripcion] FROM [estados_reclamos_unity]  where tipo = 'daños' order by descripcion"></asp:SqlDataSource>
@@ -1159,6 +1212,38 @@
             var ancho = $(window).width() - 700;
             window.open('http://52.34.115.100:5556/explorador.html#files%2FReclamosVarios/' + ruta, "ventana1", "width=" + ancho + ",height=" + alto + ",scrollbars=NO")
         }
+    </script>
+    <script>
+        $("#DatosTaller").on('click', function (event) {
+            $('#TituloTaller').css("display", "");
+            $('#TituloAnalista').css("display", "none");
+            $('#CTaller').css("display", "");
+            $('#CAnalista').css("display", "none");
+
+        });
+
+        $("#DatosAnalista").on('click', function (event) {
+             $('#TituloAnalista').css("display", "");
+             $('#TituloTaller').css("display", "none");
+             $('#CTaller').css("display", "none");
+             $('#CAnalista').css("display", "");
+        });
+
+        $('#ChPNC').on('click', function (event) {
+             $('#ContentPlaceHolder1_btnProductoNoConforme').css("display", "none");
+             $('#ContenidoMemoPNC').css("display", "");
+             $('#ImprimirPNC').css("display", "");
+        });
+
+        $('#ImprimirPNC').on('click', function (event) {
+            var para =  $('#ContentPlaceHolder1_txtParaPNC').val();
+            $('#ContentPlaceHolder1_ParaPNC')[0].innerHTML = $('#ContentPlaceHolder1_txtParaPNC').val();
+            $('#ContentPlaceHolder1_DireccionPNC')[0].innerHTML = $('#ContentPlaceHolder1_txtDireccionPNC').val();
+
+            var contenido = $('#ContentPlaceHolder1_txtContenidoPNC').val();
+             $('#ContentPlaceHolder1_ContenidoPNC')[0].innerHTML = contenido.replace(/\n/g, '<br\>');
+            printDiv('MemoPNC');
+        });
     </script>
 </asp:Content>
 

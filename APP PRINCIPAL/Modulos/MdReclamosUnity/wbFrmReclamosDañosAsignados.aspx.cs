@@ -275,7 +275,7 @@ public partial class Modulos_MdReclamos_wbFrmReclamosDañosAsignados : System.We
                     "es " + ddlGestor.SelectedItem + " Tel " + reclamo.gestores.telefono + " número de ID " + id + " ", userlogin, id);
             }
 
-            enviarNoficacion();
+            NoficacionEjecutivo();
 
             Response.Redirect("/Modulos/MdReclamosUnity/wbFrmReclamosDañosSeguimiento.aspx?ID_reclamo=" + id, false);
         }
@@ -327,7 +327,7 @@ public partial class Modulos_MdReclamos_wbFrmReclamosDañosAsignados : System.We
     }
 
     //enviar notificacion al correo electronico del ejecutivo
-    public void enviarNoficacion()
+    public void NoficacionEjecutivo()
     {
         codigo = GridReclamosDaños.SelectedRow.Cells[26].Text;
         correoGestor = Utils.seleccionarCorreoGestor(userlogin);
@@ -336,6 +336,7 @@ public partial class Modulos_MdReclamos_wbFrmReclamosDañosAsignados : System.We
 
         if (codigo == "&nbsp;")
         {
+
         }
         else
         {

@@ -826,9 +826,9 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosMedicosSeguimientos : 
                 GridComentarios.DataBind();
             }
 
-            catch (Exception)
+            catch (Exception ex)
             {
-
+                Utils.ShowMessage(this.Page, "Error al generar el memo" + ex.Message, "Nota..!", "warning");
             }
         }
     }

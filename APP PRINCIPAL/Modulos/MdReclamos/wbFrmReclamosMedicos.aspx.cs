@@ -21,7 +21,7 @@ public partial class Modulos_MdReclamos_wbFrmReclamosMedicos : System.Web.UI.Pag
     {
         if (!comprobar.verificarUsuario(userlogin))
         {
-            Response.Redirect("/Asignacion.aspx"); 
+            Response.Redirect("/Asignacion.aspx",false); 
         }
 
         obtenerID();
@@ -226,9 +226,9 @@ public partial class Modulos_MdReclamos_wbFrmReclamosMedicos : System.Web.UI.Pag
             Response.Redirect("/Modulos/MdReclamos/wbFrmReclamosMedicosEditar.aspx?ID_reclamo=" + ultimoIdReclamo, false);
         }
 
-        catch (Exception)
+        catch (Exception ex)
         {
-            Utils.ShowMessage(this.Page, "A ocurrido un error al guardar el registro", "Nota..!", "error");
+            Utils.ShowMessage(this.Page, "A ocurrido un error al guardar el registro " + ex.Message, "Nota..!", "error");
         }
     }
 

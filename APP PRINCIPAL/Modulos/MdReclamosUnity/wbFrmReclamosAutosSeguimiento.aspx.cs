@@ -165,11 +165,11 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosAutosSeguimiento : Sys
             txtCorreoAnalista.Text   = reclamo.analistas.correo;
 
             //Problemas reportados de talleres, cabina y ajustadores
-            chAnalista.Checked    = reclamo.problema_ajustador.Value;
-            chCabina.Checked      = reclamo.problema_cabina.Value;
-            chTaller.Checked      = reclamo.problema_taller.Value;
-            ChAseguradora.Checked = reclamo.problema_aseguradora.Value;
-            chEjecutivo.Checked   = reclamo.problema_ejecutivo.Value;
+            chAnalista.Checked          = reclamo.problema_ajustador.Value;
+            chCabina.Checked            = reclamo.problema_cabina.Value;
+            chTaller.Checked            = reclamo.problema_taller.Value;
+            ChAseguradora.Checked       = reclamo.problema_aseguradora.Value;
+            chEjecutivo.Checked         = reclamo.problema_ejecutivo.Value;
             txtProblemaAjustador.Text   = reclamo.comentario_ajustador;
             txtProblemaCabina.Text      = reclamo.comentario_cabina;
             txtProblemaTaller.Text      = reclamo.comentario_taller;
@@ -283,7 +283,6 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosAutosSeguimiento : Sys
         var seguimiento = DBReclamos.reclamo_auto.Find(id);
         var dias_revision = DBReclamos.estados_reclamos_unity.Where(es => es.descripcion == ddlEstadoAuto.SelectedItem.Text && es.tipo == "auto").First();
         dias = Convert.ToInt32(dias_revision.dias_revision);
-
         DateTime fecha = DateTime.Now;
 
         seguimiento.fecha_visualizar = fecha.AddDays(dias);
@@ -1025,6 +1024,13 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosAutosSeguimiento : Sys
         BitChasis.Text = bitacora.auto_reclamo.chasis;
         BitMotor.Text  = bitacora.auto_reclamo.motor;
 
+        AseguradoraPNC.Text = bitacora.auto_reclamo.aseguradora;
+        AseguradoPNC.Text = bitacora.auto_reclamo.asegurado;
+        PolizaPNC.Text = bitacora.auto_reclamo.poliza;
+        IdPNC.Text = bitacora.id.ToString();
+        AsesorPNC.Text = bitacora.gestores.nombre;
+        AsesorAsignadoPNC.Text = bitacora.gestores.nombre;
+
         llenado.llenarGrid(llamadas, Bitllamadas);
         llenado.llenarGrid(comentarios, BitSeguimiento);
     }
@@ -1081,6 +1087,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosAutosSeguimiento : Sys
         {
             chCartaDeclinado.Checked = false;
             chEnvioCarta.Checked = false;
+            CodigoISO.Text = "RE-AU-F-04";
             var buscarCarta = DBReclamos.cartas.Where(ca => ca.tipo == "cierre interno" && ca.modulo == "autos" && ca.id_reclamo == id).Count();
 
             if (buscarCarta == 1)
@@ -1114,6 +1121,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosAutosSeguimiento : Sys
         {
             chCartaCierre.Checked = false;
             chEnvioCarta.Checked = false;
+            CodigoISO.Text = "RE-AU-F-05";
             var buscarCarta = DBReclamos.cartas.Where(ca => ca.tipo == "declinado" && ca.modulo == "autos" && ca.id_reclamo == id).Count();
 
             if (buscarCarta == 1)
@@ -1147,6 +1155,8 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosAutosSeguimiento : Sys
         {
             chCartaCierre.Checked = false;
             chCartaDeclinado.Checked = false;
+            CodigoISO.Text = "RE-AU-F-03";
+
             var buscarCarta = DBReclamos.cartas.Where(ca => ca.tipo == "envio cheque" && ca.modulo == "autos" && ca.id_reclamo == id).Count();
 
             if (buscarCarta == 1)
@@ -1317,6 +1327,12 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosAutosSeguimiento : Sys
 
     protected void lnEditarPoliza_Click(object sender, EventArgs e)
     {
+        var reclamo = DBReclamos.reclamo_auto.Find(id);
+        txtPoliza.Text = reclamo.auto_reclamo.poliza;
+        txtAsegurado.Text = reclamo.auto_reclamo.asegurado;
+        txtPrograma.Text = reclamo.auto_reclamo.programa;
+        txtContratante.Text = reclamo.auto_reclamo.contratante;
+
         ddlAseguradora.DataSource = DBReclamos.aseguradoras.ToList();
         ddlAseguradora.DataTextField = "aseguradora";
         ddlAseguradora.DataValueField = "aseguradora";
@@ -1334,6 +1350,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosAutosSeguimiento : Sys
         try
         {
             var reclamo = DBReclamos.reclamo_auto.Find(id);
+
             reclamo.auto_reclamo.poliza = txtPoliza.Text;
             reclamo.auto_reclamo.asegurado = txtAsegurado.Text;
             reclamo.auto_reclamo.ejecutivo = ddlEjecutivos.SelectedItem.Text;

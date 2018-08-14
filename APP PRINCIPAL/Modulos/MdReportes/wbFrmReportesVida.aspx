@@ -1,11 +1,9 @@
-﻿<%@ Page Title="Reporte Gastos Medicos" Language="C#" MasterPageFile="~/ReclamosUnity.master" AutoEventWireup="true" EnableEventValidation="false" CodeFile="wbFrmReportesMedicos.aspx.cs" Inherits="Modulos_MdReclamosUnity_wbFrmReportesMedicos" %>
-
-<%@ Register Assembly="System.Web.DataVisualization, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" Namespace="System.Web.UI.DataVisualization.Charting" TagPrefix="asp" %>
+﻿<%@ Page Title="Reportes de vida" Language="C#" MasterPageFile="~/ReclamosUnity.master" AutoEventWireup="true" EnableEventValidation="false" CodeFile="wbFrmReportesVida.aspx.cs" Inherits="Modulos_MdReportes_wbFrmReportesVida" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
-    <div class="col-sm-12 col-md-2 col-lg-2">
+    <div class="col-sm-12 col-md-4 col-lg-2">
         <div class="panel panel-info">
             <div class="panel-heading">
                 <h3 class="panel-title"><b style="font-size: 16px;">Seleccione los campos</b></h3>
@@ -62,7 +60,7 @@
         </div>
     </div>
     <asp:Panel ID="PnReporte" runat="server">
-        <div class="col-sm-12 col-md-10 col-lg-10">
+        <div class="col-sm-12 col-md-8 col-lg-10">
             <div class="panel panel-info">
                 <div class="panel-heading">
                     <b>Tabla con campos seleccionados<label style="margin-left: 50px">Total de registros: </label>
@@ -79,7 +77,7 @@
                 </div>
                 <div class="panel-body" style="height: 520px;">
                     <div class="row">
-                        <div class="form-group col-md-2 col-lg-2">
+                        <div class="form-group col-md-4 col-lg-2">
                             <label>Busqueda:</label>
                             <asp:DropDownList ID="ddlElegir" runat="server" Style="width: 100%" CssClass="form-control" AutoPostBack="true" OnSelectedIndexChanged="ddlElegir_SelectedIndexChanged">
                                 <asp:ListItem Value="reg_reclamos_medicos.poliza ">Poliza</asp:ListItem>
@@ -90,13 +88,13 @@
                                 <asp:ListItem Value="reg_reclamos_medicos.moneda">Moneda</asp:ListItem>
                             </asp:DropDownList>
                         </div>
-                        <div class="form-group col-md-2 col-lg-2">
+                        <div class="form-group col-md-4 col-lg-2">
                             <label>Registros a buscar:</label>
                             <asp:TextBox ID="txtBuscar" CssClass="form-control" Style="width: 100%" placeholder="Escriba su busqueda" runat="server"></asp:TextBox>
                             <asp:DropDownList ID="ddlBuscar" Visible="false" runat="server" Style="width: 100%" CssClass="form-control">
                             </asp:DropDownList>
                         </div>
-                        <div class="form-group col-md-2 col-lg-2">
+                        <div class="form-group col-md-4 col-lg-2">
                             <label>Tipo:</label>
                             <asp:DropDownList ID="ddlTipoReclamo" runat="server" Style="width: 100%" CssClass="form-control">
                                 <asp:ListItem Value="reg_reclamos_medicos.tipo = 'I'">Individual</asp:ListItem>
@@ -104,20 +102,20 @@
                                 <asp:ListItem Value="reg_reclamos_medicos.tipo = 'I' or reg_reclamos_medicos.tipo = 'C'">Todos</asp:ListItem>
                             </asp:DropDownList>
                         </div>
-                        <div class="form-group col-md-2 col-lg-2">
+                        <div class="form-group col-md-4 col-lg-2">
                             <label>Estado:</label>
-                            <asp:DropDownList ID="ddlEstado" runat="server" Style="width: 100%" CssClass="form-control">
+                            <asp:DropDownList ID="ddlEstado" runat="server" Style="width: 100%; height:30px;" CssClass="form-control">
                                 <asp:ListItem Value="reclamos_medicos.estado_unity = 'Cerrado'">Cerrado</asp:ListItem>
                                 <asp:ListItem Value="reclamos_medicos.estado_unity = 'Seguimiento'">Seguimiento</asp:ListItem>
                                 <asp:ListItem Value="reclamos_medicos.estado_unity = 'Seguimiento' or reclamos_medicos.estado_unity = 'Cerrado'">Todos</asp:ListItem>
                                 <asp:ListItem>Aperturados</asp:ListItem>
                             </asp:DropDownList>
                         </div>
-                        <div class="form-group col-md-2 col-lg-2">
+                        <div class="form-group col-md-4 col-lg-2">
                             <label>Fecha Inicio:</label>
                             <asp:TextBox ID="txtFechaInicio" Height="32px" type="date" CssClass="form-control" Style="width: 100%" placeholder="Escriba su busqueda" runat="server"></asp:TextBox>
                         </div>
-                        <div class="form-group col-md-2 col-lg-2">
+                        <div class="form-group col-md-4 col-lg-2">
                             <label>Fecha Fin:</label>
                             <asp:TextBox ID="txtFechaFin" type="date" Height="32px" CssClass="form-control" Style="width: 100%" placeholder="Escriba su busqueda" runat="server"></asp:TextBox>
                         </div>
@@ -263,7 +261,7 @@
             document.body.innerHTML = contenido;
             window.print();
             document.body.innerHTML = contenidoOriginal;
-            window.location.href = "/Modulos/MdReportes/wbFrmReportesMedicos.aspx";
+            window.location.href = "/Modulos/MdReportes/wbFrmReportesVida.aspx";
         }
     </script>
     <script>

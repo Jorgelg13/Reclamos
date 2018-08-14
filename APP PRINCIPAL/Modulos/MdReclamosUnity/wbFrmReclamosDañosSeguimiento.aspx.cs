@@ -462,12 +462,12 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosDañosSeguimiento : Sy
             lblPagoTotal.Text = "<b>TOTAL : </b>" + valor_indemnizado.ToString("N2");
             Utils.ShowMessage(this.Page, "Pago guardado con exito..!", "Excelete..!", "info");
 
-            txtMejora.Text      = "0.00";
-            txtTiempoUso.Text   = "0.00";
-            txtInfraseguro.Text = "0.00";
-            txtDeducible2.Text  = "0.00";
-            txtSalvamento.Text  = "0.00";
-            txtIva.Text         = "0.00";
+            txtMejora.Text         = "0.00";
+            txtTiempoUso.Text      = "0.00";
+            txtInfraseguro.Text    = "0.00";
+            txtDeducible2.Text     = "0.00";
+            txtSalvamento.Text     = "0.00";
+            txtIva.Text            = "0.00";
             txtMontoReclamado.Text = "0.00";
         }
         catch (Exception ex)
@@ -479,7 +479,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosDañosSeguimiento : Sy
     //link para salir del reclamo
     protected void linkSalir_Click(object sender, EventArgs e)
     {
-        Response.Redirect("/Modulos/MdReclamosUnity/wbFrmRecDañosSeguimiento.aspx");
+        Response.Redirect("/Modulos/MdReclamosUnity/wbFrmRecDañosSeguimiento.aspx",false);
     }
     //metodo para cerar el reclamo
     protected void cerrarReclamo()
@@ -505,39 +505,39 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosDañosSeguimiento : Sy
     {
         try
         {
-            idPago                    = Convert.ToInt32(GridLiquidaciones.SelectedRow.Cells[1].Text);
-            var pago                  = DBReclamos.detalle_pagos_reclamos_varios.Find(idPago);
-            pago.cobertura_pagada     = ddlCoberturas.SelectedItem.Text;
-            pago.ramo                 = txtRamo.Text;
-            pago.tipo_pago            = ddlElegir.SelectedItem.Text;
-            pago.monto_reclamado      = Convert.ToDecimal(txtMontoReclamado.Text);
-            pago.monto_ajustado       = Convert.ToDecimal(txtMontoAjustado.Text);
-            pago.mejora_tecnologica   = Convert.ToDecimal(txtMejora.Text);
-            pago.tiempo_uso           = Convert.ToDecimal(txtTiempoUso.Text);
-            pago.infra_seguro         = Convert.ToDecimal(txtInfraseguro.Text);
+            idPago                      = Convert.ToInt32(GridLiquidaciones.SelectedRow.Cells[1].Text);
+            var pago                    = DBReclamos.detalle_pagos_reclamos_varios.Find(idPago);
+            pago.cobertura_pagada       = ddlCoberturas.SelectedItem.Text;
+            pago.ramo                   = txtRamo.Text;
+            pago.tipo_pago              = ddlElegir.SelectedItem.Text;
+            pago.monto_reclamado        = Convert.ToDecimal(txtMontoReclamado.Text);
+            pago.monto_ajustado         = Convert.ToDecimal(txtMontoAjustado.Text);
+            pago.mejora_tecnologica     = Convert.ToDecimal(txtMejora.Text);
+            pago.tiempo_uso             = Convert.ToDecimal(txtTiempoUso.Text);
+            pago.infra_seguro           = Convert.ToDecimal(txtInfraseguro.Text);
             pago.perdida_final_ajustada = Convert.ToDecimal(txtPerdidaFinal.Text);
-            pago.deducible            = Convert.ToDecimal(txtDeducible2.Text);
-            pago.salvamento           = Convert.ToDecimal(txtSalvamento.Text);
-            pago.timbres              = Convert.ToDecimal(txtTimbres.Text);
-            pago.valor_indemnizado    = Convert.ToDecimal(txtValorTotal.Text);
-            pago.iva                  = Convert.ToDecimal(txtIva.Text);
-            pago.destino              = ddlDestinoCheque.SelectedValue;
+            pago.deducible              = Convert.ToDecimal(txtDeducible2.Text);
+            pago.salvamento             = Convert.ToDecimal(txtSalvamento.Text);
+            pago.timbres                = Convert.ToDecimal(txtTimbres.Text);
+            pago.valor_indemnizado      = Convert.ToDecimal(txtValorTotal.Text);
+            pago.iva                    = Convert.ToDecimal(txtIva.Text);
+            pago.destino                = ddlDestinoCheque.SelectedValue;
             DBReclamos.SaveChanges();
             Utils.ShowMessage(this.Page, "Pago Actualizado con exito", "Excelente..!", "info");
             MostrarLiquidacion(idPago);
             llenado.llenarGrid(liquidaciones, GridLiquidaciones);
 
-            txtRamo.Text         = "";
-            ddlElegir.Text       = "";
-            txtMejora.Text       = "0.00";
-            txtTiempoUso.Text    = "0.00";
-            txtInfraseguro.Text  = "0.00";
-            txtPerdidaFinal.Text = "0.00";
-            txtDeducible2.Text   = "0.00";
-            txtTimbres.Text      = "0.00";
-            txtValorTotal.Text   = "0.00";
-            txtIva.Text          = "0.00";
-            txtTimbres.Text      = "0.00";
+            txtRamo.Text           = "";
+            ddlElegir.Text         = "";
+            txtMejora.Text         = "0.00";
+            txtTiempoUso.Text      = "0.00";
+            txtInfraseguro.Text    = "0.00";
+            txtPerdidaFinal.Text   = "0.00";
+            txtDeducible2.Text     = "0.00";
+            txtTimbres.Text        = "0.00";
+            txtValorTotal.Text     = "0.00";
+            txtIva.Text            = "0.00";
+            txtTimbres.Text        = "0.00";
             txtMontoReclamado.Text = "0.00";
         }
         catch (Exception ex)
@@ -613,6 +613,8 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosDañosSeguimiento : Sy
         }
     }
 
+
+    //enviar notificaciones sms
     protected void btnEnviarNotificacion_Click(object sender, EventArgs e)
     {
         if (ddlEstadoReclamo.SelectedValue == "Revisión Gestor Reclamos")
@@ -687,16 +689,23 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosDañosSeguimiento : Sy
 
     private void BitacoraReclamo()
     {
-        var bitacora          = DBReclamos.reclamos_varios.Find(id);
-        bitAsesor.Text        = bitacora.gestores.nombre;
-        BitPoliza.Text        = bitacora.reg_reclamo_varios.poliza;
-        BitAsegurado.Text     = bitacora.reg_reclamo_varios.asegurado;
-        BitEjecutivo.Text     = bitacora.reg_reclamo_varios.ejecutivo;
-        BitAseguradora.Text   = bitacora.reg_reclamo_varios.aseguradora;
-        BitId.Text            = bitacora.id.ToString();
-        BitReportante.Text    = bitacora.reportante;
-        BitFecha.Text         = Convert.ToDateTime(bitacora.fecha).ToString("dd/MM/yyyy");
-        BitNumeroReclamo.Text = bitacora.num_reclamo;
+        var registro          = DBReclamos.reclamos_varios.Find(id);
+        bitAsesor.Text        = registro.gestores.nombre;
+        BitPoliza.Text        = registro.reg_reclamo_varios.poliza;
+        BitAsegurado.Text     = registro.reg_reclamo_varios.asegurado;
+        BitEjecutivo.Text     = registro.reg_reclamo_varios.ejecutivo;
+        BitAseguradora.Text   = registro.reg_reclamo_varios.aseguradora;
+        BitId.Text            = registro.id.ToString();
+        BitReportante.Text    = registro.reportante;
+        BitFecha.Text         = Convert.ToDateTime(registro.fecha).ToString("dd/MM/yyyy");
+        BitNumeroReclamo.Text = registro.num_reclamo;
+
+        AseguradoraPNC.Text = registro.reg_reclamo_varios.aseguradora;
+        AseguradoPNC.Text = registro.reg_reclamo_varios.asegurado;
+        PolizaPNC.Text = registro.reg_reclamo_varios.poliza;
+        IdPNC.Text = registro.id.ToString();
+        AsesorPNC.Text = registro.gestores.nombre;
+        AsesorAsignadoPNC.Text = registro.gestores.nombre;
 
         llenado.llenarGrid(llamadas, Bitllamadas);
         llenado.llenarGrid(comentarios, BitSeguimiento);
@@ -1073,6 +1082,12 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosDañosSeguimiento : Sy
 
     protected void lnEditarPoliza_Click(object sender, EventArgs e)
     {
+        var reclamo = DBReclamos.reclamos_varios.Find(id);
+        txtPoliza.Text = reclamo.reg_reclamo_varios.poliza;
+        txtAsegurado.Text = reclamo.reg_reclamo_varios.asegurado;
+        txtSumaAsegurada.Text = reclamo.reg_reclamo_varios.suma_asegurada.ToString();
+        txtDireccion.Text = reclamo.reg_reclamo_varios.direccion;
+
         ddlAseguradora.DataSource = DBReclamos.aseguradoras.ToList();
         ddlAseguradora.DataTextField = "aseguradora";
         ddlAseguradora.DataValueField = "aseguradora";

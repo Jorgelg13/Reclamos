@@ -665,28 +665,44 @@
                 <div class="modal-header">
                     <h4 class="modal-title"><b>Seleccionar opcion de producto no conforme</b></h4>
                 </div>
-                <div class="modal-body">
-                    <div class="form-inline">
-                        <asp:DropDownList ID="ddlNoConforme" class="form-control" Style="width: 65%; height: 30px;" runat="server">
+                <div class="modal-body col-lg-12">
+                    <div class="form-group col-lg-9 col-md-6 col-sm-12">
+                        <asp:DropDownList ID="ddlNoConforme" class="form-control" Style="width: 100%; height: 30px;" runat="server">
                             <asp:ListItem Value="Cartas hacia la SAT con errores">Cartas hacia la SAT con errores</asp:ListItem>
                             <asp:ListItem Value="Cheques con datos incorrectos">Cheques con datos incorrectos</asp:ListItem>
                             <asp:ListItem Value="Declinaciones con Datos incorrectos">Declinaciones con Datos incorrectos</asp:ListItem>
                             <asp:ListItem Value="Nombre del asegurado incorrecto">Nombre del asegurado incorrecto</asp:ListItem>
                             <asp:ListItem Value="Facturas de deducible con datos erróneos ">Facturas de deducible con datos erróneos </asp:ListItem>
                         </asp:DropDownList>
-                        <asp:DropDownList ID="ddlEstadoNoConforme" class="form-control" Style="width: 30%; height: 30px;" runat="server">
+                    </div>
+                    <div class="form-group col-lg-3 col-md-3 col-sm-12">
+                        <asp:DropDownList ID="ddlEstadoNoConforme" class="form-control" Style="width: 100%; height: 30px;" runat="server">
                             <asp:ListItem Value="Abierto">Abierto</asp:ListItem>
                             <asp:ListItem Value="Cerrado">Cerrado</asp:ListItem>
                         </asp:DropDownList>
                     </div>
-                    <br />
-                    <asp:TextBox ID="txtObservacionesNoConf" Style="width: 99%" autocomplete="off" class="form-control" TextMode="multiline" Columns="50" Rows="3" placeholder="Comentarios del producto no conforme" runat="server"></asp:TextBox>
-                    <br />
-                    <asp:Label runat="server" ID="lblProductoNoConforme"></asp:Label>
+                    <div class="form-group col-lg-12 col-md-12 col-sm-12">
+                        <asp:TextBox ID="txtObservacionesNoConf" Style="width: 100%" autocomplete="off" class="form-control" TextMode="multiline" Columns="50" Rows="3" placeholder="Comentarios del producto no conforme" runat="server"></asp:TextBox>
+                    </div>
+                    <div class="form-group col-lg-12 col-md-12 col-sm-12">
+                        <asp:Label runat="server" ID="lblProductoNoConforme"></asp:Label>
+                    </div>
+                    <div class="form-group col-lg-12 col-md-12 col-sm-12">
+                        <input type="checkbox" id="ChPNC" name="Memo">Generar Memo No Conforme
+                    </div>
+                    <div class="form-group col-lg-12 col-md-12 col-sm-12" id="ContenidoMemoPNC" style="display: none">
+                        <asp:TextBox runat="server" ID="txtParaPNC" class="form-control" type="text" placeholder="Para" Style="width: 100%"></asp:TextBox>
+                        <br />
+                        <asp:TextBox runat="server" ID="txtDireccionPNC" class="form-control" type="text" placeholder="Direccion" Style="width: 100%"></asp:TextBox>
+                        <br />
+                        <asp:TextBox runat="server" ID="txtContenidoPNC" Rows="4" cols="65" TextMode="multiline" placeholder="Contenido" Style="width: 100%" class="form-control"
+                            Text="Estimado: Por este medio procedemos a devolver ___, debido a ____. "></asp:TextBox>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-warning" data-dismiss="modal">Cerrar</button>
                     <asp:Button ID="btnProductoNoConforme" OnClick="btnProductoNoConforme_Click" CssClass="btn btn-primary" runat="server" Text="Guardar" />
+                    <button id="ImprimirPNC" type="button" class="btn btn-primary" style="display: none" data-dismiss="modal">Imprimir</button>
                 </div>
             </div>
         </div>
@@ -807,7 +823,7 @@
                                 </p>
                             </div>
                         </div>
-                        <p style="text-align: right; padding-top: 20px;">RE-DA-F-05/Ver.01</p>
+                        <p style="text-align: right; padding-top: 20px;"><asp:label runat="server" ID="CodigoISO"></asp:label></p>
                     </div>
                 </asp:Panel>
                 <asp:Panel runat="server" ID="Panelsecundario" Style="display: none">
@@ -1063,6 +1079,57 @@
             <br />
         </div>
     </div>
+    <div id="MemoPNC" style="display: none">
+        <br />
+        <div class="img-float-right" style="float: right; padding-top: 50px;">
+            <img src="../../imgUnity/Unity%20Promotores%20transparente.png" style="margin-top: -100px; width: 235px;">
+        </div>
+        <div class="img-float-left" style="float: left; padding-top: 5px;">
+            <p>Avenida Las Americas 22-23, Zona 14</p>
+            <p>PBX: 2326-3700, 2386-3700</p>
+            <p>www.unitypromotores.com</p>
+        </div>
+        <label style="font-size: 20px; padding-left: 100px;" runat="server"><b>Memo De Envio</b></label>
+        <br />
+        <div style="padding-top: 90px;">
+            <table style="width: 100%;">
+                <tr>
+                    <td>Dirigido a:</td>
+                    <td>
+                        <asp:Label runat="server" ID="ParaPNC"></asp:Label></td>
+                    <td>Asesor Reclamo:</td>
+                    <td>
+                        <asp:Label runat="server" ID="AsesorPNC"></asp:Label></td>
+                </tr>
+                <tr>
+                    <td>Direccion:</td>
+                    <td>
+                        <asp:Label runat="server" ID="DireccionPNC"></asp:Label></td>
+                    <td>ID:</td>
+                    <td>
+                        <asp:Label runat="server" ID="IdPNC"></asp:Label></td>
+                </tr>
+                <tr>
+                    <td>Aseguradora:</td>
+                    <td>
+                        <asp:Label runat="server" ID="AseguradoraPNC"></asp:Label></td>
+                    <td>Asegurado:</td>
+                    <td>
+                        <asp:Label runat="server" ID="AseguradoPNC"></asp:Label></td>
+                </tr>
+                <tr>
+                    <td>Poliza:</td>
+                    <td>
+                        <asp:Label runat="server" ID="PolizaPNC"></asp:Label></td>
+                </tr>
+            </table>
+        </div>
+        <p>___________________________________________________________________________________________________________</p>
+        <asp:Label runat="server" ID="ContenidoPNC" Style="padding-top: 20px;"></asp:Label>
+        <p style="padding-top: 60px;">Cordialmente,</p>
+        <p>Asesor de reclamos</p>
+        <asp:Label runat="server" ID="AsesorAsignadoPNC"></asp:Label>
+    </div>
     <%-- botones circulares con opciones en la parte inferior derecha de la pantalla--%>
     <div id="container-floating">
         <div class="nd4 nds" data-toggle="tooltip" data-placement="left" data-original-title="Simone">
@@ -1186,6 +1253,23 @@
             $("#ContentPlaceHolder1_btnGuardarDocumentos").css("display", "");
             $("#ImprimirSolicitud").css("display", "none");
             $("#gvDocSolicitados").css("display", "none");
+        });
+    </script>
+    <script>
+          $('#ChPNC').on('click', function (event) {
+             $('#ContentPlaceHolder1_btnProductoNoConforme').css("display", "none");
+             $('#ContenidoMemoPNC').css("display", "");
+             $('#ImprimirPNC').css("display", "");
+        });
+
+        $('#ImprimirPNC').on('click', function (event) {
+            var para =  $('#ContentPlaceHolder1_txtParaPNC').val();
+            $('#ContentPlaceHolder1_ParaPNC')[0].innerHTML = $('#ContentPlaceHolder1_txtParaPNC').val();
+            $('#ContentPlaceHolder1_DireccionPNC')[0].innerHTML = $('#ContentPlaceHolder1_txtDireccionPNC').val();
+
+            var contenido = $('#ContentPlaceHolder1_txtContenidoPNC').val();
+             $('#ContentPlaceHolder1_ContenidoPNC')[0].innerHTML = contenido.replace(/\n/g, '<br\>');
+            printDiv('MemoPNC');
         });
     </script>
 </asp:Content>

@@ -150,7 +150,7 @@ public class Constantes
            "el asesor de reclamos asignado es " + gestor.SelectedItem.Text + " \n" +
            "Para mas detalles puede consultar el reclamo con este id : " + id + " en el siguiente link \n\n" +
            "<a href= \"http://reclamosgt.unitypromotores.com/MdBitacora/DashboardUnity.aspx\">Consulta Reclamos</a>" +
-        "Cualquier duda y/ o comentario al respecto quedamos a sus ordenes.";
+        " Cualquier duda y/ o comentario al respecto quedamos a sus ordenes.";
     }
 
     //usuario logeado

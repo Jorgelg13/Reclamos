@@ -142,6 +142,8 @@
                                     <a tabindex="-1" href="#">Copagos</a>
                                     <ul class="dropdown-menu">
                                         <li class="dropdown-submenu"></li>
+                                        <li><a href="/pdf/Copagos/Novartis.xlsx">Novartis</a></li>
+                                        <li><a href="/pdf/Copagos/Global-Solutions.pdf">Global Solutions</a></li>
                                         <li><a href="/pdf/Copagos/AMICELCO.xlsx">Amicelco</a></li>
                                         <li><a href="/pdf/Copagos/ACEROS.xlsx">Aceros</a></li>
                                         <li><a href="/pdf/Copagos/GRUPO ENTERO.xlsx">Grupo Entero</a></li>

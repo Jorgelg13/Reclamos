@@ -203,10 +203,17 @@ public partial class Modulos_MdReclamos_wbFrmReclamosAsignadosUnity : System.Web
             }
             if (txtCorreo.Text != "")
             {
-                enviarNotificacion();
+                try
+                {
+                    enviarNotificacion();
+                }
+                catch(Exception)
+                {
+
+                }
             }
 
-            Notificacion();
+            NotificacionEjecutivo();
             Response.Redirect("/Modulos/MdReclamosUnity/wbFrmReclamosAutosSeguimiento.aspx?ID_reclamo=" + id, false);
         }
         catch (Exception ex)
@@ -293,7 +300,7 @@ public partial class Modulos_MdReclamos_wbFrmReclamosAsignadosUnity : System.Web
         }
     }
 
-    public void Notificacion()
+    public void NotificacionEjecutivo()
     {
         codigo = GridAsignacion.SelectedRow.Cells[24].Text;
         poliza = GridAsignacion.SelectedRow.Cells[4].Text.ToString();

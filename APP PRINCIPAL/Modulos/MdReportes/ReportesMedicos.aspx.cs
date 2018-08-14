@@ -1,5 +1,4 @@
 ﻿using System;
-using System.IO;
 using System.Web.UI;
 
 public partial class ReportesMedicos : System.Web.UI.Page
@@ -14,7 +13,7 @@ public partial class ReportesMedicos : System.Web.UI.Page
     }
     protected void btnRegresar_Click(object sender, EventArgs e)
     {
-        Response.Redirect("/Default.aspx");
+        Response.Redirect("/Default.aspx",false);
     }
     protected void linkDescargar_Click(object sender, EventArgs e)
     {
