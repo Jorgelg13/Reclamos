@@ -9,25 +9,12 @@
                 <div class="panel-heading">
                     <h3 class="panel-title"><b style="font-size: 16px;">Listado de reclamos no conformes <spam style="margin-left:100px">Total de registros: </spam><asp:Label ID="lblConteo" runat="server" Style="font-size: 20px;"></asp:Label></b></h3>
                 </div>
-                <div class="panel-body" style="height: 520px;">
-                    <div class="scrolling-table-container" style="overflow-y: auto;">
-                        <asp:GridView ID="GridNoConforme" runat="server" CssClass="table bs-table table-responsive table-hover" AutoGenerateColumns="True" CellPadding="4" ForeColor="#333333" GridLines="None" AllowCustomPaging="True" AllowPaging="True" PageSize="3000">
-                            <AlternatingRowStyle BackColor="White" />
-                            <Columns>
-                            </Columns>
-                            <FooterStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" />
-                            <HeaderStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" HorizontalAlign="Center" Wrap="False" />
-                            <PagerSettings PageButtonCount="30" />
-                            <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
-                            <RowStyle BackColor="#EFF3FB" HorizontalAlign="Left" Wrap="False" />
-                        </asp:GridView>
-                    </div>
-                    <br />
+                <div class="panel-body" style="height: 620px;">
                     <div class="form-inline">
                         <div class="form-group" style="width: 20%">
                             <label>Seleccionar Busqueda:</label>
                             <asp:DropDownList ID="ddlTipo" runat="server" Style="width: 100%" CssClass="form-control">
-                                <asp:ListItem Value="in ('A','D','I','C')">Todos</asp:ListItem>
+                                <asp:ListItem Value="in ('A','D','I','C')">General</asp:ListItem>
                                 <asp:ListItem Value=" = 'A'">Autos</asp:ListItem>
                                 <asp:ListItem Value=" = 'D'">Daños varios</asp:ListItem>
                                 <asp:ListItem Value=" = 'I'">Individuales</asp:ListItem>
@@ -54,6 +41,26 @@
                             <asp:Button CssClass="btn btn-primary" ID="btnMostrarEficiencia"  OnClientClick="return false;" data-toggle="modal" data-target="#ModalEficiencia" style="margin-left:20px; margin-top: 22px;" runat="server" Text="Eficiencia" />
                         </div>
                     </div>
+                    <br />
+                    <asp:Panel runat="server" ID="PanelPrincipal" Visible="false">
+                        <div style="text-align: center; font-size: 20px;">
+                            <b><asp:Label runat="server" ID="lblTitulo"></asp:Label></b>
+                            <br />
+                            <asp:Label runat="server" ID="lblPeriodo"></asp:Label>
+                            <br />
+                            <asp:Label runat="server" ID="lblFechaGeneracion"></asp:Label>
+                            <asp:Label runat="server" ID="lblUsuario" style="padding-right:15px;"></asp:Label>
+                        </div>
+                        <br />
+                        <div class="scrolling-table-container">
+                            <asp:GridView ID="GridNoConforme" runat="server" CssClass="table bs-table table-responsive" AutoGenerateColumns="True" ForeColor="#333333" GridLines="None" AllowCustomPaging="True" PageSize="3000">
+                                <AlternatingRowStyle BackColor="White" />
+                                <HeaderStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" HorizontalAlign="Center" Wrap="False" />
+                                <PagerSettings PageButtonCount="30" />
+                                <RowStyle BackColor="#EFF3FB" HorizontalAlign="Left" Wrap="False" />
+                            </asp:GridView>
+                        </div>
+                    </asp:Panel>
                 </div>
             </div>
         </div>

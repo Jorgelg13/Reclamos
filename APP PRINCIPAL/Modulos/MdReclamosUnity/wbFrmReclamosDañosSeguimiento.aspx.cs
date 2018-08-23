@@ -197,7 +197,8 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosDañosSeguimiento : Sy
         }
         catch (Exception ex)
         {
-            Utils.ShowMessage(this.Page, "El id seleccionado no tiene ningun seguimiento " + ex.Message, "Error.. !", "error");
+            //Response.Write(ex);
+            Utils.ShowMessage(this.Page, "A ocurrido un error con este reclamo " + ex.Message, "Error.. !", "error");
         }
     }
 

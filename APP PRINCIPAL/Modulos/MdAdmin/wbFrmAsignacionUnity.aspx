@@ -22,6 +22,15 @@
                     </div>
                     <br />
                     <asp:Panel runat="server" ID="PnPrincipal">
+                         <div style="text-align: center; font-size: 20px; display:none;">
+                                <b>
+                                    <asp:Label runat="server" ID="lblTitulo"></asp:Label></b>
+                                <br />
+                                <asp:Label runat="server" ID="lblPeriodo"></asp:Label>
+                                <br />
+                                <asp:Label runat="server" ID="lblFechaGeneracion"></asp:Label>
+                                <asp:Label runat="server" ID="lblUsuario" Style="padding-right: 15px;"></asp:Label>
+                            </div>
                         <div class="scrolling-table-container col-sm-12 col-md-9 col-lg-9">
                             <asp:GridView ID="GridAsignacionAutos" CssClass="table table-responsive" runat="server" AutoGenerateColumns="true" GridLines="None">
                                 <AlternatingRowStyle BackColor="White" />

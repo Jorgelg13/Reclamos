@@ -68,12 +68,18 @@
                     <b>Tabla con campos seleccionados<label style="margin-left: 50px">Total de registros: </label>
                         <asp:Label ID="lblConteo" runat="server" Style="font-size: 20px;"></asp:Label></b>
                     <asp:CheckBox ID="checkSinFiltro" Style="margin-left: 50px" AutoPostBack="true" runat="server" Text="Sin Ningun Filtro" OnCheckedChanged="checkSinFiltro_CheckedChanged" />
-                    <asp:DropDownList ID="ddlCiclos" runat="server" Style="width: 25%; height: 24px;">
+                    <asp:DropDownList ID="ddlCiclos" runat="server" Style="width: 15%; height: 24px;">
                         <asp:ListItem Value="Ciclo Aseguradora">Ciclo Aseguradora</asp:ListItem>
                         <asp:ListItem Value="Ciclo Cliente">Ciclo Total</asp:ListItem>
                         <asp:ListItem Value="Ciclo Ejecutivo">Ciclo Unity</asp:ListItem>
                         <asp:ListItem Value="Ciclo Ejecutivo por etapa">Ciclo Ejecutivo por etapas</asp:ListItem>
                         <asp:ListItem Value="Eficiencia">Eficiencia</asp:ListItem>
+                    </asp:DropDownList>
+                    <label>Moneda</label>
+                    <asp:DropDownList ID="ddlMoneda" runat="server" Style="width: 10%; height: 24px;">
+                        <asp:ListItem Value="reg_reclamos_medicos.moneda in ('Dolares','Quetzales') or reg_reclamos_medicos.moneda is null ">Ambas</asp:ListItem>
+                        <asp:ListItem Value="reg_reclamos_medicos.moneda = 'Dolares'">Dolares</asp:ListItem>
+                        <asp:ListItem Value="reg_reclamos_medicos.moneda = 'Quetzales'">Quetzales</asp:ListItem>
                     </asp:DropDownList>
                     <asp:Button ID="Mostrar" OnClick="Mostrar_Click" Style="margin-left: 20px" runat="server" Text="Mostrar" />
                 </div>

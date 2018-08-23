@@ -180,7 +180,7 @@
             });
 
             $(function () {
-                $(':button,:submit').click(function () {
+                $(':button,:submit,:a').click(function () {
                     
                         $attrLogin = $('.loading-screen').attr('style');
                         if ($attrLogin == "") {

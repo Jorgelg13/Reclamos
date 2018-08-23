@@ -59,8 +59,9 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosAutosSeguimiento : Sys
 
         if (!IsPostBack)
         {
-            DatosReclamo(id);
+            llenar_dropdowns();
             datosContacto(id);
+            DatosReclamo(id);
             SeleccionarCoberturas(id);
             BitacoraReclamo();
             //funciones para llenar los gridview utilizados
@@ -79,6 +80,14 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosAutosSeguimiento : Sys
         {
             btnGuardarProximaFecha.Enabled = true;
         }
+    }
+
+    public void llenar_dropdowns()
+    {
+        ddlTipoCierre.DataSource = DBReclamos.motivos_cierre.ToList();
+        ddlTipoCierre.DataTextField = "nombre";
+        ddlTipoCierre.DataValueField = "id";
+        ddlTipoCierre.DataBind();
     }
 
     //consulta que obtiene la maoyoria de datos de un reclamo
@@ -121,7 +130,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosAutosSeguimiento : Sys
             ddlGestor.SelectedValue     = reclamo.id_gestor.ToString();
             ddlTaller.SelectedValue     = reclamo.id_taller.ToString();
             ddlAnalista.SelectedValue   = reclamo.id_analista.ToString();
-            ddlNoConforme.SelectedValue = reclamo.detalle_no_conforme;
+            ddlTipoCierre.SelectedValue = String.IsNullOrEmpty(reclamo.id_motivo_cierre.ToString()) ? "1": reclamo.id_motivo_cierre.ToString();
             ddlNoConforme.SelectedValue = String.IsNullOrEmpty(reclamo.detalle_no_conforme) ? "" : reclamo.detalle_no_conforme;
             //campos varios
             txtFrom.Text            = reclamo.gestores.correo;
@@ -326,8 +335,19 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosAutosSeguimiento : Sys
             reclamo.observaciones     = txtObservaciones.Text;
             reclamo.cierre_interno    = cierre_interno;
             DBReclamos.SaveChanges();
-            DatosReclamo(id);
             llenado.llenarGrid(estados_autos,GridEstadosAuto);
+
+            if (checkCierreInterno.Checked)
+            {
+                CierreInterno();
+            }
+
+            if (checkCerrarReclamo.Checked)
+            {
+                cerrarReclamo();
+                Response.Redirect("/Modulos/MdReclamosUnity/wbFrmReclamosEnSeguimiento.aspx", false);
+            }
+            DatosReclamo(id);
             Utils.ShowMessage(this.Page, "Datos actualizados", "Excelente...!", "success");
         }
         catch (Exception ex)
@@ -336,24 +356,17 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosAutosSeguimiento : Sys
             Email.ENVIAR_ERROR("Error de reclamo en seguimiento de autos","Error ocasionado al usuario: " + userlogin + " en el registro con el id: " + id + "\n\n" + ex);
         }
 
-        if(checkCierreInterno.Checked)
-        {
-            CierreInterno();
-        }
+        
 
-        if(checkCerrarReclamo.Checked)
-        {
-            cerrarReclamo();
-            Response.Redirect("/Modulos/MdReclamosUnity/wbFrmReclamosEnSeguimiento.aspx", false);
-        }
     }
 
-    private void cerrarReclamo()
+    protected void cerrarReclamo()
     {
         try
         {
             var cerrar = DBReclamos.reclamo_auto.Find(id);
             cerrar.acs = false;
+            cerrar.id_motivo_cierre = Convert.ToInt32(ddlTipoCierre.SelectedValue);
             cerrar.fecha_cierre_reclamo = DateTime.Now;
             DBReclamos.SaveChanges();
         }
@@ -438,6 +451,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosAutosSeguimiento : Sys
         if (checkCerrarReclamo.Checked)
         {
             ddlEstadoAuto.SelectedValue = "Cerrado";
+            ddlTipoCierre.Enabled = true;
         }
 
         else

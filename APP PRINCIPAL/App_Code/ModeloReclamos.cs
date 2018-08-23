@@ -612,6 +612,19 @@ public partial class gestores
     public virtual ICollection<reclamos_varios> reclamos_varios { get; set; }
 }
 
+public partial class motivos_cierre
+{
+    public motivos_cierre()
+    {
+        this.reclamo_auto = new HashSet<reclamo_auto>();
+    }
+
+    public int id { get; set; }
+    public string nombre { get; set; }
+
+    public virtual ICollection<reclamo_auto> reclamo_auto { get; set; }
+}
+
 public partial class pais
 {
     public pais()
@@ -687,6 +700,7 @@ public partial class reclamo_auto
     public Nullable<short> id_gestor { get; set; }
     public Nullable<int> id_analista { get; set; }
     public Nullable<int> id_taller { get; set; }
+    public Nullable<int> id_motivo_cierre { get; set; }
     public string observaciones { get; set; }
     public string estado_auto_unity { get; set; }
     public Nullable<bool> complicado { get; set; }
@@ -714,13 +728,13 @@ public partial class reclamo_auto
     public Nullable<bool> problema_taller { get; set; }
     public Nullable<bool> problema_cabina { get; set; }
     public Nullable<bool> problema_ajustador { get; set; }
+    public Nullable<bool> problema_ejecutivo { get; set; }
+    public Nullable<bool> problema_aseguradora { get; set; }
     public string comentario_taller { get; set; }
     public string comentario_ajustador { get; set; }
     public string comentario_cabina { get; set; }
-    public Nullable<bool> problema_aseguradora { get; set; }
-    public Nullable<bool> problema_ejecutivo { get; set; }
-    public string comentario_aseguradora { get; set; }
     public string comentario_ejecutivo { get; set; }
+    public string comentario_aseguradora { get; set; }
     public Nullable<System.DateTime> fecha_problema { get; set; }
 
     public virtual analistas analistas { get; set; }
@@ -735,6 +749,7 @@ public partial class reclamo_auto
     public virtual ICollection<detalle_pagos_reclamos_autos> detalle_pagos_reclamos_autos { get; set; }
     public virtual estado estado { get; set; }
     public virtual gestores gestores { get; set; }
+    public virtual motivos_cierre motivos_cierre { get; set; }
     public virtual usuario usuario { get; set; }
     public virtual talleres talleres { get; set; }
 }
@@ -872,16 +887,16 @@ public partial class reclamos_varios
     public Nullable<bool> b_carta_envio_cheque { get; set; }
     public Nullable<decimal> reserva { get; set; }
     public string documentos { get; set; }
+    public Nullable<bool> problema_ajustador { get; set; }
     public Nullable<bool> problema_taller { get; set; }
     public Nullable<bool> problema_cabina { get; set; }
-    public Nullable<bool> problema_ajustador { get; set; }
-    public Nullable<bool> problema_aseguradora { get; set; }
     public Nullable<bool> problema_ejecutivo { get; set; }
+    public Nullable<bool> problema_aseguradora { get; set; }
+    public string comentario_ajustador { get; set; }
     public string comentario_taller { get; set; }
     public string comentario_cabina { get; set; }
-    public string comentario_ajustador { get; set; }
-    public string comentario_aseguradora { get; set; }
     public string comentario_ejecutivo { get; set; }
+    public string comentario_aseguradora { get; set; }
     public Nullable<System.DateTime> fecha_problema { get; set; }
 
     public virtual analistas analistas { get; set; }
@@ -1200,6 +1215,26 @@ public partial class pa_cargar_danios_varios_Result
     public string ErrorMessage { get; set; }
 }
 
+public partial class pa_eficiencia_colectivos_Result
+{
+    public string Nombre { get; set; }
+    public Nullable<int> Pendientes { get; set; }
+    public Nullable<int> Nuevos { get; set; }
+    public Nullable<int> Cerrados { get; set; }
+    public Nullable<int> Fuera_de_tiempo { get; set; }
+    public Nullable<int> Ejecucion { get; set; }
+}
+
+public partial class pa_eficiencia_individuales_Result
+{
+    public string Nombre { get; set; }
+    public Nullable<int> Pendientes { get; set; }
+    public Nullable<int> Nuevos { get; set; }
+    public Nullable<int> Cerrados { get; set; }
+    public Nullable<int> Fuera_de_tiempo { get; set; }
+    public Nullable<int> Ejecucion { get; set; }
+}
+
 public partial class pa_reclamos_autos_Result
 {
     public Nullable<int> secuencia { get; set; }
@@ -1237,6 +1272,45 @@ public partial class pa_reclamos_varios_Result
     public string ubicacion { get; set; }
     public string version { get; set; }
     public string nombre { get; set; }
+}
+
+public partial class pa_reporte_problemas_autos_Result
+{
+    public long id { get; set; }
+    public string Poliza { get; set; }
+    public Nullable<System.DateTime> Fecha_Registro { get; set; }
+    public string Asegurado { get; set; }
+    public string Numero_Reclamo { get; set; }
+    public string Vehiculo { get; set; }
+    public string Taller { get; set; }
+    public string Comentario_Taller { get; set; }
+    public string Ajustador { get; set; }
+    public string Comentario_Ajustador { get; set; }
+    public string Cabina { get; set; }
+    public string Comentario_Cabina { get; set; }
+    public string Aseguradora { get; set; }
+    public string Comentario_Aseguradora { get; set; }
+    public string Ejecutivo { get; set; }
+    public string Comentario_Ejecutivo { get; set; }
+}
+
+public partial class pa_reporte_problemas_danios_Result
+{
+    public int id { get; set; }
+    public string Poliza { get; set; }
+    public Nullable<System.DateTime> Fecha_Registro { get; set; }
+    public string Asegurado { get; set; }
+    public string Numero_Reclamo { get; set; }
+    public string Taller { get; set; }
+    public string Comentario_Taller { get; set; }
+    public string Ajustador { get; set; }
+    public string Comentario_Ajustador { get; set; }
+    public string Cabina { get; set; }
+    public string Comentario_Cabina { get; set; }
+    public string Aseguradora { get; set; }
+    public string Comentario_Aseguradora { get; set; }
+    public string Ejecutivo { get; set; }
+    public string Comentario_Ejecutivo { get; set; }
 }
 
 public partial class pa_reportesAutorizaciones_Result

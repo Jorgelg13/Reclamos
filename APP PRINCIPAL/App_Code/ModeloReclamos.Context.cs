@@ -66,6 +66,7 @@ public partial class ReclamosEntities : DbContext
     public DbSet<estados_reclamos_unity> estados_reclamos_unity { get; set; }
     public DbSet<formulario_colectivo> formulario_colectivo { get; set; }
     public DbSet<gestores> gestores { get; set; }
+    public DbSet<motivos_cierre> motivos_cierre { get; set; }
     public DbSet<pais> pais { get; set; }
     public DbSet<ramos> ramos { get; set; }
     public DbSet<recibos_medicos> recibos_medicos { get; set; }
@@ -375,5 +376,91 @@ public partial class ReclamosEntities : DbContext
     public virtual ObjectResult<Nullable<long>> pa_sec_estados_autos()
     {
         return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<long>>("pa_sec_estados_autos");
+    }
+
+    public virtual int pa_ciclos_reclamos_autos(Nullable<System.DateTime> fechaInicio, Nullable<System.DateTime> fechaFin, Nullable<int> tipo)
+    {
+        var fechaInicioParameter = fechaInicio.HasValue ?
+            new ObjectParameter("fechaInicio", fechaInicio) :
+            new ObjectParameter("fechaInicio", typeof(System.DateTime));
+
+        var fechaFinParameter = fechaFin.HasValue ?
+            new ObjectParameter("fechaFin", fechaFin) :
+            new ObjectParameter("fechaFin", typeof(System.DateTime));
+
+        var tipoParameter = tipo.HasValue ?
+            new ObjectParameter("tipo", tipo) :
+            new ObjectParameter("tipo", typeof(int));
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pa_ciclos_reclamos_autos", fechaInicioParameter, fechaFinParameter, tipoParameter);
+    }
+
+    public virtual int pa_ciclos_reclamos_danios(Nullable<System.DateTime> fechaInicio, Nullable<System.DateTime> fechaFin, Nullable<int> tipo)
+    {
+        var fechaInicioParameter = fechaInicio.HasValue ?
+            new ObjectParameter("fechaInicio", fechaInicio) :
+            new ObjectParameter("fechaInicio", typeof(System.DateTime));
+
+        var fechaFinParameter = fechaFin.HasValue ?
+            new ObjectParameter("fechaFin", fechaFin) :
+            new ObjectParameter("fechaFin", typeof(System.DateTime));
+
+        var tipoParameter = tipo.HasValue ?
+            new ObjectParameter("tipo", tipo) :
+            new ObjectParameter("tipo", typeof(int));
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pa_ciclos_reclamos_danios", fechaInicioParameter, fechaFinParameter, tipoParameter);
+    }
+
+    public virtual ObjectResult<pa_reporte_problemas_autos_Result> pa_reporte_problemas_autos(Nullable<System.DateTime> fechaInicio, Nullable<System.DateTime> fechaFin)
+    {
+        var fechaInicioParameter = fechaInicio.HasValue ?
+            new ObjectParameter("fechaInicio", fechaInicio) :
+            new ObjectParameter("fechaInicio", typeof(System.DateTime));
+
+        var fechaFinParameter = fechaFin.HasValue ?
+            new ObjectParameter("fechaFin", fechaFin) :
+            new ObjectParameter("fechaFin", typeof(System.DateTime));
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<pa_reporte_problemas_autos_Result>("pa_reporte_problemas_autos", fechaInicioParameter, fechaFinParameter);
+    }
+
+    public virtual ObjectResult<pa_reporte_problemas_danios_Result> pa_reporte_problemas_danios(Nullable<System.DateTime> fechaInicio, Nullable<System.DateTime> fechaFin)
+    {
+        var fechaInicioParameter = fechaInicio.HasValue ?
+            new ObjectParameter("fechaInicio", fechaInicio) :
+            new ObjectParameter("fechaInicio", typeof(System.DateTime));
+
+        var fechaFinParameter = fechaFin.HasValue ?
+            new ObjectParameter("fechaFin", fechaFin) :
+            new ObjectParameter("fechaFin", typeof(System.DateTime));
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<pa_reporte_problemas_danios_Result>("pa_reporte_problemas_danios", fechaInicioParameter, fechaFinParameter);
+    }
+
+    public virtual ObjectResult<pa_eficiencia_colectivos_Result> pa_eficiencia_colectivos(Nullable<System.DateTime> fechaInicio, Nullable<System.DateTime> fechaFin)
+    {
+        var fechaInicioParameter = fechaInicio.HasValue ?
+            new ObjectParameter("fechaInicio", fechaInicio) :
+            new ObjectParameter("fechaInicio", typeof(System.DateTime));
+
+        var fechaFinParameter = fechaFin.HasValue ?
+            new ObjectParameter("fechaFin", fechaFin) :
+            new ObjectParameter("fechaFin", typeof(System.DateTime));
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<pa_eficiencia_colectivos_Result>("pa_eficiencia_colectivos", fechaInicioParameter, fechaFinParameter);
+    }
+
+    public virtual ObjectResult<pa_eficiencia_individuales_Result> pa_eficiencia_individuales(Nullable<System.DateTime> fechaInicio, Nullable<System.DateTime> fechaFin)
+    {
+        var fechaInicioParameter = fechaInicio.HasValue ?
+            new ObjectParameter("fechaInicio", fechaInicio) :
+            new ObjectParameter("fechaInicio", typeof(System.DateTime));
+
+        var fechaFinParameter = fechaFin.HasValue ?
+            new ObjectParameter("fechaFin", fechaFin) :
+            new ObjectParameter("fechaFin", typeof(System.DateTime));
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<pa_eficiencia_individuales_Result>("pa_eficiencia_individuales", fechaInicioParameter, fechaFinParameter);
     }
 }

@@ -88,7 +88,7 @@
                         </div>
                         <div class="panel-body">
                             <div style="overflow-y: auto; overflow-x: auto;">
-                                <asp:GridView ID="GridCoberturasAfectadas" CssClass="table bs-table tablaDetalleAuto table-responsive" runat="server" AutoGenerateColumns="true" CellPadding="4" ForeColor="#333333" GridLines="None">
+                                <asp:GridView ID="GridCoberturasAfectadas" CssClass="table bs-table tablaDetalleAuto table-responsive" runat="server" AutoGenerateColumns="true" ForeColor="#333333" GridLines="None">
                                     <AlternatingRowStyle BackColor="White" />
                                     <HeaderStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" HorizontalAlign="Center" />
                                     <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
@@ -105,7 +105,7 @@
                         <br />
                         <div class="scrolling-table-container col-sm-12 col-md-6 col-lg-6">
                             <b><span style="font-size: 20px">LLamadas Realizadas en cabina:</span></b>
-                            <asp:GridView ID="Gridllamadas" CssClass="table bs-table tablaDetalleAuto table-responsive table-hover" runat="server" AutoGenerateColumns="true" CellPadding="4" ForeColor="#333333" GridLines="None">
+                            <asp:GridView ID="Gridllamadas" CssClass="table bs-table tablaDetalleAuto table-responsive" runat="server" AutoGenerateColumns="true" ForeColor="#333333" GridLines="None">
                                 <AlternatingRowStyle BackColor="White" />
                                 <HeaderStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" HorizontalAlign="Center" Wrap="False" />
                                 <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
@@ -114,7 +114,7 @@
                         </div>
                         <div class="scrolling-table-container col-sm-12 col-md-6 col-lg-6">
                             <b><span style="font-size: 20px">Datos del incidente:</span></b>
-                            <asp:GridView ID="GridDatosAccidente" CssClass="table bs-table tablaDetalleAuto table-responsive table-hover" runat="server" AutoGenerateColumns="true" CellPadding="4" ForeColor="#333333" GridLines="None">
+                            <asp:GridView ID="GridDatosAccidente" CssClass="table bs-table tablaDetalleAuto table-responsive" runat="server" AutoGenerateColumns="true" ForeColor="#333333" GridLines="None">
                                 <AlternatingRowStyle BackColor="White" />
                                 <HeaderStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" HorizontalAlign="Center" Wrap="False" />
                                 <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />

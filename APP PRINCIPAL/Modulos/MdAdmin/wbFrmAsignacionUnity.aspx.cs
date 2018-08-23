@@ -122,6 +122,7 @@ public partial class Modulos_MdAdmin_wbFrmAsignacionUnity : System.Web.UI.Page
 
     protected void linkDescargar_Click(object sender, EventArgs e)
     {
+        Utils.TituloReporte(PnPrincipal, lblPeriodo, lblFechaGeneracion, lblUsuario, lblTitulo, "Reporte de Asignaciones / Depto. Reclamos Autos", userlogin, fechaInicio, fechaFinal, "");
         Utils.ExportarExcel(PnPrincipal,Response, "Asignaciones autos del " + fechaInicio.Text + " al " + fechaFinal.Text);
     }
 }

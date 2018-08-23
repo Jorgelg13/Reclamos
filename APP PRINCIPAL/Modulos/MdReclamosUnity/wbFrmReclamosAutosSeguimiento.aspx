@@ -114,9 +114,8 @@
                     </div>
                     <div class="panel-body">
                         <div style="overflow-y: auto; overflow-x: auto;">
-                            <asp:GridView ID="GridCoberturasAfectadas" CssClass="table bs-table tablaDetalleAuto table-responsive table-hover" runat="server" AutoGenerateColumns="true" CellPadding="4" ForeColor="#333333" GridLines="None">
+                            <asp:GridView ID="GridCoberturasAfectadas" CssClass="table bs-table tablaDetalleAuto table-responsive" runat="server" AutoGenerateColumns="true" ForeColor="#333333" GridLines="None">
                                 <AlternatingRowStyle BackColor="White" />
-                                <FooterStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" />
                                 <HeaderStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" HorizontalAlign="Center" />
                                 <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
                                 <RowStyle BackColor="#EFF3FB" />
@@ -132,7 +131,7 @@
                     <br />
                     <div class="scrolling-table-container col-sm-12 col-md-6 col-lg-6">
                         <b><span style="font-size: 20px">LLamadas Realizadas en cabina</span></b>
-                        <asp:GridView ID="Gridllamadas" CssClass="table bs-table tablaDetalleAuto table-responsive table-hover" runat="server" AutoGenerateColumns="true" CellPadding="4" ForeColor="#333333" GridLines="None">
+                        <asp:GridView ID="Gridllamadas" CssClass="table bs-table tablaDetalleAuto table-responsive" runat="server" AutoGenerateColumns="true" ForeColor="#333333" GridLines="None">
                             <AlternatingRowStyle BackColor="White" />
                             <FooterStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" />
                             <HeaderStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" HorizontalAlign="Center" />
@@ -142,7 +141,7 @@
                     </div>
                     <div class="scrolling-table-container col-sm-12 col-md-6 col-lg-6">
                         <b><span style="font-size: 20px">Datos Acerca Del Siniestro</span></b>
-                        <asp:GridView ID="GridDatosAccidente" CssClass="table bs-table tablaDetalleAuto table-responsive table-hover" runat="server" AutoGenerateColumns="true" CellPadding="4" ForeColor="#333333" GridLines="None">
+                        <asp:GridView ID="GridDatosAccidente" CssClass="table bs-table tablaDetalleAuto table-responsive" runat="server" AutoGenerateColumns="true" ForeColor="#333333" GridLines="None">
                             <AlternatingRowStyle BackColor="White" />
                             <FooterStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" />
                             <HeaderStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" HorizontalAlign="Center" Wrap="False" />
@@ -155,11 +154,11 @@
             <%---------------------- tab que contiene el seguimiento del reclamo -----------------%>
             <div role="tabpanel" class="tab-pane" id="coberturas">
                 <div class="panel-body form-inline col-lg-6 col-md-6" style="margin-left: 0px; padding-left: 0px; margin-top: 0px; padding-top: 0px;">
-                    <div style="height: 275px;" class="panel panel-info col-sm-5 col-md-12 col-lg-4">
+                    <div style="height: 275px;" class="panel panel-info col-sm-5 col-md-12 col-lg-5">
                         <div class="panel-heading">
                             <b>Selecciones</b>
                         </div>
-                        <div class="panel-body">
+                        <div class="panel-body" style="height: 200px; overflow-y:auto; overflow-x:auto">
                             <asp:CheckBox ID="checkPrioritario" runat="server" Text="Prioritario" />
                             <br />
                             <asp:CheckBox ID="CheckComplicado" runat="server" Text="Complicado" />
@@ -175,9 +174,12 @@
                             <asp:CheckBox ID="checkCierreInterno" runat="server" Text="Cierre Interno" AutoPostBack="true" OnCheckedChanged="checkCierreInterno_CheckedChanged" />
                             <br />
                             <asp:CheckBox ID="checkCerrarReclamo" runat="server" Text="Cerrar Reclamo" AutoPostBack="True" OnCheckedChanged="checkCerrarReclamo_CheckedChanged" />
+                            <br />
+                            <asp:DropDownList CssClass="form-control" ID="ddlTipoCierre" Enabled="false" Style="width: 95%" Height="34px" runat="server">
+                            </asp:DropDownList>
                         </div>
                     </div>
-                    <div style="height: 275px; overflow-y: auto;" class="panel panel-info col-sm-7 col-md-12 col-lg-8">
+                    <div style="height: 275px; overflow-y: auto;" class="panel panel-info col-sm-7 col-md-12 col-lg-7">
                         <div class="panel-heading">
                             <b>Opciones Multiples</b>
                         </div>
@@ -289,8 +291,8 @@
                         <asp:CheckBox ID="checkHabilitar" AutoPostBack="true" runat="server" OnCheckedChanged="checkHabilitar_CheckedChanged" />
                     </div>
                     <div class="panel-body" style="padding: 0px;">
-                        <div style="height: 300px; overflow-x: auto;" class="scrolling-table-container">
-                            <asp:GridView ID="GridComentarios" CssClass="table bs-table tablaDetalleAuto table-responsive table-hover" runat="server" AutoGenerateColumns="true" CellPadding="3" BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" OnRowDataBound="GridComentarios_RowDataBound">
+                        <div style="height: 300px;" class="scrolling-table-container">
+                            <asp:GridView ID="GridComentarios" CssClass="table bs-table tablaDetalleAuto table-responsive table-hover" runat="server" AutoGenerateColumns="true" BackColor="White" OnRowDataBound="GridComentarios_RowDataBound">
                                 <AlternatingRowStyle BackColor="White" />
                                 <HeaderStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" HorizontalAlign="Center" Wrap="False" />
                                 <PagerStyle BackColor="White" ForeColor="#000066" HorizontalAlign="Left" />
@@ -1219,6 +1221,8 @@
                 $("#MemoPara").css("display", "");
                 $("#contacto").css("display", "");
                 $("#analista").css("display", "none");
+                $('#ContentPlaceHolder1_TituloMemo').text("Solicitud de Documentos");
+
                 EstadoPoliza
             }
 
@@ -1226,6 +1230,7 @@
                 $("#MemoPara").css("display", "");
                 $("#contacto").css("display", "none");
                 $("#analista").css("display", "");
+                 $('#ContentPlaceHolder1_TituloMemo').text("Envio de Documentos");
             }
 
             var contenido = $('#ContentPlaceHolder1_txtSolicitudDocumentos').val();
@@ -1234,7 +1239,6 @@
             $('#ContenidoImpresion').html(final);
 
             $("#EstadoPoliza").css("display", "none");
-            $('#ContentPlaceHolder1_TituloMemo').text("Solicitud de Documentos");
             $('#bitacora').html($('#gvDocSolicitados').html());
             printDiv('imprimirBitacora');
         });

@@ -566,4 +566,21 @@ public class Utils
             return "no existe";
         }
     }
+
+    public static void TituloReporte(Panel PanelPrincipal, Label lblPeriodo, Label lblFechaGeneracion, Label lblUsuario, Label lblTitulo,
+                              String Titulo, String Usuario, TextBox txtFechaInicio, TextBox txtFechaFin,  String KPI)
+    {
+        try
+        {
+            PanelPrincipal.Visible = true;
+            lblPeriodo.Text = "Periodo del " + Convert.ToDateTime(txtFechaInicio.Text).ToString("dd/MM/yyyy") + " al " + Convert.ToDateTime(txtFechaFin.Text).ToString("dd/MM/yyyy");
+            lblFechaGeneracion.Text = "Generado: " + DateTime.Now.ToString();
+            lblUsuario.Text = "Usuario: " + Usuario;
+            lblTitulo.Text = Titulo;
+        }
+        catch (Exception)
+        {
+
+        }
+    }
 }

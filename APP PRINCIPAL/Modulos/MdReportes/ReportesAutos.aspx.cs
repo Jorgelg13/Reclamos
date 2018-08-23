@@ -13,7 +13,7 @@ public partial class ReportesAutos : System.Web.UI.Page
     }
     protected void btnRegresar_Click(object sender, EventArgs e)
     {
-        Response.Redirect("/Default.aspx");
+        Response.Redirect("/Default.aspx",false);
     }
     protected void linkDescargar_Click(object sender, EventArgs e)
     {

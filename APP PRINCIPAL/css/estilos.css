@@ -17,7 +17,7 @@
 }
 
 .scrolling-table-container {
-    height: 400px;
+    height: 430px;
     overflow-y: auto;
     overflow-x: auto;
     max-height: 378px;

@@ -509,12 +509,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosMedicosSeguimientos : 
        habilitarTextPago();
        btnActualizarPago.Enabled = true;
        btnGuardarPago.Enabled = false;
-       lblTotalCoaseguro.Visible = true;
-       lblTotalTimbres.Visible = true;
-       txtTotalCoaseguro.Visible = true;
-       txtTotalTimbres.Visible = true;
-       lblTotalLiquidacion.Visible = true;
-       txtTotal.Visible = true;
+       PanelDetalle.Visible = true;
        simboloMoneda();
 
        identificadorPago = Convert.ToInt32(GridPagos.SelectedRow.Cells[1].Text);

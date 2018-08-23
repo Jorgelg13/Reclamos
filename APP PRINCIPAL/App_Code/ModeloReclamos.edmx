@@ -541,6 +541,13 @@
           <Property Name="usuario" Type="varchar" MaxLength="20" />
           <Property Name="tipo" Type="varchar" MaxLength="20" />
         </EntityType>
+        <EntityType Name="motivos_cierre">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="50" />
+        </EntityType>
         <EntityType Name="pais">
           <Key>
             <PropertyRef Name="id" />
@@ -601,6 +608,7 @@
           <Property Name="id_gestor" Type="smallint" />
           <Property Name="id_analista" Type="int" />
           <Property Name="id_taller" Type="int" />
+          <Property Name="id_motivo_cierre" Type="int" />
           <Property Name="observaciones" Type="text" />
           <Property Name="estado_auto_unity" Type="varchar" MaxLength="75" />
           <Property Name="complicado" Type="bit" />
@@ -628,13 +636,13 @@
           <Property Name="problema_taller" Type="bit" />
           <Property Name="problema_cabina" Type="bit" />
           <Property Name="problema_ajustador" Type="bit" />
-          <Property Name="problema_aseguradora" Type="bit" />
           <Property Name="problema_ejecutivo" Type="bit" />
+          <Property Name="problema_aseguradora" Type="bit" />
           <Property Name="comentario_taller" Type="text" />
           <Property Name="comentario_ajustador" Type="text" />
           <Property Name="comentario_cabina" Type="text" />
-          <Property Name="comentario_aseguradora" Type="text" />
           <Property Name="comentario_ejecutivo" Type="text" />
+          <Property Name="comentario_aseguradora" Type="text" />
           <Property Name="fecha_problema" Type="datetime" />
         </EntityType>
         <EntityType Name="reclamos_medicos">
@@ -745,16 +753,16 @@
           <Property Name="b_carta_envio_cheque" Type="bit" />
           <Property Name="reserva" Type="decimal" Precision="10" Scale="2" />
           <Property Name="documentos" Type="varchar" MaxLength="150" />
+          <Property Name="problema_ajustador" Type="bit" />
           <Property Name="problema_taller" Type="bit" />
           <Property Name="problema_cabina" Type="bit" />
-          <Property Name="problema_ajustador" Type="bit" />
-          <Property Name="problema_aseguradora" Type="bit" />
           <Property Name="problema_ejecutivo" Type="bit" />
+          <Property Name="problema_aseguradora" Type="bit" />
+          <Property Name="comentario_ajustador" Type="text" />
           <Property Name="comentario_taller" Type="text" />
           <Property Name="comentario_cabina" Type="text" />
-          <Property Name="comentario_ajustador" Type="text" />
-          <Property Name="comentario_aseguradora" Type="text" />
           <Property Name="comentario_ejecutivo" Type="text" />
+          <Property Name="comentario_aseguradora" Type="text" />
           <Property Name="fecha_problema" Type="datetime" />
         </EntityType>
         <EntityType Name="reg_reclamo_varios">
@@ -1486,6 +1494,18 @@ advertencia 6002: La tabla o vista 'reclamos.dbo.v_producto_no_conforme' no tien
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_reclamo_auto_motivos_cierre">
+          <End Role="motivos_cierre" Type="Self.motivos_cierre" Multiplicity="0..1" />
+          <End Role="reclamo_auto" Type="Self.reclamo_auto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="motivos_cierre">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="reclamo_auto">
+              <PropertyRef Name="id_motivo_cierre" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_reclamo_auto_talleres">
           <End Role="talleres" Type="Self.talleres" Multiplicity="0..1" />
           <End Role="reclamo_auto" Type="Self.reclamo_auto" Multiplicity="*" />
@@ -1538,6 +1558,24 @@ advertencia 6002: La tabla o vista 'reclamos.dbo.v_producto_no_conforme' no tien
         <Function Name="pa_cargar_asegurados" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="pa_cargar_autos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="pa_cargar_danios_varios" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="pa_ciclos_reclamos_autos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="fechaInicio" Type="date" Mode="In" />
+          <Parameter Name="fechaFin" Type="date" Mode="In" />
+          <Parameter Name="tipo" Type="int" Mode="In" />
+        </Function>
+        <Function Name="pa_ciclos_reclamos_danios" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="fechaInicio" Type="date" Mode="In" />
+          <Parameter Name="fechaFin" Type="date" Mode="In" />
+          <Parameter Name="tipo" Type="int" Mode="In" />
+        </Function>
+        <Function Name="pa_eficiencia_colectivos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="fechaInicio" Type="date" Mode="In" />
+          <Parameter Name="fechaFin" Type="date" Mode="In" />
+        </Function>
+        <Function Name="pa_eficiencia_individuales" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="fechaInicio" Type="date" Mode="In" />
+          <Parameter Name="fechaFin" Type="date" Mode="In" />
+        </Function>
         <Function Name="pa_eficiencia_pnc" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="fechainicio" Type="date" Mode="In" />
           <Parameter Name="fechaFin" Type="date" Mode="In" />
@@ -1553,6 +1591,14 @@ advertencia 6002: La tabla o vista 'reclamos.dbo.v_producto_no_conforme' no tien
         </Function>
         <Function Name="pa_reclamos_autos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="pa_reclamos_varios" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="pa_reporte_problemas_autos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="fechaInicio" Type="date" Mode="In" />
+          <Parameter Name="fechaFin" Type="date" Mode="In" />
+        </Function>
+        <Function Name="pa_reporte_problemas_danios" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="fechaInicio" Type="date" Mode="In" />
+          <Parameter Name="fechaFin" Type="date" Mode="In" />
+        </Function>
         <Function Name="pa_reportesAutorizaciones" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="fechaInicio" Type="date" Mode="In" />
           <Parameter Name="fechaFin" Type="date" Mode="In" />
@@ -1655,6 +1701,7 @@ advertencia 6002: La tabla o vista 'reclamos.dbo.v_producto_no_conforme' no tien
           <EntitySet Name="estados_reclamos_unity" EntityType="Self.estados_reclamos_unity" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="formulario_colectivo" EntityType="Self.formulario_colectivo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="gestores" EntityType="Self.gestores" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="motivos_cierre" EntityType="Self.motivos_cierre" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="pais" EntityType="Self.pais" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ramos" EntityType="Self.ramos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="recibos_medicos" EntityType="Self.recibos_medicos" Schema="dbo" store:Type="Tables" />
@@ -1883,6 +1930,10 @@ FROM [dbo].[v_producto_no_conforme] AS [v_producto_no_conforme]</DefiningQuery>
             <End Role="gestores" EntitySet="gestores" />
             <End Role="reclamo_auto" EntitySet="reclamo_auto" />
           </AssociationSet>
+          <AssociationSet Name="FK_reclamo_auto_motivos_cierre" Association="Self.FK_reclamo_auto_motivos_cierre">
+            <End Role="motivos_cierre" EntitySet="motivos_cierre" />
+            <End Role="reclamo_auto" EntitySet="reclamo_auto" />
+          </AssociationSet>
           <AssociationSet Name="FK_reclamo_auto_talleres" Association="Self.FK_reclamo_auto_talleres">
             <End Role="talleres" EntitySet="talleres" />
             <End Role="reclamo_auto" EntitySet="reclamo_auto" />
@@ -1984,6 +2035,24 @@ FROM [dbo].[v_producto_no_conforme] AS [v_producto_no_conforme]</DefiningQuery>
             <Parameter Name="fechaFin" Mode="In" Type="DateTime" />
           </FunctionImport>
           <FunctionImport Name="pa_sec_estados_autos" ReturnType="Collection(Int64)" />
+          <FunctionImport Name="pa_ciclos_reclamos_autos">
+            <Parameter Name="fechaInicio" Mode="In" Type="DateTime" />
+            <Parameter Name="fechaFin" Mode="In" Type="DateTime" />
+            <Parameter Name="tipo" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="pa_ciclos_reclamos_danios">
+            <Parameter Name="fechaInicio" Mode="In" Type="DateTime" />
+            <Parameter Name="fechaFin" Mode="In" Type="DateTime" />
+            <Parameter Name="tipo" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="pa_reporte_problemas_autos" ReturnType="Collection(reclamosModel.pa_reporte_problemas_autos_Result)">
+            <Parameter Name="fechaInicio" Mode="In" Type="DateTime" />
+            <Parameter Name="fechaFin" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="pa_reporte_problemas_danios" ReturnType="Collection(reclamosModel.pa_reporte_problemas_danios_Result)">
+            <Parameter Name="fechaInicio" Mode="In" Type="DateTime" />
+            <Parameter Name="fechaFin" Mode="In" Type="DateTime" />
+          </FunctionImport>
           <EntitySet Name="ajustadores" EntityType="reclamosModel.ajustadores" />
           <EntitySet Name="analistas" EntityType="reclamosModel.analistas" />
           <EntitySet Name="aseguradoras" EntityType="reclamosModel.aseguradoras" />
@@ -2024,6 +2093,7 @@ FROM [dbo].[v_producto_no_conforme] AS [v_producto_no_conforme]</DefiningQuery>
           <EntitySet Name="estados_reclamos_unity" EntityType="reclamosModel.estados_reclamos_unity" />
           <EntitySet Name="formulario_colectivo" EntityType="reclamosModel.formulario_colectivo" />
           <EntitySet Name="gestores" EntityType="reclamosModel.gestores" />
+          <EntitySet Name="motivos_cierre" EntityType="reclamosModel.motivos_cierre" />
           <EntitySet Name="pais" EntityType="reclamosModel.pais" />
           <EntitySet Name="ramos" EntityType="reclamosModel.ramos" />
           <EntitySet Name="recibos_medicos" EntityType="reclamosModel.recibos_medicos" />
@@ -2187,6 +2257,10 @@ FROM [dbo].[v_producto_no_conforme] AS [v_producto_no_conforme]</DefiningQuery>
             <End Role="gestores" EntitySet="gestores" />
             <End Role="reclamos_varios" EntitySet="reclamos_varios" />
           </AssociationSet>
+          <AssociationSet Name="FK_reclamo_auto_motivos_cierre" Association="reclamosModel.FK_reclamo_auto_motivos_cierre">
+            <End Role="motivos_cierre" EntitySet="motivos_cierre" />
+            <End Role="reclamo_auto" EntitySet="reclamo_auto" />
+          </AssociationSet>
           <AssociationSet Name="FK_recibos_medicos_recibos_medicos" Association="reclamosModel.FK_recibos_medicos_recibos_medicos">
             <End Role="reclamos_medicos" EntitySet="reclamos_medicos" />
             <End Role="recibos_medicos" EntitySet="recibos_medicos" />
@@ -2219,6 +2293,14 @@ FROM [dbo].[v_producto_no_conforme] AS [v_producto_no_conforme]</DefiningQuery>
             <End Role="talleres" EntitySet="talleres" />
             <End Role="reclamos_varios" EntitySet="reclamos_varios" />
           </AssociationSet>
+          <FunctionImport Name="pa_eficiencia_colectivos" ReturnType="Collection(reclamosModel.pa_eficiencia_colectivos_Result)">
+            <Parameter Name="fechaInicio" Mode="In" Type="DateTime" />
+            <Parameter Name="fechaFin" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="pa_eficiencia_individuales" ReturnType="Collection(reclamosModel.pa_eficiencia_individuales_Result)">
+            <Parameter Name="fechaInicio" Mode="In" Type="DateTime" />
+            <Parameter Name="fechaFin" Mode="In" Type="DateTime" />
+          </FunctionImport>
           </EntityContainer>
         <ComplexType Name="pa_reclamos_autos_Result">
           <Property Type="Int32" Name="secuencia" Nullable="true" />
@@ -2399,6 +2481,41 @@ FROM [dbo].[v_producto_no_conforme] AS [v_producto_no_conforme]</DefiningQuery>
         <ComplexType Name="pa_vista_movil_Result">
           <Property Type="Int32" Name="ErrorNumber" Nullable="true" />
           <Property Type="String" Name="ErrorMessage" Nullable="true" MaxLength="4000" />
+        </ComplexType>
+        <ComplexType Name="pa_reporte_problemas_autos_Result">
+          <Property Type="Int64" Name="id" Nullable="false" />
+          <Property Type="String" Name="Poliza" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="Fecha_Registro" Nullable="true" Precision="23" />
+          <Property Type="String" Name="Asegurado" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="Numero_Reclamo" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Vehiculo" Nullable="false" MaxLength="132" />
+          <Property Type="String" Name="Taller" Nullable="true" MaxLength="70" />
+          <Property Type="String" Name="Comentario_Taller" Nullable="true" MaxLength="Max" />
+          <Property Type="String" Name="Ajustador" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Comentario_Ajustador" Nullable="true" MaxLength="Max" />
+          <Property Type="String" Name="Cabina" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Comentario_Cabina" Nullable="true" MaxLength="Max" />
+          <Property Type="String" Name="Aseguradora" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Comentario_Aseguradora" Nullable="true" MaxLength="Max" />
+          <Property Type="String" Name="Ejecutivo" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Comentario_Ejecutivo" Nullable="true" MaxLength="Max" />
+        </ComplexType>
+        <ComplexType Name="pa_reporte_problemas_danios_Result">
+          <Property Type="Int32" Name="id" Nullable="false" />
+          <Property Type="String" Name="Poliza" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="Fecha_Registro" Nullable="true" Precision="23" />
+          <Property Type="String" Name="Asegurado" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="Numero_Reclamo" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Taller" Nullable="true" MaxLength="70" />
+          <Property Type="String" Name="Comentario_Taller" Nullable="true" MaxLength="Max" />
+          <Property Type="String" Name="Ajustador" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Comentario_Ajustador" Nullable="true" MaxLength="Max" />
+          <Property Type="String" Name="Cabina" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Comentario_Cabina" Nullable="true" MaxLength="Max" />
+          <Property Type="String" Name="Aseguradora" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Comentario_Aseguradora" Nullable="true" MaxLength="Max" />
+          <Property Type="String" Name="Ejecutivo" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Comentario_Ejecutivo" Nullable="true" MaxLength="Max" />
         </ComplexType>
         <EntityType Name="ajustadores">
           <Key>
@@ -2974,6 +3091,14 @@ FROM [dbo].[v_producto_no_conforme] AS [v_producto_no_conforme]</DefiningQuery>
           <NavigationProperty Name="reclamo_auto" Relationship="reclamosModel.FK_reclamo_auto_gestores" FromRole="gestores" ToRole="reclamo_auto" />
           <NavigationProperty Name="reclamos_varios" Relationship="reclamosModel.FK_reclamos_varios_gestores" FromRole="gestores" ToRole="reclamos_varios" />
         </EntityType>
+        <EntityType Name="motivos_cierre">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="reclamo_auto" Relationship="reclamosModel.FK_reclamo_auto_motivos_cierre" FromRole="motivos_cierre" ToRole="reclamo_auto" />
+        </EntityType>
         <EntityType Name="pais">
           <Key>
             <PropertyRef Name="id" />
@@ -3036,6 +3161,7 @@ FROM [dbo].[v_producto_no_conforme] AS [v_producto_no_conforme]</DefiningQuery>
           <Property Name="id_gestor" Type="Int16" />
           <Property Name="id_analista" Type="Int32" />
           <Property Name="id_taller" Type="Int32" />
+          <Property Name="id_motivo_cierre" Type="Int32" />
           <Property Name="observaciones" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="estado_auto_unity" Type="String" MaxLength="75" FixedLength="false" Unicode="false" />
           <Property Name="complicado" Type="Boolean" />
@@ -3060,6 +3186,17 @@ FROM [dbo].[v_producto_no_conforme] AS [v_producto_no_conforme]</DefiningQuery>
           <Property Name="b_carta_declinado" Type="Boolean" />
           <Property Name="b_carta_envio_cheque" Type="Boolean" />
           <Property Name="documentos" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="problema_taller" Type="Boolean" />
+          <Property Name="problema_cabina" Type="Boolean" />
+          <Property Name="problema_ajustador" Type="Boolean" />
+          <Property Name="problema_ejecutivo" Type="Boolean" />
+          <Property Name="problema_aseguradora" Type="Boolean" />
+          <Property Name="comentario_taller" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="comentario_ajustador" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="comentario_cabina" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="comentario_ejecutivo" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="comentario_aseguradora" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="fecha_problema" Type="DateTime" Precision="3" />
           <NavigationProperty Name="analistas" Relationship="reclamosModel.FK_reclamo_auto_analistas" FromRole="reclamo_auto" ToRole="analistas" />
           <NavigationProperty Name="auto_reclamo" Relationship="reclamosModel.FK__reclamo_a__id_au__300424B4" FromRole="reclamo_auto" ToRole="auto_reclamo" />
           <NavigationProperty Name="bitacora_autos_unity" Relationship="reclamosModel.FK_bitacora_autos_unity_reclamo_auto" FromRole="reclamo_auto" ToRole="bitacora_autos_unity" />
@@ -3072,19 +3209,9 @@ FROM [dbo].[v_producto_no_conforme] AS [v_producto_no_conforme]</DefiningQuery>
           <NavigationProperty Name="detalle_pagos_reclamos_autos" Relationship="reclamosModel.FK_detalle_pago_reclamos_autos_reclamo_auto" FromRole="reclamo_auto" ToRole="detalle_pagos_reclamos_autos" />
           <NavigationProperty Name="estado" Relationship="reclamosModel.FK__reclamo_a__id_es__38996AB5" FromRole="reclamo_auto" ToRole="estado" />
           <NavigationProperty Name="gestores" Relationship="reclamosModel.FK_reclamo_auto_gestores" FromRole="reclamo_auto" ToRole="gestores" />
+          <NavigationProperty Name="motivos_cierre" Relationship="reclamosModel.FK_reclamo_auto_motivos_cierre" FromRole="reclamo_auto" ToRole="motivos_cierre" />
           <NavigationProperty Name="usuario" Relationship="reclamosModel.FK__reclamo_a__id_us__440B1D61" FromRole="reclamo_auto" ToRole="usuario" />
           <NavigationProperty Name="talleres" Relationship="reclamosModel.FK_reclamo_auto_talleres" FromRole="reclamo_auto" ToRole="talleres" />
-          <Property Name="problema_taller" Type="Boolean" />
-          <Property Name="problema_cabina" Type="Boolean" />
-          <Property Name="problema_ajustador" Type="Boolean" />
-          <Property Name="comentario_taller" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="comentario_ajustador" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="comentario_cabina" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="problema_aseguradora" Type="Boolean" />
-          <Property Name="problema_ejecutivo" Type="Boolean" />
-          <Property Name="comentario_aseguradora" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="comentario_ejecutivo" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="fecha_problema" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="reclamos_medicos">
           <Key>
@@ -3203,6 +3330,17 @@ FROM [dbo].[v_producto_no_conforme] AS [v_producto_no_conforme]</DefiningQuery>
           <Property Name="b_carta_envio_cheque" Type="Boolean" />
           <Property Name="reserva" Type="Decimal" Precision="10" Scale="2" />
           <Property Name="documentos" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="problema_ajustador" Type="Boolean" />
+          <Property Name="problema_taller" Type="Boolean" />
+          <Property Name="problema_cabina" Type="Boolean" />
+          <Property Name="problema_ejecutivo" Type="Boolean" />
+          <Property Name="problema_aseguradora" Type="Boolean" />
+          <Property Name="comentario_ajustador" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="comentario_taller" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="comentario_cabina" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="comentario_ejecutivo" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="comentario_aseguradora" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="fecha_problema" Type="DateTime" Precision="3" />
           <NavigationProperty Name="analistas" Relationship="reclamosModel.FK_reclamos_varios_analistas" FromRole="reclamos_varios" ToRole="analistas" />
           <NavigationProperty Name="bitacora_estados_reclamos_varios" Relationship="reclamosModel.FK_bitacora_estados_reclamos_varios_reclamos_varios" FromRole="reclamos_varios" ToRole="bitacora_estados_reclamos_varios" />
           <NavigationProperty Name="bitacora_reclamos_varios" Relationship="reclamosModel.FK__bitacora___id_re__47DBAE45" FromRole="reclamos_varios" ToRole="bitacora_reclamos_varios" />
@@ -3215,17 +3353,6 @@ FROM [dbo].[v_producto_no_conforme] AS [v_producto_no_conforme]</DefiningQuery>
           <NavigationProperty Name="reg_reclamo_varios" Relationship="reclamosModel.FK__reclamos___id_re__5441852A" FromRole="reclamos_varios" ToRole="reg_reclamo_varios" />
           <NavigationProperty Name="usuario" Relationship="reclamosModel.FK__reclamos___id_us__5535A963" FromRole="reclamos_varios" ToRole="usuario" />
           <NavigationProperty Name="talleres" Relationship="reclamosModel.FK_reclamos_varios_talleres" FromRole="reclamos_varios" ToRole="talleres" />
-          <Property Name="problema_taller" Type="Boolean" />
-          <Property Name="problema_cabina" Type="Boolean" />
-          <Property Name="problema_ajustador" Type="Boolean" />
-          <Property Name="problema_aseguradora" Type="Boolean" />
-          <Property Name="problema_ejecutivo" Type="Boolean" />
-          <Property Name="comentario_taller" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="comentario_cabina" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="comentario_ajustador" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="comentario_aseguradora" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="comentario_ejecutivo" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="fecha_problema" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="reg_reclamo_varios">
           <Key>
@@ -3917,6 +4044,18 @@ FROM [dbo].[v_producto_no_conforme] AS [v_producto_no_conforme]</DefiningQuery>
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_reclamo_auto_motivos_cierre">
+          <End Type="reclamosModel.motivos_cierre" Role="motivos_cierre" Multiplicity="0..1" />
+          <End Type="reclamosModel.reclamo_auto" Role="reclamo_auto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="motivos_cierre">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="reclamo_auto">
+              <PropertyRef Name="id_motivo_cierre" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_recibos_medicos_recibos_medicos">
           <End Type="reclamosModel.reclamos_medicos" Role="reclamos_medicos" Multiplicity="0..1" />
           <End Type="reclamosModel.recibos_medicos" Role="recibos_medicos" Multiplicity="*" />
@@ -4013,6 +4152,22 @@ FROM [dbo].[v_producto_no_conforme] AS [v_producto_no_conforme]</DefiningQuery>
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <ComplexType Name="pa_eficiencia_colectivos_Result">
+          <Property Type="String" Name="Nombre" Nullable="true" MaxLength="80" />
+          <Property Type="Int32" Name="Pendientes" Nullable="true" />
+          <Property Type="Int32" Name="Nuevos" Nullable="true" />
+          <Property Type="Int32" Name="Cerrados" Nullable="true" />
+          <Property Type="Int32" Name="Fuera_de_tiempo" Nullable="true" />
+          <Property Type="Int32" Name="Ejecucion" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="pa_eficiencia_individuales_Result">
+          <Property Type="String" Name="Nombre" Nullable="true" MaxLength="80" />
+          <Property Type="Int32" Name="Pendientes" Nullable="true" />
+          <Property Type="Int32" Name="Nuevos" Nullable="true" />
+          <Property Type="Int32" Name="Cerrados" Nullable="true" />
+          <Property Type="Int32" Name="Fuera_de_tiempo" Nullable="true" />
+          <Property Type="Int32" Name="Ejecucion" Nullable="true" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -4263,6 +4418,51 @@ FROM [dbo].[v_producto_no_conforme] AS [v_producto_no_conforme]</DefiningQuery>
           <FunctionImportMapping FunctionImportName="pa_sec_documentos_solicitados" FunctionName="reclamosModel.Store.pa_sec_documentos_solicitados" />
           <FunctionImportMapping FunctionImportName="pa_eficiencia_pnc" FunctionName="reclamosModel.Store.pa_eficiencia_pnc" />
           <FunctionImportMapping FunctionImportName="pa_sec_estados_autos" FunctionName="reclamosModel.Store.pa_sec_estados_autos" />
+          <FunctionImportMapping FunctionImportName="pa_ciclos_reclamos_autos" FunctionName="reclamosModel.Store.pa_ciclos_reclamos_autos" />
+          <FunctionImportMapping FunctionImportName="pa_ciclos_reclamos_danios" FunctionName="reclamosModel.Store.pa_ciclos_reclamos_danios" />
+          <FunctionImportMapping FunctionImportName="pa_reporte_problemas_autos" FunctionName="reclamosModel.Store.pa_reporte_problemas_autos">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="reclamosModel.pa_reporte_problemas_autos_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Poliza" ColumnName="Poliza" />
+                <ScalarProperty Name="Fecha_Registro" ColumnName="Fecha Registro" />
+                <ScalarProperty Name="Asegurado" ColumnName="Asegurado" />
+                <ScalarProperty Name="Numero_Reclamo" ColumnName="Numero Reclamo" />
+                <ScalarProperty Name="Vehiculo" ColumnName="Vehiculo" />
+                <ScalarProperty Name="Taller" ColumnName="Taller" />
+                <ScalarProperty Name="Comentario_Taller" ColumnName="Comentario Taller" />
+                <ScalarProperty Name="Ajustador" ColumnName="Ajustador" />
+                <ScalarProperty Name="Comentario_Ajustador" ColumnName="Comentario Ajustador" />
+                <ScalarProperty Name="Cabina" ColumnName="Cabina" />
+                <ScalarProperty Name="Comentario_Cabina" ColumnName="Comentario Cabina" />
+                <ScalarProperty Name="Aseguradora" ColumnName="Aseguradora" />
+                <ScalarProperty Name="Comentario_Aseguradora" ColumnName="Comentario Aseguradora" />
+                <ScalarProperty Name="Ejecutivo" ColumnName="Ejecutivo" />
+                <ScalarProperty Name="Comentario_Ejecutivo" ColumnName="Comentario Ejecutivo" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="pa_reporte_problemas_danios" FunctionName="reclamosModel.Store.pa_reporte_problemas_danios">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="reclamosModel.pa_reporte_problemas_danios_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Poliza" ColumnName="Poliza" />
+                <ScalarProperty Name="Fecha_Registro" ColumnName="Fecha Registro" />
+                <ScalarProperty Name="Asegurado" ColumnName="Asegurado" />
+                <ScalarProperty Name="Numero_Reclamo" ColumnName="Numero Reclamo" />
+                <ScalarProperty Name="Taller" ColumnName="Taller" />
+                <ScalarProperty Name="Comentario_Taller" ColumnName="Comentario Taller" />
+                <ScalarProperty Name="Ajustador" ColumnName="Ajustador" />
+                <ScalarProperty Name="Comentario_Ajustador" ColumnName="Comentario Ajustador" />
+                <ScalarProperty Name="Cabina" ColumnName="Cabina" />
+                <ScalarProperty Name="Comentario_Cabina" ColumnName="Comentario Cabina" />
+                <ScalarProperty Name="Aseguradora" ColumnName="Aseguradora" />
+                <ScalarProperty Name="Comentario_Aseguradora" ColumnName="Comentario Aseguradora" />
+                <ScalarProperty Name="Ejecutivo" ColumnName="Ejecutivo" />
+                <ScalarProperty Name="Comentario_Ejecutivo" ColumnName="Comentario Ejecutivo" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           <EntitySetMapping Name="ajustadores">
             <EntityTypeMapping TypeName="reclamosModel.ajustadores">
               <MappingFragment StoreEntitySet="ajustadores">
@@ -4839,6 +5039,14 @@ FROM [dbo].[v_producto_no_conforme] AS [v_producto_no_conforme]</DefiningQuery>
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="motivos_cierre">
+            <EntityTypeMapping TypeName="reclamosModel.motivos_cierre">
+              <MappingFragment StoreEntitySet="motivos_cierre">
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="pais">
             <EntityTypeMapping TypeName="reclamosModel.pais">
               <MappingFragment StoreEntitySet="pais">
@@ -4873,13 +5081,13 @@ FROM [dbo].[v_producto_no_conforme] AS [v_producto_no_conforme]</DefiningQuery>
             <EntityTypeMapping TypeName="reclamosModel.reclamo_auto">
               <MappingFragment StoreEntitySet="reclamo_auto">
                 <ScalarProperty Name="fecha_problema" ColumnName="fecha_problema" />
-                <ScalarProperty Name="comentario_ejecutivo" ColumnName="comentario_ejecutivo" />
                 <ScalarProperty Name="comentario_aseguradora" ColumnName="comentario_aseguradora" />
-                <ScalarProperty Name="problema_ejecutivo" ColumnName="problema_ejecutivo" />
-                <ScalarProperty Name="problema_aseguradora" ColumnName="problema_aseguradora" />
+                <ScalarProperty Name="comentario_ejecutivo" ColumnName="comentario_ejecutivo" />
                 <ScalarProperty Name="comentario_cabina" ColumnName="comentario_cabina" />
                 <ScalarProperty Name="comentario_ajustador" ColumnName="comentario_ajustador" />
                 <ScalarProperty Name="comentario_taller" ColumnName="comentario_taller" />
+                <ScalarProperty Name="problema_aseguradora" ColumnName="problema_aseguradora" />
+                <ScalarProperty Name="problema_ejecutivo" ColumnName="problema_ejecutivo" />
                 <ScalarProperty Name="problema_ajustador" ColumnName="problema_ajustador" />
                 <ScalarProperty Name="problema_cabina" ColumnName="problema_cabina" />
                 <ScalarProperty Name="problema_taller" ColumnName="problema_taller" />
@@ -4907,6 +5115,7 @@ FROM [dbo].[v_producto_no_conforme] AS [v_producto_no_conforme]</DefiningQuery>
                 <ScalarProperty Name="complicado" ColumnName="complicado" />
                 <ScalarProperty Name="estado_auto_unity" ColumnName="estado_auto_unity" />
                 <ScalarProperty Name="observaciones" ColumnName="observaciones" />
+                <ScalarProperty Name="id_motivo_cierre" ColumnName="id_motivo_cierre" />
                 <ScalarProperty Name="id_taller" ColumnName="id_taller" />
                 <ScalarProperty Name="id_analista" ColumnName="id_analista" />
                 <ScalarProperty Name="id_gestor" ColumnName="id_gestor" />
@@ -4997,16 +5206,16 @@ FROM [dbo].[v_producto_no_conforme] AS [v_producto_no_conforme]</DefiningQuery>
             <EntityTypeMapping TypeName="reclamosModel.reclamos_varios">
               <MappingFragment StoreEntitySet="reclamos_varios">
                 <ScalarProperty Name="fecha_problema" ColumnName="fecha_problema" />
-                <ScalarProperty Name="comentario_ejecutivo" ColumnName="comentario_ejecutivo" />
                 <ScalarProperty Name="comentario_aseguradora" ColumnName="comentario_aseguradora" />
-                <ScalarProperty Name="comentario_ajustador" ColumnName="comentario_ajustador" />
+                <ScalarProperty Name="comentario_ejecutivo" ColumnName="comentario_ejecutivo" />
                 <ScalarProperty Name="comentario_cabina" ColumnName="comentario_cabina" />
                 <ScalarProperty Name="comentario_taller" ColumnName="comentario_taller" />
-                <ScalarProperty Name="problema_ejecutivo" ColumnName="problema_ejecutivo" />
+                <ScalarProperty Name="comentario_ajustador" ColumnName="comentario_ajustador" />
                 <ScalarProperty Name="problema_aseguradora" ColumnName="problema_aseguradora" />
-                <ScalarProperty Name="problema_ajustador" ColumnName="problema_ajustador" />
+                <ScalarProperty Name="problema_ejecutivo" ColumnName="problema_ejecutivo" />
                 <ScalarProperty Name="problema_cabina" ColumnName="problema_cabina" />
                 <ScalarProperty Name="problema_taller" ColumnName="problema_taller" />
+                <ScalarProperty Name="problema_ajustador" ColumnName="problema_ajustador" />
                 <ScalarProperty Name="documentos" ColumnName="documentos" />
                 <ScalarProperty Name="reserva" ColumnName="reserva" />
                 <ScalarProperty Name="b_carta_envio_cheque" ColumnName="b_carta_envio_cheque" />
@@ -5317,6 +5526,30 @@ FROM [dbo].[v_producto_no_conforme] AS [v_producto_no_conforme]</DefiningQuery>
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="pa_eficiencia_colectivos" FunctionName="reclamosModel.Store.pa_eficiencia_colectivos">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="reclamosModel.pa_eficiencia_colectivos_Result">
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Pendientes" ColumnName="Pendientes" />
+                <ScalarProperty Name="Nuevos" ColumnName="Nuevos" />
+                <ScalarProperty Name="Cerrados" ColumnName="Cerrados" />
+                <ScalarProperty Name="Fuera_de_tiempo" ColumnName="Fuera_de_tiempo" />
+                <ScalarProperty Name="Ejecucion" ColumnName="Ejecucion" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="pa_eficiencia_individuales" FunctionName="reclamosModel.Store.pa_eficiencia_individuales">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="reclamosModel.pa_eficiencia_individuales_Result">
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Pendientes" ColumnName="Pendientes" />
+                <ScalarProperty Name="Nuevos" ColumnName="Nuevos" />
+                <ScalarProperty Name="Cerrados" ColumnName="Cerrados" />
+                <ScalarProperty Name="Fuera_de_tiempo" ColumnName="Fuera_de_tiempo" />
+                <ScalarProperty Name="Ejecucion" ColumnName="Ejecucion" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

@@ -57,6 +57,9 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesAutos : System.Web.UI.
 
     protected void btnGenerarTabla_Click(object sender, EventArgs e)
     {
+        PanelCamposSeleccion.Visible = true;
+        PanelEficiencia.Visible = false;
+
         //si el check esta chequeado entra aqui 
         //este check sirve para no filtrar el reporte por alguna seleccion
         if(checkSinFiltro.Checked)
@@ -104,7 +107,6 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesAutos : System.Web.UI.
                 llenado.llenarGrid(listado.Substring(0, (listado.Length - 2)) + Join + " where reclamo_auto.estado_unity = 'Seguimiento'  ", GridCamposSeleccion);
             }
             Conteo();
-            Eficiencia();
         }
 
         else
@@ -160,19 +162,26 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesAutos : System.Web.UI.
 
             else if (ddlEstado.SelectedItem.Text == "Estado")
             {
+               
                 llenado.llenarGrid(listado.Substring(0, (listado.Length - 2)) + Join +
                   " where (" + ddlElegir.SelectedValue + " like '%" + ddlBuscar.SelectedItem.Text + "%') and (estado_unity = 'Seguimiento') ", GridCamposSeleccion);
-            }
 
+                Utils.TituloReporte(PnReporte, lblPeriodo, lblFechaGeneracion, lblUsuario, lblTitulo, "Reporte de Reclamos / Depto. Reclamos Autos / "+ ddlBuscar.SelectedItem.Text +" ", userlogin, txtFechaInicio, txtFechaFin, "");
+              
+            }
             Conteo();
-            Eficiencia();
+        }
+
+        if (ddlEstado.SelectedItem.Text != "Estado")
+        {
+            Utils.TituloReporte(PnReporte, lblPeriodo, lblFechaGeneracion, lblUsuario, lblTitulo, "Reporte de Reclamos de Autos", userlogin, txtFechaInicio, txtFechaFin, "");
         }
     }
 
     //funcion para exportar a un archivo de excel lo que aparece en el gridview
     protected void btnExportar_Click(object sender, EventArgs e)
     {
-        Utils.ExportarExcel(GridCamposSeleccion, Response,"Reporte autos");
+        Utils.ExportarExcel(PanelPrincipal, Response,"Reporte Reclamos Autos");
     }
 
     //link para salir y ponerse en los reclamos en seguimiento
@@ -398,5 +407,13 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesAutos : System.Web.UI.
         {
             Response.Write(err);
         }
+    }
+
+    protected void btnMostrarEficiencia_Click(object sender, EventArgs e)
+    {
+        PanelCamposSeleccion.Visible = false;
+        PanelEficiencia.Visible = true;
+        Eficiencia();
+        Utils.TituloReporte(PnReporte, lblPeriodo, lblFechaGeneracion, lblUsuario, lblTitulo, "Reporte de Efectividad / Depto. Reclamos Autos", userlogin, txtFechaInicio, txtFechaFin, "");
     }
 }
