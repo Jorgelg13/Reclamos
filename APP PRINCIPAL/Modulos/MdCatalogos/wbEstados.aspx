@@ -17,7 +17,7 @@
                         </div>
                         <br />
                         <div class="form-group col-sm-12 col-md-12 col-lg-12">
-                            <asp:TextBox runat="server" ID="txtDescripcion" Enabled="false" Style="width: 100%" autocomplete="off" CssClass="form-control" placeholder="Descripcion"></asp:TextBox>
+                            <asp:TextBox runat="server" ID="txtDescripcion" Style="width: 100%" autocomplete="off" CssClass="form-control" placeholder="Descripcion"></asp:TextBox>
                         </div>
                         <div class="form-group col-sm-12 col-md-12 col-lg-12">
                             <asp:TextBox runat="server" ID="txtDias" Style="width: 100%" autocomplete="off" CssClass="form-control" placeholder="dias"></asp:TextBox>

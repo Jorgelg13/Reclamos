@@ -106,7 +106,7 @@ public class Utils
         }
     }
 
-    public static void Ciclos_Reclamos(TextBox fechainicio, TextBox fechafin, String reporte, GridView gridRepore, int tipo)
+    public static void Ciclos_Reclamos(TextBox fechainicio, TextBox fechafin, String reporte, GridView gridRepore, int tipo, int kpi)
     {
         try
         {
@@ -117,6 +117,7 @@ public class Utils
             comando.Parameters.AddWithValue("@fechaInicio", fechainicio.Text);
             comando.Parameters.AddWithValue("@fechaFin", fechafin.Text);
             comando.Parameters.AddWithValue("@tipo", tipo);
+            comando.Parameters.AddWithValue("@kpi", kpi);
             comando.ExecuteNonQuery();
             SqlDataAdapter sda = new SqlDataAdapter(comando);
             sda.Fill(dt);

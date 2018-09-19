@@ -3,8 +3,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
-    <div>
-        <div class="col-sm-2">
+        <div class="col-sm-12 col-md-2 col-lg-2">
             <div class="panel panel-info">
                 <div class="panel-heading">
                     <h3 class="panel-title"><b style="font-size: 16px;">Seleccione los campos</b></h3>
@@ -63,13 +62,12 @@
                 </div>
             </div>
         </div>
-        <asp:Panel runat="server" ID="PnReporte">
             <div class="col-sm-10">
                 <div class="panel panel-info">
                     <div class="panel-heading">
                         <b>Tabla con campos seleccionados<spam style="margin-left: 50px">Total de registros:</spam><asp:Label ID="lblConteo" runat="server"></asp:Label></b>
                         <asp:CheckBox ID="checkSinFiltro" Checked="true" AutoPostBack="true" runat="server" Text="Sin Ningun Filtro" OnCheckedChanged="checkSinFiltro_CheckedChanged" Style="padding-left: 20px;" />
-                        <asp:DropDownList ID="ddlCiclos" runat="server" Style="width: 25%; height: 26px; margin-left: 20px;">
+                        <asp:DropDownList ID="ddlCiclos" runat="server" Style="width: 15%; height: 26px; margin-left: 20px;">
                             <asp:ListItem Value="Ciclo Total">Ciclo Total</asp:ListItem>
                             <asp:ListItem Value="Ciclo Unity">Ciclo Unity</asp:ListItem>
                             <asp:ListItem Value="Ciclo Cliente">Ciclo Cliente</asp:ListItem>
@@ -150,37 +148,23 @@
                                     </asp:GridView>
                                 </div>
                             </asp:Panel>
+                            <asp:Panel runat="server" ID="PnCiclos" Visible="false">
+                                <div style="height: 520px;">
+                                    <div class="scrolling-table-container" style="overflow-y: auto;">
+                                        <asp:GridView ID="GridCiclos" runat="server" CssClass="table bs-table table-responsive" OnRowDataBound="GridCiclos_RowDataBound" AutoGenerateColumns="True" ShowFooter="true" ForeColor="#333333" GridLines="None">
+                                            <AlternatingRowStyle BackColor="White" />
+                                            <FooterStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" />
+                                            <HeaderStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" HorizontalAlign="Center" Wrap="False" />
+                                            <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
+                                            <RowStyle BackColor="#EFF3FB" HorizontalAlign="Left" Wrap="False" />
+                                        </asp:GridView>
+                                    </div>
+                                </div>
+                            </asp:Panel>
                         </asp:Panel>
                     </div>
                 </div>
             </div>
-        </asp:Panel>
-        <%----------------------------  ciclo de los reclamos  ---------------------%>
-        <asp:Panel ID="PnCiclos" Visible="false" runat="server">
-            <div class="col-sm-10">
-                <div class="panel panel-info">
-                    <div class="panel-heading">
-                        <h3 class="panel-title"><b style="font-size: 16px;">Promedio Por Aseguradora</b></h3>
-                    </div>
-                    <div class="panel-body" style="height: 520px;">
-                        <div class="scrolling-table-container" style="overflow-y: auto;">
-                            <asp:GridView ID="GridCiclos" runat="server" CssClass="table bs-table table-responsive" OnRowDataBound="GridCiclos_RowDataBound" AutoGenerateColumns="True" ShowFooter="true" ForeColor="#333333" GridLines="None">
-                                <AlternatingRowStyle BackColor="White" />
-                                <FooterStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" />
-                                <HeaderStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" HorizontalAlign="Center" Wrap="False" />
-                                <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
-                                <RowStyle BackColor="#EFF3FB" HorizontalAlign="Left" Wrap="False" />
-                            </asp:GridView>
-                        </div>
-                        <asp:Label ID="lblTotalPonderados" runat="server"></asp:Label>
-                        <asp:LinkButton ID="linKRegresar" OnClick="linKRegresar_Click" title="Regresar al reporte" runat="server" Style="padding-left: 20px; font-size: 70px; text-align: center; color: lightblue"><i class="fa fa-arrow-circle-o-left" aria-hidden="true"></i></asp:LinkButton>
-                        <asp:LinkButton ID="linkDescarPromedio" OnClick="linkDescarPromedio_Click" title="Descargar en excel" runat="server" Style="font-size: 70px; text-align: center; color: green"><i class="fa fa-file-excel-o" aria-hidden="true"></i></asp:LinkButton>
-                        <b>
-                            <asp:Label ID="lblTituloCiclo" Style="font-size: 25px; padding-left: 50px;" runat="server"></asp:Label></b>
-                    </div>
-                </div>
-            </div>
-        </asp:Panel>
         <%-- botones circulares con las opciones multiples --%>
         <div id="container-floating">
             <div class="nd4 nds" data-toggle="tooltip" data-placement="left" data-original-title="Simone">
@@ -197,7 +181,6 @@
                 <img class="edit" src="https://ssl.gstatic.com/bt/C3341AA7A1A076756462EE2E5CD71C11/1x/bt_compose2_1x.png">
             </div>
         </div>
-    </div>
 </asp:Content>
 <asp:Content runat="server" ContentPlaceHolderID="ContentJs" ID="JS">
     <script>

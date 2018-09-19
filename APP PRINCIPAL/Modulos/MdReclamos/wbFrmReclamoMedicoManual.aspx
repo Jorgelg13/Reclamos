@@ -9,58 +9,65 @@
         </ul>
         <div class="tab-content">
             <div role="tabpanel" class="tab-pane active" id="messages">
-                <div class="panel-body info form-inline">
+                <div class="panel-body info">
                     <div class="panel-body">
-                        <div class="form-group">
-                            <div class="form-group col-sm-12 col-md-4 col-lg-3">
-                                <label for="message-text" class="control-label">Asegurado o Titular:</label>
+                        <div class="row">
+                            <div class="form-group col-sm-12 col-md-4 col-lg-2">
+                                <label>Asegurado o Titular:</label>
                                 <asp:TextBox ID="txtAseguradoTitular" Style="width: 100%" class="form-control" runat="server" placeholder="asegurado"></asp:TextBox>
                             </div>
                             <div class="form-group col-sm-12 col-md-4 col-lg-2">
-                                <label for="message-text" class="control-label">No. Poliza:</label>
+                                <label>No. Poliza:</label>
                                 <asp:TextBox ID="txtPoliza" Style="width: 100%" CssClass="form-control" placeholder="Numero De Poliza" runat="server"></asp:TextBox>
                             </div>
-                            <div class="form-group col-sm-12 col-md-4 col-lg-3">
-                                <label for="message-text" class="control-label">Contratante:</label>
+                            <div class="form-group col-sm-12 col-md-4 col-lg-2">
+                                <label>Contratante:</label>
                                 <asp:TextBox ID="txtEmpresa" Style="width: 100%" CssClass="form-control" placeholder="Empresa Contratante" runat="server"></asp:TextBox>
                             </div>
                             <div class="form-group col-sm-12 col-md-4 col-lg-1">
-                                <label for="message-text" class="control-label">Tipo:</label>
+                                <label>Tipo:</label>
                                 <asp:DropDownList CssClass="form-control" ID="ddlTipoReclamo" Style="width: 100%" Height="32px" runat="server">
                                     <asp:ListItem Value="I">Indivual</asp:ListItem>
                                     <asp:ListItem Value="C">Colectivos</asp:ListItem>
                                 </asp:DropDownList>
                             </div>
                             <div class="form-group col-sm-12 col-md-4 col-lg-3">
-                                <label for="message-text" class="control-label">Aseguradora:</label>
-                                <asp:DropDownList CssClass="form-control" ID="ddlAseguradora" Style="width: 100%" Height="34px" runat="server">
+                                <label>Aseguradora:</label>
+                                <asp:DropDownList CssClass="form-control" ID="ddlAseguradora" Style="width: 100%" Height="32px" runat="server">
                                 </asp:DropDownList>
                             </div>
-                            <div class="form-group col-sm-12 col-md-4 col-lg-3">
-                                <label for="message-text" class="control-label">Dependiente:</label>
+                            <div class="form-group col-sm-12 col-md-4 col-lg-2">
+                                <label>Dependiente:</label>
                                 <asp:TextBox ID="txtDependiente" Style="width: 100%" class="form-control" runat="server" placeholder="Dependiente"></asp:TextBox>
                             </div>
                              <div class="form-group col-sm-12 col-md-4 col-lg-2">
-                                <label for="message-text" class="control-label">Telefono:</label>
+                                <label>Telefono:</label>
                                 <asp:TextBox ID="txtTelefono" maxlength="8" Style="width: 100%" class="form-control" runat="server" placeholder="telefono"></asp:TextBox>
                             </div>
                             <div class="form-group col-sm-12 col-md-4 col-lg-3">
-                                <label for="message-text" class="control-label">Correo:</label>
+                                <label>Correo:</label>
                                 <asp:TextBox ID="txtCorreo" Style="width: 100%" class="form-control" runat="server" placeholder="correo electronico"></asp:TextBox>
                             </div>
                             <div class="form-group col-sm-12 col-md-4 col-lg-2">
-                                <label for="message-text" class="control-label">Tipo Reclamo:</label>
+                                <label>Tipo Reclamo:</label>
                                 <asp:DropDownList CssClass="form-control" ID="DDLTipo" Style="width: 100%" Height="34px" runat="server">
                                     <asp:ListItem Value="2">Gastos Medicos</asp:ListItem>
                                 </asp:DropDownList>
                             </div>
                             <div class="form-group col-sm-12 col-md-4 col-lg-2">
-                                <label for="message-text" class="control-label">Recibido por:</label>
+                                <label>Recibido por:</label>
                                 <asp:TextBox ID="txtRecepcion" Style="width: 100%" class="form-control" runat="server" placeholder="Reclamo recibido por"></asp:TextBox>
                             </div>
+                               <div class="form-group col-sm-12 col-md-4 col-lg-1">
+                                <label>Moneda:</label>
+                                <asp:DropDownList CssClass="form-control" ID="ddlMoneda" Style="width: 100%" Height="32px" runat="server">
+                                    <asp:ListItem value="Quetzales">Quetzales</asp:ListItem>
+                                    <asp:ListItem Value="Dolares">Dolares</asp:ListItem>
+                                </asp:DropDownList>
+                            </div>
                             <div class="form-group col-sm-12 col-md-4 col-lg-2">
-                                <label for="message-text" class="control-label">Tipo Asegurado:</label>
-                                <asp:DropDownList CssClass="form-control" ID="ddlTipoAsegurado" Style="width: 100%" Height="31px" runat="server">
+                                <label>Tipo Asegurado:</label>
+                                <asp:DropDownList CssClass="form-control" ID="ddlTipoAsegurado" Style="width: 100%" Height="32px" runat="server">
                                     <asp:ListItem>Principal</asp:ListItem>
                                     <asp:ListItem>Dependiente</asp:ListItem>
                                 </asp:DropDownList>

@@ -61,6 +61,7 @@ public partial class Modulos_MdReclamos_wbFrmReclamoMedicoManual : System.Web.UI
                 registro.aseguradora = ddlAseguradora.SelectedItem.Text;
                 registro.tipo = ddlTipoReclamo.SelectedValue;
                 registro.clase = ddlTipoAsegurado.SelectedItem.Text;
+                registro.moneda = ddlMoneda.SelectedValue;
                 registro.tipo_registro = "Gasto Medico";
 
                 reclamos_medicos reclamo = new reclamos_medicos();

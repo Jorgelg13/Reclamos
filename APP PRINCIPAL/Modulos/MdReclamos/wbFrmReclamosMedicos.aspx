@@ -71,6 +71,7 @@
                                <label for="message-text" class="control-label">Tipo Reclamo:</label>
                                <asp:DropDownList CssClass="form-control" ID="DDLTipo" Style="width: 100%" Height="34px" runat="server">
                                  <asp:ListItem Value="2">Gastos Medicos</asp:ListItem>
+                                 <asp:ListItem Value="1">Vida</asp:ListItem>
                                </asp:DropDownList>
                            </div>
                                <div class="form-group" style="width: 23%">

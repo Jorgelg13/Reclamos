@@ -1,11 +1,10 @@
 ﻿using System;
-using System.Web.UI;
-using System.Web.UI.WebControls;
 using System.Linq;
 using System.Web;
-using System.Data;
+using System.Web.UI;
+using System.Web.UI.WebControls;
 
-public partial class Modulos_MdReclamosUnity_wbFrmReportesMedicos : System.Web.UI.Page
+public partial class MdBitacora_ReportesMedicos : System.Web.UI.Page
 {
     String userlogin = HttpContext.Current.User.Identity.Name;
     Utils llenado = new Utils();
@@ -22,9 +21,10 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesMedicos : System.Web.U
     String tipo_reclamo = "I";
     //variable que contiene todos los joins que se hacen en el query del reporte
     String KPI_ASEGURADORA, KPI_CLIENTE, KPI_EJECUTIVO, KPI_EFICIENCIA;
+
     protected void Page_Load(object sender, EventArgs e)
     {
-        if(!IsPostBack)
+        if (!IsPostBack)
         {
             listas();
             checkSinFiltro.Checked = true;
@@ -64,7 +64,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesMedicos : System.Web.U
             if (ddlEstado.SelectedItem.Text == "Cerrado")
             {
                 llenado.llenarGrid(listado.Substring(0, (listado.Length - 2)) + Join + " where (Convert(date,reclamos_medicos.fecha_cierre, 112) between '" + txtFechaInicio.Text + "' " +
-                    "and '" + txtFechaFin.Text + "') and (" + ddlTipoReclamo.SelectedValue+ ") and ("+ddlMoneda.SelectedValue+") and reclamos_medicos.estado_unity = 'Cerrado'", GridCamposSeleccion);
+                    "and '" + txtFechaFin.Text + "') and (" + ddlTipoReclamo.SelectedValue + ") and (" + ddlMoneda.SelectedValue + ") and reclamos_medicos.estado_unity = 'Cerrado'", GridCamposSeleccion);
                 Conteo();
             }
             else if (ddlEstado.SelectedItem.Text == "Seguimiento")
@@ -79,7 +79,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesMedicos : System.Web.U
             {
                 llenado.llenarGrid(listado.Substring(0, (listado.Length - 2)) + Join +
                 " where (Convert(date,reclamos_medicos.fecha_commit,112) between '" + txtFechaInicio.Text + "' and '" + txtFechaFin.Text + "') and (" + ddlTipoReclamo.SelectedValue + ") " +
-                " and (" + ddlMoneda.SelectedValue + ") and reclamos_medicos.estado_unity in ('Seguimiento', 'Cerrado') ", GridCamposSeleccion);
+                " and (" + ddlMoneda.SelectedValue + ") and (" + ddlEstado.SelectedValue + ") ", GridCamposSeleccion);
                 Conteo();
             }
             else if (ddlEstado.SelectedItem.Text == "Aperturados")
@@ -123,7 +123,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesMedicos : System.Web.U
             else if (ddlEstado.SelectedItem.Text == "Seguimiento")
             {
                 llenado.llenarGrid(listado.Substring(0, (listado.Length - 2)) + Join +
-                  " where (" + ddlElegir.SelectedValue + " like '%" + buscar + "%') and (Convert(date,reclamos_medicos.fecha_commit,112) between '" + txtFechaInicio.Text + "' and '"+txtFechaFin.Text+"') " +
+                  " where (" + ddlElegir.SelectedValue + " like '%" + buscar + "%') and (Convert(date,reclamos_medicos.fecha_commit,112) between '" + txtFechaInicio.Text + "' and '" + txtFechaFin.Text + "') " +
                   "and (" + ddlTipoReclamo.SelectedValue + ") and (" + ddlMoneda.SelectedValue + ") and reclamos_medicos.estado_unity = 'Seguimiento' ", GridCamposSeleccion);
                 Conteo();
             }
@@ -132,7 +132,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesMedicos : System.Web.U
             {
                 llenado.llenarGrid(listado.Substring(0, (listado.Length - 2)) + Join +
                   " where (" + ddlElegir.SelectedValue + " like '%" + buscar + "%') and ( Convert(date,reclamos_medicos.fecha_commit, 112) between '" + txtFechaInicio.Text + "' and '" + txtFechaFin.Text + "')" +
-                  " and (" + ddlTipoReclamo.SelectedValue + ") and (" + ddlMoneda.SelectedValue + ") and (reclamos_medicos.estado_unity in ('Cerrado','Seguimiento')) ", GridCamposSeleccion);
+                  " and (" + ddlTipoReclamo.SelectedValue + ") and (" + ddlMoneda.SelectedValue + ") and (" + ddlEstado.SelectedValue + ") ", GridCamposSeleccion);
                 Conteo();
             }
             else if (ddlEstado.SelectedItem.Text == "Aperturados")
@@ -158,7 +158,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesMedicos : System.Web.U
 
     protected void linkSalir_Click(object sender, EventArgs e)
     {
-        Response.Redirect("/Modulos/MdReclamosUnity/wbFrmRecMedSeguimiento.aspx", false);
+        Response.Redirect("/MdBitacora/DashboardUnity.aspx", false);
     }
 
     public override void VerifyRenderingInServerForm(Control control)
@@ -184,7 +184,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesMedicos : System.Web.U
 
     protected void CheckTodos_CheckedChanged(object sender, EventArgs e)
     {
-        if(CheckTodos.Checked)
+        if (CheckTodos.Checked)
         {
             for (int i = 0; i < checkCampos.Items.Count; i++)
             {
@@ -210,7 +210,6 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesMedicos : System.Web.U
     //ciclos para medir tiempos
     public void CicloAseguradora()
     {
-        kpiAseguradora = ddlMoneda.SelectedItem.Text == "Dolares" ? 35 : 15;
         string promedio_aseguradora = "select " +
              "count(*) total_reclamos," +
              "reg_reclamos_medicos.aseguradora, " +
@@ -234,7 +233,6 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesMedicos : System.Web.U
     //ciclo de cliente
     public void CicloCliente()
     {
-        kpiCliente = ddlMoneda.SelectedItem.Text == "Dolares" ? 38 : 18;
         string ciclo_cliente = "select " +
              "count(*) as total_reclamos, " +
              "promedio = cast(AVG(DATEDIFF(minute, reclamos_medicos.fecha_completa_commit, reclamos_medicos.fecha_cierre) *(1.0) / 60 / 24) as decimal(5,2)), " +
@@ -258,7 +256,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesMedicos : System.Web.U
     //ciclo del ejecutivo....
     public void cicloEjecutivoKPI()
     {
-        if(ddlTipoReclamo.SelectedItem.Text == "Colectivos")
+        if (ddlTipoReclamo.SelectedItem.Text == "Colectivos")
         {
             kpiUnity = 72;
         }
@@ -290,10 +288,10 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesMedicos : System.Web.U
             "from reclamos_medicos as r " +
             "inner join reg_reclamos_medicos on reg_reclamos_medicos.id = r.id_reg_reclamos_medicos " +
             "where(r.estado_unity = 'Cerrado') and (Convert(date, r.fecha_cierre, 112) between '" + txtFechaInicio.Text + "' and '" + txtFechaFin.Text + "') " +
-            "and(" +ddlTipoReclamo.SelectedValue+ ") and (" + ddlMoneda.SelectedValue + ") group by r.usuario_unity " +
+            "and(" + ddlTipoReclamo.SelectedValue + ") and (" + ddlMoneda.SelectedValue + ") group by r.usuario_unity " +
             "select " +
             "CONCAT(promedio / 60, ':', promedio % 60, ':', promedio_segundos % 60) as [Promedio usuario], " +
-            "total_reclamos as Total_Reclamos,"+
+            "total_reclamos as Total_Reclamos," +
             "usuario_unity AS Usuario from #ciclo_ejecutivo";
 
         string AsignacionApertura = "select count(*) total_reclamos," +
@@ -303,8 +301,8 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesMedicos : System.Web.U
             "into #ciclo_ejecutivo2 " +
             "from reclamos_medicos as r " +
             "inner join reg_reclamos_medicos on reg_reclamos_medicos.id = r.id_reg_reclamos_medicos " +
-            "where(r.estado_unity = 'Cerrado') and (Convert(date,r.fecha_cierre,112) between '" + txtFechaInicio.Text+"' and '"+txtFechaFin.Text+"') " +
-            " and (" + ddlMoneda.SelectedValue + ") and (" + ddlTipoReclamo.SelectedValue+ ") group by r.usuario_unity " +
+            "where(r.estado_unity = 'Cerrado') and (Convert(date,r.fecha_cierre,112) between '" + txtFechaInicio.Text + "' and '" + txtFechaFin.Text + "') " +
+            " and (" + ddlMoneda.SelectedValue + ") and (" + ddlTipoReclamo.SelectedValue + ") group by r.usuario_unity " +
             "select CONCAT(promedio_minutos / 60, ':', promedio_minutos % 60, ':', promedio_segundos % 60) as Promedio_usuario,total_reclamos as Total_Reclamos, usuario_unity as Usuario from #ciclo_ejecutivo2";
 
         string AperturaAseguradora = "select " +
@@ -315,8 +313,8 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesMedicos : System.Web.U
             "into #ciclo_ejecutivo3 " +
             "from reclamos_medicos as r " +
             "inner join reg_reclamos_medicos  on reg_reclamos_medicos.id = r.id_reg_reclamos_medicos " +
-            "where(r.estado_unity = 'Cerrado') and (Convert(date,r.fecha_cierre, 112) between '" + txtFechaInicio.Text+"' and '"+txtFechaFin.Text+ "') " +
-            " and (" + ddlMoneda.SelectedValue + ") and (" + ddlTipoReclamo.SelectedValue+ ") group by r.usuario_unity " +
+            "where(r.estado_unity = 'Cerrado') and (Convert(date,r.fecha_cierre, 112) between '" + txtFechaInicio.Text + "' and '" + txtFechaFin.Text + "') " +
+            " and (" + ddlMoneda.SelectedValue + ") and (" + ddlTipoReclamo.SelectedValue + ") group by r.usuario_unity " +
             "select " +
             "CONCAT(promedio_minutos / 60, ':', promedio_minutos % 60, ':', promedio_segundos % 60) as Promedio_usuario," +
             "total_reclamos as Total_Reclamos, usuario_unity as Usuario from #ciclo_ejecutivo3";
@@ -355,7 +353,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesMedicos : System.Web.U
 
     protected void linkDescarExcel_Click(object sender, EventArgs e)
     {
-        if(PnCicloAseguradora.Visible == true)
+        if (PnCicloAseguradora.Visible == true)
         {
             Utils.ExportarExcel(PanelPrincipal, Response, "Reporte Ciclo Aseguradora");
         }
@@ -445,7 +443,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesMedicos : System.Web.U
                 e.Row.Cells[3].HorizontalAlign = HorizontalAlign.Left;
                 e.Row.Font.Bold = true;
 
-                e.Row.Cells[4].Text = (kpiCliente / (totalPromedioPonderado / TotalReclamos) * 100).ToString("N2");
+                e.Row.Cells[4].Text = (kpiAseguradora / (totalPromedioPonderado / TotalReclamos) * 100).ToString("N2");
                 e.Row.Cells[4].HorizontalAlign = HorizontalAlign.Left;
                 e.Row.Font.Bold = true;
             }
@@ -463,8 +461,8 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesMedicos : System.Web.U
         {
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
-                TotalReclamos          += Convert.ToDouble(DataBinder.Eval(e.Row.DataItem, "[Total_Reclamos]"));
-                totalPromedioUsuario   += Convert.ToDouble(DataBinder.Eval(e.Row.DataItem, "[Promedio_usuario]"));
+                TotalReclamos += Convert.ToDouble(DataBinder.Eval(e.Row.DataItem, "[Total_Reclamos]"));
+                totalPromedioUsuario += Convert.ToDouble(DataBinder.Eval(e.Row.DataItem, "[Promedio_usuario]"));
                 totalPromedioEjecucion += Convert.ToDouble(DataBinder.Eval(e.Row.DataItem, "[Ejecucion]"));
             }
             else if (e.Row.RowType == DataControlRowType.Footer)
@@ -486,7 +484,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesMedicos : System.Web.U
         }
         catch (Exception)
         {
-           // Response.Write(err);
+            // Response.Write(err);
         }
     }
 
@@ -534,7 +532,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesMedicos : System.Web.U
 
     public void listas()
     {
-        if(ddlElegir.SelectedItem.Text == "Usuario")
+        if (ddlElegir.SelectedItem.Text == "Usuario")
         {
             ddlBuscar.DataSource = DBReclamos.gestores.ToList().Where(ge => ge.tipo == "Medicos").OrderBy(ges => ges.nombre);
             ddlBuscar.DataValueField = "usuario";
@@ -570,9 +568,9 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesMedicos : System.Web.U
     {
         if (ddlCiclos.SelectedValue == "Ciclo Aseguradora")
         {
-            kpiAseguradora = ddlMoneda.SelectedItem.Text == "Dolares" ? 35 : 15;
+            if (ddlMoneda.SelectedItem.Text == "Dolares") kpiAseguradora = 35;
             KPI_ASEGURADORA = "KPI Aseguradora " + kpiAseguradora.ToString() + " Dias";
-            TituloReporte("Promedio Ciclo Aseguradora", KPI_ASEGURADORA, ddlMoneda.SelectedItem.Text);
+            TituloReporte("Promedio Ciclo Aseguradora", KPI_ASEGURADORA);
             CicloAseguradora();
             PnReporte.Visible = false;
             PnCicloAseguradora.Visible = true;
@@ -580,9 +578,8 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesMedicos : System.Web.U
 
         else if (ddlCiclos.SelectedValue == "Ciclo Cliente")
         {
-            kpiCliente = ddlMoneda.SelectedItem.Text == "Dolares" ? 38 : 18;
             KPI_CLIENTE = "KPI Cliente " + kpiCliente.ToString() + " Dias";
-            TituloReporte("Promedio Ciclo Total", KPI_CLIENTE, ddlMoneda.SelectedItem.Text);
+            TituloReporte("Promedio Ciclo Total", KPI_CLIENTE);
             CicloCliente();
             PnReporte.Visible = false;
             PnCicloCliente.Visible = true;
@@ -591,7 +588,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesMedicos : System.Web.U
         else if (ddlCiclos.SelectedValue == "Ciclo Ejecutivo")
         {
             KPI_EJECUTIVO = "KPI Ejecutivo " + kpiUnity.ToString() + " Horas";
-            TituloReporte("Promedio Ciclo Ejecutivo", KPI_EJECUTIVO, ddlMoneda.SelectedItem.Text);
+            TituloReporte("Promedio Ciclo Ejecutivo", KPI_EJECUTIVO);
             cicloEjecutivoKPI();
             PnReporte.Visible = false;
             PnCicloEjecutivoKPI.Visible = true;
@@ -599,15 +596,15 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesMedicos : System.Web.U
 
         else if (ddlCiclos.SelectedValue == "Ciclo Ejecutivo por etapa")
         {
-            TituloReporte("Promedio Ciclo Ejecutivo por etapas", "", ddlMoneda.SelectedItem.Text);
+            TituloReporte("Promedio Ciclo Ejecutivo por etapas", "");
             CicloEjecutivo();
             PnReporte.Visible = false;
-            PnCicloEjecutivo.Visible = true; 
+            PnCicloEjecutivo.Visible = true;
         }
 
         else if (ddlCiclos.SelectedValue == "Eficiencia")
         {
-            KPI_EFICIENCIA = "Eficiencia evaluada sobre el 80%";
+            KPI_EFICIENCIA = "Eficiencia evaluada sobre el 75%";
 
             if (ddlTipoReclamo.SelectedItem.Text == "Individual")
             {
@@ -619,14 +616,14 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesMedicos : System.Web.U
                 Utils.Reportes(txtFechaInicio, txtFechaFin, "pa_eficiencia_colectivos", GridEficiencia);
             }
 
-            TituloReporte("Eficiencia Usuarios", KPI_EFICIENCIA, ddlMoneda.SelectedItem.Text);
+            TituloReporte("Eficiencia Usuarios", KPI_EFICIENCIA);
             PnReporte.Visible = false;
             PnEficiencia.Visible = true;
         }
     }
 
-    public void TituloReporte(String Titulo, String KPI, String Moneda)
-    {   
+    public void TituloReporte(String Titulo, String KPI)
+    {
         try
         {
             PanelPrincipal.Visible = true;
@@ -635,11 +632,11 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesMedicos : System.Web.U
             lblUsuario.Text = "Usuario: " + userlogin;
             lblTitulo.Text = Titulo;
             lblKpi.Text = KPI;
-            lblMoneda.Text = "Moneda: " + Moneda;
         }
-        catch(Exception)
+        catch (Exception)
         {
-            
+
         }
     }
+
 }

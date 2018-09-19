@@ -32,6 +32,7 @@
                         <asp:ListItem Value="reclamos_varios.reportante as Reportante ">Reportante</asp:ListItem>
                         <asp:ListItem Value="reclamos_varios.telefono as Telefono">Telefono</asp:ListItem>
                         <asp:ListItem Value="reclamos_varios.ajustador as Ajustador">Ajustador</asp:ListItem>
+                        <asp:ListItem Value="reclamos_varios.reserva as Reserva">Reserva</asp:ListItem>
                         <asp:ListItem Value="reclamos_varios.version as Version">Version</asp:ListItem>
                         <asp:ListItem Value="(select top 1 CONCAT(fecha,'  /  ', descripcion) from comentarios_reclamos_varios where id_reclamos_varios = reclamos_varios.id order by id desc) as [Ultimo Comentario]">Ultimo Comentario</asp:ListItem>
                         <asp:ListItem Value="detalle_pagos_reclamos_varios.cobertura_pagada as [Cobertura Pagada]">Cobertura Pagada</asp:ListItem>
@@ -62,20 +63,21 @@
                 </div>
             </div>
         </div>
-        <asp:Panel runat="server" ID="PnReporte">
             <div class="col-sm-10">
                 <div class="panel panel-info">
                     <div class="panel-heading">
                         <b>Tabla con campos seleccionados
-                        <spam style="margin-left: 100px">Total de registros: </spam>
+                        <spam style="margin-left: 50px">Total de registros: </spam>
                             <asp:Label ID="lblConteo" runat="server"></asp:Label></b>
-                        <asp:CheckBox ID="checkSinFiltro" Checked="true" AutoPostBack="true" runat="server" Text="Sin Ningun Filtro" OnCheckedChanged="checkSinFiltro_CheckedChanged" />
-                        <asp:DropDownList ID="ddlCiclos" runat="server" Style="width: 15%; height: 25px;">
+                        <asp:CheckBox ID="checkSinFiltro" style="padding-left:30px;" Checked="true" AutoPostBack="true" runat="server" Text="Sin Ningun Filtro" OnCheckedChanged="checkSinFiltro_CheckedChanged"/>
+                        <asp:DropDownList ID="ddlCiclos" runat="server" Style="width: 10%; height: 25px;">
                             <asp:ListItem Value="Ciclo Total">Ciclo Total</asp:ListItem>
                             <asp:ListItem Value="Ciclo Unity">Ciclo Unity</asp:ListItem>
                             <asp:ListItem Value="Ciclo Cliente">Ciclo Cliente</asp:ListItem>
                             <asp:ListItem Value="Ciclo Aseguradora">Ciclo Aseguradora</asp:ListItem>
                         </asp:DropDownList>
+                        <label>Monto Reserva:</label>
+                        <asp:TextBox runat="server" ID="txtMonto" Text="0.00"></asp:TextBox>
                         <asp:Button ID="Mostrar" Style="margin-left: 20px" runat="server" Text="Mostrar" OnClick="Mostrar_Click" />
                         <asp:Button ID="btnMostrarEficiencia" Style="margin-left: 20px" runat="server" Text="Eficiencia" OnClick="btnMostrarEficiencia_Click" />
                     </div>
@@ -142,7 +144,7 @@
                             </asp:Panel>
                             <asp:Panel runat="server" ID="PanelEficiencia">
                                 <div class="scrolling-table-container">
-                                    <asp:GridView ID="GridEficiencia" runat="server" CssClass="table bs-table table-responsive table-hover" AutoGenerateColumns="True" ForeColor="#333333" GridLines="None" OnRowDataBound="GridEficiencia_RowDataBound" ShowFooter="true">
+                                    <asp:GridView ID="GridEficiencia" runat="server" CssClass="table bs-table table-responsive" AutoGenerateColumns="True" ForeColor="#333333" GridLines="None" OnRowDataBound="GridEficiencia_RowDataBound" ShowFooter="true">
                                         <AlternatingRowStyle BackColor="White" />
                                         <FooterStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" />
                                         <HeaderStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" HorizontalAlign="Center" Wrap="False" />
@@ -151,37 +153,23 @@
                                     </asp:GridView>
                                 </div>
                             </asp:Panel>
+                            <asp:Panel runat="server" ID="PnCiclos">
+                                <div style="height: 520px;">
+                                    <div class="scrolling-table-container" style="overflow-y: auto;">
+                                        <asp:GridView ID="GridCiclos" runat="server" CssClass="table bs-table table-responsive" OnRowDataBound="GridCiclos_RowDataBound" AutoGenerateColumns="True" ShowFooter="true" ForeColor="#333333" GridLines="None">
+                                            <AlternatingRowStyle BackColor="White" />
+                                            <FooterStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" />
+                                            <HeaderStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" HorizontalAlign="Center" Wrap="False" />
+                                            <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
+                                            <RowStyle BackColor="#EFF3FB" HorizontalAlign="Left" Wrap="False" />
+                                        </asp:GridView>
+                                    </div>
+                                </div>
+                            </asp:Panel>
                         </asp:Panel>
                     </div>
                 </div>
             </div>
-        </asp:Panel>
-        <%----------------------------  ciclo de los reclamos  ---------------------%>
-        <asp:Panel ID="PnCiclos" Visible="false" runat="server">
-            <div class="col-sm-10">
-                <div class="panel panel-info">
-                    <div class="panel-heading">
-                        <h3 class="panel-title"><b style="font-size: 16px;">Promedio Por Aseguradora</b></h3>
-                    </div>
-                    <div class="panel-body" style="height: 520px;">
-                        <div class="scrolling-table-container" style="overflow-y: auto;">
-                            <asp:GridView ID="GridCiclos" runat="server" CssClass="table bs-table table-responsive" OnRowDataBound="GridCiclos_RowDataBound" AutoGenerateColumns="True" ShowFooter="true" ForeColor="#333333" GridLines="None">
-                                <AlternatingRowStyle BackColor="White" />
-                                <FooterStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" />
-                                <HeaderStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" HorizontalAlign="Center" Wrap="False" />
-                                <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
-                                <RowStyle BackColor="#EFF3FB" HorizontalAlign="Left" Wrap="False" />
-                            </asp:GridView>
-                        </div>
-                        <asp:Label ID="lblTotalPonderados" runat="server"></asp:Label>
-                        <asp:LinkButton ID="linKRegresar" OnClick="linKRegresar_Click" title="Regresar al reporte" runat="server" Style="padding-left: 20px; font-size: 70px; text-align: center; color: lightblue"><i class="fa fa-arrow-circle-o-left" aria-hidden="true"></i></asp:LinkButton>
-                        <asp:LinkButton ID="linkDescarPromedio" OnClick="linkDescarPromedio_Click" title="Descargar en excel" runat="server" Style="font-size: 70px; text-align: center; color: green"><i class="fa fa-file-excel-o" aria-hidden="true"></i></asp:LinkButton>
-                        <b>
-                            <asp:Label ID="lblTituloCiclo" Style="font-size: 25px; padding-left: 50px;" runat="server"></asp:Label></b>
-                    </div>
-                </div>
-            </div>
-        </asp:Panel>
         <%-- botones circulares con las opciones multiples --%>
         <div id="container-floating">
             <div class="nd4 nds" data-toggle="tooltip" data-placement="left" data-original-title="Simone">
@@ -195,7 +183,7 @@
             </div>
             <div id="floating-button" data-toggle="tooltip" data-placement="left" data-original-title="Create" onclick="newmail()">
                 <p class="plus">+</p>
-                <img class="edit" src="https://ssl.gstatic.com/bt/C3341AA7A1A076756462EE2E5CD71C11/1x/bt_compose2_1x.png">
+                <img class="edit" src="https://ssl.gstatic.com/bt/C3341AA7A1A076756462EE2E5CD71C11/1x/bt_compose2_1x.png" />
             </div>
         </div>
     </div>

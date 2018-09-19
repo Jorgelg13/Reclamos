@@ -8,14 +8,26 @@ public partial class Modulos_MdCatalogos_wbEstados : System.Web.UI.Page
     String userlogin = HttpContext.Current.User.Identity.Name;
     ReclamosEntities DBReclamos = new ReclamosEntities();
     int id;
+    string idRecibido;
 
     protected void Page_Load(object sender, EventArgs e)
     {
+        //idRecibido = Request.QueryString[0].ToString();
+
         if (userlogin == "nsierra" || userlogin == "cmejia" || userlogin == "jlaj") PnPrincipal.Visible = true;
+
         if (!IsPostBack)
         {
-            gridEstados.DataSource = DBReclamos.estados_reclamos_unity.OrderBy(es => es.tipo).ToList();
-            gridEstados.DataBind();
+            if(idRecibido == "1")
+            {
+                gridEstados.DataSource = DBReclamos.estados_reclamos_unity.Where(estados => estados.tipo == "auto").OrderBy(es => es.tipo).ToList();
+                gridEstados.DataBind();
+            }
+            else
+            {
+                gridEstados.DataSource = DBReclamos.estados_reclamos_unity.Where(estados => estados.tipo == "daños").OrderBy(es => es.tipo).ToList();
+                gridEstados.DataBind();
+            }
         }
     }
 
@@ -63,9 +75,19 @@ public partial class Modulos_MdCatalogos_wbEstados : System.Web.UI.Page
             Guardar.Visible = true;
             txtDescripcion.Text = "";
             txtDias.Text = "";
-            gridEstados.DataSource = DBReclamos.estados_reclamos_unity.ToList();
+            if (idRecibido == "1")
+            {
+                gridEstados.DataSource = DBReclamos.estados_reclamos_unity.Where(estados => estados.tipo == "auto").OrderBy(es => es.tipo).ToList();
+                gridEstados.DataBind();
+            }
+            else
+            {
+                gridEstados.DataSource = DBReclamos.estados_reclamos_unity.Where(estados => estados.tipo == "daños").OrderBy(es => es.tipo).ToList();
+                gridEstados.DataBind();
+            }
             gridEstados.DataBind();
             Utils.ShowMessage(this.Page, "estado actualizado con exito", "Excelente", "success");
+            txtDescripcion.Enabled = true;
         }
         catch (Exception ex)
         {
@@ -75,6 +97,7 @@ public partial class Modulos_MdCatalogos_wbEstados : System.Web.UI.Page
 
     protected void GridGeneral_SelectedIndexChanged(object sender, EventArgs e)
     {
+        txtDescripcion.Enabled = false;
         id = Convert.ToInt32(gridEstados.SelectedRow.Cells[1].Text);
         var estados = DBReclamos.estados_reclamos_unity.Find(id);
         txtDescripcion.Text = estados.descripcion;

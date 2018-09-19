@@ -226,7 +226,7 @@
             <asp:ControlParameter ControlID="txtBusqueda" Name="asegurado" PropertyName="Text" />
         </SelectParameters>
     </asp:SqlDataSource>
-    <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:reclamosConnectionString %>" SelectCommand="select top 10 *from viewCoberturasAutos WHERE (chasis like '%' + @chasis + '%') ">
+    <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:reclamosConnectionString %>" SelectCommand="select top 40 *from viewCoberturasAutos WHERE (chasis like '%' + @chasis + '%') ">
         <SelectParameters>
             <asp:ControlParameter ControlID="txtBusqueda" Name="chasis" PropertyName="Text" />
         </SelectParameters>

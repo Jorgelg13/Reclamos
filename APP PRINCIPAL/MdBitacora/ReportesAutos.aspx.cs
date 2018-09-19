@@ -1,11 +1,11 @@
 ﻿using System;
-using System.Web.UI;
-using System.Data;
-using System.Web;
+using System.Collections.Generic;
 using System.Linq;
+using System.Web;
+using System.Web.UI;
 using System.Web.UI.WebControls;
 
-public partial class Modulos_MdReclamosUnity_wbFrmReportesAutos : System.Web.UI.Page
+public partial class MdBitacora_ReportesAutos : System.Web.UI.Page
 {
     String userlogin = HttpContext.Current.User.Identity.Name;
     ReclamosEntities DBReclamos = new ReclamosEntities();
@@ -36,8 +36,8 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesAutos : System.Web.UI.
             "CAST(cast((rs.Cerrados * 100) / (rs.Pendientes + nuevos) as decimal) as varchar)  as Ejecucion " +
             "from(select r.nombre, " +
             "Pendientes = (select COUNT(*) from reclamo_auto where estado_unity = 'Seguimiento' and id_gestor = r.id)," +
-            "Nuevos = (select COUNT(*) from reclamo_auto where convert(date, fecha_apertura_reclamo,112) between '"+txtFechaInicio.Text+"' and '"+txtFechaFin.Text+"' and id_gestor = r.id), " +
-            "Cerrados = (select COUNT(*) from reclamo_auto where convert(date, fecha_cierre_reclamo,112) between '"+txtFechaInicio.Text+"' and '"+txtFechaFin.Text+"' and estado_unity = 'Cerrado' and id_gestor = r.id) " +
+            "Nuevos = (select COUNT(*) from reclamo_auto where convert(date, fecha_apertura_reclamo,112) between '" + txtFechaInicio.Text + "' and '" + txtFechaFin.Text + "' and id_gestor = r.id), " +
+            "Cerrados = (select COUNT(*) from reclamo_auto where convert(date, fecha_cierre_reclamo,112) between '" + txtFechaInicio.Text + "' and '" + txtFechaFin.Text + "' and estado_unity = 'Cerrado' and id_gestor = r.id) " +
             "from(select id, usuario, nombre from gestores where tipo = 'autos') as r)  rs where Pendientes !=0";
 
         //variable que contiene todos los joins que se hacen en el query del reporte
@@ -62,7 +62,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesAutos : System.Web.UI.
 
         //si el check esta chequeado entra aqui 
         //este check sirve para no filtrar el reporte por alguna seleccion
-        if(checkSinFiltro.Checked)
+        if (checkSinFiltro.Checked)
         {
             string listado;
             listado = "Select reclamo_auto.id, ";
@@ -75,14 +75,14 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesAutos : System.Web.UI.
                 }
             }
             //si seleccionarion cerrado ejecuta este query 
-            if(ddlEstado.SelectedItem.Text == "Cerrado")
+            if (ddlEstado.SelectedItem.Text == "Cerrado")
             {
                 llenado.llenarGrid(listado.Substring(0, (listado.Length - 2)) + Join +
                   " where (convert(date, reclamo_auto.fecha_cierre_reclamo,112) between '" + txtFechaInicio.Text + "' and '" + txtFechaFin.Text + "') " +
                   "and (reclamo_auto.estado_unity = '" + ddlEstado.SelectedValue + "') " +
                   "", GridCamposSeleccion);
             }
-            else if(ddlEstado.SelectedItem.Text == "Seguimiento")
+            else if (ddlEstado.SelectedItem.Text == "Seguimiento")
             {
                 llenado.llenarGrid(listado.Substring(0, (listado.Length - 2)) + Join +
                  " where (convert(date, reclamo_auto.fecha_apertura_reclamo, 112) between '" + txtFechaInicio.Text + "' and '" + txtFechaFin.Text + "') " +
@@ -123,7 +123,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesAutos : System.Web.UI.
             }
 
             string listado;
-            
+
             listado = "Select reclamo_auto.id, ";
 
             for (int i = 0; i < checkCampos.Items.Count; i++)
@@ -134,14 +134,14 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesAutos : System.Web.UI.
                 }
             }
 
-            if(ddlEstado.SelectedItem.Text == "Cerrado")
+            if (ddlEstado.SelectedItem.Text == "Cerrado")
             {
                 llenado.llenarGrid(listado.Substring(0, (listado.Length - 2)) + Join +
                   " where (" + ddlElegir.SelectedValue + " like '%" + buscar + "%') and (convert(date, reclamo_auto.fecha_cierre_reclamo,112) between '" + txtFechaInicio.Text + "' " +
                   "and '" + txtFechaFin.Text + "') and (reclamo_auto.estado_unity = '" + ddlEstado.SelectedValue + "')  ", GridCamposSeleccion);
             }
 
-            else if(ddlEstado.SelectedItem.Text == "Seguimiento")
+            else if (ddlEstado.SelectedItem.Text == "Seguimiento")
             {
                 llenado.llenarGrid(listado.Substring(0, (listado.Length - 2)) + Join +
                   " where (" + ddlElegir.SelectedValue + " like '%" + buscar + "%') and (convert(date,reclamo_auto.fecha_apertura_reclamo,112) between '" + txtFechaInicio.Text + "' " +
@@ -160,13 +160,12 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesAutos : System.Web.UI.
                 llenado.llenarGrid(listado.Substring(0, (listado.Length - 2)) + Join +
                   " where (" + ddlElegir.SelectedValue + " like '%" + buscar + "%') and (convert(date,reclamo_auto.fecha_apertura_reclamo,112) between '" + txtFechaInicio.Text + "' " +
                   "and '" + txtFechaFin.Text + "')", GridCamposSeleccion);
-            }   
+            }
 
             else if (ddlEstado.SelectedItem.Text == "Pendientes")
             {
                 llenado.llenarGrid(listado.Substring(0, (listado.Length - 2)) + Join +
-                  " where (" + ddlElegir.SelectedValue + " like '%" + buscar + "%') and (estado_unity = 'Seguimiento' ) and " +
-                  "(convert(date, reclamo_auto.fecha_apertura_reclamo,112) <= '"+txtFechaInicio.Text+"') ", GridCamposSeleccion);
+                  " where (" + ddlElegir.SelectedValue + " like '%" + buscar + "%') and reclamo_auto.estado_unity = 'Seguimiento'  ", GridCamposSeleccion);
             }
 
             else if (ddlEstado.SelectedItem.Text == "Estado")
@@ -174,7 +173,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesAutos : System.Web.UI.
                 llenado.llenarGrid(listado.Substring(0, (listado.Length - 2)) + Join +
                   " where (" + ddlElegir.SelectedValue + " like '%" + ddlBuscar.SelectedItem.Text + "%') and (estado_unity = 'Seguimiento') ", GridCamposSeleccion);
 
-                Utils.TituloReporte(PanelPrincipal, lblPeriodo, lblFechaGeneracion, lblUsuario, lblTitulo, "Reporte de Reclamos / Depto. Reclamos Autos / "+ ddlBuscar.SelectedItem.Text +" ", userlogin, txtFechaInicio, txtFechaFin, "");
+                Utils.TituloReporte(PanelPrincipal, lblPeriodo, lblFechaGeneracion, lblUsuario, lblTitulo, "Reporte de Reclamos / Depto. Reclamos Autos / " + ddlBuscar.SelectedItem.Text + " ", userlogin, txtFechaInicio, txtFechaFin, "");
             }
             Conteo();
         }
@@ -188,11 +187,11 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesAutos : System.Web.UI.
     //funcion para exportar a un archivo de excel lo que aparece en el gridview
     protected void btnExportar_Click(object sender, EventArgs e)
     {
-        if(PanelCamposSeleccion.Visible == true)
+        if (PanelCamposSeleccion.Visible == true)
         {
             Utils.ExportarExcel(PanelPrincipal, Response, "Reporte Reclamos Autos");
         }
-        
+
         else if (PanelEficiencia.Visible == true)
         {
             Utils.ExportarExcel(PanelPrincipal, Response, "Reporte de Eficiencia");
@@ -207,7 +206,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesAutos : System.Web.UI.
     //link para salir y ponerse en los reclamos en seguimiento
     protected void linkSalir_Click(object sender, EventArgs e)
     {
-        Response.Redirect("/Modulos/MdReclamosUnity/wbFrmReclamosEnSeguimiento.aspx", false);
+        Response.Redirect("/MdBitacora/DashboardUnity.aspx", false);
     }
 
     public override void VerifyRenderingInServerForm(Control control)
@@ -218,7 +217,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesAutos : System.Web.UI.
     //metodo para inabilitar las cajas de texto y seleccion
     protected void checkSinFiltro_CheckedChanged(object sender, EventArgs e)
     {
-        if(checkSinFiltro.Checked)
+        if (checkSinFiltro.Checked)
         {
             txtBuscar.Enabled = false;
             ddlElegir.Enabled = false;
@@ -237,7 +236,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesAutos : System.Web.UI.
 
     protected void btnExportarEficiencia_Click(object sender, EventArgs e)
     {
-        Utils.ExportarExcel(GridEficiencia,Response, "Eficiencia Reclamos Autos");
+        Utils.ExportarExcel(GridEficiencia, Response, "Eficiencia Reclamos Autos");
     }
 
     public void Eficiencia()
@@ -249,7 +248,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesAutos : System.Web.UI.
             llenado.llenarGrid(eficienciaGestores, GridEficiencia);
         }
 
-        catch(Exception)
+        catch (Exception)
         {
             Utils.ShowMessage(this.Page, "No se a podido generar la eficiencia", "Nota..!", "warning");
         }
@@ -268,7 +267,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesAutos : System.Web.UI.
             ddlBuscar.DataBind();
         }
 
-        else if(ddlElegir.SelectedItem.Text == "Ejecutivo")
+        else if (ddlElegir.SelectedItem.Text == "Ejecutivo")
         {
             ddlBuscar.DataSource = DBReclamos.ejecutivos.ToList();
             ddlBuscar.DataValueField = "codigo";
@@ -359,7 +358,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesAutos : System.Web.UI.
                 e.Row.Cells[3].HorizontalAlign = HorizontalAlign.Left;
                 e.Row.Font.Bold = true;
 
-                e.Row.Cells[4].Text = ((Cerrados / (Pendientes + Nuevos)) *100 ).ToString("N2");
+                e.Row.Cells[4].Text = ((Cerrados / (Pendientes + Nuevos)) * 100).ToString("N2");
                 e.Row.Cells[4].HorizontalAlign = HorizontalAlign.Left;
                 e.Row.Font.Bold = true;
             }
@@ -405,9 +404,10 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesAutos : System.Web.UI.
 
     protected void Mostrar_Click(object sender, EventArgs e)
     {
+
         if (ddlCiclos.SelectedValue == "Ciclo Total")
         {
-            kpi = 91;
+            kpi = 30;
             PanelCamposSeleccion.Visible = false;
             PanelEficiencia.Visible = false;
             PnCiclos.Visible = true;
@@ -417,27 +417,27 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesAutos : System.Web.UI.
 
         else if (ddlCiclos.SelectedValue == "Ciclo Unity")
         {
-            kpi = 12;
+            kpi = 20;
             PanelCamposSeleccion.Visible = false;
             PanelEficiencia.Visible = false;
             PnCiclos.Visible = true;
-            Utils.Ciclos_Reclamos(txtFechaInicio,txtFechaFin, "pa_ciclos_reclamos_autos", GridCiclos, 1, kpi);
+            Utils.Ciclos_Reclamos(txtFechaInicio, txtFechaFin, "pa_ciclos_reclamos_autos", GridCiclos, 1, kpi);
             lblTitulo.Text = "Ciclo Unity, KPI sobre " + kpi.ToString() + " dias";
         }
 
         else if (ddlCiclos.SelectedValue == "Ciclo Aseguradora")
         {
-            kpi = 66;
+            kpi = 10;
             PanelCamposSeleccion.Visible = false;
             PanelEficiencia.Visible = false;
             PnCiclos.Visible = true;
-            Utils.Ciclos_Reclamos(txtFechaInicio, txtFechaFin, "pa_ciclos_reclamos_autos", GridCiclos, 2 , kpi);
+            Utils.Ciclos_Reclamos(txtFechaInicio, txtFechaFin, "pa_ciclos_reclamos_autos", GridCiclos, 2, kpi);
             lblTitulo.Text = "Ciclo Aseguradora, KPI sobre " + kpi.ToString() + " dias";
         }
 
         else if (ddlCiclos.SelectedValue == "Ciclo Cliente")
         {
-            kpi = 13;
+            kpi = 10;
             PanelCamposSeleccion.Visible = false;
             PanelEficiencia.Visible = false;
             PnCiclos.Visible = true;

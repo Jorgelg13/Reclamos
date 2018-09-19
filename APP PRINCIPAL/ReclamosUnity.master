@@ -110,7 +110,8 @@
                             <li><a href="/Modulos/MdCatalogos/wbFrmTalleres.aspx">Talleres</a></li>
                             <li><a href="/Modulos/MdCatalogos/wbFrmAnalistas.aspx">Analistas</a></li>
                             <li><a href="/Modulos/MdCatalogos/wbFrmGestores.aspx">Gestores</a></li>
-                            <li><a href="/Modulos/MdCatalogos/wbEstados.aspx">Fases Reclamos</a></li>
+                            <li><a href="/Modulos/MdCatalogos/wbEstados.aspx?id=1">Fases Autos</a></li>
+                            <li><a href="/Modulos/MdCatalogos/wbEstados.aspx?id=2">Fases Daños</a></li>
                             <li><a href="/Modulos/MdCatalogos/wbAseguradoras.aspx">Aseguradoras</a></li>
                             <li><a href="/Modulos/MdCatalogos/wbTipoDocumentos.aspx?id=1">Documentos Autos</a></li>
                             <li><a href="/Modulos/MdCatalogos/wbTipoDocumentos.aspx?id=2">Documentos Daños varios</a></li>

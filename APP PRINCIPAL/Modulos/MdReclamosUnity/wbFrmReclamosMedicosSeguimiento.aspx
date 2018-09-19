@@ -27,7 +27,7 @@
 
     <asp:Panel ID="panelPrincipal" runat="server">
         <div class="panel panel-info col-sm-12 col-md-9 col-lg-9">
-            <div class="panel-body" style="height:auto; padding:0px;">
+            <div class="panel-body" style="height: auto; padding: 0px;">
                 <div class="img-float-right" style="float: right; padding-top: 15px;">
                     <asp:Label runat="server" ID="lblEstadoReclamo" Style="padding-right: 40px; font-size: 20px;">Estado: </asp:Label>
                     <asp:Label ID="labelID" runat="server" Text="ID" Style="margin-right: 20px;"></asp:Label>
@@ -51,7 +51,7 @@
                 </ul>
                 <%------------------------------------------------ detalle de gastos medicos ----------------------------------------------%>
                 <div class="tab-content" style="height: auto;">
-                    <div role="tabpanel" class="tab-pane active" id="home"style="padding:0px;" >
+                    <div role="tabpanel" class="tab-pane active" id="home" style="padding: 0px;">
                         <div class="panel panel-info col-sm-12 col-md-12 col-lg-12 panel-cuadrado">
                             <div class="panel-heading panel-memos">
                                 <b>Detalle De Gastos Medicos</b>
@@ -60,7 +60,7 @@
                                 </b>
                                 <asp:CheckBox ID="checkMoneda" automplete="false" AutoPostBack="true" runat="server" Style="padding-left: 12%;" Text="Cambiar Moneda" OnCheckedChanged="checkMoneda_CheckedChanged" />
                             </div>
-                            <div class="panel-body" style="padding:0px; height:800px;">
+                            <div class="panel-body" style="padding: 0px; height: 800px;">
                                 <div style="height: auto; overflow-x: auto;">
                                     <asp:GridView ID="GridDetalleM" CssClass="table bs-table tablaDetalleAuto table-responsive" runat="server" ForeColor="#333333" GridLines="None" AutoGenerateColumns="False" DataKeyNames="ID" DataSourceID="detalle_gasto_medico" OnSelectedIndexChanged="GridDetalleM_SelectedIndexChanged">
                                         <Columns>
@@ -86,9 +86,9 @@
                                         <SelectedRowStyle BackColor="#D1DDF1" Font-Bold="True" ForeColor="#333333" />
                                     </asp:GridView>
                                 </div>
-                                <div style="height:auto;">
-                                  <div class="form-group col-md-6 col-lg-3 col-sm-6 col-xs-6" >
-                                    <label>Tipo:</label>
+                                <div style="height: auto;">
+                                    <div class="form-group col-md-6 col-lg-3 col-sm-6 col-xs-6">
+                                        <label>Tipo:</label>
                                         <asp:DropDownList CssClass="form-control" ID="ddlDetalleGasto" Style="width: 100%" Height="32px" runat="server">
                                             <asp:ListItem Value="1">Medicamentos</asp:ListItem>
                                             <asp:ListItem Value="2">Laboratorios y examenes especiales</asp:ListItem>
@@ -100,38 +100,38 @@
                                             <asp:ListItem Value="8">Dental</asp:ListItem>
                                             <asp:ListItem Value="9">Otros</asp:ListItem>
                                         </asp:DropDownList>
-                                </div>
-                                <div class="form-group col-md-6 col-lg-2 col-sm-6 col-xs-6">
-                                   <label>Cantidad:</label> 
-                                   <asp:TextBox ID="txtAgregarGasto" Text="0.00" CssClass="form-control" Style="width: 100%" runat="server"></asp:TextBox>
-                                </div>
-                                <div class="form-group col-md-6 col-lg-3 col-sm-6 col-xs-6">
-                                   <label>No. Factura:</label> 
-                                   <asp:TextBox runat="server" ID="txtNumFactura" autocomplete="false" Style="width: 100%" placeholder="Numero de factura" class="form-control"></asp:TextBox>
-                                </div>
-                                <div class="form-group col-md-6 col-lg-2 col-sm-6 col-xs-6">
-                                   <label>Fecha de gasto:</label>
-                                   <asp:TextBox runat="server" type="date" ID="txtFechaGasto" autocomplete="false" Style="width: 100%; height: 34px;" class="form-control"></asp:TextBox>
-                                </div>
-                                <div class="form-group col-md-6 col-lg-1 col-sm-6 col-xs-6">
-                                    <label style="color: white">Guardar</label>
-                                    <asp:LinkButton ID="linkGuardarDetalleGMedico" OnClick="btnguardarDetalle_Click" title="Guardar detalle de gasto medico" runat="server" Style="font-size: 30px; width: 100%;"><i class="fa fa-floppy-o"></i></asp:LinkButton>
-                                </div>
-                                <asp:Label ID="lblTotal" Style="font-size: 20px; padding-left: 20px;" runat="server"></asp:Label>
+                                    </div>
+                                    <div class="form-group col-md-6 col-lg-2 col-sm-6 col-xs-6">
+                                        <label>Cantidad:</label>
+                                        <asp:TextBox ID="txtAgregarGasto" Text="0.00" CssClass="form-control" Style="width: 100%" runat="server"></asp:TextBox>
+                                    </div>
+                                    <div class="form-group col-md-6 col-lg-3 col-sm-6 col-xs-6">
+                                        <label>No. Factura:</label>
+                                        <asp:TextBox runat="server" ID="txtNumFactura" autocomplete="false" Style="width: 100%" placeholder="Numero de factura" class="form-control"></asp:TextBox>
+                                    </div>
+                                    <div class="form-group col-md-6 col-lg-2 col-sm-6 col-xs-6">
+                                        <label>Fecha de gasto:</label>
+                                        <asp:TextBox runat="server" type="date" ID="txtFechaGasto" autocomplete="false" Style="width: 100%; height: 34px;" class="form-control"></asp:TextBox>
+                                    </div>
+                                    <div class="form-group col-md-6 col-lg-1 col-sm-6 col-xs-6">
+                                        <label style="color: white">Guardar</label>
+                                        <asp:LinkButton ID="linkGuardarDetalleGMedico" OnClick="btnguardarDetalle_Click" title="Guardar detalle de gasto medico" runat="server" Style="font-size: 30px; width: 100%;"><i class="fa fa-floppy-o"></i></asp:LinkButton>
+                                    </div>
+                                    <asp:Label ID="lblTotal" Style="font-size: 20px; padding-left: 20px;" runat="server"></asp:Label>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <%----------------------- detalle para envio de memos a asegurado y aseguradora --------------------%>
-                    <div role="tabpanel" class="tab-pane active " id="coberturas" >
-                        <div class="panel panel-info col-sm-12 col-md-12 col-lg-12 panel-cuadrado" >
+                    <div role="tabpanel" class="tab-pane active " id="coberturas">
+                        <div class="panel panel-info col-sm-12 col-md-12 col-lg-12 panel-cuadrado">
                             <div class="panel-heading panel-memos">
                                 <b>Detalle para envio de memos</b>
                                 <asp:CheckBox ID="checkAgregar" AutoPostBack="true" Text="Generar Memo Al Cliente" title="Generar Memo para el cliente" runat="server" Style="padding-left: 10%;" OnCheckedChanged="checkAgregar_CheckedChanged" />
                                 <asp:CheckBox ID="CheckMemoAseguradora" AutoPostBack="true" Text="Generar Memo Aseguradora" title="Generar Memo para la aseguradora" runat="server" Style="padding-left: 10%;" OnCheckedChanged="CheckMemoAseguradora_CheckedChanged" />
                             </div>
                             <div class="panel-body" style="padding: 0px;">
-                                <div style="height:auto;">
+                                <div style="height: auto;">
                                     <div class="form-group col-sm-12 col-md-6 col-lg-6">
                                         <label>Detalle para el cliente:</label>
                                         <asp:TextBox ID="txtdetalle" Style="width: 100%" autocomplete="off" class="form-control" TextMode="multiline" Columns="50" Rows="5" runat="server" />
@@ -272,7 +272,7 @@
                         <div class="col-md-2 col-lg-2">
                         </div>
                         <br />
-                        <div class="form-inline btn-acciones-laterales" style="height:auto;">
+                        <div class="form-inline btn-acciones-laterales" style="height: auto;">
                             <div class="col-sm-12 col-md-4 col-lg-4">
                                 <div class="panel panel-info">
                                     <div class="panel-heading cabeceras">
@@ -676,7 +676,7 @@
             </div>
         </div>
         <%-- panel lateral con informacion de la poliza--%>
-        <div class="col-sm-12 col-md-3 col-lg-3" style="padding-right: 5px;padding-left: 5px;">
+        <div class="col-sm-12 col-md-3 col-lg-3" style="padding-right: 5px; padding-left: 5px;">
             <div class="panel panel-info">
                 <div class="panel-heading" role="tab" id="headingFour">
                     <h4 class="panel-title">
@@ -722,12 +722,19 @@
                                 <asp:ListItem Value="2">Cerrado</asp:ListItem>
                             </asp:DropDownList>
                         </div>
+                        <div class="form-group col-sm-12 col-md-12 col-lg-12">
+                            <label>Moneda:</label>
+                            <asp:DropDownList CssClass="form-control" ID="ddlMonedaPoliza" Style="width: 100%" Height="34px" runat="server">
+                                <asp:ListItem Value="Quetzales">Quetzales</asp:ListItem>
+                                <asp:ListItem Value="Dolares">Dolares</asp:ListItem>
+                            </asp:DropDownList>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
         <%------------------ datos de la poliza y del asegurado  ------------------- --%>
-        <div class="col-sm-12 col-md-3 col-lg-3" style="padding-right: 5px;padding-left: 5px;">
+        <div class="col-sm-12 col-md-3 col-lg-3" style="padding-right: 5px; padding-left: 5px;">
             <div class="panel panel-info">
                 <div class="panel-heading" role="tab" id="headingThree">
                     <h4 class="panel-title">
@@ -860,7 +867,7 @@
                     </div>
                     <div class="form-group  col-sm-12 col-md-6 col-lg-6">
                         <label>Total Aprobado:</label>
-                        <asp:TextBox ID="txtAprobado" Text="0.00" Style="width: 100%" class="form-control" autocomplete="off"  placeholder="Total Aprobado" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="txtAprobado" Text="0.00" Style="width: 100%" class="form-control" autocomplete="off" placeholder="Total Aprobado" runat="server"></asp:TextBox>
                     </div>
                     <div class="form-group  col-sm-12 col-md-6 col-lg-6">
                         <label>Total No Cubierto:</label>

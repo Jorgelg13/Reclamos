@@ -154,16 +154,17 @@
                     <div class="img-float-right" style="float: right; padding-top: 80px;">
                         <img src="../../imgUnity/Unity%20Promotores%20transparente.png" style="margin-top: -100px; width: 205px;">
                     </div>
-                    <div style="text-align: center; font-size: 20px;">
+                    <div style="text-align: center; font-size: 15px;">
                         <b>
                             <asp:Label runat="server" ID="lblTitulo"></asp:Label></b>
                         <br />
                         <asp:Label runat="server" ID="lblPeriodo"></asp:Label>
                         <br />
+                        <asp:Label Style="padding-left: 20px;" runat="server" ID="lblFechaGeneracion"></asp:Label>
                         <table style="width: 100%;">
                             <tr style="text-align: left;">
                                 <td>
-                                    <asp:Label Style="padding-left: 20px;" runat="server" ID="lblFechaGeneracion"></asp:Label></td>
+                                    <asp:Label runat="server" ID="lblMoneda"></asp:Label></td>
                                 <td>
                                     <asp:Label runat="server" ID="lblUsuario"></asp:Label></td>
                                 <td>
@@ -171,7 +172,6 @@
                             </tr>
                         </table>
                     </div>
-                    <br />
                     <asp:Panel ID="PnCicloAseguradora" Visible="false" runat="server">
                         <div class="panel-body" style="height: auto;">
                             <asp:GridView ID="GridPromedioAseguradora" runat="server" OnRowDataBound="GridPromedioAseguradora_RowDataBound" CssClass="table bs-table table-responsive " AutoGenerateColumns="True" ShowFooter="true" ForeColor="#333333" GridLines="None">
