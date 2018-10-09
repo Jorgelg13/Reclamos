@@ -1,0 +1,50 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="tigo.master.cs" Inherits="Consultas_CajaAhorro" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link href="../../bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="../../css/summernote.css" rel="stylesheet" />
+    <link href="../../css/estilos.css" rel="stylesheet" />
+    <link href="../../Scripts/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="../../css/toastr.min.css" rel="stylesheet" />
+    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <link href="../../css/GridviewScroll.css" rel="stylesheet" />
+    <title>Caja de Ahorro</title>
+    <style>
+        @media only screen and (max-width: 600px) {
+            .ocultar {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div class="jumbotron titulo-cabecera">
+            <h3 style="width: 200px; padding-bottom: 23px; padding-top: 4px;"><a href="/Consultas/Tigo/Dashboard.aspx" style="color: white">Consultas</a></h3>
+            <div class="img-float-right ocultar" style="margin-top: -77px; margin-right: 10px; float: right; color: white; ">
+               <h3>Logo Empresa</h3>
+            </div>
+        </div>
+        <br />
+        <br />
+        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+        </asp:ContentPlaceHolder>
+        <%--archivos javascripts que se utilizan en el sistema--%>
+        <script src="../../Scripts/jquery-3.1.1.min.js"></script>
+        <script src="../../bootstrap/js/bootstrap.min.js"></script>
+        <script src="../../Scripts/jquery.cookie.min.js"></script>
+        <script src="../../Scripts/toastr.min.js"></script>
+        <script src="../../Scripts/gridviewScroll.min.js"></script>
+        <script src="../../Scripts/summernote.min.js"></script>
+        <script src="../../Scripts/jQuery.print.min.js"></script>
+        <script src="../../Scripts/app.js"></script>
+        <asp:ContentPlaceHolder ID="ContentJs" runat="server">
+        </asp:ContentPlaceHolder>
+    </form>
+</body>
+</html>

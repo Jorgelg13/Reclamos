@@ -2,6 +2,7 @@
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Linq;
 
 public partial class Modulos_MdAdmin_wbFrmAsigReclamosDaños : System.Web.UI.Page
 {
@@ -9,6 +10,8 @@ public partial class Modulos_MdAdmin_wbFrmAsigReclamosDaños : System.Web.UI.Pag
     ReclamosEntities DBReclamos = new ReclamosEntities();
     Utils comprobar = new Utils();
     Utils llenado = new Utils();
+    String Cuerpo;
+
     int id;
     string asignados, datos;
 
@@ -68,6 +71,8 @@ public partial class Modulos_MdAdmin_wbFrmAsigReclamosDaños : System.Web.UI.Pag
     }
     private void asignar_reclamos()
     {
+        var gestor = DBReclamos.gestores.Where(ges => ges.nombre == DDLusuario.SelectedItem.Text).First();
+
         foreach (GridViewRow row in GridAsigDaños.Rows)
         {
             CheckBox checkAsig = (CheckBox)row.FindControl("checkAsignar");
@@ -78,6 +83,7 @@ public partial class Modulos_MdAdmin_wbFrmAsigReclamosDaños : System.Web.UI.Pag
                 try
                 {
                     var asignar = DBReclamos.reclamos_varios.Find(id);
+                    Cuerpo = "Estimado Asesor se a asignado un reclamo con el ID " + id + " bajo la poliza " + asignar.reg_reclamo_varios.poliza + ", del asegurado " + asignar.reg_reclamo_varios.asegurado + ". ";
                     asignar.usuario_unity = DDLusuario.SelectedValue;
                     asignar.fecha_asignacion = DateTime.Now;
                     asignar.asignado_por = userlogin;
@@ -86,6 +92,7 @@ public partial class Modulos_MdAdmin_wbFrmAsigReclamosDaños : System.Web.UI.Pag
                     llenado.llenarGrid(asignados, GridAsignados);
                     llenado.llenarGrid(datos, GridAsigDaños);
                     Utils.ShowMessage(this.Page, "Reclamos asignados con exito", "Excelente..!", "success");
+                    Correos.Notificacion(gestor.correo, "Asignacion de reclamo", Cuerpo);
                 }
                 catch (Exception)
                 {

@@ -15,24 +15,57 @@ public partial class Modulos_MdReclamosUnity_wbFrmReporteNoConforme : System.Web
     {
         string no_conforme;
         PanelPrincipal.Visible = true;
+        GridNoConforme.Visible = true;
+        GridEficiencia.Visible = false;
 
         no_conforme = "Select *from v_producto_no_conforme where tipo "+ddlTipo.SelectedValue+" and estado " + ddlEstado.SelectedValue + " and " +
             "convert (date,[Fecha Creacion],112) between '"+txtFechaInicio.Text+"' and '"+txtFechaFin.Text+"' ";
         llenado.llenarGrid(no_conforme, GridNoConforme);
 
         Utils.Reportes(txtFechaInicio, txtFechaFin, "pa_eficiencia_pnc", GridEficiencia);
-        lblConteo.Text = GridNoConforme.Rows.Count.ToString();
+        lblConteo.Text = "Total de Registros:  " + GridNoConforme.Rows.Count.ToString();
         TituloReporte("Reporte Producto No Conforme / Depto de Reclamos "+ ddlTipo.SelectedItem.Text +" ","");
+    }
+
+    public void ocultar()
+    {
+        if(ddlTipo.SelectedItem.Text == "General")
+        {
+
+        }
+
+        else if(ddlTipo.SelectedItem.Text == "Autos")
+        {
+            GridEficiencia.Rows[1].Visible = false;
+            GridEficiencia.Rows[2].Visible = false;
+            GridEficiencia.Rows[3].Visible = false;
+        }
+
+        else if (ddlTipo.SelectedItem.Text == "Daños varios")
+        {
+            GridEficiencia.Rows[0].Visible = false;
+            GridEficiencia.Rows[2].Visible = false;
+            GridEficiencia.Rows[3].Visible = false;
+        }
+
+        else if (ddlTipo.SelectedItem.Text == "Individuales")
+        {
+            GridEficiencia.Rows[0].Visible = false;
+            GridEficiencia.Rows[1].Visible = false;
+            GridEficiencia.Rows[3].Visible = false;
+        }
+
+        else if (ddlTipo.SelectedItem.Text == "Colectivos")
+        {
+            GridEficiencia.Rows[0].Visible = false;
+            GridEficiencia.Rows[1].Visible = false;
+            GridEficiencia.Rows[2].Visible = false;
+        }
     }
 
     protected void btnExportar_Click(object sender, EventArgs e)
     {
         Utils.ExportarExcel(PanelPrincipal, Response, "Reporte producto no conforme");
-    }
-
-    protected void btnExportarEficiencia_Click(object sender, EventArgs e)
-    {
-        Utils.ExportarExcel(GridEficiencia, Response, "Eficiencia No conforme del " + txtFechaInicio.Text + " al " + txtFechaFin.Text + "");
     }
 
     public override void VerifyRenderingInServerForm(Control control)
@@ -59,5 +92,19 @@ public partial class Modulos_MdReclamosUnity_wbFrmReporteNoConforme : System.Web
         {
 
         }
+    }
+
+    protected void btnMostrarEficiencia_Click(object sender, EventArgs e)
+    {
+        TituloReporte("Eficiencia Producto No Conforme / Depto de Reclamos " + ddlTipo.SelectedItem.Text + " ", "");
+
+        GridEficiencia.Rows[0].Visible = true;
+        GridEficiencia.Rows[1].Visible = true;
+        GridEficiencia.Rows[2].Visible = true;
+        GridEficiencia.Rows[3].Visible = true;
+
+        GridEficiencia.Visible = true;
+        GridNoConforme.Visible = false;
+        ocultar();
     }
 }

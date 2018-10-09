@@ -14,6 +14,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesDaños : System.Web.UI
     String EficienciaGestor;
     Double Pendientes, Nuevos, Cerrados, Ejecucion;
     int Promedio, Total, KPI, EjecucionCiclos;
+    int Total2, Promedio2, EjecucionCiclos2;
     conexionBD obj = new conexionBD();
     ReclamosEntities DBReclamos = new ReclamosEntities();
     
@@ -367,7 +368,8 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesDaños : System.Web.UI
             PanelCamposSeleccion.Visible = false;
             PanelEficiencia.Visible = false;
             PnCiclos.Visible = true;
-            Utils.Ciclos_Reclamos(txtFechaInicio, txtFechaFin, "pa_ciclos_reclamos_danios", GridCiclos, 1 ,KPI);
+            Utils.Ciclos_Reclamos(txtFechaInicio, txtFechaFin, "pa_ciclos_reclamos_danios", GridCiclos, 1,KPI);
+            Utils.Ciclos_Reclamos(txtFechaInicio, txtFechaFin, "pa_ciclos_reclamos_danios", GridCiclos2, 5,KPI);
             lblTitulo.Text = "Ciclo Unity, KPI sobre " + KPI.ToString() + " dias";
         }
                 
@@ -423,6 +425,49 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesDaños : System.Web.UI
                 e.Row.Font.Bold = true;
 
                 e.Row.Cells[3].Text = (EjecucionCiclos / GridCiclos.Rows.Count).ToString() + " %";
+                e.Row.Cells[3].HorizontalAlign = HorizontalAlign.Left;
+                e.Row.Font.Bold = true;
+            }
+        }
+        catch (Exception err)
+        {
+            Response.Write(err);
+        }
+    }
+
+    protected void GridCiclos2_RowDataBound(object sender, GridViewRowEventArgs e)
+    {
+        try
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                Total2 += Convert.ToInt32(DataBinder.Eval(e.Row.DataItem, "[Total_Reclamos]"));
+                Promedio2 += Convert.ToInt32(DataBinder.Eval(e.Row.DataItem, "[Promedio_dias]"));
+                EjecucionCiclos2 += Convert.ToInt32(DataBinder.Eval(e.Row.DataItem, "Ejecucion"));
+
+                if (Convert.ToInt32(e.Row.Cells[3].Text) <= 100)
+                {
+                    e.Row.Attributes.Add("style", "background-color: #8ace8e"); //rojos
+                }
+
+                if (Convert.ToInt32(e.Row.Cells[3].Text) > 100)
+                {
+                    e.Row.Attributes.Add("style", "background-color: #f7c6be"); //rojos
+                }
+            }
+            else if (e.Row.RowType == DataControlRowType.Footer)
+            {
+                e.Row.Cells[0].Text = "TOTALES:";
+
+                e.Row.Cells[1].Text = Total2.ToString();
+                e.Row.Cells[1].HorizontalAlign = HorizontalAlign.Left;
+                e.Row.Font.Bold = true;
+
+                e.Row.Cells[2].Text = (Promedio2 / GridCiclos2.Rows.Count).ToString();
+                e.Row.Cells[2].HorizontalAlign = HorizontalAlign.Left;
+                e.Row.Font.Bold = true;
+
+                e.Row.Cells[3].Text = (EjecucionCiclos2 / GridCiclos2.Rows.Count).ToString() + " %";
                 e.Row.Cells[3].HorizontalAlign = HorizontalAlign.Left;
                 e.Row.Font.Bold = true;
             }

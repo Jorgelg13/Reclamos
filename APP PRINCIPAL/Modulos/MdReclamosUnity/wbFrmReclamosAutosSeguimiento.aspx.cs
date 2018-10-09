@@ -76,7 +76,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosAutosSeguimiento : Sys
             tiempo();
         }
 
-        if (userlogin == "nsierra")
+        if (userlogin == "nsierra" || userlogin == "jlaj")
         {
             btnGuardarProximaFecha.Enabled = true;
         }
@@ -294,6 +294,11 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosAutosSeguimiento : Sys
         dias = Convert.ToInt32(dias_revision.dias_revision);
         DateTime fecha = DateTime.Now;
 
+        if(ddlEstadoAuto.SelectedItem.Text == "Reparacion" && seguimiento.auto_reclamo.poliza == "AUTO-366488")
+        {
+            dias = 3;
+        }
+
         seguimiento.fecha_visualizar = fecha.AddDays(dias);
         DBReclamos.SaveChanges();
     }
@@ -355,9 +360,6 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosAutosSeguimiento : Sys
             Utils.ShowMessage(this.Page, "No se a podido actualizar el registro", "Nota.. " + ex.Message, "error");
             Email.ENVIAR_ERROR("Error de reclamo en seguimiento de autos","Error ocasionado al usuario: " + userlogin + " en el registro con el id: " + id + "\n\n" + ex);
         }
-
-        
-
     }
 
     protected void cerrarReclamo()
@@ -703,6 +705,8 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosAutosSeguimiento : Sys
         lblCartaPoliza.Text    = registro.auto_reclamo.poliza;
         lblCartaAsegurado.Text = registro.auto_reclamo.asegurado;
         lblCartaEjecutivo.Text = registro.auto_reclamo.ejecutivo;
+        lblAsesor.Text = registro.gestores.nombre;
+        lblCorreoAsesor.Text = registro.gestores.correo;
     }
 
     //metodo para habilitar la casilla del numero de reclamo que brinda la aseguradora
@@ -1101,7 +1105,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosAutosSeguimiento : Sys
         {
             chCartaDeclinado.Checked = false;
             chEnvioCarta.Checked = false;
-            CodigoISO.Text = "RE-AU-F-04";
+            CodigoISO.Text = "RE-AU-F-04/Ver.02";
             var buscarCarta = DBReclamos.cartas.Where(ca => ca.tipo == "cierre interno" && ca.modulo == "autos" && ca.id_reclamo == id).Count();
 
             if (buscarCarta == 1)
@@ -1135,7 +1139,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosAutosSeguimiento : Sys
         {
             chCartaCierre.Checked = false;
             chEnvioCarta.Checked = false;
-            CodigoISO.Text = "RE-AU-F-05";
+            CodigoISO.Text = "RE-AU-F-05/Ver. 03";
             var buscarCarta = DBReclamos.cartas.Where(ca => ca.tipo == "declinado" && ca.modulo == "autos" && ca.id_reclamo == id).Count();
 
             if (buscarCarta == 1)
@@ -1169,7 +1173,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosAutosSeguimiento : Sys
         {
             chCartaCierre.Checked = false;
             chCartaDeclinado.Checked = false;
-            CodigoISO.Text = "RE-AU-F-03";
+            CodigoISO.Text = "RE-AU-F-03/Ver.03";
 
             var buscarCarta = DBReclamos.cartas.Where(ca => ca.tipo == "envio cheque" && ca.modulo == "autos" && ca.id_reclamo == id).Count();
 

@@ -612,6 +612,17 @@ public partial class gestores
     public virtual ICollection<reclamos_varios> reclamos_varios { get; set; }
 }
 
+public partial class ingreso_cheques
+{
+    public int id { get; set; }
+    public Nullable<int> usuario { get; set; }
+    public Nullable<long> id_reclamo { get; set; }
+    public string tipo { get; set; }
+    public Nullable<System.DateTime> fecha { get; set; }
+
+    public virtual reclamos_medicos reclamos_medicos { get; set; }
+}
+
 public partial class motivos_cierre
 {
     public motivos_cierre()
@@ -762,6 +773,7 @@ public partial class reclamos_medicos
         this.comentarios_reclamos_medicos = new HashSet<comentarios_reclamos_medicos>();
         this.detalle_gasto_medico = new HashSet<detalle_gasto_medico>();
         this.detalle_pagos_reclamos_medicos = new HashSet<detalle_pagos_reclamos_medicos>();
+        this.ingreso_cheques = new HashSet<ingreso_cheques>();
         this.recibos_medicos = new HashSet<recibos_medicos>();
     }
 
@@ -820,6 +832,7 @@ public partial class reclamos_medicos
     public virtual ICollection<detalle_gasto_medico> detalle_gasto_medico { get; set; }
     public virtual ICollection<detalle_pagos_reclamos_medicos> detalle_pagos_reclamos_medicos { get; set; }
     public virtual estado estado { get; set; }
+    public virtual ICollection<ingreso_cheques> ingreso_cheques { get; set; }
     public virtual ICollection<recibos_medicos> recibos_medicos { get; set; }
     public virtual reg_reclamos_medicos reg_reclamos_medicos { get; set; }
     public virtual usuario usuario { get; set; }

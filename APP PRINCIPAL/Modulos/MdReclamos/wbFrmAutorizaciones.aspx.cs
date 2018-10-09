@@ -13,7 +13,8 @@ public partial class Modulos_MdReclamos_wbFrmAutorizaciones : System.Web.UI.Page
     Utils llenado = new Utils();
     string ultimoIdRegMedico, ultimoIdAutorizacion, idCabina, idUsuario, codigo;
     string metodo = "sistema";
-    public string asegurado, poliza, ramo, tipo, clase, ejecutivo, aseguradora, contratante, estado,vip, secren, cliente;
+    public string asegurado, poliza, ramo, tipo, clase, ejecutivo, aseguradora, 
+                  contratante, estado,vip, secren, cliente, moneda, certificado;
     bool tramiteDirecto = false;
     ReclamosEntities DBReclamos = new ReclamosEntities();
 
@@ -42,8 +43,10 @@ public partial class Modulos_MdReclamos_wbFrmAutorizaciones : System.Web.UI.Page
             ramo = GridAutorizaciones.SelectedRow.Cells[10].Text;
             contratante = HttpUtility.HtmlDecode(GridAutorizaciones.SelectedRow.Cells[11].Text);
             estado = HttpUtility.HtmlDecode(GridAutorizaciones.SelectedRow.Cells[12].Text);
-            secren = GridAutorizaciones.SelectedRow.Cells[13].Text;
-            cliente = GridAutorizaciones.SelectedRow.Cells[14].Text;
+            moneda = HttpUtility.HtmlDecode(GridAutorizaciones.SelectedRow.Cells[13].Text);
+            certificado = HttpUtility.HtmlDecode(GridAutorizaciones.SelectedRow.Cells[14].Text);
+            secren = GridAutorizaciones.SelectedRow.Cells[15].Text;
+            cliente = GridAutorizaciones.SelectedRow.Cells[16].Text;
         }
 
         catch (Exception)
@@ -54,7 +57,6 @@ public partial class Modulos_MdReclamos_wbFrmAutorizaciones : System.Web.UI.Page
 
     public void guardar()
     {
-
         obtenerDatosPoliza();
 
         if (poliza == null)
@@ -102,6 +104,8 @@ public partial class Modulos_MdReclamos_wbFrmAutorizaciones : System.Web.UI.Page
                     reg.secren = Convert.ToInt16(secren);
                     reg.tipo_registro = "Autorizacion";
                     reg.cliente = Convert.ToInt32(cliente);
+                    reg.moneda = moneda.ToString();
+                    reg.certificado = certificado.ToString();
 
                     autorizaciones autorizacion = new autorizaciones();
                     var results = DBReclamos.pa_sec_autorizaciones();
@@ -191,7 +195,7 @@ public partial class Modulos_MdReclamos_wbFrmAutorizaciones : System.Web.UI.Page
         {
             sql = "SELECT poliza as Poliza, asegurado as Asegurado, vip as VIP, nombre as Aseguradora," +
                 "gst_nombre as Gestor, vigi as Vigencia_Inicial, vigf as Vigencia_Final, tipo as Tipo, clase as Clase, ramo as Ramo, contratante as Contratante, " +
-                "estado_poliza as Estado_Poliza, secren as [Secuencia Renovacion], cliente as Cliente FROM vistaReclamosMedicos Where asegurado like '%" + arreglo[0] + "%' ";
+                "estado_poliza as Estado_Poliza, moneda as Moneda, certificado as Certificado, secren as [Secuencia Renovacion], cliente as Cliente FROM vistaReclamosMedicos Where asegurado like '%" + arreglo[0] + "%' ";
 
             if (arreglo.Length > 1)
             {

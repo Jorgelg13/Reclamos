@@ -541,6 +541,16 @@
           <Property Name="usuario" Type="varchar" MaxLength="20" />
           <Property Name="tipo" Type="varchar" MaxLength="20" />
         </EntityType>
+        <EntityType Name="ingreso_cheques">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="usuario" Type="int" />
+          <Property Name="id_reclamo" Type="bigint" />
+          <Property Name="tipo" Type="char" MaxLength="3" />
+          <Property Name="fecha" Type="datetime" />
+        </EntityType>
         <EntityType Name="motivos_cierre">
           <Key>
             <PropertyRef Name="id" />
@@ -1458,6 +1468,18 @@ advertencia 6002: La tabla o vista 'reclamos.dbo.v_producto_no_conforme' no tien
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_ingreso_cheques">
+          <End Role="reclamos_medicos" Type="Self.reclamos_medicos" Multiplicity="0..1" />
+          <End Role="ingreso_cheques" Type="Self.ingreso_cheques" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="reclamos_medicos">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ingreso_cheques">
+              <PropertyRef Name="id_reclamo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_recibos_medicos_recibos_medicos">
           <End Role="reclamos_medicos" Type="Self.reclamos_medicos" Multiplicity="0..1" />
           <End Role="recibos_medicos" Type="Self.recibos_medicos" Multiplicity="*" />
@@ -1562,11 +1584,13 @@ advertencia 6002: La tabla o vista 'reclamos.dbo.v_producto_no_conforme' no tien
           <Parameter Name="fechaInicio" Type="date" Mode="In" />
           <Parameter Name="fechaFin" Type="date" Mode="In" />
           <Parameter Name="tipo" Type="int" Mode="In" />
+          <Parameter Name="kpi" Type="int" Mode="In" />
         </Function>
         <Function Name="pa_ciclos_reclamos_danios" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="fechaInicio" Type="date" Mode="In" />
           <Parameter Name="fechaFin" Type="date" Mode="In" />
           <Parameter Name="tipo" Type="int" Mode="In" />
+          <Parameter Name="KPI" Type="int" Mode="In" />
         </Function>
         <Function Name="pa_eficiencia_colectivos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="fechaInicio" Type="date" Mode="In" />
@@ -1624,6 +1648,7 @@ advertencia 6002: La tabla o vista 'reclamos.dbo.v_producto_no_conforme' no tien
         <Function Name="pa_sec_cartas" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="pa_sec_documentos_solicitados" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="pa_sec_estados_autos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="pa_sec_ingreso_cheque" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="pa_sec_reclamo_auto" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="pa_sec_reclamos_medicos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="pa_sec_registros_medicos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
@@ -1701,6 +1726,7 @@ advertencia 6002: La tabla o vista 'reclamos.dbo.v_producto_no_conforme' no tien
           <EntitySet Name="estados_reclamos_unity" EntityType="Self.estados_reclamos_unity" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="formulario_colectivo" EntityType="Self.formulario_colectivo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="gestores" EntityType="Self.gestores" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ingreso_cheques" EntityType="Self.ingreso_cheques" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="motivos_cierre" EntityType="Self.motivos_cierre" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="pais" EntityType="Self.pais" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ramos" EntityType="Self.ramos" Schema="dbo" store:Type="Tables" />
@@ -1918,6 +1944,10 @@ FROM [dbo].[v_producto_no_conforme] AS [v_producto_no_conforme]</DefiningQuery>
             <End Role="tipo_documentos" EntitySet="tipo_documentos" />
             <End Role="documentos_solicitados" EntitySet="documentos_solicitados" />
           </AssociationSet>
+          <AssociationSet Name="FK_ingreso_cheques" Association="Self.FK_ingreso_cheques">
+            <End Role="reclamos_medicos" EntitySet="reclamos_medicos" />
+            <End Role="ingreso_cheques" EntitySet="ingreso_cheques" />
+          </AssociationSet>
           <AssociationSet Name="FK_recibos_medicos_recibos_medicos" Association="Self.FK_recibos_medicos_recibos_medicos">
             <End Role="reclamos_medicos" EntitySet="reclamos_medicos" />
             <End Role="recibos_medicos" EntitySet="recibos_medicos" />
@@ -2039,17 +2069,27 @@ FROM [dbo].[v_producto_no_conforme] AS [v_producto_no_conforme]</DefiningQuery>
             <Parameter Name="fechaInicio" Mode="In" Type="DateTime" />
             <Parameter Name="fechaFin" Mode="In" Type="DateTime" />
             <Parameter Name="tipo" Mode="In" Type="Int32" />
+            <Parameter Name="kpi" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="pa_ciclos_reclamos_danios">
             <Parameter Name="fechaInicio" Mode="In" Type="DateTime" />
             <Parameter Name="fechaFin" Mode="In" Type="DateTime" />
             <Parameter Name="tipo" Mode="In" Type="Int32" />
+            <Parameter Name="KPI" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="pa_reporte_problemas_autos" ReturnType="Collection(reclamosModel.pa_reporte_problemas_autos_Result)">
             <Parameter Name="fechaInicio" Mode="In" Type="DateTime" />
             <Parameter Name="fechaFin" Mode="In" Type="DateTime" />
           </FunctionImport>
           <FunctionImport Name="pa_reporte_problemas_danios" ReturnType="Collection(reclamosModel.pa_reporte_problemas_danios_Result)">
+            <Parameter Name="fechaInicio" Mode="In" Type="DateTime" />
+            <Parameter Name="fechaFin" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="pa_eficiencia_colectivos" ReturnType="Collection(reclamosModel.pa_eficiencia_colectivos_Result)">
+            <Parameter Name="fechaInicio" Mode="In" Type="DateTime" />
+            <Parameter Name="fechaFin" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="pa_eficiencia_individuales" ReturnType="Collection(reclamosModel.pa_eficiencia_individuales_Result)">
             <Parameter Name="fechaInicio" Mode="In" Type="DateTime" />
             <Parameter Name="fechaFin" Mode="In" Type="DateTime" />
           </FunctionImport>
@@ -2093,6 +2133,7 @@ FROM [dbo].[v_producto_no_conforme] AS [v_producto_no_conforme]</DefiningQuery>
           <EntitySet Name="estados_reclamos_unity" EntityType="reclamosModel.estados_reclamos_unity" />
           <EntitySet Name="formulario_colectivo" EntityType="reclamosModel.formulario_colectivo" />
           <EntitySet Name="gestores" EntityType="reclamosModel.gestores" />
+          <EntitySet Name="ingreso_cheques" EntityType="reclamosModel.ingreso_cheques" />
           <EntitySet Name="motivos_cierre" EntityType="reclamosModel.motivos_cierre" />
           <EntitySet Name="pais" EntityType="reclamosModel.pais" />
           <EntitySet Name="ramos" EntityType="reclamosModel.ramos" />
@@ -2257,6 +2298,10 @@ FROM [dbo].[v_producto_no_conforme] AS [v_producto_no_conforme]</DefiningQuery>
             <End Role="gestores" EntitySet="gestores" />
             <End Role="reclamos_varios" EntitySet="reclamos_varios" />
           </AssociationSet>
+          <AssociationSet Name="FK_ingreso_cheques" Association="reclamosModel.FK_ingreso_cheques">
+            <End Role="reclamos_medicos" EntitySet="reclamos_medicos" />
+            <End Role="ingreso_cheques" EntitySet="ingreso_cheques" />
+          </AssociationSet>
           <AssociationSet Name="FK_reclamo_auto_motivos_cierre" Association="reclamosModel.FK_reclamo_auto_motivos_cierre">
             <End Role="motivos_cierre" EntitySet="motivos_cierre" />
             <End Role="reclamo_auto" EntitySet="reclamo_auto" />
@@ -2293,14 +2338,7 @@ FROM [dbo].[v_producto_no_conforme] AS [v_producto_no_conforme]</DefiningQuery>
             <End Role="talleres" EntitySet="talleres" />
             <End Role="reclamos_varios" EntitySet="reclamos_varios" />
           </AssociationSet>
-          <FunctionImport Name="pa_eficiencia_colectivos" ReturnType="Collection(reclamosModel.pa_eficiencia_colectivos_Result)">
-            <Parameter Name="fechaInicio" Mode="In" Type="DateTime" />
-            <Parameter Name="fechaFin" Mode="In" Type="DateTime" />
-          </FunctionImport>
-          <FunctionImport Name="pa_eficiencia_individuales" ReturnType="Collection(reclamosModel.pa_eficiencia_individuales_Result)">
-            <Parameter Name="fechaInicio" Mode="In" Type="DateTime" />
-            <Parameter Name="fechaFin" Mode="In" Type="DateTime" />
-          </FunctionImport>
+          <FunctionImport Name="pa_sec_ingreso_cheque" ReturnType="Collection(Int32)" />
           </EntityContainer>
         <ComplexType Name="pa_reclamos_autos_Result">
           <Property Type="Int32" Name="secuencia" Nullable="true" />
@@ -2516,6 +2554,22 @@ FROM [dbo].[v_producto_no_conforme] AS [v_producto_no_conforme]</DefiningQuery>
           <Property Type="String" Name="Comentario_Aseguradora" Nullable="true" MaxLength="Max" />
           <Property Type="String" Name="Ejecutivo" Nullable="true" MaxLength="100" />
           <Property Type="String" Name="Comentario_Ejecutivo" Nullable="true" MaxLength="Max" />
+        </ComplexType>
+        <ComplexType Name="pa_eficiencia_colectivos_Result">
+          <Property Type="String" Name="Nombre" Nullable="true" MaxLength="80" />
+          <Property Type="Int32" Name="Pendientes" Nullable="true" />
+          <Property Type="Int32" Name="Nuevos" Nullable="true" />
+          <Property Type="Int32" Name="Cerrados" Nullable="true" />
+          <Property Type="Int32" Name="Fuera_de_tiempo" Nullable="true" />
+          <Property Type="Int32" Name="Ejecucion" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="pa_eficiencia_individuales_Result">
+          <Property Type="String" Name="Nombre" Nullable="true" MaxLength="80" />
+          <Property Type="Int32" Name="Pendientes" Nullable="true" />
+          <Property Type="Int32" Name="Nuevos" Nullable="true" />
+          <Property Type="Int32" Name="Cerrados" Nullable="true" />
+          <Property Type="Int32" Name="Fuera_de_tiempo" Nullable="true" />
+          <Property Type="Int32" Name="Ejecucion" Nullable="true" />
         </ComplexType>
         <EntityType Name="ajustadores">
           <Key>
@@ -3091,6 +3145,17 @@ FROM [dbo].[v_producto_no_conforme] AS [v_producto_no_conforme]</DefiningQuery>
           <NavigationProperty Name="reclamo_auto" Relationship="reclamosModel.FK_reclamo_auto_gestores" FromRole="gestores" ToRole="reclamo_auto" />
           <NavigationProperty Name="reclamos_varios" Relationship="reclamosModel.FK_reclamos_varios_gestores" FromRole="gestores" ToRole="reclamos_varios" />
         </EntityType>
+        <EntityType Name="ingreso_cheques">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="usuario" Type="Int32" />
+          <Property Name="id_reclamo" Type="Int64" />
+          <Property Name="tipo" Type="String" MaxLength="3" FixedLength="true" Unicode="false" />
+          <Property Name="fecha" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="reclamos_medicos" Relationship="reclamosModel.FK_ingreso_cheques" FromRole="ingreso_cheques" ToRole="reclamos_medicos" />
+        </EntityType>
         <EntityType Name="motivos_cierre">
           <Key>
             <PropertyRef Name="id" />
@@ -3271,6 +3336,7 @@ FROM [dbo].[v_producto_no_conforme] AS [v_producto_no_conforme]</DefiningQuery>
           <NavigationProperty Name="detalle_gasto_medico" Relationship="reclamosModel.FK_detalle_gasto_medico_reclamos_medicos" FromRole="reclamos_medicos" ToRole="detalle_gasto_medico" />
           <NavigationProperty Name="detalle_pagos_reclamos_medicos" Relationship="reclamosModel.FK_detalle_pagos_reclamos_medicos_detalle_pagos_reclamos_medicos1" FromRole="reclamos_medicos" ToRole="detalle_pagos_reclamos_medicos" />
           <NavigationProperty Name="estado" Relationship="reclamosModel.FK__reclamos___id_es__4F7CD00D" FromRole="reclamos_medicos" ToRole="estado" />
+          <NavigationProperty Name="ingreso_cheques" Relationship="reclamosModel.FK_ingreso_cheques" FromRole="reclamos_medicos" ToRole="ingreso_cheques" />
           <NavigationProperty Name="recibos_medicos" Relationship="reclamosModel.FK_recibos_medicos_recibos_medicos" FromRole="reclamos_medicos" ToRole="recibos_medicos" />
           <NavigationProperty Name="reg_reclamos_medicos" Relationship="reclamosModel.FK__reclamos___id_re__3E52440B" FromRole="reclamos_medicos" ToRole="reg_reclamos_medicos" />
           <NavigationProperty Name="usuario" Relationship="reclamosModel.FK__reclamos___id_us__5165187F" FromRole="reclamos_medicos" ToRole="usuario" />
@@ -4044,6 +4110,18 @@ FROM [dbo].[v_producto_no_conforme] AS [v_producto_no_conforme]</DefiningQuery>
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_ingreso_cheques">
+          <End Type="reclamosModel.reclamos_medicos" Role="reclamos_medicos" Multiplicity="0..1" />
+          <End Type="reclamosModel.ingreso_cheques" Role="ingreso_cheques" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="reclamos_medicos">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ingreso_cheques">
+              <PropertyRef Name="id_reclamo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_reclamo_auto_motivos_cierre">
           <End Type="reclamosModel.motivos_cierre" Role="motivos_cierre" Multiplicity="0..1" />
           <End Type="reclamosModel.reclamo_auto" Role="reclamo_auto" Multiplicity="*" />
@@ -4152,22 +4230,6 @@ FROM [dbo].[v_producto_no_conforme] AS [v_producto_no_conforme]</DefiningQuery>
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <ComplexType Name="pa_eficiencia_colectivos_Result">
-          <Property Type="String" Name="Nombre" Nullable="true" MaxLength="80" />
-          <Property Type="Int32" Name="Pendientes" Nullable="true" />
-          <Property Type="Int32" Name="Nuevos" Nullable="true" />
-          <Property Type="Int32" Name="Cerrados" Nullable="true" />
-          <Property Type="Int32" Name="Fuera_de_tiempo" Nullable="true" />
-          <Property Type="Int32" Name="Ejecucion" Nullable="true" />
-        </ComplexType>
-        <ComplexType Name="pa_eficiencia_individuales_Result">
-          <Property Type="String" Name="Nombre" Nullable="true" MaxLength="80" />
-          <Property Type="Int32" Name="Pendientes" Nullable="true" />
-          <Property Type="Int32" Name="Nuevos" Nullable="true" />
-          <Property Type="Int32" Name="Cerrados" Nullable="true" />
-          <Property Type="Int32" Name="Fuera_de_tiempo" Nullable="true" />
-          <Property Type="Int32" Name="Ejecucion" Nullable="true" />
-        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -4460,6 +4522,30 @@ FROM [dbo].[v_producto_no_conforme] AS [v_producto_no_conforme]</DefiningQuery>
                 <ScalarProperty Name="Comentario_Aseguradora" ColumnName="Comentario Aseguradora" />
                 <ScalarProperty Name="Ejecutivo" ColumnName="Ejecutivo" />
                 <ScalarProperty Name="Comentario_Ejecutivo" ColumnName="Comentario Ejecutivo" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="pa_eficiencia_colectivos" FunctionName="reclamosModel.Store.pa_eficiencia_colectivos">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="reclamosModel.pa_eficiencia_colectivos_Result">
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Pendientes" ColumnName="Pendientes" />
+                <ScalarProperty Name="Nuevos" ColumnName="Nuevos" />
+                <ScalarProperty Name="Cerrados" ColumnName="Cerrados" />
+                <ScalarProperty Name="Fuera_de_tiempo" ColumnName="Fuera_de_tiempo" />
+                <ScalarProperty Name="Ejecucion" ColumnName="Ejecucion" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="pa_eficiencia_individuales" FunctionName="reclamosModel.Store.pa_eficiencia_individuales">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="reclamosModel.pa_eficiencia_individuales_Result">
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Pendientes" ColumnName="Pendientes" />
+                <ScalarProperty Name="Nuevos" ColumnName="Nuevos" />
+                <ScalarProperty Name="Cerrados" ColumnName="Cerrados" />
+                <ScalarProperty Name="Fuera_de_tiempo" ColumnName="Fuera_de_tiempo" />
+                <ScalarProperty Name="Ejecucion" ColumnName="Ejecucion" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -5039,6 +5125,17 @@ FROM [dbo].[v_producto_no_conforme] AS [v_producto_no_conforme]</DefiningQuery>
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="ingreso_cheques">
+            <EntityTypeMapping TypeName="reclamosModel.ingreso_cheques">
+              <MappingFragment StoreEntitySet="ingreso_cheques">
+                <ScalarProperty Name="fecha" ColumnName="fecha" />
+                <ScalarProperty Name="tipo" ColumnName="tipo" />
+                <ScalarProperty Name="id_reclamo" ColumnName="id_reclamo" />
+                <ScalarProperty Name="usuario" ColumnName="usuario" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="motivos_cierre">
             <EntityTypeMapping TypeName="reclamosModel.motivos_cierre">
               <MappingFragment StoreEntitySet="motivos_cierre">
@@ -5526,30 +5623,7 @@ FROM [dbo].[v_producto_no_conforme] AS [v_producto_no_conforme]</DefiningQuery>
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="pa_eficiencia_colectivos" FunctionName="reclamosModel.Store.pa_eficiencia_colectivos">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="reclamosModel.pa_eficiencia_colectivos_Result">
-                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
-                <ScalarProperty Name="Pendientes" ColumnName="Pendientes" />
-                <ScalarProperty Name="Nuevos" ColumnName="Nuevos" />
-                <ScalarProperty Name="Cerrados" ColumnName="Cerrados" />
-                <ScalarProperty Name="Fuera_de_tiempo" ColumnName="Fuera_de_tiempo" />
-                <ScalarProperty Name="Ejecucion" ColumnName="Ejecucion" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="pa_eficiencia_individuales" FunctionName="reclamosModel.Store.pa_eficiencia_individuales">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="reclamosModel.pa_eficiencia_individuales_Result">
-                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
-                <ScalarProperty Name="Pendientes" ColumnName="Pendientes" />
-                <ScalarProperty Name="Nuevos" ColumnName="Nuevos" />
-                <ScalarProperty Name="Cerrados" ColumnName="Cerrados" />
-                <ScalarProperty Name="Fuera_de_tiempo" ColumnName="Fuera_de_tiempo" />
-                <ScalarProperty Name="Ejecucion" ColumnName="Ejecucion" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="pa_sec_ingreso_cheque" FunctionName="reclamosModel.Store.pa_sec_ingreso_cheque" />
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

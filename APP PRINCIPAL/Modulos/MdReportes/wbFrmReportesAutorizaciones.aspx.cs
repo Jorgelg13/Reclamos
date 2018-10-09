@@ -33,6 +33,8 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesAutorizaciones : Syste
 
     protected void btnGenerarTabla_Click(object sender, EventArgs e)
     {
+        PanelEficiencia.Visible = false;
+        PanelTitulo.Visible = true;
         //si el check esta chequeado entra aqui 
         //este check sirve para no filtrar el reporte por alguna seleccion
 
@@ -54,7 +56,6 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesAutorizaciones : Syste
                 llenado.llenarGrid(listado.Substring(0, (listado.Length - 2)) + Join + " where (Convert(date,aut.fecha_completa_cierre, 112) between '" + txtFechaInicio.Text + "' and '" + txtFechaFin.Text + "')  and aut.tipo_estado = 'Cerrado'", GridCamposSeleccion);
                 Conteo();
                 eficiencia();
-                NombreAseguradora.Text = "Aseguradoras en general";
             }
             //si seleccionaron cualquier otra opcion de tipo de estado
             else if (ddlEstado.SelectedValue != "Cerrado")
@@ -63,8 +64,8 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesAutorizaciones : Syste
                 " where (Convert(date,aut.fecha_completa_commit,112) between '" + txtFechaInicio.Text + "' and '" + txtFechaFin.Text + "') and tipo_estado "+ddlEstado.SelectedValue+" ", GridCamposSeleccion);
                 Conteo();
                 eficiencia();
-                NombreAseguradora.Text = "Aseguradoras en general";
             }
+            TituloReporte("Reporte de autorizaciones");
         }
 
         else
@@ -73,7 +74,6 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesAutorizaciones : Syste
             {
                 buscar = ddlBuscar.SelectedValue;
                 eficienciaPorAseguradora();
-                NombreAseguradora.Text = ddlBuscar.SelectedValue;
             }
             else
             {
@@ -93,23 +93,35 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesAutorizaciones : Syste
             if (ddlEstado.SelectedItem.Text == "Cerrado")
             {
                 llenado.llenarGrid(listado.Substring(0, (listado.Length - 2)) + Join +
-                  " where (" + ddlElegir.SelectedValue + " like '%" + buscar + "%') and (convert( date,aut.fecha_completa_cierre, 112) between '" + txtFechaInicio.Text + "' and '" + txtFechaFin.Text + "') and aut.tipo_estado = 'Cerrado'", GridCamposSeleccion);
+                  " where (" + ddlElegir.SelectedValue + " like '%" + buscar + "%') and (convert( date,aut.fecha_completa_cierre, 112) " +
+                  "between '" + txtFechaInicio.Text + "' and '" + txtFechaFin.Text + "') and aut.tipo_estado = 'Cerrado'", GridCamposSeleccion);
                 Conteo();
             }
 
             else if (ddlEstado.SelectedItem.Text != "Cerrado")
             {
                 llenado.llenarGrid(listado.Substring(0, (listado.Length - 2)) + Join +
-                  " where (" + ddlElegir.SelectedValue + " like '%" + buscar + "%') and (Convert(date,aut.fecha_completa_commit,112) between '" + txtFechaInicio.Text + "' and '" + txtFechaFin.Text + "') and aut.tipo_estado "+ddlEstado.SelectedValue+" ", GridCamposSeleccion);
+                  " where (" + ddlElegir.SelectedValue + " like '%" + buscar + "%') and (Convert(date,aut.fecha_completa_commit,112) " +
+                  "between '" + txtFechaInicio.Text + "' and '" + txtFechaFin.Text + "') and aut.tipo_estado "+ddlEstado.SelectedValue+" ", GridCamposSeleccion);
                 Conteo();
             }
+
+            TituloReporte("Reporte Autorizaciones");
         }
     }
 
     //funcion para exportar a un archivo de excel lo que aparece en el gridview
     protected void btnExportar_Click(object sender, EventArgs e)
     {
-        Utils.ExportarExcel(GridCamposSeleccion,Response,"Reporte Autorizaciones");
+        if(PanelPrincipal.Visible == true)
+        {
+            Utils.ExportarExcel(PanelPrincipal, Response, "Reporte Autorizaciones");
+        }
+
+        else
+        {
+            Utils.ExportarExcel(PanelEficiencia, Response, "Reporte Eficiencia");
+        }
     }
 
     public void Conteo()
@@ -184,7 +196,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesAutorizaciones : Syste
 
     protected void btnExportarEficiencia_Click(object sender, EventArgs e)
     {
-        Utils.ExportarExcel(PnEficiencia, Response, "Eficiencia Autorizaciones del " + txtFechaInicio.Text + " al " + txtFechaFin.Text);
+       // Utils.ExportarExcel(PnEficiencia, Response, "Eficiencia Autorizaciones del " + txtFechaInicio.Text + " al " + txtFechaFin.Text);
     }
 
     public void aseguradoras()
@@ -199,7 +211,6 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesAutorizaciones : Syste
     {
         try
         {
-
             SqlCommand comando = new SqlCommand("pa_kpi_autirizaciones", obj.ObtenerConexionReclamos());
             comando.CommandType = CommandType.StoredProcedure;
             comando.Parameters.AddWithValue("@fechaInicio", txtFechaInicio.Text);
@@ -267,5 +278,29 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesAutorizaciones : Syste
         {
             Response.Write(err);
         }
+    }
+
+    public void TituloReporte(String Titulo)
+    {
+        try
+        {
+            PanelPrincipal.Visible = true;
+            lblPeriodo.Text = "Periodo del " + Convert.ToDateTime(txtFechaInicio.Text).ToString("dd/MM/yyyy") + " al " + Convert.ToDateTime(txtFechaFin.Text).ToString("dd/MM/yyyy");
+            lblFechaGeneracion.Text = "Generado: " + DateTime.Now.ToString();
+            lblUsuario.Text = "Usuario: " + userlogin;
+            lblTitulo.Text = Titulo;
+        }
+        catch (Exception)
+        {
+
+        }
+    }
+
+    protected void btnMostrarEficiencia_Click(object sender, EventArgs e)
+    {
+        lblTitulo.Text = "Reporte de Eficiencia de autorizaciones";
+        PanelTitulo.Visible = true;
+        PanelPrincipal.Visible = false;
+        PanelEficiencia.Visible = true;
     }
 }

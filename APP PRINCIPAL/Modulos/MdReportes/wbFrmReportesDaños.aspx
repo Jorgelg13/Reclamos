@@ -155,15 +155,26 @@
                             </asp:Panel>
                             <asp:Panel runat="server" ID="PnCiclos">
                                 <div style="height: 520px;">
-                                    <div class="scrolling-table-container" style="overflow-y: auto;">
-                                        <asp:GridView ID="GridCiclos" runat="server" CssClass="table bs-table table-responsive" OnRowDataBound="GridCiclos_RowDataBound" AutoGenerateColumns="True" ShowFooter="true" ForeColor="#333333" GridLines="None">
-                                            <AlternatingRowStyle BackColor="White" />
-                                            <FooterStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" />
-                                            <HeaderStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" HorizontalAlign="Center" Wrap="False" />
-                                            <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
-                                            <RowStyle BackColor="#EFF3FB" HorizontalAlign="Left" Wrap="False" />
-                                        </asp:GridView>
-                                    </div>
+                                  <div class="scrolling-table-container" style="overflow-y: auto;">
+                                <div id="ciclos" class="col-sm-12 col-md-12 col-lg-12">
+                                    <asp:GridView ID="GridCiclos" runat="server" CssClass="table bs-table table-responsive" OnRowDataBound="GridCiclos_RowDataBound" AutoGenerateColumns="True" ShowFooter="true" ForeColor="#333333" GridLines="None">
+                                        <AlternatingRowStyle BackColor="White" />
+                                        <FooterStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" />
+                                        <HeaderStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" HorizontalAlign="Center" Wrap="False" />
+                                        <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
+                                        <RowStyle BackColor="#EFF3FB" HorizontalAlign="Left" Wrap="False" />
+                                    </asp:GridView>
+                                </div>
+                                <div id="ciclos2" class="col-sm-12 col-md-6 col-lg-6">
+                                    <asp:GridView ID="GridCiclos2" runat="server" CssClass="table bs-table table-responsive" OnRowDataBound="GridCiclos2_RowDataBound" AutoGenerateColumns="True" ShowFooter="true" ForeColor="#333333" GridLines="None">
+                                        <AlternatingRowStyle BackColor="White" />
+                                        <FooterStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" />
+                                        <HeaderStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" HorizontalAlign="Center" Wrap="False" />
+                                        <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
+                                        <RowStyle BackColor="#EFF3FB" HorizontalAlign="Left" Wrap="False" />
+                                    </asp:GridView>
+                                </div>
+                            </div>
                                 </div>
                             </asp:Panel>
                         </asp:Panel>
@@ -200,6 +211,18 @@
                 }
             });
         } catch (ex) {
+        }
+    </script>
+     <script>
+        if ($('#ContentPlaceHolder1_ddlCiclos option:selected').text() == 'Ciclo Unity') {
+
+            $('#ciclos2').show();
+            $("#ciclos").removeClass("col-lg-12");
+            $("#ciclos").addClass("col-lg-6");
+        }
+        else {
+            $("#ciclos").addClass("col-lg-12");
+            $('#ciclos2').hide();
         }
     </script>
 </asp:Content>

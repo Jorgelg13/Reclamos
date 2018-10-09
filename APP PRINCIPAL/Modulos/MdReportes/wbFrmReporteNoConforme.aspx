@@ -7,9 +7,9 @@
         <div class="col-sm-12 col-md-12 col-lg-12">
             <div class="panel panel-info">
                 <div class="panel-heading">
-                    <h3 class="panel-title"><b style="font-size: 16px;">Listado de reclamos no conformes <spam style="margin-left:100px">Total de registros: </spam><asp:Label ID="lblConteo" runat="server" Style="font-size: 20px;"></asp:Label></b></h3>
+                   <asp:Label ID="lblConteo" runat="server" Style="font-size: 16px;"></asp:Label>
                 </div>
-                <div class="panel-body" style="height: 620px;">
+                <div class="panel-body" style="max-height: 620px;">
                     <div class="form-inline">
                         <div class="form-group" style="width: 20%">
                             <label>Seleccionar Busqueda:</label>
@@ -38,7 +38,7 @@
                             <asp:TextBox ID="txtFechaFin" type="date" Height="34px" CssClass="form-control" Style="width: 100%" placeholder="Escriba su busqueda" runat="server"></asp:TextBox>
                         </div>
                         <div class="form-group" style="width: 15%">
-                            <asp:Button CssClass="btn btn-primary" ID="btnMostrarEficiencia"  OnClientClick="return false;" data-toggle="modal" data-target="#ModalEficiencia" style="margin-left:20px; margin-top: 22px;" runat="server" Text="Eficiencia" />
+                            <asp:Button CssClass="btn btn-primary" ID="btnMostrarEficiencia" OnClick="btnMostrarEficiencia_Click" style="margin-left:20px; margin-top: 22px;" runat="server" Text="Eficiencia" />
                         </div>
                     </div>
                     <br />
@@ -59,37 +59,19 @@
                                 <PagerSettings PageButtonCount="30" />
                                 <RowStyle BackColor="#EFF3FB" HorizontalAlign="Left" Wrap="False" />
                             </asp:GridView>
-                        </div>
-                    </asp:Panel>
-                </div>
-            </div>
-        </div>
-        <%-- ------------------------ modal ver el detalle de eficiencia ------------------------------------------%>
-        <div class="modal fade" id="ModalEficiencia" data-keyboard="false" data-backdrop="static">
-            <div class="modal-dialog modal-lg">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title" id="ModalComentario1"><b>Eficiencia por area</b></h4>
-                    </div>
-                    <div class="modal-body">
-                        <div class="form-group scrolling-table-container">
-                            <asp:GridView ID="GridEficiencia" runat="server" CssClass="table bs-table table-responsive table-hover" AutoGenerateColumns="True" ForeColor="#333333" GridLines="None" AllowCustomPaging="True">
+                             <asp:GridView Visible="false" ID="GridEficiencia" runat="server" CssClass="table bs-table table-responsive table-hover" AutoGenerateColumns="True" ForeColor="#333333" GridLines="None" AllowCustomPaging="True">
                                 <AlternatingRowStyle BackColor="White" />
                                 <FooterStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" />
                                 <HeaderStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" HorizontalAlign="Center" Wrap="False" />
                                 <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
                                 <RowStyle BackColor="#EFF3FB" HorizontalAlign="Left" Wrap="False" />
                             </asp:GridView>
-                            <p style="font-size:20px"><b></b></p>
                         </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-warning" data-dismiss="modal">Cerrar</button>
-                        <asp:Button ID="btnExportarEficiencia" OnClick="btnExportarEficiencia_Click" runat="server" Text="Descargar" CssClass="btn btn-success" />
-                    </div>
+                    </asp:Panel>
                 </div>
             </div>
         </div>
+
         <%-- botones circulares con las opciones multiples --%>
         <div id="container-floating">
             <div class="nd4 nds" data-toggle="tooltip" data-placement="left" data-original-title="Simone">
@@ -120,6 +102,16 @@
                 }
             });
         } catch (ex) {
+        }
+    </script>
+     <script>
+        function printDiv(imprimir) {
+            var contenido = document.getElementById(imprimir).innerHTML;
+            var contenidoOriginal = document.body.innerHTML;
+            document.body.innerHTML = contenido;
+            window.print();
+            document.body.innerHTML = contenidoOriginal;
+            window.location.href = "/Modulos/MdReportes/wbFrmReportesMedicos.aspx";
         }
     </script>
 </asp:Content>

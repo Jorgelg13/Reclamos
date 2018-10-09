@@ -1,4 +1,5 @@
-﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="Site.master.cs" Inherits="SiteMaster" %>
+﻿
+<%@ Master Language="C#" AutoEventWireup="true" CodeFile="Site.master.cs" Inherits="SiteMaster" %>
 
 <!DOCTYPE html>
 <html lang="es">
@@ -143,6 +144,7 @@
                                     <ul class="dropdown-menu">
                                         <li class="dropdown-submenu"></li>
                                         <li><a href="/pdf/Copagos/Novartis.xlsx">Novartis</a></li>
+                                        <li><a href="/pdf/Copagos/bandegua.xlsx">Bandegua</a></li>
                                         <li><a href="/pdf/Copagos/Global-Solutions.pdf">Global Solutions</a></li>
                                         <li><a href="/pdf/Copagos/AMICELCO.xlsx">Amicelco</a></li>
                                         <li><a href="/pdf/Copagos/ACEROS.xlsx">Aceros</a></li>
@@ -449,7 +451,7 @@
          <div class="loading-screen" style="">
             <div style="display: block; overflow-x: hidden; overflow-y: auto; opacity: 1; background: rgba(0, 0, 0, 0.55); position: fixed; top: 0; right: 0; bottom: 0; left: 0; z-index: 1050; transition: opacity .15s linear;">
                 <div class="modal-dialog">
-                    <img style='top: 45%; position: absolute; height: 100px; width: 100px; left: 45%;' src='http://gifimage.net/wp-content/uploads/2017/08/loading-gif-transparent-10.gif' />
+                    <img style='top: 45%; position: absolute; height: 100px; width: 100px; left: 45%;' src='/imgUnity/cargando.gif' />
                 </div>
             </div>
         </div>

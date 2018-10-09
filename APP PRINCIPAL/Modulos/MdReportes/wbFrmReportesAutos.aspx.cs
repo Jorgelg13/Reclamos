@@ -13,6 +13,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesAutos : System.Web.UI.
     conexionBD obj = new conexionBD();
     String buscar, Join, eficienciaGestores;
     int Total, Promedio, EjecucionCiclos, kpi;
+    int Total2, Promedio2, EjecucionCiclos2;
     Double Pendientes, Nuevos, Cerrados, Ejecucion;
 
     protected void Page_Load(object sender, EventArgs e)
@@ -81,8 +82,12 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesAutos : System.Web.UI.
                   " where (convert(date, reclamo_auto.fecha_cierre_reclamo,112) between '" + txtFechaInicio.Text + "' and '" + txtFechaFin.Text + "') " +
                   "and (reclamo_auto.estado_unity = '" + ddlEstado.SelectedValue + "') " +
                   "", GridCamposSeleccion);
+
+                //Response.Write(listado.Substring(0, (listado.Length - 2)) + Join +
+                //  " where (convert(date, reclamo_auto.fecha_cierre_reclamo,112) between '" + txtFechaInicio.Text + "' and '" + txtFechaFin.Text + "') " +
+                //  "and (reclamo_auto.estado_unity = '" + ddlEstado.SelectedValue + "') ");
             }
-            else if(ddlEstado.SelectedItem.Text == "Seguimiento")
+            else if(ddlEstado.SelectedValue == "Seguimiento")
             {
                 llenado.llenarGrid(listado.Substring(0, (listado.Length - 2)) + Join +
                  " where (convert(date, reclamo_auto.fecha_apertura_reclamo, 112) between '" + txtFechaInicio.Text + "' and '" + txtFechaFin.Text + "') " +
@@ -90,21 +95,21 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesAutos : System.Web.UI.
                  "", GridCamposSeleccion);
             }
 
-            else if (ddlEstado.SelectedItem.Text == "Todos")
+            else if (ddlEstado.SelectedValue == "Todos")
             {
                 llenado.llenarGrid(listado.Substring(0, (listado.Length - 2)) + Join +
                  " where (convert(date, reclamo_auto.fecha_apertura_reclamo,112) between '" + txtFechaInicio.Text + "' and '" + txtFechaFin.Text + "')" +
                  "", GridCamposSeleccion);
             }
 
-            else if (ddlEstado.SelectedItem.Text == "Nuevos")
+            else if (ddlEstado.SelectedValue == "Nuevos")
             {
                 llenado.llenarGrid(listado.Substring(0, (listado.Length - 2)) + Join +
                  " where (convert(date, reclamo_auto.fecha_apertura_reclamo,112) between '" + txtFechaInicio.Text + "' and '" + txtFechaFin.Text + "')" +
                  "", GridCamposSeleccion);
             }
 
-            else if (ddlEstado.SelectedItem.Text == "Pendientes")
+            else if (ddlEstado.SelectedValue == "Pendientes")
             {
                 llenado.llenarGrid(listado.Substring(0, (listado.Length - 2)) + Join + " where reclamo_auto.estado_unity = 'Seguimiento'  ", GridCamposSeleccion);
             }
@@ -134,42 +139,42 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesAutos : System.Web.UI.
                 }
             }
 
-            if(ddlEstado.SelectedItem.Text == "Cerrado")
+            if(ddlEstado.SelectedValue == "Cerrado")
             {
                 llenado.llenarGrid(listado.Substring(0, (listado.Length - 2)) + Join +
                   " where (" + ddlElegir.SelectedValue + " like '%" + buscar + "%') and (convert(date, reclamo_auto.fecha_cierre_reclamo,112) between '" + txtFechaInicio.Text + "' " +
                   "and '" + txtFechaFin.Text + "') and (reclamo_auto.estado_unity = '" + ddlEstado.SelectedValue + "')  ", GridCamposSeleccion);
             }
 
-            else if(ddlEstado.SelectedItem.Text == "Seguimiento")
+            else if(ddlEstado.SelectedValue == "Seguimiento")
             {
                 llenado.llenarGrid(listado.Substring(0, (listado.Length - 2)) + Join +
                   " where (" + ddlElegir.SelectedValue + " like '%" + buscar + "%') and (convert(date,reclamo_auto.fecha_apertura_reclamo,112) between '" + txtFechaInicio.Text + "' " +
                   "and '" + txtFechaFin.Text + "') and (reclamo_auto.estado_unity = '" + ddlEstado.SelectedValue + "')  ", GridCamposSeleccion);
             }
 
-            else if (ddlEstado.SelectedItem.Text == "Todos")
+            else if (ddlEstado.SelectedValue == "Todos")
             {
                 llenado.llenarGrid(listado.Substring(0, (listado.Length - 2)) + Join +
                   " where (" + ddlElegir.SelectedValue + " like '%" + buscar + "%') and (convert(date, reclamo_auto.fecha_apertura_reclamo,112) between '" + txtFechaInicio.Text + "' " +
                   "and '" + txtFechaFin.Text + "')", GridCamposSeleccion);
             }
 
-            else if (ddlEstado.SelectedItem.Text == "Nuevos")
+            else if (ddlEstado.SelectedValue == "Nuevos")
             {
                 llenado.llenarGrid(listado.Substring(0, (listado.Length - 2)) + Join +
                   " where (" + ddlElegir.SelectedValue + " like '%" + buscar + "%') and (convert(date,reclamo_auto.fecha_apertura_reclamo,112) between '" + txtFechaInicio.Text + "' " +
                   "and '" + txtFechaFin.Text + "')", GridCamposSeleccion);
             }   
 
-            else if (ddlEstado.SelectedItem.Text == "Pendientes")
+            else if (ddlEstado.SelectedValue == "Pendientes")
             {
                 llenado.llenarGrid(listado.Substring(0, (listado.Length - 2)) + Join +
                   " where (" + ddlElegir.SelectedValue + " like '%" + buscar + "%') and (estado_unity = 'Seguimiento' ) and " +
                   "(convert(date, reclamo_auto.fecha_apertura_reclamo,112) <= '"+txtFechaInicio.Text+"') ", GridCamposSeleccion);
             }
 
-            else if (ddlEstado.SelectedItem.Text == "Estado")
+            else if (ddlEstado.SelectedValue == "Estado")
             {
                 llenado.llenarGrid(listado.Substring(0, (listado.Length - 2)) + Join +
                   " where (" + ddlElegir.SelectedValue + " like '%" + ddlBuscar.SelectedItem.Text + "%') and (estado_unity = 'Seguimiento') ", GridCamposSeleccion);
@@ -179,7 +184,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesAutos : System.Web.UI.
             Conteo();
         }
 
-        if (ddlEstado.SelectedItem.Text != "Estado")
+        if (ddlEstado.SelectedValue != "Estado")
         {
             Utils.TituloReporte(PanelPrincipal, lblPeriodo, lblFechaGeneracion, lblUsuario, lblTitulo, "Reporte de Reclamos de Autos", userlogin, txtFechaInicio, txtFechaFin, "");
         }
@@ -403,6 +408,49 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesAutos : System.Web.UI.
         }
     }
 
+    protected void GridCiclos2_RowDataBound(object sender, GridViewRowEventArgs e)
+    {
+        try
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                Total2 += Convert.ToInt32(DataBinder.Eval(e.Row.DataItem, "[Total_Reclamos]"));
+                Promedio2 += Convert.ToInt32(DataBinder.Eval(e.Row.DataItem, "[Promedio_dias]"));
+                EjecucionCiclos2 += Convert.ToInt32(DataBinder.Eval(e.Row.DataItem, "Ejecucion"));
+
+                if (Convert.ToInt32(e.Row.Cells[3].Text) <= 100)
+                {
+                    e.Row.Attributes.Add("style", "background-color: #8ace8e"); //rojos
+                }
+
+                if (Convert.ToInt32(e.Row.Cells[3].Text) > 100)
+                {
+                    e.Row.Attributes.Add("style", "background-color: #f7c6be"); //rojos
+                }
+            }
+            else if (e.Row.RowType == DataControlRowType.Footer)
+            {
+                e.Row.Cells[0].Text = "TOTALES:";
+
+                e.Row.Cells[1].Text = Total2.ToString();
+                e.Row.Cells[1].HorizontalAlign = HorizontalAlign.Left;
+                e.Row.Font.Bold = true;
+
+                e.Row.Cells[2].Text = (Promedio2 / GridCiclos2.Rows.Count).ToString();
+                e.Row.Cells[2].HorizontalAlign = HorizontalAlign.Left;
+                e.Row.Font.Bold = true;
+
+                e.Row.Cells[3].Text = (EjecucionCiclos2 / GridCiclos2.Rows.Count).ToString() + " %";
+                e.Row.Cells[3].HorizontalAlign = HorizontalAlign.Left;
+                e.Row.Font.Bold = true;
+            }
+        }
+        catch (Exception err)
+        {
+            Response.Write(err);
+        }
+    }
+
     protected void Mostrar_Click(object sender, EventArgs e)
     {
         if (ddlCiclos.SelectedValue == "Ciclo Total")
@@ -412,6 +460,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesAutos : System.Web.UI.
             PanelEficiencia.Visible = false;
             PnCiclos.Visible = true;
             Utils.Ciclos_Reclamos(txtFechaInicio, txtFechaFin, "pa_ciclos_reclamos_autos", GridCiclos, 4, kpi);
+            //Utils.Ciclos_Reclamos(txtFechaInicio, txtFechaFin, "pa_ciclos_reclamos_autos", GridCiclos2, 8, kpi);
             lblTitulo.Text = "Ciclo Total, KPI sobre " + kpi.ToString() + " dias";
         }
 
@@ -422,6 +471,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesAutos : System.Web.UI.
             PanelEficiencia.Visible = false;
             PnCiclos.Visible = true;
             Utils.Ciclos_Reclamos(txtFechaInicio,txtFechaFin, "pa_ciclos_reclamos_autos", GridCiclos, 1, kpi);
+            Utils.Ciclos_Reclamos(txtFechaInicio, txtFechaFin, "pa_ciclos_reclamos_autos", GridCiclos2, 5, kpi);
             lblTitulo.Text = "Ciclo Unity, KPI sobre " + kpi.ToString() + " dias";
         }
 
@@ -432,6 +482,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesAutos : System.Web.UI.
             PanelEficiencia.Visible = false;
             PnCiclos.Visible = true;
             Utils.Ciclos_Reclamos(txtFechaInicio, txtFechaFin, "pa_ciclos_reclamos_autos", GridCiclos, 2 , kpi);
+            //Utils.Ciclos_Reclamos(txtFechaInicio, txtFechaFin, "pa_ciclos_reclamos_autos", GridCiclos2, 6, kpi);
             lblTitulo.Text = "Ciclo Aseguradora, KPI sobre " + kpi.ToString() + " dias";
         }
 
@@ -442,6 +493,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesAutos : System.Web.UI.
             PanelEficiencia.Visible = false;
             PnCiclos.Visible = true;
             Utils.Ciclos_Reclamos(txtFechaInicio, txtFechaFin, "pa_ciclos_reclamos_autos", GridCiclos, 3, kpi);
+            //Utils.Ciclos_Reclamos(txtFechaInicio, txtFechaFin, "pa_ciclos_reclamos_autos", GridCiclos, 7, kpi);
             lblTitulo.Text = "Ciclo Cliente, KPI sobre " + kpi.ToString() + " dias";
         }
 

@@ -102,6 +102,7 @@
                             <li><a href="/Modulos/MdReportes/wbFrmReporteNoConforme.aspx">Reporte Producto No Conforme</a></li>
                             <li><a href="/Modulos/MdReportes/wbFrmReporteProblemas.aspx?id=1">Reporte de problemas Autos</a></li>
                             <li><a href="/Modulos/MdReportes/wbFrmReporteProblemas.aspx?id=2">Reporte de problemas Daños</a></li>
+                            <li><a href="/Modulos/MdReportes/wbFrmReporteCheques.aspx">Cheques Ingresados</a></li>
                         </ul>
                     </li>
                     <li class="dropdown">
@@ -159,7 +160,7 @@
         <div class="loading-screen" style="">
             <div style="display: block; overflow-x: hidden; overflow-y: auto; opacity: 1; background: rgba(0, 0, 0, 0.55); position: fixed; top: 0; right: 0; bottom: 0; left: 0; z-index: 1050; transition: opacity .15s linear;">
                 <div class="modal-dialog">
-                    <img style='top: 45%; position: absolute; height: 100px; width: 100px; left: 45%;' src='http://gifimage.net/wp-content/uploads/2017/08/loading-gif-transparent-10.gif' />
+                    <img style='top: 45%; position: absolute; height: 100px; width: 100px; left: 45%;' src='/imgUnity/cargando.gif'/>
                 </div>
             </div>
         </div>

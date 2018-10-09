@@ -158,7 +158,7 @@
                         <div class="panel-heading">
                             <b>Selecciones</b>
                         </div>
-                        <div class="panel-body" style="height: 200px; overflow-y:auto; overflow-x:auto">
+                        <div class="panel-body" style="height: 200px; overflow-y: auto; overflow-x: auto">
                             <asp:CheckBox ID="checkPrioritario" runat="server" Text="Prioritario" />
                             <br />
                             <asp:CheckBox ID="CheckComplicado" runat="server" Text="Complicado" />
@@ -710,7 +710,7 @@
         </div>
     </div>
     <%-- data source con las conexiones a las tablas de la bd reclamos--%>
-    <asp:SqlDataSource ID="SqlDataSourceGestores" runat="server" ConnectionString="<%$ ConnectionStrings:reclamosConnectionString %>" SelectCommand="SELECT [id], [nombre] FROM [gestores] where tipo = 'autos' and estado = 'true'"></asp:SqlDataSource>
+    <asp:SqlDataSource ID="SqlDataSourceGestores" runat="server" ConnectionString="<%$ ConnectionStrings:reclamosConnectionString %>" SelectCommand="SELECT [id], [nombre] FROM [gestores] where tipo = 'autos' "></asp:SqlDataSource>
     <asp:SqlDataSource ID="SqlDataSourceAnalistas" runat="server" ConnectionString="<%$ ConnectionStrings:reclamosConnectionString %>" SelectCommand="SELECT [id], [nombre] FROM [analistas] where estado = 'true' "></asp:SqlDataSource>
     <asp:SqlDataSource ID="SqlDataSourceEstadosAutos" runat="server" ConnectionString="<%$ ConnectionStrings:reclamosConnectionString %>" SelectCommand="SELECT [descripcion], [dias_revision] FROM [estados_reclamos_unity] where tipo = 'auto'"></asp:SqlDataSource>
     <asp:SqlDataSource ID="SqlDataSourceTalleres" runat="server" ConnectionString="<%$ ConnectionStrings:reclamosConnectionString %>" SelectCommand="SELECT [id], [nombre] FROM [talleres] where estado = 'true'"></asp:SqlDataSource>
@@ -773,7 +773,7 @@
                                 <asp:Label ID="lblMemo" runat="server"></asp:Label>
                             </div>
                             <asp:Panel runat="server" ID="PnDetallePago" Visible="false">
-                                <table style="width: 30%; margin-left: 285px;" class="estilos-tabla">
+                                <table style="width: 30%; margin-left: 0px;" class="estilos-tabla">
                                     <tr class="estilos-tabla">
                                         <th>Monto Reclamado</th>
                                         <th></th>
@@ -807,10 +807,14 @@
                                     <tr>
                                         <td>
                                             <asp:Label ID="lblCartaEjecutivo" runat="server"></asp:Label></td>
+                                           <td>
+                                            <asp:Label ID="lblAsesor" runat="server"></asp:Label></td>
                                     </tr>
                                     <tr>
                                         <td>
                                             <asp:Label ID="lblCartaCorreoEjecutivo" runat="server"></asp:Label></td>
+                                        <td>
+                                            <asp:Label ID="lblCorreoAsesor" runat="server"></asp:Label></td>
                                     </tr>
                                 </table>
                             </div>
@@ -825,7 +829,8 @@
                                 </p>
                             </div>
                         </div>
-                        <p style="text-align: right; padding-top: 20px;"><asp:label runat="server" ID="CodigoISO"></asp:label></p>
+                        <p style="text-align: right; padding-top: 20px;">
+                            <asp:Label runat="server" ID="CodigoISO"></asp:Label></p>
                     </div>
                 </asp:Panel>
                 <asp:Panel runat="server" ID="Panelsecundario" Style="display: none">

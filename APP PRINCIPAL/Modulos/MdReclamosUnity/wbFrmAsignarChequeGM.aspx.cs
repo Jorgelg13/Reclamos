@@ -1,7 +1,10 @@
 ﻿using System;
+using System.Linq;
+using System.Web;
 
 public partial class Modulos_MdReclamosUnity_wbFrmAsignarChequeGM : System.Web.UI.Page
 {
+    String userlogin = HttpContext.Current.User.Identity.Name; //usuario que esta en session
     Utils llenado = new Utils();
     ReclamosEntities DBReclamos = new ReclamosEntities();
     String seleccionarRegistros;
@@ -40,6 +43,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmAsignarChequeGM : System.Web.U
         try
         {
             int id;
+            var usuario = DBReclamos.usuario.Where(us => us.nombre == userlogin).First();
             id = Convert.ToInt32(GridGeneral.SelectedRow.Cells[1].Text);
             var reclamo = DBReclamos.reclamos_medicos.Find(id);
             detalle_pagos_reclamos_medicos pago = new detalle_pagos_reclamos_medicos();
@@ -60,10 +64,22 @@ public partial class Modulos_MdReclamosUnity_wbFrmAsignarChequeGM : System.Web.U
             pago.fecha_creacion = DateTime.Now;
             pago.id_reclamo_medico = id;
             DBReclamos.detalle_pagos_reclamos_medicos.Add(pago);
-
             reclamo.bandera_cheque = true;
             reclamo.fecha_recepcion_cheque = DateTime.Now;
             DBReclamos.SaveChanges();
+
+            ingreso_cheques cheque = new ingreso_cheques();
+            var sec_registro = DBReclamos.pa_sec_ingreso_cheque();
+            long? id_registro = sec_registro.Single();
+            cheque.id = Convert.ToInt32(id_registro);
+            cheque.tipo = "GM";
+            cheque.id_reclamo = id;
+            cheque.fecha = DateTime.Now;
+            cheque.usuario = usuario.id;
+            DBReclamos.ingreso_cheques.Add(cheque);
+            DBReclamos.SaveChanges();
+
+
             Utils.ShowMessage(this.Page, "Cheque agregado con exito", "Excelente..!", "info");
             GridGeneral.DataBind();
             llenado.llenarGrid(seleccionarRegistros, GridGeneral);

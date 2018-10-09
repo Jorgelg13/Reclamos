@@ -2,6 +2,8 @@
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Linq;
+using EASendMail;
 
 public partial class Modulos_MdAdmin_wbFrmAsignacionUnity : System.Web.UI.Page
 {
@@ -9,6 +11,7 @@ public partial class Modulos_MdAdmin_wbFrmAsignacionUnity : System.Web.UI.Page
     ReclamosEntities DBReclamos = new ReclamosEntities();
     Utils llenado = new Utils();
     Utils comprobar = new Utils();
+    String Cuerpo;
     int id;
     string asignados, datos;
 
@@ -75,7 +78,8 @@ public partial class Modulos_MdAdmin_wbFrmAsignacionUnity : System.Web.UI.Page
     }
 
     private void asignar_reclamos()
-    {
+    {   
+        var gestor = DBReclamos.gestores.Where(ges => ges.nombre == DDLusuario.SelectedItem.Text).First();
         foreach (GridViewRow row in GridAsignacionAutos.Rows)
         {
             CheckBox checkAsig = (CheckBox)row.FindControl("checkAsignar");
@@ -86,11 +90,13 @@ public partial class Modulos_MdAdmin_wbFrmAsignacionUnity : System.Web.UI.Page
                 try
                 {
                     var asignar = DBReclamos.reclamo_auto.Find(id);
+                    Cuerpo = "Estimado Asesor se a asignado un reclamo con el ID "+id+" bajo la poliza "+asignar.auto_reclamo.poliza+", del asegurado "+asignar.auto_reclamo.asegurado+". ";
                     asignar.usuario_unity = DDLusuario.SelectedValue;
                     asignar.fecha_asignacion = DateTime.Now;
                     asignar.asignado_por = userlogin;
                     DBReclamos.SaveChanges();
                     Utils.ShowMessage(this.Page, "Reclamos asignados exitosamente", "Excelente", "success");
+                    //Correos.Notificacion(gestor.correo,"Asignacion de reclamo", Cuerpo);
                 }
                 catch (Exception ex)
                 {
@@ -124,5 +130,29 @@ public partial class Modulos_MdAdmin_wbFrmAsignacionUnity : System.Web.UI.Page
     {
         Utils.TituloReporte(PnPrincipal, lblPeriodo, lblFechaGeneracion, lblUsuario, lblTitulo, "Reporte de Asignaciones / Depto. Reclamos Autos", userlogin, fechaInicio, fechaFinal, "");
         Utils.ExportarExcel(PnPrincipal,Response, "Asignaciones autos del " + fechaInicio.Text + " al " + fechaFinal.Text);
+    }
+
+    public void correo()
+    {
+        try
+        {
+            SmtpMail oMail = new SmtpMail("TryIt");
+            SmtpClient oSmtp = new SmtpClient();
+            oMail.From =new MailAddress("reclamosgt@unitypromotores.com");
+            oMail.To =new AddressCollection("jorgelg132012@gmail.com");
+            oMail.Subject = "test email";
+            oMail.TextBody = "this is a test email sent from c# queue";         
+
+            SmtpServer oServer = new SmtpServer("smtp.office365.com");
+            oServer.User = "reclamosgt@unitypromotores.com";
+            oServer.Password = "123$456R";
+            oServer.ConnectType = SmtpConnectType.ConnectSSLAuto;
+     
+            oSmtp.SendMailToQueue(oServer, oMail);
+        }
+        catch (Exception ex)
+        {
+            Response.Write(ex);
+        }
     }
 }

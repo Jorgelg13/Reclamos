@@ -12,7 +12,7 @@ public partial class Modulos_MdCatalogos_wbEstados : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
-        //idRecibido = Request.QueryString[0].ToString();
+        idRecibido = Request.QueryString[0].ToString();
 
         if (userlogin == "nsierra" || userlogin == "cmejia" || userlogin == "jlaj") PnPrincipal.Visible = true;
 

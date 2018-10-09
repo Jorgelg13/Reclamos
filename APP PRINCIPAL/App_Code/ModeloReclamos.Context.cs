@@ -66,6 +66,7 @@ public partial class ReclamosEntities : DbContext
     public DbSet<estados_reclamos_unity> estados_reclamos_unity { get; set; }
     public DbSet<formulario_colectivo> formulario_colectivo { get; set; }
     public DbSet<gestores> gestores { get; set; }
+    public DbSet<ingreso_cheques> ingreso_cheques { get; set; }
     public DbSet<motivos_cierre> motivos_cierre { get; set; }
     public DbSet<pais> pais { get; set; }
     public DbSet<ramos> ramos { get; set; }
@@ -378,7 +379,7 @@ public partial class ReclamosEntities : DbContext
         return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<long>>("pa_sec_estados_autos");
     }
 
-    public virtual int pa_ciclos_reclamos_autos(Nullable<System.DateTime> fechaInicio, Nullable<System.DateTime> fechaFin, Nullable<int> tipo)
+    public virtual int pa_ciclos_reclamos_autos(Nullable<System.DateTime> fechaInicio, Nullable<System.DateTime> fechaFin, Nullable<int> tipo, Nullable<int> kpi)
     {
         var fechaInicioParameter = fechaInicio.HasValue ?
             new ObjectParameter("fechaInicio", fechaInicio) :
@@ -392,10 +393,14 @@ public partial class ReclamosEntities : DbContext
             new ObjectParameter("tipo", tipo) :
             new ObjectParameter("tipo", typeof(int));
 
-        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pa_ciclos_reclamos_autos", fechaInicioParameter, fechaFinParameter, tipoParameter);
+        var kpiParameter = kpi.HasValue ?
+            new ObjectParameter("kpi", kpi) :
+            new ObjectParameter("kpi", typeof(int));
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pa_ciclos_reclamos_autos", fechaInicioParameter, fechaFinParameter, tipoParameter, kpiParameter);
     }
 
-    public virtual int pa_ciclos_reclamos_danios(Nullable<System.DateTime> fechaInicio, Nullable<System.DateTime> fechaFin, Nullable<int> tipo)
+    public virtual int pa_ciclos_reclamos_danios(Nullable<System.DateTime> fechaInicio, Nullable<System.DateTime> fechaFin, Nullable<int> tipo, Nullable<int> kPI)
     {
         var fechaInicioParameter = fechaInicio.HasValue ?
             new ObjectParameter("fechaInicio", fechaInicio) :
@@ -409,7 +414,11 @@ public partial class ReclamosEntities : DbContext
             new ObjectParameter("tipo", tipo) :
             new ObjectParameter("tipo", typeof(int));
 
-        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pa_ciclos_reclamos_danios", fechaInicioParameter, fechaFinParameter, tipoParameter);
+        var kPIParameter = kPI.HasValue ?
+            new ObjectParameter("KPI", kPI) :
+            new ObjectParameter("KPI", typeof(int));
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pa_ciclos_reclamos_danios", fechaInicioParameter, fechaFinParameter, tipoParameter, kPIParameter);
     }
 
     public virtual ObjectResult<pa_reporte_problemas_autos_Result> pa_reporte_problemas_autos(Nullable<System.DateTime> fechaInicio, Nullable<System.DateTime> fechaFin)
@@ -462,5 +471,10 @@ public partial class ReclamosEntities : DbContext
             new ObjectParameter("fechaFin", typeof(System.DateTime));
 
         return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<pa_eficiencia_individuales_Result>("pa_eficiencia_individuales", fechaInicioParameter, fechaFinParameter);
+    }
+
+    public virtual ObjectResult<Nullable<int>> pa_sec_ingreso_cheque()
+    {
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("pa_sec_ingreso_cheque");
     }
 }
