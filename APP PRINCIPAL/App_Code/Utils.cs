@@ -584,4 +584,19 @@ public class Utils
 
         }
     }
+
+    public static void actividades(int id_reclamo, int id_tipo, int id_movimiento, String usuario)
+    {
+        actividades nueva = new actividades();
+        var sec_registro = DBReclamos.pa_sec_actividades();
+        long? id_registro = sec_registro.Single();
+        nueva.id = Convert.ToInt64(id_registro);
+        nueva.id_reclamo = id_reclamo;
+        nueva.id_tipo = id_tipo;
+        nueva.id_movimiento = id_movimiento;
+        nueva.fecha = DateTime.Now;
+        nueva.usuario = usuario;
+        DBReclamos.actividades.Add(nueva);
+        DBReclamos.SaveChanges();
+    }
 }

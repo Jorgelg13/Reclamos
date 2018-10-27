@@ -113,6 +113,7 @@ public partial class Modulos_MdAdmin_wbFrmAsignacionUnity : System.Web.UI.Page
     protected void bntAsignar_Click(object sender, EventArgs e)
     {
         asignar_reclamos();
+        Utils.actividades(0, Constantes.AUTOS(), 41, Constantes.USER());
     }
 
     protected void btnBuscar_Click(object sender, EventArgs e)
@@ -128,6 +129,7 @@ public partial class Modulos_MdAdmin_wbFrmAsignacionUnity : System.Web.UI.Page
 
     protected void linkDescargar_Click(object sender, EventArgs e)
     {
+        Utils.actividades(0, Constantes.AUTOS(), 43, Constantes.USER());
         Utils.TituloReporte(PnPrincipal, lblPeriodo, lblFechaGeneracion, lblUsuario, lblTitulo, "Reporte de Asignaciones / Depto. Reclamos Autos", userlogin, fechaInicio, fechaFinal, "");
         Utils.ExportarExcel(PnPrincipal,Response, "Asignaciones autos del " + fechaInicio.Text + " al " + fechaFinal.Text);
     }

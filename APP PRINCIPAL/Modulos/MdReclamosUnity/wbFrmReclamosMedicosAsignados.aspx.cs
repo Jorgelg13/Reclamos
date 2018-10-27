@@ -60,6 +60,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosMedicosAsignados : Sys
         string actualizarFecha = "update reclamos_medicos set fecha_revision = getdate() , fecha_apertura = getdate(), estado_unity = 'Seguimiento', id_estado= "+ 8 + ", fecha_visualizar = getdate() +3  ";
         id_reclamo_medico = Convert.ToInt32(GridMedicosAsignados.SelectedRow.Cells[1].Text);
         update.actualizarDatos(actualizarFecha, id_reclamo_medico);
-        Response.Redirect("/Modulos/MdReclamosUnity/wbFrmReclamosMedicosSeguimiento.aspx?ID_reclamo=" + id_reclamo_medico);
+        Utils.actividades(0, Constantes.GASTOS_MEDICOS(), 5, Constantes.USER());
+        Response.Redirect("/Modulos/MdReclamosUnity/wbFrmReclamosMedicosSeguimiento.aspx?ID_reclamo=" + id_reclamo_medico,false);
     }
 }

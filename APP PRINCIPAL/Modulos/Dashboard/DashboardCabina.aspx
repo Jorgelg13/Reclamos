@@ -1,6 +1,8 @@
 ﻿<%@ Page Title="Reclamos Unity" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeFile="DashboardCabina.aspx.cs" Inherits="_Default" %>
 
-<asp:Content runat="server" ID="FeaturedContent" ContentPlaceHolderID="FeaturedContent">
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <div class="container menu-cuadrado btn-acciones-laterales">
         <div class="col-md-6 col-lg-6">
             <div class="panel panel-info" style="height: 200px;">

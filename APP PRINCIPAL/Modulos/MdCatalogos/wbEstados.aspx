@@ -3,7 +3,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
-    <asp:Panel runat="server" ID="PnPrincipal" Visible="false">
+    <asp:Panel runat="server" ID="PnPrincipal" Visible="true">
          <div class="container-fluid">
             <div class="col-lg-3 col-md-3 col-sm-12">
                 <div class="panel panel-info">
@@ -29,8 +29,8 @@
                             </asp:DropDownList>
                         </div>
                         <div class="col-md-2">
-                            <asp:LinkButton runat="server" Visible="false" ID="Actualizar" OnClick="Actualizar_Click" ToolTip="Actualizar Mensajero" Style="font-size: 40px; text-align: center;"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></asp:LinkButton>
-                            <asp:LinkButton runat="server" ID="Guardar" ToolTip="Guardar Mensajero" OnClick="Guardar_Click"  Style="font-size: 40px; text-align: center;"><i class="fa fa-floppy-o" aria-hidden="true"></i></asp:LinkButton>
+                            <asp:LinkButton runat="server" Visible="false" ID="Actualizar" OnClick="Actualizar_Click" ToolTip="Actualizar Mensajero" Style="font-size: 40px; text-align: center;"><i class="fa fa-pencil-square-o"></i></asp:LinkButton>
+                            <asp:LinkButton runat="server" enabled="false" ID="Guardar"  OnClick="Guardar_Click" ToolTip="Guardar Mensajero"  Style="font-size: 40px; text-align: center;"><i class="fa fa-floppy-o"></i></asp:LinkButton>
                         </div>
                     </div>
                 </div>

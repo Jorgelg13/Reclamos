@@ -168,6 +168,8 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesDaños : System.Web.UI
         {
             Utils.TituloReporte(PanelPrincipal, lblPeriodo, lblFechaGeneracion, lblUsuario, lblTitulo, "Reporte de Reclamos de Daños", userlogin, txtFechaInicio, txtFechaFin, "");
         }
+
+        Utils.actividades(0, Constantes.DANIOS(), 29, Constantes.USER());
     }
 
     public void Eficiencia()
@@ -188,17 +190,39 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesDaños : System.Web.UI
     {
         if (PanelCamposSeleccion.Visible == true)
         {
+            Utils.actividades(0, Constantes.DANIOS(), 35, Constantes.USER());
             Utils.ExportarExcel(PanelPrincipal, Response, "Reporte Reclamos Daños");
         }
 
         else if (PanelEficiencia.Visible == true)
         {
+            Utils.actividades(0, Constantes.DANIOS(), 36, Constantes.USER());
             Utils.ExportarExcel(PanelPrincipal, Response, "Reporte de Eficiencia");
         }
 
         else if (PnCiclos.Visible == true)
         {
-            Utils.ExportarExcel(PanelPrincipal, Response, "Reporte de Ciclos");
+            if(ddlCiclos.SelectedValue == "Ciclo Total")
+            {
+                Utils.actividades(0, Constantes.DANIOS(), 40, Constantes.USER());
+            }
+
+            else if (ddlCiclos.SelectedValue == "Ciclo Unity")
+            {
+                Utils.actividades(0, Constantes.DANIOS(), 39, Constantes.USER());
+            }
+
+            else if (ddlCiclos.SelectedValue == "Ciclo Cliente")
+            {
+                Utils.actividades(0, Constantes.DANIOS(), 38, Constantes.USER());
+            }
+
+            else if (ddlCiclos.SelectedValue == "Ciclo Aseguradora")
+            {
+                Utils.actividades(0, Constantes.DANIOS(), 37, Constantes.USER());
+            }
+
+            Utils.ExportarExcel(PanelPrincipal, Response, "Reporte de "+ddlCiclos.SelectedValue+"");
         }
     }
 
@@ -360,6 +384,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesDaños : System.Web.UI
             PnCiclos.Visible = true;
             Utils.Ciclos_Reclamos(txtFechaInicio, txtFechaFin, "pa_ciclos_reclamos_danios", GridCiclos, 4,KPI);
             lblTitulo.Text = "Ciclo Total, KPI sobre " + KPI.ToString() + " dias";
+            Utils.actividades(0, Constantes.DANIOS(), 34, Constantes.USER());
         }
 
         else if (ddlCiclos.SelectedValue == "Ciclo Unity")
@@ -371,6 +396,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesDaños : System.Web.UI
             Utils.Ciclos_Reclamos(txtFechaInicio, txtFechaFin, "pa_ciclos_reclamos_danios", GridCiclos, 1,KPI);
             Utils.Ciclos_Reclamos(txtFechaInicio, txtFechaFin, "pa_ciclos_reclamos_danios", GridCiclos2, 5,KPI);
             lblTitulo.Text = "Ciclo Unity, KPI sobre " + KPI.ToString() + " dias";
+            Utils.actividades(0, Constantes.DANIOS(), 31, Constantes.USER());
         }
                 
         else if (ddlCiclos.SelectedValue == "Ciclo Cliente")
@@ -381,6 +407,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesDaños : System.Web.UI
             PnCiclos.Visible = true;
             Utils.Ciclos_Reclamos(txtFechaInicio, txtFechaFin, "pa_ciclos_reclamos_danios", GridCiclos, 3 ,KPI);
             lblTitulo.Text = "Ciclo Cliente, KPI sobre " + KPI.ToString() + " dias";
+            Utils.actividades(0, Constantes.DANIOS(), 33, Constantes.USER());
         }
 
         else if (ddlCiclos.SelectedValue == "Ciclo Aseguradora")
@@ -391,13 +418,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesDaños : System.Web.UI
             PnCiclos.Visible = true;
             Utils.Ciclos_Reclamos(txtFechaInicio, txtFechaFin, "pa_ciclos_reclamos_danios", GridCiclos, 2,KPI);
             lblTitulo.Text = "Ciclo Aseguradora, KPI sobre " + KPI.ToString() + " dias";
-        }
-
-
-        else if (ddlCiclos.SelectedValue == "Eficiencia")
-        {
-            Eficiencia();
-            Page.ClientScript.RegisterStartupScript(this.Page.GetType(), "show_modal", "$('#ModalDetalle').modal('show');", addScriptTags: true);
+            Utils.actividades(0, Constantes.DANIOS(), 32, Constantes.USER());
         }
     }
 
@@ -485,6 +506,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesDaños : System.Web.UI
         PanelEficiencia.Visible = true;
         Eficiencia();
         Utils.TituloReporte(PanelPrincipal, lblPeriodo, lblFechaGeneracion, lblUsuario, lblTitulo, "Reporte de Efectividad / Depto. Reclamos Daños", userlogin, txtFechaInicio, txtFechaFin, "");
+        Utils.actividades(0, Constantes.DANIOS(), 30, Constantes.USER());
     }
 }
 

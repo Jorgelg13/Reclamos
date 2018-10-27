@@ -159,4 +159,19 @@ public class Constantes
         String userlogin = HttpContext.Current.User.Identity.Name;
         return userlogin;
     }
+
+    public static int AUTOS()
+    {
+        return 1;
+    }
+
+    public static int DANIOS()
+    {
+        return 2;
+    }
+
+    public static int GASTOS_MEDICOS()
+    {
+        return 3;
+    }
 }

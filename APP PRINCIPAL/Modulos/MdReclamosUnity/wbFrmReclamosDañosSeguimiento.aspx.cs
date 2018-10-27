@@ -230,6 +230,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosDañosSeguimiento : Sy
             actualizar_contacto.correo   = txtCorreoContacto.Text;
             DBReclamos.SaveChanges();
             Utils.ShowMessage(this.Page, "Contacto Actualizado con exito", "Excelente..!", "success");
+            Utils.actividades(id, Constantes.DANIOS(), 14, Constantes.USER());
         }
         catch (Exception ex)
         {
@@ -261,6 +262,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosDañosSeguimiento : Sy
             txtDeducible.Text  = "0.00";
             txtCoberturaAfectada.Text = "";
             SeleccionarCoberturas(id);
+            Utils.actividades(id, Constantes.DANIOS(), 23, Constantes.USER());
         }
         catch (Exception ex)
         {
@@ -299,6 +301,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosDañosSeguimiento : Sy
     protected void btnGuardarComentario_Click(object sender, EventArgs e)
     {
         agregarComentario(txtComentarios.Text);
+        Utils.actividades(id, Constantes.DANIOS(), 3, Constantes.USER());
     }
 
     //metodo para llenar el dropdown que tiene las coberturas afectadas
@@ -351,6 +354,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosDañosSeguimiento : Sy
             bitacora.id_reclamos_varios = id;
             DBReclamos.bitacora_estados_reclamos_varios.Add(bitacora);
             actualizar_fecha_seguimiento();
+            Utils.actividades(id, Constantes.DANIOS(), 4, Constantes.USER());
         }
 
         try
@@ -415,6 +419,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosDañosSeguimiento : Sy
             DBReclamos.SaveChanges();
             datosReclamo(id);
             Utils.ShowMessage(this.Page, "La fecha para mostrar el reclamo en su seguimiento se a modificado", "Nota..!", "info");
+            Utils.actividades(id, Constantes.DANIOS(), 22, Constantes.USER());
         }
         catch (Exception ex)
         {
@@ -470,6 +475,8 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosDañosSeguimiento : Sy
             txtSalvamento.Text     = "0.00";
             txtIva.Text            = "0.00";
             txtMontoReclamado.Text = "0.00";
+
+            Utils.actividades(id, Constantes.DANIOS(), 20, Constantes.USER());
         }
         catch (Exception ex)
         {
@@ -493,6 +500,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosDañosSeguimiento : Sy
             reclamo_cerrado.fecha_cierre_reclamo = DateTime.Now;
             reclamo_cerrado.acs = false;
             DBReclamos.SaveChanges();
+            Utils.actividades(id, Constantes.DANIOS(), 24, Constantes.USER());
             Response.Redirect("/Modulos/MdReclamosUnity/wbFrmRecDañosSeguimiento.aspx", false);
         }
         catch (Exception ex)
@@ -540,6 +548,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosDañosSeguimiento : Sy
             txtIva.Text            = "0.00";
             txtTimbres.Text        = "0.00";
             txtMontoReclamado.Text = "0.00";
+            Utils.actividades(id, Constantes.DANIOS(), 21, Constantes.USER());
         }
         catch (Exception ex)
         {
@@ -654,6 +663,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosDañosSeguimiento : Sy
         }
 
         llenado.llenarGrid(comentarios, GridComentarios);
+        Utils.actividades(id, Constantes.DANIOS(), 26, Constantes.USER());
     }
 
     protected void GridComentarios_RowDataBound(object sender, GridViewRowEventArgs e)
@@ -867,18 +877,21 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosDañosSeguimiento : Sy
             if (chCartaCierre.Checked)
             {
                 Utils.Guardar_cartas(txtContenidoCarta, "cierre interno", "daños", id, chCartaCierre, chCartaDeclinado, chEnvioCarta, Response);
+                Utils.actividades(id, Constantes.DANIOS(), 9, Constantes.USER());
                 datosReclamo(id);
             }
 
             else if (chCartaDeclinado.Checked)
             {
                 Utils.Guardar_cartas(txtContenidoCarta, "declinado", "daños", id, chCartaCierre, chCartaDeclinado, chEnvioCarta, Response);
+                Utils.actividades(id, Constantes.DANIOS(), 10, Constantes.USER());
                 datosReclamo(id);
             }
 
             else if (chEnvioCarta.Checked)
             {
                 Utils.Guardar_cartas(txtContenidoCarta, "envio cheque", "daños", id, chCartaCierre, chCartaDeclinado, chEnvioCarta, Response);
+                Utils.actividades(id, Constantes.DANIOS(), 11, Constantes.USER());
                 datosReclamo(id);
             }
 
@@ -909,6 +922,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosDañosSeguimiento : Sy
                 agregarComentario("Este reclamo ha sido encontrado como no conforme, catalogado como " + ddlNoConforme.SelectedValue + ". " + txtObservacionesNoConf.Text);
                 llenado.llenarGrid(comentarios, GridComentarios);
                 Utils.ShowMessage(this.Page, "Reclamo Actualizado como producto no conforme.", "Excelente", "info");
+                Utils.actividades(id, Constantes.DANIOS(), 16, Constantes.USER());
             }
 
             else
@@ -942,6 +956,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosDañosSeguimiento : Sy
             Utils.SMS_reclamos_danios(txtTelefono.Text, TxtEnvioSms.Text, userlogin, id);
             TxtEnvioSms.Text = "";
             llenado.llenarGrid(comentarios, GridComentarios);
+            Utils.actividades(id, Constantes.DANIOS(), 12, Constantes.USER());
         }
     }
 
@@ -988,6 +1003,8 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosDañosSeguimiento : Sy
                     DBReclamos.SaveChanges();
                 }
             }
+
+            Utils.actividades(id, Constantes.DANIOS(), 17, Constantes.USER());
         }
 
         catch(Exception ex)
@@ -1007,6 +1024,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosDañosSeguimiento : Sy
             reclamo.id_gestor = usuario.id;
             DBReclamos.SaveChanges();
             Utils.ShowMessage(this.Page, "Reclamo Reasignado con exito a usuario " + ddlGestor.SelectedItem.Text + "", "Excelente..", "success");
+            Utils.actividades(id, Constantes.DANIOS(), 8, Constantes.USER());
         }
 
         catch (Exception ex)
@@ -1047,6 +1065,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosDañosSeguimiento : Sy
         }
         llenado.llenarGrid(doc_solicitados, GridDocSeleccionados);
         agregarComentario("Documentos Solicitados: \n\n" + documento);
+        Utils.actividades(id, Constantes.DANIOS(), 18, Constantes.USER());
     }
 
     protected void btnGuardarDocumentos_Click(object sender, EventArgs e)
@@ -1119,6 +1138,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosDañosSeguimiento : Sy
             datosReclamo(id);
 
             Utils.ShowMessage(this.Page, "Excelente datos actualizados con exitos", "Excelente..", "success");
+            Utils.actividades(id, Constantes.DANIOS(), 7, Constantes.USER());
         }
 
         catch(Exception ex)

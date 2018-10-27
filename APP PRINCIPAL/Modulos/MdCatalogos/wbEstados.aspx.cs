@@ -14,7 +14,11 @@ public partial class Modulos_MdCatalogos_wbEstados : System.Web.UI.Page
     {
         idRecibido = Request.QueryString[0].ToString();
 
-        if (userlogin == "nsierra" || userlogin == "cmejia" || userlogin == "jlaj") PnPrincipal.Visible = true;
+        if (userlogin == "nsierra" || userlogin == "cmejia" || userlogin == "jlaj")
+        {
+            Guardar.Enabled = true;
+            Actualizar.Enabled = false;
+        }
 
         if (!IsPostBack)
         {
@@ -97,14 +101,19 @@ public partial class Modulos_MdCatalogos_wbEstados : System.Web.UI.Page
 
     protected void GridGeneral_SelectedIndexChanged(object sender, EventArgs e)
     {
-        txtDescripcion.Enabled = false;
-        id = Convert.ToInt32(gridEstados.SelectedRow.Cells[1].Text);
-        var estados = DBReclamos.estados_reclamos_unity.Find(id);
-        txtDescripcion.Text = estados.descripcion;
-        txtDias.Text = estados.dias_revision.ToString();
-        ddlTipo.SelectedValue = estados.tipo;
-        Actualizar.Visible = true;
-        Guardar.Visible = false;
+        if (userlogin == "nsierra" || userlogin == "cmejia" || userlogin == "jlaj")
+        {
+
+            txtDescripcion.Enabled = false;
+            id = Convert.ToInt32(gridEstados.SelectedRow.Cells[1].Text);
+            var estados = DBReclamos.estados_reclamos_unity.Find(id);
+            txtDescripcion.Text = estados.descripcion;
+            txtDias.Text = estados.dias_revision.ToString();
+            ddlTipo.SelectedValue = estados.tipo;
+            Guardar.Visible = false;
+            Actualizar.Visible = true;
+            Actualizar.Enabled = true;
+        }
     }
 
 

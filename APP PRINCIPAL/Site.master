@@ -466,19 +466,11 @@
                 window.open(URL, "ventana1", "width=450,height=150,scrollbars=NO")
             }
         </script>
-        <div id="body">
-            <asp:ContentPlaceHolder runat="server" ID="FeaturedContent">
-            </asp:ContentPlaceHolder>
-            <section class="content-wrapper main-content clear-fix">
-                <asp:ContentPlaceHolder runat="server" ID="MainContent" />
-            </section>
-        </div>
+        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+        </asp:ContentPlaceHolder>
         <script type="text/javascript" src="<%= ResolveUrl("/Scripts/jquery-3.1.1.min.js") %>"></script>
         <script type="text/javascript" src="<%= ResolveUrl("/bootstrap/js/bootstrap.min.js") %>"></script>
-        <script type="text/javascript" src="<%= ResolveUrl("/Scripts/jquery.cookie.min.js") %>"></script>
         <script type="text/javascript" src="<%= ResolveUrl("/Scripts/toastr.min.js") %>"></script>
-        <script type="text/javascript" src="<%= ResolveUrl("/Scripts/jQuery.print.min.js") %>"></script>
-        <script type="text/javascript" src="<%= ResolveUrl("/Scripts/app.js") %>"></script>
         <script type='text/javascript'>
             $(window).on('load', function () {
                 $('.loading-screen').attr('style', 'display:none');

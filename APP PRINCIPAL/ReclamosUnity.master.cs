@@ -24,6 +24,8 @@ public partial class ReclamosUnity : System.Web.UI.MasterPage
         {
             Response.Redirect("/Modulos/MdReclamosUnity/wbFrmReclamosAutosSeguimiento.aspx?ID_reclamo=" + txtBusquedaId.Text, false);
         }
+
+        Utils.actividades(Convert.ToInt32(txtBusquedaId.Text), Constantes.AUTOS(), 25, Constantes.USER());
     }
 
     protected void btnBuscarReclamosVarios_Click(object sender, EventArgs e)
@@ -36,6 +38,8 @@ public partial class ReclamosUnity : System.Web.UI.MasterPage
         {
             Response.Redirect("/Modulos/MdReclamosUnity/wbFrmReclamosDañosSeguimiento.aspx?ID_reclamo=" + txtReclamosVarios.Text, false);
         }
+
+        Utils.actividades(Convert.ToInt32(txtReclamosVarios.Text), Constantes.DANIOS(), 25, Constantes.USER());
     }
 
     protected void btnReclamoMedico_Click(object sender, EventArgs e)
@@ -48,5 +52,7 @@ public partial class ReclamosUnity : System.Web.UI.MasterPage
         {
             Response.Redirect("/Modulos/MdReclamosUnity/wbFrmReclamosMedicosSeguimiento.aspx?Id_reclamo=" + txtBuscarReclamoMedico.Text, false);
         }
+
+        Utils.actividades(Convert.ToInt32(txtBuscarReclamoMedico.Text), Constantes.GASTOS_MEDICOS(), 25, Constantes.USER());
     }
 }

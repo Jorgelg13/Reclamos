@@ -26,6 +26,7 @@ public partial class ReclamosEntities : DbContext
         throw new UnintentionalCodeFirstException();
     }
 
+    public DbSet<actividades> actividades { get; set; }
     public DbSet<ajustadores> ajustadores { get; set; }
     public DbSet<analistas> analistas { get; set; }
     public DbSet<aseguradoras> aseguradoras { get; set; }
@@ -68,6 +69,7 @@ public partial class ReclamosEntities : DbContext
     public DbSet<gestores> gestores { get; set; }
     public DbSet<ingreso_cheques> ingreso_cheques { get; set; }
     public DbSet<motivos_cierre> motivos_cierre { get; set; }
+    public DbSet<movimientos> movimientos { get; set; }
     public DbSet<pais> pais { get; set; }
     public DbSet<ramos> ramos { get; set; }
     public DbSet<recibos_medicos> recibos_medicos { get; set; }
@@ -80,6 +82,7 @@ public partial class ReclamosEntities : DbContext
     public DbSet<sysdiagrams> sysdiagrams { get; set; }
     public DbSet<talleres> talleres { get; set; }
     public DbSet<tipo_documentos> tipo_documentos { get; set; }
+    public DbSet<tipo_reclamos> tipo_reclamos { get; set; }
     public DbSet<usuario> usuario { get; set; }
     public DbSet<viewCoberturasAutos> viewCoberturasAutos { get; set; }
     public DbSet<vistaBusquedaPolizaMovil> vistaBusquedaPolizaMovil { get; set; }
@@ -476,5 +479,15 @@ public partial class ReclamosEntities : DbContext
     public virtual ObjectResult<Nullable<int>> pa_sec_ingreso_cheque()
     {
         return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("pa_sec_ingreso_cheque");
+    }
+
+    public virtual ObjectResult<Nullable<long>> pa_sec_actividades()
+    {
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<long>>("pa_sec_actividades");
+    }
+
+    public virtual int pa_replicar_reclamos_gm()
+    {
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pa_replicar_reclamos_gm");
     }
 }

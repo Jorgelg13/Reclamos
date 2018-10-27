@@ -53,5 +53,6 @@ public partial class Modulos_MdAdmin_wbFrmAsigReclamosMedicos : System.Web.UI.Pa
     protected void bntAsignar_Click(object sender, EventArgs e)
     {
         asignar_reclamos();
+        Utils.actividades(0, Constantes.GASTOS_MEDICOS(), 41, Constantes.USER());
     }
 }

@@ -281,6 +281,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosMedicosSeguimientos : 
     protected void btnGuardarComentario_Click(object sender, EventArgs e)
     {
         agregarComentario(txtComentarios.Text);
+        Utils.actividades(id, Constantes.GASTOS_MEDICOS(), 3, Constantes.USER());
     }
 
     //evento para guardar un correo a los comentarios
@@ -328,6 +329,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosMedicosSeguimientos : 
     protected void btnguardarDetalle_Click(object sender, EventArgs e)
     {
         GuardarDetalleGasto(id);
+        Utils.actividades(id, Constantes.GASTOS_MEDICOS(), 48, Constantes.USER());
     }
 
     private void GuardarDetalleGasto(int identificador)
@@ -452,6 +454,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosMedicosSeguimientos : 
             checkAgregar.Enabled = true;
             tiempos();
             inabilitarTextPago();
+            Utils.actividades(id, Constantes.GASTOS_MEDICOS(), 20, Constantes.USER());
         }
 
         catch (Exception)
@@ -485,7 +488,9 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosMedicosSeguimientos : 
     protected void btnGuardarProximaFecha_Click(object sender, EventArgs e)
     {
         actualizar.actualizarDatos("update reclamos_medicos set fecha_visualizar = '" + txtProximaFecha.Text + "'", id);
+        Utils.actividades(id, Constantes.GASTOS_MEDICOS(), 22, Constantes.USER());
         Response.Redirect("/Modulos/MdReclamosUnity/wbFrmRecMedSeguimiento.aspx", false);
+
     }
 
     //cerrar el reclamo
@@ -501,6 +506,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosMedicosSeguimientos : 
             cierre.bandera_cierre = true;
             cierre.acs = false;
             DBReclamos.SaveChanges();
+            Utils.actividades(id, Constantes.GASTOS_MEDICOS(), 24, Constantes.USER());
         }
         catch (Exception)
         {
@@ -630,6 +636,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosMedicosSeguimientos : 
     protected void btnActualizarPago_Click(object sender, EventArgs e)
     {
         ActualizarLiquidacion();
+        Utils.actividades(id, Constantes.GASTOS_MEDICOS(), 21, Constantes.USER());
     }
 
     //carga las direcciones disponibles del asegurado segun el sistema
@@ -695,6 +702,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosMedicosSeguimientos : 
             GridDetalleM.DataBind();
             totalDetalleGasto(id);
             GridDetalleGMAseguradora.DataBind();
+            Utils.actividades(id, Constantes.GASTOS_MEDICOS(), 46, Constantes.USER());
         }
 
         catch (Exception)
@@ -772,6 +780,8 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosMedicosSeguimientos : 
 
                 }
             }
+
+            Utils.actividades(id, Constantes.GASTOS_MEDICOS(), 44, Constantes.USER());
         }
 
         catch(Exception)
@@ -839,6 +849,8 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosMedicosSeguimientos : 
                 Utils.ShowMessage(this.Page, "Error al generar el memo" + ex.Message, "Nota..!", "warning");
             }
         }
+
+        Utils.actividades(id, Constantes.GASTOS_MEDICOS(), 45, Constantes.USER());
     }
 
     public void actualizarMemos()
@@ -1015,6 +1027,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosMedicosSeguimientos : 
             DBReclamos.SaveChanges();
             GridDetalleM.DataBind();
             GridDetalleGMAseguradora.DataBind();
+            Utils.actividades(id, Constantes.GASTOS_MEDICOS(), 47, Constantes.USER());
         }
         catch (Exception)
         {
@@ -1077,6 +1090,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosMedicosSeguimientos : 
                 Utils.ShowMessage(this.Page, "Reclamo Actualizado como producto no conforme.", "Excelente", "info");
             }
 
+            Utils.actividades(id, Constantes.GASTOS_MEDICOS(), 16, Constantes.USER());
         }
         catch (Exception)
         {
@@ -1127,6 +1141,8 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosMedicosSeguimientos : 
                     DBReclamos.SaveChanges();
                 }
             }
+
+            Utils.actividades(id, Constantes.GASTOS_MEDICOS(), 17, Constantes.USER());
         }
 
         catch (Exception ex)

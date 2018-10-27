@@ -10,6 +10,19 @@
 using System;
 using System.Collections.Generic;
 
+public partial class actividades
+{
+    public long id { get; set; }
+    public Nullable<long> id_reclamo { get; set; }
+    public Nullable<int> id_tipo { get; set; }
+    public Nullable<int> id_movimiento { get; set; }
+    public Nullable<System.DateTime> fecha { get; set; }
+    public string usuario { get; set; }
+
+    public virtual movimientos movimientos { get; set; }
+    public virtual tipo_reclamos tipo_reclamos { get; set; }
+}
+
 public partial class ajustadores
 {
     public int id { get; set; }
@@ -636,6 +649,19 @@ public partial class motivos_cierre
     public virtual ICollection<reclamo_auto> reclamo_auto { get; set; }
 }
 
+public partial class movimientos
+{
+    public movimientos()
+    {
+        this.actividades = new HashSet<actividades>();
+    }
+
+    public int id { get; set; }
+    public string nombre { get; set; }
+
+    public virtual ICollection<actividades> actividades { get; set; }
+}
+
 public partial class pais
 {
     public pais()
@@ -1046,6 +1072,19 @@ public partial class tipo_documentos
     public virtual ICollection<documentos_solicitados> documentos_solicitados { get; set; }
 }
 
+public partial class tipo_reclamos
+{
+    public tipo_reclamos()
+    {
+        this.actividades = new HashSet<actividades>();
+    }
+
+    public int id { get; set; }
+    public string nombre { get; set; }
+
+    public virtual ICollection<actividades> actividades { get; set; }
+}
+
 public partial class usuario
 {
     public usuario()
@@ -1057,6 +1096,8 @@ public partial class usuario
     }
 
     public int id { get; set; }
+    public Nullable<bool> estado { get; set; }
+    public Nullable<short> tipo { get; set; }
     public string nombre { get; set; }
     public Nullable<System.Guid> id_usuario { get; set; }
     public int id_cabina { get; set; }

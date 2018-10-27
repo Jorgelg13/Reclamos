@@ -114,6 +114,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesAutos : System.Web.UI.
                 llenado.llenarGrid(listado.Substring(0, (listado.Length - 2)) + Join + " where reclamo_auto.estado_unity = 'Seguimiento'  ", GridCamposSeleccion);
             }
             Conteo();
+           
         }
 
         else
@@ -188,6 +189,8 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesAutos : System.Web.UI.
         {
             Utils.TituloReporte(PanelPrincipal, lblPeriodo, lblFechaGeneracion, lblUsuario, lblTitulo, "Reporte de Reclamos de Autos", userlogin, txtFechaInicio, txtFechaFin, "");
         }
+
+        Utils.actividades(0, Constantes.AUTOS(), 29, Constantes.USER());
     }
 
     //funcion para exportar a un archivo de excel lo que aparece en el gridview
@@ -195,17 +198,39 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesAutos : System.Web.UI.
     {
         if(PanelCamposSeleccion.Visible == true)
         {
+            Utils.actividades(0, Constantes.AUTOS(), 35, Constantes.USER());
             Utils.ExportarExcel(PanelPrincipal, Response, "Reporte Reclamos Autos");
         }
         
         else if (PanelEficiencia.Visible == true)
         {
+            Utils.actividades(0, Constantes.AUTOS(), 36, Constantes.USER());
             Utils.ExportarExcel(PanelPrincipal, Response, "Reporte de Eficiencia");
         }
 
         else if (PnCiclos.Visible == true)
         {
-            Utils.ExportarExcel(PanelPrincipal, Response, "Reporte de Ciclos");
+            if(ddlCiclos.SelectedValue == "Ciclo Total")
+            {
+               Utils.actividades(0, Constantes.AUTOS(), 40, Constantes.USER());
+            }
+
+            else if (ddlCiclos.SelectedValue == "Ciclo Unity")
+            {
+                Utils.actividades(0, Constantes.AUTOS(), 39, Constantes.USER());
+            }
+
+            else if (ddlCiclos.SelectedValue == "Ciclo Cliente")
+            {
+                Utils.actividades(0, Constantes.AUTOS(), 38, Constantes.USER());
+            }
+
+            else if (ddlCiclos.SelectedValue == "Ciclo Aseguradora")
+            {
+                Utils.actividades(0, Constantes.AUTOS(), 37, Constantes.USER());
+            }
+
+            Utils.ExportarExcel(PanelPrincipal, Response, "Reporte de "+ddlCiclos.SelectedValue+" ");
         }
     }
 
@@ -252,6 +277,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesAutos : System.Web.UI.
             PanelCamposSeleccion.Visible = false;
             PnCiclos.Visible = false;
             llenado.llenarGrid(eficienciaGestores, GridEficiencia);
+            Utils.actividades(0, Constantes.AUTOS(), 30, Constantes.USER());
         }
 
         catch(Exception)
@@ -462,6 +488,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesAutos : System.Web.UI.
             Utils.Ciclos_Reclamos(txtFechaInicio, txtFechaFin, "pa_ciclos_reclamos_autos", GridCiclos, 4, kpi);
             //Utils.Ciclos_Reclamos(txtFechaInicio, txtFechaFin, "pa_ciclos_reclamos_autos", GridCiclos2, 8, kpi);
             lblTitulo.Text = "Ciclo Total, KPI sobre " + kpi.ToString() + " dias";
+            Utils.actividades(0, Constantes.AUTOS(), 34, Constantes.USER());
         }
 
         else if (ddlCiclos.SelectedValue == "Ciclo Unity")
@@ -473,6 +500,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesAutos : System.Web.UI.
             Utils.Ciclos_Reclamos(txtFechaInicio,txtFechaFin, "pa_ciclos_reclamos_autos", GridCiclos, 1, kpi);
             Utils.Ciclos_Reclamos(txtFechaInicio, txtFechaFin, "pa_ciclos_reclamos_autos", GridCiclos2, 5, kpi);
             lblTitulo.Text = "Ciclo Unity, KPI sobre " + kpi.ToString() + " dias";
+            Utils.actividades(0, Constantes.AUTOS(), 31, Constantes.USER());
         }
 
         else if (ddlCiclos.SelectedValue == "Ciclo Aseguradora")
@@ -484,6 +512,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesAutos : System.Web.UI.
             Utils.Ciclos_Reclamos(txtFechaInicio, txtFechaFin, "pa_ciclos_reclamos_autos", GridCiclos, 2 , kpi);
             //Utils.Ciclos_Reclamos(txtFechaInicio, txtFechaFin, "pa_ciclos_reclamos_autos", GridCiclos2, 6, kpi);
             lblTitulo.Text = "Ciclo Aseguradora, KPI sobre " + kpi.ToString() + " dias";
+            Utils.actividades(0, Constantes.AUTOS(), 32, Constantes.USER());
         }
 
         else if (ddlCiclos.SelectedValue == "Ciclo Cliente")
@@ -495,6 +524,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesAutos : System.Web.UI.
             Utils.Ciclos_Reclamos(txtFechaInicio, txtFechaFin, "pa_ciclos_reclamos_autos", GridCiclos, 3, kpi);
             //Utils.Ciclos_Reclamos(txtFechaInicio, txtFechaFin, "pa_ciclos_reclamos_autos", GridCiclos, 7, kpi);
             lblTitulo.Text = "Ciclo Cliente, KPI sobre " + kpi.ToString() + " dias";
+            Utils.actividades(0, Constantes.AUTOS(), 33, Constantes.USER());
         }
 
         else if (ddlCiclos.SelectedValue == "Eficiencia")

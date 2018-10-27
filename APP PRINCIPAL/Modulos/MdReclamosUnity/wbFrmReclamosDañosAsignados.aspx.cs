@@ -276,7 +276,7 @@ public partial class Modulos_MdReclamos_wbFrmReclamosDañosAsignados : System.We
             }
 
             NoficacionEjecutivo();
-
+            Utils.actividades(id, Constantes.DANIOS(), 5, Constantes.USER());
             Response.Redirect("/Modulos/MdReclamosUnity/wbFrmReclamosDañosSeguimiento.aspx?ID_reclamo=" + id, false);
         }
         catch (Exception ex)
@@ -310,6 +310,7 @@ public partial class Modulos_MdReclamos_wbFrmReclamosDañosAsignados : System.We
             txtSumaAsegurada.Text = "";
             txtContratante.Text = "";
             Utils.ShowMessage(this.Page, "Datos actualizados con exito", "Excelente..!", "success");
+            Utils.actividades(id, Constantes.DANIOS(), 7, Constantes.USER());
         }
         catch (Exception ex)
         {

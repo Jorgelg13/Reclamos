@@ -103,6 +103,7 @@
                             <li><a href="/Modulos/MdReportes/wbFrmReporteProblemas.aspx?id=1">Reporte de problemas Autos</a></li>
                             <li><a href="/Modulos/MdReportes/wbFrmReporteProblemas.aspx?id=2">Reporte de problemas Daños</a></li>
                             <li><a href="/Modulos/MdReportes/wbFrmReporteCheques.aspx">Cheques Ingresados</a></li>
+                            <li><a href="/Modulos/MdReportes/wbActividades.aspx">Reporte de Actividades</a></li>
                         </ul>
                     </li>
                     <li class="dropdown">

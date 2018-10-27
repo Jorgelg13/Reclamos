@@ -17,7 +17,7 @@ public partial class _Default : Page
     {
         if (!comprobar.verificarUsuario(userlogin))
         {
-            Response.Redirect("/portada.aspx");
+            Response.Redirect("/portada.aspx",false);
         }
 
         obtenerID();

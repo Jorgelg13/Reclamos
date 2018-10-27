@@ -87,36 +87,42 @@ public partial class Modulos_MdReclamosUnity_wbFrmRecDañosSeguimiento : System.
     {
         id = Convert.ToInt32(GridPrioritarios.SelectedRow.Cells[1].Text);
         Response.Redirect("/Modulos/MdReclamosUnity/wbFrmReclamosDañosSeguimiento.aspx?ID_reclamo=" + id, false);
+        Utils.actividades(id, Constantes.DANIOS(), 27, Constantes.USER());
     }
 
     protected void GridComplicados_SelectedIndexChanged(object sender, EventArgs e)
     {
         id = Convert.ToInt32(GridComplicados.SelectedRow.Cells[1].Text);
         Response.Redirect("/Modulos/MdReclamosUnity/wbFrmReclamosDañosSeguimiento.aspx?ID_reclamo=" + id, false);
+        Utils.actividades(id, Constantes.DANIOS(), 27, Constantes.USER());
     }
 
     protected void GridReclamosEstado_SelectedIndexChanged(object sender, EventArgs e)
     {
         id = Convert.ToInt32(GridReclamosEstado.SelectedRow.Cells[1].Text);
         Response.Redirect("/Modulos/MdReclamosUnity/wbFrmReclamosDañosSeguimiento.aspx?ID_reclamo=" + id, false);
+        Utils.actividades(id, Constantes.DANIOS(), 27, Constantes.USER());
     }
 
     protected void GridReclamosGeneral_SelectedIndexChanged(object sender, EventArgs e)
     {
         id = Convert.ToInt32(GridReclamosGeneral.SelectedRow.Cells[1].Text);
         Response.Redirect("/Modulos/MdReclamosUnity/wbFrmReclamosDañosSeguimiento.aspx?ID_reclamo=" + id, false);
+        Utils.actividades(id, Constantes.DANIOS(), 27, Constantes.USER());
     }
 
     protected void GridInactivos_SelectedIndexChanged(object sender, EventArgs e)
     {
         id = Convert.ToInt32(GridInactivos.SelectedRow.Cells[1].Text);
         Response.Redirect("/Modulos/MdReclamosUnity/wbFrmReclamosDañosSeguimiento.aspx?ID_reclamo=" + id, false);
+        Utils.actividades(id, Constantes.DANIOS(), 27, Constantes.USER());
     }
 
     protected void GridAlarmas_SelectedIndexChanged(object sender, EventArgs e)
     {
         id = Convert.ToInt32(GridAlarmas.SelectedRow.Cells[1].Text);
         Response.Redirect("/Modulos/MdReclamosUnity/wbFrmReclamosDañosSeguimiento.aspx?ID_reclamo=" + id, false);
+        Utils.actividades(id, Constantes.DANIOS(), 27, Constantes.USER());
     }
 
     //funcion que coloca en rojo los registros que no se an abierto en el dia
@@ -201,6 +207,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmRecDañosSeguimiento : System.
 
     protected void linkDescargar_Click(object sender, EventArgs e)
     {
+        Utils.actividades(0, Constantes.DANIOS(), 28, Constantes.USER());
         Utils.ExportarExcel(PnAlarmas, Response, "Alarmas de reclamos daños");
     }
 }

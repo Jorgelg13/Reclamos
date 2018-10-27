@@ -196,10 +196,12 @@ public partial class Modulos_MdReclamos_wbFrmReclamosAsignadosUnity : System.Web
             reclamo.fecha_apertura_reclamo = DateTime.Now;
             reclamo.fecha_cierre_reclamo = DateTime.Now;
             DBReclamos.SaveChanges();
+            Utils.actividades(id, Constantes.AUTOS() ,5,Constantes.USER());
 
             if (txtTelefono.Text != "")
             {
-                Utils.SMS_reclamos_autos(txtTelefono.Text, "UNITY: Estimad@ cliente recibimos aviso del reclamo "+reclamo.id+" asesor asignado: "+ddlGestor.SelectedItem+" Tel: "+reclamo.gestores.telefono+".", userlogin, id);
+                Utils.SMS_reclamos_autos(txtTelefono.Text, "UNITY: Mi nombre es "+ ddlGestor.SelectedItem+" soy la persona asignada para la atencion del reclamo, segun ID "+reclamo.id+" presentado " +
+                    "por daños al vehiculo "+reclamo.auto_reclamo.marca+" "+reclamo.auto_reclamo.modelo+" placas "+reclamo.auto_reclamo.placa+", mi telefono directo es "+reclamo.gestores.telefono+", correo "+reclamo.gestores.correo+" para que pueda contactarme para cualquier consulta.", userlogin, id);
             }
             if (txtCorreo.Text != "")
             {

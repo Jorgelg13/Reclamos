@@ -118,11 +118,13 @@ public partial class Modulos_MdAdmin_wbFrmAsigReclamosDaños : System.Web.UI.Pag
 
     protected void linkDescargar_Click(object sender, EventArgs e)
     {
-        Utils.ExportarExcel(PnPrincipal, Response, "Asignaciones reclamos varios del " + fechaInicio.Text + " al " + fechaFinal.Text);
+        Utils.actividades(id, Constantes.DANIOS(), 43, Constantes.USER());
+        Utils.ExportarExcel(PnPrincipal, Response, "Asignaciones reclamos daños del " + fechaInicio.Text + " al " + fechaFinal.Text);
     }
 
     protected void bntAsignar_Click(object sender, EventArgs e)
     {
         asignar_reclamos();
+        Utils.actividades(0, Constantes.DANIOS(), 41, Constantes.USER());
     }
 }

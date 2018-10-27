@@ -222,6 +222,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosAutosSeguimiento : Sys
     {
         String Comen = WebUtility.HtmlDecode(txtComentarios.Text);
         agregarComentario(Comen);
+        Utils.actividades(id, Constantes.AUTOS(),3, Constantes.USER());
     }
 
     private void agregarComentario(String descripcion)
@@ -319,6 +320,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosAutosSeguimiento : Sys
             bitacora.id_reclamo_auto = id;
             DBReclamos.bitacora_estados_autos.Add(bitacora);
             actualizar_fecha_seguimiento();
+            Utils.actividades(id, Constantes.AUTOS(), 4, Constantes.USER());
         }
 
         try
@@ -371,6 +373,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosAutosSeguimiento : Sys
             cerrar.id_motivo_cierre = Convert.ToInt32(ddlTipoCierre.SelectedValue);
             cerrar.fecha_cierre_reclamo = DateTime.Now;
             DBReclamos.SaveChanges();
+            Utils.actividades(id, Constantes.AUTOS(), 24, Constantes.USER());
         }
         catch (Exception ex)
         {
@@ -523,6 +526,8 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosAutosSeguimiento : Sys
             txtDeducible.Text = "0.00";
             txtPrima.Text     = "0.00";
             txtCoberturaAfectada.Text = "";
+
+            Utils.actividades(id, Constantes.AUTOS(),23, Constantes.USER());
         }
         catch (Exception ex)
         {
@@ -541,6 +546,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosAutosSeguimiento : Sys
             contacto.correo = txtCorreoContacto.Text;
             DBReclamos.SaveChanges();
             Utils.ShowMessage(this.Page, "Contacto actualizado con exito", "Excelente..!", "success");
+            Utils.actividades(id, Constantes.AUTOS(), 14, Constantes.USER());
         }
         catch (Exception ex)
         {
@@ -603,6 +609,8 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosAutosSeguimiento : Sys
             txtPagoDeducible.Text = "0.00";
             txtPrimasPago.Text    = "0.00";
             txtMonto.Text         = "0.00";
+
+            Utils.actividades(id, Constantes.AUTOS(), 20, Constantes.USER());
         }
         catch (Exception)
         {
@@ -645,6 +653,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosAutosSeguimiento : Sys
         pago.destino   = ddlDestino.SelectedValue;
         DBReclamos.SaveChanges();
         llenado.llenarGrid(pagos, GridPagosReclamos);
+        Utils.actividades(id, Constantes.AUTOS(), 21, Constantes.USER());
     }
 
     //salir del reclamo y me redirecciona a los reclamos en seguimiento
@@ -676,6 +685,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosAutosSeguimiento : Sys
             update_fecha.fecha_visualizar = Convert.ToDateTime(txtProximaFecha.Text);
             DBReclamos.SaveChanges();
             DatosReclamo(id);
+            Utils.actividades(id, Constantes.AUTOS(), 22, Constantes.USER());
         }
         catch(Exception ex)
         {
@@ -837,6 +847,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosAutosSeguimiento : Sys
             if(chEnviarSMS.Checked && txtTelefono.Text != "")
             {
                 Utils.SMS_reclamos_autos(txtTelefono.Text, "UNITY: Estimad@ cliente ID "+id+" su vehículo en proceso de presupuesto y ajuste en taller de su elección", userlogin, id);
+                Utils.actividades(id, Constantes.AUTOS(), 26, Constantes.USER());
             }
 
             llenado.llenarGrid(comentarios, GridComentarios);
@@ -855,6 +866,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosAutosSeguimiento : Sys
             if(chEnviarSMS.Checked && txtTelefono.Text != "")
             {
                 Utils.SMS_reclamos_autos(txtTelefono.Text, "UNITY: Estimad@ cliente Reclamo ID "+id+" su vehiculo esta en proceso de reparacion le estaremos informando sobre avances.", userlogin, id);
+                Utils.actividades(id, Constantes.AUTOS(), 26, Constantes.USER());
             }
 
             llenado.llenarGrid(comentarios, GridComentarios);
@@ -872,7 +884,8 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosAutosSeguimiento : Sys
 
             if(chEnviarSMS.Checked && txtTelefono.Text != "")
             {
-                 Utils.SMS_reclamos_autos(txtTelefono.Text, "UNITY: Estimad@ cliente Reclamo "+id+" su vehiculo esta en proceso final de reparacion le informaremos sobre la entrega.", userlogin, id);
+                Utils.SMS_reclamos_autos(txtTelefono.Text, "UNITY: Estimad@ cliente Reclamo "+id+" su vehiculo esta en proceso final de reparacion le informaremos sobre la entrega.", userlogin, id);
+                Utils.actividades(id, Constantes.AUTOS(), 26, Constantes.USER());
             }
 
             llenado.llenarGrid(comentarios, GridComentarios);
@@ -884,6 +897,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosAutosSeguimiento : Sys
             {
                 Utils.SMS_reclamos_autos(txtTelefono.Text, "UNITY: Estimad@ cliente Reclamo "+id+" su vehiculo fue declarado como perdida total, se envia solicitud de documentos.", userlogin, id);
                 llenado.llenarGrid(comentarios,GridComentarios);
+                Utils.actividades(id, Constantes.AUTOS(), 26, Constantes.USER());
             }
         }
 
@@ -893,6 +907,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosAutosSeguimiento : Sys
             {
                 Utils.SMS_reclamos_autos(txtTelefono.Text, "UNITY: Estimad@ cliente hemos recibido documentacion para revision y envio a la Aseguradora, segun reclamo ID "+id+".", userlogin, id);
                 llenado.llenarGrid(comentarios, GridComentarios);
+                Utils.actividades(id, Constantes.AUTOS(), 26, Constantes.USER());
             }
         }
 
@@ -909,6 +924,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosAutosSeguimiento : Sys
             if(chEnviarSMS.Checked && txtTelefono.Text != "")
             {
                 Utils.SMS_reclamos_autos(txtTelefono.Text, "UNITY: Estimad@ cliente ID "+id+" esta en proceso de ajuste y liquidacion en la compañia de seguros.", userlogin, id);
+                Utils.actividades(id, Constantes.AUTOS(), 26, Constantes.USER());
             }
 
             llenado.llenarGrid(comentarios,GridComentarios);
@@ -919,6 +935,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosAutosSeguimiento : Sys
             if (chEnviarSMS.Checked && txtTelefono.Text != "")
             {
                 Utils.SMS_reclamos_autos(txtTelefono.Text, "UNITY: Estimad@ cliente su ID "+id+" esta en proceso de emision de cheque en la compañia de seguros.", userlogin, id);
+                Utils.actividades(id, Constantes.AUTOS(), 26, Constantes.USER());
             }
 
             llenado.llenarGrid(comentarios, GridComentarios);
@@ -944,6 +961,8 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosAutosSeguimiento : Sys
                 {
                     Utils.SMS_reclamos_autos(txtTelefono.Text,txtSMS.Text, userlogin, id);
                 }
+
+                Utils.actividades(id, Constantes.AUTOS(), 26, Constantes.USER());
             }
 
             llenado.llenarGrid(comentarios, GridComentarios);
@@ -1008,6 +1027,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosAutosSeguimiento : Sys
             auto.auto_reclamo.propietario = txtPropietario.Text;
             DBReclamos.SaveChanges();
             Utils.ShowMessage(this.Page, "Datos del auto actualizados", "Excelente..!", "success");
+            Utils.actividades(id, Constantes.AUTOS(), 6, Constantes.USER());
         }
 
         catch(Exception ex)
@@ -1051,6 +1071,8 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosAutosSeguimiento : Sys
 
         llenado.llenarGrid(llamadas, Bitllamadas);
         llenado.llenarGrid(comentarios, BitSeguimiento);
+
+       // Utils.actividades(id, Constantes.AUTOS(), 15, Constantes.USER());
     }
 
     protected void btnProductoNoConforme_Click(object sender, EventArgs e)
@@ -1069,6 +1091,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosAutosSeguimiento : Sys
                 agregarComentario("Este reclamo ha sido encontrado como no conforme, catalogado como " + ddlNoConforme.SelectedValue + ". " + txtObservacionesNoConf.Text);
                 llenado.llenarGrid(comentarios, GridComentarios);
                 Utils.ShowMessage(this.Page, "Reclamo Actualizado como producto no conforme.", "Excelente", "info");
+                Utils.actividades(id, Constantes.AUTOS(), 16, Constantes.USER());
             }
 
             else
@@ -1096,6 +1119,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosAutosSeguimiento : Sys
             Utils.SMS_reclamos_autos(txtTelefono.Text, TxtEnvioSms.Text, userlogin, id);
             TxtEnvioSms.Text = "";
             llenado.llenarGrid(comentarios, GridComentarios);
+            Utils.actividades(id, Constantes.AUTOS(), 12, Constantes.USER());
         }
     }
 
@@ -1210,16 +1234,19 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosAutosSeguimiento : Sys
             if (chCartaCierre.Checked)
             {
                 Utils.Guardar_cartas_autos(txtContenidoCarta, "cierre interno", "autos", id, chCartaCierre, chCartaDeclinado, chEnvioCarta);
+                Utils.actividades(id, Constantes.AUTOS(), 9, Constantes.USER());
             }
 
             else if (chCartaDeclinado.Checked)
             {
                 Utils.Guardar_cartas_autos(txtContenidoCarta, "declinado", "autos", id, chCartaCierre, chCartaDeclinado, chEnvioCarta);
+                Utils.actividades(id, Constantes.AUTOS(), 10, Constantes.USER());
             }
 
             else if (chEnvioCarta.Checked)
             {
                 Utils.Guardar_cartas_autos(txtContenidoCarta, "envio cheque", "autos", id, chCartaCierre, chCartaDeclinado, chEnvioCarta);
+                Utils.actividades(id, Constantes.AUTOS(), 11, Constantes.USER());
             }
 
             chCartaCierre.Checked    = false;
@@ -1276,6 +1303,8 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosAutosSeguimiento : Sys
                     reclamo.documentos = RD;
                     DBReclamos.SaveChanges();
                 }
+
+                Utils.actividades(id, Constantes.AUTOS(), 17, Constantes.USER());
             }
         }
 
@@ -1296,6 +1325,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosAutosSeguimiento : Sys
             reclamo.id_gestor = usuario.id;
             DBReclamos.SaveChanges();
             Utils.ShowMessage(this.Page, "Reclamo Reasignado con exito a usuario "+ddlGestor.SelectedItem.Text+"", "Excelente..", "success");
+            Utils.actividades(id, Constantes.AUTOS(), 8, Constantes.USER());
         }
 
         catch(Exception ex)
@@ -1336,6 +1366,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosAutosSeguimiento : Sys
         }
         llenado.llenarGrid(doc_solicitados,GridDocSeleccionados);
         agregarComentario("Documentos Solicitados: \n\n" +documento);
+        Utils.actividades(id, Constantes.AUTOS(), 18, Constantes.USER());
     }
 
     protected void btnGuardarDocumentos_Click(object sender, EventArgs e)
@@ -1383,6 +1414,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosAutosSeguimiento : Sys
 
             Utils.ShowMessage(this.Page, "Datos actualizados con exito","Excelente..", "success");
             DatosReclamo(id);
+            Utils.actividades(id, Constantes.AUTOS(), 7, Constantes.USER());
         }
 
         catch (Exception ex)

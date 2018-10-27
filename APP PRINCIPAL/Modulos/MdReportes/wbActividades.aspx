@@ -1,32 +1,29 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/ReclamosUnity.master" AutoEventWireup="true" EnableEventValidation="false" CodeFile="wbFrmReporteNoConforme.aspx.cs" Inherits="Modulos_MdReclamosUnity_wbFrmReporteNoConforme" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/ReclamosUnity.master" AutoEventWireup="true" CodeFile="wbActividades.aspx.cs" Inherits="Modulos_MdReportes_wbActividades" %>
 
-<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
+<asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
 </asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
-    <div class="container-fluid">
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
+        <div class="container-fluid">
         <div class="col-sm-12 col-md-12 col-lg-12">
             <div class="panel panel-info">
                 <div class="panel-heading">
                     <asp:Label ID="lblConteo" runat="server" Style="font-size: 16px;"></asp:Label>
+                    <asp:CheckBox runat="server" ID="chFiltro" Text="Filtro" OnCheckedChanged="chFiltro_CheckedChanged" AutoPostBack="true"/>
                 </div>
                 <div class="panel-body" style="max-height: 620px;">
                     <div class="form-inline">
                         <div class="form-group" style="width: 20%">
-                            <label>Seleccionar Busqueda:</label>
-                            <asp:DropDownList ID="ddlTipo" runat="server" Style="width: 100%" CssClass="form-control">
-                                <asp:ListItem Value="in ('A','D','I','C')">General</asp:ListItem>
-                                <asp:ListItem Value=" = 'A'">Autos</asp:ListItem>
-                                <asp:ListItem Value=" = 'D'">Daños varios</asp:ListItem>
-                                <asp:ListItem Value=" = 'I'">Individuales</asp:ListItem>
-                                <asp:ListItem Value=" = 'C'">Colectivos</asp:ListItem>
+                            <label>Tipo:</label>
+                            <asp:DropDownList ID="ddlTipo" Enabled="false" runat="server" Style="width: 100%" AutoPostBack="true" OnSelectedIndexChanged="ddlTipo_SelectedIndexChanged" CssClass="form-control">
+                                <asp:ListItem Value="0">Todas</asp:ListItem>
+                                <asp:ListItem Value="1">Autos</asp:ListItem>
+                                <asp:ListItem Value="2">Daños varios</asp:ListItem>
+                                <asp:ListItem Value="3">Gastos Medicos</asp:ListItem>
                             </asp:DropDownList>
                         </div>
-                        <div class="form-group" style="width: 20%">
-                            <label>Estado:</label>
-                            <asp:DropDownList ID="ddlEstado" runat="server" Style="width: 100%" CssClass="form-control">
-                                <asp:ListItem Value="in ('Abierto','Cerrado')">Todos</asp:ListItem>
-                                <asp:ListItem Value=" = 'Cerrado'">Cerrados</asp:ListItem>
-                                <asp:ListItem Value=" = 'Abierto'">Abiertos</asp:ListItem>
+                         <div class="form-group" style="width: 20%">
+                            <label>Usuarios:</label>
+                            <asp:DropDownList ID="ddlusuarios" Enabled="false" runat="server" Style="width: 100%" CssClass="form-control">
                             </asp:DropDownList>
                         </div>
                         <div class="form-group" style="width: 15%">
@@ -37,13 +34,10 @@
                             <label>Fecha Fin:</label>
                             <asp:TextBox ID="txtFechaFin" type="date" Height="34px" CssClass="form-control" Style="width: 100%" placeholder="Escriba su busqueda" runat="server"></asp:TextBox>
                         </div>
-                        <div class="form-group" style="width: 15%">
-                            <asp:Button CssClass="btn btn-primary" ID="btnMostrarEficiencia" OnClick="btnMostrarEficiencia_Click" Style="margin-left: 20px; margin-top: 22px;" runat="server" Text="Eficiencia" />
-                        </div>
                     </div>
                     <br />
                     <asp:Panel runat="server" ID="PanelPrincipal" Visible="false">
-                        <div style="text-align: center; font-size: 20px;">
+                       <%-- <div style="text-align: center; font-size: 20px;">
                             <b>
                                 <asp:Label runat="server" ID="lblTitulo"></asp:Label></b>
                             <br />
@@ -52,19 +46,12 @@
                             <asp:Label runat="server" ID="lblFechaGeneracion"></asp:Label>
                             <asp:Label runat="server" ID="lblUsuario" Style="padding-right: 15px;"></asp:Label>
                         </div>
-                        <br />
+                        <br />--%>
                         <div class="scrolling-table-container">
-                            <asp:GridView ID="GridNoConforme" runat="server" CssClass="table bs-table table-responsive" AutoGenerateColumns="True" ForeColor="#333333" GridLines="None" AllowCustomPaging="True" PageSize="3000">
+                            <asp:GridView ID="GridActividades" runat="server" CssClass="table bs-table table-responsive" AutoGenerateColumns="True" ForeColor="#333333" GridLines="None" AllowCustomPaging="True" PageSize="3000">
                                 <AlternatingRowStyle BackColor="White" />
                                 <HeaderStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" HorizontalAlign="Center" Wrap="False" />
                                 <PagerSettings PageButtonCount="30" />
-                                <RowStyle BackColor="#EFF3FB" HorizontalAlign="Left" Wrap="False" />
-                            </asp:GridView>
-                            <asp:GridView Visible="false" ID="GridEficiencia" runat="server" CssClass="table bs-table table-responsive table-hover" AutoGenerateColumns="True" ForeColor="#333333" GridLines="None" AllowCustomPaging="True">
-                                <AlternatingRowStyle BackColor="White" />
-                                <FooterStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" />
-                                <HeaderStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" HorizontalAlign="Center" Wrap="False" />
-                                <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
                                 <RowStyle BackColor="#EFF3FB" HorizontalAlign="Left" Wrap="False" />
                             </asp:GridView>
                         </div>
@@ -91,29 +78,6 @@
         </div>
     </div>
 </asp:Content>
-<asp:Content ID="Content3" ContentPlaceHolderID="ContentJs" runat="Server">
-    <script>
-        try {
-            $('#ContentPlaceHolder1_GridEficiencia tr').each(function (index) {
-                $tr = $(this);
-                if (index > 0) {
-                    $td = $tr[0].cells[3];
-                    $td.innerText = $td.innerText + ' %';
-                    $td.className = 'alinearNumeros';
-                }
-            });
-        } catch (ex) {
-        }
-    </script>
-    <script>
-        function printDiv(imprimir) {
-            var contenido = document.getElementById(imprimir).innerHTML;
-            var contenidoOriginal = document.body.innerHTML;
-            document.body.innerHTML = contenido;
-            window.print();
-            document.body.innerHTML = contenidoOriginal;
-            window.location.href = "/Modulos/MdReportes/wbFrmReportesMedicos.aspx";
-        }
-    </script>
+<asp:Content ID="Content3" ContentPlaceHolderID="ContentJs" Runat="Server">
 </asp:Content>
 

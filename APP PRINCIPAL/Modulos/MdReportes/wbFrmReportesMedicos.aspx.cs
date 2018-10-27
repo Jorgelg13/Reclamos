@@ -143,11 +143,14 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesMedicos : System.Web.U
                 Conteo();
             }
         }
+
+        Utils.actividades(0, Constantes.DANIOS(), 29, Constantes.USER());
     }
 
     //funcion para exportar a un archivo de excel lo que aparece en el gridview
     protected void btnExportar_Click(object sender, EventArgs e)
     {
+        Utils.actividades(0, Constantes.DANIOS(), 35, Constantes.USER());
         Utils.ExportarExcel(GridCamposSeleccion, Response, "Reporte Gastos Medicos");
     }
 
@@ -357,21 +360,25 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesMedicos : System.Web.U
     {
         if(PnCicloAseguradora.Visible == true)
         {
+            Utils.actividades(0, Constantes.GASTOS_MEDICOS(), 37, Constantes.USER());
             Utils.ExportarExcel(PanelPrincipal, Response, "Reporte Ciclo Aseguradora");
         }
 
         else if (PnCicloCliente.Visible == true)
         {
+            Utils.actividades(0, Constantes.GASTOS_MEDICOS(), 38, Constantes.USER());
             Utils.ExportarExcel(PanelPrincipal, Response, "Reporte Ciclo Cliente");
         }
 
         else if (PnCicloEjecutivoKPI.Visible == true)
         {
+            Utils.actividades(0, Constantes.GASTOS_MEDICOS(), 39, Constantes.USER());
             Utils.ExportarExcel(PanelPrincipal, Response, "Reporte Ciclo Ejecutivo");
         }
 
         else if (PnEficiencia.Visible == true)
         {
+            Utils.actividades(0, Constantes.GASTOS_MEDICOS(), 36, Constantes.USER());
             Utils.ExportarExcel(PanelPrincipal, Response, "Reporte Eficiencia");
         }
 
@@ -417,7 +424,6 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesMedicos : System.Web.U
         {
             Response.Write(err);
         }
-
     }
 
     protected void GridCicloCliente_RowDataBound(object sender, GridViewRowEventArgs e)
@@ -576,6 +582,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesMedicos : System.Web.U
             CicloAseguradora();
             PnReporte.Visible = false;
             PnCicloAseguradora.Visible = true;
+            Utils.actividades(0, Constantes.GASTOS_MEDICOS(), 32, Constantes.USER());
         }
 
         else if (ddlCiclos.SelectedValue == "Ciclo Cliente")
@@ -586,6 +593,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesMedicos : System.Web.U
             CicloCliente();
             PnReporte.Visible = false;
             PnCicloCliente.Visible = true;
+            Utils.actividades(0, Constantes.GASTOS_MEDICOS(), 33, Constantes.USER());
         }
 
         else if (ddlCiclos.SelectedValue == "Ciclo Ejecutivo")
@@ -595,6 +603,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesMedicos : System.Web.U
             cicloEjecutivoKPI();
             PnReporte.Visible = false;
             PnCicloEjecutivoKPI.Visible = true;
+            Utils.actividades(0, Constantes.GASTOS_MEDICOS(), 31, Constantes.USER());
         }
 
         else if (ddlCiclos.SelectedValue == "Ciclo Ejecutivo por etapa")
@@ -602,7 +611,8 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesMedicos : System.Web.U
             TituloReporte("Promedio Ciclo Ejecutivo por etapas", "", ddlMoneda.SelectedItem.Text);
             CicloEjecutivo();
             PnReporte.Visible = false;
-            PnCicloEjecutivo.Visible = true; 
+            PnCicloEjecutivo.Visible = true;
+            Utils.actividades(0, Constantes.GASTOS_MEDICOS(), 32, Constantes.USER());
         }
 
         else if (ddlCiclos.SelectedValue == "Eficiencia")
@@ -622,6 +632,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesMedicos : System.Web.U
             TituloReporte("Eficiencia Usuarios", KPI_EFICIENCIA, ddlMoneda.SelectedItem.Text);
             PnReporte.Visible = false;
             PnEficiencia.Visible = true;
+            Utils.actividades(0, Constantes.GASTOS_MEDICOS(), 30, Constantes.USER());
         }
     }
 

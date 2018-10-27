@@ -268,8 +268,6 @@
         <script src="../Scripts/jquery.cookie.min.js"></script>
         <script src="../Scripts/toastr.min.js"></script>
         <script src="../Scripts/envioFormulario.js"></script>
-
-
     </form>
 </body>
 </html>
