@@ -71,6 +71,7 @@ public partial class ReclamosEntities : DbContext
     public DbSet<motivos_cierre> motivos_cierre { get; set; }
     public DbSet<movimientos> movimientos { get; set; }
     public DbSet<pais> pais { get; set; }
+    public DbSet<Presupuestos> Presupuestos { get; set; }
     public DbSet<ramos> ramos { get; set; }
     public DbSet<recibos_medicos> recibos_medicos { get; set; }
     public DbSet<reclamo_auto> reclamo_auto { get; set; }

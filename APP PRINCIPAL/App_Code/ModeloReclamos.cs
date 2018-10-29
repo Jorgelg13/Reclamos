@@ -677,6 +677,18 @@ public partial class pais
     public virtual ICollection<empresa> empresa { get; set; }
 }
 
+public partial class Presupuestos
+{
+    public int Idtrans { get; set; }
+    public string cod_empresa { get; set; }
+    public string cod_depto { get; set; }
+    public string cod_centro { get; set; }
+    public string num_cuenta { get; set; }
+    public Nullable<int> year { get; set; }
+    public Nullable<int> mes { get; set; }
+    public Nullable<double> monto { get; set; }
+}
+
 public partial class ramos
 {
     public int id { get; set; }
@@ -1168,6 +1180,7 @@ public partial class ViewBusquedaAuto
     public Nullable<short> secren { get; set; }
     public Nullable<int> cliente { get; set; }
     public string programa { get; set; }
+    public Nullable<decimal> prima { get; set; }
 }
 
 public partial class viewCoberturasAutos
@@ -1249,6 +1262,7 @@ public partial class vistaReclamosMedicos
     public string moneda { get; set; }
     public string certificado { get; set; }
     public Nullable<int> cliente { get; set; }
+    public string status { get; set; }
 }
 
 public partial class pa_cargar_asegurados_Result

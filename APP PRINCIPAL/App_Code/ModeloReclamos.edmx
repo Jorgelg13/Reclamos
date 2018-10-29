@@ -585,6 +585,19 @@
           <Property Name="moneda" Type="varchar" MaxLength="30" Nullable="false" />
           <Property Name="codigo_pais" Type="varchar" MaxLength="10" />
         </EntityType>
+        <EntityType Name="Presupuestos">
+          <Key>
+            <PropertyRef Name="Idtrans" />
+          </Key>
+          <Property Name="Idtrans" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="cod_empresa" Type="varchar" MaxLength="50" />
+          <Property Name="cod_depto" Type="varchar" MaxLength="150" />
+          <Property Name="cod_centro" Type="varchar" MaxLength="150" />
+          <Property Name="num_cuenta" Type="varchar" MaxLength="150" />
+          <Property Name="year" Type="int" />
+          <Property Name="mes" Type="int" />
+          <Property Name="monto" Type="float" />
+        </EntityType>
         <EntityType Name="ramos">
           <Key>
             <PropertyRef Name="id" />
@@ -944,6 +957,7 @@ advertencia 6002: La tabla o vista 'reclamos.dbo.ViewBusquedaAuto' no tiene defi
           <Property Name="secren" Type="smallint" />
           <Property Name="cliente" Type="int" />
           <Property Name="programa" Type="nvarchar" MaxLength="30" />
+          <Property Name="prima" Type="decimal" Precision="12" Scale="2" />
         </EntityType>
         <EntityType Name="viewCoberturasAutos">
           <Key>
@@ -1029,6 +1043,7 @@ advertencia 6002: La tabla o vista 'reclamos.dbo.ViewBusquedaAuto' no tiene defi
           <Property Name="moneda" Type="nvarchar" MaxLength="50" />
           <Property Name="certificado" Type="nvarchar" MaxLength="30" />
           <Property Name="cliente" Type="int" />
+          <Property Name="status" Type="nvarchar" MaxLength="30" />
         </EntityType>
         <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'reclamos.dbo.v_producto_no_conforme' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
@@ -1784,6 +1799,7 @@ advertencia 6002: La tabla o vista 'reclamos.dbo.v_producto_no_conforme' no tien
           <EntitySet Name="motivos_cierre" EntityType="Self.motivos_cierre" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="movimientos" EntityType="Self.movimientos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="pais" EntityType="Self.pais" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Presupuestos" EntityType="Self.Presupuestos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ramos" EntityType="Self.ramos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="recibos_medicos" EntityType="Self.recibos_medicos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="reclamo_auto" EntityType="Self.reclamo_auto" Schema="dbo" store:Type="Tables" />
@@ -1833,7 +1849,8 @@ advertencia 6002: La tabla o vista 'reclamos.dbo.v_producto_no_conforme' no tien
 [ViewBusquedaAuto].[cia] AS [cia], 
 [ViewBusquedaAuto].[secren] AS [secren], 
 [ViewBusquedaAuto].[cliente] AS [cliente], 
-[ViewBusquedaAuto].[programa] AS [programa]
+[ViewBusquedaAuto].[programa] AS [programa], 
+[ViewBusquedaAuto].[prima] AS [prima]
 FROM [dbo].[ViewBusquedaAuto] AS [ViewBusquedaAuto]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="v_producto_no_conforme" EntityType="Self.v_producto_no_conforme" store:Type="Views" store:Schema="dbo">
@@ -2159,6 +2176,7 @@ FROM [dbo].[v_producto_no_conforme] AS [v_producto_no_conforme]</DefiningQuery>
           </FunctionImport>
           <FunctionImport Name="pa_sec_ingreso_cheque" ReturnType="Collection(Int32)" />
           <FunctionImport Name="pa_sec_actividades" ReturnType="Collection(Int64)" />
+          <FunctionImport Name="pa_replicar_reclamos_gm" />
           <EntitySet Name="actividades" EntityType="reclamosModel.actividades" />
           <EntitySet Name="ajustadores" EntityType="reclamosModel.ajustadores" />
           <EntitySet Name="analistas" EntityType="reclamosModel.analistas" />
@@ -2204,6 +2222,7 @@ FROM [dbo].[v_producto_no_conforme] AS [v_producto_no_conforme]</DefiningQuery>
           <EntitySet Name="motivos_cierre" EntityType="reclamosModel.motivos_cierre" />
           <EntitySet Name="movimientos" EntityType="reclamosModel.movimientos" />
           <EntitySet Name="pais" EntityType="reclamosModel.pais" />
+          <EntitySet Name="Presupuestos" EntityType="reclamosModel.Presupuestos" />
           <EntitySet Name="ramos" EntityType="reclamosModel.ramos" />
           <EntitySet Name="recibos_medicos" EntityType="reclamosModel.recibos_medicos" />
           <EntitySet Name="reclamo_auto" EntityType="reclamosModel.reclamo_auto" />
@@ -2415,7 +2434,6 @@ FROM [dbo].[v_producto_no_conforme] AS [v_producto_no_conforme]</DefiningQuery>
             <End Role="talleres" EntitySet="talleres" />
             <End Role="reclamos_varios" EntitySet="reclamos_varios" />
           </AssociationSet>
-          <FunctionImport Name="pa_replicar_reclamos_gm" />
           </EntityContainer>
         <ComplexType Name="pa_reclamos_autos_Result">
           <Property Type="Int32" Name="secuencia" Nullable="true" />
@@ -3272,6 +3290,19 @@ FROM [dbo].[v_producto_no_conforme] AS [v_producto_no_conforme]</DefiningQuery>
           <Property Name="codigo_pais" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="empresa" Relationship="reclamosModel.FK__empresa__id_pais__4F7CD00D" FromRole="pais" ToRole="empresa" />
         </EntityType>
+        <EntityType Name="Presupuestos">
+          <Key>
+            <PropertyRef Name="Idtrans" />
+          </Key>
+          <Property Name="Idtrans" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="cod_empresa" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="cod_depto" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="cod_centro" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="num_cuenta" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="year" Type="Int32" />
+          <Property Name="mes" Type="Int32" />
+          <Property Name="monto" Type="Double" />
+        </EntityType>
         <EntityType Name="ramos">
           <Key>
             <PropertyRef Name="id" />
@@ -3730,6 +3761,7 @@ FROM [dbo].[v_producto_no_conforme] AS [v_producto_no_conforme]</DefiningQuery>
           <Property Name="moneda" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="certificado" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
           <Property Name="cliente" Type="Int32" />
+          <Property Name="status" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="ViewBusquedaAuto">
           <Key>
@@ -3766,6 +3798,7 @@ FROM [dbo].[v_producto_no_conforme] AS [v_producto_no_conforme]</DefiningQuery>
           <Property Name="secren" Type="Int16" />
           <Property Name="cliente" Type="Int32" />
           <Property Name="programa" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="prima" Type="Decimal" Precision="12" Scale="2" />
         </EntityType>
         <EntityType Name="v_producto_no_conforme">
           <Key>
@@ -4683,6 +4716,7 @@ FROM [dbo].[v_producto_no_conforme] AS [v_producto_no_conforme]</DefiningQuery>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="pa_sec_ingreso_cheque" FunctionName="reclamosModel.Store.pa_sec_ingreso_cheque" />
           <FunctionImportMapping FunctionImportName="pa_sec_actividades" FunctionName="reclamosModel.Store.pa_sec_actividades" />
+          <FunctionImportMapping FunctionImportName="pa_replicar_reclamos_gm" FunctionName="reclamosModel.Store.pa_replicar_reclamos_gm" />
           <EntitySetMapping Name="actividades">
             <EntityTypeMapping TypeName="reclamosModel.actividades">
               <MappingFragment StoreEntitySet="actividades">
@@ -5308,6 +5342,20 @@ FROM [dbo].[v_producto_no_conforme] AS [v_producto_no_conforme]</DefiningQuery>
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Presupuestos">
+            <EntityTypeMapping TypeName="reclamosModel.Presupuestos">
+              <MappingFragment StoreEntitySet="Presupuestos">
+                <ScalarProperty Name="monto" ColumnName="monto" />
+                <ScalarProperty Name="mes" ColumnName="mes" />
+                <ScalarProperty Name="year" ColumnName="year" />
+                <ScalarProperty Name="num_cuenta" ColumnName="num_cuenta" />
+                <ScalarProperty Name="cod_centro" ColumnName="cod_centro" />
+                <ScalarProperty Name="cod_depto" ColumnName="cod_depto" />
+                <ScalarProperty Name="cod_empresa" ColumnName="cod_empresa" />
+                <ScalarProperty Name="Idtrans" ColumnName="Idtrans" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="ramos">
             <EntityTypeMapping TypeName="reclamosModel.ramos">
               <MappingFragment StoreEntitySet="ramos">
@@ -5710,6 +5758,7 @@ FROM [dbo].[v_producto_no_conforme] AS [v_producto_no_conforme]</DefiningQuery>
           <EntitySetMapping Name="vistaReclamosMedicos">
             <EntityTypeMapping TypeName="reclamosModel.vistaReclamosMedicos">
               <MappingFragment StoreEntitySet="vistaReclamosMedicos">
+                <ScalarProperty Name="status" ColumnName="status" />
                 <ScalarProperty Name="cliente" ColumnName="cliente" />
                 <ScalarProperty Name="certificado" ColumnName="certificado" />
                 <ScalarProperty Name="moneda" ColumnName="moneda" />
@@ -5735,6 +5784,7 @@ FROM [dbo].[v_producto_no_conforme] AS [v_producto_no_conforme]</DefiningQuery>
           <EntitySetMapping Name="ViewBusquedaAuto">
             <EntityTypeMapping TypeName="reclamosModel.ViewBusquedaAuto">
               <MappingFragment StoreEntitySet="ViewBusquedaAuto">
+                <ScalarProperty Name="prima" ColumnName="prima" />
                 <ScalarProperty Name="programa" ColumnName="programa" />
                 <ScalarProperty Name="cliente" ColumnName="cliente" />
                 <ScalarProperty Name="secren" ColumnName="secren" />
@@ -5787,7 +5837,6 @@ FROM [dbo].[v_producto_no_conforme] AS [v_producto_no_conforme]</DefiningQuery>
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="pa_replicar_reclamos_gm" FunctionName="reclamosModel.Store.pa_replicar_reclamos_gm" />
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

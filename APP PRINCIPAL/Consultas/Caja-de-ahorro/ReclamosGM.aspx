@@ -610,7 +610,7 @@
         </div>
     </div>
     <%------------------ botones laterales grandes  ------------------- --%>
-    <div class="col-sm-12 col-md-3 col-lg-3">
+    <div class="col-sm-12 col-md-3 col-lg-3" style="display:none">
         <div class="panel panel-info">
             <div class="panel-heading" role="tab" id="Opciones">
                 <h4 class="panel-title">
@@ -731,6 +731,8 @@
             <div id="collapseThree" class="panel-collapse collapse in" role="tabpanel" aria-expanded="true">
                 <div class="panel-body">
                     <asp:Label ID="lblAsegurado2" runat="server"></asp:Label>
+                    <br />
+                     <asp:Label ID="lblCertificado" runat="server"></asp:Label>
                     <br />
                     <asp:Label ID="lblPoliza2" runat="server"></asp:Label>
                     <br />

@@ -31,7 +31,11 @@ public partial class Consultas_Caja_de_ahorro_ConsultarAsegurados : System.Web.U
         string sql = "";
         if (arreglo.Length > 0)
         {
-            sql = "SELECT id, asegurado as Asegurado FROM vistaReclamosMedicos Where asegurado like '%" + arreglo[0] + "%' and poliza in ('GTVG-198018')";
+            sql = "SELECT id, asegurado as Asegurado, status as Estado, convert(varchar(12), vigf,103) as [Vigencia Final] FROM vistaReclamosMedicos " +
+                "Where (asegurado like '%" + arreglo[0] + "%' or certificado like '%" + arreglo[0] + "%' ) " +
+                "and poliza in ('GTVG-198018')";
+
+            //or certificado like '%" + arreglo[0] + "%'
 
             if (arreglo.Length > 1)
             {

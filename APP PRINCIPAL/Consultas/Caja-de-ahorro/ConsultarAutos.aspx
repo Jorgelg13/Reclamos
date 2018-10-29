@@ -35,12 +35,12 @@
                             <AlternatingRowStyle BackColor="White" />
                             <Columns>
                                 <asp:BoundField DataField="descr" HeaderText="Descripcion" />
-                                <asp:BoundField DataField="limite1" HeaderText="Limite 1" />
-                                <asp:BoundField DataField="limite2" HeaderText="Limite 2" />
-                                <asp:BoundField DataField="deducible" HeaderText="Deducible" />
+                                <asp:BoundField DataField="limite1" HeaderText="Limite 1" DataFormatString="{0:0,0.00}"/>
+                                <asp:BoundField DataField="limite2" HeaderText="Limite 2" DataFormatString="{0:0,0.00}"/>
+                                <asp:BoundField DataField="deducible" HeaderText="Deducible" DataFormatString="{0:0,0.00}"/>
                             </Columns>
                             <HeaderStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" />
-                            <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
+                            <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Right" />
                             <RowStyle BackColor="#EFF3FB" />
                         </asp:GridView>
                     </div>
@@ -83,6 +83,11 @@
                             <td>Valor Auto</td>
                             <td>
                                 <asp:Label ID="lblValorAuto" runat="server"></asp:Label></td>
+                        </tr>
+                          <tr>
+                            <td>Prima Neta</td>
+                            <td>
+                                <asp:Label ID="lblprima" runat="server"></asp:Label></td>
                         </tr>
                         <tr>
                             <td>Placa</td>

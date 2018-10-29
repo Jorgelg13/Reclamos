@@ -21,7 +21,8 @@ public partial class Consultas_Caja_de_ahorro_ConsultarAutos : System.Web.UI.Pag
             "chasis as Chasis " +
             "from ViewBusquedaAuto where " +
             "(placa like '%"+txtBusqueda.Text+ "%') " +
-            "or (propietario like '%" + txtBusqueda.Text + "%') " +
+            "or (propietario like '%" + txtBusqueda.Text + "%' or inciso like '%" + txtBusqueda.Text + "%') " +
+          //  "or (inciso like '%" + txtBusqueda.Text + "%') " +
             " and poliza in ('AUTO-366487','AUTO-366488')";
     }
 
@@ -35,6 +36,7 @@ public partial class Consultas_Caja_de_ahorro_ConsultarAutos : System.Web.UI.Pag
         lblPropietario.Text = dato.propietario;
         lblPoliza.Text = dato.poliza;
         lblValorAuto.Text = "Q " + Convert.ToDouble(dato.valorauto).ToString("N0");
+        lblprima.Text = "Q " + Convert.ToDouble(dato.prima).ToString("N0");
         lblEstado.Text = dato.estado;
         lblVigi.Text = Convert.ToDateTime(dato.vigi).ToString("d");
         lblVigf.Text = Convert.ToDateTime(dato.vigf).ToString("d");

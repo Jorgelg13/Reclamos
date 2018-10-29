@@ -118,6 +118,7 @@ public partial class Consultas_Caja_de_ahorro_ReclamosGM : System.Web.UI.Page
             //Informacion lateral derecha
             lblEstadoReclamo.Text = ddlEstado.SelectedItem.Text;
             lblAsegurado2.Text = "<b>Asegurado:</b>        " + reclamo.reg_reclamos_medicos.asegurado;
+            lblCertificado.Text = "<b>Certificado:</b>      " + reclamo.reg_reclamos_medicos.certificado;
             lblPoliza2.Text = "<b>Poliza:</b>              " + reclamo.reg_reclamos_medicos.poliza;
             lblRamo.Text = "<b>Ramo:</b>                   " + reclamo.reg_reclamos_medicos.ramo;
             lblRamoMemo.Text = reclamo.reg_reclamos_medicos.ramo;
