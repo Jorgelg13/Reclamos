@@ -426,7 +426,11 @@ public partial class Consultas_Caja_de_ahorro_ReclamosGM : System.Web.UI.Page
         try
         {
             cmd.CommandType = CommandType.Text;
-            cmd.CommandText = "insert into detalle_pagos_reclamos_medicos (total_reclamado, total_aprobado, total_no_cubierto, total_iva, deducible,coaseguro, timbres,total, no_cheque,porcen_coaseguro, porcen_timbres, moneda,monto,banco, id_reclamo_medico) values(" + txtReclamado.Text + ", " + txtAprobado.Text + ", " + txtNoCubiertos.Text + ", " + totalIva + ", " + deducible + "," + totalCoaseguro + ", " + totalTimbres + "," + montoTotal + ",'" + txtNumeroCheque.Text + "', " + ddlCoaseguro.SelectedValue + ", " + ddlTimbres.SelectedValue + ", '" + ddlMoneda.SelectedItem + "', '" + txtMontoCheque.Text + "', '" + ddlBanco.SelectedItem + "', " + id + ")";
+            cmd.CommandText = "insert into detalle_pagos_reclamos_medicos (total_reclamado, total_aprobado, total_no_cubierto, total_iva, deducible,coaseguro, " +
+                "timbres,total, no_cheque,porcen_coaseguro, porcen_timbres, moneda,monto,banco, id_reclamo_medico) " +
+                "values(" + txtReclamado.Text + ", " + txtAprobado.Text + ", " + txtNoCubiertos.Text + ", " + totalIva + ", " + deducible + "," + totalCoaseguro + ", " +
+                "" + totalTimbres + "," + montoTotal + ",'" + txtNumeroCheque.Text + "', " + ddlCoaseguro.SelectedValue + ", " + ddlTimbres.SelectedValue + ", '" + ddlMoneda.SelectedItem + "', " +
+                "'" + txtMontoCheque.Text + "', '" + ddlBanco.SelectedItem + "', " + id + ")";
             cmd.Connection = objeto.ObtenerConexionReclamos();
             cmd.ExecuteNonQuery();
             objeto.conexion.Close();
