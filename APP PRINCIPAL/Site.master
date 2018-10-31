@@ -500,7 +500,6 @@
             });
         </script>
         <asp:ContentPlaceHolder ID="contentJS" runat="server">
-
         </asp:ContentPlaceHolder>
     </form>
 </body>
