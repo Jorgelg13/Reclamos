@@ -62,8 +62,8 @@
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle fa fa-cloud-upload" style="font-size: 16px;"data-toggle="dropdown" role="button">Cargas<span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                <li><a href="/Modulos/MdReclamos/wbFrmReclamosAutos.aspx">Polizas</a></li>
-                                <li><a href="/Modulos/MdReclamos/wbFrmReclamoAutoManual.aspx">Requerimientos</a></li>
+                                <li><a href="/Modulos/MdRenovaciones/CargarPolizas.aspx?id=1">Polizas</a></li>
+                                <li><a href="/Modulos/MdRenovaciones/CargarPolizas.aspx?id=2">Requerimientos</a></li>
                             </ul>
                         </li>
                         <li class="dropdown">

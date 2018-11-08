@@ -7,6 +7,8 @@ using System.Net.Http;
 using System.Linq;
 using System.Web;
 using System.IO;
+using System.Configuration;
+using System.Data.OleDb;
 
 public class Utils
 {
@@ -598,5 +600,46 @@ public class Utils
         nueva.usuario = usuario;
         DBReclamos.actividades.Add(nueva);
         DBReclamos.SaveChanges();
+    }
+
+    //funcion para cargar datos desde un archivo de excel
+    public void importar(string FilePath, string Extension, string isHDR, GridView cargas)
+    {
+        string conStr = "";
+        //aqui selecciona un excel por la extension que sea y la asigna dependiendo con la cadena de conexion en el archivo web.config
+        switch (Extension)
+        {
+            case ".xls": //Excel 97-03
+                conStr = ConfigurationManager.ConnectionStrings["Excel03ConString"].ConnectionString;
+                break;
+            case ".xlsx": //Excel 07
+                conStr = ConfigurationManager.ConnectionStrings["Excel07ConString"].ConnectionString;
+                break;
+        }
+        conStr = String.Format(conStr, FilePath, isHDR);
+        OleDbConnection connExcel = new OleDbConnection(conStr);
+        OleDbCommand cmdExcel = new OleDbCommand();
+        OleDbDataAdapter oda = new OleDbDataAdapter();
+        DataTable dt = new DataTable();
+        cmdExcel.Connection = connExcel;
+
+        //obtiene la conexion hacia la hoja de excel
+        connExcel.Open();
+        DataTable dtExcelSchema;
+        dtExcelSchema = connExcel.GetOleDbSchemaTable(OleDbSchemaGuid.Tables, null);
+        string SheetName = dtExcelSchema.Rows[0]["TABLE_NAME"].ToString();
+        connExcel.Close();
+
+        //lee los datos desde la hoja de excel
+        connExcel.Open();
+        cmdExcel.CommandText = "SELECT * From [" + SheetName + "]";
+        oda.SelectCommand = cmdExcel;
+        oda.Fill(dt);
+        connExcel.Close();
+
+        //muestra y carga los datos en el gridview
+        cargas.Caption = Path.GetFileName(FilePath);
+        cargas.DataSource = dt;
+        cargas.DataBind();
     }
 }
