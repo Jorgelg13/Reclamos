@@ -10,7 +10,7 @@
                 <div class="form-inline">
                     <asp:FileUpload ID="Archivo" CssClass="btn btn-file" runat="server" />
                     <asp:Button ID="btnUpload" CssClass="btn btn-primary" runat="server" Text="Subir Archivo" OnClick="btnUpload_Click" />
-                    <asp:Button ID="btnInsertar" CssClass="btn btn-primary" runat="server" Text="Insertar" />
+                    <asp:Button ID="btnInsertar" CssClass="btn btn-primary" runat="server" Text="Insertar" OnClick="btnInsertar_Click"/>
                 </div>
                 <asp:RadioButtonList ID="rbHDR" runat="server" Visible="false">
                     <asp:ListItem Text="Yes" Value="Yes" Selected="True"></asp:ListItem>
