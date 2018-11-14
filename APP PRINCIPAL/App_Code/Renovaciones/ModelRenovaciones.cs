@@ -43,14 +43,16 @@ namespace Renovaciones
         public int id { get; set; }
         public Nullable<int> ramo { get; set; }
         public string poliza { get; set; }
+        public string certificado { get; set; }
         public string cod_aseg { get; set; }
         public string asegurado { get; set; }
-        public Nullable<System.DateTime> vigf { get; set; }
+        public string cod_agen { get; set; }
+        public string vigf { get; set; }
         public string marca { get; set; }
         public string modelo { get; set; }
         public string tipo_vehiculo { get; set; }
-        public Nullable<int> pasajeros { get; set; }
-        public Nullable<int> tarifa { get; set; }
+        public string pasajeros { get; set; }
+        public string tarifa { get; set; }
         public string placa { get; set; }
         public string motor { get; set; }
         public string chasis { get; set; }
@@ -58,44 +60,45 @@ namespace Renovaciones
         public string telefono2 { get; set; }
         public string telefono3 { get; set; }
         public string telefono4 { get; set; }
-        public Nullable<decimal> sin_incurrido { get; set; }
-        public Nullable<decimal> prima_pendiente { get; set; }
-        public Nullable<decimal> porc_siniestralidad { get; set; }
-        public Nullable<int> porc_desc_pol { get; set; }
-        public Nullable<int> porc_regc_pol { get; set; }
-        public Nullable<int> porc_regc_sin { get; set; }
-        public Nullable<int> porc_recg_m1821 { get; set; }
-        public Nullable<int> porc_recg_m1618 { get; set; }
-        public Nullable<int> porc_bonif { get; set; }
-        public Nullable<decimal> monto_bonif { get; set; }
-        public Nullable<decimal> suma_aseg_vence { get; set; }
-        public Nullable<decimal> suma_aseg_renov { get; set; }
-        public Nullable<int> deduc_danos { get; set; }
-        public Nullable<int> deduc_min_danos { get; set; }
-        public Nullable<int> deduc_robo { get; set; }
-        public Nullable<int> deduc_min_robo { get; set; }
-        public Nullable<decimal> prima_neta_vence { get; set; }
-        public Nullable<decimal> prima_neta_renov { get; set; }
-        public Nullable<decimal> prima_menos_bonif { get; set; }
-        public Nullable<decimal> prima_minima_renov { get; set; }
-        public Nullable<decimal> asisto_vence { get; set; }
-        public Nullable<decimal> asisto_renova { get; set; }
-        public Nullable<int> asistencia_fun { get; set; }
-        public Nullable<int> beneficiario { get; set; }
-        public Nullable<short> pagos { get; set; }
-        public Nullable<decimal> monto_por_pago { get; set; }
-        public Nullable<decimal> prima_anual { get; set; }
+        public string sin_incurrido { get; set; }
+        public string prima_pendiente { get; set; }
+        public string porc_pri_pend { get; set; }
+        public string porc_siniestralidad { get; set; }
+        public string porc_desc_pol { get; set; }
+        public string porc_regc_pol { get; set; }
+        public string porc_regc_sin { get; set; }
+        public string porc_recg_m1821 { get; set; }
+        public string porc_recg_m1618 { get; set; }
+        public string porc_bonif { get; set; }
+        public string monto_bonif { get; set; }
+        public string suma_aseg_vence { get; set; }
+        public string suma_aseg_renov { get; set; }
+        public string deduc_danos { get; set; }
+        public string deduc_min_danos { get; set; }
+        public string deduc_robo { get; set; }
+        public string deduc_min_robo { get; set; }
+        public string prima_neta_vence { get; set; }
+        public string prima_neta_renov { get; set; }
+        public string prima_menos_bonif { get; set; }
+        public string prima_minima_renov { get; set; }
+        public string asisto_vence { get; set; }
+        public string asisto_renova { get; set; }
+        public string asistencia_fun { get; set; }
+        public string beneficiario { get; set; }
+        public string pagos { get; set; }
+        public string monto_por_pago { get; set; }
+        public string prima_anual { get; set; }
         public string forma_pago { get; set; }
-        public Nullable<int> cod_pagador { get; set; }
+        public string cod_pagador { get; set; }
         public string nombre_pagador { get; set; }
-        public Nullable<decimal> gastos_emision { get; set; }
-        public Nullable<decimal> recargo_por_frac { get; set; }
-        public Nullable<decimal> valor_iva { get; set; }
+        public string gastos_emision { get; set; }
+        public string recargo_por_frac { get; set; }
+        public string valor_iva { get; set; }
         public string confirmar { get; set; }
         public string cob_may18_men_25_anos { get; set; }
         public string cob_may16_men_18_anos { get; set; }
         public string cob_may16 { get; set; }
-        public Nullable<int> endoso_renov { get; set; }
+        public string endoso_renov { get; set; }
         public string correo { get; set; }
         public string dpi { get; set; }
         public string direccion_cobro { get; set; }

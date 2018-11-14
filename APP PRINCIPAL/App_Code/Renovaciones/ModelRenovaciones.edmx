@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="RenovacionesModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="RenovacionesModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="poliza">
           <Key>
             <PropertyRef Name="id" />
@@ -34,14 +34,16 @@
           <Property Name="id" Type="int" Nullable="false" />
           <Property Name="ramo" Type="int" />
           <Property Name="poliza" Type="varchar" MaxLength="50" />
+          <Property Name="certificado" Type="varchar" MaxLength="50" />
           <Property Name="cod_aseg" Type="varchar" MaxLength="25" />
           <Property Name="asegurado" Type="varchar" MaxLength="200" />
-          <Property Name="vigf" Type="date" />
+          <Property Name="cod_agen" Type="varchar" MaxLength="10" />
+          <Property Name="vigf" Type="varchar" MaxLength="12" />
           <Property Name="marca" Type="varchar" MaxLength="50" />
           <Property Name="modelo" Type="varchar" MaxLength="10" />
           <Property Name="tipo_vehiculo" Type="varchar" MaxLength="50" />
-          <Property Name="pasajeros" Type="int" />
-          <Property Name="tarifa" Type="int" />
+          <Property Name="pasajeros" Type="varchar" MaxLength="10" />
+          <Property Name="tarifa" Type="varchar" MaxLength="10" />
           <Property Name="placa" Type="varchar" MaxLength="10" />
           <Property Name="motor" Type="varchar" MaxLength="20" />
           <Property Name="chasis" Type="varchar" MaxLength="25" />
@@ -49,44 +51,45 @@
           <Property Name="telefono2" Type="varchar" MaxLength="10" />
           <Property Name="telefono3" Type="varchar" MaxLength="10" />
           <Property Name="telefono4" Type="varchar" MaxLength="10" />
-          <Property Name="sin_incurrido" Type="numeric" Precision="10" Scale="2" />
-          <Property Name="prima_pendiente" Type="numeric" Precision="10" Scale="2" />
-          <Property Name="porc_siniestralidad" Type="numeric" Precision="8" Scale="2" />
-          <Property Name="porc_desc_pol" Type="int" />
-          <Property Name="porc_regc_pol" Type="int" />
-          <Property Name="porc_regc_sin" Type="int" />
-          <Property Name="porc_recg_m1821" Type="int" />
-          <Property Name="porc_recg_m1618" Type="int" />
-          <Property Name="porc_bonif" Type="int" />
-          <Property Name="monto_bonif" Type="numeric" Precision="10" Scale="2" />
-          <Property Name="suma_aseg_vence" Type="numeric" Precision="10" Scale="2" />
-          <Property Name="suma_aseg_renov" Type="numeric" Precision="10" Scale="2" />
-          <Property Name="deduc_danos" Type="int" />
-          <Property Name="deduc_min_danos" Type="int" />
-          <Property Name="deduc_robo" Type="int" />
-          <Property Name="deduc_min_robo" Type="int" />
-          <Property Name="prima_neta_vence" Type="numeric" Precision="10" Scale="2" />
-          <Property Name="prima_neta_renov" Type="numeric" Precision="10" Scale="2" />
-          <Property Name="prima_menos_bonif" Type="numeric" Precision="10" Scale="2" />
-          <Property Name="prima_minima_renov" Type="numeric" Precision="10" Scale="2" />
-          <Property Name="asisto_vence" Type="numeric" Precision="10" Scale="2" />
-          <Property Name="asisto_renova" Type="numeric" Precision="10" Scale="2" />
-          <Property Name="asistencia_fun" Type="int" />
-          <Property Name="beneficiario" Type="int" />
-          <Property Name="pagos" Type="smallint" />
-          <Property Name="monto_por_pago" Type="numeric" Precision="8" Scale="2" />
-          <Property Name="prima_anual" Type="numeric" Precision="10" Scale="2" />
-          <Property Name="forma_pago" Type="varchar" MaxLength="50" />
-          <Property Name="cod_pagador" Type="int" />
+          <Property Name="sin_incurrido" Type="varchar" MaxLength="10" />
+          <Property Name="prima_pendiente" Type="varchar" MaxLength="10" />
+          <Property Name="porc_pri_pend" Type="varchar" MaxLength="10" />
+          <Property Name="porc_siniestralidad" Type="varchar" MaxLength="10" />
+          <Property Name="porc_desc_pol" Type="varchar" MaxLength="10" />
+          <Property Name="porc_regc_pol" Type="varchar" MaxLength="10" />
+          <Property Name="porc_regc_sin" Type="varchar" MaxLength="10" />
+          <Property Name="porc_recg_m1821" Type="varchar" MaxLength="10" />
+          <Property Name="porc_recg_m1618" Type="varchar" MaxLength="10" />
+          <Property Name="porc_bonif" Type="varchar" MaxLength="10" />
+          <Property Name="monto_bonif" Type="varchar" MaxLength="10" />
+          <Property Name="suma_aseg_vence" Type="varchar" MaxLength="10" />
+          <Property Name="suma_aseg_renov" Type="varchar" MaxLength="10" />
+          <Property Name="deduc_danos" Type="varchar" MaxLength="10" />
+          <Property Name="deduc_min_danos" Type="varchar" MaxLength="10" />
+          <Property Name="deduc_robo" Type="varchar" MaxLength="10" />
+          <Property Name="deduc_min_robo" Type="varchar" MaxLength="10" />
+          <Property Name="prima_neta_vence" Type="varchar" MaxLength="10" />
+          <Property Name="prima_neta_renov" Type="varchar" MaxLength="10" />
+          <Property Name="prima_menos_bonif" Type="varchar" MaxLength="10" />
+          <Property Name="prima_minima_renov" Type="varchar" MaxLength="10" />
+          <Property Name="asisto_vence" Type="varchar" MaxLength="10" />
+          <Property Name="asisto_renova" Type="varchar" MaxLength="10" />
+          <Property Name="asistencia_fun" Type="varchar" MaxLength="10" />
+          <Property Name="beneficiario" Type="varchar" MaxLength="10" />
+          <Property Name="pagos" Type="varchar" MaxLength="10" />
+          <Property Name="monto_por_pago" Type="varchar" MaxLength="10" />
+          <Property Name="prima_anual" Type="varchar" MaxLength="10" />
+          <Property Name="forma_pago" Type="varchar" MaxLength="10" />
+          <Property Name="cod_pagador" Type="varchar" MaxLength="10" />
           <Property Name="nombre_pagador" Type="varchar" MaxLength="200" />
-          <Property Name="gastos_emision" Type="numeric" Precision="6" Scale="2" />
-          <Property Name="recargo_por_frac" Type="numeric" Precision="6" Scale="2" />
-          <Property Name="valor_iva" Type="numeric" Precision="6" Scale="2" />
+          <Property Name="gastos_emision" Type="varchar" MaxLength="10" />
+          <Property Name="recargo_por_frac" Type="varchar" MaxLength="10" />
+          <Property Name="valor_iva" Type="varchar" MaxLength="10" />
           <Property Name="confirmar" Type="varchar" MaxLength="10" />
           <Property Name="cob_may18_men_25_anos" Type="varchar" MaxLength="50" />
           <Property Name="cob_may16_men_18_anos" Type="varchar" MaxLength="50" />
           <Property Name="cob_may16" Type="varchar" MaxLength="50" />
-          <Property Name="endoso_renov" Type="int" />
+          <Property Name="endoso_renov" Type="varchar" MaxLength="10" />
           <Property Name="correo" Type="varchar" MaxLength="90" />
           <Property Name="dpi" Type="varchar" MaxLength="30" />
           <Property Name="direccion_cobro" Type="varchar" MaxLength="90" />
@@ -94,15 +97,21 @@
           <Property Name="nit" Type="varchar" MaxLength="10" />
         </EntityType>
         <Function Name="pa_cargar_polizas" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="pa_sq_renovaciones" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="RenovacionesModelStoreContainer">
           <EntitySet Name="poliza" EntityType="Self.poliza" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="renovaciones_polizas" EntityType="Self.renovaciones_polizas" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="RenovacionesModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="RenovacionesEntities" annotation:LazyLoadingEnabled="true">
+          <FunctionImport Name="pa_cargar_polizas" />
+          <FunctionImport Name="pa_sq_renovaciones" ReturnType="Collection(Int32)" />
+          <EntitySet Name="poliza" EntityType="RenovacionesModel.poliza" />
+          <EntitySet Name="renovaciones_polizas" EntityType="RenovacionesModel.renovaciones_polizas" />
+        </EntityContainer>
         <EntityType Name="poliza">
           <Key>
             <PropertyRef Name="id" />
@@ -132,14 +141,16 @@
           <Property Name="id" Type="Int32" Nullable="false" />
           <Property Name="ramo" Type="Int32" />
           <Property Name="poliza" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="certificado" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="cod_aseg" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
           <Property Name="asegurado" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="vigf" Type="DateTime" Precision="0" />
+          <Property Name="cod_agen" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="vigf" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
           <Property Name="marca" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="modelo" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="tipo_vehiculo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="pasajeros" Type="Int32" />
-          <Property Name="tarifa" Type="Int32" />
+          <Property Name="pasajeros" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="tarifa" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="placa" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="motor" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="chasis" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
@@ -147,153 +158,153 @@
           <Property Name="telefono2" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="telefono3" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="telefono4" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="sin_incurrido" Type="Decimal" Precision="10" Scale="2" />
-          <Property Name="prima_pendiente" Type="Decimal" Precision="10" Scale="2" />
-          <Property Name="porc_siniestralidad" Type="Decimal" Precision="8" Scale="2" />
-          <Property Name="porc_desc_pol" Type="Int32" />
-          <Property Name="porc_regc_pol" Type="Int32" />
-          <Property Name="porc_regc_sin" Type="Int32" />
-          <Property Name="porc_recg_m1821" Type="Int32" />
-          <Property Name="porc_recg_m1618" Type="Int32" />
-          <Property Name="porc_bonif" Type="Int32" />
-          <Property Name="monto_bonif" Type="Decimal" Precision="10" Scale="2" />
-          <Property Name="suma_aseg_vence" Type="Decimal" Precision="10" Scale="2" />
-          <Property Name="suma_aseg_renov" Type="Decimal" Precision="10" Scale="2" />
-          <Property Name="deduc_danos" Type="Int32" />
-          <Property Name="deduc_min_danos" Type="Int32" />
-          <Property Name="deduc_robo" Type="Int32" />
-          <Property Name="deduc_min_robo" Type="Int32" />
-          <Property Name="prima_neta_vence" Type="Decimal" Precision="10" Scale="2" />
-          <Property Name="prima_neta_renov" Type="Decimal" Precision="10" Scale="2" />
-          <Property Name="prima_menos_bonif" Type="Decimal" Precision="10" Scale="2" />
-          <Property Name="prima_minima_renov" Type="Decimal" Precision="10" Scale="2" />
-          <Property Name="asisto_vence" Type="Decimal" Precision="10" Scale="2" />
-          <Property Name="asisto_renova" Type="Decimal" Precision="10" Scale="2" />
-          <Property Name="asistencia_fun" Type="Int32" />
-          <Property Name="beneficiario" Type="Int32" />
-          <Property Name="pagos" Type="Int16" />
-          <Property Name="monto_por_pago" Type="Decimal" Precision="8" Scale="2" />
-          <Property Name="prima_anual" Type="Decimal" Precision="10" Scale="2" />
-          <Property Name="forma_pago" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="cod_pagador" Type="Int32" />
+          <Property Name="sin_incurrido" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="prima_pendiente" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="porc_pri_pend" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="porc_siniestralidad" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="porc_desc_pol" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="porc_regc_pol" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="porc_regc_sin" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="porc_recg_m1821" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="porc_recg_m1618" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="porc_bonif" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="monto_bonif" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="suma_aseg_vence" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="suma_aseg_renov" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="deduc_danos" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="deduc_min_danos" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="deduc_robo" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="deduc_min_robo" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="prima_neta_vence" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="prima_neta_renov" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="prima_menos_bonif" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="prima_minima_renov" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="asisto_vence" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="asisto_renova" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="asistencia_fun" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="beneficiario" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="pagos" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="monto_por_pago" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="prima_anual" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="forma_pago" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="cod_pagador" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="nombre_pagador" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="gastos_emision" Type="Decimal" Precision="6" Scale="2" />
-          <Property Name="recargo_por_frac" Type="Decimal" Precision="6" Scale="2" />
-          <Property Name="valor_iva" Type="Decimal" Precision="6" Scale="2" />
+          <Property Name="gastos_emision" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="recargo_por_frac" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="valor_iva" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="confirmar" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="cob_may18_men_25_anos" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="cob_may16_men_18_anos" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="cob_may16" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="endoso_renov" Type="Int32" />
+          <Property Name="endoso_renov" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="correo" Type="String" MaxLength="90" FixedLength="false" Unicode="false" />
           <Property Name="dpi" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
           <Property Name="direccion_cobro" Type="String" MaxLength="90" FixedLength="false" Unicode="false" />
           <Property Name="pasaporte" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
           <Property Name="nit" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
         </EntityType>
-        <EntityContainer Name="RenovacionesEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="poliza" EntityType="Self.poliza" />
-          <EntitySet Name="renovaciones_polizas" EntityType="Self.renovaciones_polizas" />
-          <FunctionImport Name="pa_cargar_polizas" />
-        </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="RenovacionesModelStoreContainer" CdmEntityContainer="RenovacionesEntities">
+          <FunctionImportMapping FunctionImportName="pa_cargar_polizas" FunctionName="RenovacionesModel.Store.pa_cargar_polizas" />
+          <FunctionImportMapping FunctionImportName="pa_sq_renovaciones" FunctionName="RenovacionesModel.Store.pa_sq_renovaciones" />
           <EntitySetMapping Name="poliza">
             <EntityTypeMapping TypeName="RenovacionesModel.poliza">
               <MappingFragment StoreEntitySet="poliza">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="tipo" ColumnName="tipo" />
-                <ScalarProperty Name="codigo_cliente" ColumnName="codigo_cliente" />
-                <ScalarProperty Name="nombre_cliente" ColumnName="nombre_cliente" />
-                <ScalarProperty Name="poliza1" ColumnName="poliza" />
-                <ScalarProperty Name="secren" ColumnName="secren" />
-                <ScalarProperty Name="vigi" ColumnName="vigi" />
-                <ScalarProperty Name="vigf" ColumnName="vigf" />
-                <ScalarProperty Name="fechareg" ColumnName="fechareg" />
-                <ScalarProperty Name="no_ramo" ColumnName="no_ramo" />
-                <ScalarProperty Name="descripcion_ramo" ColumnName="descripcion_ramo" />
-                <ScalarProperty Name="cod_gestor" ColumnName="cod_gestor" />
-                <ScalarProperty Name="gestor" ColumnName="gestor" />
-                <ScalarProperty Name="cia" ColumnName="cia" />
-                <ScalarProperty Name="aseguradora" ColumnName="aseguradora" />
-                <ScalarProperty Name="telefono" ColumnName="telefono" />
                 <ScalarProperty Name="correo" ColumnName="correo" />
+                <ScalarProperty Name="telefono" ColumnName="telefono" />
+                <ScalarProperty Name="aseguradora" ColumnName="aseguradora" />
+                <ScalarProperty Name="cia" ColumnName="cia" />
+                <ScalarProperty Name="gestor" ColumnName="gestor" />
+                <ScalarProperty Name="cod_gestor" ColumnName="cod_gestor" />
+                <ScalarProperty Name="descripcion_ramo" ColumnName="descripcion_ramo" />
+                <ScalarProperty Name="no_ramo" ColumnName="no_ramo" />
+                <ScalarProperty Name="fechareg" ColumnName="fechareg" />
+                <ScalarProperty Name="vigf" ColumnName="vigf" />
+                <ScalarProperty Name="vigi" ColumnName="vigi" />
+                <ScalarProperty Name="secren" ColumnName="secren" />
+                <ScalarProperty Name="poliza1" ColumnName="poliza" />
+                <ScalarProperty Name="nombre_cliente" ColumnName="nombre_cliente" />
+                <ScalarProperty Name="codigo_cliente" ColumnName="codigo_cliente" />
+                <ScalarProperty Name="tipo" ColumnName="tipo" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="renovaciones_polizas">
             <EntityTypeMapping TypeName="RenovacionesModel.renovaciones_polizas">
               <MappingFragment StoreEntitySet="renovaciones_polizas">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="ramo" ColumnName="ramo" />
-                <ScalarProperty Name="poliza" ColumnName="poliza" />
-                <ScalarProperty Name="cod_aseg" ColumnName="cod_aseg" />
-                <ScalarProperty Name="asegurado" ColumnName="asegurado" />
-                <ScalarProperty Name="vigf" ColumnName="vigf" />
-                <ScalarProperty Name="marca" ColumnName="marca" />
-                <ScalarProperty Name="modelo" ColumnName="modelo" />
-                <ScalarProperty Name="tipo_vehiculo" ColumnName="tipo_vehiculo" />
-                <ScalarProperty Name="pasajeros" ColumnName="pasajeros" />
-                <ScalarProperty Name="tarifa" ColumnName="tarifa" />
-                <ScalarProperty Name="placa" ColumnName="placa" />
-                <ScalarProperty Name="motor" ColumnName="motor" />
-                <ScalarProperty Name="chasis" ColumnName="chasis" />
-                <ScalarProperty Name="telefono1" ColumnName="telefono1" />
-                <ScalarProperty Name="telefono2" ColumnName="telefono2" />
-                <ScalarProperty Name="telefono3" ColumnName="telefono3" />
-                <ScalarProperty Name="telefono4" ColumnName="telefono4" />
-                <ScalarProperty Name="sin_incurrido" ColumnName="sin_incurrido" />
-                <ScalarProperty Name="prima_pendiente" ColumnName="prima_pendiente" />
-                <ScalarProperty Name="porc_siniestralidad" ColumnName="porc_siniestralidad" />
-                <ScalarProperty Name="porc_desc_pol" ColumnName="porc_desc_pol" />
-                <ScalarProperty Name="porc_regc_pol" ColumnName="porc_regc_pol" />
-                <ScalarProperty Name="porc_regc_sin" ColumnName="porc_regc_sin" />
-                <ScalarProperty Name="porc_recg_m1821" ColumnName="porc_recg_m1821" />
-                <ScalarProperty Name="porc_recg_m1618" ColumnName="porc_recg_m1618" />
-                <ScalarProperty Name="porc_bonif" ColumnName="porc_bonif" />
-                <ScalarProperty Name="monto_bonif" ColumnName="monto_bonif" />
-                <ScalarProperty Name="suma_aseg_vence" ColumnName="suma_aseg_vence" />
-                <ScalarProperty Name="suma_aseg_renov" ColumnName="suma_aseg_renov" />
-                <ScalarProperty Name="deduc_danos" ColumnName="deduc_danos" />
-                <ScalarProperty Name="deduc_min_danos" ColumnName="deduc_min_danos" />
-                <ScalarProperty Name="deduc_robo" ColumnName="deduc_robo" />
-                <ScalarProperty Name="deduc_min_robo" ColumnName="deduc_min_robo" />
-                <ScalarProperty Name="prima_neta_vence" ColumnName="prima_neta_vence" />
-                <ScalarProperty Name="prima_neta_renov" ColumnName="prima_neta_renov" />
-                <ScalarProperty Name="prima_menos_bonif" ColumnName="prima_menos_bonif" />
-                <ScalarProperty Name="prima_minima_renov" ColumnName="prima_minima_renov" />
-                <ScalarProperty Name="asisto_vence" ColumnName="asisto_vence" />
-                <ScalarProperty Name="asisto_renova" ColumnName="asisto_renova" />
-                <ScalarProperty Name="asistencia_fun" ColumnName="asistencia_fun" />
-                <ScalarProperty Name="beneficiario" ColumnName="beneficiario" />
-                <ScalarProperty Name="pagos" ColumnName="pagos" />
-                <ScalarProperty Name="monto_por_pago" ColumnName="monto_por_pago" />
-                <ScalarProperty Name="prima_anual" ColumnName="prima_anual" />
-                <ScalarProperty Name="forma_pago" ColumnName="forma_pago" />
-                <ScalarProperty Name="cod_pagador" ColumnName="cod_pagador" />
-                <ScalarProperty Name="nombre_pagador" ColumnName="nombre_pagador" />
-                <ScalarProperty Name="gastos_emision" ColumnName="gastos_emision" />
-                <ScalarProperty Name="recargo_por_frac" ColumnName="recargo_por_frac" />
-                <ScalarProperty Name="valor_iva" ColumnName="valor_iva" />
-                <ScalarProperty Name="confirmar" ColumnName="confirmar" />
-                <ScalarProperty Name="cob_may18_men_25_anos" ColumnName="cob_may18_men_25_anos" />
-                <ScalarProperty Name="cob_may16_men_18_anos" ColumnName="cob_may16_men_18_anos" />
-                <ScalarProperty Name="cob_may16" ColumnName="cob_may16" />
-                <ScalarProperty Name="endoso_renov" ColumnName="endoso_renov" />
-                <ScalarProperty Name="correo" ColumnName="correo" />
-                <ScalarProperty Name="dpi" ColumnName="dpi" />
-                <ScalarProperty Name="direccion_cobro" ColumnName="direccion_cobro" />
-                <ScalarProperty Name="pasaporte" ColumnName="pasaporte" />
                 <ScalarProperty Name="nit" ColumnName="nit" />
+                <ScalarProperty Name="pasaporte" ColumnName="pasaporte" />
+                <ScalarProperty Name="direccion_cobro" ColumnName="direccion_cobro" />
+                <ScalarProperty Name="dpi" ColumnName="dpi" />
+                <ScalarProperty Name="correo" ColumnName="correo" />
+                <ScalarProperty Name="endoso_renov" ColumnName="endoso_renov" />
+                <ScalarProperty Name="cob_may16" ColumnName="cob_may16" />
+                <ScalarProperty Name="cob_may16_men_18_anos" ColumnName="cob_may16_men_18_anos" />
+                <ScalarProperty Name="cob_may18_men_25_anos" ColumnName="cob_may18_men_25_anos" />
+                <ScalarProperty Name="confirmar" ColumnName="confirmar" />
+                <ScalarProperty Name="valor_iva" ColumnName="valor_iva" />
+                <ScalarProperty Name="recargo_por_frac" ColumnName="recargo_por_frac" />
+                <ScalarProperty Name="gastos_emision" ColumnName="gastos_emision" />
+                <ScalarProperty Name="nombre_pagador" ColumnName="nombre_pagador" />
+                <ScalarProperty Name="cod_pagador" ColumnName="cod_pagador" />
+                <ScalarProperty Name="forma_pago" ColumnName="forma_pago" />
+                <ScalarProperty Name="prima_anual" ColumnName="prima_anual" />
+                <ScalarProperty Name="monto_por_pago" ColumnName="monto_por_pago" />
+                <ScalarProperty Name="pagos" ColumnName="pagos" />
+                <ScalarProperty Name="beneficiario" ColumnName="beneficiario" />
+                <ScalarProperty Name="asistencia_fun" ColumnName="asistencia_fun" />
+                <ScalarProperty Name="asisto_renova" ColumnName="asisto_renova" />
+                <ScalarProperty Name="asisto_vence" ColumnName="asisto_vence" />
+                <ScalarProperty Name="prima_minima_renov" ColumnName="prima_minima_renov" />
+                <ScalarProperty Name="prima_menos_bonif" ColumnName="prima_menos_bonif" />
+                <ScalarProperty Name="prima_neta_renov" ColumnName="prima_neta_renov" />
+                <ScalarProperty Name="prima_neta_vence" ColumnName="prima_neta_vence" />
+                <ScalarProperty Name="deduc_min_robo" ColumnName="deduc_min_robo" />
+                <ScalarProperty Name="deduc_robo" ColumnName="deduc_robo" />
+                <ScalarProperty Name="deduc_min_danos" ColumnName="deduc_min_danos" />
+                <ScalarProperty Name="deduc_danos" ColumnName="deduc_danos" />
+                <ScalarProperty Name="suma_aseg_renov" ColumnName="suma_aseg_renov" />
+                <ScalarProperty Name="suma_aseg_vence" ColumnName="suma_aseg_vence" />
+                <ScalarProperty Name="monto_bonif" ColumnName="monto_bonif" />
+                <ScalarProperty Name="porc_bonif" ColumnName="porc_bonif" />
+                <ScalarProperty Name="porc_recg_m1618" ColumnName="porc_recg_m1618" />
+                <ScalarProperty Name="porc_recg_m1821" ColumnName="porc_recg_m1821" />
+                <ScalarProperty Name="porc_regc_sin" ColumnName="porc_regc_sin" />
+                <ScalarProperty Name="porc_regc_pol" ColumnName="porc_regc_pol" />
+                <ScalarProperty Name="porc_desc_pol" ColumnName="porc_desc_pol" />
+                <ScalarProperty Name="porc_siniestralidad" ColumnName="porc_siniestralidad" />
+                <ScalarProperty Name="porc_pri_pend" ColumnName="porc_pri_pend" />
+                <ScalarProperty Name="prima_pendiente" ColumnName="prima_pendiente" />
+                <ScalarProperty Name="sin_incurrido" ColumnName="sin_incurrido" />
+                <ScalarProperty Name="telefono4" ColumnName="telefono4" />
+                <ScalarProperty Name="telefono3" ColumnName="telefono3" />
+                <ScalarProperty Name="telefono2" ColumnName="telefono2" />
+                <ScalarProperty Name="telefono1" ColumnName="telefono1" />
+                <ScalarProperty Name="chasis" ColumnName="chasis" />
+                <ScalarProperty Name="motor" ColumnName="motor" />
+                <ScalarProperty Name="placa" ColumnName="placa" />
+                <ScalarProperty Name="tarifa" ColumnName="tarifa" />
+                <ScalarProperty Name="pasajeros" ColumnName="pasajeros" />
+                <ScalarProperty Name="tipo_vehiculo" ColumnName="tipo_vehiculo" />
+                <ScalarProperty Name="modelo" ColumnName="modelo" />
+                <ScalarProperty Name="marca" ColumnName="marca" />
+                <ScalarProperty Name="vigf" ColumnName="vigf" />
+                <ScalarProperty Name="cod_agen" ColumnName="cod_agen" />
+                <ScalarProperty Name="asegurado" ColumnName="asegurado" />
+                <ScalarProperty Name="cod_aseg" ColumnName="cod_aseg" />
+                <ScalarProperty Name="certificado" ColumnName="certificado" />
+                <ScalarProperty Name="poliza" ColumnName="poliza" />
+                <ScalarProperty Name="ramo" ColumnName="ramo" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="pa_cargar_polizas" FunctionName="RenovacionesModel.Store.pa_cargar_polizas" />
-        </EntityContainerMapping>
+          </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
   </edmx:Runtime>

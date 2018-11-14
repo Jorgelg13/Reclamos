@@ -35,5 +35,10 @@ namespace Renovaciones
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pa_cargar_polizas");
         }
+    
+        public virtual ObjectResult<Nullable<int>> pa_sq_renovaciones()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("pa_sq_renovaciones");
+        }
     }
 }
