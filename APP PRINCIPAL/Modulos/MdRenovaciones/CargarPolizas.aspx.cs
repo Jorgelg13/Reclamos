@@ -37,9 +37,6 @@ public partial class Modulos_MdRenovaciones_CargarPolizas : System.Web.UI.Page
         {
             try
             {
-                var sec_registro = DBRenovaciones.pa_sq_renovaciones();
-                long? id_registro = sec_registro.Single();
-                insertar.id = Convert.ToInt32(id_registro);
                 insertar.ramo = Convert.ToInt32(row.Cells[0].Text);
                 insertar.poliza = row.Cells[1].Text;
                 insertar.certificado = row.Cells[2].Text;
@@ -102,7 +99,8 @@ public partial class Modulos_MdRenovaciones_CargarPolizas : System.Web.UI.Page
                 insertar.dpi = row.Cells[59].Text;
                 insertar.direccion_cobro = row.Cells[60].Text;
                 insertar.pasaporte = row.Cells[61].Text;
-                //insertar.nit = row.Cells[62].Text;
+                insertar.nit = row.Cells[62].Text;
+
                 DBRenovaciones.renovaciones_polizas.Add(insertar);
                 DBRenovaciones.SaveChanges();
             }

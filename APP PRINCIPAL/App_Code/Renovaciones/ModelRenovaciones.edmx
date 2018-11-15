@@ -31,70 +31,70 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ramo" Type="int" />
-          <Property Name="poliza" Type="varchar" MaxLength="50" />
-          <Property Name="certificado" Type="varchar" MaxLength="50" />
-          <Property Name="cod_aseg" Type="varchar" MaxLength="25" />
-          <Property Name="asegurado" Type="varchar" MaxLength="200" />
-          <Property Name="cod_agen" Type="varchar" MaxLength="10" />
-          <Property Name="vigf" Type="varchar" MaxLength="12" />
-          <Property Name="marca" Type="varchar" MaxLength="50" />
-          <Property Name="modelo" Type="varchar" MaxLength="10" />
-          <Property Name="tipo_vehiculo" Type="varchar" MaxLength="50" />
-          <Property Name="pasajeros" Type="varchar" MaxLength="10" />
-          <Property Name="tarifa" Type="varchar" MaxLength="10" />
-          <Property Name="placa" Type="varchar" MaxLength="10" />
-          <Property Name="motor" Type="varchar" MaxLength="20" />
-          <Property Name="chasis" Type="varchar" MaxLength="25" />
-          <Property Name="telefono1" Type="varchar" MaxLength="10" />
-          <Property Name="telefono2" Type="varchar" MaxLength="10" />
-          <Property Name="telefono3" Type="varchar" MaxLength="10" />
-          <Property Name="telefono4" Type="varchar" MaxLength="10" />
-          <Property Name="sin_incurrido" Type="varchar" MaxLength="10" />
-          <Property Name="prima_pendiente" Type="varchar" MaxLength="10" />
-          <Property Name="porc_pri_pend" Type="varchar" MaxLength="10" />
-          <Property Name="porc_siniestralidad" Type="varchar" MaxLength="10" />
-          <Property Name="porc_desc_pol" Type="varchar" MaxLength="10" />
-          <Property Name="porc_regc_pol" Type="varchar" MaxLength="10" />
-          <Property Name="porc_regc_sin" Type="varchar" MaxLength="10" />
-          <Property Name="porc_recg_m1821" Type="varchar" MaxLength="10" />
-          <Property Name="porc_recg_m1618" Type="varchar" MaxLength="10" />
-          <Property Name="porc_bonif" Type="varchar" MaxLength="10" />
-          <Property Name="monto_bonif" Type="varchar" MaxLength="10" />
-          <Property Name="suma_aseg_vence" Type="varchar" MaxLength="10" />
-          <Property Name="suma_aseg_renov" Type="varchar" MaxLength="10" />
-          <Property Name="deduc_danos" Type="varchar" MaxLength="10" />
-          <Property Name="deduc_min_danos" Type="varchar" MaxLength="10" />
-          <Property Name="deduc_robo" Type="varchar" MaxLength="10" />
-          <Property Name="deduc_min_robo" Type="varchar" MaxLength="10" />
-          <Property Name="prima_neta_vence" Type="varchar" MaxLength="10" />
-          <Property Name="prima_neta_renov" Type="varchar" MaxLength="10" />
-          <Property Name="prima_menos_bonif" Type="varchar" MaxLength="10" />
-          <Property Name="prima_minima_renov" Type="varchar" MaxLength="10" />
-          <Property Name="asisto_vence" Type="varchar" MaxLength="10" />
-          <Property Name="asisto_renova" Type="varchar" MaxLength="10" />
-          <Property Name="asistencia_fun" Type="varchar" MaxLength="10" />
-          <Property Name="beneficiario" Type="varchar" MaxLength="10" />
-          <Property Name="pagos" Type="varchar" MaxLength="10" />
-          <Property Name="monto_por_pago" Type="varchar" MaxLength="10" />
-          <Property Name="prima_anual" Type="varchar" MaxLength="10" />
-          <Property Name="forma_pago" Type="varchar" MaxLength="10" />
-          <Property Name="cod_pagador" Type="varchar" MaxLength="10" />
-          <Property Name="nombre_pagador" Type="varchar" MaxLength="200" />
-          <Property Name="gastos_emision" Type="varchar" MaxLength="10" />
-          <Property Name="recargo_por_frac" Type="varchar" MaxLength="10" />
-          <Property Name="valor_iva" Type="varchar" MaxLength="10" />
-          <Property Name="confirmar" Type="varchar" MaxLength="10" />
-          <Property Name="cob_may18_men_25_anos" Type="varchar" MaxLength="50" />
-          <Property Name="cob_may16_men_18_anos" Type="varchar" MaxLength="50" />
-          <Property Name="cob_may16" Type="varchar" MaxLength="50" />
-          <Property Name="endoso_renov" Type="varchar" MaxLength="10" />
-          <Property Name="correo" Type="varchar" MaxLength="90" />
-          <Property Name="dpi" Type="varchar" MaxLength="30" />
-          <Property Name="direccion_cobro" Type="varchar" MaxLength="90" />
-          <Property Name="pasaporte" Type="varchar" MaxLength="15" />
-          <Property Name="nit" Type="varchar" MaxLength="10" />
+          <Property Name="poliza" Type="varchar" MaxLength="150" />
+          <Property Name="certificado" Type="varchar" MaxLength="150" />
+          <Property Name="cod_aseg" Type="varchar" MaxLength="150" />
+          <Property Name="asegurado" Type="varchar" MaxLength="150" />
+          <Property Name="cod_agen" Type="varchar" MaxLength="150" />
+          <Property Name="vigf" Type="varchar" MaxLength="150" />
+          <Property Name="marca" Type="varchar" MaxLength="150" />
+          <Property Name="modelo" Type="varchar" MaxLength="150" />
+          <Property Name="tipo_vehiculo" Type="varchar" MaxLength="150" />
+          <Property Name="pasajeros" Type="varchar" MaxLength="150" />
+          <Property Name="tarifa" Type="varchar" MaxLength="150" />
+          <Property Name="placa" Type="varchar" MaxLength="150" />
+          <Property Name="motor" Type="varchar" MaxLength="150" />
+          <Property Name="chasis" Type="varchar" MaxLength="150" />
+          <Property Name="telefono1" Type="varchar" MaxLength="150" />
+          <Property Name="telefono2" Type="varchar" MaxLength="150" />
+          <Property Name="telefono3" Type="varchar" MaxLength="150" />
+          <Property Name="telefono4" Type="varchar" MaxLength="150" />
+          <Property Name="sin_incurrido" Type="varchar" MaxLength="150" />
+          <Property Name="prima_pendiente" Type="varchar" MaxLength="150" />
+          <Property Name="porc_pri_pend" Type="varchar" MaxLength="150" />
+          <Property Name="porc_siniestralidad" Type="varchar" MaxLength="150" />
+          <Property Name="porc_desc_pol" Type="varchar" MaxLength="150" />
+          <Property Name="porc_regc_pol" Type="varchar" MaxLength="150" />
+          <Property Name="porc_regc_sin" Type="varchar" MaxLength="150" />
+          <Property Name="porc_recg_m1821" Type="varchar" MaxLength="150" />
+          <Property Name="porc_recg_m1618" Type="varchar" MaxLength="150" />
+          <Property Name="porc_bonif" Type="varchar" MaxLength="150" />
+          <Property Name="monto_bonif" Type="varchar" MaxLength="150" />
+          <Property Name="suma_aseg_vence" Type="varchar" MaxLength="150" />
+          <Property Name="suma_aseg_renov" Type="varchar" MaxLength="150" />
+          <Property Name="deduc_danos" Type="varchar" MaxLength="150" />
+          <Property Name="deduc_min_danos" Type="varchar" MaxLength="150" />
+          <Property Name="deduc_robo" Type="varchar" MaxLength="150" />
+          <Property Name="deduc_min_robo" Type="varchar" MaxLength="150" />
+          <Property Name="prima_neta_vence" Type="varchar" MaxLength="150" />
+          <Property Name="prima_neta_renov" Type="varchar" MaxLength="150" />
+          <Property Name="prima_menos_bonif" Type="varchar" MaxLength="150" />
+          <Property Name="prima_minima_renov" Type="varchar" MaxLength="150" />
+          <Property Name="asisto_vence" Type="varchar" MaxLength="150" />
+          <Property Name="asisto_renova" Type="varchar" MaxLength="150" />
+          <Property Name="asistencia_fun" Type="varchar" MaxLength="150" />
+          <Property Name="beneficiario" Type="varchar" MaxLength="150" />
+          <Property Name="pagos" Type="varchar" MaxLength="150" />
+          <Property Name="monto_por_pago" Type="varchar" MaxLength="150" />
+          <Property Name="prima_anual" Type="varchar" MaxLength="150" />
+          <Property Name="forma_pago" Type="varchar" MaxLength="150" />
+          <Property Name="cod_pagador" Type="varchar" MaxLength="150" />
+          <Property Name="nombre_pagador" Type="varchar" MaxLength="150" />
+          <Property Name="gastos_emision" Type="varchar" MaxLength="150" />
+          <Property Name="recargo_por_frac" Type="varchar" MaxLength="150" />
+          <Property Name="valor_iva" Type="varchar" MaxLength="150" />
+          <Property Name="confirmar" Type="varchar" MaxLength="150" />
+          <Property Name="cob_may18_men_25_anos" Type="varchar" MaxLength="150" />
+          <Property Name="cob_may16_men_18_anos" Type="varchar" MaxLength="150" />
+          <Property Name="cob_may16" Type="varchar" MaxLength="150" />
+          <Property Name="endoso_renov" Type="varchar" MaxLength="150" />
+          <Property Name="correo" Type="varchar" MaxLength="150" />
+          <Property Name="dpi" Type="varchar" MaxLength="150" />
+          <Property Name="direccion_cobro" Type="varchar" MaxLength="150" />
+          <Property Name="pasaporte" Type="varchar" MaxLength="150" />
+          <Property Name="nit" Type="varchar" MaxLength="150" />
         </EntityType>
         <Function Name="pa_cargar_polizas" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="pa_sq_renovaciones" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
@@ -111,7 +111,7 @@
           <FunctionImport Name="pa_sq_renovaciones" ReturnType="Collection(Int32)" />
           <EntitySet Name="poliza" EntityType="RenovacionesModel.poliza" />
           <EntitySet Name="renovaciones_polizas" EntityType="RenovacionesModel.renovaciones_polizas" />
-        </EntityContainer>
+          </EntityContainer>
         <EntityType Name="poliza">
           <Key>
             <PropertyRef Name="id" />
@@ -138,72 +138,72 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ramo" Type="Int32" />
-          <Property Name="poliza" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="certificado" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="cod_aseg" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
-          <Property Name="asegurado" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="cod_agen" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="vigf" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
-          <Property Name="marca" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="modelo" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="tipo_vehiculo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="pasajeros" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="tarifa" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="placa" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="motor" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="chasis" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
-          <Property Name="telefono1" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="telefono2" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="telefono3" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="telefono4" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="sin_incurrido" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="prima_pendiente" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="porc_pri_pend" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="porc_siniestralidad" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="porc_desc_pol" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="porc_regc_pol" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="porc_regc_sin" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="porc_recg_m1821" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="porc_recg_m1618" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="porc_bonif" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="monto_bonif" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="suma_aseg_vence" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="suma_aseg_renov" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="deduc_danos" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="deduc_min_danos" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="deduc_robo" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="deduc_min_robo" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="prima_neta_vence" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="prima_neta_renov" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="prima_menos_bonif" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="prima_minima_renov" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="asisto_vence" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="asisto_renova" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="asistencia_fun" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="beneficiario" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="pagos" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="monto_por_pago" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="prima_anual" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="forma_pago" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="cod_pagador" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="nombre_pagador" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="gastos_emision" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="recargo_por_frac" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="valor_iva" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="confirmar" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="cob_may18_men_25_anos" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="cob_may16_men_18_anos" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="cob_may16" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="endoso_renov" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="correo" Type="String" MaxLength="90" FixedLength="false" Unicode="false" />
-          <Property Name="dpi" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
-          <Property Name="direccion_cobro" Type="String" MaxLength="90" FixedLength="false" Unicode="false" />
-          <Property Name="pasaporte" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
-          <Property Name="nit" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="poliza" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="certificado" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="cod_aseg" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="asegurado" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="cod_agen" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="vigf" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="marca" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="modelo" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="tipo_vehiculo" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="pasajeros" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="tarifa" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="placa" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="motor" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="chasis" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="telefono1" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="telefono2" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="telefono3" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="telefono4" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="sin_incurrido" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="prima_pendiente" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="porc_pri_pend" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="porc_siniestralidad" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="porc_desc_pol" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="porc_regc_pol" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="porc_regc_sin" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="porc_recg_m1821" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="porc_recg_m1618" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="porc_bonif" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="monto_bonif" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="suma_aseg_vence" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="suma_aseg_renov" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="deduc_danos" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="deduc_min_danos" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="deduc_robo" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="deduc_min_robo" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="prima_neta_vence" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="prima_neta_renov" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="prima_menos_bonif" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="prima_minima_renov" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="asisto_vence" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="asisto_renova" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="asistencia_fun" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="beneficiario" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="pagos" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="monto_por_pago" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="prima_anual" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="forma_pago" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="cod_pagador" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="nombre_pagador" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="gastos_emision" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="recargo_por_frac" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="valor_iva" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="confirmar" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="cob_may18_men_25_anos" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="cob_may16_men_18_anos" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="cob_may16" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="endoso_renov" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="correo" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="dpi" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="direccion_cobro" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="pasaporte" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="nit" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
         </EntityType>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
