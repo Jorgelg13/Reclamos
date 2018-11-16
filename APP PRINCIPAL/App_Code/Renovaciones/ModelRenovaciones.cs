@@ -12,6 +12,26 @@ namespace Renovaciones
     using System;
     using System.Collections.Generic;
     
+    public partial class estados
+    {
+        public estados()
+        {
+            this.renovaciones_polizas = new HashSet<renovaciones_polizas>();
+            this.renovaciones_log = new HashSet<renovaciones_log>();
+        }
+    
+        public int id { get; set; }
+        public string estado { get; set; }
+    
+        public virtual ICollection<renovaciones_polizas> renovaciones_polizas { get; set; }
+        public virtual ICollection<renovaciones_log> renovaciones_log { get; set; }
+    }
+}
+namespace Renovaciones
+{
+    using System;
+    using System.Collections.Generic;
+    
     public partial class poliza
     {
         public int id { get; set; }
@@ -38,8 +58,29 @@ namespace Renovaciones
     using System;
     using System.Collections.Generic;
     
+    public partial class renovaciones_log
+    {
+        public int id { get; set; }
+        public Nullable<int> poliza { get; set; }
+        public Nullable<int> estado { get; set; }
+        public Nullable<System.DateTime> fecha { get; set; }
+    
+        public virtual estados estados { get; set; }
+        public virtual renovaciones_polizas renovaciones_polizas { get; set; }
+    }
+}
+namespace Renovaciones
+{
+    using System;
+    using System.Collections.Generic;
+    
     public partial class renovaciones_polizas
     {
+        public renovaciones_polizas()
+        {
+            this.renovaciones_log = new HashSet<renovaciones_log>();
+        }
+    
         public int id { get; set; }
         public Nullable<int> ramo { get; set; }
         public string poliza { get; set; }
@@ -104,5 +145,9 @@ namespace Renovaciones
         public string direccion_cobro { get; set; }
         public string pasaporte { get; set; }
         public string nit { get; set; }
+        public Nullable<int> estado { get; set; }
+    
+        public virtual estados estados { get; set; }
+        public virtual ICollection<renovaciones_log> renovaciones_log { get; set; }
     }
 }

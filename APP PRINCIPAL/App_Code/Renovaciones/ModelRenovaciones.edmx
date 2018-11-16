@@ -5,6 +5,13 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="RenovacionesModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="estados">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="estado" Type="varchar" MaxLength="150" />
+        </EntityType>
         <EntityType Name="poliza">
           <Key>
             <PropertyRef Name="id" />
@@ -26,6 +33,15 @@
           <Property Name="aseguradora" Type="varchar" MaxLength="150" />
           <Property Name="telefono" Type="varchar" MaxLength="50" />
           <Property Name="correo" Type="varchar" MaxLength="150" />
+        </EntityType>
+        <EntityType Name="renovaciones_log">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="poliza" Type="int" />
+          <Property Name="estado" Type="int" />
+          <Property Name="fecha" Type="datetime" />
         </EntityType>
         <EntityType Name="renovaciones_polizas">
           <Key>
@@ -95,12 +111,63 @@
           <Property Name="direccion_cobro" Type="varchar" MaxLength="150" />
           <Property Name="pasaporte" Type="varchar" MaxLength="150" />
           <Property Name="nit" Type="varchar" MaxLength="150" />
+          <Property Name="estado" Type="int" />
         </EntityType>
+        <Association Name="FK_polizas_estado">
+          <End Role="estados" Type="Self.estados" Multiplicity="0..1" />
+          <End Role="renovaciones_polizas" Type="Self.renovaciones_polizas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="estados">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="renovaciones_polizas">
+              <PropertyRef Name="estado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_renovaciones_log_estado">
+          <End Role="estados" Type="Self.estados" Multiplicity="0..1" />
+          <End Role="renovaciones_log" Type="Self.renovaciones_log" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="estados">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="renovaciones_log">
+              <PropertyRef Name="estado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_renovaciones_log_poliza">
+          <End Role="renovaciones_polizas" Type="Self.renovaciones_polizas" Multiplicity="0..1" />
+          <End Role="renovaciones_log" Type="Self.renovaciones_log" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="renovaciones_polizas">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="renovaciones_log">
+              <PropertyRef Name="poliza" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Function Name="pa_cargar_polizas" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="pa_sq_renovaciones" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="RenovacionesModelStoreContainer">
+          <EntitySet Name="estados" EntityType="Self.estados" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="poliza" EntityType="Self.poliza" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="renovaciones_log" EntityType="Self.renovaciones_log" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="renovaciones_polizas" EntityType="Self.renovaciones_polizas" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_polizas_estado" Association="Self.FK_polizas_estado">
+            <End Role="estados" EntitySet="estados" />
+            <End Role="renovaciones_polizas" EntitySet="renovaciones_polizas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_renovaciones_log_estado" Association="Self.FK_renovaciones_log_estado">
+            <End Role="estados" EntitySet="estados" />
+            <End Role="renovaciones_log" EntitySet="renovaciones_log" />
+          </AssociationSet>
+          <AssociationSet Name="FK_renovaciones_log_poliza" Association="Self.FK_renovaciones_log_poliza">
+            <End Role="renovaciones_polizas" EntitySet="renovaciones_polizas" />
+            <End Role="renovaciones_log" EntitySet="renovaciones_log" />
+          </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -109,9 +176,32 @@
         <EntityContainer Name="RenovacionesEntities" annotation:LazyLoadingEnabled="true">
           <FunctionImport Name="pa_cargar_polizas" />
           <FunctionImport Name="pa_sq_renovaciones" ReturnType="Collection(Int32)" />
+          <EntitySet Name="estados" EntityType="RenovacionesModel.estados" />
           <EntitySet Name="poliza" EntityType="RenovacionesModel.poliza" />
+          <EntitySet Name="renovaciones_log" EntityType="RenovacionesModel.renovaciones_log" />
           <EntitySet Name="renovaciones_polizas" EntityType="RenovacionesModel.renovaciones_polizas" />
+          <AssociationSet Name="FK_polizas_estado" Association="RenovacionesModel.FK_polizas_estado">
+            <End Role="estados" EntitySet="estados" />
+            <End Role="renovaciones_polizas" EntitySet="renovaciones_polizas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_renovaciones_log_estado" Association="RenovacionesModel.FK_renovaciones_log_estado">
+            <End Role="estados" EntitySet="estados" />
+            <End Role="renovaciones_log" EntitySet="renovaciones_log" />
+          </AssociationSet>
+          <AssociationSet Name="FK_renovaciones_log_poliza" Association="RenovacionesModel.FK_renovaciones_log_poliza">
+            <End Role="renovaciones_polizas" EntitySet="renovaciones_polizas" />
+            <End Role="renovaciones_log" EntitySet="renovaciones_log" />
+          </AssociationSet>
           </EntityContainer>
+        <EntityType Name="estados">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="estado" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="renovaciones_polizas" Relationship="RenovacionesModel.FK_polizas_estado" FromRole="estados" ToRole="renovaciones_polizas" />
+          <NavigationProperty Name="renovaciones_log" Relationship="RenovacionesModel.FK_renovaciones_log_estado" FromRole="estados" ToRole="renovaciones_log" />
+        </EntityType>
         <EntityType Name="poliza">
           <Key>
             <PropertyRef Name="id" />
@@ -133,6 +223,17 @@
           <Property Name="aseguradora" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
           <Property Name="telefono" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="correo" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="renovaciones_log">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="poliza" Type="Int32" />
+          <Property Name="estado" Type="Int32" />
+          <Property Name="fecha" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="estados" Relationship="RenovacionesModel.FK_renovaciones_log_estado" FromRole="renovaciones_log" ToRole="estados" />
+          <NavigationProperty Name="renovaciones_polizas" Relationship="RenovacionesModel.FK_renovaciones_log_poliza" FromRole="renovaciones_log" ToRole="renovaciones_polizas" />
         </EntityType>
         <EntityType Name="renovaciones_polizas">
           <Key>
@@ -202,7 +303,46 @@
           <Property Name="direccion_cobro" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
           <Property Name="pasaporte" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
           <Property Name="nit" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="estado" Type="Int32" />
+          <NavigationProperty Name="estados" Relationship="RenovacionesModel.FK_polizas_estado" FromRole="renovaciones_polizas" ToRole="estados" />
+          <NavigationProperty Name="renovaciones_log" Relationship="RenovacionesModel.FK_renovaciones_log_poliza" FromRole="renovaciones_polizas" ToRole="renovaciones_log" />
         </EntityType>
+        <Association Name="FK_polizas_estado">
+          <End Type="RenovacionesModel.estados" Role="estados" Multiplicity="0..1" />
+          <End Type="RenovacionesModel.renovaciones_polizas" Role="renovaciones_polizas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="estados">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="renovaciones_polizas">
+              <PropertyRef Name="estado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_renovaciones_log_estado">
+          <End Type="RenovacionesModel.estados" Role="estados" Multiplicity="0..1" />
+          <End Type="RenovacionesModel.renovaciones_log" Role="renovaciones_log" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="estados">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="renovaciones_log">
+              <PropertyRef Name="estado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_renovaciones_log_poliza">
+          <End Type="RenovacionesModel.renovaciones_polizas" Role="renovaciones_polizas" Multiplicity="0..1" />
+          <End Type="RenovacionesModel.renovaciones_log" Role="renovaciones_log" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="renovaciones_polizas">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="renovaciones_log">
+              <PropertyRef Name="poliza" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -211,6 +351,14 @@
         <EntityContainerMapping StorageEntityContainer="RenovacionesModelStoreContainer" CdmEntityContainer="RenovacionesEntities">
           <FunctionImportMapping FunctionImportName="pa_cargar_polizas" FunctionName="RenovacionesModel.Store.pa_cargar_polizas" />
           <FunctionImportMapping FunctionImportName="pa_sq_renovaciones" FunctionName="RenovacionesModel.Store.pa_sq_renovaciones" />
+          <EntitySetMapping Name="estados">
+            <EntityTypeMapping TypeName="RenovacionesModel.estados">
+              <MappingFragment StoreEntitySet="estados">
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="poliza">
             <EntityTypeMapping TypeName="RenovacionesModel.poliza">
               <MappingFragment StoreEntitySet="poliza">
@@ -234,9 +382,20 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="renovaciones_log">
+            <EntityTypeMapping TypeName="RenovacionesModel.renovaciones_log">
+              <MappingFragment StoreEntitySet="renovaciones_log">
+                <ScalarProperty Name="fecha" ColumnName="fecha" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="poliza" ColumnName="poliza" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="renovaciones_polizas">
             <EntityTypeMapping TypeName="RenovacionesModel.renovaciones_polizas">
               <MappingFragment StoreEntitySet="renovaciones_polizas">
+                <ScalarProperty Name="estado" ColumnName="estado" />
                 <ScalarProperty Name="nit" ColumnName="nit" />
                 <ScalarProperty Name="pasaporte" ColumnName="pasaporte" />
                 <ScalarProperty Name="direccion_cobro" ColumnName="direccion_cobro" />
