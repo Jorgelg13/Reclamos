@@ -54,6 +54,21 @@ public class conexionBD
         }
     }
 
+    public SqlConnection ObtenerConexionRenovaciones()
+    {
+        ConnectionStringSettings cadena2 = ConfigurationManager.ConnectionStrings["RenovacionesConnectionString"];
+        conexion.ConnectionString = cadena2.ConnectionString;
+        try
+        {
+            conexion.Open();
+            return conexion;
+        }
+        catch (Exception ex)
+        {
+            throw ex;
+        }
+    }
+
     public bool DescargarConexion()
     {
         conexion.Close();
