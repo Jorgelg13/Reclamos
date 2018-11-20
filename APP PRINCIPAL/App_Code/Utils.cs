@@ -17,10 +17,10 @@ public class Utils
 
     public Utils()
     {
-      
+
     }
 
-    public string buscador(String search, String table,  String[] columSearch = null, String[] columView = null, string sWhere = null, String[] tJoin = null)
+    public string buscador(String search, String table, String[] columSearch = null, String[] columView = null, string sWhere = null, String[] tJoin = null)
     {
         string[] arreglo = search.Split(" ".ToCharArray());
         string sql = "";
@@ -38,9 +38,9 @@ public class Utils
             {
                 colSearch = columSearch[0];
             }
-            if(columView != null)
+            if (columView != null)
             {
-               colView = String.Join(", ", columView);
+                colView = String.Join(", ", columView);
             }
 
             sql = "SELECT " + colView + " FROM " + table + " WHERE " + colSearch + " LIKE '%" + arreglo[0] + "%' ";
@@ -56,12 +56,12 @@ public class Utils
                 }
             }
 
-            if(sWhere != null)
+            if (sWhere != null)
             {
                 sql += sWhere;
             }
         }
-       
+
         return sql;
     }
 
@@ -70,6 +70,26 @@ public class Utils
         try
         {
             SqlDataAdapter da = new SqlDataAdapter(Consulta, this.conexion.ObtenerConexionReclamos());
+            DataTable dt = new DataTable();
+            da.Fill(dt);
+            tabla.DataSource = dt;
+            tabla.DataBind();
+        }
+        catch (Exception ex)
+        {
+            throw ex;
+        }
+        finally
+        {
+            this.conexion.DescargarConexion();
+        }
+    }
+
+    public void llenarGridRenovaciones(String Consulta, GridView tabla)
+    {
+        try
+        {
+            SqlDataAdapter da = new SqlDataAdapter(Consulta, this.conexion.ObtenerConexionRenovaciones());
             DataTable dt = new DataTable();
             da.Fill(dt);
             tabla.DataSource = dt;
@@ -199,7 +219,7 @@ public class Utils
         }
         catch (Exception ex)
         {
-           throw ex;
+            throw ex;
         }
         finally
         {
@@ -241,7 +261,7 @@ public class Utils
     {
         Response.Clear();
         Response.Buffer = true;
-        Response.AddHeader("content-disposition", "attachment;filename="+nombre+".xls");
+        Response.AddHeader("content-disposition", "attachment;filename=" + nombre + ".xls");
         Response.Charset = "";
         Response.ContentType = "application/vnd.ms-excel";
 
@@ -254,7 +274,7 @@ public class Utils
             Response.End();
         }
     }
-    public static void SMS_gastos_medicos(String telefono, String mensaje, String usuario, String estado, long id,string tipo)
+    public static void SMS_gastos_medicos(String telefono, String mensaje, String usuario, String estado, long id, string tipo)
     {
         int numero = Convert.ToInt32(telefono);
 
@@ -351,9 +371,9 @@ public class Utils
     public static void Guardar_cartas(TextBox contenido, string tipo, string modulo, int id, CheckBox chCierreInterno, CheckBox chDeclinado, CheckBox chEnvioCheque, HttpResponse Response)
     {
         try
-        {   
+        {
             var bandera = DBReclamos.reclamos_varios.Find(id);
-            if(chCierreInterno.Checked)
+            if (chCierreInterno.Checked)
             {
                 if (bandera.b_carta_cierre_interno == false)
                 {
@@ -432,7 +452,7 @@ public class Utils
             }
 
             DBReclamos.SaveChanges();
-           
+
         }
         catch (Exception ex)
         {
@@ -571,7 +591,7 @@ public class Utils
     }
 
     public static void TituloReporte(Panel PanelPrincipal, Label lblPeriodo, Label lblFechaGeneracion, Label lblUsuario, Label lblTitulo,
-                              String Titulo, String Usuario, TextBox txtFechaInicio, TextBox txtFechaFin,  String KPI)
+                              String Titulo, String Usuario, TextBox txtFechaInicio, TextBox txtFechaFin, String KPI)
     {
         try
         {
@@ -641,5 +661,12 @@ public class Utils
         cargas.Caption = Path.GetFileName(FilePath);
         cargas.DataSource = dt;
         cargas.DataBind();
+    }
+
+
+    public static int CODIGO_GESTOR(String usuario)
+    {
+        var codigo = DBReclamos.usuario.Where(US => US.nombre ==usuario).First();
+        return Convert.ToInt32(codigo.numero_gestor);
     }
 }
