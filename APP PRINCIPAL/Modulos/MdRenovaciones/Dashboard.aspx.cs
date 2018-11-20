@@ -19,4 +19,9 @@ public partial class Modulos_MdRenovaciones_Dashboard : System.Web.UI.Page
     {
 
     }
+
+    protected void GridAllPolizas_SelectedIndexChanged(object sender, EventArgs e)
+    {
+
+    }
 }

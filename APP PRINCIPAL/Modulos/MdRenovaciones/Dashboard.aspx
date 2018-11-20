@@ -34,7 +34,17 @@
         </div>
         <div role="tabpanel" class="tab-pane" id="todasPolizas">
             <div class="row">
-                <asp:GridView ID="AllPolizasGrid" runat="server"></asp:GridView>
+                  <div class="scrolling-table-container col-lg-12 col-md-12" style="padding: 0px;">
+                    <asp:GridView ID="GridAllPolizas" OnSelectedIndexChanged="GridAllPolizas_SelectedIndexChanged" CssClass="table bs-table table-responsive table-hover" runat="server" AutoGenerateColumns="True" ForeColor="#333333" GridLines="None">
+                        <Columns>
+                            <asp:CommandField ShowSelectButton="True" SelectText="Seleccionar" />
+                        </Columns>
+                        <HeaderStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" Wrap="false" />
+                        <PagerStyle BackColor="#131B4D" ForeColor="White" HorizontalAlign="Center" />
+                        <RowStyle BackColor="White" Wrap="false" />
+                        <SelectedRowStyle BackColor="#D1DDF1" Font-Bold="True" ForeColor="#333333" />
+                    </asp:GridView>
+                </div>
             </div>
         </div>
     </div>
