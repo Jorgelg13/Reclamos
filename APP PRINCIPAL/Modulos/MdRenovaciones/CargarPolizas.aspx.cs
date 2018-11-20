@@ -100,6 +100,7 @@ public partial class Modulos_MdRenovaciones_CargarPolizas : System.Web.UI.Page
                 insertar.direccion_cobro = row.Cells[60].Text;
                 insertar.pasaporte = row.Cells[61].Text;
                 insertar.nit = row.Cells[62].Text;
+                insertar.estado = 1;
 
                 DBRenovaciones.renovaciones_polizas.Add(insertar);
                 DBRenovaciones.SaveChanges();
