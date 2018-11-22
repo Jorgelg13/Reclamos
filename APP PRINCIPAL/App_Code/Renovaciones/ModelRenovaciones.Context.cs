@@ -32,6 +32,7 @@ namespace Renovaciones
         public DbSet<poliza> poliza { get; set; }
         public DbSet<renovaciones_log> renovaciones_log { get; set; }
         public DbSet<renovaciones_polizas> renovaciones_polizas { get; set; }
+        public DbSet<requerimientos> requerimientos { get; set; }
     
         public virtual int pa_cargar_polizas()
         {

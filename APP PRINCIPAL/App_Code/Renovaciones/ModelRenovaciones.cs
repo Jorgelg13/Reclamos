@@ -146,8 +146,31 @@ namespace Renovaciones
         public string pasaporte { get; set; }
         public string nit { get; set; }
         public Nullable<int> estado { get; set; }
+        public Nullable<int> codigo_gestor { get; set; }
+        public string nombre_gestor { get; set; }
+        public string correo_cliente { get; set; }
+        public string telefono_cliente { get; set; }
+        public string poliza_unity { get; set; }
+        public Nullable<System.DateTime> fecha_registro { get; set; }
     
         public virtual estados estados { get; set; }
         public virtual ICollection<renovaciones_log> renovaciones_log { get; set; }
+    }
+}
+namespace Renovaciones
+{
+    using System;
+    using System.Collections.Generic;
+    
+    public partial class requerimientos
+    {
+        public int id { get; set; }
+        public string poliza { get; set; }
+        public string renovacion { get; set; }
+        public string requerimiento { get; set; }
+        public string fecha { get; set; }
+        public string prima_neta { get; set; }
+        public string comision { get; set; }
+        public string prima_total { get; set; }
     }
 }

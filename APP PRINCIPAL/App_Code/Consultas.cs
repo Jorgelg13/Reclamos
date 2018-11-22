@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.UI.WebControls;
 
 /// <summary>
 /// Descripción breve de Consultas
@@ -145,4 +146,20 @@ public class Consultas
             "total_no_cubierto as [Total no cubierto], deducible as Deducible, coaseguro as Coaseguro,  timbres as Timbres, no_cheque as [No. cheque], moneda as Moneda " +
             "from detalle_pagos_reclamos_medicos where id_reclamo_medico = " + ID + "";
     }
-}
+
+
+    //seccion de renovaciones de polizas
+    public static string POLIZAS_RENOVADAS(int codigo,  DropDownList ddlEstado)
+    {
+        return "Select id as ID," +
+            "poliza as Poliza," +
+            "asegurado as Asegurado," +
+            "marca as Marca," +
+            "modelo as Modelo," +
+            "placa as Placa," +
+            "vigf as [Vigencia Final]," +
+            "correo_cliente as [Correo Cliente]" +
+            "from renovaciones_polizas where codigo_gestor = " + codigo + " and estado = " + ddlEstado.SelectedValue + " ";
+    }
+
+ }
