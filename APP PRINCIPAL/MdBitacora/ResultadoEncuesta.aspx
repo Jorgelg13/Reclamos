@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true"  EnableEventValidation="false" CodeFile="ResultadoEncuesta.aspx.cs" Inherits="MdBitacora_ResultadoEncuesta" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" EnableEventValidation="false" CodeFile="ResultadoEncuesta.aspx.cs" Inherits="MdBitacora_ResultadoEncuesta" %>
 
 <!DOCTYPE html>
 
@@ -31,6 +31,13 @@
         </div>
         <br />
         <div class="form-group col-lg-2 col-md-2 col-sm-12">
+            <label for="message-text" class="control-label">Tipo Encuesta:</label>
+            <asp:DropDownList ID="ddlTipoEncuesta" AutoPostBack="true" OnSelectedIndexChanged="ddlTipoEncuesta_SelectedIndexChanged" runat="server" Style="width: 100%" Height="34px" CssClass="form-control">
+                <asp:ListItem Value="1">Implants</asp:ListItem>
+                <asp:ListItem Value="2">Recepcion</asp:ListItem>
+            </asp:DropDownList>
+        </div>
+        <div class="form-group col-lg-2 col-md-2 col-sm-12">
             <label for="message-text" class="control-label">Fecha Inicio:</label>
             <asp:TextBox ID="txtFechaInicio" Height="34px" type="date" CssClass="form-control" Style="width: 100%" runat="server"></asp:TextBox>
         </div>
@@ -59,41 +66,66 @@
             <asp:Button runat="server" ID="btnBuscar" BackColor="#087fca" Style="margin-top: 24px;" Text="Buscar" CssClass="btn btn-primary" OnClick="btnBuscar_Click1" />
         </div>
         <asp:Panel runat="server" ID="PnPrincipal">
-        <div class="col-sm-12 col-md-12 col-lg-12">
+            <div class="col-sm-12 col-md-12 col-lg-12">
+                <br />
+                <div class="scrolling-table-container col-sm-12 col-md-9 col-lg-9">
+                    <b style="font-size: 20px">
+                        <asp:Label runat="server" ID="lblTotalEncuestas"></asp:Label>
+                    </b>
+                    <asp:LinkButton ID="linkDescargar" Visible="false" OnClick="linkDescargar_Click" title="Descargar en excel" runat="server" Style="font-size: 20px; text-align: center; color: green"><i class="fa fa-file-excel-o" aria-hidden="true"></i></asp:LinkButton>
+                    <asp:GridView ID="GridEncuestas" CssClass="table bs-table tablaDetalleAuto table-responsive table-hover" runat="server" AutoGenerateColumns="true" CellPadding="4" ForeColor="#333333" GridLines="None">
+                        <AlternatingRowStyle BackColor="White" />
+                        <FooterStyle BackColor="#087fca" Font-Bold="True" ForeColor="White" />
+                        <HeaderStyle BackColor="#087fca" Font-Bold="True" ForeColor="White" HorizontalAlign="Center" Wrap="False" />
+                        <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
+                        <RowStyle BackColor="#EFF3FB" Wrap="false" />
+                    </asp:GridView>
+                </div>
+                <div class="scrolling-table-container col-sm-12 col-md-3 col-lg-3">
+                    <b style="font-size: 20px">
+                        <asp:Label runat="server" ID="lblAgrupados"></asp:Label>
+                    </b>
+                    <asp:GridView ID="GridAgrupados" CssClass="table bs-table tablaDetalleAuto table-responsive table-hover" runat="server" AutoGenerateColumns="true" CellPadding="4" ForeColor="#333333" GridLines="None">
+                        <AlternatingRowStyle BackColor="White" />
+                        <FooterStyle BackColor="#087fca" Font-Bold="True" ForeColor="White" />
+                        <HeaderStyle BackColor="#087fca" Font-Bold="True" ForeColor="White" HorizontalAlign="Center" Wrap="False" />
+                        <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
+                        <RowStyle BackColor="#EFF3FB" />
+                    </asp:GridView>
+                </div>
+            </div>
             <br />
-            <div class="scrolling-table-container col-sm-12 col-md-9 col-lg-9">
-                <b style="font-size: 20px">
-                    <asp:Label runat="server" ID="lblTotalEncuestas"></asp:Label>
-                </b>
-                <asp:LinkButton ID="linkDescargar" Visible="false" OnClick="linkDescargar_Click" title="Descargar en excel" runat="server" Style="font-size: 20px; text-align: center; color: green"><i class="fa fa-file-excel-o" aria-hidden="true"></i></asp:LinkButton>
-                <asp:GridView ID="GridEncuestas" CssClass="table bs-table tablaDetalleAuto table-responsive table-hover" runat="server" AutoGenerateColumns="true" CellPadding="4" ForeColor="#333333" GridLines="None">
-                    <AlternatingRowStyle BackColor="White" />
-                    <FooterStyle BackColor="#087fca" Font-Bold="True" ForeColor="White" />
-                    <HeaderStyle BackColor="#087fca" Font-Bold="True" ForeColor="White" HorizontalAlign="Center" Wrap="False" />
-                    <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
-                    <RowStyle BackColor="#EFF3FB" Wrap="false" />
-                </asp:GridView>
+            <div style="margin-top: 30%; padding-left: 20px;">
+                <p><b>PREGUNTA 1: En una calificacion de 1 a 10 ¿con base en su experiencia con Unity Promotores, usted recomendaria a un familiar o amigo el servicio de Unity Promotores? </b></p>
+                <p><b>PREGUNTA 2: En su experiencia, por favor calificar mi servicio, de 1 A 10, en donde 10 es excelente</b></p>
+                <p><b>PREGUNTA 3: En su experiencia, por favor calificar el servicio de la aseguradora, de 1 a 10, en donde 10 es excelente</b></p>
             </div>
-            <div class="scrolling-table-container col-sm-12 col-md-3 col-lg-3">
-                <b style="font-size: 20px">
-                    <asp:Label runat="server" ID="lblAgrupados"></asp:Label>
-                </b>
-                <asp:GridView ID="GridAgrupados" CssClass="table bs-table tablaDetalleAuto table-responsive table-hover" runat="server" AutoGenerateColumns="true" CellPadding="4" ForeColor="#333333" GridLines="None">
-                    <AlternatingRowStyle BackColor="White" />
-                    <FooterStyle BackColor="#087fca" Font-Bold="True" ForeColor="White" />
-                    <HeaderStyle BackColor="#087fca" Font-Bold="True" ForeColor="White" HorizontalAlign="Center" Wrap="False" />
-                    <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
-                    <RowStyle BackColor="#EFF3FB" />
-                </asp:GridView>
+        </asp:Panel>
+        <asp:Panel runat="server" ID="PnRecepcion" Visible="false">
+            <div class="col-sm-12 col-md-12 col-lg-12">
+                <br />
+                <div class="scrolling-table-container col-sm-12 col-md-12 col-lg-12">
+                    <b style="font-size: 20px">
+                        <asp:Label runat="server" ID="lblTotalRecepcion"></asp:Label>
+                    </b>
+                    <asp:LinkButton ID="lnEncuestaRecepcion" Visible="false" OnClick="lnEncuestaRecepcion_Click" title="Descargar en excel" runat="server" Style="font-size: 20px; text-align: center; color: green"><i class="fa fa-file-excel-o"></i></asp:LinkButton>
+                    <asp:GridView ID="GridRecepcion" CssClass="table bs-table tablaDetalleAuto table-responsive table-hover" runat="server" AutoGenerateColumns="true" CellPadding="4" ForeColor="#333333" GridLines="None">
+                        <AlternatingRowStyle BackColor="White" />
+                        <FooterStyle BackColor="#087fca" Font-Bold="True" ForeColor="White" />
+                        <HeaderStyle BackColor="#087fca" Font-Bold="True" ForeColor="White" HorizontalAlign="Center" Wrap="False" />
+                        <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
+                        <RowStyle BackColor="#EFF3FB" Wrap="false" />
+                    </asp:GridView>
+                </div>
             </div>
-        </div>
-        <br />
-        <div style="margin-top: 30%; padding-left: 20px;">
-            <p><b>PREGUNTA 1: En una calificacion de 1 a 10 ¿con base en su experiencia con Unity Promotores, usted recomendaria a un familiar o amigo el servicio de Unity Promotores? </b></p>
-            <p><b>PREGUNTA 2: En su experiencia, por favor calificar mi servicio, de 1 A 10, en donde 10 es excelente</b></p>
-            <p><b>PREGUNTA 3: En su experiencia, por favor calificar el servicio de la aseguradora, de 1 a 10, en donde 10 es excelente</b></p>
-        </div>
-      </asp:Panel>
+            <br />
+            <div style="margin-top: 30%; padding-left: 20px;">
+                <p><b>PREGUNTA 1: En una calificacion de 1 a 10 ¿con base en su experiencia con Unity Promotores, usted recomendaria a un familiar o amigo el servicio de Unity Promotores? </b></p>
+                <p><b>OPERACION : ¿Que operacion vino a realizar a Unity Promotores?</b></p>
+                <p><b>PREGUNTA 2: En su experiencia, por favor calificar de 1 a 10 el servicio que recibio en donde 10 es excelente</b></p>
+                <p><b>PREGUNTA 3: En su experiencia, por favor calificar de 1 a 10 el servicio que recibio en recepcion, en donde 10 es excelente</b></p>
+            </div>
+        </asp:Panel>
         <%--archivos javascripts que se utilizan en el sistema--%>
         <script src="../Scripts/jquery-3.1.1.min.js"></script>
         <script src="../bootstrap/js/bootstrap.min.js"></script>
