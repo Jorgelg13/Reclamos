@@ -159,7 +159,7 @@ public class Consultas
             "placa as Placa," +
             "vigf as [Vigencia Final]," +
             "correo_cliente as [Correo Cliente]" +
-            "from renovaciones_polizas where codigo_gestor = " + codigo + " and estado = " + ddlEstado.SelectedValue + " ";
+            "from renovaciones_polizas where codigo_gestor = " + codigo + " and estado = " + ddlEstado ;
     }
 
  }
