@@ -149,7 +149,7 @@ public class Consultas
 
 
     //seccion de renovaciones de polizas
-    public static string POLIZAS_RENOVADAS(int codigo,  DropDownList ddlEstado)
+    public static string POLIZAS_RENOVADAS(int codigo,  int ddlEstado)
     {
         return "Select id as ID," +
             "poliza as Poliza," +

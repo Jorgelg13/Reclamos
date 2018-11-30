@@ -5,15 +5,15 @@ public partial class Modulos_MdRenovaciones_Dashboard : System.Web.UI.Page
 {
     String userlogin = HttpContext.Current.User.Identity.Name;
     Utils llenar = new Utils();
-    int codigo;
 
     protected void Page_Load(object sender, EventArgs e)
-    {
-        codigo = Utils.CODIGO_GESTOR(userlogin);
+    { 
 
         if (!IsPostBack)
         {
         }
+
+        Session["CodigoGestor"] = Utils.CODIGO_GESTOR(userlogin);
         PolizasRoble();
     }
 
@@ -29,11 +29,11 @@ public partial class Modulos_MdRenovaciones_Dashboard : System.Web.UI.Page
 
     public void PolizasRoble()
     {
-        llenar.llenarGridRenovaciones(Consultas.POLIZAS_RENOVADAS(codigo,ddlEstado), GridElRoble);
+        llenar.llenarGridRenovaciones(Consultas.POLIZAS_RENOVADAS(Convert.ToInt32(Session["CodigoGestor"]), Convert.ToInt32(ddlEstado.SelectedValue)), GridElRoble);
     }
 
     protected void DDLTipo_SelectedIndexChanged(object sender, EventArgs e)
     {
-        llenar.llenarGridRenovaciones(Consultas.POLIZAS_RENOVADAS(codigo,ddlEstado), GridElRoble);
+        llenar.llenarGridRenovaciones(Consultas.POLIZAS_RENOVADAS(Convert.ToInt32(Session["CodigoGestor"]), Convert.ToInt32(ddlEstado.SelectedValue)), GridElRoble);
     }
 }
