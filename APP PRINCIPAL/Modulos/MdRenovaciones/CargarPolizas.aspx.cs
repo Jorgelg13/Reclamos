@@ -2,7 +2,6 @@
 using System.Configuration;
 using System.IO;
 using System.Web.UI.WebControls;
-using System.Linq;
 
 public partial class Modulos_MdRenovaciones_CargarPolizas : System.Web.UI.Page
 {

@@ -52,7 +52,8 @@
             <div role="tabpanel" class="tab-pane" id="todasPolizas">
                 <div class="row">
                     <div class="scrolling-table-container col-lg-12 col-md-12" style="padding: 0px;">
-                        <asp:GridView ID="GridAllPolizas" OnSelectedIndexChanged="GridAllPolizas_SelectedIndexChanged" CssClass="table bs-table table-responsive " runat="server" AutoGenerateColumns="True" ForeColor="#333333" GridLines="None">
+                        <asp:GridView ID="GridAllPolizas" CssClass="table bs-table table-responsive" 
+                            runat="server" AutoGenerateColumns="True" ForeColor="#333333" GridLines="None" OnSelectedIndexChanged="GridAllPolizas_SelectedIndexChanged">
                             <Columns>
                                 <asp:CommandField ShowSelectButton="True" SelectText="Seleccionar" />
                             </Columns>
