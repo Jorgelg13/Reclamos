@@ -11,4 +11,9 @@ public partial class Modulos_MdRenovaciones_Estados_Facturadas : System.Web.UI.P
     {
 
     }
+
+    protected void GridFacturadas_SelectedIndexChanged(object sender, EventArgs e)
+    {
+
+    }
 }

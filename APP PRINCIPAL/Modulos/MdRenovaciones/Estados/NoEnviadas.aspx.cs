@@ -11,4 +11,9 @@ public partial class Modulos_MdRenovaciones_Estados_NoEnviadas : System.Web.UI.P
     {
 
     }
+
+    protected void GridNoEnviadas_SelectedIndexChanged(object sender, EventArgs e)
+    {
+
+    }
 }

@@ -11,4 +11,9 @@ public partial class Modulos_MdRenovaciones_Estados_Enviadas : System.Web.UI.Pag
     {
 
     }
+
+    protected void GridEnviadas_SelectedIndexChanged(object sender, EventArgs e)
+    {
+
+    }
 }
