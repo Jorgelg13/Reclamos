@@ -39,7 +39,7 @@ public partial class Modulos_MdRenovaciones_Dashboard : System.Web.UI.Page
     {
         EmailValidator emailValidator = new EmailValidator();
         EmailValidationResult resultado;
-        int id = Convert.ToInt32(GridElRoble.SelectedRow.Cells[2].Text);
+        int id = Convert.ToInt32(GridElRoble.SelectedRow.Cells[1].Text);
         var registro = DBRenovaciones.renovaciones_polizas.Find(id);
 
         if (!emailValidator.Validate(correo.Trim(), out resultado))
