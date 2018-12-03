@@ -149,17 +149,29 @@ public class Consultas
 
 
     //seccion de renovaciones de polizas
-    public static string POLIZAS_RENOVADAS(int codigo,  int ddlEstado)
+    public static string POLIZAS_RENOVADAS(int codigo,  int ddlEstado, String fInicio, String fFin)
     {
-        return "Select id as ID," +
-            "poliza as Poliza," +
-            "asegurado as Asegurado," +
-            "marca as Marca," +
-            "modelo as Modelo," +
-            "placa as Placa," +
-            "vigf as [Vigencia Final]," +
-            "correo_cliente as [Correo Cliente]" +
-            "from renovaciones_polizas where codigo_gestor = " + codigo + " and estado = " + ddlEstado ;
+        String sql = "Select " +
+            "r.id as ID, " +
+            "r.poliza as Poliza," +
+            "r.asegurado as Asegurado," +
+            "r.marca as Marca," +
+            "r.modelo as Modelo," +
+            "r.placa as Placa," +
+            "r.vigf as [Vigencia Final]," +
+            "r.correo_cliente as [Correo Cliente]," +
+            "rl.fecha as [Fecha Registro]" +
+            "from renovaciones_polizas r " +
+            "inner join renovaciones_log rl  on rl.poliza = r.id " +
+            "where r.codigo_gestor =  " + codigo + " and r.estado = "+ ddlEstado + " and rl.estado = " + ddlEstado ;
+            
+        if(!String.IsNullOrEmpty(fFin.Trim()) && !String.IsNullOrEmpty(fInicio.Trim()))
+        {
+            sql += " and rl.fecha between '" + fInicio + "' and '" + fFin + "' ";
+        }
+
+
+        return sql;
     }
 
  }
