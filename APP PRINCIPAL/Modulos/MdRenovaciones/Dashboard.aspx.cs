@@ -27,12 +27,12 @@ public partial class Modulos_MdRenovaciones_Dashboard : System.Web.UI.Page
 
     public void PolizasRoble()
     {
-        llenar.llenarGridRenovaciones(Consultas.POLIZAS_RENOVADAS(Convert.ToInt32(Session["CodigoGestor"]), 2), GridElRoble);
+        llenar.llenarGridRenovaciones(Consultas.POLIZAS_RENOVADAS(Convert.ToInt32(Session["CodigoGestor"]), 2, "", ""), GridElRoble);
     }
 
     protected void DDLTipo_SelectedIndexChanged(object sender, EventArgs e)
     {
-        llenar.llenarGridRenovaciones(Consultas.POLIZAS_RENOVADAS(Convert.ToInt32(Session["CodigoGestor"]), Convert.ToInt32(ddlEstado.SelectedValue)), GridElRoble);
+        llenar.llenarGridRenovaciones(Consultas.POLIZAS_RENOVADAS(Convert.ToInt32(Session["CodigoGestor"]), Convert.ToInt32(ddlEstado.SelectedValue), "", ""), GridElRoble);
     }
 
     public void ValidarCorreo(String correo)
@@ -54,28 +54,28 @@ public partial class Modulos_MdRenovaciones_Dashboard : System.Web.UI.Page
                 Correos.Notificacion(correo.Trim(), "Renovacion de poliza", "Su poliza a sido renovada");
                 registro.estado = 3;
                 DBRenovaciones.SaveChanges();
-                llenar.llenarGridRenovaciones(Consultas.POLIZAS_RENOVADAS(Convert.ToInt32(Session["CodigoGestor"]),2), GridElRoble);
+                llenar.llenarGridRenovaciones(Consultas.POLIZAS_RENOVADAS(Convert.ToInt32(Session["CodigoGestor"]),2, "",""), GridElRoble);
                 break;
 
             case EmailValidationResult.MailboxUnavailable:
                 //Console.WriteLine("Email server replied there is no such mailbox");
                 registro.estado = 6;
                 DBRenovaciones.SaveChanges();
-                llenar.llenarGridRenovaciones(Consultas.POLIZAS_RENOVADAS(Convert.ToInt32(Session["CodigoGestor"]), 2), GridElRoble);
+                llenar.llenarGridRenovaciones(Consultas.POLIZAS_RENOVADAS(Convert.ToInt32(Session["CodigoGestor"]), 2, "", ""), GridElRoble);
                 break;
 
             case EmailValidationResult.MailboxStorageExceeded:
                 //Console.WriteLine("Mailbox overflow");
                 registro.estado = 6;
                 DBRenovaciones.SaveChanges();
-                llenar.llenarGridRenovaciones(Consultas.POLIZAS_RENOVADAS(Convert.ToInt32(Session["CodigoGestor"]), 2), GridElRoble);
+                llenar.llenarGridRenovaciones(Consultas.POLIZAS_RENOVADAS(Convert.ToInt32(Session["CodigoGestor"]), 2, "", ""), GridElRoble);
                 break;
 
             case EmailValidationResult.NoMailForDomain:
                 //Console.WriteLine("Emails are not configured for domain (no MX records)");
                 registro.estado = 6;
                 DBRenovaciones.SaveChanges();
-                llenar.llenarGridRenovaciones(Consultas.POLIZAS_RENOVADAS(Convert.ToInt32(Session["CodigoGestor"]), 2), GridElRoble);
+                llenar.llenarGridRenovaciones(Consultas.POLIZAS_RENOVADAS(Convert.ToInt32(Session["CodigoGestor"]), 2, "", ""), GridElRoble);
                 break;
         }
     }
