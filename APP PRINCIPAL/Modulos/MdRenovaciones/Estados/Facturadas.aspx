@@ -14,10 +14,7 @@
                     <asp:TextBox ID="txtFechaFin" type="date" Height="34px" CssClass="form-control" Style="width: 100%" runat="server"></asp:TextBox>
                 </div>
                 <div class="scrolling-table-container col-lg-12 col-md-12" style="padding: 0px;">
-                    <asp:GridView ID="GridFacturadas" OnSelectedIndexChanged="GridFacturadas_SelectedIndexChanged" CssClass="table bs-table table-responsive" runat="server" AutoGenerateColumns="True" ForeColor="#333333" GridLines="None">
-                        <Columns>
-                            <asp:CommandField ShowSelectButton="True" SelectText="Seleccionar" />
-                        </Columns>
+                    <asp:GridView ID="GridFacturadas" CssClass="table bs-table table-responsive" runat="server" AutoGenerateColumns="True" ForeColor="#333333" GridLines="None"> 
                         <HeaderStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" Wrap="false" />
                         <PagerStyle BackColor="#131B4D" ForeColor="White" HorizontalAlign="Center" />
                         <RowStyle BackColor="White" Wrap="false" />

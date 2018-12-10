@@ -46,7 +46,7 @@
                 </div>
             </header>
         </div>
-                <nav class="navbar navbar-default">
+        <nav class="navbar navbar-default">
             <div class="container-fluid">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
@@ -61,7 +61,7 @@
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav">
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle fa fa-cloud-upload" style="font-size: 16px;"data-toggle="dropdown" role="button">Cargas<span class="caret"></span></a>
+                            <a href="#" class="dropdown-toggle fa fa-cloud-upload" style="font-size: 16px;" data-toggle="dropdown" role="button">Cargas<span class="caret"></span></a>
                             <ul class="dropdown-menu">
                                 <li><a href="/Modulos/MdRenovaciones/CargarPolizas.aspx?id=1">Polizas</a></li>
                                 <li><a href="/Modulos/MdRenovaciones/CargarPolizas.aspx?id=2">Requerimientos</a></li>
@@ -88,46 +88,45 @@
                     </ul>
                 </div>
             </div>
-         <div class="loading-screen" style="">
-            <div style="display: block; overflow-x: hidden; overflow-y: auto; opacity: 1; background: rgba(0, 0, 0, 0.55); position: fixed; top: 0; right: 0; bottom: 0; left: 0; z-index: 1050; transition: opacity .15s linear;">
-                <div class="modal-dialog">
-                    <img style='top: 45%; position: absolute; height: 100px; width: 100px; left: 45%;' src='/imgUnity/cargando.gif' />
+            <div class="loading-screen" style="">
+                <div style="display: block; overflow-x: hidden; overflow-y: auto; opacity: 1; background: rgba(0, 0, 0, 0.55); position: fixed; top: 0; right: 0; bottom: 0; left: 0; z-index: 1050; transition: opacity .15s linear;">
+                    <div class="modal-dialog">
+                        <img style='top: 45%; position: absolute; height: 100px; width: 100px; left: 45%;' src='/imgUnity/cargando.gif' />
+                    </div>
                 </div>
             </div>
-        </div>
         </nav>
         <div>
             <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
             </asp:ContentPlaceHolder>
         </div>
-    </form>
-    <script type="text/javascript" src="<%= ResolveUrl("../Scripts/jquery-3.1.1.min.js") %>"></script>
-    <script type="text/javascript" src="<%= ResolveUrl("../bootstrap/js/bootstrap.min.js") %>"></script>
-    <script type="text/javascript" src="<%= ResolveUrl("../Scripts/jquery.cookie.min.js") %>"></script>
-    <script type="text/javascript" src="<%= ResolveUrl("../Scripts/toastr.min.js") %>"></script>
-    <script type="text/javascript" src="<%= ResolveUrl("../Scripts/jQuery.print.min.js") %>"></script>
-    <script type="text/javascript" src="<%= ResolveUrl("../Scripts/app.js") %>"></script>
-       <script type='text/javascript'>
+        <script type="text/javascript" src="<%= ResolveUrl("../Scripts/jquery-3.1.1.min.js") %>"></script>
+        <script type="text/javascript" src="<%= ResolveUrl("../bootstrap/js/bootstrap.min.js") %>"></script>
+        <script type="text/javascript" src="<%= ResolveUrl("../Scripts/jquery.cookie.min.js") %>"></script>
+        <script type="text/javascript" src="<%= ResolveUrl("../Scripts/toastr.min.js") %>"></script>
+        <script type="text/javascript" src="<%= ResolveUrl("../Scripts/jQuery.print.min.js") %>"></script>
+        <script type="text/javascript" src="<%= ResolveUrl("../Scripts/app.js") %>"></script>
+        <script type='text/javascript'>
             $(window).on('load', function () {
                 $('.loading-screen').attr('style', 'display:none');
             });
 
             $(function () {
                 $(':button,:submit').click(function () {
-
                     $attrLogin = $('.loading-screen').attr('style');
-                    if ($attrLogin == "") {
+                    if ($attrLogin === "") {
                         $('.loading-screen').attr('style', 'display:none');
-                    }
-                    else {
-                        if ($(this).attr('data-dismiss') != 'modal') {
+                    } else {
+                        if ($(this).attr('data-dismiss') !== 'modal') {
                             $('.loading-screen').attr('style', '');
                         }
                     }
                 });
             });
         </script>
-            <asp:ContentPlaceHolder ID="contentJS" runat="server">
+        <asp:ContentPlaceHolder ID="contentJS" runat="server">
         </asp:ContentPlaceHolder>
+    </form>
+
 </body>
 </html>
