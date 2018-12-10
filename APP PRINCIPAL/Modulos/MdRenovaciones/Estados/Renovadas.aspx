@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master/Renovaciones.master" AutoEventWireup="true" CodeFile="Renovadas.aspx.cs" Inherits="Modulos_MdRenovaciones_Estados_Renovadas"   EnableEventValidation="false" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master/Renovaciones.master" AutoEventWireup="true" CodeFile="Renovadas.aspx.cs" Inherits="Modulos_MdRenovaciones_Estados_Renovadas" EnableEventValidation="false" %>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <div class="container-fluid">
@@ -14,13 +14,14 @@
                     <asp:TextBox ID="txtFechaFin" type="date" Height="34px" CssClass="form-control" Style="width: 100%" runat="server"></asp:TextBox>
                 </div>
                 <div class="scrolling-table-container col-lg-12 col-md-12" style="padding: 0px;">
-                    <asp:GridView ID="GridRenovadas" CssClass="table bs-table table-responsive" runat="server" AutoGenerateColumns="True" ForeColor="#333333" GridLines="None">
+                    <asp:GridView ID="GridRenovadas" CssClass="table bs-table table-responsive" runat="server" AutoGenerateColumns="True" ForeColor="#333333" GridLines="None" OnRowDeleting="GridRenovadas_RowDeleting">
                         <Columns>
                             <asp:TemplateField HeaderText="Seleccionar">
                                 <ItemTemplate>
                                     <asp:CheckBox ID="checkAsignar" runat="server" />
                                 </ItemTemplate>
                             </asp:TemplateField>
+                            <asp:CommandField DeleteText="Requerimientos" ControlStyle-CssClass="btn btn-info" ShowDeleteButton="True"></asp:CommandField>
                         </Columns>
                         <HeaderStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" Wrap="false" />
                         <PagerStyle BackColor="#131B4D" ForeColor="White" HorizontalAlign="Center" />
@@ -30,6 +31,18 @@
                 </div>
             </div>
         </div>
+    </div>
+    <div style="display: none">
+        <asp:Panel ID="pnlRequerimientos" runat="server">
+            <div class="scrolling-table-container col-lg-12 col-md-12" style="padding: 0px;">
+                <asp:GridView ID="gridRequerimientos" CssClass="table bs-table table-responsive" runat="server" AutoGenerateColumns="True" ForeColor="#333333" GridLines="None">
+                    <HeaderStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" Wrap="false" />
+                    <PagerStyle BackColor="#131B4D" ForeColor="White" HorizontalAlign="Center" />
+                    <RowStyle BackColor="White" Wrap="false" />
+                    <SelectedRowStyle BackColor="#D1DDF1" Font-Bold="True" ForeColor="#333333" />
+                </asp:GridView>
+            </div>
+        </asp:Panel>
     </div>
     <%-- botones circulares con las opciones multiples --%>
     <div id="container-floating">

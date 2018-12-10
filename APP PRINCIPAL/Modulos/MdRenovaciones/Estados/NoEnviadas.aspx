@@ -31,7 +31,7 @@
             </div>
         </div>
     </div>
-    <%-- botones circulares con las opciones multiples --%>
+    <%-- botones circulares con las opciones multiples --%> 
     <div id="container-floating">
         <div class="nd4 nds" data-toggle="tooltip" data-placement="left" data-original-title="contract@gmail.com">
             <asp:LinkButton ID="btnExportar" title="Exportar a excel" CssClass="letter" runat="server" OnClick="btnExportar_Click"><i class="fa fa-file-excel-o" aria-hidden="true"></i></asp:LinkButton>
