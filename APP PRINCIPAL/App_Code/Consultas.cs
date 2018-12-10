@@ -160,10 +160,9 @@ public class Consultas
             "r.placa as Placa," +
             "r.vigf as [Vigencia Final]," +
             "r.correo_cliente as [Correo Cliente]," +
-            "rl.fecha as [Fecha Registro]" +
+            "  (select top 1 fecha from renovaciones_log where poliza = r.id) as [Fecha Registro]" +
             "from renovaciones_polizas r " +
-            "inner join renovaciones_log rl  on rl.poliza = r.id " +
-            "where r.codigo_gestor =  " + codigo + " and r.estado = "+ ddlEstado + " and rl.estado = " + ddlEstado ;
+            "where r.codigo_gestor =  " + codigo + " and r.estado = "+ ddlEstado;
             
         if(!String.IsNullOrEmpty(fFin.Trim()) && !String.IsNullOrEmpty(fInicio.Trim()))
         {
