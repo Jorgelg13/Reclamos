@@ -169,8 +169,19 @@ public class Consultas
             sql += " and rl.fecha between '" + fInicio + "' and '" + fFin + "' ";
         }
 
-
         return sql;
     }
 
+    public static string REQ_POLIZAS_RENOVADAS(string poliza, string secren, String polizaACS)
+    {
+        string sql = "SELECT " +
+            "[FECHA DE PAGO] = fecha," +
+            "POLIZA = '" + polizaACS + "', " +
+            "MONTO = prima_total, " +
+            "REQUERIMIENTO = requerimiento " +
+            "FROM requerimientos where poliza ='" + poliza + "' and renovacion = " + secren;
+
+        return sql;
+
+    }
  }

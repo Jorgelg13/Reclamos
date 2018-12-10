@@ -65,8 +65,22 @@ public partial class Modulos_MdRenovaciones_Estados_Renovadas : System.Web.UI.Pa
                 {
                     Utils.ShowMessage(this.Page, "No se a podido facturar " + ex.Message, "Excelente", "success");
                 }
-            }
+            }  
         }
         llenarGrid();
+    }
+
+    protected void GridRenovadas_RowDeleting(object sender, GridViewDeleteEventArgs e)
+    {
+        try
+        {
+            TableCell cell = GridRenovadas.Rows[e.RowIndex].Cells[2];
+            var poliza = DB.renovaciones_polizas.Find(Convert.ToInt32(cell.Text));
+            llenar.llenarGridRenovaciones(Consultas.REQ_POLIZAS_RENOVADAS(poliza.poliza,poliza.endoso_renov, poliza.poliza_unity), gridRequerimientos);
+            Utils.ExportarExcel(pnlRequerimientos, Response, poliza.poliza_unity);
+        }
+        catch { }
+
+         
     }
 }
