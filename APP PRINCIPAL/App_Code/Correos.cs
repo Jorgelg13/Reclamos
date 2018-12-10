@@ -25,7 +25,7 @@ public class Correos
             oMail.From = new MailAddress("reclamosgt@unitypromotores.com");
             oMail.To = new AddressCollection(para);
             oMail.Subject = asunto;
-            oMail.TextBody = cuerpo;
+            oMail.HtmlBody = cuerpo;
 
             SmtpServer oServer = new SmtpServer("smtp.office365.com");
             oServer.User = "reclamosgt@unitypromotores.com";
