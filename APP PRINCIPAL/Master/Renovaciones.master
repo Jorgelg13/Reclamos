@@ -71,9 +71,9 @@
                             <a href="#" class="dropdown-toggle fa fa-retweet" style="font-size: 16px;" data-toggle="dropdown" role="button">Renovaciones <span class="caret"></span></a>
                             <ul class="dropdown-menu">
                                 <li><a href="/Modulos/MdRenovaciones/Estados/Enviadas.aspx">Renovaciones Enviadas</a></li>
-                                <li><a href="/Modulos/MdRenovaciones/Estados/Renovadas.aspx">Renovaciones Finalizas</a></li>
-                                <li><a href="/Modulos/MdRenovaciones/Estados/Canceladas.aspx">Renovaciones Rechazadas</a></li>
-                                <li><a href="/Modulos/MdRenovaciones/Estados/NoEnviadas.aspx">Renovaciones Sin facturar</a></li>
+                                <li><a href="/Modulos/MdRenovaciones/Estados/Renovadas.aspx">Renovaciones Renovadas</a></li>
+                                <li><a href="/Modulos/MdRenovaciones/Estados/Canceladas.aspx">Renovaciones Canceladas</a></li>
+                                <li><a href="/Modulos/MdRenovaciones/Estados/NoEnviadas.aspx">Renovaciones No Enviadas</a></li>
                                 <li><a href="/Modulos/MdRenovaciones/Estados/Facturadas.aspx">Renovaciones Facturadas</a></li>
                             </ul>
                         </li>

@@ -7,6 +7,7 @@ public partial class Modulos_MdRenovaciones_Dashboard : System.Web.UI.Page
     String userlogin = HttpContext.Current.User.Identity.Name;
     Utils llenar = new Utils();
     Renovaciones.RenovacionesEntities DBRenovaciones = new Renovaciones.RenovacionesEntities();
+    String cuerpo;
 
     protected void Page_Load(object sender, EventArgs e)
     { 
@@ -41,6 +42,8 @@ public partial class Modulos_MdRenovaciones_Dashboard : System.Web.UI.Page
         EmailValidationResult resultado;
         int id = Convert.ToInt32(GridElRoble.SelectedRow.Cells[1].Text);
         var registro = DBRenovaciones.renovaciones_polizas.Find(id);
+        cuerpo = "Saludos Estimad@ asegurado </br>" +
+            "El "+ registro.vigf+"";
 
         if (!emailValidator.Validate(correo.Trim(), out resultado))
         {
