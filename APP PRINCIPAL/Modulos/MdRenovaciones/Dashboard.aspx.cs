@@ -1,6 +1,7 @@
 ﻿using EmailValidation;
 using System;
 using System.Web;
+using System.Web.UI.WebControls;
 
 public partial class Modulos_MdRenovaciones_Dashboard : System.Web.UI.Page
 {
@@ -20,27 +21,20 @@ public partial class Modulos_MdRenovaciones_Dashboard : System.Web.UI.Page
         PolizasRoble();
     }
 
-    protected void GridElRoble_SelectedIndexChanged(object sender, EventArgs e)
-    {
-        String CorreoCliente = GridElRoble.SelectedRow.Cells[8].Text;
-        ValidarCorreo(CorreoCliente);
-    }
 
     public void PolizasRoble()
     {
+        llenarGrid();
+    }
+
+    public void llenarGrid()
+    {
         llenar.llenarGridRenovaciones(Consultas.POLIZAS_RENOVADAS(Convert.ToInt32(Session["CodigoGestor"]), 2, "", ""), GridElRoble);
     }
-
-    protected void DDLTipo_SelectedIndexChanged(object sender, EventArgs e)
-    {
-        llenar.llenarGridRenovaciones(Consultas.POLIZAS_RENOVADAS(Convert.ToInt32(Session["CodigoGestor"]), Convert.ToInt32(ddlEstado.SelectedValue), "", ""), GridElRoble);
-    }
-
-    public void ValidarCorreo(String correo)
+    public void ValidarCorreo(String correo, int id)
     {
         EmailValidator emailValidator = new EmailValidator();
         EmailValidationResult resultado;
-        int id = Convert.ToInt32(GridElRoble.SelectedRow.Cells[1].Text);
         var registro = DBRenovaciones.renovaciones_polizas.Find(id);
         cuerpo = "Saludos Estimad@ asegurado </br>" +
             "<div style=\"text-align: justify\">" +
@@ -71,28 +65,28 @@ public partial class Modulos_MdRenovaciones_Dashboard : System.Web.UI.Page
                 Correos.Notificacion(correo.Trim(), "Renovacion de poliza", cuerpo);
                 registro.estado = 3;
                 DBRenovaciones.SaveChanges();
-                llenar.llenarGridRenovaciones(Consultas.POLIZAS_RENOVADAS(Convert.ToInt32(Session["CodigoGestor"]),2, "",""), GridElRoble);
+                llenarGrid();
                 break;
 
             case EmailValidationResult.MailboxUnavailable:
                 //Console.WriteLine("Email server replied there is no such mailbox");
                 registro.estado = 6;
                 DBRenovaciones.SaveChanges();
-                llenar.llenarGridRenovaciones(Consultas.POLIZAS_RENOVADAS(Convert.ToInt32(Session["CodigoGestor"]), 2, "", ""), GridElRoble);
+                llenarGrid();
                 break;
 
             case EmailValidationResult.MailboxStorageExceeded:
                 //Console.WriteLine("Mailbox overflow");
                 registro.estado = 6;
                 DBRenovaciones.SaveChanges();
-                llenar.llenarGridRenovaciones(Consultas.POLIZAS_RENOVADAS(Convert.ToInt32(Session["CodigoGestor"]), 2, "", ""), GridElRoble);
+                llenarGrid();
                 break;
 
             case EmailValidationResult.NoMailForDomain:
                 //Console.WriteLine("Emails are not configured for domain (no MX records)");
                 registro.estado = 6;
                 DBRenovaciones.SaveChanges();
-                llenar.llenarGridRenovaciones(Consultas.POLIZAS_RENOVADAS(Convert.ToInt32(Session["CodigoGestor"]), 2, "", ""), GridElRoble);
+                llenarGrid();
                 break;
         }
     }
@@ -100,5 +94,27 @@ public partial class Modulos_MdRenovaciones_Dashboard : System.Web.UI.Page
     protected void GridAllPolizas_SelectedIndexChanged(object sender, EventArgs e)
     {
 
+    }
+
+    protected void btnGuardarCambios_Click(object sender, EventArgs e)
+    {
+        foreach (GridViewRow row in GridElRoble.Rows)
+        {
+            CheckBox chkEnviar = (CheckBox)row.FindControl("chkEnviar");
+            int id = Convert.ToInt32(Convert.ToString(row.Cells[1].Text));
+            string correo = Convert.ToString(row.Cells[8].Text);
+
+            if (chkEnviar.Checked)
+            {
+                try
+                {
+                    this.ValidarCorreo(correo, id);
+                }
+                catch (Exception ex)
+                {
+                    Utils.ShowMessage(this.Page, "No se a podido renovar " + ex.Message, "Excelente", "success");
+                }
+            }
+        }
     }
 }
