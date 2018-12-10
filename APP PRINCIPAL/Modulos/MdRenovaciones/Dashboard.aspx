@@ -17,30 +17,15 @@
         <div class="tab-content">
             <div role="tabpanel" class="tab-pane active" id="elRoble">
                 <div class="row">
-                    <div class="form-group col-md-2 col-lg-2 col-sm-12" style="padding-top: 10px;">
-                        <label>Estado:</label>
-                        <asp:DropDownList CssClass="form-control" ID="ddlEstado" Style="width: 100%" Height="34px" runat="server" AutoPostBack="true" OnSelectedIndexChanged="DDLTipo_SelectedIndexChanged">
-                            <asp:ListItem Value="2">Asignadas</asp:ListItem>
-                            <asp:ListItem Value="3">Enviadas</asp:ListItem>
-                            <asp:ListItem Value="4">Renovadas</asp:ListItem>
-                            <asp:ListItem Value="5">Canceladas</asp:ListItem>
-                            <asp:ListItem Value="6">No Enviadas</asp:ListItem>
-                            <asp:ListItem Value="7">Facturadas</asp:ListItem>
-                        </asp:DropDownList>
-                    </div>
-                    <div class="form-group  col-sm-12 col-md-6 col-lg-2"  style="padding-top: 10px;">
-                        <label>Fecha Inicio:</label>
-                        <asp:TextBox ID="txtFechaInicio" Height="34px" type="date" CssClass="form-control" Style="width: 100%" placeholder="Escriba su busqueda" runat="server"></asp:TextBox>
-                    </div>
-                    <div class="form-group  col-sm-12 col-md-6 col-lg-2"  style="padding-top: 10px;">
-                        <label>Fecha Fin:</label>
-                        <asp:TextBox ID="txtFechaFin" type="date" Height="34px" CssClass="form-control" Style="width: 100%" placeholder="Escriba su busqueda" runat="server"></asp:TextBox>
-                    </div>
-                    <div class="scrolling-table-container col-lg-12 col-md-12" style="padding: 0px;">
-                        <asp:GridView ID="GridElRoble" OnSelectedIndexChanged="GridElRoble_SelectedIndexChanged" CssClass="table bs-table table-responsive" runat="server" AutoGenerateColumns="True" ForeColor="#333333" GridLines="None">
+                    <div class="scrolling-table-container col-lg-12 col-md-12" style="padding: 15px;">
+                        <asp:GridView ID="GridElRoble" CssClass="table bs-table table-responsive" runat="server" AutoGenerateColumns="True" ForeColor="#333333" GridLines="None">
                             <Columns>
-                                <asp:CommandField ShowSelectButton="True" SelectText="Seleccionar" />
-                            </Columns>
+                            <asp:TemplateField HeaderText="Seleccionar">
+                                <ItemTemplate>
+                                    <asp:CheckBox ID="chkEnviar" runat="server"/> 
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                        </Columns>
                             <HeaderStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" Wrap="false" />
                             <PagerStyle BackColor="#131B4D" ForeColor="White" HorizontalAlign="Center" />
                             <RowStyle BackColor="White" Wrap="false" />
@@ -65,6 +50,17 @@
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+
+     <%-- botones circulares con las opciones multiples --%>
+    <div id="container-floating">
+        <div class="nd1 nds" data-toggle="tooltip" data-placement="left" data-original-title="Edoardo@live.it">
+            <asp:LinkButton ID="btnGuardarCambios" title="Buscar Datos" CssClass="letter" autopostback="true" runat="server" OnClick="btnGuardarCambios_Click"><i class="fa fa-save" aria-hidden="true"></i></asp:LinkButton>
+        </div>
+        <div id="floating-button" data-toggle="tooltip" data-placement="left" data-original-title="Create" onclick="newmail()">
+            <p class="plus">+</p>
+            <img class="edit" src="https://ssl.gstatic.com/bt/C3341AA7A1A076756462EE2E5CD71C11/1x/bt_compose2_1x.png">
         </div>
     </div>
 </asp:Content>
