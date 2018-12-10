@@ -45,9 +45,11 @@ public partial class Modulos_MdRenovaciones_Estados_Enviadas : System.Web.UI.Pag
     {
         foreach (GridViewRow row in GridEnviadas.Rows)
         {
-            CheckBox checkAsig = (CheckBox)row.FindControl("checkAsignar");
+            CheckBox chkRenovar = (CheckBox)row.FindControl("chkRenovar");
+            CheckBox chkCancelar = (CheckBox)row.FindControl("chkCancelar");
             int id = Convert.ToInt32(Convert.ToString(row.Cells[1].Text));
-            if (checkAsig.Checked)
+
+            if (chkRenovar.Checked)
             {
                 try
                 {
@@ -58,9 +60,26 @@ public partial class Modulos_MdRenovaciones_Estados_Enviadas : System.Web.UI.Pag
                 }
                 catch (Exception ex)
                 {
-                    Utils.ShowMessage(this.Page, "No se a podido asigar el reclamo" + ex.Message, "Excelente", "success");
+                    Utils.ShowMessage(this.Page, "No se a podido renovar " + ex.Message, "Excelente", "success");
                 }
             }
+
+            if (chkCancelar.Checked)
+            {
+                try
+                {
+                    var poliza = DB.renovaciones_polizas.Find(id);
+                    poliza.estado = 5;
+                    DB.SaveChanges();
+                    Utils.ShowMessage(this.Page, "Polizas renovadas exitosamente", "Excelente", "success");
+                }
+                catch (Exception ex)
+                {
+                    Utils.ShowMessage(this.Page, "No se a podido renovar " + ex.Message, "Excelente", "success");
+                }
+            }
+
+
         }
         llenarGrid();
     }

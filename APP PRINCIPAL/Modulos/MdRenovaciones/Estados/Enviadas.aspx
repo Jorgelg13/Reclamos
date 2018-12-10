@@ -18,7 +18,8 @@
                         <Columns>
                             <asp:TemplateField HeaderText="Seleccionar">
                                 <ItemTemplate>
-                                    <asp:CheckBox ID="checkAsignar" runat="server" />
+                                    <asp:CheckBox ID="chkCancelar" runat="server" Text="Cancelar"/> 
+                                    <asp:CheckBox ID="chkRenovar" runat="server"  Text="Renovar"/> 
                                 </ItemTemplate>
                             </asp:TemplateField>
                         </Columns>

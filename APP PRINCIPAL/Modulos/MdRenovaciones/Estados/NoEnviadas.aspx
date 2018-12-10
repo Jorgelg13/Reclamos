@@ -14,9 +14,13 @@
                     <asp:TextBox ID="txtFechaFin" type="date" Height="34px" CssClass="form-control" Style="width: 100%" runat="server"></asp:TextBox>
                 </div>
                 <div class="scrolling-table-container col-lg-12 col-md-12" style="padding: 0px;">
-                    <asp:GridView ID="GridNoEnviadas" OnSelectedIndexChanged="GridNoEnviadas_SelectedIndexChanged" CssClass="table bs-table table-responsive" runat="server" AutoGenerateColumns="True" ForeColor="#333333" GridLines="None">
+                    <asp:GridView ID="GridNoEnviadas" CssClass="table bs-table table-responsive" runat="server" AutoGenerateColumns="True" ForeColor="#333333" GridLines="None">
                         <Columns>
-                            <asp:CommandField ShowSelectButton="True" SelectText="Seleccionar" />
+                            <asp:TemplateField HeaderText="Seleccionar">
+                                <ItemTemplate>
+                                    <asp:CheckBox ID="checkAsignar" runat="server" />
+                                </ItemTemplate>
+                            </asp:TemplateField>
                         </Columns>
                         <HeaderStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" Wrap="false" />
                         <PagerStyle BackColor="#131B4D" ForeColor="White" HorizontalAlign="Center" />
@@ -37,6 +41,9 @@
         </div>
         <div class="nd1 nds" data-toggle="tooltip" data-placement="left" data-original-title="Edoardo@live.it">
             <asp:LinkButton ID="btnGenerarTabla" title="Buscar Datos" CssClass="letter" autopostback="true" runat="server" OnClick="btnGenerarTabla_Click"><i class="fa fa-table" aria-hidden="true"></i></asp:LinkButton>
+        </div>
+         <div class="nd1 nds" data-toggle="tooltip" data-placement="left" data-original-title="Edoardo@live.it">
+            <asp:LinkButton ID="btnGuardarCambios" title="Buscar Datos" CssClass="letter" autopostback="true" runat="server" OnClick="btnGuardarCambios_Click"><i class="fa fa-save" aria-hidden="true"></i></asp:LinkButton>
         </div>
         <div id="floating-button" data-toggle="tooltip" data-placement="left" data-original-title="Create" onclick="newmail()">
             <p class="plus">+</p>
