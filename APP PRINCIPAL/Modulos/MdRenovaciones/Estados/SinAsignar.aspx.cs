@@ -92,12 +92,16 @@ public partial class Modulos_MdRenovaciones_Estados_SinAsignar : System.Web.UI.P
             DB.SaveChanges();
             llenarGrid();
             Utils.ShowMessage(this.Page, "Registro actualizado y asignado con exito","Excelente..","success");
-
         }
 
         catch(Exception ex)
         {
             Utils.ShowMessage(this.Page, "No se a podido actualizar el registro " + ex.Message, "Error..", "error");
         }
+    }
+
+    protected void GridSinAsignar_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        Guardar.Enabled = true;
     }
 }

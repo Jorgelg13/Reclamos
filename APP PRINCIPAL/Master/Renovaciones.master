@@ -78,14 +78,14 @@
                                 <li><a href="/Modulos/MdRenovaciones/Estados/SinAsignar.aspx">Renovaciones Sin Asignar</a></li>
                             </ul>
                         </li>
-                        <li class="dropdown">
+                       <%-- <li class="dropdown">
                             <a href="#" class="dropdown-toggle fa fa-file-excel-o" style="font-size: 16px;" data-toggle="dropdown" role="button">Exportaciones <span class="caret"></span></a>
                             <ul class="dropdown-menu">
                                 <li><a href="/Modulos/MdReclamos/wbFrmReclamosMedicos.aspx">Renovaciones aprovadas</a></li>
                                 <li><a href="/Modulos/MdReclamos/wbFrmReclamosMedicos.aspx">Renovaciones rechazadas</a></li>
                                 <li><a href="/Modulos/MdReclamos/wbFrmReclamosMedicos.aspx">Requerimientos de pago</a></li>
                             </ul>
-                        </li>
+                        </li>--%>
                     </ul>
                 </div>
             </div>

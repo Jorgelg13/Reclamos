@@ -17,7 +17,7 @@
                         <asp:TextBox ID="txtFechaFin" type="date" Height="34px" CssClass="form-control" Style="width: 100%" runat="server"></asp:TextBox>
                     </div>
                     <div class="scrolling-table-container col-lg-12 col-md-12" style="padding: 0px;">
-                        <asp:GridView ID="GridSinAsignar" CssClass="table bs-table table-responsive" runat="server" AutoGenerateColumns="True" ForeColor="#333333" GridLines="None">
+                        <asp:GridView ID="GridSinAsignar" CssClass="table bs-table table-responsive" OnSelectedIndexChanged="GridSinAsignar_SelectedIndexChanged" runat="server" AutoGenerateColumns="True" ForeColor="#333333" GridLines="None">
                             <Columns>
                                 <asp:CommandField ShowSelectButton="True" SelectText="Asignar" />
                             </Columns>
@@ -55,7 +55,7 @@
                         <asp:TextBox runat="server" ID="txtVigfacs" Style="width: 100%" autocomplete="off" CssClass="form-control" type="date"></asp:TextBox>
                     </div>
                     <div class="col-md-2">
-                        <asp:LinkButton runat="server" ID="Guardar" OnClick="Guardar_Click" ToolTip="Guardar y Asignar" Style="font-size: 40px; text-align: center;"><i class="fa fa-floppy-o"></i></asp:LinkButton>
+                        <asp:LinkButton runat="server" ID="Guardar" Enabled="false" OnClick="Guardar_Click" ToolTip="Guardar y Asignar" Style="font-size: 40px; text-align: center;"><i class="fa fa-floppy-o"></i></asp:LinkButton>
                     </div>
                 </div>
             </div>
