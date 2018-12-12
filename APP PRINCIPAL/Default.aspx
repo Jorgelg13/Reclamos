@@ -51,12 +51,12 @@
          <div class="col-md-3 col-lg-3" style="height:250px;">
             <div class="panel panel-info">
                 <div class="panel-heading">
-                    <p style="text-align: center; font-size: 16px;"><b>Control Mensajeria</b></p>
+                    <p style="text-align: center; font-size: 16px;"><b>Control De Renovaciones</b></p>
                 </div>
                 <div class="panel-body">
-                    <a href="#" title="Control de mensajeria" style="font-size: 80px;"><i class="fa fa-envelope-o"></i></a>
+                    <a href="/Modulos/MdRenovaciones/Dashboard.aspx" title="Control De Renovaciones" style="font-size: 80px;"><i class="fa fa-retweet"></i></a>
                     <p style="text-align: center">
-                       <b>Control De Mensajeria</b>
+                       <b>Control De Renovaciones</b>
                     </p>
                 </div>
             </div>

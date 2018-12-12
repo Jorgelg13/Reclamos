@@ -22,7 +22,7 @@
                             <Columns>
                             <asp:TemplateField HeaderText="Seleccionar">
                                 <ItemTemplate>
-                                    <asp:CheckBox ID="chEnviar" Checked="false" runat="server" Text="enviar"/> 
+                                    <asp:CheckBox ID="chEnviar" Checked="false" runat="server" Text="Enviar"/> 
                                 </ItemTemplate>
                             </asp:TemplateField>
                         </Columns>
