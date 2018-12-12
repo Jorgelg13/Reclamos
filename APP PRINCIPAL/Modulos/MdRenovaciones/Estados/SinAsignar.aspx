@@ -1,7 +1,9 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master/Renovaciones.master" AutoEventWireup="true" CodeFile="NoEnviadas.aspx.cs" Inherits="Modulos_MdRenovaciones_Estados_NoEnviadas" EnableEventValidation="false" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master/Renovaciones.master" AutoEventWireup="true" CodeFile="SinAsignar.aspx.cs" Inherits="Modulos_MdRenovaciones_Estados_SinAsignar" %>
 
-<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
-    <div class="container-fluid">
+<asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
+      <div class="container-fluid">
         <div class="col-lg-9 col-md-9 col-sm-12">
             <div class="panel panel-info">
                 <div class="panel-heading"><b>Polizas No Enviadas</b></div>
@@ -15,9 +17,9 @@
                         <asp:TextBox ID="txtFechaFin" type="date" Height="34px" CssClass="form-control" Style="width: 100%" runat="server"></asp:TextBox>
                     </div>
                     <div class="scrolling-table-container col-lg-12 col-md-12" style="padding: 0px;">
-                        <asp:GridView ID="GridNoEnviadas" CssClass="table bs-table table-responsive" OnSelectedIndexChanged="GridNoEnviadas_SelectedIndexChanged" runat="server" AutoGenerateColumns="True" ForeColor="#333333" GridLines="None">
+                        <asp:GridView ID="GridSinAsignar" CssClass="table bs-table table-responsive" runat="server" AutoGenerateColumns="True" ForeColor="#333333" GridLines="None">
                             <Columns>
-                                <asp:CommandField ShowSelectButton="True" SelectText="Editar" />
+                                <asp:CommandField ShowSelectButton="True" SelectText="Asignar" />
                             </Columns>
                             <HeaderStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" Wrap="false" />
                             <PagerStyle BackColor="#131B4D" ForeColor="White" HorizontalAlign="Center" />
@@ -36,10 +38,24 @@
                 <div class="panel-body">
                     <br />
                     <div class="form-group col-sm-12 col-md-12 col-lg-12">
+                         <label>Asignar a Ejecutivo</label>
+                        <asp:DropDownList CssClass="form-control" ID="ddlEjecutivo" Style="width: 100%" Height="34px" runat="server">
+                        </asp:DropDownList>
+                    </div>
+                     <div class="form-group col-sm-12 col-md-12 col-lg-12">
+                         <label>Correo Cliente</label>
                         <asp:TextBox runat="server" ID="txtCorreo" Style="width: 100%" autocomplete="off" CssClass="form-control" placeholder="Correo Electronico"></asp:TextBox>
                     </div>
+                     <div class="form-group col-sm-12 col-md-12 col-lg-12">
+                         <label>Poliza Unity</label>
+                        <asp:TextBox runat="server" ID="txtPolizaUnity" Style="width: 100%" autocomplete="off" CssClass="form-control" placeholder="Poliza Unity"></asp:TextBox>
+                    </div>
+                      <div class="form-group col-sm-12 col-md-12 col-lg-12">
+                        <label>Vigencia Final ACS</label>
+                        <asp:TextBox runat="server" ID="txtVigfacs" Style="width: 100%" autocomplete="off" CssClass="form-control" type="date"></asp:TextBox>
+                    </div>
                     <div class="col-md-2">
-                        <asp:LinkButton runat="server" Enabled="false" ID="Guardar" OnClick="Guardar_Click" ToolTip="Guardar Correo" Style="font-size: 40px; text-align: center;"><i class="fa fa-floppy-o"></i></asp:LinkButton>
+                        <asp:LinkButton runat="server" ID="Guardar" OnClick="Guardar_Click" ToolTip="Guardar y Asignar" Style="font-size: 40px; text-align: center;"><i class="fa fa-floppy-o"></i></asp:LinkButton>
                     </div>
                 </div>
             </div>
@@ -48,13 +64,13 @@
     <%-- botones circulares con las opciones multiples --%>
     <div id="container-floating">
         <div class="nd4 nds" data-toggle="tooltip" data-placement="left" data-original-title="Simone">
-            <asp:LinkButton ID="linkSalir" title="Salir" CssClass="letter" runat="server"><i class="fa fa-times" aria-hidden="true"></i></asp:LinkButton>
+            <asp:LinkButton ID="linkSalir" title="Salir" CssClass="letter" runat="server"><i class="fa fa-times"></i></asp:LinkButton>
         </div>
         <div class="nd3 nds" data-toggle="tooltip" data-placement="left" data-original-title="contract@gmail.com">
-            <asp:LinkButton ID="btnExportar" title="Exportar a excel" CssClass="letter" runat="server" OnClick="btnExportar_Click"><i class="fa fa-file-excel-o" aria-hidden="true"></i></asp:LinkButton>
+            <asp:LinkButton ID="btnExportar" OnClick="btnExportar_Click" title="Exportar a excel" CssClass="letter" runat="server"><i class="fa fa-file-excel-o" ></i></asp:LinkButton>
         </div>
         <div class="nd1 nds" data-toggle="tooltip" data-placement="left" data-original-title="Edoardo@live.it">
-            <asp:LinkButton ID="btnGenerarTabla" title="Buscar Datos" CssClass="letter" autopostback="true" runat="server" OnClick="btnGenerarTabla_Click"><i class="fa fa-table" aria-hidden="true"></i></asp:LinkButton>
+            <asp:LinkButton ID="btnGenerarTabla" OnClick="btnGenerarTabla_Click" title="Buscar Datos" CssClass="letter" autopostback="true" runat="server"><i class="fa fa-table"></i></asp:LinkButton>
         </div>
         <div id="floating-button" data-toggle="tooltip" data-placement="left" data-original-title="Create" onclick="newmail()">
             <p class="plus">+</p>
@@ -62,6 +78,6 @@
         </div>
     </div>
 </asp:Content>
-<asp:Content ID="Content3" ContentPlaceHolderID="contentJS" runat="Server">
+<asp:Content ID="Content3" ContentPlaceHolderID="contentJS" Runat="Server">
 </asp:Content>
 
