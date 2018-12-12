@@ -47,6 +47,7 @@ namespace Renovaciones
         public string descripcion_ramo { get; set; }
         public Nullable<int> cod_gestor { get; set; }
         public string gestor { get; set; }
+        public string correo_gestor { get; set; }
         public Nullable<short> cia { get; set; }
         public string aseguradora { get; set; }
         public string telefono { get; set; }
@@ -152,6 +153,7 @@ namespace Renovaciones
         public string telefono_cliente { get; set; }
         public string poliza_unity { get; set; }
         public Nullable<System.DateTime> fecha_registro { get; set; }
+        public string vigf_acs { get; set; }
     
         public virtual estados estados { get; set; }
         public virtual ICollection<renovaciones_log> renovaciones_log { get; set; }

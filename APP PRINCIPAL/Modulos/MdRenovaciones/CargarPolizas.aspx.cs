@@ -103,13 +103,15 @@ public partial class Modulos_MdRenovaciones_CargarPolizas : System.Web.UI.Page
                     insertar.pasaporte = row.Cells[61].Text;
                     insertar.nit = row.Cells[62].Text;
                     insertar.estado = 1;
-
                     DBRenovaciones.renovaciones_polizas.Add(insertar);
                     DBRenovaciones.SaveChanges();
+                    row.CssClass = "success";
+                    Utils.ShowMessage(this.Page, "Datos Cargados con exito", "Excelente", "success");
                 }
 
                 catch (Exception ex)
                 {
+                    row.CssClass = "danger";
                     Utils.ShowMessage(this.Page, "No se pudieron insertar los datos " + ex.Message.ToString(), "ERROR", "error");
                 }
             }
@@ -130,10 +132,12 @@ public partial class Modulos_MdRenovaciones_CargarPolizas : System.Web.UI.Page
                     requerimiento.prima_total = row.Cells[6].Text;
                     DBRenovaciones.requerimientos.Add(requerimiento);
                     DBRenovaciones.SaveChanges();
+                    row.CssClass = "success";
                 }
 
                 catch(Exception ex)
                 {
+                    row.CssClass = "danger";
                     Utils.ShowMessage(this.Page, "No se pudieron insertar los datos " + ex.Message.ToString(), "ERROR", "error");
                 }
             }

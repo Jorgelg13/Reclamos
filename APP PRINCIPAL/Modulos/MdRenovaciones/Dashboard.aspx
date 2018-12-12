@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master/Renovaciones.master" AutoEventWireup="true" CodeFile="Dashboard.aspx.cs" Inherits="Modulos_MdRenovaciones_Dashboard" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master/Renovaciones.master" AutoEventWireup="true" CodeFile="Dashboard.aspx.cs" Inherits="Modulos_MdRenovaciones_Dashboard" EnableEventValidation="false" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
 </asp:Content>
@@ -22,7 +22,7 @@
                             <Columns>
                             <asp:TemplateField HeaderText="Seleccionar">
                                 <ItemTemplate>
-                                    <asp:CheckBox ID="chkEnviar" runat="server"/> 
+                                    <asp:CheckBox ID="chEnviar" Checked="false" runat="server" Text="enviar"/> 
                                 </ItemTemplate>
                             </asp:TemplateField>
                         </Columns>
@@ -52,11 +52,10 @@
             </div>
         </div>
     </div>
-
      <%-- botones circulares con las opciones multiples --%>
     <div id="container-floating">
         <div class="nd1 nds" data-toggle="tooltip" data-placement="left" data-original-title="Edoardo@live.it">
-            <asp:LinkButton ID="btnGuardarCambios" title="Buscar Datos" CssClass="letter" autopostback="true" runat="server" OnClick="btnGuardarCambios_Click"><i class="fa fa-save" aria-hidden="true"></i></asp:LinkButton>
+            <asp:LinkButton ID="btnGuardarCambios" title="Enviar" CssClass="letter" autopostback="true" runat="server" OnClick="btnGuardarCambios_Click"><i class="fa fa-envelope-o" aria-hidden="true"></i></asp:LinkButton>
         </div>
         <div id="floating-button" data-toggle="tooltip" data-placement="left" data-original-title="Create" onclick="newmail()">
             <p class="plus">+</p>
@@ -64,4 +63,3 @@
         </div>
     </div>
 </asp:Content>
-

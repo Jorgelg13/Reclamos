@@ -1,32 +1,46 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master/Renovaciones.master" AutoEventWireup="true" CodeFile="NoEnviadas.aspx.cs" Inherits="Modulos_MdRenovaciones_Estados_NoEnviadas"  EnableEventValidation="false" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master/Renovaciones.master" AutoEventWireup="true" CodeFile="NoEnviadas.aspx.cs" Inherits="Modulos_MdRenovaciones_Estados_NoEnviadas" EnableEventValidation="false" %>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <div class="container-fluid">
-        <div class="panel panel-info">
-            <div class="panel-heading"><b>Polizas No Enviadas</b></div>
-            <div class="panel-body">
-                <div class="form-group  col-sm-12 col-md-6 col-lg-2" style="padding-top: 10px;">
-                    <label>Desde:</label>
-                    <asp:TextBox ID="txtFechaInicio" Height="34px" type="date" CssClass="form-control" Style="width: 100%" runat="server"></asp:TextBox>
+        <div class="col-lg-9 col-md-9 col-sm-12">
+            <div class="panel panel-info">
+                <div class="panel-heading"><b>Polizas No Enviadas</b></div>
+                <div class="panel-body">
+                    <div class="form-group  col-sm-12 col-md-6 col-lg-2" style="padding-top: 10px;">
+                        <label>Desde:</label>
+                        <asp:TextBox ID="txtFechaInicio" Height="34px" type="date" CssClass="form-control" Style="width: 100%" runat="server"></asp:TextBox>
+                    </div>
+                    <div class="form-group  col-sm-12 col-md-6 col-lg-2" style="padding-top: 10px;">
+                        <label>Hasta:</label>
+                        <asp:TextBox ID="txtFechaFin" type="date" Height="34px" CssClass="form-control" Style="width: 100%" runat="server"></asp:TextBox>
+                    </div>
+                    <div class="scrolling-table-container col-lg-12 col-md-12" style="padding: 0px;">
+                        <asp:GridView ID="GridNoEnviadas" CssClass="table bs-table table-responsive" OnSelectedIndexChanged="GridNoEnviadas_SelectedIndexChanged" runat="server" AutoGenerateColumns="True" ForeColor="#333333" GridLines="None">
+                            <Columns>
+                                <asp:CommandField ShowSelectButton="True" SelectText="Editar" />
+                            </Columns>
+                            <HeaderStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" Wrap="false" />
+                            <PagerStyle BackColor="#131B4D" ForeColor="White" HorizontalAlign="Center" />
+                            <RowStyle BackColor="White" Wrap="false" />
+                            <SelectedRowStyle BackColor="#D1DDF1" Font-Bold="True" ForeColor="#333333" />
+                        </asp:GridView>
+                    </div>
                 </div>
-                <div class="form-group  col-sm-12 col-md-6 col-lg-2" style="padding-top: 10px;">
-                    <label>Hasta:</label>
-                    <asp:TextBox ID="txtFechaFin" type="date" Height="34px" CssClass="form-control" Style="width: 100%" runat="server"></asp:TextBox>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-12">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <h3 class="panel-title"><b style="font-size: 16px;">Actualizar Correo</b></h3>
                 </div>
-                <div class="scrolling-table-container col-lg-12 col-md-12" style="padding: 0px;">
-                    <asp:GridView ID="GridNoEnviadas" CssClass="table bs-table table-responsive" runat="server" AutoGenerateColumns="True" ForeColor="#333333" GridLines="None">
-                        <Columns>
-                            <asp:TemplateField HeaderText="Seleccionar">
-                                <ItemTemplate>
-                                    <asp:CheckBox ID="checkAsignar" runat="server" />
-                                </ItemTemplate>
-                            </asp:TemplateField>
-                        </Columns>
-                        <HeaderStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" Wrap="false" />
-                        <PagerStyle BackColor="#131B4D" ForeColor="White" HorizontalAlign="Center" />
-                        <RowStyle BackColor="White" Wrap="false" />
-                        <SelectedRowStyle BackColor="#D1DDF1" Font-Bold="True" ForeColor="#333333" />
-                    </asp:GridView>
+                <div class="panel-body">
+                    <br />
+                    <div class="form-group col-sm-12 col-md-12 col-lg-12">
+                        <asp:TextBox runat="server" ID="txtCorreo" Style="width: 100%" autocomplete="off" CssClass="form-control" placeholder="Correo Electronico"></asp:TextBox>
+                    </div>
+                    <div class="col-md-2">
+                        <asp:LinkButton runat="server" Enabled="false" ID="Guardar" OnClick="Guardar_Click" ToolTip="Guardar Correo" Style="font-size: 40px; text-align: center;"><i class="fa fa-floppy-o"></i></asp:LinkButton>
+                    </div>
                 </div>
             </div>
         </div>
