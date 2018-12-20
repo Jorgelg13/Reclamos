@@ -80,9 +80,12 @@
 
                 <div class="sl-slide bg-4" data-orientation="vertical" data-slice1-rotation="-5" data-slice2-rotation="25" data-slice1-scale="2" data-slice2-scale="1">
                     <div class="sl-slide-inner">
-                        <h2 class="alto">Si desea dejenos sus comentarios..</h2>
                         <textarea id="txtComentario" class="centrar-text" name="textarea" rows="5" cols="20" placeholder="Dejenos sus comentarios"></textarea>
-                        <blockquote><p>Lideres a nivel Centro Americano en corredores de seguros</p><cite>Unity Promotores</cite></blockquote>
+                        <div id="contacto" style="display:none">
+                            <input type="number" id="txtTelefono" class="centrar-telefono" placeholder="Telefono" />
+                            <input type="text" id="txtNombre" class="centrar-nombre" placeholder="Nombre Cliente" />
+                        </div>
+                        <blockquote style="height: 143px;"><p>Lideres a nivel Centro Americano en corredores de seguros</p><cite>Unity Promotores</cite></blockquote>
                         <button type="submit" class="centrar-boton envio" id="enviar">Enviar</button>
                     </div>
                 </div>
@@ -94,7 +97,8 @@
                         <button type="submit" class="centrar-boton nueva-encuesta">Nueva</button>
                     </div>
                 </div>
-                <!----------------------- pregunta numero uno de la encuesta ------------------->>
+
+                <!----------------------- pregunta numero uno de la encuesta ------------------->
                 <div class="sl-slide bg-6" data-orientation="vertical" data-slice1-rotation="10" data-slice2-rotation="-15" data-slice1-scale="1.5" data-slice2-scale="1.5">
                     <div class="sl-slide-inner" id="p1-1-6" style="display:none">
                         <h2>¿Por qué razones NO estaría dispuesto a recomendar a Unity Promotores?</h2>
@@ -301,6 +305,9 @@
             }
         })(jQuery);
 
+        var PREGUNTA1 = 0;
+        var PREGUNTA2 = 0;
+        var PREGUNTA3 = 0;
         var pregunta1 = 0;
         var clasificacion1 = '';
         var comentario1 = '';
@@ -397,6 +404,7 @@
 
                         //------------------------------  funciones para cambiar al alegir una marcacion de la pregunta numero 2 ---------------------------------
                         $('.preguntaDos').on('click', function (event) {
+
                             pregunta2 = $(this).attr('data-value');
                             var $dot = $(this);
                             if (pregunta2 == "1" || pregunta2 == "2" || pregunta2 == "3" || pregunta2 == "4" || pregunta2 == "5" || pregunta2 == "6") {
@@ -493,21 +501,47 @@
 
                         //seleccionar opcion de pregunta tres
                         $('#p3-detractores').change(function () {
+
+                            PREGUNTA1 = parseInt(pregunta1);
+                            PREGUNTA2 = parseInt(pregunta2);
+                            PREGUNTA3 = parseInt(pregunta3);
+
                             clasificacion3 = $('#p3-detractores').val();
                             comentario3 = $('#p3-detractores option:selected').text();
-                            slitslider.jump(4);
+                            if (PREGUNTA1 <=8 || PREGUNTA2 <=8 || PREGUNTA3 <=8 )  {
+                                $('#contacto').css("display", "");
+                                $('.envio').css("bottom", "54%");
+                            }
+                             slitslider.jump(4);
                             return false;
                         });
                         $('#p3-neutros').change(function () {
+                            PREGUNTA1 = parseInt(pregunta1);
+                            PREGUNTA2 = parseInt(pregunta2);
+                            PREGUNTA3 = parseInt(pregunta3);
+
                             clasificacion3 = $('#p3-neutros').val();
                             comentario3 = $('#p3-neutros option:selected').text();
-                            slitslider.jump(4);
+                            if (PREGUNTA1 <= 8 || PREGUNTA2 <= 8 || PREGUNTA3 <= 8) {
+                                $('#contacto').css("display", "");
+                                $('.envio').css("bottom", "54%");
+                            }
+                                slitslider.jump(4);
                             return false;
                         });
                         $('#p3-promotores').change(function () {
+                            PREGUNTA1 = parseInt(pregunta1);
+                            PREGUNTA2 = parseInt(pregunta2);
+                            PREGUNTA3 = parseInt(pregunta3);
+
                             clasificacion3 = $('#p3-promotores').val();
                             comentario3 = $('#p3-promotores option:selected').text();
-                            slitslider.jump(4);
+                            if (PREGUNTA1 <= 8 || PREGUNTA2 <= 8 || PREGUNTA3 <= 8) {
+                                $('#contacto').css("display", "");
+                                $('.envio').css("bottom", "54%");
+                            }
+                                slitslider.jump(4);
+
                             return false;
                         });
 
@@ -562,7 +596,9 @@
                     "pregunta3": pregunta3,
                     "clasificacion3": clasificacion3,
                     "comentario3": comentario3,
-                    "comentario": $('#txtComentario').val()
+                    "comentario": $('#txtComentario').val(),
+                    "telefono": $('#txtTelefono').val(),
+                    "nombre": $('#txtNombre').val()
                 },
             ).done(function () {
                 setTimeout(
