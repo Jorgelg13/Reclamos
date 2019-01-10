@@ -39,7 +39,7 @@
                         <asp:TextBox runat="server" ID="txtCorreo" Style="width: 100%" autocomplete="off" CssClass="form-control" placeholder="Correo Electronico"></asp:TextBox>
                     </div>
                     <div class="col-md-2">
-                        <asp:LinkButton runat="server" Enabled="false" ID="Guardar" OnClick="Guardar_Click" ToolTip="Guardar Correo" Style="font-size: 40px; text-align: center;"><i class="fa fa-floppy-o"></i></asp:LinkButton>
+                        <a title="Actualizar y enviar" data-toggle="modal" role="button" Style="font-size: 40px"; data-target="#ModalCorreo"><i class="fa fa-floppy-o"></i></a>
                     </div>
                 </div>
             </div>
@@ -54,14 +54,37 @@
             <asp:LinkButton ID="btnGenerarTabla" title="Buscar Datos" CssClass="letter" autopostback="true" runat="server" OnClick="btnGenerarTabla_Click"><i class="fa fa-table" aria-hidden="true"></i></asp:LinkButton>
         </div>
          <div class="nd1 nds" data-toggle="tooltip" data-placement="left" data-original-title="Edoardo@live.it">
-            <asp:LinkButton ID="btnGuardarCambios" title="Guardar" CssClass="letter" autopostback="true" runat="server" OnClick="btnGuardarCambios_Click"><i class="fa fa-save" aria-hidden="true"></i></asp:LinkButton>
+            <asp:LinkButton ID="btnGuardarCambios" title="Guardar" CssClass="letter" autopostback="true" runat="server"><i class="fa fa-save" aria-hidden="true"></i></asp:LinkButton>
         </div>
         <div id="floating-button" data-toggle="tooltip" data-placement="left" data-original-title="Create" onclick="newmail()">
             <p class="plus">+</p>
             <img class="edit" src="https://ssl.gstatic.com/bt/C3341AA7A1A076756462EE2E5CD71C11/1x/bt_compose2_1x.png">
         </div>
     </div>
+      <%--------------------------  modal para enviar correos electronicos a los clientes ---------------------------------%>
+    <div class="modal fade" id="ModalCorreo" data-keyboard="false" data-backdrop="static" style="overflow-y:auto">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span>&times;</span></button>
+                    <h4 class="modal-title" id="imprimircarta"><b>Envio de correo electronico</b></h4>
+                </div>
+                <asp:TextBox  style="display:none" runat="server" ID="txtCuerpo"></asp:TextBox>
+                <div id="summernote" class="modal-body">
+                </div>
+                <asp:LinkButton ID="lnkGuardar" OnClick="lnkGuardar_Click" title="Enviar Correo" runat="server" Style="font-size:40px; padding-left:20px;"><i class="fa fa-envelope-o"></i></asp:LinkButton>
+            </div>
+        </div>
+    </div>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="contentJS" runat="Server">
+        <script>
+         $('#summernote').html($('#ContentPlaceHolder1_txtCuerpo').val());
+         $('#summernote').summernote();
+
+         $('.note-editable').keyup(function () { 
+             $('#<%=txtCuerpo.ClientID%>').val($('.note-editable').html());
+         });
+    </script>
 </asp:Content>
 
