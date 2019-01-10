@@ -1,0 +1,55 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Video Conferencia</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet" />
+    <link href="css/estilos.css" rel="stylesheet" />
+    <link href="css/slide.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="wrapper">
+        <nav id="sidebar">
+            <div class="sidebar-header">
+                <iframe src="http://52.34.115.100:9595/recepcion" id="frameVideo" width="100%" allow="geolocation;microphone;camera;midi;encrypted-media"></iframe>
+            </div>
+        </nav>
+        <div id="content" class="fondo">
+            <div class="container-fluid">
+                <div class="row">
+                    <div id="video" class="col-lg-12 d-flex align-items-center justify-content-center" style="text-align:center">
+                        <a id="sidebarCollapse" href="javascript:void(0)">
+                            <img src="img/face.png" class="sombra" title="iniciar una video llamada" />
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="js/jquery-3.1.1.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#sidebarCollapse').on('click', function () {
+                $('#sidebar').toggleClass('active');
+            });
+        });
+
+        setTimeout(() => {
+            $("#frameVideo").attr('style', 'height:' + (window.innerHeight - 36) + 'px');
+            $('#sidebar').toggleClass('active');
+            $("#video").attr('style', 'height:' + (window.innerHeight - 36) + 'px');
+
+        }, 500);
+
+        $('#sidebarCollapse').on('click', function (e) {
+            $("#frameVideo").attr('src', '');
+        });
+    </script>
+</body>
+
+</html>
