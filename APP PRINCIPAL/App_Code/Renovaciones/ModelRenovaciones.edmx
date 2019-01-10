@@ -120,6 +120,7 @@
           <Property Name="poliza_unity" Type="varchar" MaxLength="50" />
           <Property Name="fecha_registro" Type="datetime" />
           <Property Name="vigf_acs" Type="varchar" MaxLength="20" />
+          <Property Name="correo_gestor" Type="varchar" MaxLength="90" />
         </EntityType>
         <EntityType Name="requerimientos">
           <Key>
@@ -335,6 +336,7 @@
           <Property Name="poliza_unity" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="fecha_registro" Type="DateTime" Precision="3" />
           <Property Name="vigf_acs" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="correo_gestor" Type="String" MaxLength="90" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="estados" Relationship="RenovacionesModel.FK_polizas_estado" FromRole="renovaciones_polizas" ToRole="estados" />
           <NavigationProperty Name="renovaciones_log" Relationship="RenovacionesModel.FK_renovaciones_log_poliza" FromRole="renovaciones_polizas" ToRole="renovaciones_log" />
         </EntityType>
@@ -440,6 +442,7 @@
           <EntitySetMapping Name="renovaciones_polizas">
             <EntityTypeMapping TypeName="RenovacionesModel.renovaciones_polizas">
               <MappingFragment StoreEntitySet="renovaciones_polizas">
+                <ScalarProperty Name="correo_gestor" ColumnName="correo_gestor" />
                 <ScalarProperty Name="vigf_acs" ColumnName="vigf_acs" />
                 <ScalarProperty Name="fecha_registro" ColumnName="fecha_registro" />
                 <ScalarProperty Name="poliza_unity" ColumnName="poliza_unity" />

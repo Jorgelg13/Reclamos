@@ -10,6 +10,7 @@
     <link href="../css/estilos.css" rel="stylesheet" />
     <link href="../Scripts/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" />
     <link href="../css/toastr.min.css" rel="stylesheet" />
+    <link href="../css/summernote.css" rel="stylesheet" />
     <link rel="icon" href="favicon.ico" type="image/x-icon">
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
@@ -106,6 +107,7 @@
         <script type="text/javascript" src="<%= ResolveUrl("../Scripts/jquery.cookie.min.js") %>"></script>
         <script type="text/javascript" src="<%= ResolveUrl("../Scripts/toastr.min.js") %>"></script>
         <script type="text/javascript" src="<%= ResolveUrl("../Scripts/jQuery.print.min.js") %>"></script>
+        <script type="text/javascript" src="<%= ResolveUrl("../Scripts/summernote.min.js") %>"></script>
         <script type="text/javascript" src="<%= ResolveUrl("../Scripts/app.js") %>"></script>
         <script type='text/javascript'>
             $(window).on('load', function () {

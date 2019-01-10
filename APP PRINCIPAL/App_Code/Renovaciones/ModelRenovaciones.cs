@@ -154,6 +154,7 @@ namespace Renovaciones
         public string poliza_unity { get; set; }
         public Nullable<System.DateTime> fecha_registro { get; set; }
         public string vigf_acs { get; set; }
+        public string correo_gestor { get; set; }
     
         public virtual estados estados { get; set; }
         public virtual ICollection<renovaciones_log> renovaciones_log { get; set; }

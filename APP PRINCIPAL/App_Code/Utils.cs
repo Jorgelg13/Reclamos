@@ -669,4 +669,25 @@ public class Utils
         var codigo = DBReclamos.usuario.Where(US => US.nombre ==usuario).First();
         return Convert.ToInt32(codigo.numero_gestor);
     }
+
+    //procedimiento para insertar registro en el envio de correos automatico en el servidor 192.168.5.199
+    public static void EmailRenovacion(String procedimiento, String cliente, String cuerpo, String gestor)
+    {
+        try
+        {
+            conexionBD obj = new conexionBD();
+            DataTable dt = new DataTable();
+            SqlCommand comando = new SqlCommand(procedimiento, obj.ObtenerConexionSeguro());
+            comando.CommandType = CommandType.StoredProcedure;
+            comando.Parameters.AddWithValue("@emailCliente", cliente);
+            comando.Parameters.AddWithValue("@cuerpo", cuerpo);
+            comando.Parameters.AddWithValue("@correoGestor",gestor);
+            comando.ExecuteNonQuery();
+        }
+
+        catch (Exception ex)
+        {
+            throw ex;
+        }
+    }
 }
