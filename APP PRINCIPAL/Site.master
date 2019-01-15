@@ -125,6 +125,20 @@
                                         <li><a href="javascript:ventanaSecundaria('/pdf/Protocolos/ProtocoloColectivos.pdf')">Gastos medicos colectivos</a></li>
                                     </ul>
                                 </li>
+                                  <li class="dropdown-submenu">
+                                    <a tabindex="-1" href="#">Talleres</a>
+                                    <ul class="dropdown-menu">
+                                        <li class="dropdown-submenu"></li>
+                                        <li><a href="/pdf/Talleres/agromercantil.pdf" target="_blank">Agromercantil</a></li>
+                                        <li><a href="/pdf/Talleres/CHN.pdf" target="_blank">CHN</a></li>
+                                         <li><a href="/pdf/Talleres/AsesoresRoble.pdf" target="_blank">Asesores El Roble</a></li>
+                                         <li><a href="/pdf/Talleres/GYTCAPITAL.pdf" target="_blank">G&T Capital</a></li>
+                                         <li><a href="/pdf/Talleres/GYT.pdf" target="_blank">G&T</a></li>
+                                         <li><a href="/pdf/Talleres/ROBLE-RED-CAPITAL.pdf" target="_blank">Roble Red</a></li>
+                                         <li><a href="/pdf/Talleres/ROBLECAR-DEPARTAMENTALES.pdf" target="_blank">Roblecar Departamentales</a></li>
+                                         <li><a href="/pdf/Talleres/UNIVERSALES.pdf" target="_blank">Universales</a></li>
+                                    </ul>
+                                </li>
                                  <li class="dropdown-submenu">
                                     <a tabindex="-1" href="#">Contactos</a>
                                     <ul class="dropdown-menu">
@@ -143,9 +157,23 @@
                                     <a tabindex="-1" href="#">Copagos</a>
                                     <ul class="dropdown-menu">
                                         <li class="dropdown-submenu"></li>
-                                        <li><a href="/pdf/Copagos/Novartis.xlsx">Novartis</a></li>
+                                        <li><a href="/pdf/Copagos/NOVARTIS.pdf" target="_blank">Novartis</a></li>
+                                        <li><a href="/pdf/Copagos/RAYOVAC.pdf" target="_blank">Rayovac</a></li>
+                                        <li><a href="/pdf/Copagos/PALIGMED.pdf" target="_blank">Paligmed</a></li>
+                                        <li><a href="/pdf/Copagos/PITASA.pdf" target="_blank">Pitasa</a></li>
+                                        <li><a href="/pdf/Copagos/SIEMENS.pdf" target="_blank">Siemens</a></li>
+                                        <li><a href="/pdf/Copagos/SEALED.pdf" target="_blank">Sealed air</a></li>
+                                        <li><a href="/pdf/Copagos/AVIANCA.pdf" target="_blank">Avianca</a></li>
+                                        <li><a href="/pdf/Copagos/BCPE.pdf" target="_blank">BCPE</a></li>
+                                        <li><a href="/pdf/Copagos/ECOLAB.pdf" target="_blank">Ecolab</a></li>
+                                        <li><a href="/pdf/Copagos/GIVAUDAN.pdf" target="_blank">Givaudan</a></li>
+                                        <li><a href="/pdf/Copagos/JONESLANG.pdf" target="_blank">Jones Lang</a></li>
+                                        <li><a href="/pdf/Copagos/CISCO.pdf" target="_blank">Cisco</a></li>
+                                        <li><a href="/pdf/Copagos/KIMBERLYCLARK.pdf" target="_blank">Kimberly Clark</a></li>
+                                        <li><a href="/pdf/Copagos/LANQUETIN.pdf" target="_blank">Lanquetin</a></li>
+                                        <li><a href="/pdf/Copagos/MONDELEZ.pdf" target="_blank">Mondelez</a></li>
                                         <li><a href="/pdf/Copagos/bandegua.xlsx">Bandegua</a></li>
-                                        <li><a href="/pdf/Copagos/Global-Solutions.pdf">Global Solutions</a></li>
+                                        <li><a href="/pdf/Copagos/Global-Solutions.pdf" target="_blank">Global Solutions</a></li>
                                         <li><a href="/pdf/Copagos/AMICELCO.xlsx">Amicelco</a></li>
                                         <li><a href="/pdf/Copagos/ACEROS.xlsx">Aceros</a></li>
                                         <li><a href="/pdf/Copagos/GRUPO ENTERO.xlsx">Grupo Entero</a></li>
@@ -158,24 +186,24 @@
                                         <li><a href="/pdf/Copagos/TRANSMETAL.xlsx">Transmetal</a></li>
                                         <li><a href="javascript:excel('/pdf/Copagos/CopagosAsetec.xls')">Asetec</a></li>
                                         <li><a href="/pdf/Copagos/COEX Y AFILIADAS.xlsx">Coex y Afiliadas</a></li>
-                                        <li><a href="javascript:ventanaSecundaria('/pdf/Copagos/Agropecuaria Popoyan POLIZA 856-VDGM.pdf')">Agropecuaria Popoyan</a></li>
-                                        <li><a href="javascript:ventanaSecundaria('/pdf/Copagos/Alfa Uno POLIZA 962-001.pdf')">Alfa Uno</a></li>
-                                        <li><a href="javascript:ventanaSecundaria('/pdf/Copagos/Aliprac POLIZA 55958.pdf')">Aliprac</a></li>
-                                        <li><a href="javascript:ventanaSecundaria('/pdf/Copagos/Cartones de Guatemala.pdf')">Cartones De Guatemala</a></li>
-                                        <li><a href="javascript:ventanaSecundaria('/pdf/Copagos/Disagro Guatemala.pdf')">Disagro Guatemala</a></li>
-                                        <li><a href="javascript:ventanaSecundaria('/pdf/Copagos/Dollarcity.pdf')">DollarCity</a></li>
-                                        <li><a href="javascript:ventanaSecundaria('/pdf/Copagos/Ingenio Palo Gordo.pdf')">Ingenio Palo Gordo</a></li>
-                                        <li><a href="javascript:ventanaSecundaria('/pdf/Copagos/Lafrancol.pdf')">Lafrancol</a></li>
-                                        <li><a href="javascript:ventanaSecundaria('/pdf/Copagos/Manpower.pdf')">Manpower</a></li>
-                                        <li><a href="javascript:ventanaSecundaria('/pdf/Copagos/Oro del Pacifico.pdf')">Oro del pacifico</a></li>
-                                        <li><a href="javascript:ventanaSecundaria('/pdf/Copagos/Promotores Unity.pdf')">Promotores Unity</a></li>
-                                        <li><a href="javascript:ventanaSecundaria('/pdf/Copagos/Quala.pdf')">Quala</a></li>
-                                        <li><a href="javascript:ventanaSecundaria('/pdf/Copagos/Super Vitaminas.pdf')">Super Vitaminas</a></li>
-                                        <li><a href="javascript:ventanaSecundaria('/pdf/Copagos/Tetel.pdf')">Tetel</a></li>
-                                        <li><a href="javascript:ventanaSecundaria('/pdf/Copagos/The People Company.pdf')">The People Company</a></li>
-                                        <li><a href="javascript:ventanaSecundaria('/pdf/Copagos/Tetel.pdf')">Tetel</a></li>
-                                        <li><a href="javascript:ventanaSecundaria('/pdf/Copagos/Volaris.pdf')">Volaris</a></li>
-                                        <li><a href="javascript:ventanaSecundaria('/pdf/Copagos/Yara Guatemala.pdf')">Yara</a></li>
+                                        <li><a href="/pdf/Copagos/Agropecuaria Popoyan POLIZA 856-VDGM.pdf">Agropecuaria Popoyan</a></li>
+                                        <li><a href="/pdf/Copagos/Alfa Uno POLIZA 962-001.pdf">Alfa Uno</a></li>
+                                        <li><a href="/pdf/Copagos/Aliprac POLIZA 55958.pdf">Aliprac</a></li>
+                                        <li><a href="/pdf/Copagos/Cartones de Guatemala.pdf">Cartones De Guatemala</a></li>
+                                        <li><a href="/pdf/Copagos/Disagro Guatemala.pdf">Disagro Guatemala</a></li>
+                                        <li><a href="/pdf/Copagos/Dollarcity.pdf">DollarCity</a></li>
+                                        <li><a href="/pdf/Copagos/Ingenio Palo Gordo.pdf">Ingenio Palo Gordo</a></li>
+                                        <li><a href="/pdf/Copagos/Lafrancol.pdf">Lafrancol</a></li>
+                                        <li><a href="/pdf/Copagos/Manpower.pdf">Manpower</a></li>
+                                        <li><a href="/pdf/Copagos/Oro del Pacifico.pdf">Oro del pacifico</a></li>
+                                        <li><a href="/pdf/Copagos/Promotores Unity.pdf">Promotores Unity</a></li>
+                                        <li><a href="/pdf/Copagos/Quala.pdf">Quala</a></li>
+                                        <li><a href="/pdf/Copagos/Super Vitaminas.pdf">Super Vitaminas</a></li>
+                                        <li><a href="/pdf/Copagos/Tetel.pdf">Tetel</a></li>
+                                        <li><a href="/pdf/Copagos/The People Company.pdf">The People Company</a></li>
+                                        <li><a href="/pdf/Copagos/Tetel.pdf">Tetel</a></li>
+                                        <li><a href="/pdf/Copagos/Volaris.pdf">Volaris</a></li>
+                                        <li><a href="/pdf/Copagos/Yara Guatemala.pdf">Yara</a></li>
                                         <li><a href="/pdf/Copagos/Cuentas Daniela Lima.xlsx">Cuentas Daniela Lima</a></li>
                                         <li><a href="/pdf/Copagos/Cuentas Maribel Cermeño.xlsx">Cuentas Maribel Cermeño</a></li>
                                         <li><a href="/pdf/Copagos/Cuentas Juan Antonio.xls">Cuentas Juan Antonio</a></li>
@@ -220,7 +248,7 @@
                                             <a tabindex="-1" href="#">Seguros Universales</a>
                                             <ul class="dropdown-menu">
                                                 <li class="dropdown-submenu"></li>
-                                                <li><a href="https://www.universales.com/area/medicos/" target="_blank">Link Seguros Universales</a></li>
+                                                <li><a href="https://www.universales.com/redes/" target="_blank">Link Seguros Universales</a></li>
                                             </ul>
                                         </li>
                                         <li class="dropdown-submenu">
@@ -477,7 +505,6 @@
         <script type="text/javascript" src="<%= ResolveUrl("/bootstrap/js/bootstrap.min.js") %>"></script>
         <script type="text/javascript" src="<%= ResolveUrl("/Scripts/jquery.cookie.min.js") %>"></script>
         <script type="text/javascript" src="<%= ResolveUrl("/Scripts/toastr.min.js") %>"></script>
-        <script type="text/javascript" src="<%= ResolveUrl("/Scripts/jQuery.print.min.js") %>"></script>
         <script type="text/javascript" src="<%= ResolveUrl("/Scripts/app.js") %>"></script>
         <script type='text/javascript'>
             $(window).on('load', function () {
@@ -485,7 +512,7 @@
             });
 
             $(function () {
-                $(':button,:submit').click(function () {
+                $(':button,:submit,:a').click(function () {
 
                     $attrLogin = $('.loading-screen').attr('style');
                     if ($attrLogin == "") {

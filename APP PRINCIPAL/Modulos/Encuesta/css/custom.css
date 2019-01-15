@@ -250,7 +250,7 @@
 /* Forth Slide */
 .demo-1 .bg-4 .sl-slide-inner,
 .demo-1 .bg-4 .sl-content-slice {
-    background: #131B4D;
+    background: #00C5FF;
 }
 
 .demo-1 .bg-4 .deco {
@@ -621,7 +621,41 @@
     left: 25%;
     text-align: center;
     line-height: 20px;
-    bottom: 75% !important;
+    bottom: 84% !important;
+    margin: 0 0 -120px 0;
+}
+
+.centrar-telefono {
+    color: black;
+    text-shadow: 0 0 1px #000;
+    padding: 20px;
+    position: absolute;
+    font-size: 16px;
+    font-weight: 300;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    width: 50%;
+    left: 25%;
+    text-align: center;
+    line-height: 20px;
+    bottom: 74% !important;
+    margin: 0 0 -120px 0;
+}
+
+.centrar-nombre {
+    color: black;
+    text-shadow: 0 0 1px #000;
+    padding: 20px;
+    position: absolute;
+    font-size: 16px;
+    font-weight: 300;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    width: 50%;
+    left: 25%;
+    text-align: center;
+    line-height: 20px;
+    bottom: 64% !important;
     margin: 0 0 -120px 0;
 }
 
@@ -639,7 +673,7 @@
     left: 40%;
     text-align: center;
     line-height: 10px;
-    bottom: 65%;
+    bottom: 74%;
     margin: 0 0 -120px 0;
 }
 
@@ -661,7 +695,7 @@
 }
 
 .alto {
-    bottom: 90% !important;
+    bottom: 70% !important;
 }
 
 .nueva-encuesta {

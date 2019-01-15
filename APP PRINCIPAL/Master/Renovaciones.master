@@ -90,13 +90,13 @@
                     </ul>
                 </div>
             </div>
-            <div class="loading-screen" style="">
+           <%-- <div class="loading-screen" style="">
                 <div style="display: block; overflow-x: hidden; overflow-y: auto; opacity: 1; background: rgba(0, 0, 0, 0.55); position: fixed; top: 0; right: 0; bottom: 0; left: 0; z-index: 1050; transition: opacity .15s linear;">
                     <div class="modal-dialog">
                         <img style='top: 45%; position: absolute; height: 100px; width: 100px; left: 45%;' src='/imgUnity/cargando.gif' />
                     </div>
                 </div>
-            </div>
+            </div>--%>
         </nav>
         <div>
             <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">

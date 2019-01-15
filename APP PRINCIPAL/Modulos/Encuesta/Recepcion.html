@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Encuesta Colectivos</title>
+    <title>Encuesta Recepcion</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Fullscreen Slit Slider with CSS3 and jQuery" />
     <meta name="keywords" content="slit slider, plugin, css3, transitions, jquery, fullscreen, autoplay" />
@@ -39,10 +39,21 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="sl-slide bg-2" data-orientation="horizontal" data-slice1-rotation="-25" data-slice2-rotation="-25" data-slice1-scale="2" data-slice2-scale="2">
                     <div class="sl-slide-inner">
-                        <h2>En su experiencia, por favor calificar MI servicio, de 1 a 10, en donde 10 es excelente.</h2>
+                        <h2>¿Que operacion vino a realizar a Unity Promotores?</h2>
+                        <blockquote><p>Lideres a nivel Centro Americano en corredores de seguros</p><cite>Unity Promotores</cite></blockquote>
+                        <select id="tipo_servicio" class="centrar-listado">
+                            <option value="">Seleccionar Opcion</option>
+                            <option value="Gestion de pagos">Gestion de pagos</option>
+                            <option value="Gestion de Reclamos">Gestion de reclamos</option>
+                            <option value="Consultas de servicio con ejecutivo de cuenta">Consultas de servicio con Ejecutivo de cuenta</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="sl-slide bg-3" data-orientation="horizontal" data-slice1-rotation="3" data-slice2-rotation="3" data-slice1-scale="2" data-slice2-scale="1">
+                    <div class="sl-slide-inner">
+                        <h2>En su experiencia, por favor calificar de 1 a 10 el servicio que recibio en donde 10 es excelente.</h2>
                         <blockquote><p>Lideres a nivel Centro Americano en corredores de seguros</p><cite>Unity Promotores</cite></blockquote>
                         <div class="ec-stars-wrapper centrar-estrellas">
                             <a href="#" class="preguntaDos" data-value="1" title="Votar con 1 estrellas">&#9733;</a>
@@ -58,38 +69,24 @@
                         </div>
                     </div>
                 </div>
-
-                <div class="sl-slide bg-3" data-orientation="horizontal" data-slice1-rotation="3" data-slice2-rotation="3" data-slice1-scale="2" data-slice2-scale="1">
-                    <div class="sl-slide-inner">
-                        <h2>En su experiencia, por favor calificar EL SERVICIO DE LA ASEGURADORA, de 1 a 10, en donde 10 es excelente.</h2>
-                        <blockquote><p>Lideres a nivel Centro Americano en corredores de seguros</p><cite>Unity Promotores</cite></blockquote>
-                        <div class="ec-stars-wrapper centrar-estrellas">
-                            <a href="#" class="preguntaTres" data-value="1" title="Votar con 1 estrellas">&#9733;</a>
-                            <a href="#" class="preguntaTres" data-value="2" title="Votar con 2 estrellas">&#9733;</a>
-                            <a href="#" class="preguntaTres" data-value="3" title="Votar con 3 estrellas">&#9733;</a>
-                            <a href="#" class="preguntaTres" data-value="4" title="Votar con 4 estrellas">&#9733;</a>
-                            <a href="#" class="preguntaTres" data-value="5" title="Votar con 5 estrellas">&#9733;</a>
-                            <a href="#" class="preguntaTres" data-value="6" title="Votar con 6 estrellas">&#9733;</a>
-                            <a href="#" class="preguntaTres" data-value="7" title="Votar con 7 estrellas">&#9733;</a>
-                            <a href="#" class="preguntaTres" data-value="8" title="Votar con 8 estrellas">&#9733;</a>
-                            <a href="#" class="preguntaTres" data-value="9" title="Votar con 9 estrellas">&#9733;</a>
-                            <a href="#" class="preguntaTres" data-value="10" title="Votar con 10 estrellas">&#9733;</a>
-                        </div>
-                    </div>
-                </div>
-
                 <div class="sl-slide bg-4" data-orientation="vertical" data-slice1-rotation="-5" data-slice2-rotation="25" data-slice1-scale="2" data-slice2-scale="1">
                     <div class="sl-slide-inner">
-                        <textarea id="txtComentario" class="centrar-text" name="textarea" rows="5" cols="20" placeholder="Dejenos sus comentarios"></textarea>
-                        <div id="contacto" style="display:none">
-                            <input type="number" id="txtTelefono" class="centrar-telefono" placeholder="Telefono" />
-                            <input type="text" id="txtNombre" class="centrar-nombre" placeholder="Nombre Cliente" />
+                        <h2 class="alto">En su experiencia, por favor calificar de 1 a 10 el servicio recibido en la recepcion, en donde 10 es excelente..</h2>
+                        <div class="ec-stars-wrapper centrar-estrellas">
+                            <a href="#" class="preguntaTres envio" data-value="1" title="Votar con 1 estrellas">&#9733;</a>
+                            <a href="#" class="preguntaTres envio" data-value="2" title="Votar con 2 estrellas">&#9733;</a>
+                            <a href="#" class="preguntaTres envio" data-value="3" title="Votar con 3 estrellas">&#9733;</a>
+                            <a href="#" class="preguntaTres envio" data-value="4" title="Votar con 4 estrellas">&#9733;</a>
+                            <a href="#" class="preguntaTres envio" data-value="5" title="Votar con 5 estrellas">&#9733;</a>
+                            <a href="#" class="preguntaTres envio" data-value="6" title="Votar con 6 estrellas">&#9733;</a>
+                            <a href="#" class="preguntaTres envio" data-value="7" title="Votar con 7 estrellas">&#9733;</a>
+                            <a href="#" class="preguntaTres envio" data-value="8" title="Votar con 8 estrellas">&#9733;</a>
+                            <a href="#" class="preguntaTres envio" data-value="9" title="Votar con 9 estrellas">&#9733;</a>
+                            <a href="#" class="preguntaTres envio" data-value="10" title="Votar con 10 estrellas">&#9733;</a>
                         </div>
-                        <blockquote style="height: 143px;"><p>Lideres a nivel Centro Americano en corredores de seguros</p><cite>Unity Promotores</cite></blockquote>
-                        <button type="submit" class="centrar-boton envio" id="enviar">Enviar</button>
+                        <blockquote><p>Lideres a nivel Centro Americano en corredores de seguros</p><cite>Unity Promotores</cite></blockquote>
                     </div>
                 </div>
-
                 <div class="sl-slide bg-5" data-orientation="vertical" data-slice1-rotation="10" data-slice2-rotation="-15" data-slice1-scale="1.5" data-slice2-scale="1.5">
                     <div class="sl-slide-inner">
                         <h2>Gracias por responder a la encuesta</h2>
@@ -97,8 +94,7 @@
                         <button type="submit" class="centrar-boton nueva-encuesta">Nueva</button>
                     </div>
                 </div>
-
-                <!----------------------- pregunta numero uno de la encuesta ------------------->
+                <!----------------------- pregunta numero uno de la encuesta ------------------->>
                 <div class="sl-slide bg-6" data-orientation="vertical" data-slice1-rotation="10" data-slice2-rotation="-15" data-slice1-scale="1.5" data-slice2-scale="1.5">
                     <div class="sl-slide-inner" id="p1-1-6" style="display:none">
                         <h2>¿Por qué razones NO estaría dispuesto a recomendar a Unity Promotores?</h2>
@@ -158,7 +154,7 @@
                 <!----------------------- pregunta numero dos de la encuesta ------------------->>
                 <div class="sl-slide bg-7" data-orientation="vertical" data-slice1-rotation="10" data-slice2-rotation="-15" data-slice1-scale="1.5" data-slice2-scale="1.5">
                     <div class="sl-slide-inner" id="p2-1-6" style="display:none">
-                        <h2>¿Qué debería hacer mejor para mejorar mi puntuación?</h2>
+                        <h2>¿Qué deberíamos hacer mejor para mejorar la puntuacion?</h2>
                         <blockquote><p>Lideres a nivel Centro Americano en corredores de seguros</p><cite>Unity Promotores</cite></blockquote>
                         <select id="p2-detractores" class="centrar-listado">
                             <option value="">Seleccionar Opcion</option>
@@ -176,7 +172,7 @@
                         </select>
                     </div>
                     <div class="sl-slide-inner" id="p2-7-8" style="display:none;">
-                        <h2>¿Qué debería hacer mejor para mejorar más mi puntuación?</h2>
+                        <h2>¿Qué deberíamos hacer mejor para mejorar la puntuacion?</h2>
                         <blockquote><p>Lideres a nivel Centro Americano en corredores de seguros</p><cite>Unity Promotores</cite></blockquote>
                         <select id="p2-neutros" class="centrar-listado">
                             <option value="">Seleccionar Opcion</option>
@@ -194,7 +190,7 @@
                         </select>
                     </div>
                     <div class="sl-slide-inner" id="p2-9-10" style="display:none;">
-                        <h2>¿Qué es lo que más le gusta de mi servicio?</h2>
+                        <h2>¿Qué es lo que más le gusto del servicio recibido?</h2>
                         <blockquote><p>Lideres a nivel Centro Americano en corredores de seguros</p><cite>Unity Promotores</cite></blockquote>
                         <select id="p2-promotores" class="centrar-listado">
                             <option value="">Seleccionar Opcion</option>
@@ -212,77 +208,8 @@
                         </select>
                     </div>
                 </div>
-                <!----------------------- pregunta numero tres de la encuesta ------------------->>
-                <div class="sl-slide bg-8" data-orientation="vertical" data-slice1-rotation="10" data-slice2-rotation="-15" data-slice1-scale="1.5" data-slice2-scale="1.5">
-                    <div class="sl-slide-inner" id="p3-1-6" style="display:none">
-                        <h2>¿Qué debería hacer mejor la aseguradora para mejorar la puntuación?</h2>
-                        <blockquote><p>Lideres a nivel Centro Americano en corredores de seguros</p><cite>Unity Promotores</cite></blockquote>
-                        <select id="p3-detractores" class="centrar-listado">
-                            <option value="">Seleccionar Opcion</option>
-                            <option value="Rapidez en servicio">No son rápidos en el servicio</option>
-                            <option value="Servicio profesional">No prestan servicio profesional y de calidad</option>
-                            <option value="Seguimiento a gestiones">No otorgan seguimiento</option>
-                            <option value="Servicio personalizado">No prestan servicio personalizado</option>
-                            <option value="Amabilidad y atención al cliente">No son amables y no dan buena atención al cliente</option>
-                            <option value="Mejores que la competencia">No son mejores a la competencia</option>
-                            <option value="Integridad de la información en la documentación">Documentación sin errores</option>
-                            <option value="Cumplimiento de tiempos y fechas acordadas">No cumplen fechas de visitas</option>
-                            <option value="Información completa respecto al servicio">La información que dan no es completa</option>
-                            <option value="Notificaciones de cambios en personal, acuerdos de servicio, etc.">No notifican cambios de personal</option>
-                            <option value="Comunicación efectiva">No tienen buena comunicación</option>
-                        </select>
-                    </div>
-                    <div class="sl-slide-inner" id="p3-7-8" style="display:none;">
-                        <h2>¿Qué debería hacer mejor la aseguradora para mejorar más la puntuación?</h2>
-                        <blockquote><p>Lideres a nivel Centro Americano en corredores de seguros</p><cite>Unity Promotores</cite></blockquote>
-                        <select id="p3-neutros" class="centrar-listado">
-                            <option value="">Seleccionar Opcion</option>
-                            <option value="Rapidez en servicio">Pueden mejorar en la rapidez del servicio</option>
-                            <option value="Servicio profesional">Pueden mejorar en la profesionalidad y en la calidad</option>
-                            <option value="Seguimiento a gestiones">Pueden mejorar en el seguimiento</option>
-                            <option value="Servicio personalizado">Pueden mejorar en el servicio personalizado</option>
-                            <option value="Amabilidad y atención al cliente">Pueden mejorar en amabilidad y servicio al cliente</option>
-                            <option value="Mejores que la competencia">Pueden mejorar respecto a la competencia</option>
-                            <option value="Integridad de la información en la documentación">Pueden mejorar en la documentación con errores</option>
-                            <option value="Cumplimiento de tiempos y fechas acordadas">Pueden mejorar en cumplir fechas de visitas</option>
-                            <option value="Información completa respecto al servicio">Pueden mejorar en dar información completa</option>
-                            <option value="Notificaciones de cambios en personal, acuerdos de servicio, etc.">Pueden mejorar en notificar cambios de personal</option>
-                            <option value="Comunicación efectiva">Pueden mejorar en la comunicación</option>
-                        </select>
-                    </div>
-                    <div class="sl-slide-inner" id="p3-9-10" style="display:none;">
-                        <h2>¿Qué es lo que más le gusta del servicio de la aseguradora?</h2>
-                        <blockquote><p>Lideres a nivel Centro Americano en corredores de seguros</p><cite>Unity Promotores</cite></blockquote>
-                        <select id="p3-promotores" class="centrar-listado">
-                            <option value="">Seleccionar Opcion</option>
-                            <option value="Rapidez en servicio">Son rápidos en el servicio</option>
-                            <option value="Servicio profesional">Prestan servicio profesional y de calidad</option>
-                            <option value="Seguimiento a gestiones">Otorgan seguimiento</option>
-                            <option value="Servicio personalizado">Prestan servicio personalizado</option>
-                            <option value="Amabilidad y atención al cliente">Son amables y dan buena atención al cliente</option>
-                            <option value="Mejores que la competencia">Son mejores a la competencia</option>
-                            <option value="Integridad de la información en la documentación">Documentación con errores</option>
-                            <option value="Cumplimiento de tiempos y fechas acordadas">Cumplen fechas de visitas</option>
-                            <option value="Información completa respecto al servicio">La información que dan es completa</option>
-                            <option value="Notificaciones de cambios en personal, acuerdos de servicio, etc.">Notifican cambios de personal</option>
-                            <option value="Comunicación efectiva">Tienen buena comunicación</option>
-                        </select>
-                    </div>
-                </div>
             </div>
-
-            <!--<nav id="nav-arrows" class="nav-arrows">
-                <span class="nav-arrow-prev">Previous</span>
-                <span class="nav-arrow-next">Next</span>
-            </nav>-->
-            <!--<nav id="nav-dots" class="nav-dots">
-                <span class="nav-dot-current"></span>
-                <span></span>
-                <span></span>
-                <span></span>
-            </nav>-->
-
-        </div><!-- /slider-wrapper -->
+        </div>
     </div>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
     <script type="text/javascript" src="js/jquery.ba-cond.min.js"></script>
@@ -305,19 +232,16 @@
             }
         })(jQuery);
 
-        var PREGUNTA1 = 0;
-        var PREGUNTA2 = 0;
-        var PREGUNTA3 = 0;
+        var tabla = 'encuesta_recepcion';
+        var valor = 'Recepcion Unity';
         var pregunta1 = 0;
         var clasificacion1 = '';
         var comentario1 = '';
         var pregunta2 = 0;
+        var tipo_servicio = '';
         var clasificacion2 = '';
         var comentario2 = '';
         var pregunta3 = 0;
-        var clasificacion3 = '';
-        var comentario3 = '';
-        var valor = $.get("id");
 
         $(function () {
             var Page = (function () {
@@ -344,7 +268,7 @@
                             return false;
                         });
 
-                        //------------------------------  funciones para cambiar al alegir una marcacion de estrellas de la pregunta numero 1
+                   //---------------------------------- pregunta numero 1----------------------------------------
                         $('.preguntaUno').on('click', function (event) {
                             pregunta1 = $(this).attr('data-value');
                             var $dot = $(this);
@@ -402,9 +326,8 @@
                             return false;
                         });
 
-                        //------------------------------  funciones para cambiar al alegir una marcacion de la pregunta numero 2 ---------------------------------
+//------------------ funciones para cambiar al alegir una marcacion de la pregunta numero 2 ---------------------------------
                         $('.preguntaDos').on('click', function (event) {
-
                             pregunta2 = $(this).attr('data-value');
                             var $dot = $(this);
                             if (pregunta2 == "1" || pregunta2 == "2" || pregunta2 == "3" || pregunta2 == "4" || pregunta2 == "5" || pregunta2 == "6") {
@@ -445,113 +368,87 @@
                         $('#p2-detractores').change(function () {
                             clasificacion2 = $('#p2-detractores').val();
                             comentario2 = $('#p2-detractores option:selected').text();
-                            slitslider.jump(3);
+                            slitslider.jump(4);
                             return false;
                         });
                         $('#p2-neutros').change(function () {
                             clasificacion2 = $('#p2-neutros').val();
                             comentario2 = $('#p2-neutros option:selected').text();
-                            slitslider.jump(3);
+                            slitslider.jump(4);
                             return false;
                         });
                         $('#p2-promotores').change(function () {
                             clasificacion2 = $('#p2-promotores').val();
                             comentario2 = $('#p2-promotores option:selected').text();
+                            slitslider.jump(4);
+                            return false;
+                        });
+
+//----------funciones para cambiar al alegir una marcacion de la pregunta numero 3 -------------------------------
+
+                        //seleccionar opcion de pregunta tres
+                        $('#p2-detractores').change(function () {
+                            clasificacion3 = $('#p2-detractores').val();
+                            comentario3 = $('#p2-detractores option:selected').text();
+                            slitslider.jump(4);
+                            return false;
+                        });
+                        $('#p2-neutros').change(function () {
+                            clasificacion3 = $('#p2-neutros').val();
+                            comentario3 = $('#p2-neutros option:selected').text();
+                            slitslider.jump(4);
+                            return false;
+                        });
+                        $('#p2-promotores').change(function () {
+                            clasificacion3 = $('#p2-neutros').val();
+                            comentario3 = $('#p2-neutros option:selected').text();
+                            slitslider.jump(4);
+                            return false;
+                        });
+
+                        $('#tipo_servicio').change(function () {
+                            tipo_servicio = $('#tipo_servicio option:selected').text();
                             slitslider.jump(3);
                             return false;
                         });
 
-                        //------------------------------  funciones para cambiar al alegir una marcacion de la pregunta numero 3
+//-------------------------- envio de las preguntas ----------------------------------------------
                         $('.preguntaTres').on('click', function (event) {
                             pregunta3 = $(this).attr('data-value');
                             var $dot = $(this);
-                            if (pregunta3 == "1" || pregunta3 == "2" || pregunta3 == "3" || pregunta3 == "4" || pregunta3 == "5" || pregunta3 == "6") {
-                                $("#p3-1-6").css("display", "");
 
-                                if (!slitslider.isActive()) {
-                                    $nav.removeClass('nav-dot-current');
-                                    $dot.addClass('nav-dot-current');
-                                }
-                                slitslider.jump(8);
-                                return false;
-                            }
-
-                            if (pregunta3 == "8" || pregunta3 == "7") {
-                                $("#p3-7-8").css("display", "");
-
-                                if (!slitslider.isActive()) {
-                                    $nav.removeClass('nav-dot-current');
-                                    $dot.addClass('nav-dot-current');
-                                }
-                                slitslider.jump(8);
-                                return false;
-                            }
-
-                            if (pregunta3 == "9" || pregunta3 == "10") {
-                                $("#p3-9-10").css("display", "");
-
-                                if (!slitslider.isActive()) {
-                                    $nav.removeClass('nav-dot-current');
-                                    $dot.addClass('nav-dot-current');
-                                }
-                                slitslider.jump(8);
-                                return false;
-                            }
-                        });
-
-                        //seleccionar opcion de pregunta tres
-                        $('#p3-detractores').change(function () {
-
-                            PREGUNTA1 = parseInt(pregunta1);
-                            PREGUNTA2 = parseInt(pregunta2);
-                            PREGUNTA3 = parseInt(pregunta3);
-
-                            clasificacion3 = $('#p3-detractores').val();
-                            comentario3 = $('#p3-detractores option:selected').text();
-                            if (PREGUNTA1 <=8 || PREGUNTA2 <=8 || PREGUNTA3 <=8 )  {
-                                $('#contacto').css("display", "");
-                                $('.envio').css("bottom", "54%");
-                            }
-                             slitslider.jump(4);
-                            return false;
-                        });
-                        $('#p3-neutros').change(function () {
-                            PREGUNTA1 = parseInt(pregunta1);
-                            PREGUNTA2 = parseInt(pregunta2);
-                            PREGUNTA3 = parseInt(pregunta3);
-
-                            clasificacion3 = $('#p3-neutros').val();
-                            comentario3 = $('#p3-neutros option:selected').text();
-                            if (PREGUNTA1 <= 8 || PREGUNTA2 <= 8 || PREGUNTA3 <= 8) {
-                                $('#contacto').css("display", "");
-                                $('.envio').css("bottom", "54%");
-                            }
-                                slitslider.jump(4);
-                            return false;
-                        });
-                        $('#p3-promotores').change(function () {
-                            PREGUNTA1 = parseInt(pregunta1);
-                            PREGUNTA2 = parseInt(pregunta2);
-                            PREGUNTA3 = parseInt(pregunta3);
-
-                            clasificacion3 = $('#p3-promotores').val();
-                            comentario3 = $('#p3-promotores option:selected').text();
-                            if (PREGUNTA1 <= 8 || PREGUNTA2 <= 8 || PREGUNTA3 <= 8) {
-                                $('#contacto').css("display", "");
-                                $('.envio').css("bottom", "54%");
-                            }
-                                slitslider.jump(4);
-
-                            return false;
+                            $.post("https://192.168.81.225:9595/api/v1/encuesta/guardar",
+                                {   
+                                    "table_name": tabla,
+                                    "empresa": valor,
+                                    "pregunta1": pregunta1,
+                                    "clasificacion1": clasificacion1,
+                                    "comentario1": comentario1,
+                                    "tipo_servicio": tipo_servicio,
+                                    "pregunta2": pregunta2,
+                                    "clasificacion2": clasificacion2,
+                                    "comentario2": comentario2,
+                                    "pregunta3": pregunta3
+                                },
+                            ).done(function () {
+                                setTimeout(
+                                    function () {
+                                        toastr.success('Formulario enviado con exito', 'Excelente!');
+                                    }, 200);
+                            })
+                                .fail(function () {
+                                    setTimeout(
+                                        function () {
+                                            toastr.error('No se a podido enviar el formulario', 'Error!');
+                                        }, 200);
+                                });
                         });
 
                         $('.envio').on('click', function (event) {
                             var $dot = $(this);
                             if (!slitslider.isActive()) {
-
                                 $nav.removeClass('nav-dot-current');
                                 $dot.addClass('nav-dot-current');
-
                             }
                             slitslider.jump(5);
                             return false;
@@ -560,17 +457,13 @@
                         $('.nueva-encuesta').on('click', function (event) {
                             window.location.reload();
                         });
-                        //------------------------------------------------------------------------------------
-
+//------------------------------------------------------------------------------------
                         $nav.each(function (i) {
-
                             $(this).on('click', function (event) {
                                 var $dot = $(this);
                                 if (!slitslider.isActive()) {
-
                                     $nav.removeClass('nav-dot-current');
                                     $dot.addClass('nav-dot-current');
-
                                 }
                                 slitslider.jump(i + 1);
                                 return false;
@@ -580,37 +473,6 @@
                 return { init: init };
             })();
             Page.init();
-        });
-
-        $("#enviar").click(function () {
-            $.post("http://192.168.81.225:9595/api/v1/encuesta/guardar",
-                {
-                    "empresa": valor,
-                    "servicio": "servicio",
-                    "pregunta1": pregunta1,
-                    "comentario1": comentario1,
-                    "clasificacion1": clasificacion1,
-                    "pregunta2": pregunta2,
-                    "clasificacion2": clasificacion2,
-                    "comentario2": comentario2,
-                    "pregunta3": pregunta3,
-                    "clasificacion3": clasificacion3,
-                    "comentario3": comentario3,
-                    "comentario": $('#txtComentario').val(),
-                    "telefono": $('#txtTelefono').val(),
-                    "nombre": $('#txtNombre').val()
-                },
-            ).done(function () {
-                setTimeout(
-                    function () {
-                        toastr.success('Formulario enviado con exito', 'Excelente!');
-                    }, 200);
-            }).fail(function () {
-                    setTimeout(
-                        function () {
-                            toastr.error('No se a podido enviar el formulario', 'Error!');
-                        }, 200);
-                })
         });
     </script>
 </body>
