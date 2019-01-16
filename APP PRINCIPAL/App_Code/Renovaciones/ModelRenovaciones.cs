@@ -38,6 +38,7 @@ namespace Renovaciones
         public string tipo { get; set; }
         public Nullable<int> codigo_cliente { get; set; }
         public string nombre_cliente { get; set; }
+        public string primer_apellido { get; set; }
         public string poliza1 { get; set; }
         public Nullable<short> secren { get; set; }
         public Nullable<System.DateTime> vigi { get; set; }
