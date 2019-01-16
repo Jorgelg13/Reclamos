@@ -161,12 +161,12 @@ public class Consultas
             "r.vigf as [Vigencia Final]," +
             "r.correo_cliente as [Correo Cliente]," +
             "  (select top 1 fecha from renovaciones_log where poliza = r.id) as [Fecha Registro]" +
-            "from renovaciones_polizas r " +
+            " from renovaciones_polizas r " +
             "where r.codigo_gestor =  " + codigo + " and r.estado = "+ ddlEstado;
             
         if(!String.IsNullOrEmpty(fFin.Trim()) && !String.IsNullOrEmpty(fInicio.Trim()))
         {
-            sql += " and rl.fecha between '" + fInicio + "' and '" + fFin + "' ";
+            sql += " and convert(date,fecha_registro,112) between '" + fInicio + "' and '" + fFin + "' ";
         }
 
         return sql;

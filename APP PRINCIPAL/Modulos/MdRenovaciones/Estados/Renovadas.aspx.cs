@@ -51,7 +51,7 @@ public partial class Modulos_MdRenovaciones_Estados_Renovadas : System.Web.UI.Pa
         foreach (GridViewRow row in GridRenovadas.Rows)
         {
             CheckBox checkAsig = (CheckBox)row.FindControl("checkAsignar");
-            int id = Convert.ToInt32(Convert.ToString(row.Cells[1].Text));
+            int id = Convert.ToInt32(Convert.ToString(row.Cells[2].Text));
             if (checkAsig.Checked)
             {
                 try
@@ -79,8 +79,9 @@ public partial class Modulos_MdRenovaciones_Estados_Renovadas : System.Web.UI.Pa
             llenar.llenarGridRenovaciones(Consultas.REQ_POLIZAS_RENOVADAS(poliza.poliza,poliza.endoso_renov, poliza.poliza_unity), gridRequerimientos);
             Utils.ExportarExcel(pnlRequerimientos, Response, poliza.poliza_unity);
         }
-        catch { }
+        catch
+        {
 
-         
+        }
     }
 }

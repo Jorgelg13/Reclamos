@@ -12,14 +12,13 @@ public partial class Modulos_MdRenovaciones_Dashboard : System.Web.UI.Page
     String cuerpo;
 
     protected void Page_Load(object sender, EventArgs e)
-    { 
+    {
+        Session["CodigoGestor"] = Utils.CODIGO_GESTOR(userlogin);
 
         if (!IsPostBack)
         {
             PolizasRoble();
         }
-
-        Session["CodigoGestor"] = Utils.CODIGO_GESTOR(userlogin);
     }
 
 
@@ -90,19 +89,6 @@ public partial class Modulos_MdRenovaciones_Dashboard : System.Web.UI.Page
     protected void GridAllPolizas_SelectedIndexChanged(object sender, EventArgs e)
     {
 
-    }
-
-    protected void btnGuardarCambios_Click(object sender, EventArgs e)
-    {
-        foreach (GridViewRow row in GridElRoble.Rows)
-        {
-            CheckBox chEnviar = (CheckBox)row.FindControl("chEnviar");
-           
-            if (chEnviar.Checked)
-            {
-                
-            }
-        }
     }
 
     protected void GridElRoble_SelectedIndexChanged(object sender, EventArgs e)
