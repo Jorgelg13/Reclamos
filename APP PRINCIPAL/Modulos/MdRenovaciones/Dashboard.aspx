@@ -63,16 +63,6 @@
             </div>
         </div>
     </div>
-     <%-- botones circulares con las opciones multiples --%>
-    <div id="container-floating">
-        <div class="nd1 nds" data-toggle="tooltip" data-placement="left" data-original-title="Edoardo@live.it">
-            <asp:LinkButton ID="btnGuardarCambios" title="Enviar" CssClass="letter" autopostback="true" runat="server" OnClick="btnGuardarCambios_Click"><i class="fa fa-envelope-o" aria-hidden="true"></i></asp:LinkButton>
-        </div>
-        <div id="floating-button" data-toggle="tooltip" data-placement="left" data-original-title="Create" onclick="newmail()">
-            <p class="plus">+</p>
-            <img class="edit" src="https://ssl.gstatic.com/bt/C3341AA7A1A076756462EE2E5CD71C11/1x/bt_compose2_1x.png">
-        </div>
-    </div>
 </asp:Content>
 <asp:Content ID="Js" runat="server" ContentPlaceHolderID="contentJS">
     <script>

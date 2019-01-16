@@ -22,7 +22,7 @@
     void Application_Error(object sender, EventArgs e)
     {
         // Código que se ejecuta cuando se produce un error no controlado
-
+       // Response.Redirect("https://reclamosgt.unitypromotores.com");
     }
 
 </script>
