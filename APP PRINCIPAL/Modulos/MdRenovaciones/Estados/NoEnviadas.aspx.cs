@@ -114,9 +114,9 @@ public partial class Modulos_MdRenovaciones_Estados_NoEnviadas : System.Web.UI.P
         switch (resultado)
         {
             case EmailValidationResult.OK:
-                // Console.WriteLine("Mailbox exists");
+                //Console.WriteLine("Mailbox exists");
                 //Correos.Notificacion(correo.Trim(), "Renovacion de poliza", cuerpo);
-                Utils.EmailRenovacion("pa_envio_renovaciones", correo, txtCuerpo.Text, "jose.chinchilla@unitypromotores.com");
+                Utils.EmailRenovacion("pa_envio_renovaciones", correo, txtCuerpo.Text, registro.correo_gestor.Trim());
                 registro.estado = 3;
                 DB.SaveChanges();
                 llenarGrid();

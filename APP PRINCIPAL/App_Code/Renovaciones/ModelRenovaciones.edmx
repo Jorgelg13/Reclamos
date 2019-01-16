@@ -20,6 +20,7 @@
           <Property Name="tipo" Type="varchar" MaxLength="10" />
           <Property Name="codigo_cliente" Type="int" />
           <Property Name="nombre_cliente" Type="varchar" MaxLength="200" />
+          <Property Name="primer_apellido" Type="varchar" MaxLength="50" />
           <Property Name="poliza" Type="varchar" MaxLength="50" />
           <Property Name="secren" Type="smallint" />
           <Property Name="vigi" Type="date" />
@@ -234,6 +235,7 @@
           <Property Name="tipo" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="codigo_cliente" Type="Int32" />
           <Property Name="nombre_cliente" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="primer_apellido" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="poliza1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="secren" Type="Int16" />
           <Property Name="vigi" Type="DateTime" Precision="0" />
@@ -422,6 +424,7 @@
                 <ScalarProperty Name="vigi" ColumnName="vigi" />
                 <ScalarProperty Name="secren" ColumnName="secren" />
                 <ScalarProperty Name="poliza1" ColumnName="poliza" />
+                <ScalarProperty Name="primer_apellido" ColumnName="primer_apellido" />
                 <ScalarProperty Name="nombre_cliente" ColumnName="nombre_cliente" />
                 <ScalarProperty Name="codigo_cliente" ColumnName="codigo_cliente" />
                 <ScalarProperty Name="tipo" ColumnName="tipo" />
