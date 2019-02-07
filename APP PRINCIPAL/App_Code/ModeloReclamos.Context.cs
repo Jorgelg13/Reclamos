@@ -43,6 +43,7 @@ public partial class ReclamosEntities : DbContext
     public DbSet<busqCoberturasPolizasDaños> busqCoberturasPolizasDaños { get; set; }
     public DbSet<cabina> cabina { get; set; }
     public DbSet<cartas> cartas { get; set; }
+    public DbSet<clientes> clientes { get; set; }
     public DbSet<coberturas> coberturas { get; set; }
     public DbSet<coberturas_afectadas> coberturas_afectadas { get; set; }
     public DbSet<coberturas_afectadas_danios> coberturas_afectadas_danios { get; set; }
@@ -490,5 +491,54 @@ public partial class ReclamosEntities : DbContext
     public virtual int pa_replicar_reclamos_gm()
     {
         return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pa_replicar_reclamos_gm");
+    }
+
+    public virtual int pa_actualizar_comisiones_pendientes(Nullable<int> id, string requerimiento, Nullable<decimal> comision, Nullable<decimal> prima, string poliza, string moneda, string fecha, string nombre, Nullable<int> cliente, string poliza_acs, string mensaje)
+    {
+        var idParameter = id.HasValue ?
+            new ObjectParameter("id", id) :
+            new ObjectParameter("id", typeof(int));
+
+        var requerimientoParameter = requerimiento != null ?
+            new ObjectParameter("requerimiento", requerimiento) :
+            new ObjectParameter("requerimiento", typeof(string));
+
+        var comisionParameter = comision.HasValue ?
+            new ObjectParameter("comision", comision) :
+            new ObjectParameter("comision", typeof(decimal));
+
+        var primaParameter = prima.HasValue ?
+            new ObjectParameter("prima", prima) :
+            new ObjectParameter("prima", typeof(decimal));
+
+        var polizaParameter = poliza != null ?
+            new ObjectParameter("poliza", poliza) :
+            new ObjectParameter("poliza", typeof(string));
+
+        var monedaParameter = moneda != null ?
+            new ObjectParameter("moneda", moneda) :
+            new ObjectParameter("moneda", typeof(string));
+
+        var fechaParameter = fecha != null ?
+            new ObjectParameter("fecha", fecha) :
+            new ObjectParameter("fecha", typeof(string));
+
+        var nombreParameter = nombre != null ?
+            new ObjectParameter("nombre", nombre) :
+            new ObjectParameter("nombre", typeof(string));
+
+        var clienteParameter = cliente.HasValue ?
+            new ObjectParameter("cliente", cliente) :
+            new ObjectParameter("cliente", typeof(int));
+
+        var poliza_acsParameter = poliza_acs != null ?
+            new ObjectParameter("poliza_acs", poliza_acs) :
+            new ObjectParameter("poliza_acs", typeof(string));
+
+        var mensajeParameter = mensaje != null ?
+            new ObjectParameter("mensaje", mensaje) :
+            new ObjectParameter("mensaje", typeof(string));
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pa_actualizar_comisiones_pendientes", idParameter, requerimientoParameter, comisionParameter, primaParameter, polizaParameter, monedaParameter, fechaParameter, nombreParameter, clienteParameter, poliza_acsParameter, mensajeParameter);
     }
 }

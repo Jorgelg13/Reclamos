@@ -71,6 +71,7 @@ public partial class Modulos_MdReclamos_wbFrmAutorizacionesEditar : System.Web.U
             var registro = DBReclamos.reg_reclamos_medicos.Find(ida);
             lblAsegurado.Text = "Asegurado: " + registro.asegurado;
             lblPoliza.Text = "Poliza: " + registro.poliza;
+            lblCertificado.Text = "Certificado:" + registro.certificado;
             lblRamo.Text = "Ramo: " + registro.ramo;
             lblTipo.Text = "Tipo: " + registro.tipo;
             lblClase.Text = "Clase: " + registro.clase;

@@ -64,6 +64,7 @@ public partial class DashboardUnity : System.Web.UI.Page
             lnColectivos.Text =  medicosC.ToString();
             lbColectivosFT.Text = " = " + (( 1 - (colectivosFT / medicosC)) * 100).ToString("N2") + "%";
 
+
             Double TotalRecMedicos = medicos + medicosC;
             Double TotalFtMedicos = Convert.ToDouble(colectivosFT) + Convert.ToDouble(individualesFT);
             lnTotalGastosMedicos.Text =  TotalRecMedicos.ToString();
@@ -113,11 +114,11 @@ public partial class DashboardUnity : System.Web.UI.Page
             String sql;
             sql = "select top 1 (select count(*) from reclamos_medicos " +
                 "inner join reg_reclamos_medicos reg on reg.id = reclamos_medicos.id_reg_reclamos_medicos " +
-                "where reclamos_medicos.fecha_visualizar < GETDATE() and estado_unity != 'Cerrado' and reg.tipo = 'I') as Individuales, " +
+                "where reclamos_medicos.fecha_visualizar < convert(date,GETDATE(),103) and estado_unity != 'Cerrado' and reg.tipo = 'I') as Individuales, " +
                 "(select count(*) from reclamos_medicos " +
                 "inner join reg_reclamos_medicos reg on reg.id = reclamos_medicos.id_reg_reclamos_medicos " +
-                "where reclamos_medicos.fecha_visualizar < GETDATE() and estado_unity not in  ('Cerrado','Anulado') and reg.tipo = 'C' ) as Colectivos, " +
-                "(select count(*) from reclamos_medicos where fecha_visualizar < GETDATE() and estado_unity != 'Cerrado') as Total from reclamos_medicos ";
+                "where reclamos_medicos.fecha_visualizar < convert(date,GETDATE(),103) and estado_unity not in  ('Cerrado','Anulado') and reg.tipo = 'C' ) as Colectivos, " +
+                "(select count(*) from reclamos_medicos where fecha_visualizar < convert(date, GETDATE(),103) and estado_unity != 'Cerrado') as Total from reclamos_medicos ";
 
             SqlDataAdapter da = new SqlDataAdapter(sql, obj.ObtenerConexionReclamos());
             DataTable dt = new DataTable();

@@ -272,6 +272,19 @@ public partial class cartas
     public Nullable<int> id_reclamo { get; set; }
 }
 
+public partial class clientes
+{
+    public int id { get; set; }
+    public string codigo { get; set; }
+    public string nombre { get; set; }
+    public string correo { get; set; }
+    public string telefono { get; set; }
+    public Nullable<System.DateTime> fechareg { get; set; }
+    public string tipo_consulta { get; set; }
+    public string empresa { get; set; }
+    public string estado { get; set; }
+}
+
 public partial class coberturas
 {
     public int id { get; set; }
@@ -1123,6 +1136,7 @@ public partial class usuario
     public string sucursal { get; set; }
     public string cabina { get; set; }
     public Nullable<short> codigo { get; set; }
+    public Nullable<int> gestor_acs { get; set; }
 
     public virtual ICollection<autorizaciones> autorizaciones { get; set; }
     public virtual cabina cabina1 { get; set; }

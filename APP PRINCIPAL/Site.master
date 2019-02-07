@@ -241,7 +241,7 @@
                                             <a tabindex="-1" href="#">Seguros Mapfre</a>
                                             <ul class="dropdown-menu">
                                                 <li class="dropdown-submenu"></li>
-                                                <li><a href="javascript:excel('/pdf/Red de Proveedores/RED MEDICA MAPFRE 2017.xls')">Red De Proveedores</a></li>
+                                                <li><a href="https://app2.mapfre.com.gt/redmedica/" target="_blank">Red De Proveedores</a></li>
                                             </ul>
                                         </li>
                                         <li class="dropdown-submenu">
@@ -255,7 +255,7 @@
                                             <a tabindex="-1" href="#">Seguros Panamerican</a>
                                             <ul class="dropdown-menu">
                                                 <li class="dropdown-submenu"></li>
-                                                <li><a href="javascript:excel('/pdf/Red de Proveedores/RED PALIGMED MAYO 2017.xls')">Red De Proveedores</a></li>
+                                                <li><a href="https://paligdirect.com/PSWeb" target="_blank">Red De Proveedores</a></li>
                                             </ul>
                                         </li>
                                         <li class="dropdown-submenu">

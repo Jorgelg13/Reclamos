@@ -17,7 +17,7 @@
                     <asp:ListItem Value="Dias = (select top 1 DATEDIFF( DAY,
                                             (select min(fecha) from bitacora_estados_autos where id_reclamo_auto = reclamo_auto.id),
 		                                    (select max(fecha) from bitacora_estados_autos where id_reclamo_auto = reclamo_auto.id)
-		                                    ) from bitacora_estados_autos  where id_reclamo_auto = reclamo_auto.id) ">Cantidad de Dias</asp:ListItem>
+		                                    ) from bitacora_estados_autos where id_reclamo_auto = reclamo_auto.id) ">Cantidad de Dias</asp:ListItem>
                     <asp:ListItem Value="auto_reclamo.cliente as Cliente">Cliente</asp:ListItem>
                     <asp:ListItem Value="auto_reclamo.vip as VIP">VIP</asp:ListItem>
                     <asp:ListItem Value="auto_reclamo.placa as Placa">Placa</asp:ListItem>
@@ -183,13 +183,13 @@
     <%-- botones circulares con las opciones multiples --%>
     <div id="container-floating">
         <div class="nd4 nds" data-toggle="tooltip" data-placement="left" data-original-title="Simone">
-            <asp:LinkButton ID="linkSalir" CssClass="letter" OnClick="linkSalir_Click" runat="server"><i class="fa fa-times" ></i></asp:LinkButton>
+            <asp:LinkButton ID="linkSalir" CssClass="letter" OnClick="linkSalir_Click" runat="server" ToolTip="Salir"><i class="fa fa-times" ></i></asp:LinkButton>
         </div>
         <div class="nd3 nds" data-toggle="tooltip" data-placement="left" data-original-title="contract@gmail.com">
-            <asp:LinkButton ID="btnExportar" OnClick="btnExportar_Click" CssClass="letter" runat="server"><i class="fa fa-file-excel-o"></i></asp:LinkButton>
+            <asp:LinkButton ID="btnExportar" OnClick="btnExportar_Click" CssClass="letter" runat="server" ToolTip="Exportar a excel"><i class="fa fa-file-excel-o"></i></asp:LinkButton>
         </div>
         <div class="nd1 nds" data-toggle="tooltip" data-placement="left" data-original-title="Edoardo@live.it">
-            <asp:LinkButton ID="btnGenerarTabla" OnClick="btnGenerarTabla_Click" CssClass="letter" autopostback="true" runat="server"><i class="fa fa-table"></i></asp:LinkButton>
+            <asp:LinkButton ID="btnGenerarTabla" OnClick="btnGenerarTabla_Click" CssClass="letter" autopostback="true" runat="server" ToolTip="Generar tabla"><i class="fa fa-table"></i></asp:LinkButton>
         </div>
         <div id="floating-button" data-toggle="tooltip" data-placement="left" data-original-title="Create" onclick="newmail()">
             <p class="plus">+</p>
