@@ -108,6 +108,8 @@
                     <br />
                     <asp:Label ID="lblPoliza" runat="server"></asp:Label>
                     <br />
+                    <asp:Label ID="lblCertificado" runat="server"></asp:Label>
+                    <br />
                     <asp:Label ID="lblRamo" runat="server"></asp:Label>
                     <br />
                     <asp:Label ID="lblTipo" runat="server"></asp:Label>

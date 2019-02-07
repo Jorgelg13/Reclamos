@@ -60,7 +60,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosMedicosGeneral : Syste
 
         else if (idRecibido == "4")
         {
-            seleccionarRegistros += " where reclamos_medicos.fecha_visualizar < GETDATE() and estado_unity not in ('Cerrado','Anulado') and tipo = 'C' ";
+            seleccionarRegistros += " where reclamos_medicos.fecha_visualizar < convert(date,getdate(),103) and estado_unity not in ('Cerrado','Anulado') and tipo = 'C' ";
             llenado.llenarGrid(seleccionarRegistros, GridGeneral);
         }
         

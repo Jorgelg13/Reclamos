@@ -23,7 +23,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesAutos : System.Web.UI.
             checkSinFiltro_CheckedChanged(sender, e);
         }
 
-        if (userlogin == "jsagastume" || userlogin == "jlaj" || userlogin == "jwiesner" || userlogin == "nsierra" || userlogin == "jpazos")
+        if (userlogin == "jsagastume" || userlogin == "jlaj" || userlogin == "jwiesner" || userlogin == "nsierra" || userlogin == "jpazos" || userlogin =="mibarrios")
         {
             btnMostrarEficiencia.Visible = true;
         }
@@ -337,7 +337,6 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesAutos : System.Web.UI.
             ddlBuscar.Visible = false;
         }
     }
-
 
     protected void checkTodos_CheckedChanged(object sender, EventArgs e)
     {

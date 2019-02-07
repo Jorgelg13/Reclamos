@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>Escanear Documentos</title>
 </head>
-<body style="background-color: #131B4D;">
+<body style="background-color: #341b69;">
     <form id="form1" runat="server">
         <div id="dwtcontrolContainer"></div>
         <br />
@@ -16,9 +16,6 @@
             <legend>Elija el archivo que desea escanear</legend>
             <input type="radio" name="tipo" value="Formulario" checked="checked" />Formulario<br />
             <input type="radio" name="tipo" value="Expedientes" />Expedientes<br />
-            <input type="radio" name="tipo" value="Cartas" />Cartas<br />
-            <input type="radio" name="tipo" value="Cheques" />Cheques<br />
-            <input type="radio" name="tipo" value="Imagenes" />Imagenes<br />
             <br />
             <input type="button" value="Escanear" onclick="AcquireImage();" />
             <input type="button" value="Guardar" onclick="UploadImage();" />
@@ -96,7 +93,7 @@
 
                     var server = "reclamosgt.unitypromotores.com"; 
                     //var server = "http://localhost:4000";
-                    var pagina = "/Modulos/MdScanner/GuardarArchivoRA.aspx";
+                    var pagina = "/Scanner/GuardarArchivosCabina.aspx?codigo="+valor;
                     DWObject.IfSSL = true;
                     DWObject.HTTPPort = 443;
                     var archivo = $('input:radio[name=tipo]:checked').val();

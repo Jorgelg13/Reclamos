@@ -129,7 +129,6 @@
         <%--archivos javascripts que se utilizan en el sistema--%>
         <script src="../Scripts/jquery-3.1.1.min.js"></script>
         <script src="../bootstrap/js/bootstrap.min.js"></script>
-        <script src="../Scripts/jquery.cookie.min.js"></script>
         <script src="../Scripts/toastr.min.js"></script>
         <script src="../Scripts/gridviewScroll.min.js"></script>
         <script src="../Scripts/app.js"></script>
