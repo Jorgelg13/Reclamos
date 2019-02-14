@@ -100,7 +100,7 @@ $(document).ready(function () {
         }
         $('#summernote').summernote();
     }
-    catch ($ex) { console.log(""); }
+    catch ($ex) { }
 });
 
 

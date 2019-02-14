@@ -1,5 +1,4 @@
-﻿
-<%@ Master Language="C#" AutoEventWireup="true" CodeFile="~/Site.master.cs" Inherits="SiteMaster" %>
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="Site.master.cs" Inherits="SiteMaster" %>
 
 <!DOCTYPE html>
 <html lang="es">
@@ -14,7 +13,7 @@
     <link rel="icon" href="favicon.ico" type="image/x-icon">
     <asp:ContentPlaceHolder ID="head" runat="server"></asp:ContentPlaceHolder>
 </head>
-<body onLoad="setInterval('notificarme()',300000);">
+<body onLoad="">
     <form runat="server">
         <div class="jumbotron titulo-cabecera">
             <h2 style="width: 781px; padding-bottom: 20px;">Reclamos Unity Promotores</h2>
@@ -56,11 +55,8 @@
                         <span class="icon-bar"></span>
                     </button>
                     <a class="navbar-brand" href="/Default.aspx">Inicio</a>
+                    <a class="navbar-brand" href="/Modulos/Dashboard/DashboardCabina.aspx">Principal</a>
                 </div>
-            <asp:Label ID="totalReclamosAutos" runat="server" hidden="true" ></asp:Label>
-            <asp:Label ID="totalReclamosDaños" runat="server" hidden="true"  ></asp:Label>
-            <asp:Label ID="totalReclamosMedicos" runat="server" hidden="true" ></asp:Label>
-            <asp:Label ID="totalAutorizaciones" runat="server" hidden="true" ></asp:Label>
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
                         <li class="dropdown">
@@ -176,7 +172,6 @@
                                         <li><a href="/pdf/Copagos/Global-Solutions.pdf" target="_blank">Global Solutions</a></li>
                                         <li><a href="/pdf/Copagos/AMICELCO.xlsx">Amicelco</a></li>
                                         <li><a href="/pdf/Copagos/ACEROS.xlsx">Aceros</a></li>
-                                        <li><a href="/pdf/Copagos/GRUPO ENTERO.xlsx">Grupo Entero</a></li>
                                         <li><a href="/pdf/Copagos/LICORERA.xlsx">Licorera</a></li>
                                         <li><a href="/pdf/Copagos/CAJA DE AHORRO.xlsx">Caja de Ahorro</a></li>
                                         <li><a href="/pdf/Copagos/CopagosAlmo.xls">Almo</a></li>
@@ -185,7 +180,6 @@
                                         <li><a href="/pdf/Copagos/ROCHE.xlsx">Roche</a></li>
                                         <li><a href="/pdf/Copagos/TRANSMETAL.xlsx">Transmetal</a></li>
                                         <li><a href="javascript:excel('/pdf/Copagos/CopagosAsetec.xls')">Asetec</a></li>
-                                        <li><a href="/pdf/Copagos/COEX Y AFILIADAS.xlsx">Coex y Afiliadas</a></li>
                                         <li><a href="/pdf/Copagos/Agropecuaria Popoyan POLIZA 856-VDGM.pdf">Agropecuaria Popoyan</a></li>
                                         <li><a href="/pdf/Copagos/Alfa Uno POLIZA 962-001.pdf">Alfa Uno</a></li>
                                         <li><a href="/pdf/Copagos/Aliprac POLIZA 55958.pdf">Aliprac</a></li>
@@ -193,18 +187,15 @@
                                         <li><a href="/pdf/Copagos/Disagro Guatemala.pdf">Disagro Guatemala</a></li>
                                         <li><a href="/pdf/Copagos/Dollarcity.pdf">DollarCity</a></li>
                                         <li><a href="/pdf/Copagos/Ingenio Palo Gordo.pdf">Ingenio Palo Gordo</a></li>
-                                        <li><a href="/pdf/Copagos/Lafrancol.pdf">Lafrancol</a></li>
                                         <li><a href="/pdf/Copagos/Manpower.pdf">Manpower</a></li>
                                         <li><a href="/pdf/Copagos/Oro del Pacifico.pdf">Oro del pacifico</a></li>
                                         <li><a href="/pdf/Copagos/Promotores Unity.pdf">Promotores Unity</a></li>
                                         <li><a href="/pdf/Copagos/Quala.pdf">Quala</a></li>
-                                        <li><a href="/pdf/Copagos/Super Vitaminas.pdf">Super Vitaminas</a></li>
                                         <li><a href="/pdf/Copagos/Tetel.pdf">Tetel</a></li>
                                         <li><a href="/pdf/Copagos/The People Company.pdf">The People Company</a></li>
                                         <li><a href="/pdf/Copagos/Tetel.pdf">Tetel</a></li>
                                         <li><a href="/pdf/Copagos/Volaris.pdf">Volaris</a></li>
                                         <li><a href="/pdf/Copagos/Yara Guatemala.pdf">Yara</a></li>
-                                        <li><a href="/pdf/Copagos/Cuentas Daniela Lima.xlsx">Cuentas Daniela Lima</a></li>
                                         <li><a href="/pdf/Copagos/Cuentas Maribel Cermeño.xlsx">Cuentas Maribel Cermeño</a></li>
                                         <li><a href="/pdf/Copagos/Cuentas Juan Antonio.xls">Cuentas Juan Antonio</a></li>
                                         <li><a href="/pdf/Copagos/Cuentas Marvin Escobar.xls">Cuentas Marvin Escobar</a></li>
@@ -320,52 +311,52 @@
                                             <a tabindex="-1" href="#">Asa</a>
                                             <ul class="dropdown-menu">
                                                 <li class="dropdown-submenu"></li>
-                                                <li><a href="javascript:ventanaSecundaria('pdf/Formularios%20aseguradoras/ASSA/Formulario%20de%20Reclamacion%20Inicial%20de%20Gastos%20Médicos%20(1)ASSA.pdf')">Reclamacion Inicial de Gastos Médicos</a></li>
-                                                <li><a href="javascript:ventanaSecundaria('pdf/Formularios%20aseguradoras/ASSA/Formulario%20de%20Reclamo%20por%20ComplementoASSA.pdf')">Reclamo por ComplementoASSA</a></li>
-                                                <li><a href="javascript:ventanaSecundaria('pdf/Formularios%20aseguradoras/ASSA/Instructivo%20de%20Presentaciòn%20de%20Reclamos%20de%20Gastos%20MèdicosASSA.pdf')">Reclamos de Gastos MèdicosASSA</a></li>
+                                                <li><a href="javascript:ventanaSecundaria('/pdf/Formularios%20aseguradoras/ASSA/Formulario-de-Reclamacion-Inicial.pdf')">Reclamacion Inicial de Gastos Médicos</a></li>
+                                                <li><a href="javascript:ventanaSecundaria('/pdf/Formularios%20aseguradoras/ASSA/Formulario%20de%20Reclamo%20por%20ComplementoASSA.pdf')">Reclamo por ComplementoASSA</a></li>
+                                                <li><a href="javascript:ventanaSecundaria('/pdf/Formularios%20aseguradoras/ASSA/Instructivo%20de%20Presentaciòn%20de%20Reclamos%20de%20Gastos%20MèdicosASSA.pdf')">Reclamos de Gastos MèdicosASSA</a></li>
                                             </ul>
                                         </li>
                                         <li class="dropdown-submenu">
                                             <a tabindex="-1" href="#">Seguros G&T</a>
                                             <ul class="dropdown-menu">
                                                 <li class="dropdown-submenu"></li>
-                                                <li><a href="javascript:ventanaSecundaria('pdf/Formularios%20aseguradoras/GYT/Seguros%20GyT_Formulario%20Unico%20de%20Reclamacion.pdf')">Formulario Unico de Reclamacion</a></li>
+                                                <li><a href="javascript:ventanaSecundaria('/pdf/Formularios%20aseguradoras/GYT/Seguros%20GyT_Formulario%20Unico%20de%20Reclamacion.pdf')">Formulario Unico de Reclamacion</a></li>
                                             </ul>
                                         </li>
                                         <li class="dropdown-submenu">
                                             <a tabindex="-1" href="#">Seguros Mapfre</a>
                                             <ul class="dropdown-menu">
                                                 <li class="dropdown-submenu"></li>
-                                                <li><a href="javascript:ventanaSecundaria('pdf/Formularios%20aseguradoras/MAPFRE/INFORME%20MEDICO%20mapfre.pdf')">INFORME MEDICO mapfre</a></li>
-                                                <li><a href="javascript:ventanaSecundaria('pdf/Formularios%20aseguradoras/MAPFRE/Mapfre_Formulario%20Unico%20de%20Reclamación.pdf')">Mapfre Formulario Unico de Reclamación</a></li>
+                                                <li><a href="javascript:ventanaSecundaria('/pdf/Formularios%20aseguradoras/MAPFRE/INFORME%20MEDICO%20mapfre.pdf')">INFORME MEDICO mapfre</a></li>
+                                                <li><a href="javascript:ventanaSecundaria('/pdf/Formularios%20aseguradoras/MAPFRE/Mapfre_Formulario%20Unico%20de%20Reclamación.pdf')">Mapfre Formulario Unico de Reclamación</a></li>
                                             </ul>
                                         </li>
                                         <li class="dropdown-submenu">
                                             <a tabindex="-1" href="#">Palig</a>
                                             <ul class="dropdown-menu">
                                                 <li class="dropdown-submenu"></li>
-                                                <li><a href="javascript:ventanaSecundaria('pdf/Formularios%20aseguradoras/PALIG/INFORME%20MEDICO%20(2)%20panamerican.pdf')">INFORME MEDICO panamerican</a></li>
-                                                <li><a href="javascript:ventanaSecundaria('pdf/Formularios%20aseguradoras/PALIG/paligexaespeciale.JPG')">Examenes Especiales</a></li>
-                                                <li><a href="javascript:ventanaSecundaria('pdf/Formularios%20aseguradoras/PALIG/Pan%20American%20Life_Formulario%20Unico%20de%20Reclamación.pdf')">Life Formulario Unico de Reclamación</a></li>
-                                                <li><a href="javaScript:ventanaSecundaria('pdf/Formularios%20aseguradoras/PALIG/Pan%20American%20Life_Hospitalizaciones%20Programadas.pdf')">Pan American Life_Hospitalizaciones Programadas</a></li>
-                                                <li><a href="javascript('pdf/Formularios%20aseguradoras/PALIG/Pan%20American%20Life_Reclamos%20gastos%20médicos%20Palig.pdf')">Pan American Life Reclamos gastos médicos Palig</a></li>
-                                                <li><a href="javascript:ventanaSecundaria('pdf/Formularios%20aseguradoras/PALIG/Pan%20American%20Life_Solicitud%20de%20autorizacion%20de%20vacunas.pdf')">Pan American Life Solicitud de autorizacion de vacunas</a></li>
-                                                <li><a href="javascript:ventanaSecundaria('pdf/Formularios%20aseguradoras/PALIG/Pan%20American%20Life_Solicitud%20de%20Reclamacion%20de%20Dental.pdf')">Pan American Life Solicitud de Reclamacion de Dental</a></li>
-                                                <li><a href="javascript:ventanaSecundaria('pdf/Formularios%20aseguradoras/PALIG/Pan%20American%20Life_Terapia%20fisica%20y%20rehabilitacion.pdf')">American Life Terapia fisica y rehabilitacion</a></li>
+                                                <li><a href="javascript:ventanaSecundaria('/pdf/Formularios%20aseguradoras/PALIG/INFORME%20MEDICO%20(2)%20panamerican.pdf')">INFORME MEDICO panamerican</a></li>
+                                                <li><a href="javascript:ventanaSecundaria('/pdf/Formularios%20aseguradoras/PALIG/paligexaespeciale.JPG')">Examenes Especiales</a></li>
+                                                <li><a href="javascript:ventanaSecundaria('/pdf/Formularios%20aseguradoras/PALIG/Pan%20American%20Life_Formulario%20Unico%20de%20Reclamación.pdf')">Life Formulario Unico de Reclamación</a></li>
+                                                <li><a href="javaScript:ventanaSecundaria('/pdf/Formularios%20aseguradoras/PALIG/Pan%20American%20Life_Hospitalizaciones%20Programadas.pdf')">Pan American Life_Hospitalizaciones Programadas</a></li>
+                                                <li><a href="javascript('/pdf/Formularios%20aseguradoras/PALIG/Pan%20American%20Life_Reclamos%20gastos%20médicos%20Palig.pdf')">Pan American Life Reclamos gastos médicos Palig</a></li>
+                                                <li><a href="javascript:ventanaSecundaria('/pdf/Formularios%20aseguradoras/PALIG/Pan%20American%20Life_Solicitud%20de%20autorizacion%20de%20vacunas.pdf')">Pan American Life Solicitud de autorizacion de vacunas</a></li>
+                                                <li><a href="javascript:ventanaSecundaria('/pdf/Formularios%20aseguradoras/PALIG/Pan%20American%20Life_Solicitud%20de%20Reclamacion%20de%20Dental.pdf')">Pan American Life Solicitud de Reclamacion de Dental</a></li>
+                                                <li><a href="javascript:ventanaSecundaria('/pdf/Formularios%20aseguradoras/PALIG/Pan%20American%20Life_Terapia%20fisica%20y%20rehabilitacion.pdf')">American Life Terapia fisica y rehabilitacion</a></li>
                                             </ul>
                                         </li>
                                         <li class="dropdown-submenu">
                                             <a tabindex="-1" href="#">Seguros El Roble</a>
                                             <ul class="dropdown-menu">
                                                 <li class="dropdown-submenu"></li>
-                                                <li><a href="javascript:ventanaSecundaria:('pdf/Formularios%20aseguradoras/ROBLE/El%20Roble_Formulario%20Unico%20Reclamacion.pdf')">Formulario Unico Reclamacion</a></li>
-                                                <li><a href="javascript:ventanaSecundaria('pdf/Formularios%20aseguradoras/ROBLE/El%20Roble_Solicitud%20Hospitalizacion.pdf')">Solicitud Hospitalizacion</a></li>
-                                                <li><a href="javascript:ventanaSecundaria('pdf/Formularios%20aseguradoras/ROBLE/El%20Roble_Solicitud%20Procedimientos.pdf')">Solicitud Procedimientos</a></li>
-                                                <li><a href="javascript:ventanaSecundaria('pdf/Formularios%20aseguradoras/ROBLE/ORDEN%20DE%20LABORATORIO.pdf')">ORDEN DE LABORATORIO</a></li>
-                                                <li><a href="javascript:ventanaSecundaria('pdf/Formularios%20aseguradoras/ROBLE/ORDEN%20DE%20RADIOLOGIA.pdf')">ORDEN DE RADIOLOGIA.pdf</a></li>
-                                                <li><a href="javascript:ventanaSecundaria('pdf/Formularios%20aseguradoras/ROBLE/RECETAroble.pdf')">RECETA Roble</a></li>
-                                                <li><a href="javascript:ventanaSecundaria('pdf/Formularios%20aseguradoras/ROBLE/ROBLE%20GASTOS%20M%20EDITABLE-3.pdf')">ROBLE GASTOS M EDITABLE</a></li>
-                                                <li><a href="javascript:ventanaSecundaria('pdf/Formularios%20aseguradoras/ROBLE/SOLICITUD%20DE%20PROCEDIMIENTOS.pdf')">SOLICITUD DE PROCEDIMIENTOS</a></li>
+                                                <li><a href="javascript:ventanaSecundaria:('/pdf/Formularios%20aseguradoras/ROBLE/El%20Roble_Formulario%20Unico%20Reclamacion.pdf')">Formulario Unico Reclamacion</a></li>
+                                                <li><a href="javascript:ventanaSecundaria('/pdf/Formularios%20aseguradoras/ROBLE/El%20Roble_Solicitud%20Hospitalizacion.pdf')">Solicitud Hospitalizacion</a></li>
+                                                <li><a href="javascript:ventanaSecundaria('/pdf/Formularios%20aseguradoras/ROBLE/El%20Roble_Solicitud%20Procedimientos.pdf')">Solicitud Procedimientos</a></li>
+                                                <li><a href="javascript:ventanaSecundaria('/pdf/Formularios%20aseguradoras/ROBLE/ORDEN%20DE%20LABORATORIO.pdf')">ORDEN DE LABORATORIO</a></li>
+                                                <li><a href="javascript:ventanaSecundaria('/pdf/Formularios%20aseguradoras/ROBLE/ORDEN%20DE%20RADIOLOGIA.pdf')">ORDEN DE RADIOLOGIA.pdf</a></li>
+                                                <li><a href="javascript:ventanaSecundaria('/pdf/Formularios%20aseguradoras/ROBLE/RECETAroble.pdf')">RECETA Roble</a></li>
+                                                <li><a href="javascript:ventanaSecundaria('/pdf/Formularios%20aseguradoras/ROBLE/ROBLE%20GASTOS%20M%20EDITABLE-3.pdf')">ROBLE GASTOS M EDITABLE</a></li>
+                                                <li><a href="javascript:ventanaSecundaria('/pdf/Formularios%20aseguradoras/ROBLE/SOLICITUD%20DE%20PROCEDIMIENTOS.pdf')">SOLICITUD DE PROCEDIMIENTOS</a></li>
                                             </ul>
                                         </li>
                                     </ul>
@@ -484,16 +475,7 @@
             </div>
         </div>
         </nav>
-        <script> 
-            function ventanaSecundaria(URL) {
-                window.open(URL, "ventana1", "width=800,height=600,scrollbars=NO")
-            }
-        </script>
-        <script> 
-            function excel(URL) {
-                window.open(URL, "ventana1", "width=450,height=150,scrollbars=NO")
-            }
-        </script>
+        
            <div id="body">
             <asp:ContentPlaceHolder runat="server" ID="FeaturedContent">
             </asp:ContentPlaceHolder>
@@ -525,6 +507,14 @@
                     }
                 });
             });
+
+            function ventanaSecundaria(URL) {
+                window.open(URL, "ventana1", "width=800,height=600,scrollbars=NO");
+            }
+
+            function excel(URL) {
+                window.open(URL, "ventana1", "width=450,height=150,scrollbars=NO");
+            }
         </script>
         <asp:ContentPlaceHolder ID="contentJS" runat="server">
         </asp:ContentPlaceHolder>

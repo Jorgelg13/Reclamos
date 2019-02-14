@@ -257,6 +257,8 @@
                                 <br />
                                 <p>
                                     Firma de quien entrega papeleria:____________________________________       Fecha Recepcion:
+                                    </p>
+                                <p>
                                     <asp:Label Style="font-size: 13px;" runat="server" ID="lblfechaCreacion"></asp:Label>
                                 </p>
                             </div>
@@ -786,17 +788,6 @@
             </div>
         </div>
     </div>
-    <%------------------------------------------------ funcion javascript para imprimir un div en especifico ------------------------------------------%>
-    <script>
-        function printDiv(imprimir) {
-            var contenido = document.getElementById(imprimir).innerHTML;
-            var contenidoOriginal = document.body.innerHTML;
-            document.body.innerHTML = contenido;
-            window.print();
-            document.body.innerHTML = contenidoOriginal;
-            window.location.reload(true);
-        }
-    </script>
     <%--------------------------  modal para enviar correos electronicos a los clientes -----------------------------%>
     <div class="modal fade" id="exampleModal" data-keyboard="false" data-backdrop="static">
         <div class="modal-dialog">
@@ -1089,6 +1080,15 @@
             var alto = $(window).height() - 200;
             var ancho = $(window).width() - 700;
             window.open('http://52.34.115.100:5556/explorador.html#files%2FGastosMedicos/' + ruta, "ventana1", "width=" + ancho + ",height=" + alto + ",scrollbars=NO")
+        }
+
+ function printDiv(imprimir) {
+            var contenido = document.getElementById(imprimir).innerHTML;
+            var contenidoOriginal = document.body.innerHTML;
+            document.body.innerHTML = contenido;
+            window.print();
+            document.body.innerHTML = contenidoOriginal;
+            window.location.reload(true);
         }
     </script>
 </asp:Content>

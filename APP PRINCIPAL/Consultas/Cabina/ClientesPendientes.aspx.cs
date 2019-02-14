@@ -33,7 +33,7 @@ public partial class Consultas_Cabina_ClientesPendientes : System.Web.UI.Page
                 try
                 {
                     var cliente = DB.clientes.Find(id);
-                    cliente.estado = "a";
+                   // cliente.estado = "a";
                     DB.SaveChanges();
                     Utils.ShowMessage(this.Page, "Reclamos asignados exitosamente", "Excelente", "success");
                 }

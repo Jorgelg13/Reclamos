@@ -583,7 +583,7 @@
         });
 
         $("#enviar").click(function () {
-            $.post("http://192.168.81.225:9595/api/v1/encuesta/guardar",
+            $.post("/api/v1/encuesta/guardar",
                 {
                     "empresa": valor,
                     "servicio": "servicio",

@@ -46,7 +46,7 @@ public partial class Modulos_MdReclamos_wbFrmReclamoMedicoManual : System.Web.UI
             int id1 = Convert.ToInt32(idCabina);
             int id2 = Convert.ToInt32(idUsuario);
 
-            if (txtAseguradoTitular.Text == null)
+            if (txtAseguradoTitular.Text == "")
             {
                 Utils.ShowMessage(this.Page, "El campo asegurado es obligatorio", "info");
             }

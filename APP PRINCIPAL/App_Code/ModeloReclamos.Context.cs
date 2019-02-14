@@ -63,6 +63,7 @@ public partial class ReclamosEntities : DbContext
     public DbSet<ejecutivos> ejecutivos { get; set; }
     public DbSet<empresa> empresa { get; set; }
     public DbSet<encuesta> encuesta { get; set; }
+    public DbSet<encuesta_recepcion> encuesta_recepcion { get; set; }
     public DbSet<errores_insercion> errores_insercion { get; set; }
     public DbSet<estado> estado { get; set; }
     public DbSet<estados_reclamos_unity> estados_reclamos_unity { get; set; }
@@ -72,7 +73,6 @@ public partial class ReclamosEntities : DbContext
     public DbSet<motivos_cierre> motivos_cierre { get; set; }
     public DbSet<movimientos> movimientos { get; set; }
     public DbSet<pais> pais { get; set; }
-    public DbSet<Presupuestos> Presupuestos { get; set; }
     public DbSet<ramos> ramos { get; set; }
     public DbSet<recibos_medicos> recibos_medicos { get; set; }
     public DbSet<reclamo_auto> reclamo_auto { get; set; }

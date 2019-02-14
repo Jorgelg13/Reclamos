@@ -43,10 +43,13 @@ public partial class Modulos_MdReclamosUnity_wbFrmAsignarChequeGM : System.Web.U
         try
         {
             int id;
-            var usuario = DBReclamos.usuario.Where(us => us.nombre == userlogin).First();
             id = Convert.ToInt32(GridGeneral.SelectedRow.Cells[1].Text);
+
+            var usuario = DBReclamos.usuario.Where(us => us.nombre == userlogin).First();
             var reclamo = DBReclamos.reclamos_medicos.Find(id);
+
             detalle_pagos_reclamos_medicos pago = new detalle_pagos_reclamos_medicos();
+
             pago.banco = ddlBanco.SelectedItem.Text;
             pago.monto = Convert.ToDecimal(txtMontoCheque.Text);
             pago.no_cheque = txtNumeroCheque.Text;
@@ -87,9 +90,10 @@ public partial class Modulos_MdReclamosUnity_wbFrmAsignarChequeGM : System.Web.U
             txtNumeroCheque.Text = "";
         }
 
-        catch(Exception)
+        catch(Exception ex)
         {
-            Utils.ShowMessage(this.Page, "No se a podido efectuar el ingreso del cheque", "Error..!", "error");
+            //  Utils.ShowMessage(this.Page, "No se a podido efectuar el ingreso del cheque" + ex.Message, "Error..!", "error");
+            Response.Write(ex);
         }
     }
 }
