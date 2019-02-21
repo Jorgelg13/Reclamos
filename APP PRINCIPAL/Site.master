@@ -153,6 +153,7 @@
                                     <a tabindex="-1" href="#">Copagos</a>
                                     <ul class="dropdown-menu">
                                         <li class="dropdown-submenu"></li>
+					<li><a href="/pdf/Copagos/ENERGUATE.pdf" target="_blank">Energuate</a></li>
                                         <li><a href="/pdf/Copagos/NOVARTIS.pdf" target="_blank">Novartis</a></li>
                                         <li><a href="/pdf/Copagos/RAYOVAC.pdf" target="_blank">Rayovac</a></li>
                                         <li><a href="/pdf/Copagos/PALIGMED.pdf" target="_blank">Paligmed</a></li>

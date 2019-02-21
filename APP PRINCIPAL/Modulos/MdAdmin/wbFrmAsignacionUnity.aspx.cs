@@ -38,33 +38,21 @@ public partial class Modulos_MdAdmin_wbFrmAsignacionUnity : System.Web.UI.Page
             "auto_reclamo.poliza as Poliza," +
             "auto_reclamo.placa as Placa," +
             "auto_reclamo.marca as Marca," +
-            //"auto_reclamo.color as Color," +
-            //"auto_reclamo.modelo as Modelo," +
-            //"auto_reclamo.chasis as Chasis," +
-            //"auto_reclamo.motor as Motor," +
             "auto_reclamo.propietario as Propietario," +
             "auto_reclamo.ejecutivo as Ejecutivo," +
             "auto_reclamo.aseguradora as Aseguradora," +
             "auto_reclamo.contratante as Contratante," +
-            //"auto_reclamo.estado_poliza," +
             "reclamo_auto.boleta as Boleta," +
             "reclamo_auto.titular as Titular," +
             "reclamo_auto.hora as Hora," +
             "reclamo_auto.fecha as Fecha," +
-            //"reclamo_auto.fecha_commit as [Fecha Creacion]," +
-            //"reclamo_auto.fecha_cierre as [Fecha Cierre Cabina]," +
             "reclamo_auto.ubicacion as Ubicacion," +
             "reclamo_auto.reportante as Reportante," +
             "reclamo_auto.piloto as Piloto," +
-            //"reclamo_auto.edad as Edad," +
             "reclamo_auto.telefono as Telefono," +
             "reclamo_auto.ajustador as Ajustador," +
             "reclamo_auto.tipo_servicio as [Tipo Servicio]," +
             "reclamo_auto.version," +
-            //"cabina.nombre as Cabina," +
-            //"sucursal.nombre as Sucursal," +
-            //"empresa.nombre as Empresa," +
-            //"pais.nombre as Pais," +
             "usuario.nombre as [usuario cabina] " +
             "FROM auto_reclamo " +
             "INNER JOIN reclamo_auto ON reclamo_auto.id_auto_reclamo = auto_reclamo.id " +
@@ -132,29 +120,5 @@ public partial class Modulos_MdAdmin_wbFrmAsignacionUnity : System.Web.UI.Page
         Utils.actividades(0, Constantes.AUTOS(), 43, Constantes.USER());
         Utils.TituloReporte(PnPrincipal, lblPeriodo, lblFechaGeneracion, lblUsuario, lblTitulo, "Reporte de Asignaciones / Depto. Reclamos Autos", userlogin, fechaInicio, fechaFinal, "");
         Utils.ExportarExcel(PnPrincipal,Response, "Asignaciones autos del " + fechaInicio.Text + " al " + fechaFinal.Text);
-    }
-
-    public void correo()
-    {
-        try
-        {
-            SmtpMail oMail = new SmtpMail("TryIt");
-            SmtpClient oSmtp = new SmtpClient();
-            oMail.From =new MailAddress("reclamosgt@unitypromotores.com");
-            oMail.To =new AddressCollection("jorgelg132012@gmail.com");
-            oMail.Subject = "test email";
-            oMail.TextBody = "this is a test email sent from c# queue";         
-
-            SmtpServer oServer = new SmtpServer("smtp.office365.com");
-            oServer.User = "reclamosgt@unitypromotores.com";
-            oServer.Password = "123$456R";
-            oServer.ConnectType = SmtpConnectType.ConnectSSLAuto;
-     
-            oSmtp.SendMailToQueue(oServer, oMail);
-        }
-        catch (Exception ex)
-        {
-            Response.Write(ex);
-        }
     }
 }
