@@ -1,4 +1,5 @@
 ﻿body {
+
 }
 
 .jumbotron {
@@ -7,13 +8,32 @@
     font-size: 14px;
     background-color: #131B4D;
     margin: -3px;
-    padding-bottom: 0px;
+    padding-bottom: 7px;
     margin-bottom: -15px;
 }
 
-.panel-info
-{
-    padding:0px;
+.MyHeader {
+    position: fixed;
+    width: 100%;
+    z-index: 1;
+}
+
+.sticky {
+    position: fixed;
+    top: 0;
+    width: 100%;
+}
+
+.dropdown .dropdown-toggle {
+    font-size:13px !important;
+}
+
+    .dropdown .dropdown-toggle .dropdown-menu, li {
+        font-size: 13px !important;
+    }
+
+.panel-info {
+    padding: 0px;
 }
 
 .scrolling-table-container {
@@ -508,3 +528,5 @@ a {
     -webkit-font-feature-settings: 'liga';
     -webkit-font-smoothing: antialiased;
 }
+
+

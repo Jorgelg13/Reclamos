@@ -76,7 +76,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosAutosSeguimiento : Sys
             tiempo();
         }
 
-        if (userlogin == "nsierra" || userlogin == "jlaj")
+        if (userlogin == "nsierra" || userlogin == "jlaj" || userlogin == "mbarrios")
         {
             btnGuardarProximaFecha.Enabled = true;
         }
