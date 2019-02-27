@@ -59,7 +59,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmRecDañosSeguimiento : System.
                " where ((reclamos_varios.complicado = 'true') and (reclamos_varios.usuario_unity = '" + userlogin + "' and reclamos_varios.estado_unity = 'Seguimiento' ))";
 
         string inactivos = selectGeneral +
-              " where usuario_unity = '" + userlogin + "' and estado_unity = 'Seguimiento' and DATEDIFF(DAY, fecha_visualizar, GETDATE()) >= 43  and estado_reclamo_unity = 'Pendiente Asegurado' ";
+              " where usuario_unity = '" + userlogin + "' and estado_unity = 'Seguimiento' and DATEDIFF(DAY, fecha_visualizar, convert(date,getdate(),103) ) >= 50  and estado_reclamo_unity = 'Pendiente Asegurado' ";
 
         alarmas = selectGeneral + " where reclamos_varios.estado_unity = 'Seguimiento' and convert(date, reclamos_varios.fecha_visualizar,112) < getdate() order by gestores.nombre, reclamos_varios.fecha_visualizar";
 

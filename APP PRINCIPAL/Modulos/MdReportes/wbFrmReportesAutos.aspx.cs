@@ -33,7 +33,11 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesAutos : System.Web.UI.
             btnMostrarEficiencia.Visible = false;
         }
 
-        eficienciaGestores = "select rs.nombre as Usuario, rs.Pendientes, rs.Nuevos, rs.Cerrados , " +
+        eficienciaGestores = "select " +
+            "rs.nombre as Usuario, " +
+            "rs.Pendientes, " +
+            "rs.Nuevos, " +
+            "rs.Cerrados , " +
             "CAST(cast((rs.Cerrados * 100) / (rs.Pendientes + nuevos) as decimal) as varchar)  as Ejecucion " +
             "from(select r.nombre, " +
             "Pendientes = (select COUNT(*) from reclamo_auto where estado_unity = 'Seguimiento' and id_gestor = r.id)," +

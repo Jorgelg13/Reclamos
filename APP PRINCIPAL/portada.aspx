@@ -8,7 +8,7 @@
         </div>
         <div class="col-md-10">
             <div>
-                <p style="font-size: 70px; text-align: center"><a href="Account/Login" class="fa fa-user" aria-hidden="true">Sistema De Reclamos Inicie Sesion</a></p>
+                <p style="font-size: 70px; text-align: center"><a href="Account/Login" class="fa fa-user">Sistema De Reclamos Inicie Sesion</a></p>
             </div>
             <div class="img-float-center" style="text-align: center;">
                 <a href="Account/Login"><img src="imgUnity/unity.png" /></a> 

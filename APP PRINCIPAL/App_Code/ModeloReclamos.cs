@@ -280,9 +280,6 @@ public partial class clientes
     public string correo { get; set; }
     public string telefono { get; set; }
     public Nullable<System.DateTime> fechareg { get; set; }
-    public string tipo_consulta { get; set; }
-    public string empresa { get; set; }
-    public string estado { get; set; }
 }
 
 public partial class coberturas
@@ -526,6 +523,23 @@ public partial class encuesta
     public string comentario3 { get; set; }
     public string comentario { get; set; }
     public Nullable<System.DateTime> fecha { get; set; }
+    public string telefono { get; set; }
+    public string nombre { get; set; }
+}
+
+public partial class encuesta_recepcion
+{
+    public int id { get; set; }
+    public string empresa { get; set; }
+    public Nullable<short> pregunta1 { get; set; }
+    public string clasificacion1 { get; set; }
+    public string comentario1 { get; set; }
+    public string tipo_servicio { get; set; }
+    public Nullable<short> pregunta2 { get; set; }
+    public string clasificacion2 { get; set; }
+    public string comentario2 { get; set; }
+    public Nullable<short> pregunta3 { get; set; }
+    public Nullable<System.DateTime> fecha { get; set; }
 }
 
 public partial class errores_insercion
@@ -688,18 +702,6 @@ public partial class pais
     public string codigo_pais { get; set; }
 
     public virtual ICollection<empresa> empresa { get; set; }
-}
-
-public partial class Presupuestos
-{
-    public int Idtrans { get; set; }
-    public string cod_empresa { get; set; }
-    public string cod_depto { get; set; }
-    public string cod_centro { get; set; }
-    public string num_cuenta { get; set; }
-    public Nullable<int> year { get; set; }
-    public Nullable<int> mes { get; set; }
-    public Nullable<double> monto { get; set; }
 }
 
 public partial class ramos
@@ -1136,7 +1138,6 @@ public partial class usuario
     public string sucursal { get; set; }
     public string cabina { get; set; }
     public Nullable<short> codigo { get; set; }
-    public Nullable<int> gestor_acs { get; set; }
 
     public virtual ICollection<autorizaciones> autorizaciones { get; set; }
     public virtual cabina cabina1 { get; set; }

@@ -13,7 +13,7 @@
                     <asp:GridView ID="GridReclamosMedicos" runat="server" CssClass="table bs-table table-responsive table-hover" CellPadding="4" ForeColor="#333333" GridLines="None" AutoGenerateColumns="False" DataSourceID="SqlDataSourceReclamosMedicosGeneral">
                         <AlternatingRowStyle BackColor="White" />
                         <Columns>
-                            <asp:HyperLinkField DataNavigateUrlFields="id" DataNavigateUrlFormatString="/Modulos/MdReclamos/wbFrmReclamosMedicosEditar.aspx?ID_reclamo={0}" DataTextField="asegurado">
+                            <asp:HyperLinkField DataNavigateUrlFields="id" DataNavigateUrlFormatString="/Modulos/MdReclamos/wbFrmReclamosMedicosEditar.aspx?ID_reclamo={0}" DataTextField="titular">
                                 <HeaderStyle HorizontalAlign="Center" Wrap="False" />
                                 <ItemStyle HorizontalAlign="Left" Wrap="False" />
                             </asp:HyperLinkField>
@@ -72,6 +72,7 @@
                         reclamos_medicos.hora_commit, 
                         reclamos_medicos.fecha_commit, 
                         reg_reclamos_medicos.asegurado,
+                        reclamos_medicos.titular,
                         reg_reclamos_medicos.poliza, 
                         reg_reclamos_medicos.aseguradora, 
                         reg_reclamos_medicos.contratante, 

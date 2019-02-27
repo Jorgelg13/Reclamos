@@ -1,5 +1,4 @@
 ﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="ReclamosUnity.master.cs" Inherits="ReclamosUnity" %>
-
 <!DOCTYPE html>
 <html lang="es">
 <head runat="server">
@@ -11,8 +10,6 @@
     <link href="css/estilos.css" rel="stylesheet" />
     <link href="Scripts/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" />
     <link href="css/toastr.min.css" rel="stylesheet" />
-    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
-    <link href="css/GridviewScroll.css" rel="stylesheet" />
     <link href="Scripts/FlipClock/compiled/flipclock.css" rel="stylesheet" />
     <link href="css/estilosContador.css" rel="stylesheet" />
     <script type="text/javascript">
@@ -60,6 +57,7 @@
                     <span class="icon-bar"></span>
                 </button>
                 <a class="navbar-brand" href="/Default.aspx">Inicio</a>
+                <a class="navbar-brand" href="/Modulos/Dashboard/DashboardUnity.aspx">Principal</a>
             </div>
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
@@ -171,19 +169,18 @@
         <script type="text/javascript" src="<%= ResolveUrl("/bootstrap/js/bootstrap.min.js") %>"></script>
         <script type="text/javascript" src="<%= ResolveUrl("/Scripts/jquery.cookie.min.js") %>"></script>
         <script type="text/javascript" src="<%= ResolveUrl("/Scripts/toastr.min.js") %>"></script>
-        <script type="text/javascript" src="<%= ResolveUrl("/Scripts/gridviewScroll.min.js") %>"></script>
         <script type="text/javascript" src="<%= ResolveUrl("/Scripts/summernote.min.js") %>"></script>
         <script type="text/javascript" src="<%= ResolveUrl("/Scripts/jQuery.print.min.js") %>"></script>
         <script type="text/javascript" src="<%= ResolveUrl("/Scripts/FlipClock/compiled/flipclock.min.js") %>"></script>
         <script type="text/javascript" src="<%= ResolveUrl("/Scripts/app.js") %>"></script>
-        <script type="text/javascript" src="<%= ResolveUrl("Scripts/contador.js") %>"></script>
+        <script type="text/javascript" src="<%= ResolveUrl("/Scripts/contador.js") %>"></script>
         <script type='text/javascript'>
             $(window).on('load', function () {
                 $('.loading-screen').attr('style', 'display:none');
             });
 
             $(function () {
-                $(':button,:submit,:a').click(function () {
+                $(':button,:submit').click(function () {
                     
                         $attrLogin = $('.loading-screen').attr('style');
                         if ($attrLogin == "") {

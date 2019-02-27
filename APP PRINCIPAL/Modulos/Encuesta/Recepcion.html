@@ -417,7 +417,7 @@
                             pregunta3 = $(this).attr('data-value');
                             var $dot = $(this);
 
-                            $.post("https://192.168.81.225:9595/api/v1/encuesta/guardar",
+                            $.post("/api/v1/encuesta/guardar",
                                 {   
                                     "table_name": tabla,
                                     "empresa": valor,

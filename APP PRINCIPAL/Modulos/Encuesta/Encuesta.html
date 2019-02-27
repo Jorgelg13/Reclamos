@@ -287,7 +287,6 @@
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
     <script type="text/javascript" src="js/jquery.ba-cond.min.js"></script>
     <script type="text/javascript" src="js/jquery.slitslider.js"></script>
-    <script src="../../Scripts/toastr.min.js"></script>
     <script type="text/javascript">
         (function ($) {
             $.get = function (key) {
@@ -583,7 +582,7 @@
         });
 
         $("#enviar").click(function () {
-            $.post("http://192.168.81.225:9595/api/v1/encuesta/guardar",
+            $.post("/api/v1/encuesta/guardar",
                 {
                     "empresa": valor,
                     "servicio": "servicio",
