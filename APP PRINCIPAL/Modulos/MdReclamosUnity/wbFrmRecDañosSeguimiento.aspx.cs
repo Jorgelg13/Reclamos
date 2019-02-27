@@ -12,7 +12,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmRecDañosSeguimiento : System.
 
     protected void Page_Load(object sender, EventArgs e)
     {
-        if (userlogin == "cmejia" || userlogin == "jlaj" || userlogin == "jsagastume")
+        if (userlogin == "cmejia" || userlogin == "jlaj" || userlogin == "jsagastume" || userlogin == "mbarrios")
         {
             PnAlarmas.Visible = true;
         }
