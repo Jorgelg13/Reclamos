@@ -18,16 +18,14 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosMedicosSeguimientos : 
     Utils llenado = new Utils();
     Utils actualizar = new Utils();
     DateTime thisDay = DateTime.Today;
-    string metodo = "sistema";
-    string idRecibido; //id de la ultima transaccion de la tabla reclamo_auto
-    String comentarios, Documentos, pagos, datosReclamos, detalle_gastos, detalle_gastos2, updateFecha, correo, simbolo, MinimaFechaGastoMedico;
-    int id, totalDias, identificadorPago;
+    String metodo = "sistema";
+    String idRecibido,comentarios, Documentos, pagos, datosReclamos, detalle_gastos, detalle_gastos2, updateFecha, correo, simbolo, MinimaFechaGastoMedico;
+    String mensaje;
     Double total;
     Decimal sumaTotal;
-    Double montoReclamado, montoAprobado, montoNoCubierto, montoConIva, montoConDeducible, deducible, iva, 
-           timbres, coaseguro, montoTotal, totalIva, totalCoaseguro,totalTimbres;
+    Double montoReclamado, montoAprobado, montoNoCubierto, montoConIva, montoConDeducible, deducible, iva, timbres, coaseguro, montoTotal, totalIva, totalCoaseguro,totalTimbres;
     bool bandera_asegurado;
-    String mensaje = "UNITY: Estimad@ cliente hemos gestionado su reclamo, el siguiente dia habil estara siendo entregado en la Aseguradora.";
+    int id, totalDias, identificadorPago;
 
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -35,9 +33,10 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosMedicosSeguimientos : 
         id = Int32.Parse(idRecibido);
         Session.Add("id_RM", id.ToString());
         lblId.Text   = "<b>No.</b>" + id.ToString();
-        labelID.Text = "<b>ID: </b>" + id.ToString();
-        lblFechaEnvioCliente.Text = thisDay.ToString("D");
+        labelID.Text = "<b>ID:</b>" + id.ToString();
         lblIdOculto.Text = idRecibido;
+        lblFechaEnvioCliente.Text = thisDay.ToString("D");
+        mensaje = "UNITY: Estimado cliente hemos revisado su reclamo ID "+id.ToString()+" y se estará enviando a la Aseguradora el siguiente día hábil, para los trámites correspondientes.";
 
         Documentos  = Consultas.DOCUMENTOS_GM(id);
         comentarios = Consultas.COMENTARIOS_GM(id);
@@ -60,6 +59,8 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosMedicosSeguimientos : 
 
         else
         {
+            panelInformacion.Visible = true;
+            panelPrincipal.Visible = false;
             Utils.ShowMessage(this.Page, "Este reclamo no esta aperturado", "Nota..!", "error");
         }
     }
@@ -74,7 +75,6 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosMedicosSeguimientos : 
             {
                 aperturado = false;
                 panelPrincipal.Visible = false;
-                panelInformacion.Visible = true;
             }
         }
 
@@ -116,8 +116,8 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosMedicosSeguimientos : 
             txtNumReclamo.Text      = reclamo.num_reclamo;
             txtObservaciones.Text.Replace("<br/>", "\n");
             ddlMonedaPoliza.SelectedValue = String.IsNullOrEmpty(reclamo.reg_reclamos_medicos.moneda) ? "Quetzales" : reclamo.reg_reclamos_medicos.moneda;
-            ddlNoConforme.SelectedValue = String.IsNullOrEmpty(reclamo.detalle_no_conforme) ? "" : reclamo.detalle_no_conforme;
-            txtObservacionesNoConf.Text = reclamo.observacion_no_conforme;
+            ddlNoConforme.SelectedValue   = String.IsNullOrEmpty(reclamo.detalle_no_conforme) ? "" : reclamo.detalle_no_conforme;
+            txtObservacionesNoConf.Text   = reclamo.observacion_no_conforme;
 
             //Informacion lateral derecha
             lblEstadoReclamo.Text = ddlEstado.SelectedItem.Text;
@@ -147,11 +147,11 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosMedicosSeguimientos : 
             lblCartaDestinatario.Text = "Depto de reclamos de " + reclamo.reg_reclamos_medicos.aseguradora;
             lblCartaEjecutivo.Text = reclamo.reg_reclamos_medicos.ejecutivo;
 
-            lblCartaPoliza.Text = reclamo.reg_reclamos_medicos.poliza;
-            lblCartaContratante.Text = reclamo.empresa;
             lblCartaId.Text = reclamo.id.ToString();
+            lblCartaPoliza.Text        = reclamo.reg_reclamos_medicos.poliza;
+            lblCartaContratante.Text   = reclamo.empresa;
             lblCartaFechaCreacion.Text = reclamo.fecha_commit.ToString();
-            lblCartaEjecutivo2.Text = reclamo.reg_reclamos_medicos.ejecutivo;
+            lblCartaEjecutivo2.Text    = reclamo.reg_reclamos_medicos.ejecutivo;
             lblCartaAseguradoPrincipal.Text = reclamo.titular;
             lblCartaCertificado.Text = reclamo.reg_reclamos_medicos.certificado;
             lblCartaDependiente.Text = reclamo.reg_reclamos_medicos.asegurado;
@@ -199,7 +199,6 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosMedicosSeguimientos : 
 
         catch (Exception ex)
         {
-           // Response.Write(ex);
             Utils.ShowMessage(this.Page, "Error al traer los datos del asegurado " + ex.Message, "Nota..!", "warning");
         }
     }
@@ -253,7 +252,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosMedicosSeguimientos : 
 
     protected void btnCancelar_Click(object sender, EventArgs e)
     {
-        Response.Redirect("/Default.aspx");
+        Response.Redirect("/Default.aspx",false);
     }
     //agregar un comentario nuevo
     private void agregarComentario(String descripcion)
@@ -349,7 +348,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosMedicosSeguimientos : 
                 DBReclamos.SaveChanges();
                 GridDetalleM.DataBind();
                 totalDetalleGasto(id);
-                Response.Redirect("/Modulos/MdReclamosUnity/wbFrmReclamosMedicosSeguimiento.aspx?ID_reclamo=" + identificador);
+                Response.Redirect("/Modulos/MdReclamosUnity/wbFrmReclamosMedicosSeguimiento.aspx?ID_reclamo=" + identificador,false);
             }
             catch (Exception)
             {
@@ -727,15 +726,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosMedicosSeguimientos : 
                 lblFechaGastoMedico.Text   = MinimaFechaGastoMedico;
                 lblMemoContratante.Text    = txtContacto.Text + " <br /> " + RecMemoCliente.empresa;
                 lblMemoAsunto.Text         = "Reclamo No. " + txtNumReclamo.Text;
-
-                if (ddlDirecciones.Items.Count > 0)
-                {
-                    lblMemoDireccion.Text = ddlDirecciones.SelectedItem.Text;
-                }
-                else
-                {
-                    lblMemoDireccion.Text = txtDireccion.Text;
-                }
+                lblMemoDireccion.Text = ddlDirecciones.Items.Count > 0 ? ddlDirecciones.SelectedItem.Text : txtDireccion.Text;
 
                 if(txtEjecutivo.Text != "")
                 {
@@ -765,14 +756,14 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosMedicosSeguimientos : 
                     }
                     else if(ddlDestino.SelectedValue == "2")
                     {
-                        mensaje = "UNITY: Estimad@ cliente la liquidación de su reclamo se encuentra lista en recepción.";
+                        mensaje = "UNITY: Estimad@ cliente la liquidación de su reclamo ID: "+ updateFecha.id +" se encuentra lista en recepción.";
                     }
                     else if(ddlDestino.SelectedValue == "3")
                     {
                         mensaje = "UNITY: Estimad@ cliente su reclamo fue abonado a su deducible anual enviamos copia de la liquidación a su correo.";
                     }
 
-                    Utils.SMS_gastos_medicos(updateFecha.telefono, mensaje, userlogin, ddlEstado.SelectedItem.Text, id, updateFecha.reg_reclamos_medicos.tipo);
+                   // Utils.SMS_gastos_medicos(updateFecha.telefono, mensaje, userlogin, ddlEstado. SelectedItem.Text, id, updateFecha.reg_reclamos_medicos.tipo);
                     llenado.llenarGrid(comentarios,GridComentarios);
                 }
                 catch (Exception)
@@ -824,14 +815,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosMedicosSeguimientos : 
 
                 int dias;
 
-                if(moneda == "Quetzales")
-                {
-                    dias = 15;
-                }
-                else
-                {
-                    dias = 35;
-                }
+                dias = moneda.Equals("Quetzales") ? 15 : 35;
 
                 var fechaEnvio = DBReclamos.reclamos_medicos.Find(id);
                 fechaEnvio.fecha_envio_aseg = DateTime.Now;
@@ -918,89 +902,22 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosMedicosSeguimientos : 
             string tiemposAbierto = "select DATEDIFF(SECOND, fecha_commit, getdate())," +
             "fecha_commit, fecha_asignacion, fecha_apertura, fecha_envio_aseg, fecha_recepcion_cheque, convert(nvarchar(20), fecha_envio_cheque, 103), fecha_cierre, destino" +
             " from reclamos_medicos where id = "+id+"";
-           
-            if(ddlEstado.SelectedItem.Text == "Cerrado")
-            {
-                seleccionar = tiemposCerrado;
-            }
-            else
-            {
-                seleccionar = tiemposAbierto;
-            }
+
+            seleccionar = (ddlEstado.SelectedItem.Text == "Cerrado") ? tiemposCerrado : tiemposAbierto;
 
             SqlDataAdapter da = new SqlDataAdapter(seleccionar, objeto.ObtenerConexionReclamos());
             DataTable dt = new DataTable();
             da.Fill(dt);
             txtTiempo.Text = dt.Rows[0][0].ToString();
-          
-            if(dt.Rows[0][1].ToString() == "")
-            {
-                lblFechaRecepcion.Text = "<b>Fecha de recepcion del reclamo</b><br /> En espera";
-            }
 
-            else
-            {
-                lblFechaRecepcion.Text = "<b>Fecha de recepcion del reclamo</b><br /> " + dt.Rows[0][1].ToString();
-            }
-           
-
-            if (dt.Rows[0][2].ToString()== "")
-            {
-                lblfechaAsignacion.Text = "<b>Fecha de asignacion del reclamo</b><br />En espera ";
-            }
-    
-            else
-            {
-                lblfechaAsignacion.Text = "<b>Fecha de asignacion del reclamo</b><br /> " + dt.Rows[0][2].ToString();
-            }
-
-            if (dt.Rows[0][3].ToString() == "")
-            {
-                lblFechaApertura.Text = "<b>Fecha de apertura del reclamo</b><br /> En espera";
-            }
-            else
-            {
-                lblFechaApertura.Text = "<b>Fecha de apertura del reclamo</b><br /> " + dt.Rows[0][3].ToString();
-            }
-            
-            if (dt.Rows[0][4].ToString() == "")
-            {
-                lblFechaAseguradora.Text = "<b>Fecha de envio a aseguradora</b><br />En Espera";
-            }
-            else
-            {
-                lblFechaAseguradora.Text = "<b>Fecha de envio a aseguradora</b><br /> " + dt.Rows[0][4].ToString();
-            }
-            //fecha de recepcion del cheque
-            if (dt.Rows[0][5].ToString() == "")
-            {
-                lblFechaEnvioCheque.Text = "<b>Fecha de cheque recibido</b><br /> En espera";
-            }
-            else
-            {
-                lblFechaEnvioCheque.Text = "<b>Fecha de cheque recibido</b><br /> " + dt.Rows[0][5].ToString();
-            }
-
-            //fecha envio cheque
-            if (dt.Rows[0][6].ToString() == "")
-            {
-                lblEnvioCheque.Text = "<b>Fecha envio de cheque</b><br /> En espera";
-            }
-            else
-            {
-                lblEnvioCheque.Text = "<b>Fecha envio de cheque</b><br /> " + dt.Rows[0][6].ToString();
-            }
-
-            //fecha final de cierre del reclamo
-            if (dt.Rows[0][7].ToString() == "")
-            {
-                lblFechaCierreReclamo.Text = "<b>Fecha de cierre</b><br /> En Espera";
-            }
-            else
-            {
-                lblFechaCierreReclamo.Text = "<b>Fecha de cierre</b><br /> " + dt.Rows[0][7].ToString();
-                lblDestino.Text = "<b>Destino: </b>" + dt.Rows[0][8].ToString();
-            }
+            lblFechaRecepcion.Text     = titulo_tiempo("recepcion", dt.Rows[0][1].ToString());
+            lblfechaAsignacion.Text    = titulo_tiempo("asignacion", dt.Rows[0][2].ToString());
+            lblFechaApertura.Text      = titulo_tiempo("apertura", dt.Rows[0][3].ToString());
+            lblFechaAseguradora.Text   = titulo_tiempo("envio aseguradora", dt.Rows[0][4].ToString());
+            lblFechaEnvioCheque.Text   = titulo_tiempo("cheque recibido", dt.Rows[0][5].ToString());
+            lblEnvioCheque.Text        = titulo_tiempo("envio de cheque", dt.Rows[0][6].ToString());
+            lblFechaCierreReclamo.Text = titulo_tiempo("cierre", dt.Rows[0][6].ToString());
+            lblDestino.Text = "<b>Destino: </b>" + dt.Rows[0][8].ToString();
         }
         catch (Exception)
         {
@@ -1010,6 +927,11 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosMedicosSeguimientos : 
         {
             objeto.DescargarConexion();
         }
+    }
+
+    public string titulo_tiempo(string val, string condicion)
+    {
+        return "<b>Fecha de "+val+"</b><br/>" + (condicion == "" ? "En espera": condicion);
     }
 
     //cambiar el simbolo de la moneda en que se esta trabajando

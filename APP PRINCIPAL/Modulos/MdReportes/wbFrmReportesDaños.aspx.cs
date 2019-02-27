@@ -389,7 +389,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesDaños : System.Web.UI
 
         else if (ddlCiclos.SelectedValue == "Ciclo Unity")
         {
-            KPI = 12;
+            KPI = 15;
             PanelCamposSeleccion.Visible = false;
             PanelEficiencia.Visible = false;
             PnCiclos.Visible = true;

@@ -496,7 +496,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesAutos : System.Web.UI.
 
         else if (ddlCiclos.SelectedValue == "Ciclo Unity")
         {
-            kpi = 12;
+            kpi = 16;
             PanelCamposSeleccion.Visible = false;
             PanelEficiencia.Visible = false;
             PnCiclos.Visible = true;
@@ -508,7 +508,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesAutos : System.Web.UI.
 
         else if (ddlCiclos.SelectedValue == "Ciclo Aseguradora")
         {
-            kpi = 66;
+            kpi = 68;
             PanelCamposSeleccion.Visible = false;
             PanelEficiencia.Visible = false;
             PnCiclos.Visible = true;
