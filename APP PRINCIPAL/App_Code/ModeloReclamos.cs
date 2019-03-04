@@ -663,6 +663,18 @@ public partial class ingreso_cheques
     public virtual reclamos_medicos reclamos_medicos { get; set; }
 }
 
+public partial class maternidad
+{
+    public int id { get; set; }
+    public string poliza { get; set; }
+    public string asegurado { get; set; }
+    public Nullable<int> cod_ejecutivo { get; set; }
+    public string ejecutivo { get; set; }
+    public Nullable<System.DateTime> fecha { get; set; }
+    public Nullable<System.DateTime> fecha_parto { get; set; }
+    public Nullable<bool> estado { get; set; }
+}
+
 public partial class motivos_cierre
 {
     public motivos_cierre()
