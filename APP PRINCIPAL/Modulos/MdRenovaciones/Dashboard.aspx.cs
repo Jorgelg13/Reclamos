@@ -19,6 +19,8 @@ public partial class Modulos_MdRenovaciones_Dashboard : System.Web.UI.Page
         {
             PolizasRoble();
         }
+
+        Utils.MoverArchivos("9134048647351.pdf", "Enviadas");
     }
 
 
