@@ -13,7 +13,9 @@
 <body>
     <form id="form1" runat="server">
         <div class="jumbotron titulo-cabecera" style="height: 81px;">
-            <h2 style="width: 781px; padding-bottom: 20px; font-size: 22px;">Consulta De Reclamos</h2>
+            <a href="/MdBitacora/DashboardUnity.aspx" style="color: white">
+                <h2 style="width: 381px; padding-bottom: 20px;">Consulta De Reclamos</h2>
+            </a>
             <div class="content-wrapper">
                 <div class="float-right">
                     <div class="img-float-right" style="float: right;">
@@ -61,7 +63,7 @@
                         </div>
                         <div class="panel-body">
                             <h1>
-                                <asp:LinkButton runat="server" ID="ConsultarMaternidad" OnClick="ConsultarMaternidad_Click" title="Generar Reportes" Style="font-size: 80px;"><i class="fa fa-female"></i></asp:LinkButton>
+                                <asp:LinkButton runat="server" ID="ConsultarMaternidad" OnClick="ConsultarMaternidad_Click" title="Agregar control de maternidad" Style="font-size: 80px;"><i class="fa fa-female"></i></asp:LinkButton>
                                 <br />
                                 <br />
                             </h1>
@@ -162,7 +164,21 @@
                 </div>
             </div>
         </asp:Panel>
-
+        <!-- Start of LiveChat (www.livechatinc.com) code -->
+        <script type="text/javascript">
+            window.__lc = window.__lc || {};
+            window.__lc.license = 9462205;
+            (function () {
+                var lc = document.createElement('script'); lc.type = 'text/javascript'; lc.async = true;
+                lc.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'cdn.livechatinc.com/tracking.js';
+                var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(lc, s);
+            })();
+        </script>
+        <noscript>
+        <a href="https://www.livechatinc.com/chat-with/9462205/">Chat with us</a>,
+        powered by <a href="https://www.livechatinc.com/?welcome" rel="noopener" target="_blank">LiveChat</a>
+    </noscript>
+        <!-- End of LiveChat code -->
         <%--archivos javascripts que se utilizan en el sistema--%>
         <script src="../Scripts/jquery-3.1.1.min.js"></script>
         <script src="../bootstrap/js/bootstrap.min.js"></script>

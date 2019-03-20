@@ -10,6 +10,7 @@ public partial class MdBitacora_ControlMaternidad : System.Web.UI.Page
     String correo;
     String pendientes = "select id as ID, poliza as Poliza, asegurado as Asegurado, " +
         "ejecutivo as Ejecutivo, cod_ejecutivo as Codigo, fecha_parto as [Fecha de Parto] from maternidad where estado = 0";
+    String contenido;
 
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -72,7 +73,7 @@ public partial class MdBitacora_ControlMaternidad : System.Web.UI.Page
             else
             {
                 maternidad nuevo = new maternidad();
-                nuevo.poliza = txtbuscar.Text;
+                nuevo.poliza = txtPoliza.Text;
                 nuevo.asegurado = txtNombre.Text;
                 nuevo.cod_ejecutivo = Convert.ToInt32(ddlEjecutivos.SelectedValue);
                 nuevo.ejecutivo = ddlEjecutivos.SelectedItem.Text;
@@ -112,9 +113,15 @@ public partial class MdBitacora_ControlMaternidad : System.Web.UI.Page
         foreach (GridViewRow row in GridPendientes.Rows)
         {
             CheckBox check = (CheckBox)row.FindControl("ChAtendido");
-            String reclamo = Convert.ToString(row.Cells[1].Text);
+            String registro = Convert.ToString(row.Cells[1].Text);
+            String poliza = Convert.ToString(row.Cells[2].Text);
+            String fecha = row.Cells[6].Text;
             int codigo = Convert.ToInt32(row.Cells[5].Text);
-            int id = Convert.ToInt32(reclamo);
+
+            contenido = "Recuerde que la fecha probable de parto de su asegurado en la póliza "+poliza+" es el "+Convert.ToDateTime(fecha).ToString("dd/MM/yyyy") +"; recuerde enviarle los formularios de adición de " +
+                        "dependientes para realizar los trámites respectivos.";
+
+            int id = Convert.ToInt32(registro);
             if (check.Checked)
             {
                 try
@@ -123,7 +130,7 @@ public partial class MdBitacora_ControlMaternidad : System.Web.UI.Page
                     atender.estado = true;
                     DBReclamos.SaveChanges();
                     correo = Utils.seleccionarCorreo(codigo);
-                    envio.NOTIFICACION(correo,"Cuerpo de correo", "Inclusion de asegurado");
+                    envio.NOTIFICACION(correo,contenido, "Inclusion de asegurado");
                 }
                 catch (Exception)
                 {
@@ -131,6 +138,7 @@ public partial class MdBitacora_ControlMaternidad : System.Web.UI.Page
                 }
             }
         }
+
         llenar.llenarGrid(pendientes, GridPendientes);
     }
 

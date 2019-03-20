@@ -83,7 +83,7 @@ public partial class Modulos_MdRenovaciones_Estados_SinAsignar : System.Web.UI.P
         {
             string correo_gestor;
             var gestor = DBReclamos.ejecutivos.Find(Convert.ToInt32(ddlEjecutivo.SelectedValue));
-            correo_gestor = gestor.correo;
+            correo_gestor = gestor.correo.ToString();
             int id = Convert.ToInt32(GridSinAsignar.SelectedRow.Cells[1].Text);
             var registro = DB.renovaciones_polizas.Find(id);
             registro.codigo_gestor = Convert.ToInt32(ddlEjecutivo.SelectedValue);

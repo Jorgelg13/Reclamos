@@ -64,6 +64,7 @@ public partial class ReclamosEntities : DbContext
     public DbSet<empresa> empresa { get; set; }
     public DbSet<encuesta> encuesta { get; set; }
     public DbSet<encuesta_recepcion> encuesta_recepcion { get; set; }
+    public DbSet<encuesta_egresos> encuesta_egresos { get; set; }
     public DbSet<errores_insercion> errores_insercion { get; set; }
     public DbSet<estado> estado { get; set; }
     public DbSet<estados_reclamos_unity> estados_reclamos_unity { get; set; }

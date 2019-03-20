@@ -34,13 +34,6 @@ public partial class Modulos_MdReclamosUnity_wbFrmRecDañosSeguimiento : System.
                 "dbo.reg_reclamo_varios.tipo as Tipo," +//10
                 "dbo.reclamos_varios.reportante as Reportante," +
                 "Convert(varchar(20),dbo.reclamos_varios.fecha_commit, 103) as [Fecha Creacion]," +
-                //"gestores.telefono, " +//38
-                //"gestores.correo, " +//39
-                //"dbo.cabina.nombre as cabina," +
-                //"dbo.sucursal.nombre as sucursal," +
-                //"dbo.empresa.nombre as empresa," +
-                //"dbo.pais.nombre as pais," +
-                //"dbo.usuario.nombre as usuario, " +
                 "Convert(varchar(20),dbo.reclamos_varios.fecha_visualizar, 103) as [Fecha Visualizar] " +
                 "FROM " +
                 "dbo.reg_reclamo_varios " +

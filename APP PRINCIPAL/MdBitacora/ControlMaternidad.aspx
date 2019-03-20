@@ -15,7 +15,9 @@
 <body>
     <form id="form1" runat="server">
         <div class="jumbotron titulo-cabecera" style="height: 81px;">
-            <h2 style="width: 781px; padding-bottom: 20px; font-size: 22px;">Control De Maternidad</h2>
+            <a href="/MdBitacora/DashboardUnity.aspx" style="color:white">
+            <h2 style="width: 381px; padding-bottom: 20px;">Control De Maternidad</h2>
+            </a>
             <div class="content-wrapper">
                 <div class="float-right">
                     <div class="img-float-right" style="float: right;">
