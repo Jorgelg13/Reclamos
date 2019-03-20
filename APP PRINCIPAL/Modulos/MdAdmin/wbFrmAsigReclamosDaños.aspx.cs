@@ -11,6 +11,7 @@ public partial class Modulos_MdAdmin_wbFrmAsigReclamosDaños : System.Web.UI.Pag
     Utils comprobar = new Utils();
     Utils llenado = new Utils();
     String Cuerpo;
+    Email Notificacion = new Email();
 
     int id;
     string asignados, datos;
@@ -92,7 +93,9 @@ public partial class Modulos_MdAdmin_wbFrmAsigReclamosDaños : System.Web.UI.Pag
                     llenado.llenarGrid(asignados, GridAsignados);
                     llenado.llenarGrid(datos, GridAsigDaños);
                     Utils.ShowMessage(this.Page, "Reclamos asignados con exito", "Excelente..!", "success");
-                    Correos.Notificacion(gestor.correo, "Asignacion de reclamo", Cuerpo);
+
+                    //Correos.Notificacion(gestor.correo, "Asignacion de reclamo", Cuerpo);
+                    Notificacion.NOTIFICACION(gestor.correo, "Asignacion de reclamo", Cuerpo);
                 }
                 catch (Exception)
                 {

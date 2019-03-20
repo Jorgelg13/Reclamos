@@ -64,12 +64,14 @@ public partial class ReclamosEntities : DbContext
     public DbSet<empresa> empresa { get; set; }
     public DbSet<encuesta> encuesta { get; set; }
     public DbSet<encuesta_recepcion> encuesta_recepcion { get; set; }
+    public DbSet<encuesta_egresos> encuesta_egresos { get; set; }
     public DbSet<errores_insercion> errores_insercion { get; set; }
     public DbSet<estado> estado { get; set; }
     public DbSet<estados_reclamos_unity> estados_reclamos_unity { get; set; }
     public DbSet<formulario_colectivo> formulario_colectivo { get; set; }
     public DbSet<gestores> gestores { get; set; }
     public DbSet<ingreso_cheques> ingreso_cheques { get; set; }
+    public DbSet<maternidad> maternidad { get; set; }
     public DbSet<motivos_cierre> motivos_cierre { get; set; }
     public DbSet<movimientos> movimientos { get; set; }
     public DbSet<pais> pais { get; set; }
@@ -540,5 +542,44 @@ public partial class ReclamosEntities : DbContext
             new ObjectParameter("mensaje", typeof(string));
 
         return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pa_actualizar_comisiones_pendientes", idParameter, requerimientoParameter, comisionParameter, primaParameter, polizaParameter, monedaParameter, fechaParameter, nombreParameter, clienteParameter, poliza_acsParameter, mensajeParameter);
+    }
+
+    public virtual int pa_nps_autos(Nullable<System.DateTime> fechaInicio, Nullable<System.DateTime> fechaFin)
+    {
+        var fechaInicioParameter = fechaInicio.HasValue ?
+            new ObjectParameter("fechaInicio", fechaInicio) :
+            new ObjectParameter("fechaInicio", typeof(System.DateTime));
+
+        var fechaFinParameter = fechaFin.HasValue ?
+            new ObjectParameter("fechaFin", fechaFin) :
+            new ObjectParameter("fechaFin", typeof(System.DateTime));
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pa_nps_autos", fechaInicioParameter, fechaFinParameter);
+    }
+
+    public virtual int pa_nps_danios_varios(Nullable<System.DateTime> fechaInicio, Nullable<System.DateTime> fechaFin)
+    {
+        var fechaInicioParameter = fechaInicio.HasValue ?
+            new ObjectParameter("fechaInicio", fechaInicio) :
+            new ObjectParameter("fechaInicio", typeof(System.DateTime));
+
+        var fechaFinParameter = fechaFin.HasValue ?
+            new ObjectParameter("fechaFin", fechaFin) :
+            new ObjectParameter("fechaFin", typeof(System.DateTime));
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pa_nps_danios_varios", fechaInicioParameter, fechaFinParameter);
+    }
+
+    public virtual int pa_nps_gastos_medicos(Nullable<System.DateTime> fechaInicio, Nullable<System.DateTime> fechaFin)
+    {
+        var fechaInicioParameter = fechaInicio.HasValue ?
+            new ObjectParameter("fechaInicio", fechaInicio) :
+            new ObjectParameter("fechaInicio", typeof(System.DateTime));
+
+        var fechaFinParameter = fechaFin.HasValue ?
+            new ObjectParameter("fechaFin", fechaFin) :
+            new ObjectParameter("fechaFin", typeof(System.DateTime));
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pa_nps_gastos_medicos", fechaInicioParameter, fechaFinParameter);
     }
 }

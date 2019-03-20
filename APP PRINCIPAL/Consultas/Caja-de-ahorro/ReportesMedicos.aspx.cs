@@ -84,6 +84,8 @@ public partial class Consultas_Caja_de_ahorro_ReportesMedicos : System.Web.UI.Pa
                   " and (reclamos_medicos.estado_unity = 'Seguimiento')  and (reg_reclamos_medicos.contratante like '%caja de ahorro%' or reg_reclamos_medicos.poliza= 'GTVG-198018') ", GridCamposSeleccion);
                 Conteo();
             }
+
+            Utils.actividades(0, Constantes.GASTOS_MEDICOS(), 53, "caja");
         }
 
         else
@@ -95,6 +97,7 @@ public partial class Consultas_Caja_de_ahorro_ReportesMedicos : System.Web.UI.Pa
     //funcion para exportar a un archivo de excel lo que aparece en el gridview
     protected void btnExportar_Click(object sender, EventArgs e)
     {
+        Utils.actividades(0, Constantes.GASTOS_MEDICOS(), 54, "caja");
         Utils.ExportarExcel(GridCamposSeleccion, Response, "Reporte Gastos Medicos del " + txtFechaInicio.Text + " al " + txtFechaFin.Text);
     }
 

@@ -31,7 +31,7 @@
                         <asp:TextBox ID="txtFechaFin" CssClass="form-control" Height="34px" type="date" runat="server"></asp:TextBox>
                         <asp:Button ID="btnBuscar" runat="server" Text="Buscar" CssClass="btn btn-primary" OnClick="btnBuscar_Click" />
                         <asp:Button ID="btnRegresar" runat="server" Text="Inicio" CssClass="btn btn-primary" OnClick="btnRegresar_Click" />
-                        <asp:LinkButton ID="linkDescargar" OnClick="linkDescargar_Click" title="Descargar en excel" runat="server" Style="font-size: 30px; text-align: center; color: green; padding: 0px;"><i class="fa fa-file-excel-o" aria-hidden="true"></i></asp:LinkButton>
+                        <asp:LinkButton ID="linkDescargar" OnClick="linkDescargar_Click" title="Descargar en excel" runat="server" Style="font-size: 30px; text-align: center; color: green; padding: 0px;"><i class="fa fa-file-excel-o"></i></asp:LinkButton>
                     </div>
                     <div class="scrolling-table-container" id="Reporte">
                         <asp:GridView ID="GridAutos" runat="server" CssClass="table bs-table table-responsive table-hover" AutoGenerateColumns="true" CellPadding="4" ForeColor="#333333" GridLines="None">

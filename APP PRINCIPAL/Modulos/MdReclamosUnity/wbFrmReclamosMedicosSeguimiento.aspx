@@ -588,6 +588,13 @@
                                     <td style="text-align: right; padding-right: 5px;">
                                         <asp:Label ID="lblMemoDeducible" runat="server"></asp:Label></td>
                                 </tr>
+                                <asp:Panel runat="server" ID="PanelDetalleCopago" Visible="false">
+                                    <tr>
+                                        <td style="padding-left: 5px;"><b>Copago:</b></td>
+                                        <td style="text-align: right; padding-right: 5px;">
+                                        <asp:Label ID="lblCopago" runat="server"></asp:Label></td>
+                                    </tr>
+                                </asp:Panel>
                                 <tr>
                                     <td style="padding-left: 5px;"><b>Monto Pagado:</b></td>
                                     <td style="text-align: right; padding-right: 5px;">
@@ -670,7 +677,10 @@
                                 <asp:LinkButton ID="linkRegresar" role="button" OnClick="Regresar_Click" title="Regresar a reclamos en seguimiento" runat="server"><i class="fa fa-arrow-left"></i></asp:LinkButton>
                             </div>
                             <div class="col-xs-3 col-md-3 col-sm-4 col-lg-3">
-                                <a title="Cerrar El Reclamo" role="button" data-toggle="modal" data-target="#CierreReclamo"><i class="fa fa-lock" aria-hidden="true"></i></a>
+                                <a title="Cerrar El Reclamo" role="button" data-toggle="modal" data-target="#CierreReclamo"><i class="fa fa-lock" ></i></a>
+                            </div>
+                             <div class="col-xs-3 col-md-3 col-sm-4 col-lg-3">
+                                <a title="Imprimir codos de reclamos cerrados" role="button" data-toggle="modal" data-target="#ImprimirCodos"><i class="fa fa-id-card-o"></i></a>
                             </div>
                         </div>
                     </div>
@@ -774,7 +784,24 @@
             </div>
         </div>
     </asp:Panel>
-    <%------------------------ Confirmacion de cierre -------------------%>
+    <%------------------------ Imprimir codos de cierre de reclamos -------------------%>
+    <div class="modal fade" id="ImprimirCodos">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title"><b>Impresion de codos</b></h4>
+                </div>
+                  <div class="modal-body">
+                    <asp:TextBox runat="server" ID="txtFechaCierre" CssClass="form-control" type="date"></asp:TextBox>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-warning" data-dismiss="modal">Cancelar</button>
+                    <asp:Button ID="btnImprimirCodos" CssClass="btn btn-primary" runat="server" Text="Imprimir" />
+                </div>
+            </div>
+        </div>
+    </div>
+      <%------------------------ Confirmacion de cierre -------------------%>
     <div class="modal fade" id="CierreReclamo">
         <div class="modal-dialog modal-sm">
             <div class="modal-content">
@@ -820,7 +847,8 @@
             </div>
         </div>
     </div>
-    <%--------------------------  modal para realizar una liquidacion ---------------------------------%>
+
+     <%-- ------------------------ modal para agregar una liquidacion ------------------------------------------%>
     <div class="modal fade" id="modalPago" data-keyboard="false" data-backdrop="static">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -850,23 +878,29 @@
                     </div>
                     <div class="form-group col-sm-12 col-md-4 col-lg-4">
                         <label>No Cheque:</label>
-                        <asp:TextBox ID="txtNumeroCheque" Style="width: 100%" autocomplete="off" class="form-control" placeholder="Numero de cheque" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="txtNumeroCheque" Style="width: 100%" autocomplete="off" CssClass="form-control" placeholder="Numero de cheque" runat="server"></asp:TextBox>
                     </div>
                     <div class="form-group  col-sm-12 col-md-6 col-lg-6">
                         <label>Total Reclamado:</label>
                         <asp:TextBox ID="txtReclamado" Text="0.00" Style="width: 100%" CssClass="form-control" AutoComplete="off" runat="server" placeholder="Total Reclamado"></asp:TextBox>
                     </div>
-                    <div class="form-group  col-sm-12 col-md-6 col-lg-6">
+                    <div class="form-group col-sm-12 col-md-6 col-lg-6">
                         <label>Total Aprobado:</label>
-                        <asp:TextBox ID="txtAprobado" Text="0.00" Style="width: 100%" class="form-control" autocomplete="off" placeholder="Total Aprobado" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="txtAprobado" Text="0.00" Style="width: 100%" CssClass="form-control" autocomplete="off" placeholder="Total Aprobado" runat="server"></asp:TextBox>
                     </div>
+                    <asp:Panel runat="server" ID="PanelCopago" Visible="false">
+                         <div class="form-group col-sm-12 col-md-12 col-lg-12">
+                        <label>Copago:</label>
+                        <asp:TextBox ID="txtCopago" Text="0.00" Style="width: 100%" CssClass="form-control" autocomplete="off" placeholder="Total Aprobado" runat="server"></asp:TextBox>
+                    </div>
+                    </asp:Panel>
                     <div class="form-group  col-sm-12 col-md-6 col-lg-6">
                         <label>Total No Cubierto:</label>
-                        <asp:TextBox ID="txtNoCubiertos" Text="0.00" Style="width: 100%" autocomplete="off" class="form-control" placeholder="Total no Cubierto" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="txtNoCubiertos" Text="0.00" Style="width: 100%" autocomplete="off" CssClass="form-control" placeholder="Total no Cubierto" runat="server"></asp:TextBox>
                     </div>
                     <div class="form-group col-sm-12 col-md-6 col-lg-6">
                         <label>Deducible:</label>
-                        <asp:TextBox ID="txtDeducible" Text="0.00" Style="width: 100%" autocomplete="off" class="form-control" placeholder="Deducible" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="txtDeducible" Text="0.00" Style="width: 100%" autocomplete="off" CssClass="form-control" placeholder="Deducible" runat="server"></asp:TextBox>
                     </div>
                     <div class="form-group col-sm-12 col-md-6 col-lg-6">
                         <label>Coaseguro:</label>
@@ -906,15 +940,15 @@
                     <asp:Panel runat="server" ID="PanelDetalle" Visible="false">
                         <div class="form-group col-sm-12 col-md-4 col-lg-4">
                             <label>Total Coaseguro</label>
-                            <asp:TextBox ID="txtTotalCoaseguro" Style="width: 100%" autocomplete="off" class="form-control" placeholder="Total Coaseguro" runat="server"></asp:TextBox>
+                            <asp:TextBox ID="txtTotalCoaseguro" Style="width: 100%" autocomplete="off" CssClass="form-control" placeholder="Total Coaseguro" runat="server"></asp:TextBox>
                         </div>
                         <div class="form-group col-sm-12 col-md-4 col-lg-4">
                             <label>Total Timbres</label>
-                            <asp:TextBox ID="txtTotalTimbres" Style="width: 100%" autocomplete="off" class="form-control" placeholder="Total Timbres" runat="server"></asp:TextBox>
+                            <asp:TextBox ID="txtTotalTimbres" Style="width: 100%" autocomplete="off" CssClass="form-control" placeholder="Total Timbres" runat="server"></asp:TextBox>
                         </div>
                         <div class="form-group col-sm-12 col-md-4 col-lg-4">
                             <label>Total</label>
-                            <asp:TextBox ID="txtTotal" Style="width: 100%" Text="0.00" autocomplete="off" class="form-control" placeholder="Total" runat="server"></asp:TextBox>
+                            <asp:TextBox ID="txtTotal" Style="width: 100%" Text="0.00" autocomplete="off" CssClass="form-control" placeholder="Total" runat="server"></asp:TextBox>
                         </div>
                     </asp:Panel>
                     <div class="form-group  col-sm-12 col-md-4 col-lg-4">
@@ -926,7 +960,7 @@
                     </div>
                     <div class="form-group col-sm-12 col-md-4 col-lg-4">
                         <label>Fecha Envio Cheque:</label>
-                        <asp:TextBox runat="server" type="date" ID="txtFechaEnvioCheque" autocomplete="false" Style="width: 100%; height: 34px;" class="form-control"></asp:TextBox>
+                        <asp:TextBox runat="server" type="date" ID="txtFechaEnvioCheque" autocomplete="false" Style="width: 100%; height: 34px;" CssClass="form-control"></asp:TextBox>
                     </div>
                     <div class="form-group col-sm-12 col-md-4 col-lg-4">
                         <label>Destino:</label>
@@ -939,7 +973,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-warning" data-dismiss="modal">Cerrar</button>
+                   <button type="button" class="btn btn-warning" data-dismiss="modal">Cerrar</button>
                     <asp:Button ID="btnGuardarPago" CssClass="btn btn-primary" runat="server" Text="Guardar" OnClick="btnGuardarPago_Click" />
                     <asp:Button ID="btnActualizarPago" Enabled="false" CssClass="btn btn-success" runat="server" Text="Actualizar" OnClick="btnActualizarPago_Click" />
                 </div>
@@ -1082,7 +1116,7 @@
             window.open('http://52.34.115.100:5556/explorador.html#files%2FGastosMedicos/' + ruta, "ventana1", "width=" + ancho + ",height=" + alto + ",scrollbars=NO")
         }
 
- function printDiv(imprimir) {
+        function printDiv(imprimir) {
             var contenido = document.getElementById(imprimir).innerHTML;
             var contenidoOriginal = document.body.innerHTML;
             document.body.innerHTML = contenido;
@@ -1090,6 +1124,12 @@
             document.body.innerHTML = contenidoOriginal;
             window.location.reload(true);
         }
+    </script>
+    <script>
+        $('#ContentPlaceHolder1_btnImprimirCodos').click(function () {
+           var fecha = $('#ContentPlaceHolder1_txtFechaCierre').val();
+           window.open('https://encuestas.unitypromotores.com/codoReclamo?fecha='+fecha+'','', "ventana1", "width=700,height=800,scrollbars=NO");
+        });
     </script>
 </asp:Content>
 

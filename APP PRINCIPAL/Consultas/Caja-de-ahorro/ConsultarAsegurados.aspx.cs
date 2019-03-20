@@ -23,6 +23,7 @@ public partial class Consultas_Caja_de_ahorro_ConsultarAsegurados : System.Web.U
     protected void btnBuscar_Click(object sender, EventArgs e)
     {
         llenado.llenarGrid(buscador(txtBusqueda.Text), GridAsegurados);
+        Utils.actividades(0, Constantes.GASTOS_MEDICOS(), 49, "caja");
     }
 
     public string buscador(String dato)

@@ -5,9 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <title>Encuesta Colectivos</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Fullscreen Slit Slider with CSS3 and jQuery" />
-    <meta name="keywords" content="slit slider, plugin, css3, transitions, jquery, fullscreen, autoplay" />
-    <meta name="author" content="Codrops" />
+    <meta name="description" content="Encuesta de consulto seguro" />
     <link rel="shortcut icon" href="../favicon.ico">
     <link rel="stylesheet" type="text/css" href="css/demo.css" />
     <link rel="stylesheet" type="text/css" href="css/style.css" />
@@ -549,7 +547,7 @@
         });
 
         $("#enviar").click(function () {
-            $.post("https://192.168.81.225:9595/api/v1/encuesta/guardar",
+            $.post("/api/v1/encuesta/guardar",
                 {
                     "empresa": valor,
                     "servicio": valor,

@@ -409,6 +409,7 @@ public partial class detalle_pagos_reclamos_medicos
     public Nullable<decimal> total_iva { get; set; }
     public Nullable<decimal> deducible { get; set; }
     public Nullable<decimal> coaseguro { get; set; }
+    public Nullable<decimal> copago { get; set; }
     public Nullable<decimal> timbres { get; set; }
     public Nullable<decimal> total { get; set; }
     public string no_cheque { get; set; }
@@ -525,6 +526,16 @@ public partial class encuesta
     public Nullable<System.DateTime> fecha { get; set; }
     public string telefono { get; set; }
     public string nombre { get; set; }
+}
+
+public partial class encuesta_egresos
+{
+    public int id { get; set; }
+    public string hospital { get; set; }
+    public string pregunta1 { get; set; }
+    public string pregunta2 { get; set; }
+    public string comentarios { get; set; }
+    public Nullable<System.DateTime> fecha { get; set; }
 }
 
 public partial class encuesta_recepcion
@@ -661,6 +672,18 @@ public partial class ingreso_cheques
     public Nullable<System.DateTime> fecha { get; set; }
 
     public virtual reclamos_medicos reclamos_medicos { get; set; }
+}
+
+public partial class maternidad
+{
+    public int id { get; set; }
+    public string poliza { get; set; }
+    public string asegurado { get; set; }
+    public Nullable<int> cod_ejecutivo { get; set; }
+    public string ejecutivo { get; set; }
+    public Nullable<System.DateTime> fecha { get; set; }
+    public Nullable<System.DateTime> fecha_parto { get; set; }
+    public Nullable<bool> estado { get; set; }
 }
 
 public partial class motivos_cierre
@@ -878,6 +901,7 @@ public partial class reclamos_medicos
     public Nullable<System.DateTime> fecha_cierre_no_conforme { get; set; }
     public string observacion_no_conforme { get; set; }
     public string documento { get; set; }
+    public string direccion { get; set; }
 
     public virtual ICollection<bitacora_reclamos_medicos> bitacora_reclamos_medicos { get; set; }
     public virtual cabina cabina { get; set; }
@@ -1196,6 +1220,7 @@ public partial class ViewBusquedaAuto
     public Nullable<int> cliente { get; set; }
     public string programa { get; set; }
     public Nullable<decimal> prima { get; set; }
+    public Nullable<decimal> porcom { get; set; }
 }
 
 public partial class viewCoberturasAutos
@@ -1254,6 +1279,8 @@ public partial class vistaReclamosDaños
     public Nullable<short> gestor { get; set; }
     public Nullable<short> cia { get; set; }
     public Nullable<short> secren { get; set; }
+    public Nullable<decimal> prima { get; set; }
+    public Nullable<decimal> porcom { get; set; }
 }
 
 public partial class vistaReclamosMedicos
@@ -1278,6 +1305,8 @@ public partial class vistaReclamosMedicos
     public string certificado { get; set; }
     public Nullable<int> cliente { get; set; }
     public string status { get; set; }
+    public Nullable<decimal> prima { get; set; }
+    public Nullable<decimal> porcom { get; set; }
 }
 
 public partial class pa_cargar_asegurados_Result

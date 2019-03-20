@@ -15,7 +15,9 @@
 <body>
     <form id="form1" runat="server">
         <div class="jumbotron titulo-cabecera" style="height: 115px;">
-            <h2 style="width: 781px; padding-bottom: 20px;">Reclamos Autos Unity Promotores</h2>
+              <a href="/MdBitacora/DashboardUnity.aspx" style="color:white">
+            <h2 style="width: 481px; padding-bottom: 20px;">Consulta Autos Unity Promotores</h2>
+            </a>
             <header>
                 <div class="content-wrapper">
                     <div class="float-right">

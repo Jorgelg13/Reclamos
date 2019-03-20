@@ -101,13 +101,17 @@ public partial class Consultas_Caja_de_ahorro_Dashboard : System.Web.UI.Page
 
     protected void GridGeneral_SelectedIndexChanged(object sender, EventArgs e)
     {
+        int id = Convert.ToInt32(GridGeneral.SelectedRow.Cells[1].Text);
         Session["id_ra_caja"] = GridGeneral.SelectedRow.Cells[1].Text;
+        Utils.actividades(id, Constantes.AUTOS(), 51, "caja");
         Response.Redirect("/Consultas/caja-de-ahorro/ReclamosAutos.aspx",false);
     }
 
     protected void GridMedicos_SelectedIndexChanged(object sender, EventArgs e)
     {
+        int id = Convert.ToInt32(GridMedicos.SelectedRow.Cells[1].Text);
         Session["id_rm_caja"] = GridMedicos.SelectedRow.Cells[1].Text;
+        Utils.actividades(id, Constantes.AUTOS(), 52, "caja");
         Response.Redirect("/Consultas/caja-de-ahorro/ReclamosGM.aspx", false);
     }
 

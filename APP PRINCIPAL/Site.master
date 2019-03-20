@@ -153,7 +153,15 @@
                                     <a tabindex="-1" href="#">Copagos</a>
                                     <ul class="dropdown-menu">
                                         <li class="dropdown-submenu"></li>
-					<li><a href="/pdf/Copagos/ENERGUATE.pdf" target="_blank">Energuate</a></li>
+                                         <li class="dropdown-submenu">
+                                            <a tabindex="-1" href="#">AMM</a>
+                                            <ul class="dropdown-menu">
+                                                <li class="dropdown-submenu"></li>
+                                                <li><a href="/pdf/Copagos/Planes-ABC-FINAL.pdf" target="_blank">Condiciones Planes ABC-Final</a></li>
+                                                <li><a href="/pdf/Copagos/Plan-Gold-FINAL.pdf" target="_blank">Condiciones Plan Gold</a></li>
+                                            </ul>
+                                        </li>
+				                    	<li><a href="/pdf/Copagos/ENERGUATE.pdf" target="_blank">Energuate</a></li>
                                         <li><a href="/pdf/Copagos/NOVARTIS.pdf" target="_blank">Novartis</a></li>
                                         <li><a href="/pdf/Copagos/RAYOVAC.pdf" target="_blank">Rayovac</a></li>
                                         <li><a href="/pdf/Copagos/PALIGMED.pdf" target="_blank">Paligmed</a></li>
@@ -200,6 +208,7 @@
                                         <li><a href="/pdf/Copagos/Cuentas Maribel Cermeño.xlsx">Cuentas Maribel Cermeño</a></li>
                                         <li><a href="/pdf/Copagos/Cuentas Juan Antonio.xls">Cuentas Juan Antonio</a></li>
                                         <li><a href="/pdf/Copagos/Cuentas Marvin Escobar.xls">Cuentas Marvin Escobar</a></li>
+                                        
                                     </ul>
                                 </li>
                                 <li class="dropdown-submenu">

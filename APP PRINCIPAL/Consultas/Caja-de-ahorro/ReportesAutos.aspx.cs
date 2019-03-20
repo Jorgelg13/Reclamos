@@ -90,6 +90,7 @@ public partial class Consultas_Caja_de_ahorro_ReportesAutos : System.Web.UI.Page
                 llenado.llenarGrid(listado.Substring(0, (listado.Length - 2)) + Join + " where reclamo_auto.estado_unity = 'Seguimiento' and poliza in ('AUTO-366487','AUTO-366488') ", GridCamposSeleccion);
             }
             Conteo();
+            Utils.actividades(0, Constantes.AUTOS(), 53, "caja");
         }
 
         else
@@ -103,6 +104,7 @@ public partial class Consultas_Caja_de_ahorro_ReportesAutos : System.Web.UI.Page
     {
         if (PanelCamposSeleccion.Visible == true)
         {
+            Utils.actividades(0, Constantes.AUTOS(), 54, "caja");
             Utils.ExportarExcel(PanelPrincipal, Response, "Reclamos autos del " + txtFechaInicio.Text + " al " + txtFechaFin.Text);
         }
     }

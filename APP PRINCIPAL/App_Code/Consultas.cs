@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI.WebControls;
 
 /// <summary>
 /// Descripción breve de Consultas
@@ -145,6 +141,16 @@ public class Consultas
         return "select id as ID, monto as [Monto Cheque], total_reclamado as [Total Reclamado], total_aprobado as [Total Aprobado]," +
             "total_no_cubierto as [Total no cubierto], deducible as Deducible, coaseguro as Coaseguro,  timbres as Timbres, no_cheque as [No. cheque], moneda as Moneda " +
             "from detalle_pagos_reclamos_medicos where id_reclamo_medico = " + ID + "";
+    }
+
+    public static string NPS_AUTOS(string inicio, string fin)
+    {
+        return "select r.id,a.asegurado as Asegurado,a.Poliza,r.fecha_cierre_reclamo as [Fecha Cierre],g.nombre as Gestor, Contacto = (select top 1 contacto from contacto_auto as c where c.id_reclamo_auto = r.id)," +
+            "Telefono = (select top 1 telefono from contacto_auto as c where c.id_reclamo_auto = r.id) " +
+            "from reclamo_auto as r " +
+            "inner join auto_reclamo as a on r.id_auto_reclamo = a.id " +
+            "inner join gestores as g on g.id = r.id_gestor " +
+            "where r.fecha_cierre between '"+inicio+"' and '"+fin+"' order by a.poliza";
     }
 
 

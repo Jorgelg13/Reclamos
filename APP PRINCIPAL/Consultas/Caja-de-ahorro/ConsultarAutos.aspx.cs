@@ -14,7 +14,7 @@ public partial class Consultas_Caja_de_ahorro_ConsultarAutos : System.Web.UI.Pag
         Consulta = "select " +
             "id," +
             "propietario as Propietario," +
-            "placa as Placa, " +
+            "placa as Placa, " +    
             "marca as Marca, " +
             "modelo as Modelo, " +
             "Color as Color, " +
@@ -52,5 +52,6 @@ public partial class Consultas_Caja_de_ahorro_ConsultarAutos : System.Web.UI.Pag
     protected void btnBuscar_Click(object sender, EventArgs e)
     {
         llenado.llenarGrid(Consulta,GridAutos);
+        Utils.actividades(0, Constantes.AUTOS(), 50, "caja");
     }
 }

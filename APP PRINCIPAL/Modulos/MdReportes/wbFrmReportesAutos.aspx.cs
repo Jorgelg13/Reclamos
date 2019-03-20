@@ -23,7 +23,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesAutos : System.Web.UI.
             checkSinFiltro_CheckedChanged(sender, e);
         }
 
-        if (userlogin == "jsagastume" || userlogin == "jlaj" || userlogin == "jwiesner" || userlogin == "nsierra" || userlogin == "jpazos" || userlogin =="mibarrios")
+        if (userlogin == "jsagastume" || userlogin == "jlaj" || userlogin == "jwiesner" || userlogin == "nsierra" || userlogin == "jpazos" || userlogin =="mbarrios")
         {
             btnMostrarEficiencia.Visible = true;
         }
