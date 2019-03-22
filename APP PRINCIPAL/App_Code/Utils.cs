@@ -694,13 +694,13 @@ public class Utils
     public static void MoverArchivos(string poliza,string destino)
     {
         //String pathPrincipal = @"E:\ReclamosScanner\files\RenovacionesElRoble\OneDrive - Unity Seguros\Renovaciones\Polizas";
-        //String pathDestino = @"E:\ReclamosScanner\files\RenovacionesElRoble\OneDrive - Unity Seguros\Renovaciones"+destino;
+        //String pathDestino = @"E:\ReclamosScanner\files\RenovacionesElRoble\OneDrive - Unity Seguros\Renovaciones";
 
         String pathPrincipal = @"C:\Renovaciones\Polizas";
         String pathDestino = @"C:\Renovaciones";
 
-        string origen = Path.Combine(pathPrincipal, poliza);
-        string destinoArchivo = Path.Combine(pathDestino, destino + "\\" +poliza);
+        String origen = Path.Combine(pathPrincipal, poliza);
+        String destinoArchivo = Path.Combine(pathDestino, destino + "\\" +poliza);
 
         if (File.Exists(origen))
         {
