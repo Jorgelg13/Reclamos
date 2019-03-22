@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Configuration;
 using System.IO;
+using System.Web;
 using System.Web.UI.WebControls;
 
 public partial class Modulos_MdRenovaciones_CargarPolizas : System.Web.UI.Page
@@ -43,7 +44,7 @@ public partial class Modulos_MdRenovaciones_CargarPolizas : System.Web.UI.Page
                     insertar.poliza = row.Cells[1].Text;
                     insertar.certificado = row.Cells[2].Text;
                     insertar.cod_aseg = row.Cells[3].Text;
-                    insertar.asegurado = row.Cells[4].Text;
+                    insertar.asegurado = HttpUtility.HtmlDecode(row.Cells[4].Text);
                     insertar.cod_agen = row.Cells[5].Text;
                     insertar.vigf = row.Cells[6].Text;
                     insertar.marca = row.Cells[7].Text;
@@ -88,17 +89,17 @@ public partial class Modulos_MdRenovaciones_CargarPolizas : System.Web.UI.Page
                     insertar.prima_anual = row.Cells[46].Text;
                     insertar.forma_pago = row.Cells[47].Text;
                     insertar.cod_pagador = row.Cells[48].Text;
-                    insertar.nombre_pagador = row.Cells[49].Text;
+                    insertar.nombre_pagador = HttpUtility.HtmlDecode(row.Cells[49].Text);
                     insertar.gastos_emision = row.Cells[50].Text;
                     insertar.recargo_por_frac = row.Cells[51].Text;
                     insertar.valor_iva = row.Cells[52].Text;
                     insertar.confirmar = row.Cells[53].Text;
-                    insertar.cob_may18_men_25_anos = row.Cells[54].Text;
-                    insertar.cob_may16_men_18_anos = row.Cells[55].Text;
-                    insertar.cob_may16 = row.Cells[56].Text;
+                    insertar.cob_may18_men_25_anos = HttpUtility.HtmlDecode(row.Cells[54].Text);
+                    insertar.cob_may16_men_18_anos = HttpUtility.HtmlDecode(row.Cells[55].Text);
+                    insertar.cob_may16 = HttpUtility.HtmlDecode(row.Cells[56].Text);
                     insertar.endoso_renov = row.Cells[57].Text;
                     insertar.correo = row.Cells[58].Text;
-                    insertar.dpi = row.Cells[59].Text;
+                    insertar.dpi = HttpUtility.HtmlDecode(row.Cells[59].Text);
                     insertar.direccion_cobro = row.Cells[60].Text;
                     insertar.pasaporte = row.Cells[61].Text;
                     insertar.nit = row.Cells[62].Text;

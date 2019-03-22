@@ -51,6 +51,8 @@ public partial class Modulos_MdRenovaciones_Dashboard : System.Web.UI.Page
                     Utils.EmailRenovacion("pa_envio_renovaciones", correo, txtCuerpo.Text, registro.correo_gestor.Trim());
                     registro.estado = 3;
                     DBRenovaciones.SaveChanges();
+                    String Poliza = (registro.ramo + registro.poliza + registro.endoso_renov + ".pdf");
+                    Utils.MoverArchivos(Poliza, "Enviadas");
                     llenarGrid();
                     break;
 
@@ -95,15 +97,16 @@ public partial class Modulos_MdRenovaciones_Dashboard : System.Web.UI.Page
         int identificador = Convert.ToInt32(GridElRoble.SelectedRow.Cells[1].Text);
         var registro = DBRenovaciones.renovaciones_polizas.Find(identificador);
         var gestor = DBReclamos.usuario.Find(Convert.ToInt32(Session["CodigoGestor"]));
+        String Poliza = registro.ramo + registro.poliza + registro.endoso_renov + ".pdf";
 
         cuerpo = "Saludos Estimad@ asegurado \n" +
             "<div style=\"text-align: justify\">" +
-            "<p>El " + registro.vigf_acs + " vence la anualidad de su póliza " + registro.poliza_unity + ", la cual le brinda coberturas al " + registro.tipo_vehiculo + "  MARCA  " + registro.marca + " PLACA " + registro.placa + ".<p>" +
+            "<p>El " + Convert.ToDateTime(registro.vigf_acs).ToString("dd/MM/yyyy") + " vence la anualidad de su póliza " + registro.poliza_unity + ", la cual le brinda coberturas al " + registro.tipo_vehiculo + "  MARCA  " + registro.marca + " PLACA " + registro.placa + ".<p>" +
             "<p>Con el afán de realizar el proceso de renovación de una forma más conveniente para todas las partes, a partir de este año, Seguros El Roble realiza la renovación anticipada de su póliza, la cual encontrará adjunta y cuenta con las siguientes condiciones:</p>" +
             "<p><b>Valor Garantizado</b> de Q." + registro.suma_aseg_renov + "; el valor garantizado es fijo y le da la tranquilidad de contar con la suma asegurada adecuada. Por favor revise el Endoso de Valor Garantizado, donde se describen las condiciones que aplican a este beneficio.<p>" +
             "<p><b>Deducibles:</b> Los deducibles que aplican en la renovación, son: " + registro.deduc_min_danos + " para Daños Propios y " + registro.deduc_min_robo + " para Robo Total</p>" +
             "<p><b>Prima a pagar anual:</b> Q." + registro.prima_anual + ", fraccionada en " + registro.pagos + " pagos.</p>" +
-            "<p>Las condiciones especiales con que cuenta su póliza, puede revisarlas en el endoso de “Beneficios adicionales Incluidos sin cobro de prima” y consultarnos por cualquier duda sobre las mismas.</p>" +
+            "<p>Las condiciones especiales con que cuenta su póliza, <a href=\"http://52.34.115.100:5556/files/RenovacionesElRoble/OneDrive%20-%20Unity%20Seguros/Renovaciones/Enviadas/" + Poliza +"\"> puede revisarlas aqui</a>, en el endoso de “Beneficios adicionales Incluidos sin cobro de prima” y consultarnos por cualquier duda sobre las mismas.</p>" +
             "<p>Debe revisar y verificar que su renovación contenga las coberturas y condiciones contratadas e informarnos inmediatamente de cualquier modificación que debamos efectuar <b>(Artículo 673 del Código de Comercio de Guatemala)</b>.</p>" +
             "<p>Le recordamos que debe mantener al día sus pagos, para evitar situaciones de no cobertura en caso de ocurrir un siniestro (Artículo 892 del Código de Comercio de Guatemala).</p>" +
             "<p>Recuerde que, de ocurrir algún siniestro, debe notificarlo inmediatamente a nuestra cabina de emergencias a los teléfonos 2386-3737 o 2326-3737; si lo reporta directo a la Aseguradora, favor indicárnoslo al día hábil siguiente para dar seguimiento a su reclamo.</p>" +

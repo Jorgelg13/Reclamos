@@ -690,4 +690,26 @@ public class Utils
             throw ex;
         }
     }
+
+    public static void MoverArchivos(string poliza,string destino)
+    {
+        //String pathPrincipal = @"E:\ReclamosScanner\files\RenovacionesElRoble\OneDrive - Unity Seguros\Renovaciones\Polizas";
+        //String pathDestino = @"E:\ReclamosScanner\files\RenovacionesElRoble\OneDrive - Unity Seguros\Renovaciones";
+
+        String pathPrincipal = @"C:\Renovaciones\Polizas";
+        String pathDestino = @"C:\Renovaciones";
+
+        String origen = Path.Combine(pathPrincipal, poliza);
+        String destinoArchivo = Path.Combine(pathDestino, destino + "\\" +poliza);
+
+        if (File.Exists(origen))
+        {
+            File.Move(origen, destinoArchivo);
+        }
+
+        else
+        {
+
+        }
+    }
 }
