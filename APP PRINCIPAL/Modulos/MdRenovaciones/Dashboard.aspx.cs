@@ -1,6 +1,7 @@
 ﻿using EmailValidation;
 using System;
 using System.Web;
+using System.Web.UI.WebControls;
 
 public partial class Modulos_MdRenovaciones_Dashboard : System.Web.UI.Page
 {
@@ -132,5 +133,22 @@ public partial class Modulos_MdRenovaciones_Dashboard : System.Web.UI.Page
         {
             Utils.ShowMessage(this.Page, "No se a podido renovar " + ex.Message, "Excelente", "success");
         }
+    }
+
+  
+
+    protected void GridElRoble_RowDeleting(object sender, System.Web.UI.WebControls.GridViewDeleteEventArgs e)
+    {
+        GridViewRow row = (GridViewRow)GridElRoble.Rows[e.RowIndex];
+        int ID = Convert.ToInt32(row.Cells[3].Text);
+
+        var registro = DBRenovaciones.renovaciones_polizas.Find(ID);
+        registro.estado = 8;
+
+        String Poliza = (registro.ramo + registro.poliza + registro.endoso_renov + ".pdf");
+        Utils.MoverArchivos(Poliza, "Invalidas");
+
+        DBRenovaciones.SaveChanges();
+        llenarGrid();
     }
 }

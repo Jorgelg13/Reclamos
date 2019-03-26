@@ -18,9 +18,12 @@
             <div role="tabpanel" class="tab-pane active" id="elRoble">
                 <div class="row">
                     <div class="scrolling-table-container col-lg-12 col-md-12" style="padding: 15px;">
-                        <asp:GridView ID="GridElRoble" CssClass="table bs-table table-responsive" OnSelectedIndexChanged="GridElRoble_SelectedIndexChanged" runat="server" AutoGenerateColumns="True" ForeColor="#333333" GridLines="None">
+                        <asp:GridView ID="GridElRoble" CssClass="table bs-table table-responsive" OnSelectedIndexChanged="GridElRoble_SelectedIndexChanged" OnRowDeleting="GridElRoble_RowDeleting" runat="server" AutoGenerateColumns="True" ForeColor="#333333" GridLines="None">
                             <Columns>
                               <asp:CommandField ShowSelectButton="True" SelectText="Seleccionar" />
+                              <asp:CommandField ShowDeleteButton="True" DeleteText="" ControlStyle-CssClass="fa fa-ban" ControlStyle-ForeColor="Red" HeaderText="Invalidar"/>
+                              <asp:CommandField ShowEditButton="True"   EditText=""  ControlStyle-CssClass="fa fa-search btnRevisarPoliza" HeaderText=" Revisar"/>
+
                             </Columns>
                             <HeaderStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" Wrap="false" />
                             <PagerStyle BackColor="#131B4D" ForeColor="White" HorizontalAlign="Center" />
@@ -71,6 +74,14 @@
 
          $('.note-editable').keyup(function () { 
              $('#<%=txtCuerpo.ClientID%>').val($('.note-editable').html());
-         });
+        });
+
+        $('.btnRevisarPoliza').attr('href', "javascript:void(0)");
+
+        $('.btnRevisarPoliza').on('click', function () {
+            $tr = $(this).closest('tr')[0].cells;
+            $poliza = $tr[5].innerText + $tr[4].innerText + $tr[6].innerText + ".pdf";
+            window.open('http://52.34.115.100:5556/files/RenovacionesElRoble/OneDrive%20-%20Unity%20Seguros/Renovaciones/Polizas/' + $poliza, '_blank');
+        });
     </script>
 </asp:Content>

@@ -160,6 +160,8 @@ public class Consultas
         String sql = "Select " +
             "r.id as ID, " +
             "r.poliza as Poliza," +
+            "r.ramo as Ramo," +
+            "r.endoso_renov as Endoso," +
             "r.asegurado as Asegurado," +
             "r.marca as Marca," +
             "r.modelo as Modelo," +

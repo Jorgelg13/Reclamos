@@ -77,6 +77,7 @@
                                 <li><a href="/Modulos/MdRenovaciones/Estados/NoEnviadas.aspx">Renovaciones No Enviadas</a></li>
                                 <li><a href="/Modulos/MdRenovaciones/Estados/Facturadas.aspx">Renovaciones Facturadas</a></li>
                                 <li><a href="/Modulos/MdRenovaciones/Estados/SinAsignar.aspx">Renovaciones Sin Asignar</a></li>
+                                <li><a href="/Modulos/MdRenovaciones/Estados/Invalidas.aspx">Renovaciones Invalidas</a></li>
                             </ul>
                         </li>
                         <li class="dropdown">
