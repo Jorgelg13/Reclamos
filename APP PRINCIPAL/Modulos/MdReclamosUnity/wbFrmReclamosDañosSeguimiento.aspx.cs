@@ -71,7 +71,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosDañosSeguimiento : Sy
             btnActualizarPagos.Enabled = false;
         }
 
-        if(userlogin== "cmejia" || userlogin == "mbarrios")
+        if(userlogin== "cmejia" || userlogin == "mbarrios" || userlogin =="jlaj")
         {
             btnGuardarProximaFecha.Enabled = true;
         }

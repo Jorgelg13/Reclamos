@@ -64,6 +64,9 @@ public partial class Modulos_MdReclamosUnity_wbFrmRecDañosSeguimiento : System.
             llenado.llenarGrid(inactivos, GridInactivos);
             llenado.llenarGrid(alarmas, GridAlarmas);
             lblTotalAlarmas.Text = "Total de reclamos: " + GridAlarmas.Rows.Count.ToString();
+
+            lblProximosInactivos.Text = GridInactivos.Rows.Count.ToString();
+            lblProximosInactivos.Visible = (lblProximosInactivos.Text == "0") ? false : true;
         }
     }
 

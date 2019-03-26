@@ -19,7 +19,9 @@
                     <a href="#ingreso-datos" aria-controls="ingreso-datos" role="tab" data-toggle="tab" style="font-size: 18px;">R. por Gestor</a>
                 </li>
                 <li role="presentation" class="inactivos">
-                    <a href="#inactivos" aria-controls="ingreso-datos" role="tab" data-toggle="tab" style="font-size: 18px;">Proximos Inactivos</a>
+                    <a href="#inactivos" aria-controls="ingreso-datos" role="tab" data-toggle="tab" style="font-size: 18px;">
+                        Proximos Inactivos <asp:label runat="server" ID="lblProximosInactivos" class="badge" style="background:red"></asp:label> 
+                    </a>
                 </li>
                 <li role="presentation" class="alarmas">
                     <a href="#alarmas" aria-controls="alarmas" role="tab" data-toggle="tab" style="font-size: 18px;">Alarmas</a>
