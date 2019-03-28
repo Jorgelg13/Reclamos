@@ -368,6 +368,29 @@ public class Utils
         }
     }
 
+    public static void ENVIOSMS(String telefono, String mensaje)
+    {
+        int numero = Convert.ToInt32(telefono);
+
+        if (numero > 30000000)
+        {
+            if (telefono != "")
+            {
+                HttpClient client = new HttpClient();
+                var values = new System.Collections.Generic.Dictionary<string, string>
+                 {
+                   { "token", "Un!ty2018" },
+                   { "numero", telefono },
+                   { "mensaje", mensaje}
+                 };
+
+                var content = new FormUrlEncodedContent(values);
+                var response = client.PostAsync("http://192.168.81.225:9900/movistar/enviar", content);
+                bool estado_envio = response.IsFaulted;
+            }
+        }
+    }
+
     public static void Guardar_cartas(TextBox contenido, string tipo, string modulo, int id, CheckBox chCierreInterno, CheckBox chDeclinado, CheckBox chEnvioCheque, HttpResponse Response)
     {
         try
@@ -559,6 +582,14 @@ public class Utils
         return telefono;
     }
 
+    public static string TelefonoEjecutivo(int codigo)
+    {
+        string telefono;
+        var numero = DBReclamos.ejecutivos.Where(tel => tel.codigo == codigo).First();
+        telefono = numero.telefono.ToString();
+        return telefono;
+    }
+
     //seleccionar correo de ejecutivos que tienen asignado una poliza
     public static string seleccionarCorreo(int cod)
     {
@@ -693,11 +724,11 @@ public class Utils
 
     public static void MoverArchivos(string poliza,string destino)
     {
-        //String pathPrincipal = @"E:\ReclamosScanner\files\RenovacionesElRoble\OneDrive - Unity Seguros\Renovaciones\Polizas";
-        //String pathDestino = @"E:\ReclamosScanner\files\RenovacionesElRoble\OneDrive - Unity Seguros\Renovaciones";
+        String pathPrincipal = @"E:\ReclamosScanner\files\RenovacionesElRoble\OneDrive - Unity Seguros\Renovaciones\Polizas";
+        String pathDestino = @"E:\ReclamosScanner\files\RenovacionesElRoble\OneDrive - Unity Seguros\Renovaciones";
 
-        String pathPrincipal = @"C:\Renovaciones\Polizas";
-        String pathDestino = @"C:\Renovaciones";
+        //String pathPrincipal = @"C:\Renovaciones\Polizas";
+        //String pathDestino = @"C:\Renovaciones";
 
         String origen = Path.Combine(pathPrincipal, poliza);
         String destinoArchivo = Path.Combine(pathDestino, destino + "\\" +poliza);

@@ -34,47 +34,17 @@ public partial class Modulos_MdReclamosUnity_wbFrmBusquedaReclamos : System.Web.
                " auto_reclamo.marca as Marca," +
                " auto_reclamo.color as Color, " +
                " auto_reclamo.modelo as Modelo," +
-               " auto_reclamo.chasis as Chasis," +
                " auto_reclamo.motor as Motor, " +
                " auto_reclamo.propietario as Propietario, " +
-               " auto_reclamo.ejecutivo as Ejecutivo," +
                " auto_reclamo.aseguradora as Aseguradora," +
                " auto_reclamo.contratante as Contratante, " +
-               " auto_reclamo.estado_poliza as [Estado Poliza]," +
-               " reclamo_auto.boleta as Boleta," +
-               " reclamo_auto.titular  as Titular," +
-               " reclamo_auto.hora as Hora," +
-               " reclamo_auto.fecha as [Fecha Siniestro]," +
                //" reclamo_auto.fecha_commit as [Fecha Commit]," 21 +
-               " reclamo_auto.ubicacion as Ubicacion," +
-               " reclamo_auto.reportante as Reportante," +
-               " reclamo_auto.piloto as Piloto," +
-               " reclamo_auto.telefono as Telefono," +
-               " reclamo_auto.ajustador as Ajustador," +
-               " reclamo_auto.prioritario, " +
-               " reclamo_auto.complicado as Complicado, " +
-               " reclamo_auto.compromiso_pago as [Compromiso Pago], " +
-               " reclamo_auto.alquiler_auto as [Alquiler Auto], " +
-               " reclamo_auto.perdida_total as [Perdida Total], " +
-               " reclamo_auto.estado_auto_unity as [Estado Auto]," +
-               " gestores.nombre as [Gestor Reclamo], " +
-               " reclamo_auto.num_reclamo, " +
-                " talleres.nombre as Taller, " +
-                " analistas.nombre as Analista, " +
-                " cabina.nombre as Cabina," +
-                " sucursal.nombre as Sucursal," +
-                " empresa.nombre as Empresa," +
-                " pais.nombre as Pais," +
-                " usuario.nombre as [Usuario Cabina]" +
+                " talleres.nombre as Taller " +
                 " FROM auto_reclamo " +
                 " INNER JOIN reclamo_auto ON reclamo_auto.id_auto_reclamo = auto_reclamo.id " +
                 " INNER JOIN gestores on reclamo_auto.id_gestor = gestores.id" +
                 " INNER JOIN talleres on reclamo_auto.id_taller = talleres.id" +
                 " INNER JOIN analistas on reclamo_auto.id_analista = analistas.id" +
-                " INNER JOIN cabina ON reclamo_auto.id_cabina = cabina.id " +
-                " INNER JOIN sucursal ON cabina.id_sucursal = sucursal.id " +
-                " INNER JOIN empresa ON sucursal.id_empresa = empresa.id " +
-                " INNER JOIN pais ON empresa.id_pais = pais.id " +
                 " INNER JOIN usuario ON reclamo_auto.id_usuario = usuario.id "; 
 
             if (ddlEstado.SelectedItem.Text == "Todos")

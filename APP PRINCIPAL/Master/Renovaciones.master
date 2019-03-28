@@ -18,12 +18,12 @@
 <body>
     <form id="form1" runat="server">
         <div class="jumbotron titulo-cabecera">
-            <h2 style="width: 781px; padding-bottom: 20px;">Sistema de renovaciones</h2>
+            <h2 style="width: 781px; padding-bottom: 20px; font-size:18px;">Sistema de renovaciones</h2>
             <header>
                 <div class="content-wrapper">
                     <div class="float-right">
                         <div class="img-float-right" style="float: right;">
-                            <img src="/imgUnity/Unity%20Promotores-%20Logo%20en%20blanco.png" style="margin-top: -90px; width: 235px;">
+                            <img src="/imgUnity/Unity%20Promotores-%20Logo%20en%20blanco.png" style="margin-top: -57px; width: 150px;">
                         </div>
                         <section id="login">
                             <asp:LoginView runat="server" ViewStateMode="Disabled">
@@ -34,7 +34,7 @@
                                     </ul>
                                 </AnonymousTemplate>
                                 <LoggedInTemplate>
-                                    <p>
+                                    <p style="font-size:16px; margin: -21px 0 10px;">
                                         Hola  <a runat="server" class="username fondo" href="/Account/Manage" title="Cambiar Contraseña">
                                             <asp:LoginName runat="server" CssClass="username" />
                                         </a>!

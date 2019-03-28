@@ -31,6 +31,7 @@ public partial class Modulos_MdRenovaciones_Dashboard : System.Web.UI.Page
     {
         llenar.llenarGridRenovaciones(Consultas.POLIZAS_RENOVADAS(Convert.ToInt32(Session["CodigoGestor"]), 2, "", ""), GridElRoble);
     }
+
     public void ValidarCorreo(String correo, int id)
     {
         EmailValidator emailValidator = new EmailValidator();
@@ -55,6 +56,7 @@ public partial class Modulos_MdRenovaciones_Dashboard : System.Web.UI.Page
                     String Poliza = (registro.ramo + registro.poliza + registro.endoso_renov + ".pdf");
                     Utils.MoverArchivos(Poliza, "Enviadas");
                     llenarGrid();
+                    //EnvioSms();
                     break;
 
                 case EmailValidationResult.MailboxUnavailable:
@@ -88,14 +90,9 @@ public partial class Modulos_MdRenovaciones_Dashboard : System.Web.UI.Page
         }
     }
 
-    protected void GridAllPolizas_SelectedIndexChanged(object sender, EventArgs e)
-    {
-
-    }
-
     protected void GridElRoble_SelectedIndexChanged(object sender, EventArgs e)
     {
-        int identificador = Convert.ToInt32(GridElRoble.SelectedRow.Cells[1].Text);
+        int identificador = Convert.ToInt32(GridElRoble.SelectedRow.Cells[3].Text);
         var registro = DBRenovaciones.renovaciones_polizas.Find(identificador);
         var gestor = DBReclamos.usuario.Find(Convert.ToInt32(Session["CodigoGestor"]));
         String Poliza = registro.ramo + registro.poliza + registro.endoso_renov + ".pdf";
@@ -120,10 +117,11 @@ public partial class Modulos_MdRenovaciones_Dashboard : System.Web.UI.Page
         this.Page.ClientScript.RegisterStartupScript(this.Page.GetType(), "show_modal", "$('#ModalCorreo').modal('show');", addScriptTags: true);
     }
 
+    //enviar correo electronico
     protected void lnkGuardar_Click(object sender, EventArgs e)
     {
-        string correo = Convert.ToString(GridElRoble.SelectedRow.Cells[8].Text);
-        int id = Convert.ToInt32(GridElRoble.SelectedRow.Cells[1].Text);
+        string correo = Convert.ToString(GridElRoble.SelectedRow.Cells[12].Text);
+        int id = Convert.ToInt32(GridElRoble.SelectedRow.Cells[3].Text);
 
         try
         {
@@ -136,7 +134,7 @@ public partial class Modulos_MdRenovaciones_Dashboard : System.Web.UI.Page
     }
 
   
-
+    //mover registros a invalidos
     protected void GridElRoble_RowDeleting(object sender, System.Web.UI.WebControls.GridViewDeleteEventArgs e)
     {
         GridViewRow row = (GridViewRow)GridElRoble.Rows[e.RowIndex];
@@ -150,5 +148,19 @@ public partial class Modulos_MdRenovaciones_Dashboard : System.Web.UI.Page
 
         DBRenovaciones.SaveChanges();
         llenarGrid();
+    }
+
+    private void EnvioSms()
+    {
+        int id = Convert.ToInt32(GridElRoble.SelectedRow.Cells[3].Text);
+        var registro = DBRenovaciones.renovaciones_polizas.Find(id);
+
+        String mensaje = "Hemos enviado a su email registrado la renovacion " +  Convert.ToDateTime(registro.vigf).AddYears(-1).Year + "/" +  Convert.ToDateTime(registro.vigf).Year + " " +
+            "de su poliza " + registro.poliza + " del " + registro.marca + " / " + registro.modelo +", favor revisar y cualquier duda contacte a " +
+            "" + registro.nombre_gestor + " al " + Utils.TelefonoEjecutivo(Convert.ToInt32(registro.codigo_gestor));
+
+        
+
+        Utils.ENVIOSMS("57014696",mensaje);
     }
 }

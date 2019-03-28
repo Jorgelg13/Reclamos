@@ -14,6 +14,7 @@
                         <asp:ListItem Value="placa">Placa</asp:ListItem>
                         <asp:ListItem Value="asegurado">Asegurado</asp:ListItem>
                         <asp:ListItem Value="num_reclamo">No. Reclamo</asp:ListItem> 
+                        <asp:ListItem Value="cliente">cliente</asp:ListItem> 
                     </asp:DropDownList>
                      <asp:DropDownList CssClass="form-control" ID="ddlEstado" Style="width: 10%" Height="34px" runat="server" CausesValidation="True">
                         <asp:ListItem >Todos</asp:ListItem>
