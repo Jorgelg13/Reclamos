@@ -436,36 +436,54 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosMedicosSeguimientos : 
     protected void btnGuardarPago_Click(object sender, EventArgs e)
     {
         aplicarLiquidacion();
-        fechaChequeRecibido();
 
         try
         {
-            cmd.CommandType = CommandType.Text;
-            cmd.CommandText = "insert into detalle_pagos_reclamos_medicos (total_reclamado, total_aprobado, copago, total_no_cubierto, total_iva, deducible,coaseguro, timbres,total, no_cheque,porcen_coaseguro, porcen_timbres, moneda,monto,banco, id_reclamo_medico) values(" + txtReclamado.Text + ", " + txtAprobado.Text +", "+txtCopago.Text+", "+ txtNoCubiertos.Text+", "+totalIva+", "+deducible+","+totalCoaseguro+", "+totalTimbres+","+ montoTotal+",'"+ txtNumeroCheque.Text+"', "+ ddlCoaseguro.SelectedValue +", "+ddlTimbres.SelectedValue+", '"+ ddlMoneda.SelectedItem+"', '"+ txtMontoCheque.Text +"', '"+ddlBanco.SelectedItem+"', " + id + ")";
-            cmd.Connection = objeto.ObtenerConexionReclamos();
-            cmd.ExecuteNonQuery();
-            objeto.conexion.Close();
-            //actualizar la fecha del envio de cheque
-            cmd.CommandText = "update reclamos_medicos set fecha_envio_cheque = '"+txtFechaEnvioCheque.Text+"', destino = '"+ddlDestino.SelectedItem+"' where id = "+ id +"";
-            cmd.Connection = objeto.ObtenerConexionReclamos();
-            cmd.ExecuteNonQuery();
-            objeto.conexion.Close();
-            Utils.ShowMessage(this.Page, "Cheque ingresado con exito..!", "Excelente", "success");
-            llenado.llenarGrid(pagos, GridPagos);
-            txtReclamado.Text = "0.00";
-            txtAprobado.Text = "0.00";
-            txtNoCubiertos.Text = "0.00";
-            txtDeducible.Text = "0.00";
-            txtNumeroCheque.Text = "";
-            checkAgregar.Enabled = true;
-            tiempos();
-            inabilitarTextPago();
-            Utils.actividades(id, Constantes.GASTOS_MEDICOS(), 20, Constantes.USER());
+            var registro = DBReclamos.reclamos_medicos.Find(id);
+            DateTime fecha;
+
+            if(DateTime.TryParse(txtFechaEnvioCheque.Text , out fecha))
+            {
+                if(fecha.Year > 2000)
+                {
+                    cmd.CommandType = CommandType.Text;
+                    cmd.CommandText = "insert into detalle_pagos_reclamos_medicos " +
+                        "(total_reclamado, total_aprobado, copago, total_no_cubierto, total_iva, deducible,coaseguro, timbres,total, no_cheque,porcen_coaseguro, porcen_timbres, moneda,monto,banco, id_reclamo_medico) " +
+                        "values(" + txtReclamado.Text + ", " + txtAprobado.Text + ", " + txtCopago.Text + ", " + txtNoCubiertos.Text + ", " + totalIva + ", " + deducible + "," + totalCoaseguro + ", " + totalTimbres + "," + montoTotal + "," +
+                        "'" + txtNumeroCheque.Text + "', " + ddlCoaseguro.SelectedValue + ", " + ddlTimbres.SelectedValue + ", '" + ddlMoneda.SelectedItem + "', '" + txtMontoCheque.Text + "', '" + ddlBanco.SelectedItem + "', " + id + ")";
+                    cmd.Connection = objeto.ObtenerConexionReclamos();
+                    cmd.ExecuteNonQuery();
+                    objeto.conexion.Close();
+
+                    registro.fecha_envio_cheque = fecha;
+                    registro.destino = ddlDestino.SelectedItem.Text;
+                    DBReclamos.SaveChanges();
+
+                    llenado.llenarGrid(pagos, GridPagos);
+                    txtReclamado.Text = "0.00";
+                    txtAprobado.Text = "0.00";
+                    txtNoCubiertos.Text = "0.00";
+                    txtDeducible.Text = "0.00";
+                    txtNumeroCheque.Text = "";
+                    checkAgregar.Enabled = true;
+                    tiempos();
+                    inabilitarTextPago();
+                    Utils.actividades(id, Constantes.GASTOS_MEDICOS(), 20, Constantes.USER());
+                    fechaChequeRecibido();
+
+                    Utils.ShowMessage(this.Page, "Cheque ingresado con exito..!", "Excelente", "success");
+                }
+
+                else
+                {
+                    Utils.ShowMessage(this.Page, "Error al ingresar la liquidacion, revise que los campos numericos y fechas tengan valores correctos", "Error", "warning");
+                }
+            } 
         }
 
         catch (Exception)
         {
-            Utils.ShowMessage(this.Page, "Error al realzar el pago..", "Error", "error");
+            Utils.ShowMessage(this.Page, "Error al ingresar la liquidacion, revise que los campos numericos y fechas tengan valores correctos", "Error", "error");
         }
     }
 
@@ -614,6 +632,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosMedicosSeguimientos : 
     private void ActualizarLiquidacion()
     {
         identificadorPago = Convert.ToInt32(GridPagos.SelectedRow.Cells[1].Text);
+
         try
         {
             var pago = DBReclamos.detalle_pagos_reclamos_medicos.Find(identificadorPago);

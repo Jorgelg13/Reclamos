@@ -62,7 +62,13 @@
                 <asp:TextBox  style="display:none" runat="server" ID="txtCuerpo"></asp:TextBox>
                 <div id="summernote" class="modal-body">
                 </div>
-                <asp:LinkButton ID="lnkGuardar" OnClick="lnkGuardar_Click" title="Enviar Correo" runat="server" Style="font-size:40px; padding-left:20px;"><i class="fa fa-envelope-o"></i></asp:LinkButton>
+               
+                <div class="modal-footer">
+                  <div class="form-inline">
+                   <asp:TextBox runat="server" ID="txtTelefono" CssClass="form-control" placeholder="Celular"></asp:TextBox>
+                   <asp:LinkButton ID="lnkGuardar" OnClick="lnkGuardar_Click" title="Enviar Correo" runat="server" Style="font-size:40px; padding-left:20px;"><i class="fa fa-envelope-o"></i></asp:LinkButton>
+                </div>
+                </div>
             </div>
         </div>
     </div>

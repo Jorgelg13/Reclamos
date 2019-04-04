@@ -159,8 +159,6 @@ public partial class Modulos_MdRenovaciones_Dashboard : System.Web.UI.Page
             "de su poliza " + registro.poliza + " del " + registro.marca + " / " + registro.modelo +", favor revisar y cualquier duda contacte a " +
             "" + registro.nombre_gestor + " al " + Utils.TelefonoEjecutivo(Convert.ToInt32(registro.codigo_gestor));
 
-        
-
-        Utils.ENVIOSMS("57014696",mensaje);
+        Utils.ENVIOSMS(registro.telefono_cliente.Trim(),mensaje);
     }
 }
