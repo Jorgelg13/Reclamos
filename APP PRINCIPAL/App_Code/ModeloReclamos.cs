@@ -1162,6 +1162,7 @@ public partial class usuario
     public string sucursal { get; set; }
     public string cabina { get; set; }
     public Nullable<short> codigo { get; set; }
+    public string rol { get; set; }
 
     public virtual ICollection<autorizaciones> autorizaciones { get; set; }
     public virtual cabina cabina1 { get; set; }

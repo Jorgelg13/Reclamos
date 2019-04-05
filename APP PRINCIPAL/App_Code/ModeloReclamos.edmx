@@ -961,6 +961,7 @@
           <Property Name="sucursal" Type="varchar" MaxLength="50" />
           <Property Name="cabina" Type="varchar" MaxLength="50" />
           <Property Name="codigo" Type="smallint" />
+          <Property Name="rol" Type="varchar" MaxLength="50" />
         </EntityType>
         <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'reclamos.dbo.ViewBusquedaAuto' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
@@ -1106,6 +1107,8 @@ advertencia 6013: La tabla o vista 'reclamos.dbo.v_polizas' no tiene definida un
           <Property Name="gestor" Type="nvarchar" MaxLength="300" />
           <Property Name="prima" Type="decimal" Precision="12" Scale="2" />
           <Property Name="porcom" Type="decimal" Precision="12" Scale="4" />
+          <Property Name="moneda" Type="nvarchar" MaxLength="50" />
+          <Property Name="gst_nombre" Type="nvarchar" MaxLength="300" />
         </EntityType>-->
         <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'reclamos.dbo.v_producto_no_conforme' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
@@ -1753,6 +1756,9 @@ advertencia 6002: La tabla o vista 'reclamos.dbo.v_producto_no_conforme' no tien
           <Parameter Name="fechaInicio" Type="date" Mode="In" />
           <Parameter Name="fechaFin" Type="date" Mode="In" />
         </Function>
+        <Function Name="pa_reclamos_app" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="cliente" Type="int" Mode="In" />
+        </Function>
         <Function Name="pa_reclamos_autos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="pa_reclamos_varios" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="pa_replicar_reclamos_gm" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
@@ -2279,6 +2285,9 @@ FROM [dbo].[v_producto_no_conforme] AS [v_producto_no_conforme]</DefiningQuery>
           <FunctionImport Name="pa_nps_gastos_medicos">
             <Parameter Name="fechaInicio" Mode="In" Type="DateTime" />
             <Parameter Name="fechaFin" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="pa_reclamos_app">
+          <Parameter Name="cliente" Mode="In" Type="Int32" />
           </FunctionImport>
           <EntitySet Name="actividades" EntityType="reclamosModel.actividades" />
           <EntitySet Name="ajustadores" EntityType="reclamosModel.ajustadores" />
@@ -3819,6 +3828,7 @@ FROM [dbo].[v_producto_no_conforme] AS [v_producto_no_conforme]</DefiningQuery>
           <Property Name="sucursal" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="cabina" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="codigo" Type="Int16" />
+          <Property Name="rol" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="autorizaciones" Relationship="reclamosModel.FK__autorizac__id_us__412EB0B6" FromRole="usuario" ToRole="autorizaciones" />
           <NavigationProperty Name="cabina1" Relationship="reclamosModel.FK__usuario__id_cabi__5CD6CB2B" FromRole="usuario" ToRole="cabina" />
           <NavigationProperty Name="reclamo_auto" Relationship="reclamosModel.FK__reclamo_a__id_us__440B1D61" FromRole="usuario" ToRole="reclamo_auto" />
@@ -4873,6 +4883,7 @@ FROM [dbo].[v_producto_no_conforme] AS [v_producto_no_conforme]</DefiningQuery>
           <FunctionImportMapping FunctionImportName="pa_nps_autos" FunctionName="reclamosModel.Store.pa_nps_autos" />
           <FunctionImportMapping FunctionImportName="pa_nps_danios_varios" FunctionName="reclamosModel.Store.pa_nps_danios_varios" />
           <FunctionImportMapping FunctionImportName="pa_nps_gastos_medicos" FunctionName="reclamosModel.Store.pa_nps_gastos_medicos" />
+          <FunctionImportMapping FunctionImportName="pa_reclamos_app" FunctionName="reclamosModel.Store.pa_reclamos_app" />
           <EntitySetMapping Name="actividades">
             <EntityTypeMapping TypeName="reclamosModel.actividades">
               <MappingFragment StoreEntitySet="actividades">
@@ -5873,6 +5884,7 @@ FROM [dbo].[v_producto_no_conforme] AS [v_producto_no_conforme]</DefiningQuery>
           <EntitySetMapping Name="usuario">
             <EntityTypeMapping TypeName="reclamosModel.usuario">
               <MappingFragment StoreEntitySet="usuario">
+                <ScalarProperty Name="rol" ColumnName="rol" />
                 <ScalarProperty Name="codigo" ColumnName="codigo" />
                 <ScalarProperty Name="cabina" ColumnName="cabina" />
                 <ScalarProperty Name="sucursal" ColumnName="sucursal" />

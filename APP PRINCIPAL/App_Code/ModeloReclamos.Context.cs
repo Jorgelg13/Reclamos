@@ -582,4 +582,13 @@ public partial class ReclamosEntities : DbContext
 
         return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pa_nps_gastos_medicos", fechaInicioParameter, fechaFinParameter);
     }
+
+    public virtual int pa_reclamos_app(Nullable<int> cliente)
+    {
+        var clienteParameter = cliente.HasValue ?
+            new ObjectParameter("cliente", cliente) :
+            new ObjectParameter("cliente", typeof(int));
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pa_reclamos_app", clienteParameter);
+    }
 }
