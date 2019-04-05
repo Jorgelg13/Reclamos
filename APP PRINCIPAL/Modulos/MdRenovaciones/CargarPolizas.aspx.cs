@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Configuration;
 using System.IO;
+using System.Linq;
 using System.Web;
 using System.Web.UI.WebControls;
 
@@ -8,10 +9,25 @@ public partial class Modulos_MdRenovaciones_CargarPolizas : System.Web.UI.Page
 {
     Renovaciones.RenovacionesEntities DBRenovaciones = new Renovaciones.RenovacionesEntities();
     Utils cargarDatos = new Utils();
+
+    ReclamosEntities DBReclamos = new ReclamosEntities();
     string idRecibido;
 
     protected void Page_Load(object sender, EventArgs e)
     {
+
+        try
+        {
+            string usuarioLogin = HttpContext.Current.User.Identity.Name;
+            var user = DBReclamos.usuario.Where(U => U.nombre == usuarioLogin).First();
+
+            if (user.rol == "E" || user.rol == "S" || user.rol == "F")
+            {
+                Response.Redirect("/Modulos/MdRenovaciones/Dashboard.aspx");
+            }
+        }
+        catch { }
+
         idRecibido = Request.QueryString[0].ToString();
     }
 
