@@ -8,10 +8,25 @@ using System.Web.UI.WebControls;
 public partial class Modulos_MdRenovaciones_Estados_Renovadas : System.Web.UI.Page
 {
     Utils llenar = new Utils();
+
+    ReclamosEntities DBReclamos = new ReclamosEntities();
     Renovaciones.RenovacionesEntities DB = new Renovaciones.RenovacionesEntities();
 
     protected void Page_Load(object sender, EventArgs e)
     {
+        try
+        {
+            string usuarioLogin = HttpContext.Current.User.Identity.Name;
+            var user = DBReclamos.usuario.Where(U => U.nombre == usuarioLogin).First();
+
+            if (user.rol == "E" || user.rol == "S")
+            {
+                Response.Redirect("/Modulos/MdRenovaciones/Dashboard.aspx");
+            }
+        }
+        catch { }
+
+
         if (!IsPostBack)
         {
             llenar.llenarGridRenovaciones(Consultas.POLIZAS_RENOVADAS(Convert.ToInt32(Session["CodigoGestor"]), 4, txtFechaInicio.Text,

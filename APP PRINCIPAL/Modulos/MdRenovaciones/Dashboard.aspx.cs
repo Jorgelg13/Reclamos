@@ -1,6 +1,7 @@
 ﻿using EmailValidation;
 using System;
 using System.Web;
+using System.Linq;
 using System.Web.UI.WebControls;
 
 public partial class Modulos_MdRenovaciones_Dashboard : System.Web.UI.Page
@@ -14,6 +15,17 @@ public partial class Modulos_MdRenovaciones_Dashboard : System.Web.UI.Page
     protected void Page_Load(object sender, EventArgs e)
     {
         Session["CodigoGestor"] = Utils.CODIGO_GESTOR(userlogin);
+
+        try
+        {
+            var user = DBReclamos.usuario.Where(U => U.nombre == userlogin).First();
+
+            if (user.rol == "F")
+            {
+                Response.Redirect("/Modulos/MdRenovaciones/Estados/Renovadas.aspx");
+            }
+        }
+        catch { }
 
         if (!IsPostBack)
         {

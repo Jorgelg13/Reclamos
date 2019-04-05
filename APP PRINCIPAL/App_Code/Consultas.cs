@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Linq;
+using System.Web;
 
 /// <summary>
 /// Descripción breve de Consultas
@@ -157,6 +159,19 @@ public class Consultas
     //seccion de renovaciones de polizas
     public static string POLIZAS_RENOVADAS(int codigo,  int ddlEstado, String fInicio, String fFin)
     {
+        String userlogin = HttpContext.Current.User.Identity.Name;
+
+        string rol = "E";
+
+        try
+        {
+            ReclamosEntities DBReclamos = new ReclamosEntities();
+            var user = DBReclamos.usuario.Where(U => U.nombre == userlogin).First();
+            rol = user.rol;
+        }
+        catch { }
+
+
         String sql = "Select " +
             "r.id as ID, " +
             "r.poliza as Poliza," +
@@ -170,14 +185,26 @@ public class Consultas
             "r.correo_cliente as [Correo Cliente]," +
             "  (select top 1 fecha from renovaciones_log where poliza = r.id) as [Fecha Registro]" +
             " from renovaciones_polizas r " +
-            "where r.codigo_gestor =  " + codigo + " and r.estado = "+ ddlEstado;
-            
-        if(!String.IsNullOrEmpty(fFin.Trim()) && !String.IsNullOrEmpty(fInicio.Trim()))
+            "where r.estado = " + ddlEstado;
+
+        if (rol == "E")
+        {
+            sql += " and r.codigo_gestor = " + codigo;
+        }
+
+        else if (rol == "S")
+        {
+            sql += " and r.grupo_economico = " + codigo;
+        }
+
+
+        if (!String.IsNullOrEmpty(fFin.Trim()) && !String.IsNullOrEmpty(fInicio.Trim()))
         {
             sql += " and convert(date,fecha_registro,112) between '" + fInicio + "' and '" + fFin + "' ";
         }
 
         return sql;
+
     }
 
     public static string REQ_POLIZAS_RENOVADAS(string poliza, string secren, String polizaACS)

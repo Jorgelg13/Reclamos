@@ -15,6 +15,20 @@ public partial class Modulos_MdRenovaciones_Estados_SinAsignar : System.Web.UI.P
     protected void Page_Load(object sender, EventArgs e)
     {
 
+        try
+        {
+            string usuarioLogin = HttpContext.Current.User.Identity.Name;
+            var user = DBReclamos.usuario.Where(U => U.nombre == usuarioLogin).First();
+
+            if (user.rol == "E" || user.rol == "S" ||  user.rol == "F")
+            {
+                Response.Redirect("/Modulos/MdRenovaciones/Dashboard.aspx");
+            }
+        }
+        catch { }
+
+
+
         Cargadas = "Select " +
            "r.id as ID, " +
            "r.poliza as Poliza," +

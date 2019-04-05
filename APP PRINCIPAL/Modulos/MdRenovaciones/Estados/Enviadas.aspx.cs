@@ -9,9 +9,23 @@ public partial class Modulos_MdRenovaciones_Estados_Enviadas : System.Web.UI.Pag
 {
     Utils llenar = new Utils();
     Renovaciones.RenovacionesEntities DB = new Renovaciones.RenovacionesEntities();
-    
+    ReclamosEntities DBReclamos = new ReclamosEntities();
+
     protected void Page_Load(object sender, EventArgs e)
     {
+        try
+        {
+            string usuarioLogin = HttpContext.Current.User.Identity.Name; 
+            var user = DBReclamos.usuario.Where(U => U.nombre == usuarioLogin).First();
+
+            if (user.rol == "F")
+            {
+                Response.Redirect("/Modulos/MdRenovaciones/Estados/Renovadas.aspx");
+            }
+        }
+        catch { }
+
+
         if (!IsPostBack)
         {
             llenar.llenarGridRenovaciones(Consultas.POLIZAS_RENOVADAS(Convert.ToInt32(Session["CodigoGestor"]), 3, txtFechaInicio.Text,

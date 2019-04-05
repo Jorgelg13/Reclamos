@@ -14,25 +14,29 @@ public partial class Modulos_MdRenovaciones_Estados_Invalidas : System.Web.UI.Pa
 
     protected void Page_Load(object sender, EventArgs e)
     {
-        Cargadas = "Select " +
-          "r.id as ID, " +
-          "r.poliza as Poliza," +
-          "r.ramo as Ramo," +
-          "r.endoso_renov as Endoso," +
-          "r.asegurado as Asegurado," +
-          "r.marca as Marca," +
-          "r.modelo as Modelo," +
-          "r.placa as Placa," +
-          "r.vigf as [Vigencia Final]," +
-          "r.correo_cliente as [Correo Cliente]," +
-          "  (select top 1 fecha from renovaciones_log where poliza = r.id) as [Fecha Registro]" +
-          "from renovaciones_polizas r " +
-          "where  r.estado = 8 ";
 
+        try
+        {
+            string usuarioLogin = HttpContext.Current.User.Identity.Name;
+            var user = DBReclamos.usuario.Where(U => U.nombre == usuarioLogin).First();
+
+            if (user.rol == "F")
+            {
+                Response.Redirect("/Modulos/MdRenovaciones/Estados/Renovadas.aspx");
+            }
+        }
+        catch { }
+
+     
         if (!IsPostBack)
         {
-            llenar.llenarGridRenovaciones(Cargadas, GridInvalidas);
+            llenarGrid();
         }
+    }
+
+    private void llenarGrid()
+    {
+        llenar.llenarGridRenovaciones(Consultas.POLIZAS_RENOVADAS(Convert.ToInt32(Session["CodigoGestor"]), 8, "", ""), GridInvalidas);
     }
 
     protected void GridInvalidas_SelectedIndexChanged(object sender, EventArgs e)
@@ -42,22 +46,6 @@ public partial class Modulos_MdRenovaciones_Estados_Invalidas : System.Web.UI.Pa
         registro.estado = 2;
         DB.SaveChanges();
 
-        Cargadas = "Select " +
-          "r.id as ID, " +
-          "r.poliza as Poliza," +
-          "r.ramo as Ramo," +
-          "r.endoso_renov as Endoso," +
-          "r.asegurado as Asegurado," +
-          "r.marca as Marca," +
-          "r.modelo as Modelo," +
-          "r.placa as Placa," +
-          "r.vigf as [Vigencia Final]," +
-          "r.correo_cliente as [Correo Cliente]," +
-          "  (select top 1 fecha from renovaciones_log where poliza = r.id) as [Fecha Registro]" +
-          "from renovaciones_polizas r " +
-          "where  r.estado = 8 ";
-
-        llenar.llenarGridRenovaciones(Cargadas, GridInvalidas);
-
+        llenarGrid();
     }
 }

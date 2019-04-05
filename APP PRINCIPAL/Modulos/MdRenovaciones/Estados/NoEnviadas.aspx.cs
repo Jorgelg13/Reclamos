@@ -1,6 +1,8 @@
 ﻿using System;
 using EmailValidation;
 using System.Web.UI;
+using System.Web;
+using System.Linq;
 
 public partial class Modulos_MdRenovaciones_Estados_NoEnviadas : System.Web.UI.Page
 {
@@ -11,6 +13,19 @@ public partial class Modulos_MdRenovaciones_Estados_NoEnviadas : System.Web.UI.P
 
     protected void Page_Load(object sender, EventArgs e)
     {
+        try
+        {
+            string usuarioLogin = HttpContext.Current.User.Identity.Name; 
+            var user = DBReclamos.usuario.Where(U => U.nombre == usuarioLogin).First();
+
+            if (user.rol == "F")
+            {
+                Response.Redirect("/Modulos/MdRenovaciones/Estados/Renovadas.aspx");
+            }
+        }
+        catch { }
+
+
         if (!IsPostBack)
         {
             llenar.llenarGridRenovaciones(Consultas.POLIZAS_RENOVADAS(Convert.ToInt32(Session["CodigoGestor"]), 6, txtFechaInicio.Text,
