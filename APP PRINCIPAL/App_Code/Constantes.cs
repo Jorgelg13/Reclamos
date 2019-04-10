@@ -81,10 +81,10 @@ public class Constantes
 
     /////////////////////////////////////////////////////////
     //Textos para reclamos de autos 
-    public static string ASIGNACION_AUTOS(DropDownList gestor, string placa, string marca, string modelo, string telefono)
+    public static string ASIGNACION_AUTOS(DropDownList gestor, string placa, string marca, string modelo, string telefono, int id)
     {
         return "Estimado asegurado: \n\n" +
-                " Mi nombre es " + gestor.SelectedItem.Text + ", soy la persona asignada para la atención del reclamo presentado por daños al vehículo" +
+                " Mi nombre es " + gestor.SelectedItem.Text + ", soy la persona asignada para la atención del reclamo con ID: "+id+", presentado por daños al vehículo" +
                 " Placas: " + placa + " Marca: " + marca + " Año: " + modelo + ", " +
                 " Mi teléfono directo es:   " + telefono + " para que pueda contactarme en cualquier consulta. \n" +
                 " Solicito de su amable apoyo a manera que pueda confirmarme si ya cuenta con fecha para el ingreso de su vehículo al taller y así poderle apoyar en el proceso de su reclamo. \n\n" +

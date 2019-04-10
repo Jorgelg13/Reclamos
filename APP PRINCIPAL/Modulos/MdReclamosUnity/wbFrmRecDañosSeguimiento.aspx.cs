@@ -75,7 +75,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmRecDañosSeguimiento : System.
     {
         estado = GridReclamosSeguimiento.SelectedRow.Cells[2].Text;
         reclamosSeguimiento = selectGeneral +
-               " where (reclamos_varios.usuario_unity = '" + userlogin + "' and reclamos_varios.estado_unity = 'Seguimiento' and reclamos_varios.estado_reclamo_unity like '"+estado+"') ";
+               " where (reclamos_varios.usuario_unity = '" + userlogin + "' and reclamos_varios.estado_unity = 'Seguimiento' and reclamos_varios.estado_reclamo_unity = '"+HttpUtility.HtmlDecode(estado)+"') ";
         llenado.llenarGrid(reclamosSeguimiento, GridReclamosEstado);
     }
 

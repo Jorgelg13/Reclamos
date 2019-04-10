@@ -6,7 +6,7 @@
       <div class="container-fluid">
         <div class="col-lg-9 col-md-9 col-sm-12">
             <div class="panel panel-info">
-                <div class="panel-heading"><b>Polizas No Enviadas</b></div>
+                <div class="panel-heading"><b>Polizas Sin Asignar</b></div>
                 <div class="panel-body">
                     <div class="form-group  col-sm-12 col-md-6 col-lg-2" style="padding-top: 10px;">
                         <label>Desde:</label>

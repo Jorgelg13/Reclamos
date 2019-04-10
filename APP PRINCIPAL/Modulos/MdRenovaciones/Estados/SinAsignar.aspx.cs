@@ -22,7 +22,7 @@ public partial class Modulos_MdRenovaciones_Estados_SinAsignar : System.Web.UI.P
 
             if (user.rol == "E" || user.rol == "S" ||  user.rol == "F")
             {
-                Response.Redirect("/Modulos/MdRenovaciones/Dashboard.aspx");
+                Response.Redirect("/Modulos/MdRenovaciones/Dashboard.aspx",false);
             }
         }
         catch { }
@@ -97,7 +97,7 @@ public partial class Modulos_MdRenovaciones_Estados_SinAsignar : System.Web.UI.P
         {
             string correo_gestor;
             var gestor = DBReclamos.ejecutivos.Find(Convert.ToInt32(ddlEjecutivo.SelectedValue));
-            correo_gestor = gestor.correo.ToString();
+            correo_gestor = gestor.correo;
             int id = Convert.ToInt32(GridSinAsignar.SelectedRow.Cells[1].Text);
             var registro = DB.renovaciones_polizas.Find(id);
             registro.codigo_gestor = Convert.ToInt32(ddlEjecutivo.SelectedValue);
@@ -114,7 +114,8 @@ public partial class Modulos_MdRenovaciones_Estados_SinAsignar : System.Web.UI.P
 
         catch(Exception ex)
         {
-            Utils.ShowMessage(this.Page, "No se a podido actualizar el registro " + ex.Message, "Error..", "error");
+            Response.Write(ex);
+           // Utils.ShowMessage(this.Page, "No se a podido actualizar el registro " + ex.Message, "Error..", "error");
         }
     }
 

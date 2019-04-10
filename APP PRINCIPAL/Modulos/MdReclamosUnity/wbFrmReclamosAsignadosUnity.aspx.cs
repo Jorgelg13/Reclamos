@@ -276,7 +276,7 @@ public partial class Modulos_MdReclamos_wbFrmReclamosAsignadosUnity : System.Web
     public void enviarNotificacion()
     {
         string telefono = Utils.TelefonoGestor(ddlGestor);
-        string mensaje = Constantes.ASIGNACION_AUTOS(ddlGestor, lblPlaca.Text, lblMarca.Text, lblModelo.Text,telefono);
+        string mensaje = Constantes.ASIGNACION_AUTOS(ddlGestor, lblPlaca.Text, lblMarca.Text, lblModelo.Text,telefono, id);
 
         notificacion.NOTIFICACION(txtCorreo.Text.Trim(), mensaje, "Asignacion de Reclamo");
         agregarComentario("Registro de envio de correo de notificacion: \n\n" + mensaje);

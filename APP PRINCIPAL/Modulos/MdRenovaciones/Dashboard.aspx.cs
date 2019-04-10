@@ -68,7 +68,7 @@ public partial class Modulos_MdRenovaciones_Dashboard : System.Web.UI.Page
                     String Poliza = (registro.ramo + registro.poliza + registro.endoso_renov + ".pdf");
                     Utils.MoverArchivos(Poliza, "Enviadas");
                     llenarGrid();
-                    //EnvioSms();
+                    EnvioSms();
                     break;
 
                 case EmailValidationResult.MailboxUnavailable:
@@ -108,8 +108,9 @@ public partial class Modulos_MdRenovaciones_Dashboard : System.Web.UI.Page
         var registro = DBRenovaciones.renovaciones_polizas.Find(identificador);
         var gestor = DBReclamos.usuario.Find(Convert.ToInt32(Session["CodigoGestor"]));
         String Poliza = registro.ramo + registro.poliza + registro.endoso_renov + ".pdf";
+        txtTelefono.Text = registro.telefono_cliente;
 
-        cuerpo = "Saludos Estimad@ asegurado \n" +
+        cuerpo = "Saludos Estimad@ asegurad@ \n" +
             "<div style=\"text-align: justify\">" +
             "<p>El " + Convert.ToDateTime(registro.vigf_acs).ToString("dd/MM/yyyy") + " vence la anualidad de su póliza " + registro.poliza_unity + ", la cual le brinda coberturas al " + registro.tipo_vehiculo + "  MARCA  " + registro.marca + " PLACA " + registro.placa + ".<p>" +
             "<p>Con el afán de realizar el proceso de renovación de una forma más conveniente para todas las partes, a partir de este año, Seguros El Roble realiza la renovación anticipada de su póliza, la cual encontrará adjunta y cuenta con las siguientes condiciones:</p>" +

@@ -63,124 +63,124 @@
                 </div>
             </div>
         </div>
-            <div class="col-sm-10">
-                <div class="panel panel-info">
-                    <div class="panel-heading">
-                        <b>Tabla con campos seleccionados
+        <div class="col-sm-10">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <b>Tabla con campos seleccionados
                         <spam style="margin-left: 50px">Total de registros: </spam>
-                            <asp:Label ID="lblConteo" runat="server"></asp:Label></b>
-                        <asp:CheckBox ID="checkSinFiltro" style="padding-left:30px;" Checked="true" AutoPostBack="true" runat="server" Text="Sin Ningun Filtro" OnCheckedChanged="checkSinFiltro_CheckedChanged"/>
-                        <asp:DropDownList ID="ddlCiclos" runat="server" Style="width: 10%; height: 25px;">
-                            <asp:ListItem Value="Ciclo Total">Ciclo Total</asp:ListItem>
-                            <asp:ListItem Value="Ciclo Unity">Ciclo Unity</asp:ListItem>
-                            <asp:ListItem Value="Ciclo Cliente">Ciclo Cliente</asp:ListItem>
-                            <asp:ListItem Value="Ciclo Aseguradora">Ciclo Aseguradora</asp:ListItem>
-                        </asp:DropDownList>
-                        <label>Monto Reserva:</label>
-                        <asp:TextBox runat="server" ID="txtMonto" Text="0.00"></asp:TextBox>
-                        <asp:Button ID="Mostrar" Style="margin-left: 20px" runat="server" Text="Mostrar" OnClick="Mostrar_Click" />
-                        <asp:Button ID="btnMostrarEficiencia" Style="margin-left: 20px" runat="server" Text="Eficiencia" OnClick="btnMostrarEficiencia_Click" />
-                    </div>
-                    <div class="panel-body" style="height: auto;">
-                        <div class="row">
-                            <div class="form-group col-sm-12 col-md-6 col-lg-3">
-                                <label>Seleccionar Busqueda:</label>
-                                <asp:DropDownList ID="ddlElegir" runat="server" Style="width: 100%" CssClass="form-control" AutoPostBack="true" OnSelectedIndexChanged="ddlElegir_SelectedIndexChanged">
-                                    <asp:ListItem Value="reg_reclamo_varios.poliza">Poliza</asp:ListItem>
-                                    <asp:ListItem Value="reclamos_varios.estado_reclamo_unity">Estado Reclamo</asp:ListItem>
-                                    <asp:ListItem Value="gestores.nombre">Gestor</asp:ListItem>
-                                    <asp:ListItem Value="reg_reclamo_varios.aseguradora ">Aseguradora</asp:ListItem>
-                                    <asp:ListItem Value="reg_reclamo_varios.asegurado">Asegurado</asp:ListItem>
-                                    <asp:ListItem Value="reg_reclamo_varios.moneda">Moneda</asp:ListItem>
-                                    <asp:ListItem Value="reclamos_varios">Ajustador</asp:ListItem>
-                                    <asp:ListItem Value="reg_reclamo_varios.ejecutivo">Ejecutivo</asp:ListItem>
-                                    <asp:ListItem Value="reg_reclamo_varios.cliente">Cliente</asp:ListItem>
-                                </asp:DropDownList>
-                            </div>
-                            <div class="form-group col-sm-12 col-md-6 col-lg-3">
-                                <label>Registros a buscar:</label>
-                                <asp:TextBox ID="txtBuscar" CssClass="form-control" Style="width: 100%" placeholder="Escriba su busqueda" runat="server"></asp:TextBox>
-                                <asp:DropDownList ID="ddlBuscar" Visible="false" runat="server" Style="width: 100%" CssClass="form-control">
-                                </asp:DropDownList>
-                            </div>
-                            <div class="form-group col-sm-12 col-md-6 col-lg-2">
-                                <label>Estado:</label>
-                                <asp:DropDownList ID="ddlEstado" runat="server" Style="width: 100%" CssClass="form-control">
-                                    <asp:ListItem Value="Cerrado">Cerrado</asp:ListItem>
-                                    <asp:ListItem Value="Seguimiento">Seguimiento</asp:ListItem>
-                                    <asp:ListItem Value="Todos">Todos</asp:ListItem>
-                                    <asp:ListItem Value="reclamos_varios.estado_unity= 'Seguimiento'">Pendientes</asp:ListItem>
-                                    <asp:ListItem>Estado</asp:ListItem>
-                                </asp:DropDownList>
-                            </div>
-                            <div class="form-group col-sm-12 col-md-6 col-lg-2">
-                                <label>Fecha Inicio:</label>
-                                <asp:TextBox ID="txtFechaInicio" Height="34px" type="date" CssClass="form-control" Style="width: 100%" placeholder="Escriba su busqueda" runat="server"></asp:TextBox>
-                            </div>
-                            <div class="form-group col-sm-12 col-md-6 col-lg-2">
-                                <label>Fecha Fin:</label>
-                                <asp:TextBox ID="txtFechaFin" type="date" Height="34px" CssClass="form-control" Style="width: 100%" placeholder="Escriba su busqueda" runat="server"></asp:TextBox>
-                            </div>
+                        <asp:Label ID="lblConteo" runat="server"></asp:Label></b>
+                    <asp:CheckBox ID="checkSinFiltro" Style="padding-left: 30px;" Checked="true" AutoPostBack="true" runat="server" Text="Sin Ningun Filtro" OnCheckedChanged="checkSinFiltro_CheckedChanged" />
+                    <asp:DropDownList ID="ddlCiclos" runat="server" Style="width: 10%; height: 25px;">
+                        <asp:ListItem Value="Ciclo Total">Ciclo Total</asp:ListItem>
+                        <asp:ListItem Value="Ciclo Unity">Ciclo Unity</asp:ListItem>
+                        <asp:ListItem Value="Ciclo Cliente">Ciclo Cliente</asp:ListItem>
+                        <asp:ListItem Value="Ciclo Aseguradora">Ciclo Aseguradora</asp:ListItem>
+                    </asp:DropDownList>
+                    <label>Monto Reserva:</label>
+                    <asp:TextBox runat="server" ID="txtMonto" Text="0.00"></asp:TextBox>
+                    <asp:Button ID="Mostrar" Style="margin-left: 20px" runat="server" Text="Mostrar" OnClick="Mostrar_Click" />
+                    <asp:Button ID="btnMostrarEficiencia" Style="margin-left: 20px" runat="server" Text="Eficiencia" OnClick="btnMostrarEficiencia_Click" />
+                </div>
+                <div class="panel-body" style="height: auto;">
+                    <div class="row">
+                        <div class="form-group col-sm-12 col-md-6 col-lg-3">
+                            <label>Seleccionar Busqueda:</label>
+                            <asp:DropDownList ID="ddlElegir" runat="server" Style="width: 100%" CssClass="form-control" AutoPostBack="true" OnSelectedIndexChanged="ddlElegir_SelectedIndexChanged">
+                                <asp:ListItem Value="reg_reclamo_varios.poliza">Poliza</asp:ListItem>
+                                <asp:ListItem Value="reclamos_varios.estado_reclamo_unity">Estado Reclamo</asp:ListItem>
+                                <asp:ListItem Value="gestores.nombre">Gestor</asp:ListItem>
+                                <asp:ListItem Value="reg_reclamo_varios.aseguradora ">Aseguradora</asp:ListItem>
+                                <asp:ListItem Value="reg_reclamo_varios.asegurado">Asegurado</asp:ListItem>
+                                <asp:ListItem Value="reg_reclamo_varios.moneda">Moneda</asp:ListItem>
+                                <asp:ListItem Value="reclamos_varios">Ajustador</asp:ListItem>
+                                <asp:ListItem Value="reg_reclamo_varios.ejecutivo">Ejecutivo</asp:ListItem>
+                                <asp:ListItem Value="reg_reclamo_varios.cliente">Cliente</asp:ListItem>
+                            </asp:DropDownList>
                         </div>
-                        <asp:Panel runat="server" ID="PanelPrincipal">
-                             <div style="text-align: center; font-size: 20px;">
-                                <b>
-                                    <asp:Label runat="server" ID="lblTitulo"></asp:Label></b>
-                                <br />
-                                <asp:Label runat="server" ID="lblPeriodo"></asp:Label>
-                                <br />
-                                <asp:Label runat="server" ID="lblFechaGeneracion"></asp:Label>
-                                <asp:Label runat="server" ID="lblUsuario" Style="padding-right: 15px;"></asp:Label>
-                            </div>
-                            <asp:Panel runat="server" ID="PanelCamposSeleccion">
-                                <div class="scrolling-table-container">
-                                    <asp:GridView ID="GridCamposSeleccion" runat="server" CssClass="table table-responsive" AutoGenerateColumns="True" ForeColor="#333333" GridLines="None">
-                                        <AlternatingRowStyle BackColor="White" />
-                                        <HeaderStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" HorizontalAlign="Center" Wrap="False" />
-                                        <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
-                                        <RowStyle BackColor="#EFF3FB" HorizontalAlign="Left" Wrap="False" />
-                                    </asp:GridView>
-                                </div>
-                            </asp:Panel>
-                            <asp:Panel runat="server" ID="PanelEficiencia">
-                                <div class="scrolling-table-container">
-                                    <asp:GridView ID="GridEficiencia" runat="server" CssClass="table bs-table table-responsive" AutoGenerateColumns="True" ForeColor="#333333" GridLines="None" OnRowDataBound="GridEficiencia_RowDataBound" ShowFooter="true">
-                                        <AlternatingRowStyle BackColor="White" />
-                                        <FooterStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" />
-                                        <HeaderStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" HorizontalAlign="Center" Wrap="False" />
-                                        <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
-                                        <RowStyle BackColor="#EFF3FB" HorizontalAlign="Left" Wrap="False" />
-                                    </asp:GridView>
-                                </div>
-                            </asp:Panel>
-                            <asp:Panel runat="server" ID="PnCiclos">
-                                <div style="height: 520px;">
-                                  <div class="scrolling-table-container" style="overflow-y: auto;">
-                                <div id="ciclos" class="col-sm-12 col-md-12 col-lg-12">
-                                    <asp:GridView ID="GridCiclos" runat="server" CssClass="table bs-table table-responsive" OnRowDataBound="GridCiclos_RowDataBound" AutoGenerateColumns="True" ShowFooter="true" ForeColor="#333333" GridLines="None">
-                                        <AlternatingRowStyle BackColor="White" />
-                                        <FooterStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" />
-                                        <HeaderStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" HorizontalAlign="Center" Wrap="False" />
-                                        <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
-                                        <RowStyle BackColor="#EFF3FB" HorizontalAlign="Left" Wrap="False" />
-                                    </asp:GridView>
-                                </div>
-                                <div id="ciclos2" class="col-sm-12 col-md-6 col-lg-6">
-                                    <asp:GridView ID="GridCiclos2" runat="server" CssClass="table bs-table table-responsive" OnRowDataBound="GridCiclos2_RowDataBound" AutoGenerateColumns="True" ShowFooter="true" ForeColor="#333333" GridLines="None">
-                                        <AlternatingRowStyle BackColor="White" />
-                                        <FooterStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" />
-                                        <HeaderStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" HorizontalAlign="Center" Wrap="False" />
-                                        <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
-                                        <RowStyle BackColor="#EFF3FB" HorizontalAlign="Left" Wrap="False" />
-                                    </asp:GridView>
-                                </div>
-                            </div>
-                                </div>
-                            </asp:Panel>
-                        </asp:Panel>
+                        <div class="form-group col-sm-12 col-md-6 col-lg-3">
+                            <label>Registros a buscar:</label>
+                            <asp:TextBox ID="txtBuscar" CssClass="form-control" Style="width: 100%" placeholder="Escriba su busqueda" runat="server"></asp:TextBox>
+                            <asp:DropDownList ID="ddlBuscar" Visible="false" runat="server" Style="width: 100%" CssClass="form-control">
+                            </asp:DropDownList>
+                        </div>
+                        <div class="form-group col-sm-12 col-md-6 col-lg-2">
+                            <label>Estado:</label>
+                            <asp:DropDownList ID="ddlEstado" runat="server" Style="width: 100%" CssClass="form-control">
+                                <asp:ListItem Value="Cerrado">Cerrado</asp:ListItem>
+                                <asp:ListItem Value="Seguimiento">Seguimiento</asp:ListItem>
+                                <asp:ListItem Value="Todos">Todos</asp:ListItem>
+                                <asp:ListItem Value="reclamos_varios.estado_unity= 'Seguimiento'">Pendientes</asp:ListItem>
+                                <asp:ListItem>Estado</asp:ListItem>
+                            </asp:DropDownList>
+                        </div>
+                        <div class="form-group col-sm-12 col-md-6 col-lg-2">
+                            <label>Fecha Inicio:</label>
+                            <asp:TextBox ID="txtFechaInicio" Height="34px" type="date" CssClass="form-control" Style="width: 100%" placeholder="Escriba su busqueda" runat="server"></asp:TextBox>
+                        </div>
+                        <div class="form-group col-sm-12 col-md-6 col-lg-2">
+                            <label>Fecha Fin:</label>
+                            <asp:TextBox ID="txtFechaFin" type="date" Height="34px" CssClass="form-control" Style="width: 100%" placeholder="Escriba su busqueda" runat="server"></asp:TextBox>
+                        </div>
                     </div>
+                    <asp:Panel runat="server" ID="PanelPrincipal">
+                        <div style="text-align: center; font-size: 20px;">
+                            <b>
+                                <asp:Label runat="server" ID="lblTitulo"></asp:Label></b>
+                            <br />
+                            <asp:Label runat="server" ID="lblPeriodo"></asp:Label>
+                            <br />
+                            <asp:Label runat="server" ID="lblFechaGeneracion"></asp:Label>
+                            <asp:Label runat="server" ID="lblUsuario" Style="padding-right: 15px;"></asp:Label>
+                        </div>
+                        <asp:Panel runat="server" ID="PanelCamposSeleccion">
+                            <div class="scrolling-table-container">
+                                <asp:GridView ID="GridCamposSeleccion" runat="server" CssClass="table table-responsive" AutoGenerateColumns="True" ForeColor="#333333" GridLines="None">
+                                    <AlternatingRowStyle BackColor="White" />
+                                    <HeaderStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" HorizontalAlign="Center" Wrap="False" />
+                                    <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
+                                    <RowStyle BackColor="#EFF3FB" HorizontalAlign="Left" Wrap="False" />
+                                </asp:GridView>
+                            </div>
+                        </asp:Panel>
+                        <asp:Panel runat="server" ID="PanelEficiencia">
+                            <div class="scrolling-table-container">
+                                <asp:GridView ID="GridEficiencia" runat="server" CssClass="table bs-table table-responsive" AutoGenerateColumns="True" ForeColor="#333333" GridLines="None" OnRowDataBound="GridEficiencia_RowDataBound" ShowFooter="true">
+                                    <AlternatingRowStyle BackColor="White" />
+                                    <FooterStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" />
+                                    <HeaderStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" HorizontalAlign="Center" Wrap="False" />
+                                    <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
+                                    <RowStyle BackColor="#EFF3FB" HorizontalAlign="Left" Wrap="False" />
+                                </asp:GridView>
+                            </div>
+                        </asp:Panel>
+                        <asp:Panel runat="server" ID="PnCiclos">
+                            <div style="height: 520px;">
+                                <div class="scrolling-table-container" style="overflow-y: auto;">
+                                    <div id="ciclos" class="col-sm-12 col-md-12 col-lg-12">
+                                        <asp:GridView ID="GridCiclos" runat="server" CssClass="table bs-table table-responsive" OnRowDataBound="GridCiclos_RowDataBound" AutoGenerateColumns="True" ShowFooter="true" ForeColor="#333333" GridLines="None">
+                                            <AlternatingRowStyle BackColor="White" />
+                                            <FooterStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" />
+                                            <HeaderStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" HorizontalAlign="Center" Wrap="False" />
+                                            <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
+                                            <RowStyle BackColor="#EFF3FB" HorizontalAlign="Left" Wrap="False" />
+                                        </asp:GridView>
+                                    </div>
+                                    <div id="ciclos2" class="col-sm-12 col-md-6 col-lg-6">
+                                        <asp:GridView ID="GridCiclos2" runat="server" CssClass="table bs-table table-responsive" OnRowDataBound="GridCiclos2_RowDataBound" AutoGenerateColumns="True" ShowFooter="true" ForeColor="#333333" GridLines="None">
+                                            <AlternatingRowStyle BackColor="White" />
+                                            <FooterStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" />
+                                            <HeaderStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" HorizontalAlign="Center" Wrap="False" />
+                                            <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
+                                            <RowStyle BackColor="#EFF3FB" HorizontalAlign="Left" Wrap="False" />
+                                        </asp:GridView>
+                                    </div>
+                                </div>
+                            </div>
+                        </asp:Panel>
+                    </asp:Panel>
                 </div>
             </div>
+        </div>
         <%-- botones circulares con las opciones multiples --%>
         <div id="container-floating">
             <div class="nd4 nds" data-toggle="tooltip" data-placement="left" data-original-title="Simone">
@@ -213,7 +213,7 @@
         } catch (ex) {
         }
     </script>
-     <script>
+    <script>
         if ($('#ContentPlaceHolder1_ddlCiclos option:selected').text() == 'Ciclo Unity') {
 
             $('#ciclos2').show();
