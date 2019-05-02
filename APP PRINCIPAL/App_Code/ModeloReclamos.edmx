@@ -368,6 +368,9 @@
           <Property Name="moneda" Type="varchar" MaxLength="50" />
           <Property Name="banco" Type="varchar" MaxLength="50" />
           <Property Name="monto" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="no_transferencia" Type="varchar" MaxLength="30" />
+          <Property Name="monto_transferencia" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="fecha_transferencia" Type="date" />
           <Property Name="fecha_creacion" Type="datetime" />
           <Property Name="id_reclamo_medico" Type="bigint" Nullable="false" />
         </EntityType>
@@ -1093,23 +1096,6 @@ advertencia 6002: La tabla o vista 'reclamos.dbo.ViewBusquedaAuto' no tiene defi
           <Property Name="prima" Type="decimal" Precision="12" Scale="2" />
           <Property Name="porcom" Type="decimal" Precision="10" Scale="4" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6013: La tabla o vista 'reclamos.dbo.v_polizas' no tiene definida una clave principal y no es posible inferir ninguna clave principal válida. Esta tabla o vista se ha excluido. Para usar la entidad, necesitará revisar el esquema, agregar las claves correctas y quitar sus comentarios.
-        <EntityType Name="v_polizas">
-          <Property Name="poliza" Type="nvarchar" MaxLength="50" />
-          <Property Name="secren" Type="smallint" />
-          <Property Name="ramo" Type="nvarchar" MaxLength="60" />
-          <Property Name="aseguradora" Type="nvarchar" MaxLength="300" />
-          <Property Name="vigi" Type="date" />
-          <Property Name="vigf" Type="date" />
-          <Property Name="cliente" Type="int" />
-          <Property Name="asegurado" Type="nvarchar" MaxLength="300" />
-          <Property Name="gestor" Type="nvarchar" MaxLength="300" />
-          <Property Name="prima" Type="decimal" Precision="12" Scale="2" />
-          <Property Name="porcom" Type="decimal" Precision="12" Scale="4" />
-          <Property Name="moneda" Type="nvarchar" MaxLength="50" />
-          <Property Name="gst_nombre" Type="nvarchar" MaxLength="300" />
-        </EntityType>-->
         <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'reclamos.dbo.v_producto_no_conforme' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="v_producto_no_conforme">
@@ -3177,6 +3163,9 @@ FROM [dbo].[v_producto_no_conforme] AS [v_producto_no_conforme]</DefiningQuery>
           <Property Name="fecha_creacion" Type="DateTime" Precision="3" />
           <Property Name="id_reclamo_medico" Type="Int64" Nullable="false" />
           <NavigationProperty Name="reclamos_medicos" Relationship="reclamosModel.FK_detalle_pagos_reclamos_medicos_detalle_pagos_reclamos_medicos1" FromRole="detalle_pagos_reclamos_medicos" ToRole="reclamos_medicos" />
+          <Property Name="no_transferencia" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="monto_transferencia" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="fecha_transferencia" Type="DateTime" Precision="0" />
         </EntityType>
         <EntityType Name="detalle_pagos_reclamos_varios">
           <Key>
@@ -5258,6 +5247,9 @@ FROM [dbo].[v_producto_no_conforme] AS [v_producto_no_conforme]</DefiningQuery>
           <EntitySetMapping Name="detalle_pagos_reclamos_medicos">
             <EntityTypeMapping TypeName="reclamosModel.detalle_pagos_reclamos_medicos">
               <MappingFragment StoreEntitySet="detalle_pagos_reclamos_medicos">
+                <ScalarProperty Name="fecha_transferencia" ColumnName="fecha_transferencia" />
+                <ScalarProperty Name="monto_transferencia" ColumnName="monto_transferencia" />
+                <ScalarProperty Name="no_transferencia" ColumnName="no_transferencia" />
                 <ScalarProperty Name="id_reclamo_medico" ColumnName="id_reclamo_medico" />
                 <ScalarProperty Name="fecha_creacion" ColumnName="fecha_creacion" />
                 <ScalarProperty Name="monto" ColumnName="monto" />

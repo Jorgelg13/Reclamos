@@ -828,7 +828,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosAutosSeguimiento : Sys
     {
         if (ddlEstadoAuto.SelectedValue == "Asignacion" && txtCorreoContacto.Text != "")
         {
-            mensaje = Constantes.ASIGNACION_AUTOS(ddlGestor,txtPlaca.Text, txtMarca.Text,txtModelo.Text,txtGestorTelefono.Text); 
+            mensaje = Constantes.ASIGNACION_AUTOS(ddlGestor,txtPlaca.Text, txtMarca.Text,txtModelo.Text,txtGestorTelefono.Text,id); 
             txtAsunto.Text = "Asignacion Reclamo";
             enviarNotificacion();
             agregarComentario("Correo automatico: " + mensaje);

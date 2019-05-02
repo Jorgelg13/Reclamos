@@ -420,6 +420,9 @@ public partial class detalle_pagos_reclamos_medicos
     public Nullable<decimal> monto { get; set; }
     public Nullable<System.DateTime> fecha_creacion { get; set; }
     public long id_reclamo_medico { get; set; }
+    public string no_transferencia { get; set; }
+    public Nullable<decimal> monto_transferencia { get; set; }
+    public Nullable<System.DateTime> fecha_transferencia { get; set; }
 
     public virtual reclamos_medicos reclamos_medicos { get; set; }
 }

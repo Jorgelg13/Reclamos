@@ -41,7 +41,7 @@
                     }
                 }
             })(jQuery);
-            var valor = $.get("id");
+            var valor = $.get("codigo");
 
             var console = window['console'] ? window['console'] : { 'log': function () { } };
             Dynamsoft.WebTwainEnv.RegisterEvent('OnWebTwainReady', Dynamsoft_OnReady); // Register OnWebTwainReady event. This event fires as soon as Dynamic Web TWAIN is initialized and ready to be used
@@ -96,7 +96,8 @@
                     var pagina = "/Scanner/GuardarArchivosCabina.aspx?codigo="+valor;
                     DWObject.IfSSL = true;
                     DWObject.HTTPPort = 443;
-                    var archivo = $('input:radio[name=tipo]:checked').val();
+                    //var archivo = $('input:radio[name=tipo]:checked').val();
+                    var archivo = valor;
                     DWObject.HTTPUploadAllThroughPostAsPDF(server, pagina, archivo + ".pdf", OnHttpUploadSuccess, OnHttpUploadFailure);
                 }
             }

@@ -37,6 +37,7 @@
                     <asp:ListItem Value="reclamo_auto.hora as [Hora Siniestro]">Hora Siniestro</asp:ListItem>
                     <asp:ListItem Value="Convert(varchar(10),reclamo_auto.fecha, 103) As [Fecha Siniestro]">Fecha Siniestro</asp:ListItem>
                     <asp:ListItem Value="Convert(varchar(10),reclamo_auto.fecha_commit, 103) As [Fecha Creacion]">Fecha Creacion</asp:ListItem>
+                    <asp:ListItem Value="reclamo_auto.fecha_cierre_reclamo As [Fecha Cierre]">Fecha Cierre</asp:ListItem>
                     <asp:ListItem Value="reclamo_auto.ubicacion as Ubicacion">Ubicacion</asp:ListItem>
                     <asp:ListItem Value="reclamo_auto.reportante as Reportante">Reportante</asp:ListItem>
                     <asp:ListItem Value="reclamo_auto.version as Version">Version</asp:ListItem>

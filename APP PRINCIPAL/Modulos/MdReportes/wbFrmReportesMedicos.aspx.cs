@@ -210,10 +210,10 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesMedicos : System.Web.U
         }
     }
 
-    //ciclos para medir tiempos
+    //ciclos para medir tiempos de la aseguradora
     public void CicloAseguradora()
     {
-        kpiAseguradora = ddlMoneda.SelectedItem.Text == "Dolares" ? 35 : 15;
+        kpiAseguradora = ddlMoneda.SelectedItem.Text == "Dolares" ? 35 : 12;
         string promedio_aseguradora = "select " +
              "count(*) total_reclamos," +
              "reg_reclamos_medicos.aseguradora, " +
@@ -237,7 +237,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesMedicos : System.Web.U
     //ciclo de cliente
     public void CicloCliente()
     {
-        kpiCliente = ddlMoneda.SelectedItem.Text == "Dolares" ? 38 : 18;
+        kpiCliente = ddlMoneda.SelectedItem.Text == "Dolares" ? 38 : 15;
         string ciclo_cliente = "select " +
              "count(*) as total_reclamos, " +
              "promedio = cast(AVG(DATEDIFF(minute, reclamos_medicos.fecha_completa_commit, reclamos_medicos.fecha_cierre) *(1.0) / 60 / 24) as decimal(5,2)), " +
@@ -263,7 +263,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesMedicos : System.Web.U
     {
         if(ddlTipoReclamo.SelectedItem.Text == "Colectivos")
         {
-            kpiUnity = 72;
+            kpiUnity = 55;
         }
 
         string ejecutivoKPI = "select count(*) total_reclamos, " +
@@ -276,7 +276,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesMedicos : System.Web.U
             "and(" + ddlTipoReclamo.SelectedValue + ") group by r.usuario_unity " +
             " select usuario_unity as Usuario, total_reclamos as Total_Reclamos , " +
             " isnull(promedio, 1) as Promedio_usuario, " +
-            " cast((72 / ((case when promedio = 0 then 1 " +
+            " cast(("+kpiUnity+" / ((case when promedio = 0 then 1 " +
             " when promedio is NULL then 1 else promedio end) * 1.0) ) *100 as decimal) as Ejecucion " +
             " from #ciclo_ejecutivoKPI";
 
@@ -576,10 +576,10 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesMedicos : System.Web.U
     {
         if (ddlCiclos.SelectedValue == "Ciclo Aseguradora")
         {
-            kpiAseguradora = ddlMoneda.SelectedItem.Text == "Dolares" ? 35 : 15;
+            CicloAseguradora();
+            kpiAseguradora = ddlMoneda.SelectedItem.Text == "Dolares" ? 35 : 12;
             KPI_ASEGURADORA = "KPI Aseguradora " + kpiAseguradora.ToString() + " Dias";
             TituloReporte("Promedio Ciclo Aseguradora", KPI_ASEGURADORA, ddlMoneda.SelectedItem.Text);
-            CicloAseguradora();
             PnReporte.Visible = false;
             PnCicloAseguradora.Visible = true;
             Utils.actividades(0, Constantes.GASTOS_MEDICOS(), 32, Constantes.USER());
@@ -587,10 +587,10 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesMedicos : System.Web.U
 
         else if (ddlCiclos.SelectedValue == "Ciclo Cliente")
         {
-            kpiCliente = ddlMoneda.SelectedItem.Text == "Dolares" ? 38 : 18;
+            CicloCliente();
+            kpiCliente = ddlMoneda.SelectedItem.Text == "Dolares" ? 38 : 15;
             KPI_CLIENTE = "KPI Cliente " + kpiCliente.ToString() + " Dias";
             TituloReporte("Promedio Ciclo Total", KPI_CLIENTE, ddlMoneda.SelectedItem.Text);
-            CicloCliente();
             PnReporte.Visible = false;
             PnCicloCliente.Visible = true;
             Utils.actividades(0, Constantes.GASTOS_MEDICOS(), 33, Constantes.USER());
@@ -598,9 +598,9 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesMedicos : System.Web.U
 
         else if (ddlCiclos.SelectedValue == "Ciclo Ejecutivo")
         {
+            cicloEjecutivoKPI();
             KPI_EJECUTIVO = "KPI Ejecutivo " + kpiUnity.ToString() + " Horas";
             TituloReporte("Promedio Ciclo Ejecutivo", KPI_EJECUTIVO, ddlMoneda.SelectedItem.Text);
-            cicloEjecutivoKPI();
             PnReporte.Visible = false;
             PnCicloEjecutivoKPI.Visible = true;
             Utils.actividades(0, Constantes.GASTOS_MEDICOS(), 31, Constantes.USER());
@@ -608,8 +608,8 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesMedicos : System.Web.U
 
         else if (ddlCiclos.SelectedValue == "Ciclo Ejecutivo por etapa")
         {
-            TituloReporte("Promedio Ciclo Ejecutivo por etapas", "", ddlMoneda.SelectedItem.Text);
             CicloEjecutivo();
+            TituloReporte("Promedio Ciclo Ejecutivo por etapas", "", ddlMoneda.SelectedItem.Text);
             PnReporte.Visible = false;
             PnCicloEjecutivo.Visible = true;
             Utils.actividades(0, Constantes.GASTOS_MEDICOS(), 32, Constantes.USER());
@@ -617,7 +617,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesMedicos : System.Web.U
 
         else if (ddlCiclos.SelectedValue == "Eficiencia")
         {
-            KPI_EFICIENCIA = "Eficiencia evaluada sobre el 80%";
+            KPI_EFICIENCIA = "Eficiencia evaluada sobre el 85%";
 
             if (ddlTipoReclamo.SelectedItem.Text == "Individual")
             {

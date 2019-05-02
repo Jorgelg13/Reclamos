@@ -92,8 +92,8 @@ public partial class Modulos_MdReclamosUnity_wbFrmAsignarChequeGM : System.Web.U
 
         catch(Exception ex)
         {
-            //  Utils.ShowMessage(this.Page, "No se a podido efectuar el ingreso del cheque" + ex.Message, "Error..!", "error");
-            Response.Write(ex);
+            Utils.ShowMessage(this.Page, "No se a podido efectuar el ingreso del cheque" + ex.Message, "Error..!", "error");
+          //  Response.Write(ex);
         }
     }
 }

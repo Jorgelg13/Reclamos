@@ -880,7 +880,21 @@
                         <label>No Cheque:</label>
                         <asp:TextBox ID="txtNumeroCheque" Style="width: 100%" autocomplete="off" CssClass="form-control" placeholder="Numero de cheque" runat="server"></asp:TextBox>
                     </div>
-                    <div class="form-group  col-sm-12 col-md-6 col-lg-6">
+                    <asp:Panel runat="server" ID="PanelTransferencia" Visible="false">
+                        <div class="form-group col-sm-12 col-md-4 col-lg-4s">
+                            <label>No. Transferencia:</label>
+                            <asp:TextBox ID="txtNoTransferencia" Style="width: 100%" autocomplete="off" CssClass="form-control" placeholder="transferencia" runat="server"></asp:TextBox>
+                        </div>
+                        <div class="form-group col-sm-12 col-md-6 col-lg-4">
+                            <label>Monto:</label>
+                            <asp:TextBox ID="txtMontoTransferencia" Text="0.00" Style="width: 100%" CssClass="form-control" AutoComplete="off" runat="server" placeholder="Total Reclamado"></asp:TextBox>
+                        </div>
+                        <div class="form-group col-sm-12 col-md-6 col-lg-4">
+                            <label>Fecha:</label>
+                            <asp:TextBox ID="txtFechatransferencia" Style="width: 100%; height: 34px;" CssClass="form-control" autocomplete="off" type="date" runat="server"></asp:TextBox>
+                        </div>
+                    </asp:Panel>
+                    <div class="form-group col-sm-12 col-md-6 col-lg-6">
                         <label>Total Reclamado:</label>
                         <asp:TextBox ID="txtReclamado" Text="0.00" Style="width: 100%" CssClass="form-control" AutoComplete="off" runat="server" placeholder="Total Reclamado"></asp:TextBox>
                     </div>
@@ -889,10 +903,10 @@
                         <asp:TextBox ID="txtAprobado" Text="0.00" Style="width: 100%" CssClass="form-control" autocomplete="off" placeholder="Total Aprobado" runat="server"></asp:TextBox>
                     </div>
                     <asp:Panel runat="server" ID="PanelCopago" Visible="false">
-                         <div class="form-group col-sm-12 col-md-12 col-lg-12">
-                        <label>Copago:</label>
-                        <asp:TextBox ID="txtCopago" Text="0.00" Style="width: 100%" CssClass="form-control" autocomplete="off" placeholder="Total Aprobado" runat="server"></asp:TextBox>
-                    </div>
+                      <div class="form-group col-sm-12 col-md-12 col-lg-12">
+                         <label>Copago:</label>
+                         <asp:TextBox ID="txtCopago" Text="0.00" Style="width: 100%" CssClass="form-control" autocomplete="off" placeholder="Total Aprobado" runat="server"></asp:TextBox>
+                      </div>
                     </asp:Panel>
                     <div class="form-group  col-sm-12 col-md-6 col-lg-6">
                         <label>Total No Cubierto:</label>
@@ -974,8 +988,8 @@
                 </div>
                 <div class="modal-footer">
                    <button type="button" class="btn btn-warning" data-dismiss="modal">Cerrar</button>
-                    <asp:Button ID="btnGuardarPago" CssClass="btn btn-primary" runat="server" Text="Guardar" OnClick="btnGuardarPago_Click" />
-                    <asp:Button ID="btnActualizarPago" Enabled="false" CssClass="btn btn-success" runat="server" Text="Actualizar" OnClick="btnActualizarPago_Click" />
+                   <asp:Button ID="btnGuardarPago" CssClass="btn btn-primary" runat="server" Text="Guardar" OnClick="btnGuardarPago_Click" />
+                   <asp:Button ID="btnActualizarPago" Enabled="false" CssClass="btn btn-success" runat="server" Text="Actualizar" OnClick="btnActualizarPago_Click" />
                 </div>
             </div>
         </div>

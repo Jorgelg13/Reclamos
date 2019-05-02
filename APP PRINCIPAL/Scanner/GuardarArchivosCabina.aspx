@@ -20,7 +20,7 @@
         String anio = fecha.Year.ToString();
         String id = Convert.ToString(Request.QueryString[0]);
 
-        CA = anio+"\\"+mes+"\\"+id;
+        CA = anio+"\\"+mes+"\\"+archivo.FileName.Replace(".pdf","");
 
         if (Directory.Exists(path+"\\"+CA))
         {

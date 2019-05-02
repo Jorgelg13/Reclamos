@@ -147,7 +147,11 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosMedicosSeguimientos : 
             if (ddlEstado.SelectedItem.Text == "Cerrado") lblEstadoReclamo.ForeColor = System.Drawing.Color.Red;
             if (reclamo.bandera_cheque == true) inabilitarTextPago();
             if (reclamo.bandera_cierre == true) ddlEstado.Enabled = false;
-            if (reclamo.reg_reclamos_medicos.tipo == "C") txtContacto.Visible = true;
+            if (reclamo.reg_reclamos_medicos.tipo == "C")
+            {
+                txtContacto.Visible = true;
+                PanelTransferencia.Visible = true;
+            }
             checkAgregar.Enabled = (reclamo.bandera_cheque == false)  ? false: true;
 
             //memo envio aseguradora
@@ -448,9 +452,9 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosMedicosSeguimientos : 
                 {
                     cmd.CommandType = CommandType.Text;
                     cmd.CommandText = "insert into detalle_pagos_reclamos_medicos " +
-                        "(total_reclamado, total_aprobado, copago, total_no_cubierto, total_iva, deducible,coaseguro, timbres,total, no_cheque,porcen_coaseguro, porcen_timbres, moneda,monto,banco, id_reclamo_medico) " +
+                        "(total_reclamado, total_aprobado, copago, total_no_cubierto, total_iva, deducible,coaseguro, timbres,total, no_cheque,porcen_coaseguro, porcen_timbres, moneda,monto,banco,no_transferencia, monto_transferencia,fecha_transferencia, id_reclamo_medico) " +
                         "values(" + txtReclamado.Text + ", " + txtAprobado.Text + ", " + txtCopago.Text + ", " + txtNoCubiertos.Text + ", " + totalIva + ", " + deducible + "," + totalCoaseguro + ", " + totalTimbres + "," + montoTotal + "," +
-                        "'" + txtNumeroCheque.Text + "', " + ddlCoaseguro.SelectedValue + ", " + ddlTimbres.SelectedValue + ", '" + ddlMoneda.SelectedItem + "', '" + txtMontoCheque.Text + "', '" + ddlBanco.SelectedItem + "', " + id + ")";
+                        "'" + txtNumeroCheque.Text + "', " + ddlCoaseguro.SelectedValue + ", " + ddlTimbres.SelectedValue + ", '" + ddlMoneda.SelectedItem + "', '" + txtMontoCheque.Text + "', '" + ddlBanco.SelectedItem + "','"+txtNoTransferencia.Text+"', '"+txtMontoTransferencia.Text+"', '"+txtFechatransferencia.Text+"'," + id + ")";
                     cmd.Connection = objeto.ObtenerConexionReclamos();
                     cmd.ExecuteNonQuery();
                     objeto.conexion.Close();
@@ -567,6 +571,9 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosMedicosSeguimientos : 
             txtTotalCoaseguro.Text = memo.coaseguro.ToString();
             txtTotalTimbres.Text = memo.timbres.ToString();
             txtMontoCheque.Text = memo.monto.ToString();
+            txtNoTransferencia.Text = memo.no_transferencia;
+            txtMontoTransferencia.Text =memo.monto_transferencia != null ? memo.monto_transferencia.ToString() : "0.00";
+            txtFechatransferencia.Text = Convert.ToDateTime(memo.fecha_transferencia).ToString("yyyy/MM/dd").Replace("/", "-");
             ddlBanco.Text = memo.banco;
             lblMemoPagado.Text = memo.total.ToString();
 
@@ -584,10 +591,10 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosMedicosSeguimientos : 
             lblMemoNocubierto.Text = simbolo + " " + Nocubierto.ToString("N2");
             lblCopago.Text = simbolo + " " + memo.copago.ToString();
         }
-        catch(Exception ex)
+        catch(Exception)
         {
-            Response.Write(ex);
-            //Utils.ShowMessage(this.Page, "Error al seleccionar el pago", "Nota..!", "error");
+            //Response.Write(ex);
+            Utils.ShowMessage(this.Page, "Error al seleccionar el pago", "Nota..!", "error");
         }
     }
 
@@ -649,6 +656,9 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosMedicosSeguimientos : 
             pago.timbres = Convert.ToDecimal(txtTotalTimbres.Text);
             pago.total = Convert.ToDecimal(txtTotal.Text);
             pago.copago = (PanelCopago.Visible == true) ? Convert.ToDecimal(txtCopago.Text) : Convert.ToDecimal(0.00);
+            pago.no_transferencia = txtNoTransferencia.Text;
+            pago.monto_transferencia = Convert.ToDecimal(txtMontoTransferencia.Text);
+            pago.fecha_transferencia = Convert.ToDateTime(txtFechatransferencia.Text);
             reclamo.fecha_envio_cheque = Convert.ToDateTime(txtFechaEnvioCheque.Text);
             reclamo.destino = ddlDestino.SelectedItem.Text;
             DBReclamos.SaveChanges();

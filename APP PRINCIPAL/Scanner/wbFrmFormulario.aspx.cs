@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
 using System.Data;
 using System.Data.SqlClient;
 
@@ -35,7 +30,33 @@ public partial class formulario_wbFrmFormulario : System.Web.UI.Page
                 }
 
                 cmd.CommandType = CommandType.Text;
-                cmd.CommandText = "insert into formulario_colectivo(poliza, certificado,vigencia,contratante, nombre_titular, dpi,nit,direccion,telefono,email, nombre_asegurado_titular,ocupacion_titular, peso_titular, estatura_titular, fecha_nacimiento_titular, nombre_beneficiario1, parentesco_ben1, porcentaje_ben1,nombre_beneficiario2, parentesco_ben2, porcentaje_ben2, enfermedades, detalle_enfermedades, impedimentos,detalle_impedimentos,enfermedades_recientes,actividad_peligrosa, detalle_actividad_peligrosa, lugar_fecha, solicitante) values('" + txtPoliza.Text + "','" + txtCertificado.Text + "','" + txtVigencia.Text + "','" + txtContratante.Text + "','" + txtNombre.Text + "', '" + txtDpi.Text + "','" + txtNit.Text + "','" + txtDireccion.Text + "','" + txtTelefono.Text + "','" + txtEmail.Text + "','" + txtNombreCompletoTitular.Text + "','" + txtocupacionTitular.Text + "','" + txtpesoTitular.Text + "','" + txtEstaturaTitular.Text + "','" + txtFechaNacimientoTitular.Text + "','" + txtNombreBeneficiario1.Text + "','" + txtParentesco1.Text + "','" + txtPorcentaje1.Text + "', '" + txtNombreBeneficiaro2.Text + "','" + txtParentesco2.Text + "','" + txtPorcentaje2.Text + "'," + enfermedaded + ",'" + txtDetalleEnfermedad.Text + "', " + impedimentos + ",'" + txtDetallesImpedimemtos.Text + "','" + txtEnfermedadesRecientes.Text + "'," + actividadFisica + ", '" + txtAcitividadFisica.Text + "','" + txtLugar.Text + "','" + txtSolicitante.Text + "')";
+                cmd.CommandText = "insert into formulario_colectivo(poliza, " +
+                    "certificado,vigencia," +
+                    "contratante, nombre_titular," +
+                    "dpi," +
+                    "nit," +
+                    "direccion," +
+                    "telefono," +
+                    "email, " +
+                    "nombre_asegurado_titular," +
+                    "ocupacion_titular, " +
+                    "peso_titular, " +
+                    "estatura_titular, " +
+                    "fecha_nacimiento_titular, " +
+                    "nombre_beneficiario1, parentesco_ben1, " +
+                    "porcentaje_ben1," +
+                    "nombre_beneficiario2, " +
+                    "parentesco_ben2, " +
+                    "porcentaje_ben2, " +
+                    "enfermedades, " +
+                    "detalle_enfermedades, " +
+                    "impedimentos," +
+                    "detalle_impedimentos," +
+                    "enfermedades_recientes," +
+                    "actividad_peligrosa, " +
+                    "detalle_actividad_peligrosa, " +
+                    "lugar_fecha, solicitante) " +
+                    "values('" + txtPoliza.Text + "','" + txtCertificado.Text + "','" + txtVigencia.Text + "','" + txtContratante.Text + "','" + txtNombre.Text + "', '" + txtDpi.Text + "','" + txtNit.Text + "','" + txtDireccion.Text + "','" + txtTelefono.Text + "','" + txtEmail.Text + "','" + txtNombreCompletoTitular.Text + "','" + txtocupacionTitular.Text + "','" + txtpesoTitular.Text + "','" + txtEstaturaTitular.Text + "','" + txtFechaNacimientoTitular.Text + "','" + txtNombreBeneficiario1.Text + "','" + txtParentesco1.Text + "','" + txtPorcentaje1.Text + "', '" + txtNombreBeneficiaro2.Text + "','" + txtParentesco2.Text + "','" + txtPorcentaje2.Text + "'," + enfermedaded + ",'" + txtDetalleEnfermedad.Text + "', " + impedimentos + ",'" + txtDetallesImpedimemtos.Text + "','" + txtEnfermedadesRecientes.Text + "'," + actividadFisica + ", '" + txtAcitividadFisica.Text + "','" + txtLugar.Text + "','" + txtSolicitante.Text + "')";
                 cmd.Connection = obj.ObtenerConexionReclamos();
                 cmd.ExecuteNonQuery();
                 obj.conexion.Close();
