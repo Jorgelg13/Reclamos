@@ -35,6 +35,7 @@
             <asp:DropDownList ID="ddlTipoEncuesta" AutoPostBack="true" OnSelectedIndexChanged="ddlTipoEncuesta_SelectedIndexChanged" runat="server" Style="width: 100%" Height="34px" CssClass="form-control">
                 <asp:ListItem Value="1">Implants</asp:ListItem>
                 <asp:ListItem Value="2">Recepcion</asp:ListItem>
+                <asp:ListItem Value="3">Egresos Hospitalarios</asp:ListItem>
             </asp:DropDownList>
         </div>
         <div class="form-group col-lg-2 col-md-2 col-sm-12">
@@ -126,6 +127,30 @@
                 <p><b>OPERACION : ¿Que operacion vino a realizar a Unity Promotores?</b></p>
                 <p><b>PREGUNTA 2: En su experiencia, por favor calificar de 1 a 10 el servicio que recibio en donde 10 es excelente</b></p>
                 <p><b>PREGUNTA 3: En su experiencia, por favor calificar de 1 a 10 el servicio que recibio en recepcion, en donde 10 es excelente</b></p>
+            </div>
+        </asp:Panel>
+         <asp:Panel runat="server" ID="PnEgresosHospitalarios" Visible="false">
+            <div class="col-sm-12 col-md-12 col-lg-12">
+                <br />
+                <div class="scrolling-table-container col-sm-12 col-md-12 col-lg-12">
+                    <b style="font-size: 20px">
+                        <asp:Label runat="server" ID="lbltotalegresos"></asp:Label>
+                    </b>
+                    <asp:LinkButton ID="lnEgresosHispilarios" Visible="false" OnClick="lnEgresosHispilarios_Click" title="Descargar en excel" runat="server" Style="font-size: 20px; text-align: center; color: green"><i class="fa fa-file-excel-o"></i></asp:LinkButton>
+                    <asp:GridView ID="GridEgresosHospitalarios" CssClass="table bs-table tablaDetalleAuto table-responsive table-hover" runat="server" AutoGenerateColumns="true" CellPadding="4" ForeColor="#333333" GridLines="None">
+                        <AlternatingRowStyle BackColor="White" />
+                        <FooterStyle BackColor="#087fca" Font-Bold="True" ForeColor="White" />
+                        <HeaderStyle BackColor="#087fca" Font-Bold="True" ForeColor="White" HorizontalAlign="Center" Wrap="False" />
+                        <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
+                        <RowStyle BackColor="#EFF3FB" Wrap="false" />
+                    </asp:GridView>
+                </div>
+            </div>
+            <br />
+            <div style="margin-top: 30%; padding-left: 20px;">
+                <p><b>¿Nombre del Hospital que brindo el servicio? </b></p>
+                <p><b>¿Cual seria su satisfaccion en el servicio recibido por el hospital?</b></p>
+                <p><b>¿Puede indicar el tiempo que demoro el tramite de egreso?</b></p>
             </div>
         </asp:Panel>
         <%--archivos javascripts que se utilizan en el sistema--%>

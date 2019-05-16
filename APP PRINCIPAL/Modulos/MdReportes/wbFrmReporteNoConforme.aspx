@@ -58,7 +58,7 @@
                                 <AlternatingRowStyle BackColor="White" />
                                 <HeaderStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" HorizontalAlign="Center" Wrap="False" />
                                 <PagerSettings PageButtonCount="30" />
-                                <RowStyle BackColor="#EFF3FB" HorizontalAlign="Left" Wrap="False" />
+                                <RowStyle BackColor="#EFF3FB" HorizontalAlign="Left" Wrap="True" />
                             </asp:GridView>
                             <asp:GridView Visible="false" ID="GridEficiencia" runat="server" CssClass="table bs-table table-responsive table-hover" AutoGenerateColumns="True" ForeColor="#333333" GridLines="None" AllowCustomPaging="True">
                                 <AlternatingRowStyle BackColor="White" />

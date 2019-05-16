@@ -42,6 +42,7 @@ public partial class ReclamosEntities : DbContext
     public DbSet<bitacora_reclamos_varios> bitacora_reclamos_varios { get; set; }
     public DbSet<busqCoberturasPolizasDaños> busqCoberturasPolizasDaños { get; set; }
     public DbSet<cabina> cabina { get; set; }
+    public DbSet<cabina_virtual> cabina_virtual { get; set; }
     public DbSet<cartas> cartas { get; set; }
     public DbSet<clientes> clientes { get; set; }
     public DbSet<coberturas> coberturas { get; set; }

@@ -263,6 +263,18 @@ public partial class cabina
     public virtual ICollection<usuario> usuario { get; set; }
 }
 
+public partial class cabina_virtual
+{
+    public int id { get; set; }
+    public string nombre { get; set; }
+    public string correo { get; set; }
+    public string telefono { get; set; }
+    public string codigo { get; set; }
+    public Nullable<System.DateTime> fechareg { get; set; }
+    public Nullable<System.DateTime> fecha_atencion { get; set; }
+    public Nullable<bool> estado { get; set; }
+}
+
 public partial class cartas
 {
     public int id { get; set; }
@@ -418,11 +430,11 @@ public partial class detalle_pagos_reclamos_medicos
     public string moneda { get; set; }
     public string banco { get; set; }
     public Nullable<decimal> monto { get; set; }
-    public Nullable<System.DateTime> fecha_creacion { get; set; }
-    public long id_reclamo_medico { get; set; }
     public string no_transferencia { get; set; }
     public Nullable<decimal> monto_transferencia { get; set; }
     public Nullable<System.DateTime> fecha_transferencia { get; set; }
+    public Nullable<System.DateTime> fecha_creacion { get; set; }
+    public long id_reclamo_medico { get; set; }
 
     public virtual reclamos_medicos reclamos_medicos { get; set; }
 }

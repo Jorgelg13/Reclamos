@@ -19,7 +19,6 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesMedicos : System.Web.U
     int totalNuevos, totalCerrados, totalFueraTiempo;
     Double totalPromedio, totalPromedioPonderado, totalPromedioEjecucion;
     String buscar;
-    String tipo_reclamo = "I";
     //variable que contiene todos los joins que se hacen en el query del reporte
     String KPI_ASEGURADORA, KPI_CLIENTE, KPI_EJECUTIVO, KPI_EFICIENCIA;
     protected void Page_Load(object sender, EventArgs e)
@@ -213,7 +212,11 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesMedicos : System.Web.U
     //ciclos para medir tiempos de la aseguradora
     public void CicloAseguradora()
     {
-        kpiAseguradora = ddlMoneda.SelectedItem.Text == "Dolares" ? 35 : 12;
+        if (ddlTipoReclamo.SelectedItem.Text == "Colectivos")
+        {
+            kpiAseguradora = ddlMoneda.SelectedItem.Text == "Dolares" ? 35 : 12;
+        }
+
         string promedio_aseguradora = "select " +
              "count(*) total_reclamos," +
              "reg_reclamos_medicos.aseguradora, " +
@@ -237,7 +240,11 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesMedicos : System.Web.U
     //ciclo de cliente
     public void CicloCliente()
     {
-        kpiCliente = ddlMoneda.SelectedItem.Text == "Dolares" ? 38 : 15;
+        if (ddlTipoReclamo.SelectedItem.Text == "Colectivos")
+        {
+            kpiCliente = ddlMoneda.SelectedItem.Text == "Dolares" ? 38 : 15;
+        }
+
         string ciclo_cliente = "select " +
              "count(*) as total_reclamos, " +
              "promedio = cast(AVG(DATEDIFF(minute, reclamos_medicos.fecha_completa_commit, reclamos_medicos.fecha_cierre) *(1.0) / 60 / 24) as decimal(5,2)), " +
@@ -577,7 +584,6 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesMedicos : System.Web.U
         if (ddlCiclos.SelectedValue == "Ciclo Aseguradora")
         {
             CicloAseguradora();
-            kpiAseguradora = ddlMoneda.SelectedItem.Text == "Dolares" ? 35 : 12;
             KPI_ASEGURADORA = "KPI Aseguradora " + kpiAseguradora.ToString() + " Dias";
             TituloReporte("Promedio Ciclo Aseguradora", KPI_ASEGURADORA, ddlMoneda.SelectedItem.Text);
             PnReporte.Visible = false;
@@ -588,7 +594,6 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesMedicos : System.Web.U
         else if (ddlCiclos.SelectedValue == "Ciclo Cliente")
         {
             CicloCliente();
-            kpiCliente = ddlMoneda.SelectedItem.Text == "Dolares" ? 38 : 15;
             KPI_CLIENTE = "KPI Cliente " + kpiCliente.ToString() + " Dias";
             TituloReporte("Promedio Ciclo Total", KPI_CLIENTE, ddlMoneda.SelectedItem.Text);
             PnReporte.Visible = false;
@@ -617,15 +622,15 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesMedicos : System.Web.U
 
         else if (ddlCiclos.SelectedValue == "Eficiencia")
         {
-            KPI_EFICIENCIA = "Eficiencia evaluada sobre el 85%";
-
             if (ddlTipoReclamo.SelectedItem.Text == "Individual")
             {
+                KPI_EFICIENCIA = "Eficiencia evaluada sobre el 80%";
                 Utils.Reportes(txtFechaInicio, txtFechaFin, "pa_eficiencia_individuales", GridEficiencia);
             }
 
             else
             {
+                KPI_EFICIENCIA = "Eficiencia evaluada sobre el 85%";
                 Utils.Reportes(txtFechaInicio, txtFechaFin, "pa_eficiencia_colectivos", GridEficiencia);
             }
 

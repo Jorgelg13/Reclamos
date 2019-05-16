@@ -3,7 +3,7 @@ using System.Web.UI;
 
 public partial class MdBitacora_ResultadoEncuesta : System.Web.UI.Page
 {
-    String encuesta, Total,recepcion;
+    String encuesta, Total,recepcion,egresos_hospitalarios;
     Utils llenar = new Utils();
 
     protected void Page_Load(object sender, EventArgs e)
@@ -66,11 +66,13 @@ public partial class MdBitacora_ResultadoEncuesta : System.Web.UI.Page
             "end as [Resultado 3]," +
             "fecha as Fecha " +
             " from encuesta_recepcion where Convert(date,fecha,112) between '"+txtFechaInicio.Text+"' and '"+txtFechaFin.Text+"' ";
+
+        egresos_hospitalarios = "select * from [encuesta-egresos] where convert(date,fecha,112) between '"+txtFechaInicio.Text+"' and '"+txtFechaFin.Text+"' " ;
     }
 
     protected void btnBuscar_Click1(object sender, EventArgs e)
     {
-        if(PnPrincipal.Visible== true)
+        if(ddlTipoEncuesta.SelectedValue == "1")
         {
             if (ddlEmpresa.SelectedValue != "Todas")
             {
@@ -84,11 +86,19 @@ public partial class MdBitacora_ResultadoEncuesta : System.Web.UI.Page
             linkDescargar.Visible = true;
         }
 
-        else
+
+        if (ddlTipoEncuesta.SelectedValue == "2")
         {
             llenar.llenarGrid(recepcion, GridRecepcion);
             lnEncuestaRecepcion.Visible = true;
-            lblTotalRecepcion.Text = "Total de encuestas en Recepcion "+ GridRecepcion.Rows.Count.ToString();
+            lblTotalRecepcion.Text = "Total de encuestas en Recepcion " + GridRecepcion.Rows.Count.ToString();
+        }
+
+        else if (ddlTipoEncuesta.SelectedValue == "3")
+        {
+            llenar.llenarGrid(egresos_hospitalarios, GridEgresosHospitalarios);
+            lnEgresosHispilarios.Visible = true;
+            lbltotalegresos.Text = "Total de encuestas de egresos Hospitalarios " + GridEgresosHospitalarios.Rows.Count.ToString();
         }
     }
 
@@ -108,17 +118,31 @@ public partial class MdBitacora_ResultadoEncuesta : System.Web.UI.Page
         {
             PnPrincipal.Visible = true;
             PnRecepcion.Visible = false;
+            PnEgresosHospitalarios.Visible = false;
         }
 
-        else
+        else if(ddlTipoEncuesta.SelectedValue == "2")
         {
             PnPrincipal.Visible = false;
+            PnEgresosHospitalarios.Visible = false;
             PnRecepcion.Visible = true;
+        }
+
+        else if (ddlTipoEncuesta.SelectedValue == "3")
+        {
+            PnPrincipal.Visible = false;
+            PnRecepcion.Visible = false;
+            PnEgresosHospitalarios.Visible = true;
         }
     }
 
     protected void lnEncuestaRecepcion_Click(object sender, EventArgs e)
     {
         Utils.ExportarExcel(PnRecepcion, Response, "Resultado Encuesta del Recepcion " + txtFechaInicio.Text + " al " + txtFechaFin.Text);
+    }
+
+    protected void lnEgresosHispilarios_Click(object sender, EventArgs e)
+    {
+        Utils.ExportarExcel(PnEgresosHospitalarios, Response, "Resultado Encuesta Hospitalarias del " + txtFechaInicio.Text + " al " + txtFechaFin.Text);
     }
 }

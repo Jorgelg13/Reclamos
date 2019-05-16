@@ -46,6 +46,7 @@
                                 <asp:ListItem>Asegurado</asp:ListItem>
                                 <asp:ListItem>Enviado</asp:ListItem>
                                 <asp:ListItem>Cerrado</asp:ListItem>
+                                <asp:ListItem>Rechazado por Datos Incompletos</asp:ListItem>
                                 <asp:ListItem>Anulado</asp:ListItem>
                             </asp:DropDownList>
                             <br />
@@ -125,7 +126,6 @@
                     <asp:Label ID="lblEstadoPoliza" runat="server"></asp:Label>
                     <br />
                     <asp:Label ID="lblVip" runat="server"></asp:Label>
-                    <br />
                     <br />
                 </div>
             </div>
