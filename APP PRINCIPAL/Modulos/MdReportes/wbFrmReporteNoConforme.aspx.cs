@@ -1,6 +1,13 @@
 ﻿using System;
 using System.Web;
 using System.Web.UI;
+using iTextSharp.text;
+using iTextSharp.text.pdf;
+using iTextSharp.text.html.simpleparser;
+using System.IO;
+using System.Text;
+using System.Xml;
+
 
 public partial class Modulos_MdReclamosUnity_wbFrmReporteNoConforme : System.Web.UI.Page
 {
@@ -106,5 +113,33 @@ public partial class Modulos_MdReclamosUnity_wbFrmReporteNoConforme : System.Web
         GridEficiencia.Visible = true;
         GridNoConforme.Visible = false;
         ocultar();
+    }
+
+    private void ExportGridToPDF()
+    {
+        Response.ContentType = "application/pdf";
+        Response.AddHeader("content-disposition", "attachment;filename=Vithal_Wadje.pdf");
+        Response.Cache.SetCacheability(HttpCacheability.NoCache);
+        StringWriter sw = new StringWriter();
+        HtmlTextWriter hw = new HtmlTextWriter(sw);
+        GridNoConforme.RenderControl(hw);
+        StringReader sr = new StringReader(sw.ToString());
+        Document pdfDoc = new Document(PageSize.A2, 10f, 10f, 10f, 0f);
+        HTMLWorker htmlparser = new HTMLWorker(pdfDoc);
+        PdfWriter.GetInstance(pdfDoc, Response.OutputStream);
+        pdfDoc.AddTitle("Producto No conforme");
+        pdfDoc.Open();
+
+        htmlparser.Parse(sr);
+        pdfDoc.Close();
+        Response.Write(pdfDoc);
+        Response.End();
+        GridNoConforme.AllowPaging = true;
+        GridNoConforme.DataBind();
+    }
+
+    protected void btnPDF_Click(object sender, EventArgs e)
+    {
+        ExportGridToPDF();
     }
 }

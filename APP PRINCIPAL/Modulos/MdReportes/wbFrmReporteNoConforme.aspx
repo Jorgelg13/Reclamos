@@ -39,6 +39,7 @@
                         </div>
                         <div class="form-group" style="width: 15%">
                             <asp:Button CssClass="btn btn-primary" ID="btnMostrarEficiencia" OnClick="btnMostrarEficiencia_Click" Style="margin-left: 20px; margin-top: 22px;" runat="server" Text="Eficiencia" />
+                             <asp:Button CssClass="btn btn-primary" Visible="false" ID="btnPDF" OnClick="btnPDF_Click" Style="margin-left: 20px; margin-top: 22px;" runat="server" Text="PDF" />
                         </div>
                     </div>
                     <br />
