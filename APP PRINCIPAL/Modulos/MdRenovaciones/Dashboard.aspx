@@ -23,7 +23,6 @@
                               <asp:CommandField ShowSelectButton="True" SelectText="Seleccionar" />
                               <asp:CommandField ShowDeleteButton="True" DeleteText="" ControlStyle-CssClass="fa fa-ban" ControlStyle-ForeColor="Red" HeaderText="Invalidar"/>
                               <asp:CommandField ShowEditButton="True"   EditText=""  ControlStyle-CssClass="fa fa-search btnRevisarPoliza" HeaderText=" Revisar"/>
-
                             </Columns>
                             <HeaderStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" Wrap="false" />
                             <PagerStyle BackColor="#131B4D" ForeColor="White" HorizontalAlign="Center" />

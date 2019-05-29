@@ -14,7 +14,6 @@ public partial class Modulos_MdRenovaciones_Estados_SinAsignar : System.Web.UI.P
 
     protected void Page_Load(object sender, EventArgs e)
     {
-
         try
         {
             string usuarioLogin = HttpContext.Current.User.Identity.Name;
@@ -26,8 +25,6 @@ public partial class Modulos_MdRenovaciones_Estados_SinAsignar : System.Web.UI.P
             }
         }
         catch { }
-
-
 
         Cargadas = "Select " +
            "r.id as ID, " +

@@ -56,6 +56,16 @@ public partial class analistas
     public virtual ICollection<reclamos_varios> reclamos_varios { get; set; }
 }
 
+public partial class archivos_copagos
+{
+    public int id { get; set; }
+    public Nullable<System.DateTime> fechareg { get; set; }
+    public string usuario { get; set; }
+    public string path { get; set; }
+    public string nombre { get; set; }
+    public string nombre_archivo { get; set; }
+}
+
 public partial class aseguradoras
 {
     public int id { get; set; }

@@ -15,7 +15,6 @@ public partial class Modulos_MdRenovaciones_CargarPolizas : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
-
         try
         {
             string usuarioLogin = HttpContext.Current.User.Identity.Name;
@@ -117,7 +116,7 @@ public partial class Modulos_MdRenovaciones_CargarPolizas : System.Web.UI.Page
                     insertar.correo = row.Cells[58].Text;
                     insertar.dpi = HttpUtility.HtmlDecode(row.Cells[59].Text);
                     insertar.direccion_cobro = row.Cells[60].Text;
-                    insertar.pasaporte = row.Cells[61].Text;
+                    insertar.pasaporte = HttpUtility.HtmlDecode(row.Cells[61].Text);
                     insertar.nit = row.Cells[62].Text;
                     insertar.estado = 1;
                     DBRenovaciones.renovaciones_polizas.Add(insertar);

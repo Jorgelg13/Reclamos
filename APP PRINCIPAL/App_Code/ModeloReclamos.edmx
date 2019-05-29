@@ -42,6 +42,17 @@
           <Property Name="estado" Type="bit" />
           <Property Name="tipo" Type="varchar" MaxLength="50" />
         </EntityType>
+        <EntityType Name="archivos_copagos">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fechareg" Type="datetime" />
+          <Property Name="usuario" Type="varchar" MaxLength="20" />
+          <Property Name="path" Type="varchar" MaxLength="150" />
+          <Property Name="nombre" Type="varchar" MaxLength="150" />
+          <Property Name="nombre_archivo" Type="varchar" MaxLength="70" />
+        </EntityType>
         <EntityType Name="aseguradoras">
           <Key>
             <PropertyRef Name="id" />
@@ -1110,23 +1121,6 @@ advertencia 6002: La tabla o vista 'reclamos.dbo.ViewBusquedaAuto' no tiene defi
           <Property Name="porcom" Type="decimal" Precision="10" Scale="4" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6013: La tabla o vista 'reclamos.dbo.v_polizas' no tiene definida una clave principal y no es posible inferir ninguna clave principal válida. Esta tabla o vista se ha excluido. Para usar la entidad, necesitará revisar el esquema, agregar las claves correctas y quitar sus comentarios.
-        <EntityType Name="v_polizas">
-          <Property Name="poliza" Type="nvarchar" MaxLength="50" />
-          <Property Name="secren" Type="smallint" />
-          <Property Name="ramo" Type="nvarchar" MaxLength="60" />
-          <Property Name="aseguradora" Type="nvarchar" MaxLength="300" />
-          <Property Name="vigi" Type="date" />
-          <Property Name="vigf" Type="date" />
-          <Property Name="cliente" Type="int" />
-          <Property Name="asegurado" Type="nvarchar" MaxLength="300" />
-          <Property Name="gestor" Type="nvarchar" MaxLength="300" />
-          <Property Name="prima" Type="decimal" Precision="12" Scale="2" />
-          <Property Name="porcom" Type="decimal" Precision="12" Scale="4" />
-          <Property Name="moneda" Type="nvarchar" MaxLength="50" />
-          <Property Name="gst_nombre" Type="nvarchar" MaxLength="300" />
-        </EntityType>-->
-        <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'reclamos.dbo.v_producto_no_conforme' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="v_producto_no_conforme">
           <Key>
@@ -1853,6 +1847,7 @@ advertencia 6002: La tabla o vista 'reclamos.dbo.v_producto_no_conforme' no tien
           <EntitySet Name="actividades" EntityType="Self.actividades" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ajustadores" EntityType="Self.ajustadores" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="analistas" EntityType="Self.analistas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="archivos_copagos" EntityType="Self.archivos_copagos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="aseguradoras" EntityType="Self.aseguradoras" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="auto_reclamo" EntityType="Self.auto_reclamo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="autorizaciones" EntityType="Self.autorizaciones" Schema="dbo" store:Type="Tables" />
@@ -2309,6 +2304,7 @@ FROM [dbo].[v_producto_no_conforme] AS [v_producto_no_conforme]</DefiningQuery>
           <EntitySet Name="actividades" EntityType="reclamosModel.actividades" />
           <EntitySet Name="ajustadores" EntityType="reclamosModel.ajustadores" />
           <EntitySet Name="analistas" EntityType="reclamosModel.analistas" />
+          <EntitySet Name="archivos_copagos" EntityType="reclamosModel.archivos_copagos" />
           <EntitySet Name="aseguradoras" EntityType="reclamosModel.aseguradoras" />
           <EntitySet Name="auto_reclamo" EntityType="reclamosModel.auto_reclamo" />
           <EntitySet Name="autorizaciones" EntityType="reclamosModel.autorizaciones" />
@@ -2839,6 +2835,17 @@ FROM [dbo].[v_producto_no_conforme] AS [v_producto_no_conforme]</DefiningQuery>
           <Property Name="tipo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="reclamo_auto" Relationship="reclamosModel.FK_reclamo_auto_analistas" FromRole="analistas" ToRole="reclamo_auto" />
           <NavigationProperty Name="reclamos_varios" Relationship="reclamosModel.FK_reclamos_varios_analistas" FromRole="analistas" ToRole="reclamos_varios" />
+        </EntityType>
+        <EntityType Name="archivos_copagos">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fechareg" Type="DateTime" Precision="3" />
+          <Property Name="usuario" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="path" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="nombre" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="nombre_archivo" Type="String" MaxLength="70" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="aseguradoras">
           <Key>
@@ -4954,6 +4961,18 @@ FROM [dbo].[v_producto_no_conforme] AS [v_producto_no_conforme]</DefiningQuery>
                 <ScalarProperty Name="telefono" ColumnName="telefono" />
                 <ScalarProperty Name="Empresa" ColumnName="Empresa" />
                 <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="archivos_copagos">
+            <EntityTypeMapping TypeName="reclamosModel.archivos_copagos">
+              <MappingFragment StoreEntitySet="archivos_copagos">
+                <ScalarProperty Name="nombre_archivo" ColumnName="nombre_archivo" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="path" ColumnName="path" />
+                <ScalarProperty Name="usuario" ColumnName="usuario" />
+                <ScalarProperty Name="fechareg" ColumnName="fechareg" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>

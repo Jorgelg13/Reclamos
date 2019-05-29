@@ -29,6 +29,7 @@ public partial class ReclamosEntities : DbContext
     public DbSet<actividades> actividades { get; set; }
     public DbSet<ajustadores> ajustadores { get; set; }
     public DbSet<analistas> analistas { get; set; }
+    public DbSet<archivos_copagos> archivos_copagos { get; set; }
     public DbSet<aseguradoras> aseguradoras { get; set; }
     public DbSet<auto_reclamo> auto_reclamo { get; set; }
     public DbSet<autorizaciones> autorizaciones { get; set; }

@@ -150,8 +150,8 @@
                                     </ul>
                                 </li>
                                   <li class="dropdown-submenu">
-                                    <a tabindex="-1" href="#">Copagos</a>
-                                    <ul class="dropdown-menu">
+                                    <a tabindex="-1" href="https://reclamosgt.unitypromotores.com/Modulos/MdReclamos/Copagos.aspx">Copagos</a>
+ <%--                                   <ul class="dropdown-menu">
                                         <li class="dropdown-submenu"></li>
                                          <li class="dropdown-submenu">
                                             <a tabindex="-1" href="#">AMM</a>
@@ -209,7 +209,7 @@
                                         <li><a href="/pdf/Copagos/Cuentas Juan Antonio.xls">Cuentas Juan Antonio</a></li>
                                         <li><a href="/pdf/Copagos/Cuentas Marvin Escobar.xls">Cuentas Marvin Escobar</a></li>
                                         
-                                    </ul>
+                                    </ul>--%>
                                 </li>
                                 <li class="dropdown-submenu">
                                     <a tabindex="-1" href="#">Preguntas Frecuentes</a>

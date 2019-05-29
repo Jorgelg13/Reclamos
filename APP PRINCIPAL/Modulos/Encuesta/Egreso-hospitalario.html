@@ -34,6 +34,8 @@
                     data-slice2-rotation="-25" data-slice1-scale="2" data-slice2-scale="2">
                     <div class="sl-slide-inner">
                         <h2 class="alto2">¿Nombre del Hospital que brindó el servicio?</h2>
+                        <input type="text" id="txtNombre" class="centrar-text" name="texthospital"
+                            placeholder="Nombre asegurado" style="bottom: 100% !important;"></input>
                         <input type="text" id="txtHospital" class="centrar-text2" name="texthospital"
                             placeholder="Hospital"></input>
                         <blockquote>
@@ -211,6 +213,7 @@
                 {
                     "table_name": tabla,
                     "hospital": hospital,
+                    "asegurado": $('#txtNombre').val(),
                     "pregunta1": pregunta1,
                     "pregunta2": pregunta2,
                     "comentarios": $('#txtComentario').val()
