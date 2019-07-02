@@ -115,6 +115,31 @@ public class Utils
             comando.CommandType = CommandType.StoredProcedure;
             comando.Parameters.AddWithValue("@fechaInicio", fechainicio.Text);
             comando.Parameters.AddWithValue("@fechaFin", fechafin.Text);
+           
+            comando.ExecuteNonQuery();
+            SqlDataAdapter sda = new SqlDataAdapter(comando);
+            sda.Fill(dt);
+            gridRepore.DataSource = dt;
+            gridRepore.DataBind();
+        }
+
+        catch (Exception ex)
+        {
+            throw ex;
+        }
+    }
+
+    public static void ReportesSeguro(String fechainicio, String fechafin, String reporte, GridView gridRepore, DropDownList area)
+    {
+        try
+        {
+            conexionBD obj = new conexionBD();
+            DataTable dt = new DataTable();
+            SqlCommand comando = new SqlCommand(reporte, obj.ObtenerConexionSeguro());
+            comando.CommandType = CommandType.StoredProcedure;
+            comando.Parameters.AddWithValue("@fechaInicio", fechainicio);
+            comando.Parameters.AddWithValue("@fechaFin", fechafin);
+            comando.Parameters.AddWithValue("@i_opcion", area.SelectedValue);
             comando.ExecuteNonQuery();
             SqlDataAdapter sda = new SqlDataAdapter(comando);
             sda.Fill(dt);
@@ -742,5 +767,27 @@ public class Utils
         {
 
         }
+    }
+
+    //agregar comentario a reclamos de gastos medicos
+    public static void insertarComentario(int id, string descripcion, string estado)
+    {
+        try
+        {
+            comentarios_reclamos_medicos comentario = new comentarios_reclamos_medicos();
+            comentario.descripcion = descripcion;
+            comentario.estado = estado;
+            comentario.usuario = Constantes.USER();
+            comentario.fecha = DateTime.Now;
+            comentario.id_reclamo_medico = id;
+            DBReclamos.comentarios_reclamos_medicos.Add(comentario);
+            DBReclamos.SaveChanges();
+        }
+
+        catch (Exception)
+        {
+
+        }
+
     }
 }

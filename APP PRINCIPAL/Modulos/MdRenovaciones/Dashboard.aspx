@@ -86,7 +86,7 @@
         $('.btnRevisarPoliza').on('click', function () {
             $tr = $(this).closest('tr')[0].cells;
             $poliza = $tr[5].innerText + $tr[4].innerText + $tr[6].innerText + ".pdf";
-            window.open('http://52.34.115.100:5556/files/RenovacionesElRoble/OneDrive%20-%20Unity%20Seguros/Renovaciones/Polizas/' + $poliza, '_blank');
+            window.open('https://archivos-reclamos.unitypromotores.com/files/RenovacionesElRoble/OneDrive%20-%20Unity%20Seguros/Renovaciones/Polizas/' + $poliza, '_blank');
         });
     </script>
 </asp:Content>

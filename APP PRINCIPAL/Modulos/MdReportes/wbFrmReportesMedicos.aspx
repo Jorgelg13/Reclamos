@@ -13,50 +13,50 @@
             <div class="panel-body" style="height: 525px; max-height: 600px; overflow-x: auto; overflow-y: auto;">
                 <asp:CheckBox ID="CheckTodos" Text="Seleccionar Todos" AutoPostBack="true" runat="server" OnCheckedChanged="CheckTodos_CheckedChanged" />
                 <asp:CheckBoxList ID="checkCampos" runat="server" Height="141px" Width="147px">
-                    <asp:ListItem Value="reg_reclamos_medicos.asegurado as Asegurado">Asegurado</asp:ListItem>
-                    <asp:ListItem Value="reg_reclamos_medicos.poliza as Poliza">Poliza</asp:ListItem>
-                    <asp:ListItem Value="reg_reclamos_medicos.aseguradora as Aseguradora">Aseguradora</asp:ListItem>
-                    <asp:ListItem Value="reg_reclamos_medicos.cliente as Cliente">No. Cliente</asp:ListItem>
-                    <asp:ListItem Value="reg_reclamos_medicos.telefono_acs as [Telefono ACS]">Telefono acs</asp:ListItem>
-                    <asp:ListItem Value="reclamos_medicos.estado_unity as [Estado Reclamo]">Estado Reclamo</asp:ListItem>
-                    <asp:ListItem Value="reclamos_medicos.usuario_unity as Usuario">Usuario</asp:ListItem>
-                    <asp:ListItem Value="reclamos_medicos.telefono as Telefono">Telefono</asp:ListItem>
-                    <asp:ListItem Value="reclamos_medicos.correo as Correo">Correo</asp:ListItem>
-                    <asp:ListItem Value="reclamos_medicos.empresa as Empresa">Empresa</asp:ListItem>
-                    <asp:ListItem Value="reclamos_medicos.tipo_reclamo as [Tipo Reclamo]">Tipo Reclamo</asp:ListItem>
-                    <asp:ListItem Value="reg_reclamos_medicos.ramo as Ramo">Ramo</asp:ListItem>
-                    <asp:ListItem Value="reg_reclamos_medicos.tipo as Tipo">Tipo</asp:ListItem>
-                    <asp:ListItem Value="reg_reclamos_medicos.clase as Clase">Clase</asp:ListItem>
-                    <asp:ListItem Value="reg_reclamos_medicos.ejecutivo as Ejecutivo">Ejecutivo</asp:ListItem>
-                    <asp:ListItem Value="reg_reclamos_medicos.estado_poliza as [Estado Poliza]">Estado Poliza</asp:ListItem>
-                    <asp:ListItem Value="reg_reclamos_medicos.vip as VIP">VIP</asp:ListItem>
-                    <asp:ListItem Value="reg_reclamos_medicos.moneda as Moneda">Moneda</asp:ListItem>
-                    <asp:ListItem Value="reclamos_medicos.fecha_commit as [Fecha Creacion]">Fecha Creacion</asp:ListItem>
-                    <asp:ListItem Value="reclamos_medicos.fecha_revision as [Fecha Revision]">Fecha Revision</asp:ListItem>
-                    <asp:ListItem Value="reclamos_medicos.fecha_envio_aseg as [Fecha Envio Aseguradora]">Fecha Envio Aseg.</asp:ListItem>
-                    <asp:ListItem Value="reclamos_medicos.fecha_modificacion as [Fecha Modificacion]">Fecha Modificacion</asp:ListItem>
-                    <asp:ListItem Value="reclamos_medicos.fecha_envio_cheque as [Fecha Envio Cheque]">Fecha Env. Cheque</asp:ListItem>
-                    <asp:ListItem Value="reclamos_medicos.fecha_cierre as [Fecha Cierre]">Fecha Cierre</asp:ListItem>
-                    <asp:ListItem Value="reclamos_medicos.titular as Titular">Titular</asp:ListItem>
-                    <asp:ListItem Value="reclamos_medicos.detalle_cliente">Detalle Cliente</asp:ListItem>
-                    <asp:ListItem Value="reclamos_medicos.observacion as Observacion">Observacion</asp:ListItem>
-                    <asp:ListItem Value="reg_reclamos_medicos.certificado as Certificado">Certificado</asp:ListItem>
-                    <asp:ListItem Value="reclamos_medicos.num_reclamo as [Numero Reclamo]">Numero Reclamo</asp:ListItem>
-                    <asp:ListItem Value="CONCAT(DATEDIFF(MINUTE, reclamos_medicos.fecha_completa_commit,reclamos_medicos.fecha_asignacion)/60 ,':',
-                                                    DATEDIFF(MINUTE, reclamos_medicos.fecha_completa_commit,reclamos_medicos.fecha_asignacion)%60 ,':',
-                                                    DATEDIFF(SECOND, reclamos_medicos.fecha_completa_commit,reclamos_medicos.fecha_asignacion)%60 ) as [Fecha creacion A Fecha Asignacion] ">Fecha Apertura a fecha asignacion</asp:ListItem>
-                    <asp:ListItem Value="CONCAT(DATEDIFF(MINUTE, reclamos_medicos.fecha_asignacion,reclamos_medicos.fecha_apertura)/60, ':',
-                                                    DATEDIFF(MINUTE, reclamos_medicos.fecha_asignacion,reclamos_medicos.fecha_apertura)%60, ':',
-	                                                DATEDIFF(SECOND, reclamos_medicos.fecha_asignacion,reclamos_medicos.fecha_apertura)%60 ) as [Fecha Asignacion A Fecha Apertura] ">Fecha Asignacion a Fecha Apertura</asp:ListItem>
-                    <asp:ListItem Value="CONCAT(DATEDIFF(MINUTE, reclamos_medicos.fecha_apertura, reclamos_medicos.fecha_envio_aseg)/60, ':',
-	                                                DATEDIFF(MINUTE, reclamos_medicos.fecha_apertura, reclamos_medicos.fecha_envio_aseg)%60, ':',
-	                                                DATEDIFF(SECOND, reclamos_medicos.fecha_apertura, reclamos_medicos.fecha_envio_aseg)%60 ) as [Fecha Apertura A Fecha Envio Aseguradora] ">Fecha Apertura A fecha env. Aseguradora</asp:ListItem>
-                    <asp:ListItem Value="CONCAT(DATEDIFF(MINUTE, reclamos_medicos.fecha_envio_aseg,reclamos_medicos.fecha_recepcion_cheque)/60, ':',
-	                                                DATEDIFF(MINUTE, reclamos_medicos.fecha_envio_aseg,reclamos_medicos.fecha_recepcion_cheque)%60, ':',
-	                                                DATEDIFF(SECOND, reclamos_medicos.fecha_envio_aseg,reclamos_medicos.fecha_recepcion_cheque)%60 ) as [Fecha Aseguradora a Fecha Recepcion] ">Fecha Aseguradora a Fecha Recepcion</asp:ListItem>
-                    <asp:ListItem Value="CONCAT(DATEDIFF(MINUTE, reclamos_medicos.fecha_completa_commit, reclamos_medicos.fecha_cierre)/60, ':',
-	                                                DATEDIFF(MINUTE, reclamos_medicos.fecha_completa_commit, reclamos_medicos.fecha_cierre)%60, ':',
-	                                                DATEDIFF(SECOND, reclamos_medicos.fecha_completa_commit, reclamos_medicos.fecha_cierre)%60 ) as [Fecha Creacion a cierre] ">Fecha creacion a cierre</asp:ListItem>
+                    <asp:ListItem Value="reg.asegurado as Asegurado">Asegurado</asp:ListItem>
+                    <asp:ListItem Value="reg.poliza as Poliza">Poliza</asp:ListItem>
+                    <asp:ListItem Value="reg.aseguradora as Aseguradora">Aseguradora</asp:ListItem>
+                    <asp:ListItem Value="reg.cliente as Cliente">No. Cliente</asp:ListItem>
+                    <asp:ListItem Value="reg.telefono_acs as [Telefono ACS]">Telefono acs</asp:ListItem>
+                    <asp:ListItem Value="r.estado_unity as [Estado Reclamo]">Estado Reclamo</asp:ListItem>
+                    <asp:ListItem Value="r.usuario_unity as Usuario">Usuario</asp:ListItem>
+                    <asp:ListItem Value="r.telefono as Telefono">Telefono</asp:ListItem>
+                    <asp:ListItem Value="r.correo as Correo">Correo</asp:ListItem>
+                    <asp:ListItem Value="r.empresa as Empresa">Empresa</asp:ListItem>
+                    <asp:ListItem Value="r.tipo_reclamo as [Tipo Reclamo]">Tipo Reclamo</asp:ListItem>
+                    <asp:ListItem Value="reg.ramo as Ramo">Ramo</asp:ListItem>
+                    <asp:ListItem Value="reg.tipo as Tipo">Tipo</asp:ListItem>
+                    <asp:ListItem Value="reg.clase as Clase">Clase</asp:ListItem>
+                    <asp:ListItem Value="reg.ejecutivo as Ejecutivo">Ejecutivo</asp:ListItem>
+                    <asp:ListItem Value="reg.estado_poliza as [Estado Poliza]">Estado Poliza</asp:ListItem>
+                    <asp:ListItem Value="reg.vip as VIP">VIP</asp:ListItem>
+                    <asp:ListItem Value="reg.moneda as Moneda">Moneda</asp:ListItem>
+                    <asp:ListItem Value="r.fecha_commit as [Fecha Creacion]">Fecha Creacion</asp:ListItem>
+                    <asp:ListItem Value="r.fecha_revision as [Fecha Revision]">Fecha Revision</asp:ListItem>
+                    <asp:ListItem Value="r.fecha_envio_aseg as [Fecha Envio Aseguradora]">Fecha Envio Aseg.</asp:ListItem>
+                    <asp:ListItem Value="r.fecha_modificacion as [Fecha Modificacion]">Fecha Modificacion</asp:ListItem>
+                    <asp:ListItem Value="r.fecha_envio_cheque as [Fecha Envio Cheque]">Fecha Env. Cheque</asp:ListItem>
+                    <asp:ListItem Value="r.fecha_cierre as [Fecha Cierre]">Fecha Cierre</asp:ListItem>
+                    <asp:ListItem Value="r.titular as Titular">Titular</asp:ListItem>
+                    <asp:ListItem Value="r.detalle_cliente">Detalle Cliente</asp:ListItem>
+                    <asp:ListItem Value="r.observacion as Observacion">Observacion</asp:ListItem>
+                    <asp:ListItem Value="reg.certificado as Certificado">Certificado</asp:ListItem>
+                    <asp:ListItem Value="r.num_reclamo as [Numero Reclamo]">Numero Reclamo</asp:ListItem>
+                    <asp:ListItem Value="CONCAT(DATEDIFF(MINUTE, r.fecha_completa_commit,r.fecha_asignacion)/60 ,':',
+                                                    DATEDIFF(MINUTE, r.fecha_completa_commit,r.fecha_asignacion)%60 ,':',
+                                                    DATEDIFF(SECOND, r.fecha_completa_commit,r.fecha_asignacion)%60 ) as [Fecha creacion A Fecha Asignacion] ">Fecha Apertura a fecha asignacion</asp:ListItem>
+                    <asp:ListItem Value="CONCAT(DATEDIFF(MINUTE, r.fecha_asignacion,r.fecha_apertura)/60, ':',
+                                                    DATEDIFF(MINUTE, r.fecha_asignacion,r.fecha_apertura)%60, ':',
+	                                                DATEDIFF(SECOND, r.fecha_asignacion,r.fecha_apertura)%60 ) as [Fecha Asignacion A Fecha Apertura] ">Fecha Asignacion a Fecha Apertura</asp:ListItem>
+                    <asp:ListItem Value="CONCAT(DATEDIFF(MINUTE, r.fecha_apertura, r.fecha_envio_aseg)/60, ':',
+	                                                DATEDIFF(MINUTE, r.fecha_apertura, r.fecha_envio_aseg)%60, ':',
+	                                                DATEDIFF(SECOND, r.fecha_apertura, r.fecha_envio_aseg)%60 ) as [Fecha Apertura A Fecha Envio Aseguradora] ">Fecha Apertura A fecha env. Aseguradora</asp:ListItem>
+                    <asp:ListItem Value="CONCAT(DATEDIFF(MINUTE, r.fecha_envio_aseg,r.fecha_recepcion_cheque)/60, ':',
+	                                                DATEDIFF(MINUTE, r.fecha_envio_aseg,r.fecha_recepcion_cheque)%60, ':',
+	                                                DATEDIFF(SECOND, r.fecha_envio_aseg,r.fecha_recepcion_cheque)%60 ) as [Fecha Aseguradora a Fecha Recepcion] ">Fecha Aseguradora a Fecha Recepcion</asp:ListItem>
+                    <asp:ListItem Value="CONCAT(DATEDIFF(MINUTE, r.fecha_completa_commit, r.fecha_cierre)/60, ':',
+	                                                DATEDIFF(MINUTE, r.fecha_completa_commit, r.fecha_cierre)%60, ':',
+	                                                DATEDIFF(SECOND, r.fecha_completa_commit, r.fecha_cierre)%60 ) as [Fecha Creacion a cierre] ">Fecha creacion a cierre</asp:ListItem>
                 </asp:CheckBoxList>
             </div>
         </div>
@@ -77,9 +77,9 @@
                     </asp:DropDownList>
                     <label>Moneda</label>
                     <asp:DropDownList ID="ddlMoneda" runat="server" Style="width: 10%; height: 24px;">
-                        <asp:ListItem Value="reg_reclamos_medicos.moneda in ('Dolares','Quetzales') or reg_reclamos_medicos.moneda is null ">Ambas</asp:ListItem>
-                        <asp:ListItem Value="reg_reclamos_medicos.moneda = 'Dolares'">Dolares</asp:ListItem>
-                        <asp:ListItem Value="reg_reclamos_medicos.moneda = 'Quetzales'">Quetzales</asp:ListItem>
+                        <asp:ListItem Value="reg.moneda in ('Dolares','Quetzales') or reg.moneda is null ">Ambas</asp:ListItem>
+                        <asp:ListItem Value="reg.moneda = 'Dolares'">Dolares</asp:ListItem>
+                        <asp:ListItem Value="reg.moneda = 'Quetzales'">Quetzales</asp:ListItem>
                     </asp:DropDownList>
                     <asp:Button ID="Mostrar" OnClick="Mostrar_Click" Style="margin-left: 20px" runat="server" Text="Mostrar" />
                 </div>
@@ -88,12 +88,12 @@
                         <div class="form-group col-md-2 col-lg-2">
                             <label>Busqueda:</label>
                             <asp:DropDownList ID="ddlElegir" runat="server" Style="width: 100%" CssClass="form-control" AutoPostBack="true" OnSelectedIndexChanged="ddlElegir_SelectedIndexChanged">
-                                <asp:ListItem Value="reg_reclamos_medicos.poliza ">Poliza</asp:ListItem>
-                                <asp:ListItem Value="reclamos_medicos.usuario_unity ">Usuario</asp:ListItem>
-                                <asp:ListItem Value="reg_reclamos_medicos.aseguradora ">Aseguradora</asp:ListItem>
-                                <asp:ListItem Value="reg_reclamos_medicos.asegurado">Asegurado</asp:ListItem>
-                                <asp:ListItem Value="reclamos_medicos.titular">Titular</asp:ListItem>
-                                <asp:ListItem Value="reg_reclamos_medicos.moneda">Moneda</asp:ListItem>
+                                <asp:ListItem Value="reg.poliza ">Poliza</asp:ListItem>
+                                <asp:ListItem Value="r.usuario_unity ">Usuario</asp:ListItem>
+                                <asp:ListItem Value="reg.aseguradora ">Aseguradora</asp:ListItem>
+                                <asp:ListItem Value="reg.asegurado">Asegurado</asp:ListItem>
+                                <asp:ListItem Value="reg.titular">Titular</asp:ListItem>
+                                <asp:ListItem Value="reg.moneda">Moneda</asp:ListItem>
                             </asp:DropDownList>
                         </div>
                         <div class="form-group col-md-2 col-lg-2">
@@ -105,17 +105,17 @@
                         <div class="form-group col-md-2 col-lg-2">
                             <label>Tipo:</label>
                             <asp:DropDownList ID="ddlTipoReclamo" runat="server" Style="width: 100%" CssClass="form-control">
-                                <asp:ListItem Value="reg_reclamos_medicos.tipo = 'I'">Individual</asp:ListItem>
-                                <asp:ListItem Value="reg_reclamos_medicos.tipo = 'C'">Colectivos</asp:ListItem>
-                                <asp:ListItem Value="reg_reclamos_medicos.tipo = 'I' or reg_reclamos_medicos.tipo = 'C'">Todos</asp:ListItem>
+                                <asp:ListItem Value="reg.tipo = 'I'">Individual</asp:ListItem>
+                                <asp:ListItem Value="reg.tipo = 'C'">Colectivos</asp:ListItem>
+                                <asp:ListItem Value="reg.tipo = 'I' or reg.tipo = 'C'">Todos</asp:ListItem>
                             </asp:DropDownList>
                         </div>
                         <div class="form-group col-md-2 col-lg-2">
                             <label>Estado:</label>
                             <asp:DropDownList ID="ddlEstado" runat="server" Style="width: 100%" CssClass="form-control">
-                                <asp:ListItem Value="reclamos_medicos.estado_unity = 'Cerrado'">Cerrado</asp:ListItem>
-                                <asp:ListItem Value="reclamos_medicos.estado_unity = 'Seguimiento'">Seguimiento</asp:ListItem>
-                                <asp:ListItem Value="reclamos_medicos.estado_unity = 'Seguimiento' or reclamos_medicos.estado_unity = 'Cerrado'">Todos</asp:ListItem>
+                                <asp:ListItem Value="r.estado_unity = 'Cerrado'">Cerrado</asp:ListItem>
+                                <asp:ListItem Value="r.estado_unity = 'Seguimiento'">Seguimiento</asp:ListItem>
+                                <asp:ListItem Value="r.estado_unity = 'Seguimiento' or r.estado_unity = 'Cerrado'">Todos</asp:ListItem>
                                 <asp:ListItem>Aperturados</asp:ListItem>
                             </asp:DropDownList>
                         </div>

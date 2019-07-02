@@ -20,7 +20,7 @@ public partial class Modulos_MdRenovaciones_Estados_NoEnviadas : System.Web.UI.P
 
             if (user.rol == "F")
             {
-                Response.Redirect("/Modulos/MdRenovaciones/Estados/Renovadas.aspx");
+                Response.Redirect("/Modulos/MdRenovaciones/Estados/Renovadas.aspx",false);
             }
         }
         catch { }
@@ -60,23 +60,71 @@ public partial class Modulos_MdRenovaciones_Estados_NoEnviadas : System.Web.UI.P
         int id = Convert.ToInt32(GridNoEnviadas.SelectedRow.Cells[1].Text);
         var registro = DB.renovaciones_polizas.Find(id);
         txtCorreo.Text = registro.correo_cliente;
+        txtTelefono.Text = registro.telefono_cliente;
         String Poliza = registro.ramo + registro.poliza + registro.endoso_renov + ".pdf";
 
-        cuerpo = "Saludos Estimad@ asegurado </br>" +
-                "<div style=\"text-align: justify\">" +
+        cuerpo = "Saludos Estimad@ asegurad@: \n" +
+            "<div style=\"text-align: justify\">" +
+                "</br>" +
                 "<p>El " + Convert.ToDateTime(registro.vigf_acs).ToString("dd/MM/yyyy") + " vence la anualidad de su póliza " + registro.poliza_unity + ", la cual le brinda coberturas al " + registro.tipo_vehiculo + "  MARCA  " + registro.marca + " PLACA " + registro.placa + ".<p>" +
-                "<p>Con el afán de realizar el proceso de renovación de una forma más conveniente para todas las partes, a partir de este año, Seguros El Roble realiza la renovación anticipada de su póliza, la cual encontrará adjunta y cuenta con las siguientes condiciones:</p>" +
-                "<p><b>Valor Garantizado</b> de Q." + registro.suma_aseg_renov + "; el valor garantizado es fijo y le da la tranquilidad de contar con la suma asegurada adecuada. Por favor revise el Endoso de Valor Garantizado, donde se describen las condiciones que aplican a este beneficio.<p>" +
-                "<p><b>Deducibles:</b> Los deducibles que aplican en la renovación, son: " + registro.deduc_min_danos + " para Daños Propios y " + registro.deduc_min_robo + " para Robo Total</p>" +
-                "<p><b>Prima a pagar anual:</b> Q." + registro.prima_anual + ", fraccionada en " + registro.pagos + " pagos.</p>" +
-                "<p>Las condiciones especiales con que cuenta su póliza, <a href=\"http://52.34.115.100:5556/files/RenovacionesElRoble/OneDrive%20-%20Unity%20Seguros/Renovaciones/Enviadas/" + Poliza + "\"> puede revisarlas aqui</a>, en el endoso de “Beneficios adicionales Incluidos sin cobro de prima” y consultarnos por cualquier duda sobre las mismas.</p>" +
-                "<p>Debe revisar y verificar que su renovación contenga las coberturas y condiciones contratadas e informarnos inmediatamente de cualquier modificación que debamos efectuar <b>(Artículo 673 del Código de Comercio de Guatemala)</b>.</p>" +
-                "<p>Le recordamos que debe mantener al día sus pagos, para evitar situaciones de no cobertura en caso de ocurrir un siniestro (Artículo 892 del Código de Comercio de Guatemala).</p>" +
-                "<p>Recuerde que, de ocurrir algún siniestro, debe notificarlo inmediatamente a nuestra cabina de emergencias a los teléfonos 2386-3737 o 2326-3737; si lo reporta directo a la Aseguradora, favor indicárnoslo al día hábil siguiente para dar seguimiento a su reclamo.</p>" +
-                "<p>NOTA IMPORTANTE: En caso no recibamos confirmación escrita de que no desea esta renovación, como mínimo con 5 días de anticipación al vencimiento " + registro.vigf_acs + ", la Aseguradora asumirá que está de acuerdo con los términos y condiciones y procederá a realizar los cobros en las fechas pactadas en el Anexo de Pagos.<p>" +
+                "<p>Tanto Unity como El Roble, estamos comprometidos con el servicio al cliente y la protección del medio ambiente; por ello, se implementó el envío electrónico de pólizas desde hace un par de años para dar agilidad a la entrega de documentos y proteger los recursos, al no utilizar papel.</p>" +
+                "<p>En nuestra búsqueda de mejoras en el servicio, <a href=\"http://52.34.115.100:5556/files/RenovacionesElRoble/OneDrive%20-%20Unity%20Seguros/Renovaciones/Enviadas/" + Poliza + "\">ud puede revisar aqui</a> su renovación del período " + Convert.ToDateTime(registro.vigf).AddYears(-1).Year + "/" + Convert.ToDateTime(registro.vigf).Year + "; la cual cuenta con las siguientes condiciones:</p>" +
+                "<p><b>Valor Garantizado</b> este valor es proporcionado por Seguros El Roble y le da la tranquilidad de contar con una suma asegurada adecuada; en la renovación, su vehículo tiene valor Asegurado de Q." + Convert.ToDecimal(registro.suma_aseg_renov).ToString("N2") + "; puede revisar todas las condiciones aplicables a este beneficio en el endoso incluido en su póliza</p>" +
+                "<p><b>Deducibles:</b> " + Convert.ToDecimal(registro.deduc_min_danos).ToString("N2") + " para daños y " + Convert.ToDecimal(registro.deduc_min_robo).ToString("N2") + " por pérdida total. Deducible máximo si aplica:" +
+                "<p><b>Prima a pagar anual:</b> Q." + Convert.ToDecimal(registro.prima_anual).ToString("N2") + ", fraccionada en " + registro.pagos + " pagos.</p>" +
+                "<p>Las mejoras en límites de cobertura para esta renovación y sin costo adicional, son las siguientes:</p>" +
+
+                "<table style=\"width: 100 %; text-align:center; border: 1px solid black; border-collapse: collapse; border-spacing: 0px !important;\">" +
+                   "  <tr>" +
+                   "    <th style=\"border: 1px solid black; border-collapse: collapse; text-align:center;\">Cobertura</th>" +
+                   "    <th style=\"border: 1px solid black; border-collapse: collapse; text-align:center;\">Actual</th> " +
+                   "    <th style=\"border: 1px solid black; border-collapse: collapse; text-align:center;\">Renovacion 2019/2020</th>" +
+                   "  </tr>" +
+                   "  <tr>" +
+                   "    <td style=\"border: 1px solid black; border-collapse: collapse; text-align:center;\">Responsabilidad Civil ante Terceros</td>" +
+                   "    <td style=\"border: 1px solid black; border-collapse: collapse; text-align:center;\">Q.800,000.00</td>" +
+                   "    <td style=\"border: 1px solid black; border-collapse: collapse; text-align:center;\">Q.1,000,000.00</td>" +
+                   "  </tr>" +
+                   "  <tr>" +
+                   "    <td style=\"border: 1px solid black; border-collapse: collapse; text-align:center;\">Lesiones y Gastos Médicos a ocupantes (Máximo por persona y/o por accidente)</td>" +
+                   "    <td style=\"border: 1px solid black; border-collapse: collapse; text-align:center;\">Q. 30,000.00 por persona Q.150,000.00 por Accidente</td>" +
+                   "    <td style=\"border: 1px solid black; border-collapse: collapse; text-align:center;\">Q. 50,000.00 por persona Q.250,000.00 por Accidente</td>" +
+                   "  </tr>" +
+                   "  <tr>" +
+                   "    <td style=\"border: 1px solid black; border-collapse: collapse; text-align:center;\">Grúa en caso de accidente</td>" +
+                   "    <td style=\"border: 1px solid black; border-collapse: collapse; text-align:center;\">Q.7,500.00</td>" +
+                   "    <td style=\"border: 1px solid black; border-collapse: collapse; text-align:center;\">Q.10,000.00</td>" +
+                   "  </tr>" +
+                   "   <tr>" +
+                   "    <td style=\"border: 1px solid black; border-collapse: collapse; text-align:center;\">Muerte del Piloto a consecuencia del accidente (certificada por el INACIF)</td>" +
+                   "    <td style=\"border: 1px solid black; border-collapse: collapse; text-align:center;\">Q.150,000.00</td>" +
+                   "    <td style=\"border: 1px solid black; border-collapse: collapse; text-align:center;\">Q.250,000.00</td>" +
+                   "  </tr>" +
+                   "   <tr>" +
+                   "    <td style=\"border: 1px solid black; border-collapse: collapse; text-align:center;\">Fianza de Excarcelación</td>" +
+                   "    <td style=\"border: 1px solid black; border-collapse: collapse; text-align:center;\">Q.25,000.00</td>" +
+                   "    <td style=\"border: 1px solid black; border-collapse: collapse; text-align:center;\">Q.50,000.00</td>" +
+                   "  </tr>" +
+                   "</table>" +
+                   "</br>" +
+                "<p>Las condiciones especiales con que cuenta su póliza, puede revisarlas en el endoso de “Beneficios adicionales incluidos sin cobro de prima” que forma parte de su renovación y consultarnos cualquier duda o aclaración sobre las mismas.</p>" +
+                "<p>A partir de esta vigencia, se ha extendido la cobertura de Asistencia Vehicular a cubrir también la Asistencia Funeraria, cuyas condiciones están descritas en el “Endoso especial Roble asistencia funeraria” que forma parte de su renovación.</p>" +
+                "<p>Actualmente la póliza cubre menores de 25 años, pero mayores de 21 sin cobro adicional de prima; favor indicar si algún menor de 21 años conduce el vehículo, para cotizarle la cobertura adecuada.</p>" +
+                "<p>¿Qué coberturas adicionales tiene? Describir comenzando con:  Actualmente cuenta con las coberturas de Robo Parcial por Q. para el radio y bocinas xx; alquiler en caso de accidente. SI NO TIENE NINGUNA, BORRAR EL PÁRRAFO</p>" +
+                "<p>Adicional a las coberturas con que cuenta actualmente, puede complementar su seguro por un costo adicional, e incluir alguna de las siguientes; contáctenos para una cotización: SI TIENE NINGUNA, BORRAR EL PÁRRAFO</p>" +
+                "<li>Robo parcial de equipo especial (equipos de sonido o dvd instalados dentro del vehículo).</li>" +
+                "<li>Renta de vehículo en caso de colisión</li>" +
+                "</br>" +
+                "<p>Recuerde actualizar su formulario de pago con Tarjeta de Crédito en caso de cambio de plástico, vencimiento, numeración, etc., para no afectar la continuidad de los pagos y evitar inconvenientes en caso de siniestro. " +
+                "OTRO TEXTO Puede programar sus pagos con cargo a Tarjeta de Crédito, esto le dará beneficios conforme al programa de lealtad de su tarjeta, mantiene la continuidad de los pagos y evita inconvenientes en caso de siniestro; " +
+                "puede solicitar el formulario respectivo, completarlo y devolvérnoslo para el envío a la Aseguradora.</p>" +
+                "<p>Debe revisar y verificar que su renovación contenga las coberturas y condiciones contratadas, e informarnos inmediatamente de cualquier modificación que debamos efectuar (Artículo 673 Código de Comercio de Guatemala). " +
+                "Adicionalmente, debe mantener al día sus pagos para evitar situaciones de no cobertura en caso de ocurrir un siniestro (Artículo 892 Código de Comercio de Guatemala).</p>" +
+                "<p>IMPORTANTE:  Si usted no desea la renovación de la póliza, debe enviar el aviso por escrito como mínimo con 5 días de anticipación a su vencimiento " + Convert.ToDateTime(registro.vigf_acs).ToString("dd/MM/yyyy") + "; de no recibir su solicitud, la Aseguradora tomará como aceptados los términos y condiciones, procediendo con el cobro de las primas en las fechas indicadas en el Anexo de Pagos.</p>" +
+                "<p>Recuerde que de ocurrir algún siniestro, debe notificarlo inmediatamente a nuestra cabina de emergencia a los teléfonos 2386-3737 o 2326-3737; si lo reporta directamente a la Aseguradora, favor indicárnoslo al día hábil siguiente para dar seguimiento a su reclamo.</p>" +
                 "<p>Agradecemos la confianza depositada en nuestros servicios para el manejo de sus seguros y estoy a las órdenes para cualquier aclaración o consulta.</p>" +
                 "<p>" + registro.nombre_gestor + "</p>" +
-                "</div>";
+            "</div>";
 
         txtCuerpo.Text = cuerpo;
         Utils.ShowMessage(this.Page, "Ahora debe de ingresar el correo exacto del cliente ", "Excelente..", "success");
@@ -87,12 +135,11 @@ public partial class Modulos_MdRenovaciones_Estados_NoEnviadas : System.Web.UI.P
         try
         {
             int id = Convert.ToInt32(GridNoEnviadas.SelectedRow.Cells[1].Text);
-            string correo = GridNoEnviadas.SelectedRow.Cells[8].Text;
             var registro = DB.renovaciones_polizas.Find(id);
-
             registro.correo_cliente = txtCorreo.Text;
             DB.SaveChanges();
             llenarGrid();
+
             if (ValidarCorreo(txtCorreo.Text, id))
             {
                 Utils.ShowMessage(this.Page, "Se ha actualizado el correo y se ha enviado con exito la notificacion. ", "Excelente", "success");
@@ -117,51 +164,78 @@ public partial class Modulos_MdRenovaciones_Estados_NoEnviadas : System.Web.UI.P
         EmailValidationResult resultado;
         var registro = DB.renovaciones_polizas.Find(id);
         var gestor = DBReclamos.usuario.Find(Convert.ToInt32(Session["CodigoGestor"]));
-
-        if (!emailValidator.Validate(correo.Trim(), out resultado))
+        if (txtCorreo.Text != "")
         {
-            Console.WriteLine("Unable to check email"); // no internet connection or mailserver is down / busy
+            if (!emailValidator.Validate(txtCorreo.Text.Trim(), out resultado))
+            {
+                Console.WriteLine("Unable to check email"); // no internet connection or mailserver is down / busy
+                registro.estado = 6;
+                DB.SaveChanges();
+                llenarGrid();
+            }
+
+            switch (resultado)
+            {
+                case EmailValidationResult.OK:
+                    // Console.WriteLine("Mailbox exists");
+                    //Utils.EmailRenovacion("pa_envio_renovaciones", txtCorreo.Text, txtCuerpo.Text, registro.correo_gestor.Trim());
+                    //copia al ejecutivo
+                    //Utils.EmailRenovacion("pa_envio_renovaciones", registro.correo_gestor, txtCuerpo.Text, registro.correo_gestor.Trim());
+                    registro.estado = 3;
+                    DB.SaveChanges();
+                    String Poliza = (registro.ramo + registro.poliza + registro.endoso_renov + ".pdf");
+                    Utils.MoverArchivos(Poliza, "Enviadas");
+                    //EnvioSms();
+                    llenarGrid();
+                    break;
+
+                case EmailValidationResult.MailboxUnavailable:
+                    //Console.WriteLine("Email server replied there is no such mailbox");
+                    registro.estado = 6;
+                    DB.SaveChanges();
+                    llenarGrid();
+                    break;
+
+                case EmailValidationResult.MailboxStorageExceeded:
+                    //Console.WriteLine("Mailbox overflow");
+                    registro.estado = 6;
+                    DB.SaveChanges();
+                    llenarGrid();
+                    break;
+
+                case EmailValidationResult.NoMailForDomain:
+                    //Console.WriteLine("Emails are not configured for domain (no MX records)");
+                    registro.estado = 6;
+                    DB.SaveChanges();
+                    llenarGrid();
+                    break;
+            }
         }
 
-        switch (resultado)
+        else
         {
-            case EmailValidationResult.OK:
-                //Console.WriteLine("Mailbox exists");
-                //Correos.Notificacion(correo.Trim(), "Renovacion de poliza", cuerpo);
-                Utils.EmailRenovacion("pa_envio_renovaciones", correo, txtCuerpo.Text, registro.correo_gestor.Trim());
-                registro.estado = 3;
-                DB.SaveChanges();
-                String Poliza = (registro.ramo + registro.poliza + registro.endoso_renov + ".pdf");
-                Utils.MoverArchivos(Poliza, "Enviadas");
-                llenarGrid();
-                estado = true;
-                break;
-
-            case EmailValidationResult.MailboxUnavailable:
-                //Console.WriteLine("Email server replied there is no such mailbox");
-                registro.estado = 6;
-                DB.SaveChanges();
-                llenarGrid();
-                estado = false;
-                break;
-
-            case EmailValidationResult.MailboxStorageExceeded:
-                //Console.WriteLine("Mailbox overflow");
-                registro.estado = 6;
-                DB.SaveChanges();
-                llenarGrid();
-                estado = false;
-                break;
-
-            case EmailValidationResult.NoMailForDomain:
-                //Console.WriteLine("Emails are not configured for domain (no MX records)");
-                registro.estado = 6;
-                DB.SaveChanges();
-                llenarGrid();
-                estado = false;
-                break;
+            registro.estado = 6;
+            DB.SaveChanges();
+            llenarGrid();
         }
 
         return estado;
+    }
+
+    private void EnvioSms()
+    {
+        int id = Convert.ToInt32(GridNoEnviadas.SelectedRow.Cells[1].Text);
+        var registro = DB.renovaciones_polizas.Find(id);
+
+        String mensaje = "Hemos enviado a su email registrado la renovacion " + Convert.ToDateTime(registro.vigf).AddYears(-1).Year + "/" + Convert.ToDateTime(registro.vigf).Year + " " +
+            "de su poliza " + registro.poliza + " del " + registro.marca + " / " + registro.modelo + ", favor revisar y cualquier duda contacte a " +
+            "" + registro.nombre_gestor + " al " + Utils.TelefonoEjecutivo(Convert.ToInt32(registro.codigo_gestor));
+
+        if(txtTelefono.Text == "")
+        {
+            txtTelefono.Text = "0";
+        }
+
+        Utils.ENVIOSMS(txtTelefono.Text, mensaje);
     }
 }

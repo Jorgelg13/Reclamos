@@ -105,7 +105,8 @@
                                 <li><a href="/Modulos/MdReportes/wbFrmReporteProblemas.aspx?id=2">Reporte de problemas Daños</a></li>
                                 <li><a href="/Modulos/MdReportes/wbFrmReporteCheques.aspx">Cheques Ingresados</a></li>
                                 <li><a href="/Modulos/MdReportes/wbActividades.aspx">Reporte de Actividades</a></li>
-                                <li><a href="/Modulos/MdReportes/ReporteNPS.aspx">Reporte NPS</a></li>
+                                <li><a href="/Modulos/MdReportes/ReporteNPS.aspx?id=1">Reporte NPS</a></li>
+                                <li><a href="/Modulos/MdReportes/ReporteNPS.aspx?id=2">Reporte CRM</a></li>
                             </ul>
                         </li>
                         <li class="dropdown">

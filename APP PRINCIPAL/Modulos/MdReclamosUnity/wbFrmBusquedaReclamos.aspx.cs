@@ -32,20 +32,10 @@ public partial class Modulos_MdReclamosUnity_wbFrmBusquedaReclamos : System.Web.
                " auto_reclamo.asegurado as Asegurado, " +
                " auto_reclamo.placa as Placa," +
                " auto_reclamo.marca as Marca," +
-               " auto_reclamo.color as Color, " +
                " auto_reclamo.modelo as Modelo," +
-               " auto_reclamo.motor as Motor, " +
-               " auto_reclamo.propietario as Propietario, " +
-               " auto_reclamo.aseguradora as Aseguradora," +
-               " auto_reclamo.contratante as Contratante, " +
-               //" reclamo_auto.fecha_commit as [Fecha Commit]," 21 +
-                " talleres.nombre as Taller " +
+               " auto_reclamo.propietario as Propietario " +
                 " FROM auto_reclamo " +
-                " INNER JOIN reclamo_auto ON reclamo_auto.id_auto_reclamo = auto_reclamo.id " +
-                " INNER JOIN gestores on reclamo_auto.id_gestor = gestores.id" +
-                " INNER JOIN talleres on reclamo_auto.id_taller = talleres.id" +
-                " INNER JOIN analistas on reclamo_auto.id_analista = analistas.id" +
-                " INNER JOIN usuario ON reclamo_auto.id_usuario = usuario.id "; 
+                " INNER JOIN reclamo_auto ON reclamo_auto.id_auto_reclamo = auto_reclamo.id ";
 
             if (ddlEstado.SelectedItem.Text == "Todos")
             {

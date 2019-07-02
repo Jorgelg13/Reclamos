@@ -5,9 +5,6 @@ using iTextSharp.text;
 using iTextSharp.text.pdf;
 using iTextSharp.text.html.simpleparser;
 using System.IO;
-using System.Text;
-using System.Xml;
-
 
 public partial class Modulos_MdReclamosUnity_wbFrmReporteNoConforme : System.Web.UI.Page
 {

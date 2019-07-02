@@ -12,61 +12,45 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosMedicosGeneral : Syste
         idRecibido = Request.QueryString[0].ToString();
 
         String seleccionarRegistros = "SELECT " +
-          "dbo.reclamos_medicos.id as ID," + //1
-          "dbo.reg_reclamos_medicos.asegurado as Asegurado," +
-          "dbo.reg_reclamos_medicos.poliza as Poliza," +
-          "dbo.reg_reclamos_medicos.aseguradora as Aseguradora," +
-          "dbo.reclamos_medicos.telefono as Telefono," +
-          "dbo.reclamos_medicos.correo as Correo," +
-          "dbo.reclamos_medicos.empresa as Empresa," +
-          "dbo.reclamos_medicos.tipo_reclamo as [Tipo Reclamo]," +
-          "dbo.reg_reclamos_medicos.ramo as Ramo," +
-          "dbo.reg_reclamos_medicos.tipo as Tipo," +
-          "dbo.reg_reclamos_medicos.clase as Clase," +
-          "dbo.reg_reclamos_medicos.ejecutivo as Ejecutivo," +
-          "dbo.reg_reclamos_medicos.estado_poliza as [Estado Poliza]," +
-          "dbo.reg_reclamos_medicos.vip as VIP," +
-          "dbo.reg_reclamos_medicos.moneda as Moneda," +
-          //"dbo.cabina.nombre as Cabina," +
-          //"dbo.sucursal.nombre as Sucursal," +
-          //"dbo.empresa.nombre as Empresa," +
-          //"dbo.pais.nombre as Pais, " +
-          "Convert(varchar(10),dbo.reclamos_medicos.fecha_visualizar, 103) As [Fecha Visualizar] " +
+          "r.id as ID," + //1
+          "reg.asegurado as Asegurado," +
+          "reg.poliza as Poliza," +
+          "reg.aseguradora as Aseguradora," +
+          "r.telefono as Telefono," +
+          "r.empresa as Empresa," +
+          "r.tipo_reclamo as [Tipo Reclamo]," +
+          "Convert(varchar(10), r.fecha_visualizar, 103) As [Fecha Visualizar] " +
           "FROM " +
-          " dbo.reg_reclamos_medicos " +
-          "INNER JOIN dbo.reclamos_medicos ON dbo.reclamos_medicos.id_reg_reclamos_medicos = dbo.reg_reclamos_medicos.id " +
-          "INNER JOIN dbo.cabina ON dbo.reclamos_medicos.id_cabina = dbo.cabina.id " +
-          "INNER JOIN dbo.sucursal ON dbo.cabina.id_sucursal = dbo.sucursal.id " +
-          "INNER JOIN dbo.empresa ON dbo.sucursal.id_empresa = dbo.empresa.id " +
-          "INNER JOIN dbo.pais ON dbo.empresa.id_pais = dbo.pais.id ";
+          "reg_reclamos_medicos as reg " +
+          "INNER JOIN reclamos_medicos as r ON r.id_reg_reclamos_medicos = reg.id ";
 
         if (idRecibido == "1")
         {
-            seleccionarRegistros += " where reclamos_medicos.estado_unity = 'Seguimiento'";
+            seleccionarRegistros += " where r.estado_unity = 'Seguimiento'";
             llenado.llenarGrid(seleccionarRegistros, GridGeneral);
         }
 
         else if(idRecibido == "2")
         {
-            seleccionarRegistros += " where reclamos_medicos.fecha_visualizar < GETDATE() and estado_unity != 'Cerrado' and tipo = 'I' ";
+            seleccionarRegistros += " where r.fecha_visualizar < GETDATE() and r.estado_unity != 'Cerrado' and reg.tipo = 'I' ";
             llenado.llenarGrid(seleccionarRegistros, GridGeneral);
         }
 
         else if (idRecibido == "3")
         {
-            seleccionarRegistros += " where reclamos_medicos.estado_unity = 'Seguimiento' and tipo = 'C'  ";
+            seleccionarRegistros += " where r.estado_unity = 'Seguimiento' and reg.tipo = 'C'  ";
             llenado.llenarGrid(seleccionarRegistros, GridGeneral);
         }
 
         else if (idRecibido == "4")
         {
-            seleccionarRegistros += " where reclamos_medicos.fecha_visualizar < convert(date,getdate(),103) and estado_unity not in ('Cerrado','Anulado') and tipo = 'C' ";
+            seleccionarRegistros += " where r.fecha_visualizar < convert(date,getdate(),103) and r.estado_unity not in ('Cerrado','Anulado') and reg.tipo = 'C' ";
             llenado.llenarGrid(seleccionarRegistros, GridGeneral);
         }
         
         else if(idRecibido == "5")
         {
-            seleccionarRegistros += "where reclamos_medicos.estado_unity = 'Seguimiento' and reclamos_medicos.id_estado = 4 and tipo = 'I' ";
+            seleccionarRegistros += "where r.estado_unity = 'Seguimiento' and r.id_estado = 4 and reg.tipo = 'I' ";
             llenado.llenarGrid(seleccionarRegistros, GridGeneral);
         }
     }
@@ -92,7 +76,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosMedicosGeneral : Syste
     protected void GridGeneral_RowDataBound(object sender, System.Web.UI.WebControls.GridViewRowEventArgs e)
     {
         if (e.Row.RowType == DataControlRowType.DataRow)
-            if (Convert.ToDateTime(e.Row.Cells[16].Text) <= DateTime.Today)
+            if (Convert.ToDateTime(e.Row.Cells[8].Text) <= DateTime.Today)
             {
                 e.Row.Attributes.Add("style", "background-color: #f7c6be"); //rojos
             }

@@ -208,8 +208,9 @@ public partial class Modulos_MdReclamos_wbFrmReclamosMedicos : System.Web.UI.Pag
             DBReclamos.SaveChanges();
             ultimoIdReclamo = reclamo.id.ToString();
             insertar_documentos(Convert.ToInt32(ultimoIdReclamo));
+            //Utils.insertarComentario(Convert.ToInt32(ultimoIdReclamo), "Reclamo ingresado al sistema con fecha: " + DateTime.Now, "Ingresado");
 
-            if(tipo == "I")
+            if (tipo == "I")
             {
                 if (txtDependiente.Text == "")
                 {

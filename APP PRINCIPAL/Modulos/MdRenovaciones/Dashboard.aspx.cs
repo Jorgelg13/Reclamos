@@ -22,7 +22,7 @@ public partial class Modulos_MdRenovaciones_Dashboard : System.Web.UI.Page
 
             if (user.rol == "F")
             {
-                Response.Redirect("/Modulos/MdRenovaciones/Estados/Renovadas.aspx");
+                Response.Redirect("/Modulos/MdRenovaciones/Estados/Renovadas.aspx",false);
             }
         }
         catch { }
@@ -55,6 +55,9 @@ public partial class Modulos_MdRenovaciones_Dashboard : System.Web.UI.Page
             if (!emailValidator.Validate(correo.Trim(), out resultado))
             {
                 Console.WriteLine("Unable to check email"); // no internet connection or mailserver is down / busy
+                registro.estado = 6;
+                DBRenovaciones.SaveChanges();
+                llenarGrid();
             }
 
             switch (resultado)
@@ -62,14 +65,14 @@ public partial class Modulos_MdRenovaciones_Dashboard : System.Web.UI.Page
                 case EmailValidationResult.OK:
                     // Console.WriteLine("Mailbox exists");
                     // Correos.Notificacion(correo.Trim(), "Renovacion de poliza", txtCuerpo.Text);
-                    Utils.EmailRenovacion("pa_envio_renovaciones", correo.Trim(), txtCuerpo.Text, registro.correo_gestor.Trim());
-                    Utils.EmailRenovacion("pa_envio_renovaciones", registro.correo_gestor.Trim(), txtCuerpo.Text, registro.correo_gestor.Trim());
+                    //Utils.EmailRenovacion("pa_envio_renovaciones", correo.Trim(), txtCuerpo.Text, registro.correo_gestor.Trim());
+                    //Utils.EmailRenovacion("pa_envio_renovaciones", registro.correo_gestor.Trim(), txtCuerpo.Text, registro.correo_gestor.Trim());
                     registro.estado = 3;
                     DBRenovaciones.SaveChanges();
                     String Poliza = (registro.ramo + registro.poliza + registro.endoso_renov + ".pdf");
                     Utils.MoverArchivos(Poliza, "Enviadas");
+                    //EnvioSms();
                     llenarGrid();
-                    EnvioSms();
                     break;
 
                 case EmailValidationResult.MailboxUnavailable:
@@ -95,7 +98,7 @@ public partial class Modulos_MdRenovaciones_Dashboard : System.Web.UI.Page
             }
         }
 
-        else if (registro.correo_cliente == "")
+        else
         {
             registro.estado = 6;
             DBRenovaciones.SaveChanges();
@@ -116,7 +119,7 @@ public partial class Modulos_MdRenovaciones_Dashboard : System.Web.UI.Page
                 "</br>" +
                 "<p>El " + Convert.ToDateTime(registro.vigf_acs).ToString("dd/MM/yyyy") + " vence la anualidad de su póliza " + registro.poliza_unity + ", la cual le brinda coberturas al " + registro.tipo_vehiculo + "  MARCA  " + registro.marca + " PLACA " + registro.placa + ".<p>" +
                 "<p>Tanto Unity como El Roble, estamos comprometidos con el servicio al cliente y la protección del medio ambiente; por ello, se implementó el envío electrónico de pólizas desde hace un par de años para dar agilidad a la entrega de documentos y proteger los recursos, al no utilizar papel.</p>" +
-                "<p>En nuestra búsqueda de mejoras en el servicio, <a href=\"http://52.34.115.100:5556/files/RenovacionesElRoble/OneDrive%20-%20Unity%20Seguros/Renovaciones/Enviadas/" + Poliza + "\">ud puede revisar aqui</a> su renovación del período " + Convert.ToDateTime(registro.vigf).AddYears(-1).Year + "/" + Convert.ToDateTime(registro.vigf).Year + "; la cual cuenta con las siguientes condiciones:</p>" +
+                "<p>En nuestra búsqueda de mejoras en el servicio, <a href=\"https://archivos-reclamos.unitypromotores.com/files/RenovacionesElRoble/OneDrive%20-%20Unity%20Seguros/Renovaciones/Enviadas/" + Poliza + "\">ud puede revisar aqui</a> su renovación del período " + Convert.ToDateTime(registro.vigf).AddYears(-1).Year + "/" + Convert.ToDateTime(registro.vigf).Year + "; la cual cuenta con las siguientes condiciones:</p>" +
                 "<p><b>Valor Garantizado</b> este valor es proporcionado por Seguros El Roble y le da la tranquilidad de contar con una suma asegurada adecuada; en la renovación, su vehículo tiene valor Asegurado de Q." + Convert.ToDecimal(registro.suma_aseg_renov).ToString("N2") + "; puede revisar todas las condiciones aplicables a este beneficio en el endoso incluido en su póliza</p>" +
                 "<p><b>Deducibles:</b> "+ Convert.ToDecimal(registro.deduc_min_danos).ToString("N2") + " para daños y "+ Convert.ToDecimal(registro.deduc_min_robo).ToString("N2") + " por pérdida total. Deducible máximo si aplica:" +
                 "<p><b>Prima a pagar anual:</b> Q." + Convert.ToDecimal(registro.prima_anual).ToString("N2") + ", fraccionada en " + registro.pagos + " pagos.</p>" +
@@ -216,10 +219,10 @@ public partial class Modulos_MdRenovaciones_Dashboard : System.Web.UI.Page
         int id = Convert.ToInt32(GridElRoble.SelectedRow.Cells[3].Text);
         var registro = DBRenovaciones.renovaciones_polizas.Find(id);
 
-        String mensaje = "Hemos enviado a su email registrado la renovacion " +  Convert.ToDateTime(registro.vigf).AddYears(-1).Year + "/" +  Convert.ToDateTime(registro.vigf).Year + " " +
-            "de su poliza " + registro.poliza + " del " + registro.marca + " / " + registro.modelo +", favor revisar y cualquier duda contacte a " +
+        String mensaje = "Hemos enviado a su email registrado la renovacion " +  Convert.ToDateTime(registro.vigf).Year + "/" +  Convert.ToDateTime(registro.vigf).AddYears(1).Year + " " +
+            "de su poliza " + registro.poliza_unity + " del " + registro.marca + " / " + registro.modelo +", favor revisar y cualquier duda contacte a " +
             "" + registro.nombre_gestor + " al " + Utils.TelefonoEjecutivo(Convert.ToInt32(registro.codigo_gestor));
 
-        Utils.ENVIOSMS(registro.telefono_cliente.Trim(),mensaje);
+        Utils.ENVIOSMS(txtTelefono.Text,mensaje);
     }
 }

@@ -39,11 +39,6 @@ public partial class Modulos_MdReclamosUnity_wbFrmRecDañosSeguimiento : System.
                 "dbo.reg_reclamo_varios " +
                 "INNER JOIN dbo.reclamos_varios ON dbo.reclamos_varios.id_reg_reclamos_varios = dbo.reg_reclamo_varios.id "+
                 "INNER JOIN gestores on reclamos_varios.id_gestor = gestores.id ";
-                //"INNER JOIN dbo.cabina ON dbo.reclamos_varios.id_cabina = dbo.cabina.id " +
-                //"INNER JOIN dbo.sucursal ON dbo.cabina.id_sucursal = dbo.sucursal.id " +
-                //"INNER JOIN dbo.empresa ON dbo.sucursal.id_empresa = dbo.empresa.id " +
-                //"INNER JOIN dbo.pais ON dbo.empresa.id_pais = dbo.pais.id " +
-                //"INNER JOIN dbo.usuario ON dbo.reclamos_varios.id_usuario = dbo.usuario.id ";
 
         string reclamosPrioritarios = selectGeneral +
                " where ((reclamos_varios.prioritario = 'true') and (reclamos_varios.usuario_unity = '" + userlogin + "' and reclamos_varios.estado_unity = 'Seguimiento' ))";

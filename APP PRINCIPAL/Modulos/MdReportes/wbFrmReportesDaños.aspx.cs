@@ -378,7 +378,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesDaños : System.Web.UI
     {
         if (ddlCiclos.SelectedValue == "Ciclo Total")
         {
-            KPI = 62;
+            KPI = 70;
             PanelCamposSeleccion.Visible = false;
             PanelEficiencia.Visible = false;
             PnCiclos.Visible = true;
@@ -401,7 +401,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesDaños : System.Web.UI
                 
         else if (ddlCiclos.SelectedValue == "Ciclo Cliente")
         {
-            KPI = 22;
+            KPI = 23;
             PanelCamposSeleccion.Visible = false;
             PanelEficiencia.Visible = false;
             PnCiclos.Visible = true;
@@ -412,7 +412,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesDaños : System.Web.UI
 
         else if (ddlCiclos.SelectedValue == "Ciclo Aseguradora")
         {
-            KPI = 28;
+            KPI = 32;
             PanelCamposSeleccion.Visible = false;
             PanelEficiencia.Visible = false;
             PnCiclos.Visible = true;

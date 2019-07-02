@@ -1094,6 +1094,9 @@
                 <div class="modal-header">
                     <h4 class="modal-title"><b>Enviar Notificacion por falta de Documentos</b></h4>
                 </div>
+                <div class="modal-body">
+                    <asp:TextBox ID="TxtEnvioSms" Style="width: 99%" autocomplete="off" class="form-control" TextMode="multiline" Columns="50" Rows="5" runat="server"></asp:TextBox>
+                </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-warning" data-dismiss="modal">Cancelar</button>
                     <asp:Button ID="btnEnviarSMS" CssClass="btn btn-primary" runat="server" Text="Enviar" OnClick="btnEnviarSMS_Click" />
@@ -1121,13 +1124,13 @@
         }
 
         function documento() {
-            window.open('http://52.34.115.100:5556/files/GastosMedicos/' + ruta + '', "ventana1", "width=700,height=800,scrollbars=NO")
+            window.open('https://archivos-reclamos.unitypromotores.com/files/GastosMedicos/' + ruta + '', "ventana1", "width=700,height=800,scrollbars=NO")
         }
 
         function buscador() {
             var alto = $(window).height() - 200;
             var ancho = $(window).width() - 700;
-            window.open('http://52.34.115.100:5556/explorador.html#files%2FGastosMedicos/' + ruta, "ventana1", "width=" + ancho + ",height=" + alto + ",scrollbars=NO")
+            window.open('https://archivos-reclamos.unitypromotores.com/explorador.html#files%2FGastosMedicos/' + ruta, "ventana1", "width=" + ancho + ",height=" + alto + ",scrollbars=NO")
         }
 
         function printDiv(imprimir) {

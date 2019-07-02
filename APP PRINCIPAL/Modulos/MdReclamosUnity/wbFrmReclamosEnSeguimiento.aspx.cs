@@ -23,41 +23,37 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosEnSeguimiento : System
         estadosAgrupados = "select count(*) as Total, estado_auto_unity as Estado from reclamo_auto where usuario_unity = '"+userlogin+"' and estado_unity = 'Seguimiento' " +
             "group by estado_auto_unity ";
 
-        reclamosGeneral = "SELECT reclamo_auto.id AS ID," +
-          " reclamo_auto.estado_unity as [Estado Unity]," +
-          " reclamo_auto.usuario_unity as [Usuario Unity]," +
-          " auto_reclamo.poliza as Poliza," +
-          " auto_reclamo.asegurado as Asegurado, " +
-          " auto_reclamo.placa as Placa," +
-          " auto_reclamo.marca as Marca," +
-          " auto_reclamo.color as Color, " +
-          " auto_reclamo.modelo as Modelo," +
-          " auto_reclamo.chasis as Chasis," +
-          " auto_reclamo.motor as Motor, " +
-          " auto_reclamo.propietario as Propietario, " +
-          " auto_reclamo.ejecutivo as Ejecutivo," +
-          " auto_reclamo.aseguradora as Aseguradora," +
-          " Convert(varchar(10),reclamo_auto.fecha, 103) As [Fecha Siniestro]," +
-          " reclamo_auto.reportante as Reportante," +
-          " reclamo_auto.estado_auto_unity as [Estado Auto]," +
-          " CONVERT(varchar(12), reclamo_auto.fecha_visualizar,103) as [Fecha Visualizar] " +
-          " FROM auto_reclamo " +
-          " INNER JOIN reclamo_auto ON reclamo_auto.id_auto_reclamo = auto_reclamo.id ";
+        reclamosGeneral = "SELECT " +
+          " r.id AS ID," +
+          " r.estado_unity as [Estado Unity],"+
+          " r.estado_auto_unity as [Estado Auto]," +
+          " r.usuario_unity as [Usuario Unity]," +
+          " a.poliza as Poliza," +
+          " a.asegurado as Asegurado, " +
+          " a.placa as Placa," +
+          " a.marca as Marca," +
+          " a.color as Color, " +
+          " a.modelo as Modelo," +
+          " a.ejecutivo as Ejecutivo," +
+          " a.aseguradora as Aseguradora," +
+          " CONVERT(varchar(12), r.fecha_visualizar,103) as [Fecha Visualizar] " +
+          " FROM auto_reclamo a " +
+          " INNER JOIN reclamo_auto as r ON r.id_auto_reclamo = a.id ";
 
         //query con el que se muestran los reclamos complicados por usuario.
         string reclamosComplicados = reclamosGeneral +
-                    " where ((reclamo_auto.complicado = 'true') and (reclamo_auto.usuario_unity = '" + userlogin + "' and reclamo_auto.estado_unity != 'Cerrado' ))";
+                    " where ((r.complicado = 'true') and (r.usuario_unity = '" + userlogin + "' and r.estado_unity != 'Cerrado' ))";
 
         //query con el que se muestran los reclamos prioritarios.
         string reclamosPrioritarios = reclamosGeneral +
-                    " where ((reclamo_auto.prioritario = 'true') and (reclamo_auto.usuario_unity = '" + userlogin + "' and reclamo_auto.estado_unity != 'Cerrado' ))";
+                    " where ((r.prioritario = 'true') and (r.usuario_unity = '" + userlogin + "' and r.estado_unity != 'Cerrado' ))";
 
         //query con el que se muestran los reclamos proximos a ser inactivados.
         string inactivos = reclamosGeneral +
-              " where reclamo_auto.usuario_unity = '" + userlogin + "' and reclamo_auto.estado_unity = 'Seguimiento' and DATEDIFF(DAY, reclamo_auto.fecha_visualizar, GETDATE()) >= 43  " +
-              "and reclamo_auto.estado_auto_unity = 'Pendiente Asegurado' ";
+              " where r.usuario_unity = '" + userlogin + "' and r.estado_unity = 'Seguimiento' and DATEDIFF(DAY, r.fecha_visualizar, GETDATE()) >= 43  " +
+              "and r.estado_auto_unity = 'Pendiente Asegurado' ";
 
-        alarmas = reclamosGeneral + " where reclamo_auto.estado_unity = 'Seguimiento' and  convert(date, reclamo_auto.fecha_visualizar,112) < getdate() order by reclamo_auto.usuario_unity, reclamo_auto.fecha_visualizar";
+        alarmas = reclamosGeneral + " where r.estado_unity = 'Seguimiento' and  convert(date, r.fecha_visualizar,112) < getdate() order by r.usuario_unity, r.fecha_visualizar";
 
         if(!IsPostBack)
         {
@@ -75,7 +71,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosEnSeguimiento : System
     {
         estado = GridReclamosSeguimiento.SelectedRow.Cells[2].Text;
         reclamosSeguimiento = reclamosGeneral +
-        " where (reclamo_auto.usuario_unity = '" + userlogin + "' and reclamo_auto.estado_unity = 'Seguimiento' and reclamo_auto.estado_auto_unity = '" + estado + "') ";
+        " where (r.usuario_unity = '" + userlogin + "' and r.estado_unity = 'Seguimiento' and r.estado_auto_unity = '" + estado + "') ";
         llenado.llenarGrid(reclamosSeguimiento, GridReclamosEstado);
     }
 
@@ -125,26 +121,27 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosEnSeguimiento : System
     //funcion que coloca en rojo los registros que no se an abierto en el dia
     protected void GridReclamosSeguimiento_RowDataBound(object sender, GridViewRowEventArgs e)
     {
+        int pocision = 13;
         if (e.Row.RowType == DataControlRowType.DataRow)
-            if (Convert.ToDateTime(e.Row.Cells[18].Text) >= DateTime.Today)
+            if (Convert.ToDateTime(e.Row.Cells[pocision].Text) >= DateTime.Today)
             {
                 e.Row.Attributes.Add("style", "background-color: #8ace8e "); //verdes
             }
 
         if (e.Row.RowType == DataControlRowType.DataRow)
-            if (Convert.ToDateTime(e.Row.Cells[18].Text) < DateTime.Today)
+            if (Convert.ToDateTime(e.Row.Cells[pocision].Text) < DateTime.Today && e.Row.Cells[pocision].Text =="")
             {
                  e.Row.Attributes.Add("style", "background-color: #f7c6be"); //rojos
             }
 
         if (e.Row.RowType == DataControlRowType.DataRow)
-            if (Convert.ToDateTime(e.Row.Cells[18].Text) == DateTime.Today.AddDays(2) || Convert.ToDateTime(e.Row.Cells[18].Text) == DateTime.Today.AddDays(1))
+            if (Convert.ToDateTime(e.Row.Cells[pocision].Text) == DateTime.Today.AddDays(2) || Convert.ToDateTime(e.Row.Cells[pocision].Text) == DateTime.Today.AddDays(1))
             {
                e.Row.Attributes.Add("style", "background-color: #f9f595"); //amarillos
             }
 
         if (e.Row.RowType == DataControlRowType.DataRow)
-            if (Convert.ToDateTime(e.Row.Cells[18].Text) == DateTime.Today)
+            if (Convert.ToDateTime(e.Row.Cells[pocision].Text) == DateTime.Today)
             {
                 e.Row.Attributes.Add("style", "background-color: #afcaf7"); //azules
             }
@@ -153,13 +150,13 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosEnSeguimiento : System
     protected void ddlGestor_SelectedIndexChanged(object sender, EventArgs e)
     {
         String reclamosGestor = reclamosGeneral +
-              "where ( reclamo_auto.id_gestor = " + ddlgestor.SelectedValue + " and reclamo_auto.estado_unity = 'Seguimiento') order by reclamo_auto.fecha_visualizar";
+              "where ( r.id_gestor = " + ddlgestor.SelectedValue + " and r.estado_unity = 'Seguimiento') order by r.fecha_visualizar";
 
         String Prioritarios = reclamosGeneral +
-             " where ((reclamo_auto.prioritario = 'true') and (reclamo_auto.id_gestor = " + ddlgestor.SelectedValue + " and reclamo_auto.estado_unity = 'Seguimiento' ))";
+             " where ((r.prioritario = 'true') and (r.id_gestor = " + ddlgestor.SelectedValue + " and r.estado_unity = 'Seguimiento' ))";
 
         String Complicados = reclamosGeneral +
-             " where ((reclamo_auto.complicado = 'true') and (reclamo_auto.id_gestor = " + ddlgestor.SelectedValue + " and reclamo_auto.estado_unity = 'Seguimiento' ))";
+             " where ((r.complicado = 'true') and (r.id_gestor = " + ddlgestor.SelectedValue + " and r.estado_unity = 'Seguimiento' ))";
 
         llenado.llenarGrid(reclamosGestor, GridReclamosGeneral);
         llenado.llenarGrid(Prioritarios, GridPrioritarios);
@@ -190,8 +187,8 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosEnSeguimiento : System
 
     protected void ddlAlarmaGestor_SelectedIndexChanged(object sender, EventArgs e)
     {
-        alarmas = reclamosGeneral + " where reclamo_auto.estado_unity = 'Seguimiento' and reclamo_auto.id_gestor = "+ddlAlarmaGestor.SelectedValue+" and " +
-            " convert(date, reclamo_auto.fecha_visualizar,112) < getdate() order by reclamo_auto.fecha_visualizar ";
+        alarmas = reclamosGeneral + " where r.estado_unity = 'Seguimiento' and r.id_gestor = "+ddlAlarmaGestor.SelectedValue+" and " +
+            " convert(date, r.fecha_visualizar,112) < getdate() order by r.fecha_visualizar ";
         llenado.llenarGrid(alarmas, GridAlarmas);
         GridAlarmas.DataBind();
         lblTotalAlarmas.Text = "   Total de reclamos: " + GridAlarmas.Rows.Count.ToString();

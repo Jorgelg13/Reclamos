@@ -28,7 +28,8 @@
             <div class="tab-content">
                 <div role="tabpanel" class="tab-pane" id="home">
                     <div class="col-sm-12 col-md-3 col-lg-3 scrolling-table-container">
-                        <asp:GridView ID="GridReclamosSeguimiento" runat="server" ShowFooter="true" CssClass="table table-hover" GridLines="None" OnRowDataBound="GridReclamosSeguimiento_RowDataBound1" OnSelectedIndexChanged="GridReclamosSeguimiento_SelectedIndexChanged">
+                        <asp:GridView ID="GridReclamosSeguimiento" runat="server" ShowFooter="true" CssClass="table table-hover" GridLines="None" 
+                            OnRowDataBound="GridReclamosSeguimiento_RowDataBound1" OnSelectedIndexChanged="GridReclamosSeguimiento_SelectedIndexChanged">
                             <Columns>
                                 <asp:CommandField ShowSelectButton="True" SelectText="Mostrar">
                                     <HeaderStyle HorizontalAlign="Center" Wrap="False" />
@@ -42,7 +43,8 @@
                         </asp:GridView>
                     </div>
                     <div class="col-sm-12 col-md-9 col-lg-9 scrolling-table-container">
-                        <asp:GridView ID="GridReclamosEstado" OnRowDataBound="GridReclamosSeguimiento_RowDataBound" runat="server" CssClass="table table-responsive table-hover" AutoGenerateColumns="True" GridLines="None" OnSelectedIndexChanged="GridReclamosEstado_SelectedIndexChanged">
+                        <asp:GridView ID="GridReclamosEstado" OnRowDataBound="GridReclamosSeguimiento_RowDataBound" runat="server" CssClass="table table-responsive table-hover"
+                            AutoGenerateColumns="True" GridLines="None" OnSelectedIndexChanged="GridReclamosEstado_SelectedIndexChanged">
                             <AlternatingRowStyle BackColor="White" />
                             <Columns>
                                 <asp:CommandField ShowSelectButton="True">
@@ -59,7 +61,8 @@
                 <%--    seccion de reclamos Prioritarios--%>
                 <div role="tabpanel" class="tab-pane" id="profile">
                     <div class="scrolling-table-container">
-                        <asp:GridView ID="GridPrioritarios" OnRowDataBound="GridReclamosSeguimiento_RowDataBound" runat="server" CssClass="table bs-table table-responsive table-hover" AutoGenerateColumns="True" CellPadding="4" ForeColor="#333333" GridLines="None" OnSelectedIndexChanged="GridPrioritarios_SelectedIndexChanged">
+                        <asp:GridView ID="GridPrioritarios" OnRowDataBound="GridReclamosSeguimiento_RowDataBound" runat="server" CssClass="table bs-table table-responsive table-hover" 
+                            AutoGenerateColumns="True" CellPadding="4" ForeColor="#333333" GridLines="None" OnSelectedIndexChanged="GridPrioritarios_SelectedIndexChanged">
                             <AlternatingRowStyle BackColor="White" />
                             <Columns>
                                 <asp:CommandField ShowSelectButton="True">
@@ -76,7 +79,8 @@
                 <%-- seccion de reclamos complicados--%>
                 <div role="tabpanel" class="tab-pane" id="coberturas">
                     <div class="scrolling-table-container">
-                        <asp:GridView ID="GridComplicados" OnRowDataBound="GridReclamosSeguimiento_RowDataBound" runat="server" CssClass="table bs-table table-responsive table-hover" AutoGenerateColumns="True" CellPadding="4" ForeColor="#333333" GridLines="None" OnSelectedIndexChanged="GridComplicados_SelectedIndexChanged">
+                        <asp:GridView ID="GridComplicados" OnRowDataBound="GridReclamosSeguimiento_RowDataBound" runat="server" CssClass="table bs-table table-responsive table-hover"
+                            AutoGenerateColumns="True" CellPadding="4" ForeColor="#333333" GridLines="None" OnSelectedIndexChanged="GridComplicados_SelectedIndexChanged">
                             <AlternatingRowStyle BackColor="White" />
                             <Columns>
                                 <asp:CommandField ShowSelectButton="True">
@@ -100,7 +104,8 @@
                     </div>
                     <br />
                     <div class="scrolling-table-container">
-                        <asp:GridView ID="GridReclamosGeneral" OnRowDataBound="GridReclamosSeguimiento_RowDataBound" runat="server" CssClass="table bs-table table-responsive table-hover" AutoGenerateColumns="True" CellPadding="4" ForeColor="#333333" GridLines="None" OnSelectedIndexChanged="GridReclamosGeneral_SelectedIndexChanged">
+                        <asp:GridView ID="GridReclamosGeneral" OnRowDataBound="GridReclamosSeguimiento_RowDataBound" runat="server" CssClass="table bs-table table-responsive table-hover"
+                            AutoGenerateColumns="True" CellPadding="4" ForeColor="#333333" GridLines="None" OnSelectedIndexChanged="GridReclamosGeneral_SelectedIndexChanged">
                             <AlternatingRowStyle BackColor="White" />
                             <Columns>
                                 <asp:CommandField ShowSelectButton="True">
@@ -116,7 +121,8 @@
                 </div>
                  <div role="tabpanel" class="tab-pane" id="inactivos">
                     <div class="scrolling-table-container">
-                        <asp:GridView ID="GridInactivos" runat="server" CssClass="table bs-table table-responsive table-hover" OnSelectedIndexChanged="GridInactivos_SelectedIndexChanged" AutoGenerateColumns="True" GridLines="None">
+                        <asp:GridView ID="GridInactivos" runat="server" CssClass="table bs-table table-responsive table-hover" 
+                            OnSelectedIndexChanged="GridInactivos_SelectedIndexChanged" AutoGenerateColumns="True" GridLines="None">
                             <AlternatingRowStyle BackColor="White" />
                             <Columns>
                                 <asp:CommandField ShowSelectButton="True">
@@ -136,10 +142,13 @@
                         <div class="form-inline">
                            <asp:DropDownList runat="server" CssClass="form-control" ID="ddlAlarmaGestor" AutoPostBack="true" OnSelectedIndexChanged="ddlAlarmaGestor_SelectedIndexChanged" DataSourceID="SqlDataSourceGestores" DataTextField="nombre" DataValueField="id"></asp:DropDownList>
                             <asp:label runat="server" ID="lblTotalAlarmas" style="font-size:25px; margin-left:15px;"></asp:label>
-                           <asp:LinkButton ID="linkDescargar" OnClick="linkDescargar_Click" title="Descargar en excel" runat="server" Style="font-size: 30px; text-align: center; color:green"><i class="fa fa-file-excel-o"></i></asp:LinkButton>
+                           <asp:LinkButton ID="linkDescargar" OnClick="linkDescargar_Click" title="Descargar en excel" runat="server" Style="font-size: 30px; text-align: center; color:green">
+                               <i class="fa fa-file-excel-o"></i>
+                           </asp:LinkButton>
                         </div>
                            <br />
-                            <asp:GridView ID="GridAlarmas" OnRowDataBound="GridReclamosSeguimiento_RowDataBound" OnSelectedIndexChanged="GridAlarmas_SelectedIndexChanged" runat="server" CssClass="table table-responsive" AutoGenerateColumns="True" ForeColor="#333333" GridLines="None">
+                            <asp:GridView ID="GridAlarmas" OnRowDataBound="GridReclamosSeguimiento_RowDataBound" OnSelectedIndexChanged="GridAlarmas_SelectedIndexChanged" 
+                                runat="server" CssClass="table table-responsive" AutoGenerateColumns="True" ForeColor="#333333" GridLines="None">
                                 <AlternatingRowStyle BackColor="White" />
                                 <Columns>
                                     <asp:CommandField ShowSelectButton="True">

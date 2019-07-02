@@ -38,6 +38,7 @@ public partial class Modulos_MdAdmin_wbFrmAsigReclamosMedicos : System.Web.UI.Pa
                     asignar.fecha_asignacion = DateTime.Now;
                     DBReclamos.SaveChanges();
                     GridAsigMedicos.DataBind();
+                    Utils.insertarComentario(id, "Su reclamo ha sido asignado a un ejecutivo para su revisión, fecha: " + DateTime.Now, "Asignado");
                     string mensaje = "UNITY: Estimad@ cliente su reclamo ha sido asignado a  "+DDLusuario.SelectedItem.Text+", Telefono: "+telefonoGestor.telefono+".";
                     Utils.SMS_gastos_medicos(asignar.telefono,mensaje,userlogin,"Asignado",id, asignar.reg_reclamos_medicos.tipo);
                     Utils.ShowMessage(this.Page, "Reclamos asignados con exito", "Excelente", "success");

@@ -37,9 +37,9 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesMedicos : System.Web.U
 
         //variable que contiene todos los joins que se hacen en el query del reporte
         Join = " FROM " +
-          " dbo.reg_reclamos_medicos " +
-          "INNER JOIN dbo.reclamos_medicos ON dbo.reclamos_medicos.id_reg_reclamos_medicos = dbo.reg_reclamos_medicos.id " +
-          "INNER JOIN dbo.estado on dbo.reclamos_medicos.id_estado = dbo.estado.id ";
+          " dbo.reg_reclamos_medicos as reg " +
+          "INNER JOIN reclamos_medicos as r ON r.id_reg_reclamos_medicos = reg.id " +
+          "INNER JOIN estado on r.id_estado = estado.id ";
     }
 
     protected void btnGenerarTabla_Click(object sender, EventArgs e)
@@ -50,7 +50,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesMedicos : System.Web.U
         if (checkSinFiltro.Checked)
         {
             string listado;
-            listado = "Select reclamos_medicos.id, ";
+            listado = "Select r.id, ";
             //recorre la lista de checks que seleccionaron para generar el reporte
             for (int i = 0; i < checkCampos.Items.Count; i++)
             {
@@ -62,30 +62,30 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesMedicos : System.Web.U
             //si seleccionarion cerrado ejecuta este query 
             if (ddlEstado.SelectedItem.Text == "Cerrado")
             {
-                llenado.llenarGrid(listado.Substring(0, (listado.Length - 2)) + Join + " where (Convert(date,reclamos_medicos.fecha_cierre, 112) between '" + txtFechaInicio.Text + "' " +
-                    "and '" + txtFechaFin.Text + "') and (" + ddlTipoReclamo.SelectedValue+ ") and ("+ddlMoneda.SelectedValue+") and reclamos_medicos.estado_unity = 'Cerrado'", GridCamposSeleccion);
+                llenado.llenarGrid(listado.Substring(0, (listado.Length - 2)) + Join + " where (Convert(date,r.fecha_cierre, 112) between '" + txtFechaInicio.Text + "' " +
+                    "and '" + txtFechaFin.Text + "') and (" + ddlTipoReclamo.SelectedValue+ ") and ("+ddlMoneda.SelectedValue+") and r.estado_unity = 'Cerrado'", GridCamposSeleccion);
                 Conteo();
             }
             else if (ddlEstado.SelectedItem.Text == "Seguimiento")
             {
                 llenado.llenarGrid(listado.Substring(0, (listado.Length - 2)) + Join +
-                " where (Convert(date,reclamos_medicos.fecha_commit,112) between '" + txtFechaInicio.Text + "' and  '" + txtFechaFin.Text + "') and (" + ddlTipoReclamo.SelectedValue + ") " +
-                " and (" + ddlMoneda.SelectedValue + ") and reclamos_medicos.estado_unity = 'Seguimiento' " +
+                " where (Convert(date,r.fecha_commit,112) between '" + txtFechaInicio.Text + "' and  '" + txtFechaFin.Text + "') and (" + ddlTipoReclamo.SelectedValue + ") " +
+                " and (" + ddlMoneda.SelectedValue + ") and r.estado_unity = 'Seguimiento' " +
                 "", GridCamposSeleccion);
                 Conteo();
             }
             else if (ddlEstado.SelectedItem.Text == "Todos")
             {
                 llenado.llenarGrid(listado.Substring(0, (listado.Length - 2)) + Join +
-                " where (Convert(date,reclamos_medicos.fecha_commit,112) between '" + txtFechaInicio.Text + "' and '" + txtFechaFin.Text + "') and (" + ddlTipoReclamo.SelectedValue + ") " +
-                " and (" + ddlMoneda.SelectedValue + ") and reclamos_medicos.estado_unity in ('Seguimiento', 'Cerrado') ", GridCamposSeleccion);
+                " where (Convert(date,r.fecha_commit,112) between '" + txtFechaInicio.Text + "' and '" + txtFechaFin.Text + "') and (" + ddlTipoReclamo.SelectedValue + ") " +
+                " and (" + ddlMoneda.SelectedValue + ") and r.estado_unity in ('Seguimiento', 'Cerrado') ", GridCamposSeleccion);
                 Conteo();
             }
             else if (ddlEstado.SelectedItem.Text == "Aperturados")
             {
                 llenado.llenarGrid(listado.Substring(0, (listado.Length - 2)) + Join +
-                  " where (Convert(date,reclamos_medicos.fecha_apertura, 112) between '" + txtFechaInicio.Text + "' and '" + txtFechaFin.Text + "') and (" + ddlTipoReclamo.SelectedValue + ") " +
-                  " and (" + ddlMoneda.SelectedValue + ") and (reclamos_medicos.estado_unity = 'Seguimiento') ", GridCamposSeleccion);
+                  " where (Convert(date,r.fecha_apertura, 112) between '" + txtFechaInicio.Text + "' and '" + txtFechaFin.Text + "') and (" + ddlTipoReclamo.SelectedValue + ") " +
+                  " and (" + ddlMoneda.SelectedValue + ") and (r.estado_unity = 'Seguimiento') ", GridCamposSeleccion);
                 Conteo();
             }
         }
@@ -102,7 +102,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesMedicos : System.Web.U
             }
 
             string listado;
-            listado = "Select reclamos_medicos.id, ";
+            listado = "Select r.id, ";
             for (int i = 0; i < checkCampos.Items.Count; i++)
             {
                 if (checkCampos.Items[i].Selected)
@@ -114,31 +114,31 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesMedicos : System.Web.U
             if (ddlEstado.SelectedItem.Text == "Cerrado")
             {
                 llenado.llenarGrid(listado.Substring(0, (listado.Length - 2)) + Join +
-                  " where (" + ddlElegir.SelectedValue + " like '%" + buscar + "%') and (convert( date,reclamos_medicos.fecha_cierre, 112) between '" + txtFechaInicio.Text + "' " +
-                  "and '" + txtFechaFin.Text + "') and (" + ddlTipoReclamo.SelectedValue + ") and (" + ddlMoneda.SelectedValue + ") and reclamos_medicos.estado_unity = 'Cerrado'", GridCamposSeleccion);
+                  " where (" + ddlElegir.SelectedValue + " like '%" + buscar + "%') and (convert( date,r.fecha_cierre, 112) between '" + txtFechaInicio.Text + "' " +
+                  "and '" + txtFechaFin.Text + "') and (" + ddlTipoReclamo.SelectedValue + ") and (" + ddlMoneda.SelectedValue + ") and r.estado_unity = 'Cerrado'", GridCamposSeleccion);
                 Conteo();
             }
 
             else if (ddlEstado.SelectedItem.Text == "Seguimiento")
             {
                 llenado.llenarGrid(listado.Substring(0, (listado.Length - 2)) + Join +
-                  " where (" + ddlElegir.SelectedValue + " like '%" + buscar + "%') and (Convert(date,reclamos_medicos.fecha_commit,112) between '" + txtFechaInicio.Text + "' and '"+txtFechaFin.Text+"') " +
-                  "and (" + ddlTipoReclamo.SelectedValue + ") and (" + ddlMoneda.SelectedValue + ") and reclamos_medicos.estado_unity = 'Seguimiento' ", GridCamposSeleccion);
+                  " where (" + ddlElegir.SelectedValue + " like '%" + buscar + "%') and (Convert(date,r.fecha_commit,112) between '" + txtFechaInicio.Text + "' and '"+txtFechaFin.Text+"') " +
+                  "and (" + ddlTipoReclamo.SelectedValue + ") and (" + ddlMoneda.SelectedValue + ") and r.estado_unity = 'Seguimiento' ", GridCamposSeleccion);
                 Conteo();
             }
 
             else if (ddlEstado.SelectedItem.Text == "Todos")
             {
                 llenado.llenarGrid(listado.Substring(0, (listado.Length - 2)) + Join +
-                  " where (" + ddlElegir.SelectedValue + " like '%" + buscar + "%') and ( Convert(date,reclamos_medicos.fecha_commit, 112) between '" + txtFechaInicio.Text + "' and '" + txtFechaFin.Text + "')" +
-                  " and (" + ddlTipoReclamo.SelectedValue + ") and (" + ddlMoneda.SelectedValue + ") and (reclamos_medicos.estado_unity in ('Cerrado','Seguimiento')) ", GridCamposSeleccion);
+                  " where (" + ddlElegir.SelectedValue + " like '%" + buscar + "%') and ( Convert(date,r.fecha_commit, 112) between '" + txtFechaInicio.Text + "' and '" + txtFechaFin.Text + "')" +
+                  " and (" + ddlTipoReclamo.SelectedValue + ") and (" + ddlMoneda.SelectedValue + ") and (r.estado_unity in ('Cerrado','Seguimiento')) ", GridCamposSeleccion);
                 Conteo();
             }
             else if (ddlEstado.SelectedItem.Text == "Aperturados")
             {
                 llenado.llenarGrid(listado.Substring(0, (listado.Length - 2)) + Join +
-                  " where (" + ddlElegir.SelectedValue + " like '%" + buscar + "%') and ( Convert(date,reclamos_medicos.fecha_apertura, 112) between '" + txtFechaInicio.Text + "' and '" + txtFechaFin.Text + "') " +
-                  "and (" + ddlTipoReclamo.SelectedValue + ") and (" + ddlMoneda.SelectedValue + ") and (reclamos_medicos.estado_unity = 'Seguimiento') ", GridCamposSeleccion);
+                  " where (" + ddlElegir.SelectedValue + " like '%" + buscar + "%') and ( Convert(date,r.fecha_apertura, 112) between '" + txtFechaInicio.Text + "' and '" + txtFechaFin.Text + "') " +
+                  "and (" + ddlTipoReclamo.SelectedValue + ") and (" + ddlMoneda.SelectedValue + ") and (r.estado_unity = 'Seguimiento') ", GridCamposSeleccion);
                 Conteo();
             }
         }
@@ -217,15 +217,20 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesMedicos : System.Web.U
             kpiAseguradora = ddlMoneda.SelectedItem.Text == "Dolares" ? 35 : 12;
         }
 
+        else if (ddlTipoReclamo.SelectedItem.Text == "Individual")
+        {
+            kpiAseguradora = ddlMoneda.SelectedItem.Text == "Dolares" ? 35 : 12;
+        }
+
         string promedio_aseguradora = "select " +
              "count(*) total_reclamos," +
-             "reg_reclamos_medicos.aseguradora, " +
-             "promedio_dias = cast(AVG(DATEDIFF(MINUTE, reclamos_medicos.fecha_envio_aseg, reclamos_medicos.fecha_recepcion_cheque)* (1.0) / 60 / 24) as decimal(5,2))" +
+             "reg.aseguradora, " +
+             "promedio_dias = cast(AVG(dbo.FN_DIAS_HABILES(r.fecha_envio_aseg, r.fecha_recepcion_cheque)* (1.0)) as decimal(5,2))" +
              "into #cicloAseguradora " +
-             "from reclamos_medicos " +
-             "inner join reg_reclamos_medicos on reg_reclamos_medicos.id = reclamos_medicos.id_reg_reclamos_medicos " +
-             "where(reclamos_medicos.estado_unity = 'Cerrado') and (Convert(date,reclamos_medicos.fecha_cierre, 112) between '" + txtFechaInicio.Text + "' and '" + txtFechaFin.Text + "') " +
-             "and (" + ddlTipoReclamo.SelectedValue + " ) and (" + ddlMoneda.SelectedValue + ") group by reg_reclamos_medicos.aseguradora " +
+             "from reclamos_medicos as r " +
+             "inner join reg_reclamos_medicos as reg on reg.id = r.id_reg_reclamos_medicos " +
+             "where(r.estado_unity = 'Cerrado') and (Convert(date,r.fecha_cierre, 112) between '" + txtFechaInicio.Text + "' and '" + txtFechaFin.Text + "') " +
+             "and (" + ddlTipoReclamo.SelectedValue + " ) and (" + ddlMoneda.SelectedValue + ") group by reg.aseguradora " +
              "select " +
              "aseguradora as Aseguradora, " +
              "total_reclamos as [Total_Reclamos], " +
@@ -237,23 +242,30 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesMedicos : System.Web.U
 
         llenado.llenarGrid(promedio_aseguradora, GridPromedioAseguradora);
     }
-    //ciclo de cliente
+
+    //ciclo de cliente o ciclo total
     public void CicloCliente()
     {
+
         if (ddlTipoReclamo.SelectedItem.Text == "Colectivos")
+        {
+            kpiCliente = ddlMoneda.SelectedItem.Text == "Dolares" ? 38 : 15;
+        }
+
+        if (ddlTipoReclamo.SelectedItem.Text == "Individual")
         {
             kpiCliente = ddlMoneda.SelectedItem.Text == "Dolares" ? 38 : 15;
         }
 
         string ciclo_cliente = "select " +
              "count(*) as total_reclamos, " +
-             "promedio = cast(AVG(DATEDIFF(minute, reclamos_medicos.fecha_completa_commit, reclamos_medicos.fecha_cierre) *(1.0) / 60 / 24) as decimal(5,2)), " +
-             "reg_reclamos_medicos.aseguradora as Aseguradora " +
+             "promedio = cast(AVG(dbo.FN_DIAS_HABILES(r.fecha_completa_commit, r.fecha_cierre) *(1.0)) as decimal(5,2)), " +
+             "reg.aseguradora as Aseguradora " +
              "into #cicloCliente " +
-             "from reclamos_medicos " +
-             "inner join reg_reclamos_medicos on reg_reclamos_medicos.id = reclamos_medicos.id_reg_reclamos_medicos " +
-             "where (reclamos_medicos.estado_unity = 'Cerrado') and ( Convert(date,reclamos_medicos.fecha_cierre,112) between '" + txtFechaInicio.Text + "' and '" + txtFechaFin.Text + "') " +
-             "and (" + ddlTipoReclamo.SelectedValue + ") and (" + ddlMoneda.SelectedValue + ") group by reg_reclamos_medicos.aseguradora " +
+             "from reclamos_medicos as r " +
+             "inner join reg_reclamos_medicos as reg on reg.id = r.id_reg_reclamos_medicos " +
+             "where (r.estado_unity = 'Cerrado') and ( Convert(date,r.fecha_cierre,112) between '" + txtFechaInicio.Text + "' and '" + txtFechaFin.Text + "') " +
+             "and (" + ddlTipoReclamo.SelectedValue + ") and (" + ddlMoneda.SelectedValue + ") group by reg.aseguradora " +
              "select " +
              "Aseguradora, " +
              "total_reclamos as Total_Reclamos," +
@@ -262,10 +274,9 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesMedicos : System.Web.U
              "case when(isnull(total_reclamos, 0)) = 0 then 0 else cast((" + kpiCliente + " / (promedio * 1.0)) * 100 as decimal) end as Ejecucion " +
              "from #cicloCliente order by Promedio_Dias";
 
-
         llenado.llenarGrid(ciclo_cliente, GridCicloCliente);
     }
-    //ciclo del ejecutivo....
+    //ciclo del ejecutivo o ciclo UNITY....
     public void cicloEjecutivoKPI()
     {
         if(ddlTipoReclamo.SelectedItem.Text == "Colectivos")
@@ -274,11 +285,11 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesMedicos : System.Web.U
         }
 
         string ejecutivoKPI = "select count(*) total_reclamos, " +
-            "AVG((DATEDIFF(HOUR, r.fecha_completa_commit, r.fecha_cierre) - DATEDIFF(HOUR, r.fecha_envio_aseg, r.fecha_recepcion_cheque)) - DATEDIFF(HOUR, r.fecha_completa_commit, r.fecha_asignacion) ) as promedio, " +
+            "AVG(((dbo.FN_DIAS_HABILES(r.fecha_completa_commit, r.fecha_cierre) - dbo.FN_DIAS_HABILES(r.fecha_envio_aseg, r.fecha_recepcion_cheque)) * 24) - DATEDIFF(HOUR, r.fecha_completa_commit, r.fecha_asignacion) ) as promedio, " +
             "r.usuario_unity " +
             "into #ciclo_ejecutivoKPI " +
             "from reclamos_medicos as r " +
-            "inner join reg_reclamos_medicos on reg_reclamos_medicos.id = r.id_reg_reclamos_medicos " +
+            "inner join reg_reclamos_medicos as reg on reg.id = r.id_reg_reclamos_medicos " +
             "where(r.estado_unity = 'Cerrado') and (" + ddlMoneda.SelectedValue + ") and (Convert(date, r.fecha_cierre, 112) between '" + txtFechaInicio.Text + "' and '" + txtFechaFin.Text + "') " +
             "and(" + ddlTipoReclamo.SelectedValue + ") group by r.usuario_unity " +
             " select usuario_unity as Usuario, total_reclamos as Total_Reclamos , " +
@@ -298,7 +309,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesMedicos : System.Web.U
             "r.usuario_unity " +
             "into #ciclo_ejecutivo " +
             "from reclamos_medicos as r " +
-            "inner join reg_reclamos_medicos on reg_reclamos_medicos.id = r.id_reg_reclamos_medicos " +
+            "inner join reg_reclamos_medicos as reg on reg.id = r.id_reg_reclamos_medicos " +
             "where(r.estado_unity = 'Cerrado') and (Convert(date, r.fecha_cierre, 112) between '" + txtFechaInicio.Text + "' and '" + txtFechaFin.Text + "') " +
             "and(" +ddlTipoReclamo.SelectedValue+ ") and (" + ddlMoneda.SelectedValue + ") group by r.usuario_unity " +
             "select " +
@@ -312,7 +323,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesMedicos : System.Web.U
             "r.usuario_unity " +
             "into #ciclo_ejecutivo2 " +
             "from reclamos_medicos as r " +
-            "inner join reg_reclamos_medicos on reg_reclamos_medicos.id = r.id_reg_reclamos_medicos " +
+            "inner join reg_reclamos_medicos as reg on reg.id = r.id_reg_reclamos_medicos " +
             "where(r.estado_unity = 'Cerrado') and (Convert(date,r.fecha_cierre,112) between '" + txtFechaInicio.Text+"' and '"+txtFechaFin.Text+"') " +
             " and (" + ddlMoneda.SelectedValue + ") and (" + ddlTipoReclamo.SelectedValue+ ") group by r.usuario_unity " +
             "select CONCAT(promedio_minutos / 60, ':', promedio_minutos % 60, ':', promedio_segundos % 60) as Promedio_usuario,total_reclamos as Total_Reclamos, usuario_unity as Usuario from #ciclo_ejecutivo2";
@@ -324,7 +335,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesMedicos : System.Web.U
             "r.usuario_unity " +
             "into #ciclo_ejecutivo3 " +
             "from reclamos_medicos as r " +
-            "inner join reg_reclamos_medicos  on reg_reclamos_medicos.id = r.id_reg_reclamos_medicos " +
+            "inner join reg_reclamos_medicos as reg on reg.id = r.id_reg_reclamos_medicos " +
             "where(r.estado_unity = 'Cerrado') and (Convert(date,r.fecha_cierre, 112) between '" + txtFechaInicio.Text+"' and '"+txtFechaFin.Text+ "') " +
             " and (" + ddlMoneda.SelectedValue + ") and (" + ddlTipoReclamo.SelectedValue+ ") group by r.usuario_unity " +
             "select " +
@@ -338,7 +349,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesMedicos : System.Web.U
            "r.usuario_unity " +
            "into #ciclo_ejecutivo3 " +
            "from reclamos_medicos as r " +
-           "inner join reg_reclamos_medicos  on reg_reclamos_medicos.id = r.id_reg_reclamos_medicos " +
+           "inner join reg_reclamos_medicos as reg on reg.id = r.id_reg_reclamos_medicos " +
            "where(r.estado_unity = 'Cerrado') and (Convert(date,r.fecha_cierre, 112) between '" + txtFechaInicio.Text + "' and '" + txtFechaFin.Text + "') " +
            " and (" + ddlMoneda.SelectedValue + ") and (" + ddlTipoReclamo.SelectedValue + ") group by r.usuario_unity " +
            "select " +
