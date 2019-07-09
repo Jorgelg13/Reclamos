@@ -9,7 +9,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosGeneralAutos : System.
     protected void Page_Load(object sender, EventArgs e)
     {
         idRecibido = Request.QueryString[0].ToString();
-        string reclamosSeguimiento = "SELECT a.id, " +
+        string reclamosSeguimiento = "SELECT r.id, " +
              " a.poliza as Poliza," +
              " a.asegurado as Asegurado, " +
              " a.placa as Placa," +

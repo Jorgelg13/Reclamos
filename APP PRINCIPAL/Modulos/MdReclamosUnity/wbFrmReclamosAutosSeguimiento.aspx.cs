@@ -19,6 +19,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosAutosSeguimiento : Sys
     Utils update = new Utils();
     DateTime thisDay = DateTime.Today;
     Email notificacion = new Email();
+    bool importacion = false;
     bool prioritario = false;
     bool alquiler = false;
     bool perdidaTotal = false;
@@ -154,6 +155,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosAutosSeguimiento : Sys
             }
 
             //opciones de checks
+            checkImportacion.Checked   = reclamo.importacion.Value;
             checkPrioritario.Checked   = reclamo.prioritario.Value;
             CheckComplicado.Checked    = reclamo.complicado.Value;
             checkCompromiso.Checked    = reclamo.compromiso_pago.Value;
@@ -278,6 +280,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosAutosSeguimiento : Sys
     //metodo para verificar que opciones fueron seleccionadas o deseleccionadas para luego ser actualizadas
     private void opcionesChecked()
     {
+        if (checkImportacion.Checked) importacion      = true;
         if (CheckComplicado.Checked) complicado        = true;
         if (checkCompromiso.Checked) compromiso_pago   = true;
         if (checkPrioritario.Checked) prioritario      = true;
@@ -329,6 +332,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosAutosSeguimiento : Sys
             if (reclamo.fecha_visualizar <= DateTime.Now) actualizar_fecha_seguimiento();
             reclamo.estado_unity      = estado;
             reclamo.num_reclamo       = txtNumReclamo.Text;
+            reclamo.importacion       = importacion;
             reclamo.complicado        = complicado;
             reclamo.prioritario       = prioritario;
             reclamo.compromiso_pago   = compromiso_pago;
@@ -354,6 +358,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosAutosSeguimiento : Sys
                 cerrarReclamo();
                 Response.Redirect("/Modulos/MdReclamosUnity/wbFrmReclamosEnSeguimiento.aspx", false);
             }
+
             DatosReclamo(id);
             Utils.ShowMessage(this.Page, "Datos actualizados", "Excelente...!", "success");
         }
@@ -406,10 +411,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosAutosSeguimiento : Sys
             var ejecutivo = DBReclamos.ejecutivos.Where(co => co.gestor == txtEjecutivo.Text).First();
             txtDestinatario.Text = ejecutivo.correo;
         }
-        catch (Exception)
-        {
-
-        }
+        catch (Exception){}
 
         txtMensaje.Text = Constantes.PERDIDA_TOTAL_AUTO(txtPlaca, txtMarca, txtModelo, lblNombreAsegurado, lblNumeroPoliza);
         txtAsunto.Text = "Perdida Total en vehiculo ";

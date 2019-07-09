@@ -16,6 +16,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosDañosSeguimiento : Sy
     DateTime thisDay = DateTime.Today;
     ReclamosEntities DBReclamos = new ReclamosEntities();
     Email notificacion = new Email();
+    bool reaseguro = false;
     bool prioritario = false;
     bool complicado = false;
     bool compromiso_pago = false;
@@ -327,6 +328,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosDañosSeguimiento : Sy
         if (CheckComplicado.Checked)  complicado = true;
         if (checkCompromiso.Checked)  compromiso_pago = true;
         if (checkPrioritario.Checked) prioritario = true;
+        if (CheckReaseuro.Checked) reaseguro = true;
     }
     //obtener los dias que tiene asignado cada etapa y sumarlo a la fecha de seguimiento
     private void actualizar_fecha_seguimiento()
@@ -364,6 +366,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosDañosSeguimiento : Sy
             reclamo.estado_unity  = estado;
             reclamo.num_reclamo   = txtNumReclamo.Text.ToString();
             reclamo.num_contrato  = txtContrato.Text;
+            reclamo.reaseguro     = reaseguro;
             reclamo.complicado    = complicado;
             reclamo.prioritario   = prioritario;
             reclamo.compromiso_pago = compromiso_pago;

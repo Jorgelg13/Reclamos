@@ -557,6 +557,7 @@ public partial class encuesta_egresos
 {
     public int id { get; set; }
     public string hospital { get; set; }
+    public string asegurado { get; set; }
     public string pregunta1 { get; set; }
     public string pregunta2 { get; set; }
     public string comentarios { get; set; }
@@ -848,6 +849,7 @@ public partial class reclamo_auto
     public string comentario_ejecutivo { get; set; }
     public string comentario_aseguradora { get; set; }
     public Nullable<System.DateTime> fecha_problema { get; set; }
+    public Nullable<bool> importacion { get; set; }
 
     public virtual analistas analistas { get; set; }
     public virtual auto_reclamo auto_reclamo { get; set; }
@@ -1013,6 +1015,7 @@ public partial class reclamos_varios
     public string comentario_ejecutivo { get; set; }
     public string comentario_aseguradora { get; set; }
     public Nullable<System.DateTime> fecha_problema { get; set; }
+    public Nullable<bool> reaseguro { get; set; }
 
     public virtual analistas analistas { get; set; }
     public virtual ICollection<bitacora_estados_reclamos_varios> bitacora_estados_reclamos_varios { get; set; }

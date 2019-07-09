@@ -31,40 +31,37 @@ public partial class Modulos_MdReclamos_wbFrmReclamosDañosAsignados : System.We
         }
 
         ReclamosAsignados = "SELECT " +
-           "dbo.reclamos_varios.id as ID," +//1
-           "dbo.reg_reclamo_varios.poliza as Poliza," +//2
-           "dbo.reg_reclamo_varios.asegurado as Asegurado," + //3
-           "dbo.reg_reclamo_varios.cliente as Cliente," +
-           "dbo.reg_reclamo_varios.status as Status," +
-           "dbo.reg_reclamo_varios.tipo as Tipo," +
-           "dbo.reg_reclamo_varios.direccion as Direccion," +
-           "dbo.reg_reclamo_varios.ramo as Ramo," +
-           "dbo.reg_reclamo_varios.ejecutivo as Ejecutivo," +
-           "dbo.reg_reclamo_varios.aseguradora as Aseguradora," +//10
-           "dbo.reg_reclamo_varios.contratante as Contratante," +
-           "dbo.reclamos_varios.usuario_unity as [Usuario Unity]," +
-           "dbo.reclamos_varios.estado_unity as [Estado Unity]," +
-           "dbo.reclamos_varios.boleta as Boleta," +
-           "dbo.reclamos_varios.titular as Titular," +
-           "dbo.reclamos_varios.ubicacion as Ubicacion," +
-           "dbo.reclamos_varios.hora as Hora," +
-           "Convert(varchar(10),dbo.reclamos_varios.fecha, 103) as [Fecha Siniestro]," +
-           "dbo.reclamos_varios.reportante as Reportante," +//19
-           "dbo.reclamos_varios.telefono as Telefono," +
-           "dbo.reclamos_varios.ajustador as Ajustador," +
-           "dbo.reclamos_varios.version as Version," +
-           "Convert(varchar(10),dbo.reclamos_varios.fecha_commit, 103) as [Fecha Creacion]," +//23
-           "dbo.usuario.nombre as Usuario, " +
-           "dbo.reg_reclamo_varios.id as id_registro," + //29
-           "dbo.reg_reclamo_varios.gestor as [Codigo Ejecutivo] " +//30
-           "FROM dbo.reclamos_varios " +
-           "INNER JOIN dbo.reg_reclamo_varios ON dbo.reclamos_varios.id_reg_reclamos_varios = dbo.reg_reclamo_varios.id " +
-           "INNER JOIN dbo.cabina ON dbo.reclamos_varios.id_cabina = dbo.cabina.id " +
-           //"INNER JOIN dbo.sucursal ON dbo.cabina.id_sucursal = dbo.sucursal.id " +
-           //"INNER JOIN dbo.empresa ON dbo.sucursal.id_empresa = dbo.empresa.id " +
-           //"INNER JOIN dbo.pais ON dbo.empresa.id_pais = dbo.pais.id " +
-           "INNER JOIN dbo.usuario ON dbo.usuario.id_cabina = dbo.cabina.id AND dbo.reclamos_varios.id_usuario = dbo.usuario.id " +
-           "where(usuario_unity = '" + userlogin + "') and(estado_unity = 'Sin Cerrar')";
+           "r.id as ID," +//1
+           "reg.poliza as Poliza," +//2
+           "reg.asegurado as Asegurado," + //3
+           "reg.cliente as Cliente," +
+           "reg.status as Status," +
+           "reg.tipo as Tipo," +
+           "reg.direccion as Direccion," +
+           "reg.ramo as Ramo," +
+           "reg.ejecutivo as Ejecutivo," +
+           "reg.aseguradora as Aseguradora," +//10
+           "reg.contratante as Contratante," +
+           "r.usuario_unity as [Usuario Unity]," +
+           "r.estado_unity as [Estado Unity]," +
+           "r.boleta as Boleta," +
+           "r.titular as Titular," +
+           "r.ubicacion as Ubicacion," +
+           "r.hora as Hora," +
+           "Convert(varchar(10), r.fecha, 103) as [Fecha Siniestro]," +
+           "r.reportante as Reportante," +//19
+           "r.telefono as Telefono," +
+           "r.ajustador as Ajustador," +
+           "r.version as Version," +
+           "Convert(varchar(10), r.fecha_commit, 103) as [Fecha Creacion]," +//23
+           "usuario.nombre as Usuario, " +
+           "reg.id as id_registro," + //29
+           "reg.gestor as [Codigo Ejecutivo] " +//30
+           "FROM reclamos_varios as r " +
+           "INNER JOIN reg_reclamo_varios as reg ON r.id_reg_reclamos_varios = reg.id " +
+           "INNER JOIN cabina ON r.id_cabina = cabina.id " +
+           "INNER JOIN usuario ON usuario.id_cabina = cabina.id AND r.id_usuario = usuario.id " +
+           "where(r.usuario_unity = '" + userlogin + "') and(r.estado_unity = 'Sin Cerrar')";
 
         llenado.llenarGrid(ReclamosAsignados, GridReclamosDaños); 
 
@@ -181,7 +178,8 @@ public partial class Modulos_MdReclamos_wbFrmReclamosDañosAsignados : System.We
                 try
                 {
                     cmd.CommandType = CommandType.Text;
-                    cmd.CommandText = "insert into coberturas_afectadas_danios(cobertura, limite1, limite2, deducible, id_reclamos_varios) values('" + cobertura + "', " + limite1 + ", " + limite2 + ", " + deducible + ", " + id_reclamo + ")";
+                    cmd.CommandText = "insert into coberturas_afectadas_danios(cobertura, limite1, limite2, deducible, id_reclamos_varios) " +
+                        "values('" + cobertura + "', " + limite1 + ", " + limite2 + ", " + deducible + ", " + id_reclamo + ")";
                     cmd.Connection = obj.ObtenerConexionReclamos();
                     cmd.ExecuteNonQuery();
                     obj.conexion.Close();
@@ -250,6 +248,7 @@ public partial class Modulos_MdReclamos_wbFrmReclamosDañosAsignados : System.We
             reclamo.id_gestor = Convert.ToInt16(ddlGestor.SelectedValue);
             reclamo.id_analista = Convert.ToInt16(ddlAnalista.SelectedValue);
             reclamo.observaciones = txtObservaciones.Text.ToString();
+            reclamo.reaseguro = false;
             reclamo.complicado = complicado;
             reclamo.prioritario = prioritario;
             reclamo.compromiso_pago = compromiso_pago;

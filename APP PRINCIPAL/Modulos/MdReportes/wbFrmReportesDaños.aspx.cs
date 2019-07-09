@@ -12,7 +12,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesDaños : System.Web.UI
     String Join;
     String buscar;
     String EficienciaGestor;
-    Double Pendientes, Nuevos, Cerrados, Ejecucion;
+    Double Pendientes, Nuevos, Cerrados, Ejecucion,CCRFT,CSRFT,PCRFT,PSRFT,EficienciaCierre,Anejamiento;
     int Promedio, Total, KPI, EjecucionCiclos;
     int Total2, Promedio2, EjecucionCiclos2;
     conexionBD obj = new conexionBD();
@@ -337,43 +337,6 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesDaños : System.Web.UI
         }
     }
 
-    protected void GridEficiencia_RowDataBound(object sender, System.Web.UI.WebControls.GridViewRowEventArgs e)
-    {
-        try
-        {
-            if (e.Row.RowType == DataControlRowType.DataRow)
-            {
-                Pendientes += Convert.ToDouble(DataBinder.Eval(e.Row.DataItem, "[Pendientes]"));
-                Nuevos     += Convert.ToDouble(DataBinder.Eval(e.Row.DataItem, "[Nuevos]"));
-                Cerrados   += Convert.ToDouble(DataBinder.Eval(e.Row.DataItem, "[Cerrados]"));
-                Ejecucion  += Convert.ToDouble(DataBinder.Eval(e.Row.DataItem, "[Ejecucion]"));
-            }
-            else if (e.Row.RowType == DataControlRowType.Footer)
-            {
-                e.Row.Cells[0].Text = "TOTALES:";
-                e.Row.Cells[1].Text = Pendientes.ToString();
-                e.Row.Cells[1].HorizontalAlign = HorizontalAlign.Left;
-                e.Row.Font.Bold = true;
-
-                e.Row.Cells[2].Text = Nuevos.ToString();
-                e.Row.Cells[2].HorizontalAlign = HorizontalAlign.Left;
-                e.Row.Font.Bold = true;
-
-                e.Row.Cells[3].Text = Cerrados.ToString();
-                e.Row.Cells[3].HorizontalAlign = HorizontalAlign.Left;
-                e.Row.Font.Bold = true;
-
-                e.Row.Cells[4].Text = ((Cerrados / (Pendientes + Nuevos))*100).ToString("N2");
-                e.Row.Cells[4].HorizontalAlign = HorizontalAlign.Left;
-                e.Row.Font.Bold = true;
-            }
-        }
-        catch (Exception err)
-        {
-            Response.Write(err);
-        }
-    }
-
     protected void Mostrar_Click(object sender, EventArgs e)
     {
         if (ddlCiclos.SelectedValue == "Ciclo Total")
@@ -422,7 +385,67 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesDaños : System.Web.UI
         }
     }
 
+    protected void GridEficiencia_RowDataBound(object sender, GridViewRowEventArgs e)
+    {
+        try
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                Pendientes       += Convert.ToDouble(DataBinder.Eval(e.Row.DataItem, "[Pendientes]"));
+                Nuevos           += Convert.ToDouble(DataBinder.Eval(e.Row.DataItem, "[Nuevos]"));
+                Cerrados         += Convert.ToDouble(DataBinder.Eval(e.Row.DataItem, "[Cerrados]"));
+                CCRFT            += Convert.ToDouble(DataBinder.Eval(e.Row.DataItem, "[Cerrados_Con_Reaseguro_Fuera_Tiempo]"));
+                CSRFT            += Convert.ToDouble(DataBinder.Eval(e.Row.DataItem, "[Cerrados_Sin_Reaseguro_Fuera_Tiempo]"));
+                PCRFT            += Convert.ToDouble(DataBinder.Eval(e.Row.DataItem, "[Pendientes_Con_Reaseguro_Fuera_Tiempo]"));
+                PSRFT            += Convert.ToDouble(DataBinder.Eval(e.Row.DataItem, "[Pendientes_Sin_Reaseguro_Fuera_Tiempo]"));
+                EficienciaCierre += Convert.ToDouble(DataBinder.Eval(e.Row.DataItem, "[Ejecucion_cierre]"));
+                Anejamiento      += Convert.ToDouble(DataBinder.Eval(e.Row.DataItem, "[Añejamiento]"));
+            }
+            else if (e.Row.RowType == DataControlRowType.Footer)
+            {
+                e.Row.Cells[0].Text = "TOTALES:";
+                e.Row.Cells[1].Text = Pendientes.ToString();
+                e.Row.Cells[1].HorizontalAlign = HorizontalAlign.Right;
+                e.Row.Font.Bold = true;
 
+                e.Row.Cells[2].Text = Nuevos.ToString();
+                e.Row.Cells[2].HorizontalAlign = HorizontalAlign.Right;
+                e.Row.Font.Bold = true;
+
+                e.Row.Cells[3].Text = Cerrados.ToString();
+                e.Row.Cells[3].HorizontalAlign = HorizontalAlign.Right;
+                e.Row.Font.Bold = true;
+
+                e.Row.Cells[4].Text = CCRFT.ToString();
+                e.Row.Cells[4].HorizontalAlign = HorizontalAlign.Right;
+                e.Row.Font.Bold = true;
+
+                e.Row.Cells[5].Text = CSRFT.ToString();
+                e.Row.Cells[5].HorizontalAlign = HorizontalAlign.Right;
+                e.Row.Font.Bold = true;
+
+                e.Row.Cells[6].Text = PCRFT.ToString();
+                e.Row.Cells[6].HorizontalAlign = HorizontalAlign.Right;
+                e.Row.Font.Bold = true;
+
+                e.Row.Cells[7].Text = PSRFT.ToString();
+                e.Row.Cells[7].HorizontalAlign = HorizontalAlign.Right;
+                e.Row.Font.Bold = true;
+
+                e.Row.Cells[8].Text =  (EficienciaCierre / GridEficiencia.Rows.Count).ToString();
+                e.Row.Cells[8].HorizontalAlign = HorizontalAlign.Right;
+                e.Row.Font.Bold = true;
+
+                e.Row.Cells[9].Text = (Anejamiento / GridEficiencia.Rows.Count).ToString();
+                e.Row.Cells[9].HorizontalAlign = HorizontalAlign.Right;
+                e.Row.Font.Bold = true;
+            }
+        }
+        catch (Exception err)
+        {
+            Response.Write(err);
+        }
+    }
     protected void GridCiclos_RowDataBound(object sender, GridViewRowEventArgs e)
     {
         try
@@ -455,7 +478,6 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesDaños : System.Web.UI
             Response.Write(err);
         }
     }
-
     protected void GridCiclos2_RowDataBound(object sender, GridViewRowEventArgs e)
     {
         try
@@ -504,7 +526,8 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesDaños : System.Web.UI
         PanelCamposSeleccion.Visible = false;
         PnCiclos.Visible = false;
         PanelEficiencia.Visible = true;
-        Eficiencia();
+        //Eficiencia();
+        Utils.Reportes(txtFechaInicio,txtFechaFin, "pa_eficiencia_danos_varios",GridEficiencia);
         Utils.TituloReporte(PanelPrincipal, lblPeriodo, lblFechaGeneracion, lblUsuario, lblTitulo, "Reporte de Efectividad / Depto. Reclamos Daños", userlogin, txtFechaInicio, txtFechaFin, "");
         Utils.actividades(0, Constantes.DANIOS(), 30, Constantes.USER());
     }

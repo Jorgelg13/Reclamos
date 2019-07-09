@@ -126,31 +126,42 @@
                 <%--------------------------.------------------------ selecciones de opciones por medio de checks--------------------------------%>
                 <div role="tabpanel" class="tab-pane" id="coberturas">
                     <div class="panel-body form-inline col-lg-6 col-md-6">
-                        <div style="height: 275px;" class="panel panel-info col-sm-5 col-md-12 col-lg-4">
+                        <div style="height: 275px;overflow:auto" class="panel panel-info col-sm-5 col-md-12 col-lg-4">
                             <div class="panel-heading">
                                 <b>Selecciones</b>
                             </div>
                             <div class="panel-body">
-                                <asp:CheckBox ID="checkPrioritario" runat="server" Text="Prioritario" AutoPostBack="True" />
-                                <br />
-                                <asp:CheckBox ID="CheckComplicado" runat="server" Text="Complicado" AutoPostBack="True" />
-                                <br />
-                                <asp:CheckBox ID="checkCompromiso" runat="server" Text="Compromiso De Pago" AutoPostBack="True" />
-                                <br />
-                                <asp:CheckBox ID="checkCerrarReclamo" OnCheckedChanged="checkCerrarReclamo_CheckedChanged" AutoPostBack="true" runat="server" Text="Cerrar Reclamo" />
-                                <br />
-                                <asp:DropDownList CssClass="form-control" ID="ddlTipoCierre" Enabled="false" Style="width: 150px" Height="34px" runat="server">
-                                    <asp:ListItem Value="Sin Cobertura">Sin Cobertura</asp:ListItem>
-                                    <asp:ListItem Value="Pagado">Pagado</asp:ListItem>
-                                    <asp:ListItem Value="A solicitud del asegurado">A solicitud del asegurado</asp:ListItem>
-                                    <asp:ListItem Value="No supera Deducible">No supera deducible</asp:ListItem>
-                                    <asp:ListItem Value="Tercero Responsale">Tercero Responsable</asp:ListItem>
-                                    <asp:ListItem Value="Sin Documentos">Sin Documentos</asp:ListItem>
-                                    <asp:ListItem Value="Cambio de corredor">Cambio de corredor</asp:ListItem>
-                                    <asp:ListItem Value="Otros">Otros</asp:ListItem>
-                                </asp:DropDownList>
-                                <label>Monto de reserva:</label>
-                                <asp:TextBox runat="server" ID="txtReserva" Text="0.00" CssClass="form-control" placeholder="Monto de Reserva"></asp:TextBox>
+                                <div class="form-group col-lg-12 col-md-12">
+                                  <asp:CheckBox ID="CheckReaseuro" runat="server" Text="Reaseguro" ForeColor="Red" />
+                                </div>
+                                <div class="form-group col-lg-12 col-md-12">
+                                   <asp:CheckBox ID="checkPrioritario" runat="server" Text="Prioritario"/>
+                                </div>
+                                <div class="form-group col-lg-12 col-md-12">
+                                    <asp:CheckBox ID="CheckComplicado" runat="server" Text="Complicado" />
+                                </div>
+                                <div class="form-group col-lg-12 col-md-12">
+                                    <asp:CheckBox ID="checkCompromiso" runat="server" Text="Compromiso De Pago" />                                    
+                                </div>
+                                <div class="form-group col-lg-12 col-md-12">
+                                   <asp:CheckBox ID="checkCerrarReclamo" OnCheckedChanged="checkCerrarReclamo_CheckedChanged" AutoPostBack="true" runat="server" Text="Cerrar Reclamo" />                                    
+                                </div>
+                                <div class="form-group col-lg-12 col-md-12">
+                                    <asp:DropDownList CssClass="form-control" ID="ddlTipoCierre" Enabled="false" Style="width: 100%" Height="34px" runat="server">
+                                       <asp:ListItem Value="Sin Cobertura">Sin Cobertura</asp:ListItem>
+                                       <asp:ListItem Value="Pagado">Pagado</asp:ListItem>
+                                       <asp:ListItem Value="A solicitud del asegurado">A solicitud del asegurado</asp:ListItem>
+                                       <asp:ListItem Value="No supera Deducible">No supera deducible</asp:ListItem>
+                                       <asp:ListItem Value="Tercero Responsale">Tercero Responsable</asp:ListItem>
+                                       <asp:ListItem Value="Sin Documentos">Sin Documentos</asp:ListItem>
+                                       <asp:ListItem Value="Cambio de corredor">Cambio de corredor</asp:ListItem>
+                                       <asp:ListItem Value="Otros">Otros</asp:ListItem>
+                                    </asp:DropDownList>
+                                </div>
+                                <div class="form-group col-lg-12 col-md-12">
+                                   <label>Monto de reserva:</label>
+                                   <asp:TextBox runat="server" ID="txtReserva" Text="0.00" CssClass="form-control" Width="100%" placeholder="Monto de Reserva"></asp:TextBox>                                    
+                                </div>
                             </div>
                         </div>
                         <%------------------------------- opciones multiples de los combobox -------------------------%>
@@ -159,7 +170,9 @@
                             <div class="panel-body">
                                 <div class="form-inline">
                                     <label style="width: 15%">Etapa:</label>
-                                    <asp:DropDownList CssClass="form-control" ID="ddlEstadoReclamo" AutoPostBack="True" Style="width: 80%" Height="34px" runat="server" DataSourceID="SqlDataSourceEstados" DataTextField="descripcion" DataValueField="descripcion" OnSelectedIndexChanged="ddlEstadoReclamo_SelectedIndexChanged"></asp:DropDownList>
+                                    <asp:DropDownList CssClass="form-control" ID="ddlEstadoReclamo" AutoPostBack="True" Style="width: 80%" Height="34px" 
+                                        runat="server" DataSourceID="SqlDataSourceEstados" DataTextField="descripcion" DataValueField="descripcion" 
+                                        OnSelectedIndexChanged="ddlEstadoReclamo_SelectedIndexChanged"></asp:DropDownList>
                                 </div>
                                 <br />
                                 <div class="form-inline">

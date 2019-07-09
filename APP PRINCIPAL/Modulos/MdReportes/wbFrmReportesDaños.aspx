@@ -149,7 +149,7 @@
                                     <FooterStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" />
                                     <HeaderStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" HorizontalAlign="Center" Wrap="False" />
                                     <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
-                                    <RowStyle BackColor="#EFF3FB" HorizontalAlign="Left" Wrap="False" />
+                                    <RowStyle BackColor="#EFF3FB" HorizontalAlign="Right" Wrap="False" />
                                 </asp:GridView>
                             </div>
                         </asp:Panel>
@@ -205,7 +205,7 @@
             $('#ContentPlaceHolder1_GridEficiencia tr').each(function (index) {
                 $tr = $(this);
                 if (index > 0) {
-                        $td = $tr[0].cells[4];
+                        $td = $tr[0].cells[8];
                     $td.innerText = $td.innerText + ' %';
                     $td.className = 'alinearNumeros';
                 }

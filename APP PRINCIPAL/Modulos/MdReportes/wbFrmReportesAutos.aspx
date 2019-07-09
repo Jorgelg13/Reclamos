@@ -63,6 +63,7 @@
                     <asp:ListItem Value="empresa.nombre as Empresa">Empresa</asp:ListItem>
                     <asp:ListItem Value="pais.nombre as Pais">Pais</asp:ListItem>
                     <asp:ListItem Value="usuario.nombre as Usuario_cabina">Usuario Cabina</asp:ListItem>
+                    <asp:ListItem Value="m.nombre as Motivo_Cierre">Motivo Cierre</asp:ListItem>
                 </asp:CheckBoxList>
             </div>
         </div>
@@ -96,6 +97,7 @@
                             <asp:ListItem Value="auto_reclamo.poliza">Poliza</asp:ListItem>
                             <asp:ListItem Value="reclamo_auto.cierre_interno">Cierre Interno</asp:ListItem>
                             <asp:ListItem Value="auto_reclamo.aseguradora">Aseguradora</asp:ListItem>
+                            <asp:ListItem Value="reclamo_auto.id_motivo_cierre">Motivo Cierre</asp:ListItem>
                         </asp:DropDownList>
                     </div>
                     <div class="form-group  col-sm-12 col-md-6 col-lg-3">
@@ -149,7 +151,7 @@
                                 <AlternatingRowStyle BackColor="White" />
                                 <FooterStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" />
                                 <HeaderStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" HorizontalAlign="Center" Wrap="False" />
-                                <RowStyle BackColor="#EFF3FB" HorizontalAlign="Left" Wrap="False" />
+                                <RowStyle BackColor="#EFF3FB" HorizontalAlign="Right" Wrap="False" />
                             </asp:GridView>
                         </div>
                     </asp:Panel>
@@ -204,7 +206,7 @@
             $('#ContentPlaceHolder1_GridEficiencia tr').each(function (index) {
                 $tr = $(this);
                 if (index > 0) {
-                    $td = $tr[0].cells[4];
+                    $td = $tr[0].cells[15];
                     $td.innerText = $td.innerText + ' %';
                     $td.className = 'alinearNumeros';
                 }

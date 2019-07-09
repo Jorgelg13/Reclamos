@@ -726,6 +726,12 @@ public class Utils
         return Convert.ToInt32(codigo.numero_gestor);
     }
 
+    public static String CORREO_GESTOR(string ejecutivo)
+    {
+        var correo = DBReclamos.ejecutivos.Where(ej => ej.gestor == ejecutivo).First();
+        return correo.correo;
+    }
+
     //procedimiento para insertar registro en el envio de correos automatico en el servidor 192.168.5.199
     public static void EmailRenovacion(String procedimiento, String cliente, String cuerpo, String gestor)
     {

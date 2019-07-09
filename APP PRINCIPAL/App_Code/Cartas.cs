@@ -44,12 +44,14 @@ public class Cartas
 
     {
         return "Datos de la póliza a afectar: \n\n" +
+            "Nota: El requerimiento de documentos no debe interpretarse como una aceptación de cobertura u obligación de indemnización, la presentación de dichos documentos es para" +
+            " el proceso de analisis de acuerdo a las condiciones de la poliza contratada y posible solicitud de documentos adicionales si es necesario \n\n"+
             "No.de Póliza: \n" +
             "Suma asegurada: \n" +
             "Bien asegurado: \n" +
             "Deducible: \n" +
             "Valuación: \n\n" +
-            "RECOMENDACIONES EN CASO DE SINIESTRO: \n" +
+            "RECOMENDACIONES:\n" +
             "1) Informar de inmediato a nuestra cabina de emergencia 2386 - 3737 que esta disponible las 24 horas del día y los 365 días del año.\n\n" +
             "2) Si la Aseguradora solicita visita de ajustador, indicar a las personas involucradas en la asistencia que no deben entregar ningún documento al ajustador; ya que éste procedimiento se hará  a través de su Corredor de Seguros Unity Promotores.\n\n" +
             "3) Es importante que este al día con el pago de primas convenido.\n\n" +

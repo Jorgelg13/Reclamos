@@ -151,65 +151,6 @@
                                 </li>
                                   <li class="dropdown-submenu">
                                     <a tabindex="-1" href="https://reclamosgt.unitypromotores.com/Modulos/MdReclamos/Copagos.aspx">Copagos</a>
- <%--                                   <ul class="dropdown-menu">
-                                        <li class="dropdown-submenu"></li>
-                                         <li class="dropdown-submenu">
-                                            <a tabindex="-1" href="#">AMM</a>
-                                            <ul class="dropdown-menu">
-                                                <li class="dropdown-submenu"></li>
-                                                <li><a href="/pdf/Copagos/Planes-ABC-FINAL.pdf" target="_blank">Condiciones Planes ABC-Final</a></li>
-                                                <li><a href="/pdf/Copagos/Plan-Gold-FINAL.pdf" target="_blank">Condiciones Plan Gold</a></li>
-                                            </ul>
-                                        </li>
-				                    	<li><a href="/pdf/Copagos/ENERGUATE.pdf" target="_blank">Energuate</a></li>
-                                        <li><a href="/pdf/Copagos/NOVARTIS.pdf" target="_blank">Novartis</a></li>
-                                        <li><a href="/pdf/Copagos/RAYOVAC.pdf" target="_blank">Rayovac</a></li>
-                                        <li><a href="/pdf/Copagos/PALIGMED.pdf" target="_blank">Paligmed</a></li>
-                                        <li><a href="/pdf/Copagos/PITASA.pdf" target="_blank">Pitasa</a></li>
-                                        <li><a href="/pdf/Copagos/SIEMENS.pdf" target="_blank">Siemens</a></li>
-                                        <li><a href="/pdf/Copagos/SEALED.pdf" target="_blank">Sealed air</a></li>
-                                        <li><a href="/pdf/Copagos/AVIANCA.pdf" target="_blank">Avianca</a></li>
-                                        <li><a href="/pdf/Copagos/BCPE.pdf" target="_blank">BCPE</a></li>
-                                        <li><a href="/pdf/Copagos/ECOLAB.pdf" target="_blank">Ecolab</a></li>
-                                        <li><a href="/pdf/Copagos/GIVAUDAN.pdf" target="_blank">Givaudan</a></li>
-                                        <li><a href="/pdf/Copagos/JONESLANG.pdf" target="_blank">Jones Lang</a></li>
-                                        <li><a href="/pdf/Copagos/CISCO.pdf" target="_blank">Cisco</a></li>
-                                        <li><a href="/pdf/Copagos/KIMBERLYCLARK.pdf" target="_blank">Kimberly Clark</a></li>
-                                        <li><a href="/pdf/Copagos/LANQUETIN.pdf" target="_blank">Lanquetin</a></li>
-                                        <li><a href="/pdf/Copagos/MONDELEZ.pdf" target="_blank">Mondelez</a></li>
-                                        <li><a href="/pdf/Copagos/bandegua.xlsx">Bandegua</a></li>
-                                        <li><a href="/pdf/Copagos/Global-Solutions.pdf" target="_blank">Global Solutions</a></li>
-                                        <li><a href="/pdf/Copagos/AMICELCO.xlsx">Amicelco</a></li>
-                                        <li><a href="/pdf/Copagos/ACEROS.xlsx">Aceros</a></li>
-                                        <li><a href="/pdf/Copagos/LICORERA.xlsx">Licorera</a></li>
-                                        <li><a href="/pdf/Copagos/CAJA DE AHORRO.xlsx">Caja de Ahorro</a></li>
-                                        <li><a href="/pdf/Copagos/CopagosAlmo.xls">Almo</a></li>
-                                        <li><a href="/pdf/Copagos/OFFICE DEPOT.xlsX">Office Depot</a></li>
-                                        <li><a href="/pdf/Copagos/PANIFRESH.xlsx">Panifresh</a></li>
-                                        <li><a href="/pdf/Copagos/ROCHE.xlsx">Roche</a></li>
-                                        <li><a href="/pdf/Copagos/TRANSMETAL.xlsx">Transmetal</a></li>
-                                        <li><a href="javascript:excel('/pdf/Copagos/CopagosAsetec.xls')">Asetec</a></li>
-                                        <li><a href="/pdf/Copagos/Agropecuaria Popoyan POLIZA 856-VDGM.pdf">Agropecuaria Popoyan</a></li>
-                                        <li><a href="/pdf/Copagos/Alfa Uno POLIZA 962-001.pdf">Alfa Uno</a></li>
-                                        <li><a href="/pdf/Copagos/Aliprac POLIZA 55958.pdf">Aliprac</a></li>
-                                        <li><a href="/pdf/Copagos/Cartones de Guatemala.pdf">Cartones De Guatemala</a></li>
-                                        <li><a href="/pdf/Copagos/Disagro Guatemala.pdf">Disagro Guatemala</a></li>
-                                        <li><a href="/pdf/Copagos/Dollarcity.pdf">DollarCity</a></li>
-                                        <li><a href="/pdf/Copagos/Ingenio Palo Gordo.pdf">Ingenio Palo Gordo</a></li>
-                                        <li><a href="/pdf/Copagos/Manpower.pdf">Manpower</a></li>
-                                        <li><a href="/pdf/Copagos/Oro del Pacifico.pdf">Oro del pacifico</a></li>
-                                        <li><a href="/pdf/Copagos/Promotores Unity.pdf">Promotores Unity</a></li>
-                                        <li><a href="/pdf/Copagos/Quala.pdf">Quala</a></li>
-                                        <li><a href="/pdf/Copagos/Tetel.pdf">Tetel</a></li>
-                                        <li><a href="/pdf/Copagos/The People Company.pdf">The People Company</a></li>
-                                        <li><a href="/pdf/Copagos/Tetel.pdf">Tetel</a></li>
-                                        <li><a href="/pdf/Copagos/Volaris.pdf">Volaris</a></li>
-                                        <li><a href="/pdf/Copagos/Yara Guatemala.pdf">Yara</a></li>
-                                        <li><a href="/pdf/Copagos/Cuentas Maribel Cermeño.xlsx">Cuentas Maribel Cermeño</a></li>
-                                        <li><a href="/pdf/Copagos/Cuentas Juan Antonio.xls">Cuentas Juan Antonio</a></li>
-                                        <li><a href="/pdf/Copagos/Cuentas Marvin Escobar.xls">Cuentas Marvin Escobar</a></li>
-                                        
-                                    </ul>--%>
                                 </li>
                                 <li class="dropdown-submenu">
                                     <a tabindex="-1" href="#">Preguntas Frecuentes</a>

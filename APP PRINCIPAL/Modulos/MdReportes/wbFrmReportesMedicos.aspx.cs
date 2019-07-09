@@ -219,7 +219,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesMedicos : System.Web.U
 
         else if (ddlTipoReclamo.SelectedItem.Text == "Individual")
         {
-            kpiAseguradora = ddlMoneda.SelectedItem.Text == "Dolares" ? 35 : 12;
+            kpiAseguradora = ddlMoneda.SelectedItem.Text == "Dolares" ? 35 : 15;
         }
 
         string promedio_aseguradora = "select " +
@@ -254,7 +254,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesMedicos : System.Web.U
 
         if (ddlTipoReclamo.SelectedItem.Text == "Individual")
         {
-            kpiCliente = ddlMoneda.SelectedItem.Text == "Dolares" ? 38 : 15;
+            kpiCliente = ddlMoneda.SelectedItem.Text == "Dolares" ? 38 : 18;
         }
 
         string ciclo_cliente = "select " +
@@ -266,6 +266,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesMedicos : System.Web.U
              "inner join reg_reclamos_medicos as reg on reg.id = r.id_reg_reclamos_medicos " +
              "where (r.estado_unity = 'Cerrado') and ( Convert(date,r.fecha_cierre,112) between '" + txtFechaInicio.Text + "' and '" + txtFechaFin.Text + "') " +
              "and (" + ddlTipoReclamo.SelectedValue + ") and (" + ddlMoneda.SelectedValue + ") group by reg.aseguradora " +
+             "update #cicloCliente set promedio = 1 where promedio = 0.00"+
              "select " +
              "Aseguradora, " +
              "total_reclamos as Total_Reclamos," +

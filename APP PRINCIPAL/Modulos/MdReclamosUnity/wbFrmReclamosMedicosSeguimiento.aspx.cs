@@ -811,7 +811,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosMedicosSeguimientos : 
                         mensaje = "UNITY: Estimad@ cliente su reclamo fue abonado a su deducible anual enviamos copia de la liquidación a su correo.";
                     }
 
-                   // Utils.SMS_gastos_medicos(registro.telefono, mensaje, userlogin, ddlEstado.SelectedItem.Text, id, registro.reg_reclamos_medicos.tipo);
+                    //Utils.SMS_gastos_medicos(registro.telefono, mensaje, userlogin, ddlEstado.SelectedItem.Text, id, registro.reg_reclamos_medicos.tipo);
                     llenado.llenarGrid(comentarios,GridComentarios);
                 }
                 catch (Exception)

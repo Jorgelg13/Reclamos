@@ -159,6 +159,8 @@
                             <b>Selecciones</b>
                         </div>
                         <div class="panel-body" style="height: 200px; overflow-y: auto; overflow-x: auto">
+                            <asp:CheckBox ID="checkImportacion" runat="server" Text="Importacion" ForeColor="Red" />
+                            <br />
                             <asp:CheckBox ID="checkPrioritario" runat="server" Text="Prioritario" />
                             <br />
                             <asp:CheckBox ID="CheckComplicado" runat="server" Text="Complicado" />
@@ -186,22 +188,26 @@
                         <div class="panel-body">
                             <div class="form-inline">
                                 <label style="width: 15%">Estado:</label>
-                                <asp:DropDownList CssClass="form-control" ID="ddlEstadoAuto" Style="width: 80%" Height="34px" runat="server" DataSourceID="SqlDataSourceEstadosAutos" DataTextField="descripcion" DataValueField="descripcion" AutoPostBack="true" OnSelectedIndexChanged="ddlEstadoAuto_SelectedIndexChanged"></asp:DropDownList>
+                                <asp:DropDownList CssClass="form-control" ID="ddlEstadoAuto" Style="width: 80%" Height="34px" runat="server" DataSourceID="SqlDataSourceEstadosAutos" 
+                                    DataTextField="descripcion" DataValueField="descripcion" AutoPostBack="true" OnSelectedIndexChanged="ddlEstadoAuto_SelectedIndexChanged"></asp:DropDownList>
                             </div>
                             <br />
                             <div class="form-inline">
                                 <label style="width: 15%">Analista:</label>
-                                <asp:DropDownList CssClass="form-control" ID="ddlAnalista" Style="width: 80%" Height="34px" runat="server" DataSourceID="SqlDataSourceAnalistas" DataTextField="nombre" DataValueField="id"></asp:DropDownList>
+                                <asp:DropDownList CssClass="form-control" ID="ddlAnalista" Style="width: 80%" Height="34px" runat="server" DataSourceID="SqlDataSourceAnalistas" 
+                                    DataTextField="nombre" DataValueField="id"></asp:DropDownList>
                             </div>
                             <br />
                             <div class="form-inline">
                                 <label style="width: 15%">Taller:</label>
-                                <asp:DropDownList CssClass="form-control" ID="ddlTaller" Style="width: 80%" Height="34px" runat="server" DataSourceID="SqlDataSourceTalleres" DataTextField="nombre" DataValueField="id"></asp:DropDownList>
+                                <asp:DropDownList CssClass="form-control" ID="ddlTaller" Style="width: 80%" Height="34px" runat="server" DataSourceID="SqlDataSourceTalleres" 
+                                    DataTextField="nombre" DataValueField="id"></asp:DropDownList>
                             </div>
                             <br />
                             <div class="form-inline">
                                 <label style="width: 15%">Gestor:</label>
-                                <asp:DropDownList CssClass="form-control" ID="ddlGestor" Style="width: 80%" Height="34px" runat="server" OnSelectedIndexChanged="ddlGestor_SelectedIndexChanged" AutoPostBack="True" DataSourceID="SqlDataSourceGestores" DataTextField="nombre" DataValueField="id"></asp:DropDownList>
+                                <asp:DropDownList CssClass="form-control" ID="ddlGestor" Style="width: 80%" Height="34px" runat="server" OnSelectedIndexChanged="ddlGestor_SelectedIndexChanged"
+                                    AutoPostBack="True" DataSourceID="SqlDataSourceGestores" DataTextField="nombre" DataValueField="id"></asp:DropDownList>
                             </div>
                         </div>
                     </div>

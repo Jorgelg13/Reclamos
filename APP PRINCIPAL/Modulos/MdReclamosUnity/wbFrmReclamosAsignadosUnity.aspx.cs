@@ -118,11 +118,11 @@ public partial class Modulos_MdReclamos_wbFrmReclamosAsignadosUnity : System.Web
         try
         {
             lblId.Text     = GridAsignacion.SelectedRow.Cells[1].Text;
-            lblPlaca.Text  = GridAsignacion.SelectedRow.Cells[5].Text.ToString();
-            lblChasis.Text = GridAsignacion.SelectedRow.Cells[9].Text.ToString();
-            lblMarca.Text  = GridAsignacion.SelectedRow.Cells[6].Text.ToString();
-            lblModelo.Text = GridAsignacion.SelectedRow.Cells[8].Text.ToString();
-            poliza         = GridAsignacion.SelectedRow.Cells[4].Text.ToString();
+            lblPlaca.Text  = GridAsignacion.SelectedRow.Cells[5].Text;
+            lblChasis.Text = GridAsignacion.SelectedRow.Cells[9].Text;
+            lblMarca.Text  = GridAsignacion.SelectedRow.Cells[6].Text;
+            lblModelo.Text = GridAsignacion.SelectedRow.Cells[8].Text;
+            poliza         = GridAsignacion.SelectedRow.Cells[4].Text;
             asegurado      = GridAsignacion.SelectedRow.Cells[3].Text;
             fechaCreacion  = GridAsignacion.SelectedRow.Cells[18].Text;
         }
@@ -180,6 +180,7 @@ public partial class Modulos_MdReclamos_wbFrmReclamosAsignadosUnity : System.Web
             reclamo.observaciones  = txtObservaciones.Text.ToString();
             reclamo.complicado     = complicado;
             reclamo.prioritario    = prioritario;
+            reclamo.importacion    = false;
             reclamo.compromiso_pago = compromiso_pago;
             reclamo.alquiler_auto  = alquiler;
             reclamo.perdida_total  = perdidaTotal;

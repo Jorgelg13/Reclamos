@@ -14,7 +14,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesAutos : System.Web.UI.
     String buscar, Join, eficienciaGestores;
     int Total, Promedio, EjecucionCiclos, kpi;
     int Total2, Promedio2, EjecucionCiclos2;
-    Double Pendientes, Nuevos, Cerrados, Ejecucion;
+    Double Pendientes, Nuevos, Cerrados, Ejecucion, CCIFT, CSIFT,PCIFT,PSIFT,EficienciaCierre,Anejamiento;
 
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -52,6 +52,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesAutos : System.Web.UI.
                   " INNER JOIN talleres on reclamo_auto.id_taller = talleres.id" +
                   " INNER JOIN analistas on reclamo_auto.id_analista = analistas.id " +
                   " LEFT JOIN contacto_auto on reclamo_auto.id = contacto_auto.id_reclamo_auto " +
+                  " lEFT JOIN motivos_cierre as m on m.id = reclamo_auto.id_motivo_cierre " +
                   " INNER JOIN cabina ON reclamo_auto.id_cabina = cabina.id " +
                   " INNER JOIN sucursal ON cabina.id_sucursal = sucursal.id " +
                   " INNER JOIN empresa ON sucursal.id_empresa = empresa.id " +
@@ -123,9 +124,16 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesAutos : System.Web.UI.
 
         else
         {
-            if (ddlElegir.SelectedItem.Text == "Gestor" || ddlElegir.SelectedItem.Text == "Ejecutivo" || ddlElegir.SelectedItem.Text == "Taller" || ddlElegir.SelectedItem.Text == "Aseguradora")
+            if (ddlElegir.SelectedItem.Text == "Gestor" || ddlElegir.SelectedItem.Text == "Ejecutivo" || ddlElegir.SelectedItem.Text == "Taller" || ddlElegir.SelectedItem.Text == "Aseguradora" || ddlElegir.SelectedItem.Text =="Motivo Cierre")
             {
-                buscar = ddlBuscar.SelectedItem.Text;
+                if(ddlElegir.SelectedItem.Text =="Motivo Cierre")
+                {
+                    buscar = ddlBuscar.SelectedValue;
+                }
+                else
+                {
+                    buscar = ddlBuscar.SelectedItem.Text;
+                }
             }
             else
             {
@@ -335,6 +343,14 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesAutos : System.Web.UI.
             ddlBuscar.DataBind();
         }
 
+        else if(ddlElegir.SelectedItem.Text == "Motivo Cierre")
+        {
+            ddlBuscar.DataSource = DBReclamos.motivos_cierre.ToList();
+            ddlBuscar.DataValueField = "id";
+            ddlBuscar.DataTextField = "nombre";
+            ddlBuscar.DataBind();
+        }
+
         else
         {
             txtBuscar.Visible = true;
@@ -373,28 +389,53 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesAutos : System.Web.UI.
         {
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
-                Pendientes += Convert.ToDouble(DataBinder.Eval(e.Row.DataItem, "[Pendientes]"));
-                Nuevos += Convert.ToDouble(DataBinder.Eval(e.Row.DataItem, "[Nuevos]"));
-                Cerrados += Convert.ToDouble(DataBinder.Eval(e.Row.DataItem, "[Cerrados]"));
-                Ejecucion += Convert.ToDouble(DataBinder.Eval(e.Row.DataItem, "[Ejecucion]"));
+                Pendientes       += Convert.ToDouble(DataBinder.Eval(e.Row.DataItem, "[Pendientes]"));
+                Nuevos           += Convert.ToDouble(DataBinder.Eval(e.Row.DataItem, "[Nuevos]"));
+                Cerrados         += Convert.ToDouble(DataBinder.Eval(e.Row.DataItem, "[Cerrados]"));
+                CCIFT            += Convert.ToDouble(DataBinder.Eval(e.Row.DataItem, "[Cerrados_Con_Importacion_Fuera_Tiempo]"));
+                CSIFT            += Convert.ToDouble(DataBinder.Eval(e.Row.DataItem, "[Cerrados_Sin_Importacion_Fuera_Tiempo]"));
+                PCIFT            += Convert.ToDouble(DataBinder.Eval(e.Row.DataItem, "[Pendientes_Con_Importacion_Fuera_Tiempo]"));
+                PSIFT            += Convert.ToDouble(DataBinder.Eval(e.Row.DataItem, "[Pendientes_Sin_Importacion_Fuera_Tiempo]"));
+                EficienciaCierre += Convert.ToDouble(DataBinder.Eval(e.Row.DataItem, "[Eficiencia_cierre]"));
+                Anejamiento      += Convert.ToDouble(DataBinder.Eval(e.Row.DataItem, "[Añejamiento]"));
             }
             else if (e.Row.RowType == DataControlRowType.Footer)
             {
                 e.Row.Cells[0].Text = "TOTALES:";
                 e.Row.Cells[1].Text = Pendientes.ToString();
-                e.Row.Cells[1].HorizontalAlign = HorizontalAlign.Left;
+                e.Row.Cells[1].HorizontalAlign = HorizontalAlign.Right;
                 e.Row.Font.Bold = true;
 
                 e.Row.Cells[2].Text = Nuevos.ToString();
-                e.Row.Cells[2].HorizontalAlign = HorizontalAlign.Left;
+                e.Row.Cells[2].HorizontalAlign = HorizontalAlign.Right;
                 e.Row.Font.Bold = true;
 
                 e.Row.Cells[3].Text = Cerrados.ToString();
-                e.Row.Cells[3].HorizontalAlign = HorizontalAlign.Left;
+                e.Row.Cells[3].HorizontalAlign = HorizontalAlign.Right;
                 e.Row.Font.Bold = true;
 
-                e.Row.Cells[4].Text = ((Cerrados / (Pendientes + Nuevos)) *100 ).ToString("N2");
-                e.Row.Cells[4].HorizontalAlign = HorizontalAlign.Left;
+                e.Row.Cells[4].Text = CCIFT.ToString();
+                e.Row.Cells[4].HorizontalAlign = HorizontalAlign.Right;
+                e.Row.Font.Bold = true;
+
+                e.Row.Cells[5].Text = CSIFT.ToString();
+                e.Row.Cells[5].HorizontalAlign = HorizontalAlign.Right;
+                e.Row.Font.Bold = true;
+
+                e.Row.Cells[6].Text = PCIFT.ToString();
+                e.Row.Cells[6].HorizontalAlign = HorizontalAlign.Right;
+                e.Row.Font.Bold = true;
+
+                e.Row.Cells[7].Text = PSIFT.ToString();
+                e.Row.Cells[7].HorizontalAlign = HorizontalAlign.Right;
+                e.Row.Font.Bold = true;
+
+                e.Row.Cells[8].Text = (EficienciaCierre / GridEficiencia.Rows.Count).ToString();
+                e.Row.Cells[8].HorizontalAlign = HorizontalAlign.Right;
+                e.Row.Font.Bold = true;
+
+                e.Row.Cells[9].Text = (Anejamiento / GridEficiencia.Rows.Count).ToString();
+                e.Row.Cells[9].HorizontalAlign = HorizontalAlign.Right;
                 e.Row.Font.Bold = true;
             }
         }
@@ -530,11 +571,6 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesAutos : System.Web.UI.
             Utils.actividades(0, Constantes.AUTOS(), 33, Constantes.USER());
         }
 
-        else if (ddlCiclos.SelectedValue == "Eficiencia")
-        {
-            Eficiencia();
-            Page.ClientScript.RegisterStartupScript(this.Page.GetType(), "show_modal", "$('#ModalDetalle').modal('show');", addScriptTags: true);
-        }
     }
 
     protected void linKRegresar_Click(object sender, EventArgs e)
@@ -553,7 +589,8 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesAutos : System.Web.UI.
         PanelCamposSeleccion.Visible = false;
         PnCiclos.Visible = false;
         PanelEficiencia.Visible = true;
-        Eficiencia();
+        //Eficiencia();
+        Utils.Reportes(txtFechaInicio, txtFechaFin, "pa_eficiencia_autos", GridEficiencia);
         Utils.TituloReporte(PanelPrincipal, lblPeriodo, lblFechaGeneracion, lblUsuario, lblTitulo, "Reporte de Efectividad / Depto. Reclamos Autos", userlogin, txtFechaInicio, txtFechaFin, "");
     }
 }
