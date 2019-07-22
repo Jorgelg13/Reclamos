@@ -22,6 +22,10 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesDaños : System.Web.UI
     {
         if(!IsPostBack)
         {
+            DateTime primerDia = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
+            DateTime ultimoDia = primerDia.AddMonths(1).AddDays(-1);
+            txtFechaInicio.Text = primerDia.ToString("yyyy/MM/dd").Replace("/", "-");
+            txtFechaFin.Text = ultimoDia.ToString("yyyy/MM/dd").Replace("/", "-");
             checkSinFiltro_CheckedChanged(sender, e);
         }
 
@@ -102,7 +106,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesDaños : System.Web.UI
             }
 
             Conteo();
-            Eficiencia();
+            //Eficiencia();
         }
 
         else
@@ -394,11 +398,11 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesDaños : System.Web.UI
                 Pendientes       += Convert.ToDouble(DataBinder.Eval(e.Row.DataItem, "[Pendientes]"));
                 Nuevos           += Convert.ToDouble(DataBinder.Eval(e.Row.DataItem, "[Nuevos]"));
                 Cerrados         += Convert.ToDouble(DataBinder.Eval(e.Row.DataItem, "[Cerrados]"));
-                CCRFT            += Convert.ToDouble(DataBinder.Eval(e.Row.DataItem, "[Cerrados_Con_Reaseguro_Fuera_Tiempo]"));
-                CSRFT            += Convert.ToDouble(DataBinder.Eval(e.Row.DataItem, "[Cerrados_Sin_Reaseguro_Fuera_Tiempo]"));
-                PCRFT            += Convert.ToDouble(DataBinder.Eval(e.Row.DataItem, "[Pendientes_Con_Reaseguro_Fuera_Tiempo]"));
-                PSRFT            += Convert.ToDouble(DataBinder.Eval(e.Row.DataItem, "[Pendientes_Sin_Reaseguro_Fuera_Tiempo]"));
-                EficienciaCierre += Convert.ToDouble(DataBinder.Eval(e.Row.DataItem, "[Ejecucion_cierre]"));
+                CCRFT            += Convert.ToDouble(DataBinder.Eval(e.Row.DataItem, "[Cerrados Con Reaseguro_Fuera_Tiempo]"));
+                CSRFT            += Convert.ToDouble(DataBinder.Eval(e.Row.DataItem, "[Cerrados Sin Reaseguro_Fuera_Tiempo]"));
+                PCRFT            += Convert.ToDouble(DataBinder.Eval(e.Row.DataItem, "[Pendientes Con Reaseguro_Fuera_Tiempo]"));
+                PSRFT            += Convert.ToDouble(DataBinder.Eval(e.Row.DataItem, "[Pendientes Sin Reaseguro_Fuera_Tiempo]"));
+                EficienciaCierre += Convert.ToDouble(DataBinder.Eval(e.Row.DataItem, "[Ejecucion Cierre]"));
                 Anejamiento      += Convert.ToDouble(DataBinder.Eval(e.Row.DataItem, "[Añejamiento]"));
             }
             else if (e.Row.RowType == DataControlRowType.Footer)
@@ -432,11 +436,11 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesDaños : System.Web.UI
                 e.Row.Cells[7].HorizontalAlign = HorizontalAlign.Right;
                 e.Row.Font.Bold = true;
 
-                e.Row.Cells[8].Text =  (EficienciaCierre / GridEficiencia.Rows.Count).ToString();
+                e.Row.Cells[8].Text = (((CCRFT + CSRFT) / Cerrados) * 100).ToString("N2");
                 e.Row.Cells[8].HorizontalAlign = HorizontalAlign.Right;
                 e.Row.Font.Bold = true;
 
-                e.Row.Cells[9].Text = (Anejamiento / GridEficiencia.Rows.Count).ToString();
+                e.Row.Cells[9].Text = (((PCRFT + PSRFT) / Pendientes) * 100).ToString("N2");
                 e.Row.Cells[9].HorizontalAlign = HorizontalAlign.Right;
                 e.Row.Font.Bold = true;
             }

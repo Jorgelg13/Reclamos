@@ -117,47 +117,46 @@ public partial class Modulos_MdRenovaciones_Dashboard : System.Web.UI.Page
         cuerpo = "Saludos Estimad@ asegurad@: \n" +
             "<div style=\"text-align: justify\">" +
                 "</br>" +
-                "<p>El " + Convert.ToDateTime(registro.vigf_acs).ToString("dd/MM/yyyy") + " vence la anualidad de su póliza " + registro.poliza_unity + ", la cual le brinda coberturas al " + registro.tipo_vehiculo + "  MARCA  " + registro.marca + " PLACA " + registro.placa + ".<p>" +
+                "<p>El " + Convert.ToDateTime(registro.vigf_acs).ToString("dd/MM/yyyy") + " vence la anualidad de su póliza " + registro.poliza_unity + ", la cual le brinda coberturas al " + registro.tipo_vehiculo + "  MARCA  " + registro.marca + " PLACA " + registro.placa + " año "+registro.modelo+".<p>" +
                 "<p>Tanto Unity como El Roble, estamos comprometidos con el servicio al cliente y la protección del medio ambiente; por ello, se implementó el envío electrónico de pólizas desde hace un par de años para dar agilidad a la entrega de documentos y proteger los recursos, al no utilizar papel.</p>" +
-                "<p>En nuestra búsqueda de mejoras en el servicio, <a href=\"https://archivos-reclamos.unitypromotores.com/files/RenovacionesElRoble/OneDrive%20-%20Unity%20Seguros/Renovaciones/Enviadas/" + Poliza + "\">ud puede revisar aqui</a> su renovación del período " + Convert.ToDateTime(registro.vigf).AddYears(-1).Year + "/" + Convert.ToDateTime(registro.vigf).Year + "; la cual cuenta con las siguientes condiciones:</p>" +
+                "<p>En nuestra búsqueda de mejoras en el servicio, <b><a href=\"https://archivos-reclamos.unitypromotores.com/files/RenovacionesElRoble/OneDrive%20-%20Unity%20Seguros/Renovaciones/Enviadas/" + Poliza + "\">usted puede revisar aqui</a></b> su renovación del período " + Convert.ToDateTime(registro.vigf).Year + "/" + Convert.ToDateTime(registro.vigf).AddYears(1).Year + "; la cual cuenta con las siguientes condiciones:</p>" +
                 "<p><b>Valor Garantizado</b> este valor es proporcionado por Seguros El Roble y le da la tranquilidad de contar con una suma asegurada adecuada; en la renovación, su vehículo tiene valor Asegurado de Q." + Convert.ToDecimal(registro.suma_aseg_renov).ToString("N2") + "; puede revisar todas las condiciones aplicables a este beneficio en el endoso incluido en su póliza</p>" +
-                "<p><b>Deducibles:</b> "+ Convert.ToDecimal(registro.deduc_min_danos).ToString("N2") + " para daños y "+ Convert.ToDecimal(registro.deduc_min_robo).ToString("N2") + " por pérdida total. Deducible máximo si aplica:" +
+                "<p><b>Deducibles:</b> Q."+ Convert.ToDecimal(registro.deduc_min_danos).ToString("N2") + " para daños y Q."+ Convert.ToDecimal(registro.deduc_min_robo).ToString("N2") + " por pérdida y/o robo total. Deducible máximo si aplica:" +
                 "<p><b>Prima a pagar anual:</b> Q." + Convert.ToDecimal(registro.prima_anual).ToString("N2") + ", fraccionada en " + registro.pagos + " pagos.</p>" +
-                "<p>Las mejoras en límites de cobertura para esta renovación y sin costo adicional, son las siguientes:</p>" +
-
-                "<table style=\"width: 100 %; text-align:center; border: 1px solid black; border-collapse: collapse; border-spacing: 0px !important;\">" +
-                   "  <tr>" +
-                   "    <th style=\"border: 1px solid black; border-collapse: collapse; text-align:center;\">Cobertura</th>" +
-                   "    <th style=\"border: 1px solid black; border-collapse: collapse; text-align:center;\">Actual</th> " +
-                   "    <th style=\"border: 1px solid black; border-collapse: collapse; text-align:center;\">Renovacion 2019/2020</th>" +
-                   "  </tr>" +
-                   "  <tr>" +
-                   "    <td style=\"border: 1px solid black; border-collapse: collapse; text-align:center;\">Responsabilidad Civil ante Terceros</td>" +
-                   "    <td style=\"border: 1px solid black; border-collapse: collapse; text-align:center;\">Q.800,000.00</td>" +
-                   "    <td style=\"border: 1px solid black; border-collapse: collapse; text-align:center;\">Q.1,000,000.00</td>" +
-                   "  </tr>" +
-                   "  <tr>" +
-                   "    <td style=\"border: 1px solid black; border-collapse: collapse; text-align:center;\">Lesiones y Gastos Médicos a ocupantes (Máximo por persona y/o por accidente)</td>" +
-                   "    <td style=\"border: 1px solid black; border-collapse: collapse; text-align:center;\">Q. 30,000.00 por persona Q.150,000.00 por Accidente</td>" +
-                   "    <td style=\"border: 1px solid black; border-collapse: collapse; text-align:center;\">Q. 50,000.00 por persona Q.250,000.00 por Accidente</td>" +
-                   "  </tr>" +
-                   "  <tr>" +
-                   "    <td style=\"border: 1px solid black; border-collapse: collapse; text-align:center;\">Grúa en caso de accidente</td>" +
-                   "    <td style=\"border: 1px solid black; border-collapse: collapse; text-align:center;\">Q.7,500.00</td>" +
-                   "    <td style=\"border: 1px solid black; border-collapse: collapse; text-align:center;\">Q.10,000.00</td>" +
-                   "  </tr>" +
-                   "   <tr>" +
-                   "    <td style=\"border: 1px solid black; border-collapse: collapse; text-align:center;\">Muerte del Piloto a consecuencia del accidente (certificada por el INACIF)</td>" +
-                   "    <td style=\"border: 1px solid black; border-collapse: collapse; text-align:center;\">Q.150,000.00</td>" +
-                   "    <td style=\"border: 1px solid black; border-collapse: collapse; text-align:center;\">Q.250,000.00</td>" +
-                   "  </tr>" +
-                   "   <tr>" +
-                   "    <td style=\"border: 1px solid black; border-collapse: collapse; text-align:center;\">Fianza de Excarcelación</td>" +
-                   "    <td style=\"border: 1px solid black; border-collapse: collapse; text-align:center;\">Q.25,000.00</td>" +
-                   "    <td style=\"border: 1px solid black; border-collapse: collapse; text-align:center;\">Q.50,000.00</td>" +
-                   "  </tr>" +
-                   "</table>" +
-                   "</br>"+
+                /* "<p>Las mejoras en límites de cobertura para esta renovación y sin costo adicional, son las siguientes:</p>" +
+                 "<table style=\"width: 100 %; text-align:center; border: 1px solid black; border-collapse: collapse; border-spacing: 0px !important;\">" +
+                    "  <tr>" +
+                    "    <th style=\"border: 1px solid black; border-collapse: collapse; text-align:center;\">Cobertura</th>" +
+                    "    <th style=\"border: 1px solid black; border-collapse: collapse; text-align:center;\">Actual</th> " +
+                    "    <th style=\"border: 1px solid black; border-collapse: collapse; text-align:center;\">Renovacion 2019/2020</th>" +
+                    "  </tr>" +
+                    "  <tr>" +
+                    "    <td style=\"border: 1px solid black; border-collapse: collapse; text-align:center;\">Responsabilidad Civil ante Terceros</td>" +
+                    "    <td style=\"border: 1px solid black; border-collapse: collapse; text-align:center;\">Q.800,000.00</td>" +
+                    "    <td style=\"border: 1px solid black; border-collapse: collapse; text-align:center;\">Q.1,000,000.00</td>" +
+                    "  </tr>" +
+                    "  <tr>" +
+                    "    <td style=\"border: 1px solid black; border-collapse: collapse; text-align:center;\">Lesiones y Gastos Médicos a ocupantes (Máximo por persona y/o por accidente)</td>" +
+                    "    <td style=\"border: 1px solid black; border-collapse: collapse; text-align:center;\">Q. 30,000.00 por persona Q.150,000.00 por Accidente</td>" +
+                    "    <td style=\"border: 1px solid black; border-collapse: collapse; text-align:center;\">Q. 50,000.00 por persona Q.250,000.00 por Accidente</td>" +
+                    "  </tr>" +
+                    "  <tr>" +
+                    "    <td style=\"border: 1px solid black; border-collapse: collapse; text-align:center;\">Grúa en caso de accidente</td>" +
+                    "    <td style=\"border: 1px solid black; border-collapse: collapse; text-align:center;\">Q.7,500.00</td>" +
+                    "    <td style=\"border: 1px solid black; border-collapse: collapse; text-align:center;\">Q.10,000.00</td>" +
+                    "  </tr>" +
+                    "   <tr>" +
+                    "    <td style=\"border: 1px solid black; border-collapse: collapse; text-align:center;\">Muerte del Piloto a consecuencia del accidente (certificada por el INACIF)</td>" +
+                    "    <td style=\"border: 1px solid black; border-collapse: collapse; text-align:center;\">Q.150,000.00</td>" +
+                    "    <td style=\"border: 1px solid black; border-collapse: collapse; text-align:center;\">Q.250,000.00</td>" +
+                    "  </tr>" +
+                    "   <tr>" +
+                    "    <td style=\"border: 1px solid black; border-collapse: collapse; text-align:center;\">Fianza de Excarcelación</td>" +
+                    "    <td style=\"border: 1px solid black; border-collapse: collapse; text-align:center;\">Q.25,000.00</td>" +
+                    "    <td style=\"border: 1px solid black; border-collapse: collapse; text-align:center;\">Q.50,000.00</td>" +
+                    "  </tr>" +
+                    "</table>" +
+                "</br>" +*/
                 "<p>Las condiciones especiales con que cuenta su póliza, puede revisarlas en el endoso de “Beneficios adicionales incluidos sin cobro de prima” que forma parte de su renovación y consultarnos cualquier duda o aclaración sobre las mismas.</p>" +
                 "<p>A partir de esta vigencia, se ha extendido la cobertura de Asistencia Vehicular a cubrir también la Asistencia Funeraria, cuyas condiciones están descritas en el “Endoso especial Roble asistencia funeraria” que forma parte de su renovación.</p>" +
                 "<p>Actualmente la póliza cubre menores de 25 años, pero mayores de 21 sin cobro adicional de prima; favor indicar si algún menor de 21 años conduce el vehículo, para cotizarle la cobertura adecuada.</p>" +

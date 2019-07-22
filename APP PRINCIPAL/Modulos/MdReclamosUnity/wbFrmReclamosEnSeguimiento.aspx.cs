@@ -25,7 +25,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosEnSeguimiento : System
 
         reclamosGeneral = "SELECT " +
           " r.id AS ID," +
-          " r.estado_unity as [Estado Unity],"+
+          " r.num_reclamo as [Numero Reclamo]," +
           " r.estado_auto_unity as [Estado Auto]," +
           " r.usuario_unity as [Usuario Unity]," +
           " a.poliza as Poliza," +
@@ -129,7 +129,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosEnSeguimiento : System
             }
 
         if (e.Row.RowType == DataControlRowType.DataRow)
-            if (Convert.ToDateTime(e.Row.Cells[pocision].Text) < DateTime.Today && e.Row.Cells[pocision].Text =="")
+            if (Convert.ToDateTime(e.Row.Cells[pocision].Text) < DateTime.Today)
             {
                  e.Row.Attributes.Add("style", "background-color: #f7c6be"); //rojos
             }

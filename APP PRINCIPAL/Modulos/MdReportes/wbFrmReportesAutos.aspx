@@ -150,7 +150,7 @@
                             <asp:GridView ID="GridEficiencia" runat="server" CssClass="table bs-table table-responsive" AutoGenerateColumns="True" ForeColor="#333333" GridLines="None" AllowCustomPaging="True" PageSize="3000" OnRowDataBound="GridEficiencia_RowDataBound" ShowFooter="true">
                                 <AlternatingRowStyle BackColor="White" />
                                 <FooterStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" />
-                                <HeaderStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" HorizontalAlign="Center" Wrap="False" />
+                                <HeaderStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" HorizontalAlign="Center" Wrap="True" />
                                 <RowStyle BackColor="#EFF3FB" HorizontalAlign="Right" Wrap="False" />
                             </asp:GridView>
                         </div>
@@ -206,7 +206,11 @@
             $('#ContentPlaceHolder1_GridEficiencia tr').each(function (index) {
                 $tr = $(this);
                 if (index > 0) {
-                    $td = $tr[0].cells[15];
+                    $td = $tr[0].cells[8];
+                    $td.innerText = $td.innerText + ' %';
+                    $td.className = 'alinearNumeros';
+
+                     $td = $tr[0].cells[9];
                     $td.innerText = $td.innerText + ' %';
                     $td.className = 'alinearNumeros';
                 }

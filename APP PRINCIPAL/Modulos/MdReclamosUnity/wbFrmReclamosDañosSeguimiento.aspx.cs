@@ -164,6 +164,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosDañosSeguimiento : Sy
             checkPrioritario.Checked = reclamo.prioritario.Value;
             CheckComplicado.Checked  = reclamo.complicado.Value;
             checkCompromiso.Checked  = reclamo.compromiso_pago.Value;
+            CheckReaseuro.Checked = reclamo.reaseguro.Value;
 
             //informacion del taller asignado
             txtNombreTaller.Text    = reclamo.talleres.nombre;

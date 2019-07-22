@@ -28,6 +28,10 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesMedicos : System.Web.U
             listas();
             checkSinFiltro.Checked = true;
             checkSinFiltro_CheckedChanged(sender, e);
+            DateTime primerDia = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
+            DateTime ultimoDia = primerDia.AddMonths(1).AddDays(-1);
+            txtFechaInicio.Text = primerDia.ToString("yyyy/MM/dd").Replace("/", "-");
+            txtFechaFin.Text = ultimoDia.ToString("yyyy/MM/dd").Replace("/", "-");
         }
 
         //if (userlogin == "jlaj" || userlogin == "jwiesner" || userlogin == "jflores" || userlogin == "lteo" || userlogin == "kmejia")
@@ -229,7 +233,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesMedicos : System.Web.U
              "into #cicloAseguradora " +
              "from reclamos_medicos as r " +
              "inner join reg_reclamos_medicos as reg on reg.id = r.id_reg_reclamos_medicos " +
-             "where(r.estado_unity = 'Cerrado') and (Convert(date,r.fecha_cierre, 112) between '" + txtFechaInicio.Text + "' and '" + txtFechaFin.Text + "') " +
+             "where r.estado_unity = 'Cerrado' and (Convert(date,r.fecha_cierre, 112) between '" + txtFechaInicio.Text + "' and '" + txtFechaFin.Text + "') " +
              "and (" + ddlTipoReclamo.SelectedValue + " ) and (" + ddlMoneda.SelectedValue + ") group by reg.aseguradora " +
              "select " +
              "aseguradora as Aseguradora, " +

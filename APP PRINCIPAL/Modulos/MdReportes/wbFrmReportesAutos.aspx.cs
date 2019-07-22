@@ -21,6 +21,10 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesAutos : System.Web.UI.
         if (!IsPostBack)
         {
             checkSinFiltro_CheckedChanged(sender, e);
+            DateTime primerDia = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
+            DateTime ultimoDia = primerDia.AddMonths(1).AddDays(-1);
+            txtFechaInicio.Text = primerDia.ToString("yyyy/MM/dd").Replace("/", "-");
+            txtFechaFin.Text = ultimoDia.ToString("yyyy/MM/dd").Replace("/", "-");
         }
 
         if (userlogin == "jsagastume" || userlogin == "jlaj" || userlogin == "jwiesner" || userlogin == "nsierra" || userlogin == "jpazos" || userlogin =="mbarrios")
@@ -392,11 +396,11 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesAutos : System.Web.UI.
                 Pendientes       += Convert.ToDouble(DataBinder.Eval(e.Row.DataItem, "[Pendientes]"));
                 Nuevos           += Convert.ToDouble(DataBinder.Eval(e.Row.DataItem, "[Nuevos]"));
                 Cerrados         += Convert.ToDouble(DataBinder.Eval(e.Row.DataItem, "[Cerrados]"));
-                CCIFT            += Convert.ToDouble(DataBinder.Eval(e.Row.DataItem, "[Cerrados_Con_Importacion_Fuera_Tiempo]"));
-                CSIFT            += Convert.ToDouble(DataBinder.Eval(e.Row.DataItem, "[Cerrados_Sin_Importacion_Fuera_Tiempo]"));
-                PCIFT            += Convert.ToDouble(DataBinder.Eval(e.Row.DataItem, "[Pendientes_Con_Importacion_Fuera_Tiempo]"));
-                PSIFT            += Convert.ToDouble(DataBinder.Eval(e.Row.DataItem, "[Pendientes_Sin_Importacion_Fuera_Tiempo]"));
-                EficienciaCierre += Convert.ToDouble(DataBinder.Eval(e.Row.DataItem, "[Eficiencia_cierre]"));
+                CCIFT            += Convert.ToDouble(DataBinder.Eval(e.Row.DataItem, "[Cerrados Con Importacion_Fuera_Tiempo]"));
+                CSIFT            += Convert.ToDouble(DataBinder.Eval(e.Row.DataItem, "[Cerrados Sin Importacion_Fuera_Tiempo]"));
+                PCIFT            += Convert.ToDouble(DataBinder.Eval(e.Row.DataItem, "[Pendientes Con Importacion_Fuera_Tiempo]"));
+                PSIFT            += Convert.ToDouble(DataBinder.Eval(e.Row.DataItem, "[Pendientes Sin Importacion_Fuera_Tiempo]"));
+                EficienciaCierre += Convert.ToDouble(DataBinder.Eval(e.Row.DataItem, "[Eficiencia Cierre]"));
                 Anejamiento      += Convert.ToDouble(DataBinder.Eval(e.Row.DataItem, "[Añejamiento]"));
             }
             else if (e.Row.RowType == DataControlRowType.Footer)
@@ -430,11 +434,11 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesAutos : System.Web.UI.
                 e.Row.Cells[7].HorizontalAlign = HorizontalAlign.Right;
                 e.Row.Font.Bold = true;
 
-                e.Row.Cells[8].Text = (EficienciaCierre / GridEficiencia.Rows.Count).ToString();
+                e.Row.Cells[8].Text = (((CCIFT + CSIFT) /Cerrados) *100 ).ToString("N2");
                 e.Row.Cells[8].HorizontalAlign = HorizontalAlign.Right;
                 e.Row.Font.Bold = true;
 
-                e.Row.Cells[9].Text = (Anejamiento / GridEficiencia.Rows.Count).ToString();
+                e.Row.Cells[9].Text = (((PCIFT + PSIFT) / Pendientes) * 100).ToString("N2");
                 e.Row.Cells[9].HorizontalAlign = HorizontalAlign.Right;
                 e.Row.Font.Bold = true;
             }
