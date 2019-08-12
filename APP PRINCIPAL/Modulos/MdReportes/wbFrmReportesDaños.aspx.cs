@@ -13,7 +13,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesDaños : System.Web.UI
     String buscar;
     String EficienciaGestor;
     Double Pendientes, Nuevos, Cerrados, Ejecucion,CCRFT,CSRFT,PCRFT,PSRFT,EficienciaCierre,Anejamiento;
-    int Promedio, Total, KPI, EjecucionCiclos;
+    int Promedio, Total, KPI, KpiReaseguro, EjecucionCiclos;
     int Total2, Promedio2, EjecucionCiclos2;
     conexionBD obj = new conexionBD();
     ReclamosEntities DBReclamos = new ReclamosEntities();
@@ -379,12 +379,18 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesDaños : System.Web.UI
 
         else if (ddlCiclos.SelectedValue == "Ciclo Aseguradora")
         {
-            KPI = 32;
+            KPI = 100;
+            KpiReaseguro = 100;
             PanelCamposSeleccion.Visible = false;
             PanelEficiencia.Visible = false;
             PnCiclos.Visible = true;
-            Utils.Ciclos_Reclamos(txtFechaInicio, txtFechaFin, "pa_ciclos_reclamos_danios", GridCiclos, 2,KPI);
-            lblTitulo.Text = "Ciclo Aseguradora, KPI sobre " + KPI.ToString() + " dias";
+            //Utils.Ciclos_Reclamos(txtFechaInicio, txtFechaFin, "pa_ciclos_reclamos_danios", GridCiclos, 2,KPI);
+            Utils.Ciclos_Reclamos_tipo(txtFechaInicio, txtFechaFin, "pa_ciclos_reclamos_danios_reaseguro", GridCiclos, 2, KPI,1);
+            KPI = 32;
+            Utils.Ciclos_Reclamos_tipo(txtFechaInicio, txtFechaFin, "pa_ciclos_reclamos_danios_reaseguro", GridCiclos2, 2, KPI,0);
+            lblTitulo.Text = "Ciclo Aseguradora, KPI sobre " + KPI.ToString() + " dias sin reaseguro y "+KpiReaseguro+" con reaseguro.";
+            KpiConReaseguro.Text = "Con Reaseguro Evaluado sobre " + KpiReaseguro + " Dias";
+            KpiSinReaseguro.Text = "Sin Reaseguro Evaluado sobre " + KPI + " Dias";
             Utils.actividades(0, Constantes.DANIOS(), 32, Constantes.USER());
         }
     }
@@ -436,11 +442,11 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesDaños : System.Web.UI
                 e.Row.Cells[7].HorizontalAlign = HorizontalAlign.Right;
                 e.Row.Font.Bold = true;
 
-                e.Row.Cells[8].Text = (((CCRFT + CSRFT) / Cerrados) * 100).ToString("N2");
+                e.Row.Cells[8].Text = ((1 - ((CCRFT + CSRFT) / Cerrados)) * 100).ToString("N2");
                 e.Row.Cells[8].HorizontalAlign = HorizontalAlign.Right;
                 e.Row.Font.Bold = true;
 
-                e.Row.Cells[9].Text = (((PCRFT + PSRFT) / Pendientes) * 100).ToString("N2");
+                e.Row.Cells[9].Text = ((1 - ((PCRFT + PSRFT) / Pendientes)) * 100).ToString("N2");
                 e.Row.Cells[9].HorizontalAlign = HorizontalAlign.Right;
                 e.Row.Font.Bold = true;
             }
@@ -472,7 +478,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesDaños : System.Web.UI
                 e.Row.Cells[2].HorizontalAlign = HorizontalAlign.Left;
                 e.Row.Font.Bold = true;
 
-                e.Row.Cells[3].Text = (EjecucionCiclos / GridCiclos.Rows.Count).ToString() + " %";
+                e.Row.Cells[3].Text = ((Convert.ToDouble(KPI) / (Promedio / GridCiclos.Rows.Count)) * 100).ToString("N2");
                 e.Row.Cells[3].HorizontalAlign = HorizontalAlign.Left;
                 e.Row.Font.Bold = true;
             }
@@ -492,12 +498,12 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesDaños : System.Web.UI
                 Promedio2 += Convert.ToInt32(DataBinder.Eval(e.Row.DataItem, "[Promedio_dias]"));
                 EjecucionCiclos2 += Convert.ToInt32(DataBinder.Eval(e.Row.DataItem, "Ejecucion"));
 
-                if (Convert.ToInt32(e.Row.Cells[3].Text) <= 100)
+                if (Convert.ToInt32(e.Row.Cells[3].Text) >= 90)
                 {
-                    e.Row.Attributes.Add("style", "background-color: #8ace8e"); //rojos
+                    e.Row.Attributes.Add("style", "background-color: #8ace8e"); //verdes
                 }
 
-                if (Convert.ToInt32(e.Row.Cells[3].Text) > 100)
+                if (Convert.ToInt32(e.Row.Cells[3].Text) < 90)
                 {
                     e.Row.Attributes.Add("style", "background-color: #f7c6be"); //rojos
                 }
@@ -514,7 +520,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesDaños : System.Web.UI
                 e.Row.Cells[2].HorizontalAlign = HorizontalAlign.Left;
                 e.Row.Font.Bold = true;
 
-                e.Row.Cells[3].Text = (EjecucionCiclos2 / GridCiclos2.Rows.Count).ToString() + " %";
+                e.Row.Cells[3].Text = ((Convert.ToDouble(KPI) / (Promedio2 / GridCiclos2.Rows.Count)) * 100 ).ToString("N2");
                 e.Row.Cells[3].HorizontalAlign = HorizontalAlign.Left;
                 e.Row.Font.Bold = true;
             }

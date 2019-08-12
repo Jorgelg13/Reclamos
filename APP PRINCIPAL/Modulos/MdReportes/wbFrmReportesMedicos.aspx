@@ -73,7 +73,6 @@
                         <asp:ListItem Value="Ciclo Cliente">Ciclo Total</asp:ListItem>
                         <asp:ListItem Value="Ciclo Ejecutivo">Ciclo Unity</asp:ListItem>
                         <asp:ListItem Value="Ciclo Ejecutivo por etapa">Ciclo Ejecutivo por etapas</asp:ListItem>
-                        <asp:ListItem Value="Eficiencia">Eficiencia</asp:ListItem>
                     </asp:DropDownList>
                     <label>Moneda</label>
                     <asp:DropDownList ID="ddlMoneda" runat="server" Style="width: 10%; height: 24px;">
@@ -82,6 +81,7 @@
                         <asp:ListItem Value="reg.moneda = 'Quetzales'">Quetzales</asp:ListItem>
                     </asp:DropDownList>
                     <asp:Button ID="Mostrar" OnClick="Mostrar_Click" Style="margin-left: 20px" runat="server" Text="Mostrar" />
+                    <asp:Button ID="btnEficiencia" OnClick="btnEficiencia_Click" Style="margin-left: 20px" runat="server" Text="Eficiencia" />
                 </div>
                 <div class="panel-body" style="height: 520px;">
                     <div class="row">
@@ -321,7 +321,11 @@
             $('#ContentPlaceHolder1_GridEficiencia tr').each(function (index) {
                 $tr = $(this);
                 if (index > 0) {
-                    $td = $tr[0].cells[5];
+                    $td = $tr[0].cells[6];
+                    $td.innerText = $td.innerText + ' %';
+                    $td.className = 'alinearNumeros';
+
+                     $td = $tr[0].cells[7];
                     $td.innerText = $td.innerText + ' %';
                     $td.className = 'alinearNumeros';
                 }

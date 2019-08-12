@@ -120,6 +120,7 @@
                                 <li><a href="/Modulos/MdCatalogos/wbAseguradoras.aspx">Aseguradoras</a></li>
                                 <li><a href="/Modulos/MdCatalogos/wbTipoDocumentos.aspx?id=1">Documentos Autos</a></li>
                                 <li><a href="/Modulos/MdCatalogos/wbTipoDocumentos.aspx?id=2">Documentos Daños varios</a></li>
+                                <li><a href="/Modulos/MdCatalogos/wbAsegurados.aspx">Catalogo de asegurados</a></li>
                             </ul>
                         </li>
                     </ul>

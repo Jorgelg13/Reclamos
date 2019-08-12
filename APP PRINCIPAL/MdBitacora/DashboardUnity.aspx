@@ -28,7 +28,21 @@
         <br />
         <asp:Panel runat="server" ID="PanelPrincipal">
             <div class="container menu-cuadrado btn-acciones-laterales">
-                <div class="col-md-4 col-lg-4" style="height: 300px;">
+                <div class="col-md-3 col-lg-3" style="height: 300px;">
+                    <div class="panel panel-info">
+                        <div class="panel-heading">
+                            <p style="text-align: center; font-size: 16px;"><b>Cabina De Emergencias</b></p>
+                        </div>
+                        <div class="panel-body">
+                            <h1>
+                                <asp:LinkButton runat="server" title="Busqueda de reclamos" Style="font-size: 80px;" ID="ConsultarCabina" OnClick="ConsultarCabina_Click"><i class="fa fa-car"></i></asp:LinkButton>
+                                <br />
+                                <br />
+                            </h1>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-lg-3" style="height: 300px;">
                     <div class="panel panel-info">
                         <div class="panel-heading">
                             <p style="text-align: center; font-size: 16px;"><b>Consultar Reclamos</b></p>
@@ -42,7 +56,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4 col-lg-4" style="height: 300px;">
+                <div class="col-md-3 col-lg-3" style="height: 300px;">
                     <div class="panel panel-info">
                         <div class="panel-heading">
                             <p style="text-align: center; font-size: 16px;"><b>Generar Reportes</b></p>
@@ -56,7 +70,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4 col-lg-4" style="height: 300px;">
+                <div class="col-md-3 col-lg-3" style="height: 300px;">
                     <div class="panel panel-info">
                         <div class="panel-heading">
                             <p style="text-align: center; font-size: 16px;"><b>Maternidad</b></p>
@@ -158,6 +172,36 @@
                                 <a href="/MdBitacora/ReportesMedicos.aspx" title="Reportes de gastos medicos" style="font-size: 80px;" class="fa fa-heartbeat"></a>
                                 <br />
                                 <br />
+                            </h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </asp:Panel>
+        <asp:Panel runat="server" ID="PanelCabina" Visible="false">
+            <div class="container menu-cuadrado btn-acciones-laterales">
+                <div class="col-md-6 col-lg-6">
+                    <div class="panel panel-info" style="height: 200px;">
+                        <div class="panel-heading">
+                            <p style="text-align: center; font-size: 16px;"><b>Asistencias y accidentes de autos</b></p>
+                        </div>
+                        <div class="panel-body">
+                            <h1>
+                               <a href="/MdBitacora/CabinaUnity/Consultas.aspx?id=1" style="font-size: 90px;" class="fa fa-car ">
+                                   <asp:Label ID="totalReclamosAutos" runat="server" ForeColor="#797D7F"></asp:Label></a>
+                            </h1>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-6">
+                    <div class="panel panel-info" style="height: 200px;">
+                        <div class="panel-heading">
+                            <p style="text-align: center; font-size: 16px;"><b>Asistencias de daños varios</b></p>
+                        </div>
+                        <div class="panel-body">
+                            <h1>
+                               <a href="/MdBitacora/CabinaUnity/Consultas.aspx?id=2" style="font-size: 90px;" class="fa fa-exclamation-triangle">
+                               <asp:Label ID="totalReclamosDaños" runat="server" ForeColor="#797D7F"></asp:Label></a>
                             </h1>
                         </div>
                     </div>

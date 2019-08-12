@@ -37,7 +37,7 @@ public class Consultas
     public static string ESTADOS(int ID)
     {
         return "SELECT ber.estado as Estado, ber.fecha as Fecha, " +
-            "datediff(day, ber.fecha, (select top 1 fecha from bitacora_estados_reclamos_varios ber2 where ber2.id > ber.id and ber2.id_reclamos_varios = " + ID + ")) as Dias " +
+            " isnull( datediff(day, ber.fecha, (select top 1 fecha from bitacora_estados_reclamos_varios ber2 where ber2.id > ber.id and ber2.id_reclamos_varios = " + ID + ")),datediff(day, ber.fecha, GETDATE())) as Dias " +
             "FROM bitacora_estados_reclamos_varios as ber where id_reclamos_varios = " + ID + " ";
     }
 
@@ -160,6 +160,7 @@ public class Consultas
     public static string POLIZAS_RENOVADAS(int codigo,  int ddlEstado, String fInicio, String fFin)
     {
         String userlogin = HttpContext.Current.User.Identity.Name;
+        String backoffice = Utils.backOffice(userlogin);
 
         string rol = "E";
 
@@ -183,13 +184,14 @@ public class Consultas
             "r.placa as Placa," +
             "r.vigf as [Vigencia Final]," +
             "r.correo_cliente as [Correo Cliente]," +
-            "  (select top 1 fecha from renovaciones_log where poliza = r.id) as [Fecha Registro]" +
+            " (select top 1 fecha from renovaciones_log where poliza = r.id) as [Fecha Registro]" +
             " from renovaciones_polizas r " +
             "where r.estado = " + ddlEstado;
 
         if (rol == "E")
         {
-            sql += " and r.codigo_gestor = " + codigo;
+            //sql += " and r.codigo_gestor = " + codigo;
+            sql += " and r.codigo_gestor in ("+ backoffice+")";
         }
 
         else if (rol == "S")

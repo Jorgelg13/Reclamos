@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Web.UI;
 using System.Web.UI.WebControls;
 
 public partial class MdBitacora_CabinaVirtual_Pendientes : System.Web.UI.Page
@@ -13,11 +14,19 @@ public partial class MdBitacora_CabinaVirtual_Pendientes : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
-        consulta = "select id, nombre as Nombre, correo as Correo, telefono as Telefono, codigo as Codigo, fechareg as Fecha from cabina_virtual where estado = 0";
+        consulta = "select id, nombre as Nombre, correo as Correo, telefono as Telefono, codigo as Codigo, fechareg as Fecha, estado as Estado from cabina_virtual where estado = 0";
 
         if (!IsPostBack)
         {
             llenado.llenarGrid(consulta, GridPendientes);
+
+            if (!IsPostBack)
+            {
+                DateTime primerDia = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
+                DateTime ultimoDia = primerDia.AddMonths(1).AddDays(-1);
+                txtFechaInicio.Text = primerDia.ToString("yyyy/MM/dd").Replace("/", "-");
+                txtFechaFin.Text = ultimoDia.ToString("yyyy/MM/dd").Replace("/", "-");
+            }
         }
     }
 
@@ -52,5 +61,22 @@ public partial class MdBitacora_CabinaVirtual_Pendientes : System.Web.UI.Page
         }
 
         llenado.llenarGrid(consulta, GridPendientes);
+    }
+
+    public override void VerifyRenderingInServerForm(Control control)
+    {
+        //base.VerifyRenderingInServerForm(control);
+    }
+
+    protected void btnBuscar_Click(object sender, EventArgs e)
+    {
+        consulta = "select id, nombre as Nombre, correo as Correo, telefono as Telefono, codigo as Codigo, fechareg as Fecha, estado as Estado from cabina_virtual where estado in (" + ddlFiltro.SelectedValue + ") " +
+           " and convert(date,fechareg,112) between '" + txtFechaInicio.Text + "' and '" + txtFechaFin.Text + "'";
+        llenado.llenarGrid(consulta, GridPendientes);
+    }
+
+    protected void btnDescargar_Click(object sender, EventArgs e)
+    {
+        Utils.ExportarExcel(GridPendientes, Response, "Reporte Cabina Virtual");
     }
 }

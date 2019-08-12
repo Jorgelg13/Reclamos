@@ -25,14 +25,12 @@
 <body>
     <form id="form1" runat="server">
         <div class="jumbotron titulo-cabecera">
-            <h3 style="width: 781px; padding-bottom: 23px; padding-top:4px;"><a href="/Consultas/Caja-de-ahorro/Dashboard.aspx" style="color:white">Consultas Caja De Ahorro</a></h3>
+            <h3 style="width: 781px; padding-bottom: 23px; padding-top:4px;"><a href="/Consultas/Caja-de-ahorro/Dashboard.aspx" style="color:white">Consultas Unity Promotores</a></h3>
             <header>
                 <div class="content-wrapper">
-                    <div class="float-right ocultar">
                         <div class="img-float-right ocultar" style="float: right;">
-                            <img src="../../imgUnity/caja.png" style="margin-top: -114px" />
+                            <img src="../../imgUnity/Unity%20Promotores-%20Logo%20en%20blanco.png" style="margin-top: -99px; width:150px;" />
                         </div>
-                    </div>
                 </div>
             </header>
         </div>

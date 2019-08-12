@@ -63,7 +63,6 @@
                                 <asp:ListItem>Fisioterapias</asp:ListItem>
                                 <asp:ListItem>Control de niño sano</asp:ListItem>
                                 <asp:ListItem>Dental</asp:ListItem>
-                                <asp:ListItem>Otros</asp:ListItem>
                             </asp:DropDownList>
                         </div>
                         <div class="form-group col-sm-12 col-md-6 col-lg-6">

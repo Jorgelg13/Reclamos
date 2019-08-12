@@ -747,15 +747,17 @@
                                 <h4 class="modal-title"><b>Tiempo Del Reclamo</b></h4>
                             </div>
                             <div class="modal-body">
-                                <div class="TiempoReclamo center-block">
+                                <div class="TiempoReclamo center-block" style="display:none">
                                 </div>
                                 <div class="scrolling-table-container">
                                     <b><span style="font-size: 20px">Estados y Tiempo del reclamo</span></b>
-                                    <asp:GridView ID="GridEstados" CssClass="table bs-table table-responsive table-hover" runat="server" AutoGenerateColumns="true" CellPadding="4" ForeColor="#333333" GridLines="None">
+                                    <asp:GridView ID="GridEstados" CssClass="table bs-table table-responsive table-hover" runat="server" 
+                                        AutoGenerateColumns="true" ShowFooter="true" CellPadding="4" ForeColor="#333333" GridLines="None" OnRowDataBound="GridEstados_RowDataBound">
                                         <AlternatingRowStyle BackColor="White" />
                                         <HeaderStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" HorizontalAlign="Center" Wrap="False" />
                                         <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
                                         <RowStyle BackColor="#EFF3FB" HorizontalAlign="Left" Wrap="False" />
+                                        <FooterStyle BackColor="#131B4D" HorizontalAlign="Left" Wrap="False" ForeColor="White" />
                                     </asp:GridView>
                                 </div>
                             </div>

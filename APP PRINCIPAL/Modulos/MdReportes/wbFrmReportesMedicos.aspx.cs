@@ -16,7 +16,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesMedicos : System.Web.U
     int kpiAseguradora = 15; //dias
     int kpiUnity = 72; //horas
     Double TotalReclamos, totalPromedioUsuario, totalPendientes;
-    int totalNuevos, totalCerrados, totalFueraTiempo;
+    int totalNuevos, totalCerrados,pendientesFueratiempo, totalFueraTiempo;
     Double totalPromedio, totalPromedioPonderado, totalPromedioEjecucion;
     String buscar;
     //variable que contiene todos los joins que se hacen en el query del reporte
@@ -218,7 +218,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesMedicos : System.Web.U
     {
         if (ddlTipoReclamo.SelectedItem.Text == "Colectivos")
         {
-            kpiAseguradora = ddlMoneda.SelectedItem.Text == "Dolares" ? 35 : 12;
+            kpiAseguradora = ddlMoneda.SelectedItem.Text == "Dolares" ? 35 : 11;
         }
 
         else if (ddlTipoReclamo.SelectedItem.Text == "Individual")
@@ -286,7 +286,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesMedicos : System.Web.U
     {
         if(ddlTipoReclamo.SelectedItem.Text == "Colectivos")
         {
-            kpiUnity = 55;
+            kpiUnity = 35;
         }
 
         string ejecutivoKPI = "select count(*) total_reclamos, " +
@@ -507,7 +507,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesMedicos : System.Web.U
                 e.Row.Cells[2].HorizontalAlign = HorizontalAlign.Left;
                 e.Row.Font.Bold = true;
 
-                e.Row.Cells[3].Text = (totalPromedioEjecucion / GridEjecutivosKPI.Rows.Count).ToString("N");
+                e.Row.Cells[3].Text = ((kpiUnity / (totalPromedioUsuario / GridEjecutivosKPI.Rows.Count)) * 100).ToString("N");
                 e.Row.Cells[3].HorizontalAlign = HorizontalAlign.Left;
 
                 e.Row.Font.Bold = true;
@@ -528,7 +528,8 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesMedicos : System.Web.U
                 totalPendientes += Convert.ToInt32(DataBinder.Eval(e.Row.DataItem, "[Pendientes]"));
                 totalNuevos += Convert.ToInt32(DataBinder.Eval(e.Row.DataItem, "[Nuevos]"));
                 totalCerrados += Convert.ToInt32(DataBinder.Eval(e.Row.DataItem, "[Cerrados]"));
-                totalFueraTiempo += Convert.ToInt32(DataBinder.Eval(e.Row.DataItem, "[Fuera_de_tiempo]"));
+                pendientesFueratiempo += Convert.ToInt32(DataBinder.Eval(e.Row.DataItem, "[Pendientes_fuera_tiempo]"));
+                totalFueraTiempo += Convert.ToInt32(DataBinder.Eval(e.Row.DataItem, "[Cerrados_fuera_tiempo]"));
                 totalPromedioEjecucion += Convert.ToDouble(DataBinder.Eval(e.Row.DataItem, "[Ejecucion]"));
             }
             else if (e.Row.RowType == DataControlRowType.Footer)
@@ -546,12 +547,20 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesMedicos : System.Web.U
                 e.Row.Cells[3].HorizontalAlign = HorizontalAlign.Left;
                 e.Row.Font.Bold = true;
 
-                e.Row.Cells[4].Text = totalFueraTiempo.ToString();
+                e.Row.Cells[4].Text = pendientesFueratiempo.ToString();
                 e.Row.Cells[4].HorizontalAlign = HorizontalAlign.Left;
                 e.Row.Font.Bold = true;
 
-                e.Row.Cells[5].Text = (totalPromedioEjecucion / Convert.ToDouble(GridEficiencia.Rows.Count)).ToString("N2");
+                e.Row.Cells[5].Text = totalFueraTiempo.ToString();
                 e.Row.Cells[5].HorizontalAlign = HorizontalAlign.Left;
+                e.Row.Font.Bold = true;
+
+                e.Row.Cells[6].Text = ((1 - (Convert.ToDouble(totalFueraTiempo) / Convert.ToDouble(totalCerrados) )) * 100).ToString("N2");
+                e.Row.Cells[6].HorizontalAlign = HorizontalAlign.Left;
+                e.Row.Font.Bold = true;
+
+                e.Row.Cells[7].Text = ((1 - (Convert.ToDouble(pendientesFueratiempo) / Convert.ToDouble(totalPendientes))) * 100).ToString("N2");
+                e.Row.Cells[7].HorizontalAlign = HorizontalAlign.Left;
                 e.Row.Font.Bold = true;
             }
         }
@@ -635,26 +644,6 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesMedicos : System.Web.U
             PnCicloEjecutivo.Visible = true;
             Utils.actividades(0, Constantes.GASTOS_MEDICOS(), 32, Constantes.USER());
         }
-
-        else if (ddlCiclos.SelectedValue == "Eficiencia")
-        {
-            if (ddlTipoReclamo.SelectedItem.Text == "Individual")
-            {
-                KPI_EFICIENCIA = "Eficiencia evaluada sobre el 80%";
-                Utils.Reportes(txtFechaInicio, txtFechaFin, "pa_eficiencia_individuales", GridEficiencia);
-            }
-
-            else
-            {
-                KPI_EFICIENCIA = "Eficiencia evaluada sobre el 85%";
-                Utils.Reportes(txtFechaInicio, txtFechaFin, "pa_eficiencia_colectivos", GridEficiencia);
-            }
-
-            TituloReporte("Eficiencia Usuarios", KPI_EFICIENCIA, ddlMoneda.SelectedItem.Text);
-            PnReporte.Visible = false;
-            PnEficiencia.Visible = true;
-            Utils.actividades(0, Constantes.GASTOS_MEDICOS(), 30, Constantes.USER());
-        }
     }
 
     public void TituloReporte(String Titulo, String KPI, String Moneda)
@@ -673,5 +662,25 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesMedicos : System.Web.U
         {
             
         }
+    }
+
+    protected void btnEficiencia_Click(object sender, EventArgs e)
+    {
+        if (ddlTipoReclamo.SelectedItem.Text == "Individual")
+        {
+            KPI_EFICIENCIA = "Eficiencia evaluada sobre el 80%";
+            Utils.Reportes(txtFechaInicio, txtFechaFin, "pa_eficiencia_individuales", GridEficiencia);
+        }
+
+        else
+        {
+            KPI_EFICIENCIA = "Eficiencia evaluada sobre el 85%";
+            Utils.Reportes(txtFechaInicio, txtFechaFin, "pa_eficiencia_colectivos", GridEficiencia);
+        }
+
+        TituloReporte("Eficiencia Usuarios", KPI_EFICIENCIA, ddlMoneda.SelectedItem.Text);
+        PnReporte.Visible = false;
+        PnEficiencia.Visible = true;
+        Utils.actividades(0, Constantes.GASTOS_MEDICOS(), 30, Constantes.USER());
     }
 }

@@ -689,6 +689,17 @@ public partial class gestores
     public virtual ICollection<reclamos_varios> reclamos_varios { get; set; }
 }
 
+public partial class info_asegurado
+{
+    public int id { get; set; }
+    public string poliza { get; set; }
+    public string ejecutivo { get; set; }
+    public string asegurado { get; set; }
+    public string parentesco { get; set; }
+    public string carne { get; set; }
+    public Nullable<bool> estado { get; set; }
+}
+
 public partial class ingreso_cheques
 {
     public int id { get; set; }
@@ -1191,6 +1202,7 @@ public partial class usuario
     public string cabina { get; set; }
     public Nullable<short> codigo { get; set; }
     public string rol { get; set; }
+    public string backOffice { get; set; }
 
     public virtual ICollection<autorizaciones> autorizaciones { get; set; }
     public virtual cabina cabina1 { get; set; }
@@ -1356,6 +1368,20 @@ public partial class pa_cargar_danios_varios_Result
     public string ErrorMessage { get; set; }
 }
 
+public partial class pa_eficiencia_autos_Result
+{
+    public string Usuario { get; set; }
+    public Nullable<int> Pendientes { get; set; }
+    public Nullable<int> Nuevos { get; set; }
+    public Nullable<int> Cerrados { get; set; }
+    public Nullable<int> Cerrados_Con_Importacion_Fuera_Tiempo { get; set; }
+    public Nullable<int> Cerrados_Sin_Importacion_Fuera_Tiempo { get; set; }
+    public Nullable<int> Pendientes_Con_Importacion_Fuera_Tiempo { get; set; }
+    public Nullable<int> Pendientes_Sin_Importacion_Fuera_Tiempo { get; set; }
+    public Nullable<double> Eficiencia_Cierre { get; set; }
+    public Nullable<double> Añejamiento { get; set; }
+}
+
 public partial class pa_eficiencia_colectivos_Result
 {
     public string Nombre { get; set; }
@@ -1364,6 +1390,20 @@ public partial class pa_eficiencia_colectivos_Result
     public Nullable<int> Cerrados { get; set; }
     public Nullable<int> Fuera_de_tiempo { get; set; }
     public Nullable<int> Ejecucion { get; set; }
+}
+
+public partial class pa_eficiencia_danos_varios_Result
+{
+    public string Usuario { get; set; }
+    public Nullable<int> Pendientes { get; set; }
+    public Nullable<int> Nuevos { get; set; }
+    public Nullable<int> Cerrados { get; set; }
+    public Nullable<int> Cerrados_Con_Reaseguro_Fuera_Tiempo { get; set; }
+    public Nullable<int> Cerrados_Sin_Reaseguro_Fuera_Tiempo { get; set; }
+    public Nullable<int> Pendientes_Con_Reaseguro_Fuera_Tiempo { get; set; }
+    public Nullable<int> Pendientes_Sin_Reaseguro_Fuera_Tiempo { get; set; }
+    public Nullable<double> Ejecucion_Cierre { get; set; }
+    public Nullable<double> Añejamiento { get; set; }
 }
 
 public partial class pa_eficiencia_individuales_Result

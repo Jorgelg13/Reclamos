@@ -50,6 +50,9 @@ public partial class Modulos_MdReclamos_wbFrmReclamoDañoManual : System.Web.UI.
                 }
 
                 reg_reclamo_varios registro = new reg_reclamo_varios();
+                var sec_registro = DBReclamos.pa_sec_reg_reclamos_danios_varios();
+                long? id_registro = sec_registro.Single();
+                registro.id = Convert.ToInt32(id_registro);
                 registro.poliza = txtPoliza.Text.ToString();
                 registro.direccion = txtDireccion.Text.ToString();
                 registro.ejecutivo = txtEjecutivo.Text.ToString();
@@ -63,6 +66,9 @@ public partial class Modulos_MdReclamos_wbFrmReclamoDañoManual : System.Web.UI.
                 }
 
                 reclamos_varios reclamo = new reclamos_varios();
+                var reclamo_id = DBReclamos.pa_sec_reclamos_varios();
+                long? id_reclamo = reclamo_id.Single();
+                reclamo.id = Convert.ToInt32(id_reclamo);
                 reclamo.boleta = txtBoleta.Text;
                 reclamo.titular = txtTitular.Text;
                 reclamo.ubicacion = txtUbicacion.Text;

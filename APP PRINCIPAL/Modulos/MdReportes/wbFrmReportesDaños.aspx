@@ -14,6 +14,7 @@
                     <asp:CheckBoxList ID="checkCampos" runat="server" Height="141px" Width="147px">
                         <asp:ListItem Value="reclamos_varios.estado_unity as [Estado Reclamo]">Estado</asp:ListItem>
                         <asp:ListItem Value="reclamos_varios.estado_reclamo_unity as [Estado Reclamo Unity]">Estado Unity</asp:ListItem>
+                        <asp:ListItem Value="reclamos_varios.reaseguro as Reaseguro">Reaseguro</asp:ListItem>
                         <asp:ListItem Value="reg_reclamo_varios.poliza as Poliza">Poliza</asp:ListItem>
                         <asp:ListItem Value="reg_reclamo_varios.asegurado as Asegurado">Asegurado</asp:ListItem>
                         <asp:ListItem Value="reg_reclamo_varios.cliente as Cliente">Cliente</asp:ListItem>
@@ -157,6 +158,7 @@
                             <div style="height: 520px;">
                                 <div class="scrolling-table-container" style="overflow-y: auto;">
                                     <div id="ciclos" class="col-sm-12 col-md-12 col-lg-12">
+                                        <asp:Label runat="server" ID="KpiConReaseguro"></asp:Label>
                                         <asp:GridView ID="GridCiclos" runat="server" CssClass="table bs-table table-responsive" OnRowDataBound="GridCiclos_RowDataBound" AutoGenerateColumns="True" ShowFooter="true" ForeColor="#333333" GridLines="None">
                                             <AlternatingRowStyle BackColor="White" />
                                             <FooterStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" />
@@ -166,6 +168,7 @@
                                         </asp:GridView>
                                     </div>
                                     <div id="ciclos2" class="col-sm-12 col-md-6 col-lg-6">
+                                        <asp:Label runat="server" ID="KpiSinReaseguro"></asp:Label>
                                         <asp:GridView ID="GridCiclos2" runat="server" CssClass="table bs-table table-responsive" OnRowDataBound="GridCiclos2_RowDataBound" AutoGenerateColumns="True" ShowFooter="true" ForeColor="#333333" GridLines="None">
                                             <AlternatingRowStyle BackColor="White" />
                                             <FooterStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" />
@@ -216,9 +219,31 @@
             });
         } catch (ex) {
         }
+         try {
+            $('#ContentPlaceHolder1_GridCiclos tr').each(function (index) {
+                $tr = $(this);
+                if (index > 0) {
+                    $td = $tr[0].cells[3];
+                    $td.innerText = $td.innerText + ' %';
+                    $td.className = 'alinearNumeros';
+                }
+            });
+        } catch (ex) {
+        }
+         try {
+            $('#ContentPlaceHolder1_GridCiclos2 tr').each(function (index) {
+                $tr = $(this);
+                if (index > 0) {
+                    $td = $tr[0].cells[3];
+                    $td.innerText = $td.innerText + ' %';
+                    $td.className = 'alinearNumeros';
+                }
+            });
+        } catch (ex) {
+        }
     </script>
     <script>
-        if ($('#ContentPlaceHolder1_ddlCiclos option:selected').text() == 'Ciclo Unity') {
+        if ($('#ContentPlaceHolder1_ddlCiclos option:selected').text() == 'Ciclo Unity' || $('#ContentPlaceHolder1_ddlCiclos option:selected').text() == 'Ciclo Aseguradora') {
 
             $('#ciclos2').show();
             $("#ciclos").removeClass("col-lg-12");

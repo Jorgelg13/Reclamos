@@ -36,6 +36,7 @@
                 <asp:ListItem Value="1">Implants</asp:ListItem>
                 <asp:ListItem Value="2">Recepcion</asp:ListItem>
                 <asp:ListItem Value="3">Egresos Hospitalarios</asp:ListItem>
+                <asp:ListItem Value="4">Cabina</asp:ListItem>
             </asp:DropDownList>
         </div>
         <div class="form-group col-lg-2 col-md-2 col-sm-12">
@@ -151,6 +152,30 @@
                 <p><b>¿Nombre del Hospital que brindo el servicio? </b></p>
                 <p><b>¿Cual seria su satisfaccion en el servicio recibido por el hospital?</b></p>
                 <p><b>¿Puede indicar el tiempo que demoro el tramite de egreso?</b></p>
+            </div>
+        </asp:Panel>
+         <asp:Panel runat="server" ID="PnCabina" Visible="false">
+            <div class="col-sm-12 col-md-12 col-lg-12">
+                <br />
+                <div class="scrolling-table-container col-sm-12 col-md-12 col-lg-12">
+                    <b style="font-size: 20px">
+                        <asp:Label runat="server" ID="lblTotalCabina"></asp:Label>
+                    </b>
+                    <asp:LinkButton ID="lnCabina" Visible="false" OnClick="lnCabina_Click" title="Descargar en excel" runat="server" Style="font-size: 20px; text-align: center; color: green"><i class="fa fa-file-excel-o"></i></asp:LinkButton>
+                    <asp:GridView ID="GridCabina" CssClass="table bs-table tablaDetalleAuto table-responsive table-hover" runat="server" AutoGenerateColumns="true" CellPadding="4" ForeColor="#333333" GridLines="None">
+                        <AlternatingRowStyle BackColor="White" />
+                        <FooterStyle BackColor="#087fca" Font-Bold="True" ForeColor="White" />
+                        <HeaderStyle BackColor="#087fca" Font-Bold="True" ForeColor="White" HorizontalAlign="Center" Wrap="False" />
+                        <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
+                        <RowStyle BackColor="#EFF3FB" Wrap="false" />
+                    </asp:GridView>
+                </div>
+            </div>
+            <br />
+            <div style="margin-top: 30%; padding-left: 20px;">
+                <p><b>¿En una calificacion de 1 a 10 ¿con base a su experiencia con unity promotores, usted recomendaria a un familiar o amigo el servicio de unity promotores? </b></p>
+                <p><b>¿De 1 a 10 y segun su experiencia, como califica el servicio brindado por el ejecutivo?</b></p>
+                <p><b>¿De 1 a 10 y en base a su experiencia recomienda a un colega el servicio del ejecutivo de servicio de unity?</b></p>
             </div>
         </asp:Panel>
         <%--archivos javascripts que se utilizan en el sistema--%>

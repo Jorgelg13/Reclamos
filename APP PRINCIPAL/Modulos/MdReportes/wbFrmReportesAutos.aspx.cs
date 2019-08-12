@@ -12,7 +12,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesAutos : System.Web.UI.
     Utils llenado = new Utils();
     conexionBD obj = new conexionBD();
     String buscar, Join, eficienciaGestores;
-    int Total, Promedio, EjecucionCiclos, kpi;
+    int Total, Promedio, EjecucionCiclos, kpi, kpiImportacion;
     int Total2, Promedio2, EjecucionCiclos2;
     Double Pendientes, Nuevos, Cerrados, Ejecucion, CCIFT, CSIFT,PCIFT,PSIFT,EficienciaCierre,Anejamiento;
 
@@ -434,11 +434,11 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesAutos : System.Web.UI.
                 e.Row.Cells[7].HorizontalAlign = HorizontalAlign.Right;
                 e.Row.Font.Bold = true;
 
-                e.Row.Cells[8].Text = (((CCIFT + CSIFT) /Cerrados) *100 ).ToString("N2");
+                e.Row.Cells[8].Text =((1- ((CCIFT + CSIFT) /Cerrados)) *100 ).ToString("N2");
                 e.Row.Cells[8].HorizontalAlign = HorizontalAlign.Right;
                 e.Row.Font.Bold = true;
 
-                e.Row.Cells[9].Text = (((PCIFT + PSIFT) / Pendientes) * 100).ToString("N2");
+                e.Row.Cells[9].Text = ((1 -((PCIFT + PSIFT) / Pendientes)) * 100).ToString("N2");
                 e.Row.Cells[9].HorizontalAlign = HorizontalAlign.Right;
                 e.Row.Font.Bold = true;
             }
@@ -471,7 +471,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesAutos : System.Web.UI.
                 e.Row.Cells[2].HorizontalAlign = HorizontalAlign.Left;
                 e.Row.Font.Bold = true;
 
-                e.Row.Cells[3].Text = (EjecucionCiclos / GridCiclos.Rows.Count).ToString() + " %";
+                e.Row.Cells[3].Text = (Convert.ToDouble(kpi) / (Promedio /GridCiclos.Rows.Count) * 100).ToString("N2");
                 e.Row.Cells[3].HorizontalAlign = HorizontalAlign.Left;
                 e.Row.Font.Bold = true;
             }
@@ -492,12 +492,12 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesAutos : System.Web.UI.
                 Promedio2 += Convert.ToInt32(DataBinder.Eval(e.Row.DataItem, "[Promedio_dias]"));
                 EjecucionCiclos2 += Convert.ToInt32(DataBinder.Eval(e.Row.DataItem, "Ejecucion"));
 
-                if (Convert.ToInt32(e.Row.Cells[3].Text) <= 100)
+                if (Convert.ToInt32(e.Row.Cells[3].Text) >= 100)
                 {
-                    e.Row.Attributes.Add("style", "background-color: #8ace8e"); //rojos
+                    e.Row.Attributes.Add("style", "background-color: #8ace8e"); //verdes
                 }
 
-                if (Convert.ToInt32(e.Row.Cells[3].Text) > 100)
+                if (Convert.ToInt32(e.Row.Cells[3].Text) < 90)
                 {
                     e.Row.Attributes.Add("style", "background-color: #f7c6be"); //rojos
                 }
@@ -514,7 +514,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesAutos : System.Web.UI.
                 e.Row.Cells[2].HorizontalAlign = HorizontalAlign.Left;
                 e.Row.Font.Bold = true;
 
-                e.Row.Cells[3].Text = (EjecucionCiclos2 / GridCiclos2.Rows.Count).ToString() + " %";
+                e.Row.Cells[3].Text = ((Convert.ToDouble(kpi)/ (Promedio2 / GridCiclos2.Rows.Count)) *100 ).ToString("N2");
                 e.Row.Cells[3].HorizontalAlign = HorizontalAlign.Left;
                 e.Row.Font.Bold = true;
             }
@@ -529,19 +529,19 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesAutos : System.Web.UI.
     {
         if (ddlCiclos.SelectedValue == "Ciclo Total")
         {
-            kpi = 91;
+            kpi = 87;
             PanelCamposSeleccion.Visible = false;
             PanelEficiencia.Visible = false;
             PnCiclos.Visible = true;
             Utils.Ciclos_Reclamos(txtFechaInicio, txtFechaFin, "pa_ciclos_reclamos_autos", GridCiclos, 4, kpi);
-            //Utils.Ciclos_Reclamos(txtFechaInicio, txtFechaFin, "pa_ciclos_reclamos_autos", GridCiclos2, 8, kpi);
             lblTitulo.Text = "Ciclo Total, KPI sobre " + kpi.ToString() + " dias";
             Utils.actividades(0, Constantes.AUTOS(), 34, Constantes.USER());
+            KPI(false);
         }
 
         else if (ddlCiclos.SelectedValue == "Ciclo Unity")
         {
-            kpi = 16;
+            kpi = 11;
             PanelCamposSeleccion.Visible = false;
             PanelEficiencia.Visible = false;
             PnCiclos.Visible = true;
@@ -549,17 +549,23 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesAutos : System.Web.UI.
             Utils.Ciclos_Reclamos(txtFechaInicio, txtFechaFin, "pa_ciclos_reclamos_autos", GridCiclos2, 5, kpi);
             lblTitulo.Text = "Ciclo Unity, KPI sobre " + kpi.ToString() + " dias";
             Utils.actividades(0, Constantes.AUTOS(), 31, Constantes.USER());
+            KPI(false);
         }
 
         else if (ddlCiclos.SelectedValue == "Ciclo Aseguradora")
         {
-            kpi = 68;
+            kpi = 63;
+            kpiImportacion = 63;
             PanelCamposSeleccion.Visible = false;
             PanelEficiencia.Visible = false;
             PnCiclos.Visible = true;
-            Utils.Ciclos_Reclamos(txtFechaInicio, txtFechaFin, "pa_ciclos_reclamos_autos", GridCiclos, 2 , kpi);
-            //Utils.Ciclos_Reclamos(txtFechaInicio, txtFechaFin, "pa_ciclos_reclamos_autos", GridCiclos2, 6, kpi);
-            lblTitulo.Text = "Ciclo Aseguradora, KPI sobre " + kpi.ToString() + " dias";
+            Utils.Ciclos_Reclamos_tipo(txtFechaInicio, txtFechaFin, "pa_ciclos_reclamos_autos_con_importacion", GridCiclos, 2, kpi,1);
+            kpi = 33;
+            Utils.Ciclos_Reclamos_tipo(txtFechaInicio, txtFechaFin, "pa_ciclos_reclamos_autos_con_importacion", GridCiclos2, 2, kpi,0);
+            lblTitulo.Text = "Ciclo Aseguradora, KPI sobre " + kpi.ToString() + " dias sin importacion y "+kpiImportacion+" con importacion" ;
+            KpiConImportacion.Text = "Con importación Evaluado sobre " + kpiImportacion + " Dias";
+            KpiSinImportacion.Text = "Sin importación Evaluado sobre " + kpi + " Dias";
+            KPI(true);
             Utils.actividades(0, Constantes.AUTOS(), 32, Constantes.USER());
         }
 
@@ -570,11 +576,17 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesAutos : System.Web.UI.
             PanelEficiencia.Visible = false;
             PnCiclos.Visible = true;
             Utils.Ciclos_Reclamos(txtFechaInicio, txtFechaFin, "pa_ciclos_reclamos_autos", GridCiclos, 3, kpi);
-            //Utils.Ciclos_Reclamos(txtFechaInicio, txtFechaFin, "pa_ciclos_reclamos_autos", GridCiclos, 7, kpi);
             lblTitulo.Text = "Ciclo Cliente, KPI sobre " + kpi.ToString() + " dias";
             Utils.actividades(0, Constantes.AUTOS(), 33, Constantes.USER());
+            KPI(false);
         }
 
+    }
+
+    private void KPI(bool valor)
+    {
+        KpiSinImportacion.Visible = valor;
+        KpiConImportacion.Visible = valor;
     }
 
     protected void linKRegresar_Click(object sender, EventArgs e)

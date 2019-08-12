@@ -72,6 +72,7 @@ public partial class ReclamosEntities : DbContext
     public DbSet<estados_reclamos_unity> estados_reclamos_unity { get; set; }
     public DbSet<formulario_colectivo> formulario_colectivo { get; set; }
     public DbSet<gestores> gestores { get; set; }
+    public DbSet<info_asegurado> info_asegurado { get; set; }
     public DbSet<ingreso_cheques> ingreso_cheques { get; set; }
     public DbSet<maternidad> maternidad { get; set; }
     public DbSet<motivos_cierre> motivos_cierre { get; set; }
@@ -592,5 +593,91 @@ public partial class ReclamosEntities : DbContext
             new ObjectParameter("cliente", typeof(int));
 
         return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pa_reclamos_app", clienteParameter);
+    }
+
+    public virtual int pa_ciclos_reclamos_autos_con_importacion(Nullable<System.DateTime> fechaInicio, Nullable<System.DateTime> fechaFin, Nullable<int> tipo, Nullable<int> kpi, Nullable<int> filtro)
+    {
+        var fechaInicioParameter = fechaInicio.HasValue ?
+            new ObjectParameter("fechaInicio", fechaInicio) :
+            new ObjectParameter("fechaInicio", typeof(System.DateTime));
+
+        var fechaFinParameter = fechaFin.HasValue ?
+            new ObjectParameter("fechaFin", fechaFin) :
+            new ObjectParameter("fechaFin", typeof(System.DateTime));
+
+        var tipoParameter = tipo.HasValue ?
+            new ObjectParameter("tipo", tipo) :
+            new ObjectParameter("tipo", typeof(int));
+
+        var kpiParameter = kpi.HasValue ?
+            new ObjectParameter("kpi", kpi) :
+            new ObjectParameter("kpi", typeof(int));
+
+        var filtroParameter = filtro.HasValue ?
+            new ObjectParameter("filtro", filtro) :
+            new ObjectParameter("filtro", typeof(int));
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pa_ciclos_reclamos_autos_con_importacion", fechaInicioParameter, fechaFinParameter, tipoParameter, kpiParameter, filtroParameter);
+    }
+
+    public virtual int pa_ciclos_reclamos_danios_reaseguro(Nullable<System.DateTime> fechaInicio, Nullable<System.DateTime> fechaFin, Nullable<int> tipo, Nullable<int> kPI, Nullable<int> filtro)
+    {
+        var fechaInicioParameter = fechaInicio.HasValue ?
+            new ObjectParameter("fechaInicio", fechaInicio) :
+            new ObjectParameter("fechaInicio", typeof(System.DateTime));
+
+        var fechaFinParameter = fechaFin.HasValue ?
+            new ObjectParameter("fechaFin", fechaFin) :
+            new ObjectParameter("fechaFin", typeof(System.DateTime));
+
+        var tipoParameter = tipo.HasValue ?
+            new ObjectParameter("tipo", tipo) :
+            new ObjectParameter("tipo", typeof(int));
+
+        var kPIParameter = kPI.HasValue ?
+            new ObjectParameter("KPI", kPI) :
+            new ObjectParameter("KPI", typeof(int));
+
+        var filtroParameter = filtro.HasValue ?
+            new ObjectParameter("filtro", filtro) :
+            new ObjectParameter("filtro", typeof(int));
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pa_ciclos_reclamos_danios_reaseguro", fechaInicioParameter, fechaFinParameter, tipoParameter, kPIParameter, filtroParameter);
+    }
+
+    public virtual ObjectResult<pa_eficiencia_autos_Result> pa_eficiencia_autos(Nullable<System.DateTime> fechaInicio, Nullable<System.DateTime> fechaFin)
+    {
+        var fechaInicioParameter = fechaInicio.HasValue ?
+            new ObjectParameter("fechaInicio", fechaInicio) :
+            new ObjectParameter("fechaInicio", typeof(System.DateTime));
+
+        var fechaFinParameter = fechaFin.HasValue ?
+            new ObjectParameter("fechaFin", fechaFin) :
+            new ObjectParameter("fechaFin", typeof(System.DateTime));
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<pa_eficiencia_autos_Result>("pa_eficiencia_autos", fechaInicioParameter, fechaFinParameter);
+    }
+
+    public virtual ObjectResult<pa_eficiencia_danos_varios_Result> pa_eficiencia_danos_varios(Nullable<System.DateTime> fechaInicio, Nullable<System.DateTime> fechaFin)
+    {
+        var fechaInicioParameter = fechaInicio.HasValue ?
+            new ObjectParameter("fechaInicio", fechaInicio) :
+            new ObjectParameter("fechaInicio", typeof(System.DateTime));
+
+        var fechaFinParameter = fechaFin.HasValue ?
+            new ObjectParameter("fechaFin", fechaFin) :
+            new ObjectParameter("fechaFin", typeof(System.DateTime));
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<pa_eficiencia_danos_varios_Result>("pa_eficiencia_danos_varios", fechaInicioParameter, fechaFinParameter);
+    }
+
+    public virtual ObjectResult<Nullable<long>> pa_sec_reclamos_varios()
+    {
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<long>>("pa_sec_reclamos_varios");
+    }
+
+    public virtual ObjectResult<Nullable<long>> pa_sec_reg_reclamos_danios_varios()
+    {
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<long>>("pa_sec_reg_reclamos_danios_varios");
     }
 }

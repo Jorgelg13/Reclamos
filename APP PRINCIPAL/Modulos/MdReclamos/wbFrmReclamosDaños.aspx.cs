@@ -80,6 +80,9 @@ public partial class Modulos_MdReclamos_wbFrmReclamosDaños : System.Web.UI.Page
                 }
 
                 reg_reclamo_varios registro = new reg_reclamo_varios();
+                var sec_registro = DBReclamos.pa_sec_reg_reclamos_danios_varios();
+                long? id_registro = sec_registro.Single();
+                registro.id = Convert.ToInt32(id_registro);
                 registro.poliza = poliza.ToString();
                 registro.asegurado = asegurado.ToString();
                 registro.cliente = Convert.ToInt32(cliente);
@@ -104,6 +107,9 @@ public partial class Modulos_MdReclamos_wbFrmReclamosDaños : System.Web.UI.Page
                 }
 
                 reclamos_varios reclamo = new reclamos_varios();
+                var reclamo_id = DBReclamos.pa_sec_reclamos_varios();
+                long? id_reclamo = reclamo_id.Single();
+                reclamo.id = Convert.ToInt32(id_reclamo);
                 reclamo.boleta = txtBoleta.Text;
                 reclamo.titular = txtTitular.Text;
                 reclamo.ubicacion = txtUbicacion.Text;
@@ -134,7 +140,7 @@ public partial class Modulos_MdReclamos_wbFrmReclamosDaños : System.Web.UI.Page
 
             catch (Exception)
             {
-                Utils.ShowMessage(this.Page, "A ocurrido algo inesperado intentelo nuevament", "Error", "error");
+                Utils.ShowMessage(this.Page, "A ocurrido algo inesperado intentelo nuevamente", "Error", "error");
             }
         }
     }

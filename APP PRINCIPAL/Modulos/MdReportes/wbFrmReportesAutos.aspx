@@ -14,10 +14,21 @@
                     <asp:ListItem Value="reclamo_auto.estado_auto_unity as [Estado Auto]">Estado Auto</asp:ListItem>
                     <asp:ListItem Value="auto_reclamo.poliza as Poliza">Poliza</asp:ListItem>
                     <asp:ListItem Value="auto_reclamo.asegurado as Asegurado">Asegurado</asp:ListItem>
-                    <asp:ListItem Value="Dias = (select top 1 DATEDIFF( DAY,
+<%--                    <asp:ListItem Value="Dias = (select top 1 DATEDIFF( DAY,
                                             (select min(fecha) from bitacora_estados_autos where id_reclamo_auto = reclamo_auto.id),
 		                                    (select max(fecha) from bitacora_estados_autos where id_reclamo_auto = reclamo_auto.id)
-		                                    ) from bitacora_estados_autos where id_reclamo_auto = reclamo_auto.id) ">Cantidad de Dias</asp:ListItem>
+		                                    ) from bitacora_estados_autos where id_reclamo_auto = reclamo_auto.id) ">Cantidad de Dias</asp:ListItem>--%>
+                    <asp:ListItem Value="Dias =(select top 1 case when 
+                        DATEDIFF( DAY,
+                        (select min(fecha) from bitacora_estados_autos where id_reclamo_auto = reclamo_auto.id),
+                        (select max(fecha) from bitacora_estados_autos where id_reclamo_auto = reclamo_auto.id)
+                        ) = 0 then DATEDIFF( DAY,
+                        (select min(fecha) from bitacora_estados_autos where id_reclamo_auto = reclamo_auto.id),
+                        (GETDATE())) else 
+                        DATEDIFF( DAY,
+                        (select min(fecha) from bitacora_estados_autos where id_reclamo_auto = reclamo_auto.id),
+                        (select max(fecha) from bitacora_estados_autos where id_reclamo_auto = reclamo_auto.id))
+                        end as Dias from bitacora_estados_autos where id_reclamo_auto = reclamo_auto.id)">Cantidad de dias</asp:ListItem>
                     <asp:ListItem Value="auto_reclamo.cliente as Cliente">Cliente</asp:ListItem>
                     <asp:ListItem Value="auto_reclamo.vip as VIP">VIP</asp:ListItem>
                     <asp:ListItem Value="auto_reclamo.placa as Placa">Placa</asp:ListItem>
@@ -138,7 +149,8 @@
                     </div>
                     <asp:Panel runat="server" ID="PanelCamposSeleccion" Visible="false">
                         <div class="scrolling-table-container" style="overflow-y: auto;">
-                            <asp:GridView ID="GridCamposSeleccion" runat="server" CssClass="table bs-table table-responsive" AutoGenerateColumns="True" ForeColor="#333333" GridLines="None" PageSize="3000">
+                            <asp:GridView ID="GridCamposSeleccion" runat="server" CssClass="table bs-table table-responsive" AutoGenerateColumns="True" 
+                                ForeColor="#333333" GridLines="None" PageSize="3000">
                                 <AlternatingRowStyle BackColor="White" />
                                 <HeaderStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" HorizontalAlign="Center" Wrap="False" />
                                 <RowStyle BackColor="#EFF3FB" HorizontalAlign="Left" Wrap="False" />
@@ -147,7 +159,8 @@
                     </asp:Panel>
                     <asp:Panel runat="server" ID="PanelEficiencia" Visible="false">
                         <div class="scrolling-table-container" style="overflow-y: auto;">
-                            <asp:GridView ID="GridEficiencia" runat="server" CssClass="table bs-table table-responsive" AutoGenerateColumns="True" ForeColor="#333333" GridLines="None" AllowCustomPaging="True" PageSize="3000" OnRowDataBound="GridEficiencia_RowDataBound" ShowFooter="true">
+                            <asp:GridView ID="GridEficiencia" runat="server" CssClass="table bs-table table-responsive" AutoGenerateColumns="True" 
+                                ForeColor="#333333" GridLines="None" AllowCustomPaging="True" PageSize="3000" OnRowDataBound="GridEficiencia_RowDataBound" ShowFooter="true">
                                 <AlternatingRowStyle BackColor="White" />
                                 <FooterStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" />
                                 <HeaderStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" HorizontalAlign="Center" Wrap="True" />
@@ -159,7 +172,9 @@
                         <div style="height: 520px;">
                             <div class="scrolling-table-container" style="overflow-y: auto;">
                                 <div id="ciclos" class="col-sm-12 col-md-12 col-lg-12">
-                                    <asp:GridView ID="GridCiclos" runat="server" CssClass="table bs-table table-responsive" OnRowDataBound="GridCiclos_RowDataBound" AutoGenerateColumns="True" ShowFooter="true" ForeColor="#333333" GridLines="None">
+                                    <b><asp:label runat="server" ID="KpiConImportacion" Visible="false"></asp:label></b>
+                                    <asp:GridView ID="GridCiclos" runat="server" CssClass="table bs-table table-responsive" OnRowDataBound="GridCiclos_RowDataBound" 
+                                        AutoGenerateColumns="True" ShowFooter="true" ForeColor="#333333" GridLines="None">
                                         <AlternatingRowStyle BackColor="White" />
                                         <FooterStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" />
                                         <HeaderStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" HorizontalAlign="Center" Wrap="False" />
@@ -168,7 +183,9 @@
                                     </asp:GridView>
                                 </div>
                                 <div id="ciclos2" class="col-sm-12 col-md-6 col-lg-6">
-                                    <asp:GridView ID="GridCiclos2" runat="server" CssClass="table bs-table table-responsive" OnRowDataBound="GridCiclos2_RowDataBound" AutoGenerateColumns="True" ShowFooter="true" ForeColor="#333333" GridLines="None">
+                                    <b><asp:label runat="server" ID="KpiSinImportacion" Visible="false"></asp:label></b>
+                                    <asp:GridView ID="GridCiclos2" runat="server" CssClass="table bs-table table-responsive" OnRowDataBound="GridCiclos2_RowDataBound" 
+                                        AutoGenerateColumns="True" ShowFooter="true" ForeColor="#333333" GridLines="None">
                                         <AlternatingRowStyle BackColor="White" />
                                         <FooterStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" />
                                         <HeaderStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" HorizontalAlign="Center" Wrap="False" />
@@ -217,9 +234,38 @@
             });
         } catch (ex) {
         }
+         try {
+            $('#ContentPlaceHolder1_GridCiclos tr').each(function (index) {
+                $tr = $(this);
+                if (index > 0) {
+                    $td = $tr[0].cells[2];
+                    $td.className = 'alinearNumeros';
+
+                     $td = $tr[0].cells[3];
+                    $td.innerText = $td.innerText + ' %';
+                    $td.className = 'alinearNumeros';
+                }
+            });
+        } catch (ex) {
+        }
+
+         try {
+            $('#ContentPlaceHolder1_GridCiclos2 tr').each(function (index) {
+                $tr = $(this);
+                if (index > 0) {
+                    $td = $tr[0].cells[2];
+                    $td.className = 'alinearNumeros';
+
+                     $td = $tr[0].cells[3];
+                    $td.innerText = $td.innerText + ' %';
+                    $td.className = 'alinearNumeros';
+                }
+            });
+        } catch (ex) {
+        }
     </script>
     <script>
-        if ($('#ContentPlaceHolder1_ddlCiclos option:selected').text() == 'Ciclo Unity') {
+        if ($('#ContentPlaceHolder1_ddlCiclos option:selected').text() == 'Ciclo Unity' || $('#ContentPlaceHolder1_ddlCiclos option:selected').text() == 'Ciclo Aseguradora' ) {
 
             $('#ciclos2').show();
             $("#ciclos").removeClass("col-lg-12");

@@ -6,6 +6,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Globalization;
 using System.IO;
+using System.Web.UI;
 
 public partial class Modulos_MdReclamosUnity_wbFrmReclamosDañosSeguimiento : System.Web.UI.Page
 {
@@ -25,9 +26,10 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosDañosSeguimiento : Sy
     short codigo;
     String idRecibido, comentarios, pagos, llamadas, coberturas, datosSiniestro, estados, liquidaciones;
     String estadoReclamo, cartaEnvioCheque, cartaCierreInterno, cartaDeclinado, documentos, doc_solicitados;
-    int id, dias, idPago = 0;
+    int id, dias,totalEstado, idPago = 0;
     //variables para calculos de pagos de reclamos
-    Double iva, monto_reclamado, mejora_tecnologica, tiempo_uso, infra_seguro, perdida_final_ajustada, perdidaConDeducible, deducible, valor_indemnizado, timbres, total;
+    Double iva, monto_reclamado, mejora_tecnologica, tiempo_uso, infra_seguro, perdida_final_ajustada, 
+        perdidaConDeducible, deducible, valor_indemnizado, timbres, total;
 
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -1174,6 +1176,28 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosDañosSeguimiento : Sy
         catch (Exception ex)
         {
             Utils.ShowMessage(this.Page, "No se pudieron grabar las observaciones " + ex.Message, "Error", "error");
+        }
+    }
+
+    protected void GridEstados_RowDataBound(object sender, GridViewRowEventArgs e)
+    {
+        try
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                totalEstado += Convert.ToInt32(DataBinder.Eval(e.Row.DataItem, "[Dias]"));
+            }
+            else if (e.Row.RowType == DataControlRowType.Footer)
+            {
+                e.Row.Cells[0].Text = "TOTALES:";
+                e.Row.Cells[2].Text = totalEstado.ToString();
+                e.Row.Cells[2].HorizontalAlign = HorizontalAlign.Left;
+                e.Row.Font.Bold = true;
+            }
+        }
+        catch (Exception err)
+        {
+            Response.Write(err);
         }
     }
 }

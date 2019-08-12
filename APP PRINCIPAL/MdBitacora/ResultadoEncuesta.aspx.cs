@@ -3,7 +3,7 @@ using System.Web.UI;
 
 public partial class MdBitacora_ResultadoEncuesta : System.Web.UI.Page
 {
-    String encuesta, Total,recepcion,egresos_hospitalarios;
+    String encuesta, Total,recepcion,egresos_hospitalarios, cabina;
     Utils llenar = new Utils();
 
     protected void Page_Load(object sender, EventArgs e)
@@ -36,6 +36,7 @@ public partial class MdBitacora_ResultadoEncuesta : System.Web.UI.Page
             "fecha as [Fecha Registro] " +
             "from encuesta " +
             "where Convert(date, fecha, 112) between '"+txtFechaInicio.Text+"' and '"+txtFechaFin.Text+"' " ;
+
         Total = "select COUNT(*) as Total, empresa as Empresa from encuesta  where Convert (date, fecha, 112) between " +
             "'" + txtFechaInicio.Text + "' and '" + txtFechaFin.Text + "' group by empresa order by Total desc";
 
@@ -68,6 +69,11 @@ public partial class MdBitacora_ResultadoEncuesta : System.Web.UI.Page
             " from encuesta_recepcion where Convert(date,fecha,112) between '"+txtFechaInicio.Text+"' and '"+txtFechaFin.Text+"' ";
 
         egresos_hospitalarios = "select * from [encuesta-egresos] where convert(date,fecha,112) between '"+txtFechaInicio.Text+"' and '"+txtFechaFin.Text+"' " ;
+
+        cabina = "select c.codigo, c.nombre, c.telefono, c.correo, e.id, e.empresa, e.pregunta1, e.comentario1, e.pregunta2, e.comentario2, e.pregunta3," +
+            "e.comentario3, e.comentario, e.fecha from encuesta as e " +
+            "inner join cabina_virtual as c on c.codigo = e.codigo " +
+            "where empresa = 'Cabina' and convert(date,e.fecha,112) between '"+txtFechaInicio.Text+"' and '"+txtFechaFin.Text+"' ";
     }
 
     protected void btnBuscar_Click1(object sender, EventArgs e)
@@ -100,6 +106,13 @@ public partial class MdBitacora_ResultadoEncuesta : System.Web.UI.Page
             lnEgresosHispilarios.Visible = true;
             lbltotalegresos.Text = "Total de encuestas de egresos Hospitalarios " + GridEgresosHospitalarios.Rows.Count.ToString();
         }
+
+        else if (ddlTipoEncuesta.SelectedValue == "4")
+        {
+            llenar.llenarGrid(cabina, GridCabina);
+            lnCabina.Visible = true;
+            lblTotalCabina.Text = "Total de encuestas de cabina virtual " + GridCabina.Rows.Count.ToString();
+        }
     }
 
     protected void linkDescargar_Click(object sender, EventArgs e)
@@ -118,6 +131,7 @@ public partial class MdBitacora_ResultadoEncuesta : System.Web.UI.Page
         {
             PnPrincipal.Visible = true;
             PnRecepcion.Visible = false;
+            PnCabina.Visible = false;
             PnEgresosHospitalarios.Visible = false;
         }
 
@@ -125,6 +139,7 @@ public partial class MdBitacora_ResultadoEncuesta : System.Web.UI.Page
         {
             PnPrincipal.Visible = false;
             PnEgresosHospitalarios.Visible = false;
+            PnCabina.Visible = false;
             PnRecepcion.Visible = true;
         }
 
@@ -132,7 +147,16 @@ public partial class MdBitacora_ResultadoEncuesta : System.Web.UI.Page
         {
             PnPrincipal.Visible = false;
             PnRecepcion.Visible = false;
+            PnCabina.Visible = false;
             PnEgresosHospitalarios.Visible = true;
+        }
+
+        else if (ddlTipoEncuesta.SelectedValue == "4")
+        {
+            PnPrincipal.Visible = false;
+            PnRecepcion.Visible = false;
+            PnCabina.Visible = false;
+            PnCabina.Visible = true;
         }
     }
 
@@ -144,5 +168,10 @@ public partial class MdBitacora_ResultadoEncuesta : System.Web.UI.Page
     protected void lnEgresosHispilarios_Click(object sender, EventArgs e)
     {
         Utils.ExportarExcel(PnEgresosHospitalarios, Response, "Resultado Encuesta Hospitalarias del " + txtFechaInicio.Text + " al " + txtFechaFin.Text);
+    }
+
+    protected void lnCabina_Click(object sender, EventArgs e)
+    {
+        Utils.ExportarExcel(PnCabina, Response, "Resultado Encuesta del Cabina " + txtFechaInicio.Text + " al " + txtFechaFin.Text);
     }
 }

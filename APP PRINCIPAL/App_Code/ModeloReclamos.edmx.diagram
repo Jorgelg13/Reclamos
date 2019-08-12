@@ -7,74 +7,75 @@
       <Diagram DiagramId="f6b4798536da4735887fb7f905f97590" Name="Diagram1" ZoomLevel="73">
         <EntityTypeShape EntityType="reclamosModel.actividades" Width="1.5" PointX="3" PointY="1" />
         <EntityTypeShape EntityType="reclamosModel.ajustadores" Width="1.5" PointX="5.75" PointY="0.75" />
-        <EntityTypeShape EntityType="reclamosModel.analistas" Width="1.5" PointX="0.75" PointY="26" />
+        <EntityTypeShape EntityType="reclamosModel.analistas" Width="1.5" PointX="0.75" PointY="45.625" />
         <EntityTypeShape EntityType="reclamosModel.archivos_copagos" Width="1.5" PointX="7.75" PointY="0.75" />
         <EntityTypeShape EntityType="reclamosModel.aseguradoras" Width="1.5" PointX="7.75" PointY="3.75" />
-        <EntityTypeShape EntityType="reclamosModel.auto_reclamo" Width="1.5" PointX="0.75" PointY="42.5" />
-        <EntityTypeShape EntityType="reclamosModel.autorizaciones" Width="1.5" PointX="11" PointY="18.875" />
-        <EntityTypeShape EntityType="reclamosModel.bitacora_autorizaciones" Width="1.5" PointX="13.25" PointY="20.5" />
-        <EntityTypeShape EntityType="reclamosModel.bitacora_autos_unity" Width="1.5" PointX="5.25" PointY="41.625" />
+        <EntityTypeShape EntityType="reclamosModel.auto_reclamo" Width="1.5" PointX="0.75" PointY="19.625" />
+        <EntityTypeShape EntityType="reclamosModel.autorizaciones" Width="1.5" PointX="14" PointY="32.125" />
+        <EntityTypeShape EntityType="reclamosModel.bitacora_autorizaciones" Width="1.5" PointX="16.25" PointY="33.75" />
+        <EntityTypeShape EntityType="reclamosModel.bitacora_autos_unity" Width="1.5" PointX="5.25" PointY="51.75" />
         <EntityTypeShape EntityType="reclamosModel.bitacora_consulta_movil" Width="1.5" PointX="7.75" PointY="6.75" />
-        <EntityTypeShape EntityType="reclamosModel.bitacora_estados_autos" Width="1.5" PointX="5.25" PointY="48.625" />
-        <EntityTypeShape EntityType="reclamosModel.bitacora_estados_reclamos_varios" Width="1.5" PointX="11.25" PointY="29" />
-        <EntityTypeShape EntityType="reclamosModel.bitacora_reclamo_auto" Width="1.5" PointX="5.25" PointY="54.5" />
-        <EntityTypeShape EntityType="reclamosModel.bitacora_reclamos_medicos" Width="1.5" PointX="8.25" PointY="43" />
+        <EntityTypeShape EntityType="reclamosModel.bitacora_estados_autos" Width="1.5" PointX="5.25" PointY="19.75" />
+        <EntityTypeShape EntityType="reclamosModel.bitacora_estados_reclamos_varios" Width="1.5" PointX="11.25" PointY="37.5" />
+        <EntityTypeShape EntityType="reclamosModel.bitacora_reclamo_auto" Width="1.5" PointX="5.25" PointY="41.375" />
+        <EntityTypeShape EntityType="reclamosModel.bitacora_reclamos_medicos" Width="1.5" PointX="8.25" PointY="48.875" />
         <EntityTypeShape EntityType="reclamosModel.bitacora_reclamos_varios" Width="1.5" PointX="11.25" PointY="40.25" />
-        <EntityTypeShape EntityType="reclamosModel.busqCoberturasPolizasDaños" Width="1.5" PointX="3.75" PointY="8.75" />
-        <EntityTypeShape EntityType="reclamosModel.cabina" Width="1.5" PointX="0.75" PointY="22.125" />
-        <EntityTypeShape EntityType="reclamosModel.cabina_virtual" Width="1.5" PointX="9.75" PointY="0.75" />
-        <EntityTypeShape EntityType="reclamosModel.cartas" Width="1.5" PointX="9.75" PointY="4.75" />
-        <EntityTypeShape EntityType="reclamosModel.clientes" Width="1.5" PointX="5.75" PointY="9.75" />
-        <EntityTypeShape EntityType="reclamosModel.coberturas" Width="1.5" PointX="9.75" PointY="7.75" />
-        <EntityTypeShape EntityType="reclamosModel.coberturas_afectadas" Width="1.5" PointX="5.25" PointY="19.25" />
-        <EntityTypeShape EntityType="reclamosModel.coberturas_afectadas_danios" Width="1.5" PointX="11.25" PointY="25.625" />
-        <EntityTypeShape EntityType="reclamosModel.comentarios_reclamos_autos" Width="1.5" PointX="5.25" PointY="51.375" />
-        <EntityTypeShape EntityType="reclamosModel.comentarios_reclamos_medicos" Width="1.5" PointX="8.25" PointY="46.125" />
-        <EntityTypeShape EntityType="reclamosModel.comentarios_reclamos_varios" Width="1.5" PointX="11.25" PointY="37.25" />
-        <EntityTypeShape EntityType="reclamosModel.contacto_auto" Width="1.5" PointX="5.25" PointY="23.375" />
-        <EntityTypeShape EntityType="reclamosModel.contactos_reclamos_varios" Width="1.5" PointX="8.75" PointY="10.75" />
-        <EntityTypeShape EntityType="reclamosModel.detalle_gasto_medico" Width="1.5" PointX="8.25" PointY="22.75" />
+        <EntityTypeShape EntityType="reclamosModel.busqCoberturasPolizasDaños" Width="1.5" PointX="0.75" PointY="8.75" />
+        <EntityTypeShape EntityType="reclamosModel.cabina" Width="1.5" PointX="0.75" PointY="49.125" />
+        <EntityTypeShape EntityType="reclamosModel.cabina_virtual" Width="1.5" PointX="2.75" PointY="8.75" />
+        <EntityTypeShape EntityType="reclamosModel.cartas" Width="1.5" PointX="4.75" PointY="8.75" />
+        <EntityTypeShape EntityType="reclamosModel.clientes" Width="1.5" PointX="9.75" PointY="0.75" />
+        <EntityTypeShape EntityType="reclamosModel.coberturas" Width="1.5" PointX="9.75" PointY="3.75" />
+        <EntityTypeShape EntityType="reclamosModel.coberturas_afectadas" Width="1.5" PointX="5.25" PointY="23.375" />
+        <EntityTypeShape EntityType="reclamosModel.coberturas_afectadas_danios" Width="1.5" PointX="11.25" PointY="34.125" />
+        <EntityTypeShape EntityType="reclamosModel.comentarios_reclamos_autos" Width="1.5" PointX="5.25" PointY="48.625" />
+        <EntityTypeShape EntityType="reclamosModel.comentarios_reclamos_medicos" Width="1.5" PointX="8.25" PointY="45.75" />
+        <EntityTypeShape EntityType="reclamosModel.comentarios_reclamos_varios" Width="1.5" PointX="11.25" PointY="31.25" />
+        <EntityTypeShape EntityType="reclamosModel.contacto_auto" Width="1.5" PointX="5.25" PointY="54.625" />
+        <EntityTypeShape EntityType="reclamosModel.contactos_reclamos_varios" Width="1.5" PointX="9.75" PointY="6.75" />
+        <EntityTypeShape EntityType="reclamosModel.detalle_gasto_medico" Width="1.5" PointX="8.25" PointY="52" />
         <EntityTypeShape EntityType="reclamosModel.detalle_pagos_reclamos_autos" Width="1.5" PointX="5.25" PointY="44.5" />
-        <EntityTypeShape EntityType="reclamosModel.detalle_pagos_reclamos_medicos" Width="1.5" PointX="8.25" PointY="52.125" />
-        <EntityTypeShape EntityType="reclamosModel.detalle_pagos_reclamos_varios" Width="1.5" PointX="11.25" PointY="31.625" />
-        <EntityTypeShape EntityType="reclamosModel.direcciones" Width="1.5" PointX="10.75" PointY="10.75" />
-        <EntityTypeShape EntityType="reclamosModel.direcciones_clientes_gm" Width="1.5" PointX="11.75" PointY="0.75" />
-        <EntityTypeShape EntityType="reclamosModel.documentos_medicos" Width="1.5" PointX="11.75" PointY="3.75" />
+        <EntityTypeShape EntityType="reclamosModel.detalle_pagos_reclamos_medicos" Width="1.5" PointX="8.25" PointY="19.75" />
+        <EntityTypeShape EntityType="reclamosModel.detalle_pagos_reclamos_varios" Width="1.5" PointX="11.25" PointY="25.625" />
+        <EntityTypeShape EntityType="reclamosModel.direcciones" Width="1.5" PointX="6.75" PointY="9.75" />
+        <EntityTypeShape EntityType="reclamosModel.direcciones_clientes_gm" Width="1.5" PointX="8.75" PointY="9.75" />
+        <EntityTypeShape EntityType="reclamosModel.documentos_medicos" Width="1.5" PointX="10.75" PointY="9.75" />
         <EntityTypeShape EntityType="reclamosModel.documentos_solicitados" Width="1.5" PointX="5" PointY="5" />
-        <EntityTypeShape EntityType="reclamosModel.ejecutivos" Width="1.5" PointX="11.75" PointY="6.75" />
-        <EntityTypeShape EntityType="reclamosModel.empresa" Width="1.5" PointX="1.5" PointY="13.625" />
-        <EntityTypeShape EntityType="reclamosModel.encuesta" Width="1.5" PointX="12.75" PointY="9.75" />
-        <EntityTypeShape EntityType="reclamosModel.encuesta_recepcion" Width="1.5" PointX="13.75" PointY="0.75" />
-        <EntityTypeShape EntityType="reclamosModel.encuesta_egresos" Width="1.5" PointX="13.75" PointY="4.75" />
-        <EntityTypeShape EntityType="reclamosModel.errores_insercion" Width="1.5" PointX="8.75" PointY="13.75" />
+        <EntityTypeShape EntityType="reclamosModel.ejecutivos" Width="1.5" PointX="11.75" PointY="0.75" />
+        <EntityTypeShape EntityType="reclamosModel.empresa" Width="1.5" PointX="1.5" PointY="56.625" />
+        <EntityTypeShape EntityType="reclamosModel.encuesta" Width="1.5" PointX="11.75" PointY="3.75" />
+        <EntityTypeShape EntityType="reclamosModel.encuesta_recepcion" Width="1.5" PointX="0.75" PointY="12.75" />
+        <EntityTypeShape EntityType="reclamosModel.encuesta_egresos" Width="1.5" PointX="12.75" PointY="8.75" />
+        <EntityTypeShape EntityType="reclamosModel.errores_insercion" Width="1.5" PointX="8.75" PointY="12.75" />
         <EntityTypeShape EntityType="reclamosModel.estado" Width="1.5" PointX="0.75" PointY="33.125" />
-        <EntityTypeShape EntityType="reclamosModel.estados_reclamos_unity" Width="1.5" PointX="14.75" PointY="8.75" />
-        <EntityTypeShape EntityType="reclamosModel.formulario_colectivo" Width="1.5" PointX="15.75" PointY="11.75" />
-        <EntityTypeShape EntityType="reclamosModel.gestores" Width="1.5" PointX="0.75" PointY="49.375" />
-        <EntityTypeShape EntityType="reclamosModel.ingreso_cheques" Width="1.5" PointX="8.25" PointY="19.125" />
-        <EntityTypeShape EntityType="reclamosModel.maternidad" Width="1.5" PointX="10.75" PointY="14.75" />
-        <EntityTypeShape EntityType="reclamosModel.motivos_cierre" Width="1.5" PointX="0.75" PointY="19.75" />
+        <EntityTypeShape EntityType="reclamosModel.estados_reclamos_unity" Width="1.5" PointX="10.75" PointY="12.75" />
+        <EntityTypeShape EntityType="reclamosModel.formulario_colectivo" Width="1.5" PointX="12.75" PointY="12.75" />
+        <EntityTypeShape EntityType="reclamosModel.gestores" Width="1.5" PointX="0.75" PointY="35.875" />
+        <EntityTypeShape EntityType="reclamosModel.info_asegurado" Width="1.5" PointX="13.75" PointY="0.75" />
+        <EntityTypeShape EntityType="reclamosModel.ingreso_cheques" Width="1.5" PointX="8.25" PointY="55.25" />
+        <EntityTypeShape EntityType="reclamosModel.maternidad" Width="1.5" PointX="13.75" PointY="4.75" />
+        <EntityTypeShape EntityType="reclamosModel.motivos_cierre" Width="1.5" PointX="0.75" PointY="63" />
         <EntityTypeShape EntityType="reclamosModel.movimientos" Width="1.5" PointX="0.75" PointY="5.375" />
-        <EntityTypeShape EntityType="reclamosModel.pais" Width="1.5" PointX="1.5" PointY="10.625" />
-        <EntityTypeShape EntityType="reclamosModel.ramos" Width="1.5" PointX="12.75" PointY="14.75" />
-        <EntityTypeShape EntityType="reclamosModel.recibos_medicos" Width="1.5" PointX="8.25" PointY="49.25" />
+        <EntityTypeShape EntityType="reclamosModel.pais" Width="1.5" PointX="1.5" PointY="59.625" />
+        <EntityTypeShape EntityType="reclamosModel.ramos" Width="1.5" PointX="14.75" PointY="8.75" />
+        <EntityTypeShape EntityType="reclamosModel.recibos_medicos" Width="1.5" PointX="8.25" PointY="42.75" />
         <EntityTypeShape EntityType="reclamosModel.reclamo_auto" Width="1.5" PointX="3" PointY="25.75" />
         <EntityTypeShape EntityType="reclamosModel.reclamos_medicos" Width="1.5" PointX="6" PointY="27.875" />
         <EntityTypeShape EntityType="reclamosModel.reclamos_varios" Width="1.5" PointX="9" PointY="26.375" />
-        <EntityTypeShape EntityType="reclamosModel.reg_reclamo_varios" Width="1.5" PointX="6.75" PointY="12.625" />
+        <EntityTypeShape EntityType="reclamosModel.reg_reclamo_varios" Width="1.5" PointX="6.75" PointY="13.625" />
         <EntityTypeShape EntityType="reclamosModel.reg_reclamos_medicos" Width="1.5" PointX="3.75" PointY="13.75" />
-        <EntityTypeShape EntityType="reclamosModel.sucursal" Width="1.5" PointX="1.5" PointY="16.625" />
-        <EntityTypeShape EntityType="reclamosModel.sysdiagrams" Width="1.5" PointX="15.75" PointY="0.75" />
-        <EntityTypeShape EntityType="reclamosModel.talleres" Width="1.5" PointX="0.75" PointY="52.875" />
+        <EntityTypeShape EntityType="reclamosModel.sucursal" Width="1.5" PointX="1.5" PointY="53.625" />
+        <EntityTypeShape EntityType="reclamosModel.sysdiagrams" Width="1.5" PointX="14.75" PointY="11.75" />
+        <EntityTypeShape EntityType="reclamosModel.talleres" Width="1.5" PointX="0.75" PointY="26.625" />
         <EntityTypeShape EntityType="reclamosModel.tipo_documentos" Width="1.5" PointX="2.75" PointY="5" />
         <EntityTypeShape EntityType="reclamosModel.tipo_reclamos" Width="1.5" PointX="0.75" PointY="1.375" />
-        <EntityTypeShape EntityType="reclamosModel.usuario" Width="1.5" PointX="0.75" PointY="36.5" />
-        <EntityTypeShape EntityType="reclamosModel.viewCoberturasAutos" Width="1.5" PointX="15.75" PointY="3.75" />
-        <EntityTypeShape EntityType="reclamosModel.vistaBusquedaPolizaMovil" Width="1.5" PointX="17.75" PointY="0.75" />
-        <EntityTypeShape EntityType="reclamosModel.vistaReclamosDaños" Width="1.5" PointX="17.75" PointY="5.75" />
-        <EntityTypeShape EntityType="reclamosModel.vistaReclamosMedicos" Width="1.5" PointX="17.75" PointY="12.75" />
-        <EntityTypeShape EntityType="reclamosModel.ViewBusquedaAuto" Width="1.5" PointX="17.75" PointY="18.75" />
-        <EntityTypeShape EntityType="reclamosModel.v_producto_no_conforme" Width="1.5" PointX="19.75" PointY="0.75" />
+        <EntityTypeShape EntityType="reclamosModel.usuario" Width="1.5" PointX="0.75" PointY="39.375" />
+        <EntityTypeShape EntityType="reclamosModel.viewCoberturasAutos" Width="1.5" PointX="14.75" PointY="14.75" />
+        <EntityTypeShape EntityType="reclamosModel.vistaBusquedaPolizaMovil" Width="1.5" PointX="15.75" PointY="0.75" />
+        <EntityTypeShape EntityType="reclamosModel.vistaReclamosDaños" Width="1.5" PointX="16.75" PointY="5.75" />
+        <EntityTypeShape EntityType="reclamosModel.vistaReclamosMedicos" Width="1.5" PointX="16.75" PointY="12.75" />
+        <EntityTypeShape EntityType="reclamosModel.ViewBusquedaAuto" Width="1.5" PointX="18.75" PointY="0.75" />
+        <EntityTypeShape EntityType="reclamosModel.v_producto_no_conforme" Width="1.5" PointX="18.75" PointY="9.75" />
         <AssociationConnector Association="reclamosModel.FK_movimiento" />
         <AssociationConnector Association="reclamosModel.FK_tipo" />
         <AssociationConnector Association="reclamosModel.FK_reclamo_auto_analistas" />
