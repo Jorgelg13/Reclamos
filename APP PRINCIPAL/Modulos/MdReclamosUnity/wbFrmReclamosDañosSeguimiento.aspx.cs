@@ -25,7 +25,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosDañosSeguimiento : Sy
     String poliza;
     short codigo;
     String idRecibido, comentarios, pagos, llamadas, coberturas, datosSiniestro, estados, liquidaciones;
-    String estadoReclamo, cartaEnvioCheque, cartaCierreInterno, cartaDeclinado, documentos, doc_solicitados;
+    String estadoReclamo, cartaEnvioCheque, cartaCierreInterno, cartaDeclinado, cartaDeducibleAnual, documentos, doc_solicitados;
     int id, dias,totalEstado, idPago = 0;
     //variables para calculos de pagos de reclamos
     Double iva, monto_reclamado, mejora_tecnologica, tiempo_uso, infra_seguro, perdida_final_ajustada, 
@@ -42,6 +42,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosDañosSeguimiento : Sy
         cartaEnvioCheque   = Cartas.CARTA_ENVIO_CHEQUE_DANOS(reg);
         cartaCierreInterno = Cartas.CARTA_CIERRE_INTERNO_DANOS(reg);
         cartaDeclinado     = Cartas.CARTA_DECLINADO_DANOS(reg);
+        cartaDeducibleAnual = Cartas.CIERRE_DEDUCIBLE_ANUAL(reg);
         txtSolicitudDocumentos.Text = Cartas.SOLICITUD_DOCUMENTOS();
 
         datosSiniestro     = Consultas.DATOS_SINIESTRO(id);
@@ -74,7 +75,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosDañosSeguimiento : Sy
             btnActualizarPagos.Enabled = false;
         }
 
-        if(userlogin== "cmejia" || userlogin == "mbarrios" || userlogin =="jlaj")
+        if(userlogin== "cmejia" || userlogin == "mbarrios" || userlogin =="jlaj" || userlogin =="nsierra")
         {
             btnGuardarProximaFecha.Enabled = true;
         }
@@ -129,6 +130,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosDañosSeguimiento : Sy
             lblBanderaCierreInterno.Text     = reclamo.b_carta_cierre_interno.Value.ToString();
             lblBanderaDeclinado.Text         = reclamo.b_carta_declinado.Value.ToString();
             lblBanderaEnvioCheque.Text       = reclamo.b_carta_envio_cheque.Value.ToString();
+            lblBanderaCierreDeducible.Text = reclamo.b_carta_deducible_anual.ToString();
 
             //listado de dropdown
             lblEstadoReclamo.Text       = reclamo.estado_reclamo_unity;
@@ -366,7 +368,6 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosDañosSeguimiento : Sy
         {
             var reclamo = DBReclamos.reclamos_varios.Find(id);
             if(reclamo.fecha_visualizar <= DateTime.Now) actualizar_fecha_seguimiento();
-            reclamo.estado_unity  = estado;
             reclamo.num_reclamo   = txtNumReclamo.Text.ToString();
             reclamo.num_contrato  = txtContrato.Text;
             reclamo.reaseguro     = reaseguro;
@@ -774,136 +775,38 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosDañosSeguimiento : Sy
         lblCartaEjecutivo.Text = registro.reg_reclamo_varios.ejecutivo;
     }
 
-    //generar modelo de carta de envio de cheque
-    protected void chEnvioCarta_CheckedChanged(object sender, EventArgs e)
-    {
-        if (chEnvioCarta.Checked)
-        {
-            chCartaCierre.Checked = false;
-            chCartaDeclinado.Checked = false;
-            CodigoISO.Text = "RE-DA-F-03/Ver.02";
-            var buscarCarta = DBReclamos.cartas.Where(ca => ca.tipo == "envio cheque" && ca.modulo == "daños" && ca.id_reclamo == id).Count();
-
-            if (buscarCarta == 1)
-            {
-                var mostrar = DBReclamos.cartas.Where(ma => ma.id_reclamo == id && ma.tipo == "envio cheque" && ma.modulo == "daños").First();
-                txtContenidoCarta.Text = mostrar.contenido;
-                panelPrincipal.Visible = false;
-                Panelsecundario.Visible = true;
-                lblcarta.Text = txtContenidoCarta.Text;
-            }
-            else
-            {
-                DatosCarta();
-                PnDetallePago.Visible = true;
-                lblMemo.Text = cartaEnvioCheque;
-            }
-        }
-        else
-        {
-            lblMemo.Text = "";
-            panelPrincipal.Visible = true;
-            Panelsecundario.Visible = false;
-        }
-        this.Page.ClientScript.RegisterStartupScript(this.Page.GetType(), "show_modal", "$('#Editor').modal('show');", addScriptTags: true);
-    }
-
-    //generar carta de declinacion de reclamo
-    protected void chCartaDeclinado_CheckedChanged(object sender, EventArgs e)
-    {
-        if (chCartaDeclinado.Checked)
-        {
-            chCartaCierre.Checked = false;
-            chEnvioCarta.Checked = false;
-            CodigoISO.Text = "RE-DA-F-05/Ver.02";
-            var buscarCarta = DBReclamos.cartas.Where(ca => ca.tipo == "declinado" && ca.modulo == "daños" && ca.id_reclamo == id).Count();
-
-            if (buscarCarta == 1)
-            {
-                var mostrar = DBReclamos.cartas.Where(ma => ma.id_reclamo == id && ma.tipo == "declinado" && ma.modulo == "daños").First();
-                txtContenidoCarta.Text = mostrar.contenido;
-                panelPrincipal.Visible = false;
-                Panelsecundario.Visible = true;
-                lblcarta.Text = txtContenidoCarta.Text;
-            }
-            else
-            {
-                PnDetallePago.Visible = false;
-                DatosCarta();
-                lblMemo.Text = cartaDeclinado;
-            }
-        }
-        else
-        {
-            lblMemo.Text = "";
-            panelPrincipal.Visible = true;
-            Panelsecundario.Visible = false;
-        }
-        this.Page.ClientScript.RegisterStartupScript(this.Page.GetType(), "show_modal", "$('#Editor').modal('show');", addScriptTags: true);
-    }
-
-    //generar carta de cierre interno
-    protected void chCartaCierre_CheckedChanged(object sender, EventArgs e)
-    {
-        if (chCartaCierre.Checked)
-        {
-            chCartaDeclinado.Checked = false;
-            chEnvioCarta.Checked = false;
-            CodigoISO.Text = "RE-DA-F-04/Ver.02";
-            var buscarCarta = DBReclamos.cartas.Where(ca => ca.tipo == "cierre interno" && ca.modulo == "daños" && ca.id_reclamo == id).Count();
-
-            if (buscarCarta == 1)
-            {
-                var mostrar = DBReclamos.cartas.Where(ma => ma.id_reclamo == id && ma.tipo == "cierre interno" && ma.modulo == "daños").First();
-                txtContenidoCarta.Text = mostrar.contenido;
-                panelPrincipal.Visible = false;
-                Panelsecundario.Visible = true;
-                lblcarta.Text = txtContenidoCarta.Text;
-            }
-            else
-            {
-                PnDetallePago.Visible = false;
-                DatosCarta();
-                lblMemo.Text = cartaCierreInterno;
-            }
-        }
-        else
-        {
-            lblMemo.Text = "";
-            panelPrincipal.Visible = true;
-            Panelsecundario.Visible = false;
-        }
-        this.Page.ClientScript.RegisterStartupScript(this.Page.GetType(), "show_modal", "$('#Editor').modal('show');", addScriptTags: true);
-    }
-
     protected void lnkGuardarCarta_Click(object sender, EventArgs e)
     {
         try
         {
-            if (chCartaCierre.Checked)
+            if (ddlCartas.SelectedValue =="cierre interno")
             {
-                Utils.Guardar_cartas(txtContenidoCarta, "cierre interno", "daños", id, chCartaCierre, chCartaDeclinado, chEnvioCarta, Response);
+                Utils.Guardar_cartas(txtContenidoCarta, "cierre interno", "daños", id,ddlCartas, Response);
                 Utils.actividades(id, Constantes.DANIOS(), 9, Constantes.USER());
                 datosReclamo(id);
             }
 
-            else if (chCartaDeclinado.Checked)
+            else if (ddlCartas.SelectedValue =="declinado")
             {
-                Utils.Guardar_cartas(txtContenidoCarta, "declinado", "daños", id, chCartaCierre, chCartaDeclinado, chEnvioCarta, Response);
+                Utils.Guardar_cartas(txtContenidoCarta, "declinado", "daños", id, ddlCartas, Response);
                 Utils.actividades(id, Constantes.DANIOS(), 10, Constantes.USER());
                 datosReclamo(id);
             }
 
-            else if (chEnvioCarta.Checked)
+            else if (ddlCartas.SelectedValue =="envio cheque")
             {
-                Utils.Guardar_cartas(txtContenidoCarta, "envio cheque", "daños", id, chCartaCierre, chCartaDeclinado, chEnvioCarta, Response);
+                Utils.Guardar_cartas(txtContenidoCarta, "envio cheque", "daños", id,ddlCartas, Response);
                 Utils.actividades(id, Constantes.DANIOS(), 11, Constantes.USER());
                 datosReclamo(id);
             }
 
-            chCartaCierre.Checked = false;
-            chCartaDeclinado.Checked = false;
-            chEnvioCarta.Checked = false;
+            else if (ddlCartas.SelectedValue == "cierre deducible")
+            {
+                Utils.Guardar_cartas(txtContenidoCarta, "cierre deducible", "daños", id, ddlCartas, Response);
+                Utils.actividades(id, Constantes.DANIOS(), 11, Constantes.USER());
+                datosReclamo(id);
+            }
+
             Utils.ShowMessage(this.Page, "Carta Guardada con exito", "Excelente", "success");
         }
         catch (Exception ex)
@@ -1199,5 +1102,103 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosDañosSeguimiento : Sy
         {
             Response.Write(err);
         }
+    }
+
+    protected void ddlCartas_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        CodigoISO.Text = "RE-DA-F-05/Ver.02";
+
+        if (ddlCartas.SelectedValue == "declinado")
+        {
+            var buscarCarta = DBReclamos.cartas.Where(ca => ca.tipo == "declinado" && ca.modulo == "daños" && ca.id_reclamo == id).Count();
+
+            if (buscarCarta == 1)
+            {
+                var mostrar = DBReclamos.cartas.Where(ma => ma.id_reclamo == id && ma.tipo == "declinado" && ma.modulo == "daños").First();
+                txtContenidoCarta.Text = mostrar.contenido;
+                panelPrincipal.Visible = false;
+                Panelsecundario.Visible = true;
+                lblcarta.Text = txtContenidoCarta.Text;
+            }
+            else
+            {
+                PnDetallePago.Visible = false;
+                PanelDetalleDeducible.Visible = false;
+                DatosCarta();
+                lblMemo.Text = cartaDeclinado;
+            }
+        }
+
+        else if (ddlCartas.SelectedValue == "cierre interno")
+        {
+            var buscarCarta = DBReclamos.cartas.Where(ca => ca.tipo == "cierre interno" && ca.modulo == "daños" && ca.id_reclamo == id).Count();
+
+            if (buscarCarta == 1)
+            {
+                var mostrar = DBReclamos.cartas.Where(ma => ma.id_reclamo == id && ma.tipo == "cierre interno" && ma.modulo == "daños").First();
+                txtContenidoCarta.Text = mostrar.contenido;
+                panelPrincipal.Visible = false;
+                Panelsecundario.Visible = true;
+                lblcarta.Text = txtContenidoCarta.Text;
+            }
+            else
+            {
+                PnDetallePago.Visible = false;
+                PanelDetalleDeducible.Visible = false;
+                DatosCarta();
+                lblMemo.Text = cartaCierreInterno;
+            }
+        }
+
+        else if (ddlCartas.SelectedValue == "envio cheque")
+        {
+            var buscarCarta = DBReclamos.cartas.Where(ca => ca.tipo == "envio cheque" && ca.modulo == "daños" && ca.id_reclamo == id).Count();
+
+            if (buscarCarta == 1)
+            {
+                var mostrar = DBReclamos.cartas.Where(ma => ma.id_reclamo == id && ma.tipo == "envio cheque" && ma.modulo == "daños").First();
+                txtContenidoCarta.Text = mostrar.contenido;
+                panelPrincipal.Visible = false;
+                Panelsecundario.Visible = true;
+                lblcarta.Text = txtContenidoCarta.Text;
+            }
+            else
+            {
+                DatosCarta();
+                PnDetallePago.Visible = true;
+                PanelDetalleDeducible.Visible = false;
+                lblMemo.Text = cartaEnvioCheque;
+            }
+        }
+
+        else if (ddlCartas.SelectedValue == "cierre deducible")
+        {
+            var buscarCarta = DBReclamos.cartas.Where(ca => ca.tipo == "cierre deducible" && ca.modulo == "daños" && ca.id_reclamo == id).Count();
+
+            if (buscarCarta == 1)
+            {
+                var mostrar = DBReclamos.cartas.Where(ma => ma.id_reclamo == id && ma.tipo == "cierre deducible" && ma.modulo == "daños").First();
+                txtContenidoCarta.Text = mostrar.contenido;
+                panelPrincipal.Visible = false;
+                Panelsecundario.Visible = true;
+                lblcarta.Text = txtContenidoCarta.Text;
+            }
+            else
+            {
+                PnDetallePago.Visible = false;
+                PanelDetalleDeducible.Visible = true;
+                DatosCarta();
+                lblMemo.Text = cartaDeducibleAnual;
+            }
+        }
+
+        else
+        {
+            lblMemo.Text = "";
+            panelPrincipal.Visible = true;
+            Panelsecundario.Visible = false;
+        }
+
+        this.Page.ClientScript.RegisterStartupScript(this.Page.GetType(), "show_modal", "$('#Editor').modal('show');", addScriptTags: true);
     }
 }

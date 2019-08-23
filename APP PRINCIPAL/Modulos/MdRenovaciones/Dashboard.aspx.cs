@@ -116,7 +116,7 @@ public partial class Modulos_MdRenovaciones_Dashboard : System.Web.UI.Page
             registro.estado = 3;
             DBRenovaciones.SaveChanges();
             String Poliza = (registro.ramo + registro.poliza + registro.endoso_renov + ".pdf");
-            Utils.MoverArchivos(Poliza, "Enviadas");
+            Utils.MoverArchivos(Poliza, "Enviadas","Polizas");
             EnvioSms();
             llenarGrid();
         }
@@ -166,7 +166,7 @@ public partial class Modulos_MdRenovaciones_Dashboard : System.Web.UI.Page
         registro.estado = 8;
 
         String Poliza = (registro.ramo + registro.poliza + registro.endoso_renov + ".pdf");
-        Utils.MoverArchivos(Poliza, "Invalidas");
+        Utils.MoverArchivos(Poliza, "Invalidas", "Polizas");
 
         DBRenovaciones.SaveChanges();
         llenarGrid();

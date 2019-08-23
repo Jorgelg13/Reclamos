@@ -1013,6 +1013,7 @@ public partial class reclamos_varios
     public Nullable<bool> b_carta_cierre_interno { get; set; }
     public Nullable<bool> b_carta_declinado { get; set; }
     public Nullable<bool> b_carta_envio_cheque { get; set; }
+    public Nullable<bool> b_carta_deducible_anual { get; set; }
     public Nullable<decimal> reserva { get; set; }
     public string documentos { get; set; }
     public Nullable<bool> problema_ajustador { get; set; }
@@ -1143,6 +1144,21 @@ public partial class talleres
 
     public virtual ICollection<reclamo_auto> reclamo_auto { get; set; }
     public virtual ICollection<reclamos_varios> reclamos_varios { get; set; }
+}
+
+public partial class tblCities
+{
+    public int CityID { get; set; }
+    public string CityName { get; set; }
+}
+
+public partial class tblEmployee
+{
+    public int EmployeeID { get; set; }
+    public string Name { get; set; }
+    public string City { get; set; }
+    public string Department { get; set; }
+    public string Gender { get; set; }
 }
 
 public partial class tipo_documentos

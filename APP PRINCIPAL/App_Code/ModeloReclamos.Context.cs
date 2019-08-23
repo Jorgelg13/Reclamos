@@ -88,6 +88,8 @@ public partial class ReclamosEntities : DbContext
     public DbSet<sucursal> sucursal { get; set; }
     public DbSet<sysdiagrams> sysdiagrams { get; set; }
     public DbSet<talleres> talleres { get; set; }
+    public DbSet<tblCities> tblCities { get; set; }
+    public DbSet<tblEmployee> tblEmployee { get; set; }
     public DbSet<tipo_documentos> tipo_documentos { get; set; }
     public DbSet<tipo_reclamos> tipo_reclamos { get; set; }
     public DbSet<usuario> usuario { get; set; }

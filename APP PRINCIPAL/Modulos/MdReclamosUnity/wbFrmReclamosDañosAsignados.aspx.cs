@@ -255,6 +255,7 @@ public partial class Modulos_MdReclamos_wbFrmReclamosDañosAsignados : System.We
             reclamo.b_carta_cierre_interno = false;
             reclamo.b_carta_declinado = false;
             reclamo.b_carta_envio_cheque = false;
+            reclamo.b_carta_deducible_anual = false;
             reclamo.problema_ajustador = false;
             reclamo.problema_aseguradora = false;
             reclamo.problema_cabina = false;

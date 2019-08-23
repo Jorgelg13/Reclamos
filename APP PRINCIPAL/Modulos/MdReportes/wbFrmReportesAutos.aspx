@@ -265,7 +265,8 @@
         }
     </script>
     <script>
-        if ($('#ContentPlaceHolder1_ddlCiclos option:selected').text() == 'Ciclo Unity' || $('#ContentPlaceHolder1_ddlCiclos option:selected').text() == 'Ciclo Aseguradora' ) {
+        if ($('#ContentPlaceHolder1_ddlCiclos option:selected').text() == 'Ciclo Unity' || $('#ContentPlaceHolder1_ddlCiclos option:selected').text() == 'Ciclo Aseguradora'
+            || $('#ContentPlaceHolder1_ddlCiclos option:selected').text() == 'Ciclo Total') {
 
             $('#ciclos2').show();
             $("#ciclos").removeClass("col-lg-12");

@@ -19,7 +19,11 @@
                         <asp:ListItem Value="aut.telefono as Telefono">Telefono</asp:ListItem>
                         <asp:ListItem Value="aut.fecha_completa_commit as [Fecha Creacion]">Fecha Creacion</asp:ListItem>
                         <asp:ListItem Value="aut.fecha_completa_cierre as [Fecha Cierre]">Fecha Cierre</asp:ListItem>
-                        <asp:ListItem Value="aut.total_tiempo as [Total Tiempo]">Total Tiempo</asp:ListItem>
+                        <asp:ListItem Value="CONCAT(
+	                                            DATEDIFF(MINUTE, aut.fecha_completa_commit,aut.fecha_completa_cierre)/60, ':',
+	                                            DATEDIFF(MINUTE, aut.fecha_completa_commit,aut.fecha_completa_cierre)%60, ':',
+	                                            DATEDIFF(SECOND, aut.fecha_completa_commit,aut.fecha_completa_cierre)%60
+                                                   ) as [Total Tiempo]">Total Tiempo</asp:ListItem>
                         <asp:ListItem Value="reg.asegurado as Asegurado">Asegurado</asp:ListItem>
                         <asp:ListItem Value="reg.poliza as Poliza">Poliza</asp:ListItem>
                         <asp:ListItem Value="reg.tipo as Tipo">Tipo</asp:ListItem>

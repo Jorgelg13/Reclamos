@@ -68,8 +68,11 @@ public partial class Modulos_MdRenovaciones_Estados_Enviadas : System.Web.UI.Pag
                 try
                 {
                     var poliza = DB.renovaciones_polizas.Find(id);
+                    String Poliza = (poliza.ramo + poliza.poliza + poliza.endoso_renov + ".pdf");
+
                     poliza.estado = 4;
                     DB.SaveChanges();
+                    Utils.MoverArchivos(Poliza, "Renovadas","Enviadas");
                     Utils.ShowMessage(this.Page, "Polizas renovadas exitosamente", "Excelente", "success");
                 }
                 catch (Exception ex)
@@ -83,8 +86,11 @@ public partial class Modulos_MdRenovaciones_Estados_Enviadas : System.Web.UI.Pag
                 try
                 {
                     var poliza = DB.renovaciones_polizas.Find(id);
+                    String Poliza = (poliza.ramo + poliza.poliza + poliza.endoso_renov + ".pdf");
+
                     poliza.estado = 5;
                     DB.SaveChanges();
+                    Utils.MoverArchivos(Poliza, "Canceladas", "Enviadas");
                     Utils.ShowMessage(this.Page, "Polizas renovadas exitosamente", "Excelente", "success");
                 }
                 catch (Exception ex)

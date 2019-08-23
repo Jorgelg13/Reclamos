@@ -72,8 +72,10 @@ public partial class Modulos_MdRenovaciones_Estados_Renovadas : System.Web.UI.Pa
                 try
                 {
                     var poliza = DB.renovaciones_polizas.Find(id);
+                    String Poliza = (poliza.ramo + poliza.poliza + poliza.endoso_renov + ".pdf");
                     poliza.estado = 7;
                     DB.SaveChanges();
+                    Utils.MoverArchivos(Poliza, "Archivo", "Renovadas");
                     Utils.ShowMessage(this.Page, "Polizas facturada exitosamente", "Excelente", "success");
                 }
                 catch (Exception ex)

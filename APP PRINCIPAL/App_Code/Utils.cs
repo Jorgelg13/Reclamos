@@ -443,12 +443,13 @@ public class Utils
         }
     }
 
-    public static void Guardar_cartas(TextBox contenido, string tipo, string modulo, int id, CheckBox chCierreInterno, CheckBox chDeclinado, CheckBox chEnvioCheque, HttpResponse Response)
+    public static void Guardar_cartas(TextBox contenido, string tipo, string modulo, int id, DropDownList tipoCarta, HttpResponse Response)
     {
         try
         {
             var bandera = DBReclamos.reclamos_varios.Find(id);
-            if (chCierreInterno.Checked)
+
+            if (tipoCarta.SelectedValue =="cierre interno")
             {
                 if (bandera.b_carta_cierre_interno == false)
                 {
@@ -474,7 +475,7 @@ public class Utils
                 }
             }
 
-            if (chDeclinado.Checked)
+            if (tipoCarta.SelectedValue =="declinado")
             {
                 if (bandera.b_carta_declinado == false)
                 {
@@ -500,7 +501,7 @@ public class Utils
                 }
             }
 
-            if (chEnvioCheque.Checked)
+            if (tipoCarta.SelectedValue=="envio cheque")
             {
                 if (bandera.b_carta_envio_cheque == false)
                 {
@@ -513,6 +514,32 @@ public class Utils
                     carta.modulo = modulo;
                     carta.id_reclamo = id;
                     bandera.b_carta_envio_cheque = true;
+                    DBReclamos.cartas.Add(carta);
+                }
+
+                else
+                {
+                    var actualizar = DBReclamos.cartas.Where(ca => ca.id_reclamo == id && ca.tipo == tipo && ca.modulo == modulo).First();
+                    actualizar.contenido = contenido.Text;
+                    actualizar.tipo = tipo;
+                    actualizar.modulo = modulo;
+                    actualizar.id_reclamo = id;
+                }
+            }
+
+            if(tipoCarta.SelectedValue =="cierre deducible")
+            {
+                if (bandera.b_carta_deducible_anual == false)
+                {
+                    cartas carta = new cartas();
+                    var sec_registro = DBReclamos.pa_sec_cartas();
+                    int? id_registro = sec_registro.Single();
+                    carta.id = Convert.ToInt32(id_registro);
+                    carta.contenido = contenido.Text;
+                    carta.tipo = tipo;
+                    carta.modulo = modulo;
+                    carta.id_reclamo = id;
+                    bandera.b_carta_deducible_anual = true;
                     DBReclamos.cartas.Add(carta);
                 }
 
@@ -780,9 +807,9 @@ public class Utils
         }
     }
 
-    public static void MoverArchivos(string poliza,string destino)
+    public static void MoverArchivos(string poliza,string destino, string rutaOrigen)
     {
-        String pathPrincipal = @"E:\ReclamosScanner\files\RenovacionesElRoble\OneDrive - Unity Seguros\Renovaciones\Polizas";
+        String pathPrincipal = @"E:\ReclamosScanner\files\RenovacionesElRoble\OneDrive - Unity Seguros\Renovaciones\"+rutaOrigen+"";
         String pathDestino = @"E:\ReclamosScanner\files\RenovacionesElRoble\OneDrive - Unity Seguros\Renovaciones";
 
         //String pathPrincipal = @"C:\Renovaciones\Polizas";

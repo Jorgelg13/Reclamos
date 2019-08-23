@@ -12,6 +12,17 @@ namespace Renovaciones
     using System;
     using System.Collections.Generic;
     
+    public partial class archivos
+    {
+        public int id { get; set; }
+        public string poliza { get; set; }
+    }
+}
+namespace Renovaciones
+{
+    using System;
+    using System.Collections.Generic;
+    
     public partial class estados
     {
         public estados()
@@ -53,6 +64,7 @@ namespace Renovaciones
         public string aseguradora { get; set; }
         public string telefono { get; set; }
         public string correo { get; set; }
+        public Nullable<int> grupo_economico { get; set; }
     }
 }
 namespace Renovaciones
@@ -156,6 +168,7 @@ namespace Renovaciones
         public Nullable<System.DateTime> fecha_registro { get; set; }
         public string vigf_acs { get; set; }
         public string correo_gestor { get; set; }
+        public Nullable<int> grupo_economico { get; set; }
     
         public virtual estados estados { get; set; }
         public virtual ICollection<renovaciones_log> renovaciones_log { get; set; }

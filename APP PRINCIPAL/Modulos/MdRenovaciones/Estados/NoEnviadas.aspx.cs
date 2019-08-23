@@ -90,7 +90,7 @@ public partial class Modulos_MdRenovaciones_Estados_NoEnviadas : System.Web.UI.P
                 registro.estado = 3;
                 DB.SaveChanges();
                 String Poliza = (registro.ramo + registro.poliza + registro.endoso_renov + ".pdf");
-                Utils.MoverArchivos(Poliza, "Enviadas");
+                Utils.MoverArchivos(Poliza, "Enviadas", "Polizas");
                 EnvioSms();
                 llenarGrid();
             }
@@ -130,7 +130,7 @@ public partial class Modulos_MdRenovaciones_Estados_NoEnviadas : System.Web.UI.P
                     registro.estado = 3;
                     DB.SaveChanges();
                     String Poliza = (registro.ramo + registro.poliza + registro.endoso_renov + ".pdf");
-                    Utils.MoverArchivos(Poliza, "Enviadas");
+                    Utils.MoverArchivos(Poliza, "Enviadas", "Polizas");
                     EnvioSms();
                     llenarGrid();
                     break;

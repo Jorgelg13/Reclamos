@@ -104,6 +104,43 @@ $(document).ready(function () {
 });
 
 
+//funcion para mostrar el editor de texto de las cartas
+$(document).ready(function () {
+    try {
+        if ($('#ContentPlaceHolder1_ddlCartas').val() === 'cierre interno'  && $('#ContentPlaceHolder1_lblBanderaCierreInterno').text() === 'True') {
+            $('#summernote').html($('#ContentPlaceHolder1_lblcarta').html());
+        }
+        else {
+            $('#summernote').html($('#MemosReclamos').html());
+        }
+
+        if ($('#ContentPlaceHolder1_ddlCartas').val() === 'cierre interno' && $('#ContentPlaceHolder1_lblBanderaDeclinado').text() === 'True') {
+            $('#summernote').html($('#ContentPlaceHolder1_lblcarta').html());
+        }
+        else {
+            $('#summernote').html($('#MemosReclamos').html());
+        }
+
+        if ($('#ContentPlaceHolder1_ddlCartas').val() ==="envio cheque"  && $('#ContentPlaceHolder1_lblBanderaEnvioCheque').text() === 'True') {
+            $('#summernote').html($('#ContentPlaceHolder1_lblcarta').html());
+        }
+        else {
+            $('#summernote').html($('#MemosReclamos').html());
+        }
+
+        if ($('#ContentPlaceHolder1_ddlCartas').val() === "cierre deducible" && $('#ContentPlaceHolder1_lblBanderaCierreDeducible').text() === 'True') {
+            $('#summernote').html($('#ContentPlaceHolder1_lblcarta').html());
+        }
+        else {
+            $('#summernote').html($('#MemosReclamos').html());
+        }
+
+        $('#summernote').summernote();
+    }
+    catch ($ex) { }
+});
+
+
 //funcion para enviar correo electronico
 function enviarCorreo() {
     var body = $('#ContentPlaceHolder1_txtMensaje').val();

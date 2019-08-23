@@ -530,13 +530,20 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesAutos : System.Web.UI.
         if (ddlCiclos.SelectedValue == "Ciclo Total")
         {
             kpi = 87;
+            kpiImportacion = 87;
             PanelCamposSeleccion.Visible = false;
             PanelEficiencia.Visible = false;
             PnCiclos.Visible = true;
-            Utils.Ciclos_Reclamos(txtFechaInicio, txtFechaFin, "pa_ciclos_reclamos_autos", GridCiclos, 4, kpi);
-            lblTitulo.Text = "Ciclo Total, KPI sobre " + kpi.ToString() + " dias";
+            //Utils.Ciclos_Reclamos(txtFechaInicio, txtFechaFin, "pa_ciclos_reclamos_autos", GridCiclos, 4, kpi);
+            //lblTitulo.Text = "Ciclo Total, KPI sobre " + kpi.ToString() + " dias";
+            Utils.Ciclos_Reclamos_tipo(txtFechaInicio, txtFechaFin, "pa_ciclos_reclamos_autos_con_importacion", GridCiclos, 4, kpi, 1);
+            kpi = 57;
+            Utils.Ciclos_Reclamos_tipo(txtFechaInicio, txtFechaFin, "pa_ciclos_reclamos_autos_con_importacion", GridCiclos2, 4, kpi, 0);
+            lblTitulo.Text = "Ciclo Aseguradora, KPI sobre " + kpi.ToString() + " dias sin importacion y " + kpiImportacion + " con importacion";
+            KpiConImportacion.Text = "Con importación Evaluado sobre " + kpiImportacion + " Dias";
+            KpiSinImportacion.Text = "Sin importación Evaluado sobre " + kpi + " Dias";
+            KPI(true);
             Utils.actividades(0, Constantes.AUTOS(), 34, Constantes.USER());
-            KPI(false);
         }
 
         else if (ddlCiclos.SelectedValue == "Ciclo Unity")
@@ -545,7 +552,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesAutos : System.Web.UI.
             PanelCamposSeleccion.Visible = false;
             PanelEficiencia.Visible = false;
             PnCiclos.Visible = true;
-            Utils.Ciclos_Reclamos(txtFechaInicio,txtFechaFin, "pa_ciclos_reclamos_autos", GridCiclos, 1, kpi);
+            Utils.Ciclos_Reclamos(txtFechaInicio, txtFechaFin, "pa_ciclos_reclamos_autos", GridCiclos, 1, kpi);
             Utils.Ciclos_Reclamos(txtFechaInicio, txtFechaFin, "pa_ciclos_reclamos_autos", GridCiclos2, 5, kpi);
             lblTitulo.Text = "Ciclo Unity, KPI sobre " + kpi.ToString() + " dias";
             Utils.actividades(0, Constantes.AUTOS(), 31, Constantes.USER());

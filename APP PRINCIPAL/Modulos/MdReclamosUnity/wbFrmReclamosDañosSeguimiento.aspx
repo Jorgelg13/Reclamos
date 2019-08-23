@@ -42,6 +42,7 @@
                 <asp:Label ID="lblBanderaCierreInterno" runat="server" Style="display: none;"></asp:Label>
                 <asp:Label ID="lblBanderaDeclinado" runat="server" Style="display: none;"></asp:Label>
                 <asp:Label ID="lblBanderaEnvioCheque" runat="server" Style="display: none;"></asp:Label>
+                 <asp:Label ID="lblBanderaCierreDeducible" runat="server" Style="display: none;"></asp:Label>
                 <asp:Label ID="lblDocumento" runat="server" Style="display: none;"></asp:Label>
             </div>
             <%---------------------------------------------------------------------------------------------------%>
@@ -197,10 +198,17 @@
                                 <b>Cartas y observaciones</b>
                             </div>
                             <div class="panel-body form-inline">
+                                <label>Tipo de carta: </label>
+                                <asp:DropDownList CssClass="form-control" ID="ddlCartas" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlCartas_SelectedIndexChanged">
+                                    <asp:ListItem Value="elegir">Elegir</asp:ListItem>
+                                    <asp:ListItem Value="cierre interno">Carta Cierre Interno</asp:ListItem>
+                                    <asp:ListItem Value="declinado">Carta Declinado</asp:ListItem>
+                                    <asp:ListItem Value="envio cheque">Carta envio cheque</asp:ListItem>
+                                    <asp:ListItem Value="cierre deducible">Cierre deducible anual</asp:ListItem>
+                                </asp:DropDownList>
+                                <br />
+                                <br />
                                 <asp:TextBox ID="txtContenidoCarta" Style="width: 100%; display: none;" autocomplete="off" CssClass="form-control" TextMode="multiline" Columns="50" Rows="3" runat="server" placeholder="Observaciones" />
-                                <asp:CheckBox ID="chCartaCierre" Text="Carta Cierre Interno" AutoPostBack="true" runat="server" OnCheckedChanged="chCartaCierre_CheckedChanged" />
-                                <asp:CheckBox ID="chCartaDeclinado" Text="Carta Declinado" AutoPostBack="true" runat="server" OnCheckedChanged="chCartaDeclinado_CheckedChanged" />
-                                <asp:CheckBox ID="chEnvioCarta" Text="Carta Envio Cheque" AutoPostBack="true" runat="server" OnCheckedChanged="chEnvioCarta_CheckedChanged" />
                                 <asp:TextBox ID="txtObservaciones" Style="width: 100%" autocomplete="off" CssClass="form-control" TextMode="multiline" Columns="50" Rows="3" runat="server" placeholder="Observaciones" />
                             </div>
                         </div>
@@ -614,6 +622,34 @@
                                                 <tr class="estilos-tabla">
                                                     <td>Total a Liquidar</td>
                                                     <td>0.00</td>
+                                                </tr>
+                                            </table>
+                                        </asp:Panel>
+                                        <asp:Panel runat="server" ID="PanelDetalleDeducible" Visible="false">
+                                            <table style="width: 30%; margin-left: 285px;" class="estilos-tabla">
+                                                <tr class="estilos-tabla">
+                                                    <th>Monto Reclamado</th>
+                                                    <th>Q</th>
+                                                </tr>
+                                                <tr class="estilos-tabla">
+                                                    <td>Monto Ajustado</td>
+                                                    <td>Q</td>
+                                                </tr>
+                                                <tr class="estilos-tabla">
+                                                    <td>Deducible</td>
+                                                    <td>Q</td>
+                                                </tr>
+                                                <tr class="estilos-tabla">
+                                                    <td>Subtotal</td>
+                                                    <td>Q</td>
+                                                </tr>
+                                                <tr class="estilos-tabla">
+                                                    <td>(-)Deducible Agregado Anual</td>
+                                                    <td>Q</td>
+                                                </tr>
+                                                <tr class="estilos-tabla">
+                                                    <td>Deducible por agotar</td>
+                                                    <td>-Q</td>
                                                 </tr>
                                             </table>
                                         </asp:Panel>
@@ -1119,13 +1155,13 @@
 
                 <div id="container-floating">
                     <div class="nd4 nds" data-toggle="tooltip" data-placement="left" data-original-title="Simone">
-                        <asp:LinkButton ID="linkSalir" title="regresar a reclamos en seguimiento" CssClass="letter" runat="server" OnClick="linkSalir_Click"><i class="fa fa-times" aria-hidden="true"></i></asp:LinkButton>
+                        <asp:LinkButton ID="linkSalir" title="regresar a reclamos en seguimiento" CssClass="letter" runat="server" OnClick="linkSalir_Click"><i class="fa fa-times"></i></asp:LinkButton>
                     </div>
                     <div class="nd3 nds" data-toggle="tooltip" data-placement="left" data-original-title="contract@gmail.com">
-                        <asp:LinkButton ID="linkRefresar" title="Refrescar la pagina" CssClass="letter" autopostback="true" runat="server"><i class="fa fa-undo" aria-hidden="true"></i></asp:LinkButton>
+                        <asp:LinkButton ID="linkRefresar" title="Refrescar la pagina" CssClass="letter" autopostback="true" runat="server"><i class="fa fa-undo"></i></asp:LinkButton>
                     </div>
                     <div class="nd1 nds" data-toggle="tooltip" data-placement="left" data-original-title="Edoardo@live.it">
-                        <asp:LinkButton ID="btnActualizar" title="Actualizar registro" CssClass="letter" runat="server" OnClick="btnActualizar_Click"><i class="fa fa-floppy-o" aria-hidden="true"></i></asp:LinkButton>
+                        <asp:LinkButton ID="btnActualizar" title="Actualizar registro" CssClass="letter" runat="server" OnClick="btnActualizar_Click"><i class="fa fa-floppy-o"></i></asp:LinkButton>
                     </div>
                     <div id="floating-button" data-toggle="tooltip" data-placement="left" data-original-title="Create" onclick="newmail()">
                         <p class="plus">+</p>

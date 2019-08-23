@@ -37,7 +37,8 @@ public class Consultas
     public static string ESTADOS(int ID)
     {
         return "SELECT ber.estado as Estado, ber.fecha as Fecha, " +
-            " isnull( datediff(day, ber.fecha, (select top 1 fecha from bitacora_estados_reclamos_varios ber2 where ber2.id > ber.id and ber2.id_reclamos_varios = " + ID + ")),datediff(day, ber.fecha, GETDATE())) as Dias " +
+            " isnull( datediff(day, ber.fecha, (select top 1 fecha from bitacora_estados_reclamos_varios ber2 where ber2.id > ber.id and ber2.id_reclamos_varios = " + ID + "))," +
+            " datediff(day, ber.fecha, case when ber.estado = 'Cierre' then ber.fecha else getdate() end)) as Dias " +
             "FROM bitacora_estados_reclamos_varios as ber where id_reclamos_varios = " + ID + " ";
     }
 

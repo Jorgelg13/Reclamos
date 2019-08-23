@@ -42,6 +42,24 @@ public class Cartas
             "<br />";
     }
 
+    public static string CIERRE_DEDUCIBLE_ANUAL(reclamos_varios reg)
+    {
+        return "<p>Sobre el reclamo descrito en referencia, por este medio sírvase encontrar adjunta carta de cierre de reclamo emitida por la Aseguradora,  " +
+               "por el robo de mercadería ocurrido el " + reg.fecha + ", debido a que la pérdida ajustada pasa a formar parte del deducible agregado anual, de acuerdo a condiciones " +
+               "establecidas en la póliza, dónde se describen los siguientes deducibles:</p>" +
+               "<ol>" +
+               "<li>Robo de mercadería:</li>" +
+               "<li>Deducible Agregado Anual:</li>" +
+               "<li>Vigencia a afectar</li>" +
+               "</ol>" +
+               "<p>Por lo anterior, por cada reclamación, el deducible se aplicara de la siguiente manera:</p>" +
+               "<ol>" +
+               "<li>En cada reclamación se aplicarán deducibles establecidos en la póliza.</li>" +
+               "<li>Después de establecer su deducible específico, se abonará al deducible agregado anual únicamente la parte cubierta de cada reclamo.</li>" +
+               "<li>Al completar el deducible agregado anual, aplicarán únicamente los deducibles establecidos en la póliza.</li>" +
+               "</ol>";
+    }
+
     public static string SOLICITUD_DOCUMENTOS()
 
     {
