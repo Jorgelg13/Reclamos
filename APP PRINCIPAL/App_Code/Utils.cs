@@ -782,6 +782,10 @@ public class Utils
 
     public static String CORREO_GESTOR(string ejecutivo)
     {
+        if (String.IsNullOrEmpty(ejecutivo))
+        {
+            return  "reclamosgt@unitypromotores.com";
+        }
         var correo = DBReclamos.ejecutivos.Where(ej => ej.gestor == ejecutivo).First();
         return correo.correo;
     }

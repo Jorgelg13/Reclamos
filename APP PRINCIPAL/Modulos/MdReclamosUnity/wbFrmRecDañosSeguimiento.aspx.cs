@@ -20,36 +20,36 @@ public partial class Modulos_MdReclamosUnity_wbFrmRecDañosSeguimiento : System.
         EstadosAgrupados = "select count(*) as Total, estado_reclamo_unity as Estado from reclamos_varios where usuario_unity = '"+userlogin+"' and estado_unity = 'Seguimiento' group by estado_reclamo_unity ";
 
         selectGeneral = "SELECT " +
-                "dbo.reclamos_varios.id as ID," +
+                "r.id as ID," +
                 "gestores.nombre as Gestor," +
-                "dbo.reclamos_varios.estado_reclamo_unity as Estado," +
-                "dbo.reg_reclamo_varios.poliza as Poliza," +
-                "dbo.reg_reclamo_varios.asegurado as Asegurado," +
-                "dbo.reg_reclamo_varios.cliente as Cliente," +
-                "dbo.reg_reclamo_varios.aseguradora as Aseguradora," + //4
-                "dbo.reg_reclamo_varios.contratante as Contratante," +
-                "dbo.reg_reclamo_varios.ejecutivo as Ejecutivo," +//6
-                "dbo.reg_reclamo_varios.ramo as Ramo," +
-                "dbo.reg_reclamo_varios.status as Estatus," +
-                "dbo.reg_reclamo_varios.tipo as Tipo," +//10
-                "dbo.reclamos_varios.reportante as Reportante," +
-                "Convert(varchar(20),dbo.reclamos_varios.fecha_commit, 103) as [Fecha Creacion]," +
-                "Convert(varchar(20),dbo.reclamos_varios.fecha_visualizar, 103) as [Fecha Visualizar] " +
-                "FROM " +
-                "dbo.reg_reclamo_varios " +
-                "INNER JOIN dbo.reclamos_varios ON dbo.reclamos_varios.id_reg_reclamos_varios = dbo.reg_reclamo_varios.id "+
-                "INNER JOIN gestores on reclamos_varios.id_gestor = gestores.id ";
+                "r.estado_reclamo_unity as Estado," +
+                "DATEDIFF(DAY, r.fecha_commit, GETDATE()) as  [Total Dias]," +
+                "reg.poliza as Poliza," +
+                "reg.asegurado as Asegurado," +
+                "reg.cliente as Cliente," +
+                "reg.aseguradora as Aseguradora," + //4
+                "reg.contratante as Contratante," +
+                "reg.ejecutivo as Ejecutivo," +//6
+                "reg.ramo as Ramo," +
+                "reg.status as Estatus," +
+                "reg.tipo as Tipo," +//10
+                "r.reportante as Reportante," +
+                "Convert(varchar(20),r.fecha_commit, 103) as [Fecha Creacion]," +
+                "Convert(varchar(20),r.fecha_visualizar, 103) as [Fecha Visualizar] " +
+                "FROM reg_reclamo_varios as reg " +
+                "INNER JOIN reclamos_varios as r on r.id_reg_reclamos_varios = reg.id "+
+                "INNER JOIN gestores on r.id_gestor = gestores.id ";
 
         string reclamosPrioritarios = selectGeneral +
-               " where ((reclamos_varios.prioritario = 'true') and (reclamos_varios.usuario_unity = '" + userlogin + "' and reclamos_varios.estado_unity = 'Seguimiento' ))";
+               " where ((r.prioritario = 'true') and (r.usuario_unity = '" + userlogin + "' and r.estado_unity = 'Seguimiento' ))";
 
         string reclamosComplicados = selectGeneral +
-               " where ((reclamos_varios.complicado = 'true') and (reclamos_varios.usuario_unity = '" + userlogin + "' and reclamos_varios.estado_unity = 'Seguimiento' ))";
+               " where ((r.complicado = 'true') and (r.usuario_unity = '" + userlogin + "' and r.estado_unity = 'Seguimiento' ))";
 
         string inactivos = selectGeneral +
-              " where usuario_unity = '" + userlogin + "' and estado_unity = 'Seguimiento' and DATEDIFF(DAY, fecha_visualizar, convert(date,getdate(),103) ) >= 50  and estado_reclamo_unity = 'Pendiente Asegurado' ";
+              " where r.usuario_unity = '" + userlogin + "' and r.estado_unity = 'Seguimiento' and DATEDIFF(DAY, r.fecha_visualizar, convert(date,getdate(),103) ) >= 30  and r.estado_reclamo_unity = 'Pendiente Asegurado' ";
 
-        alarmas = selectGeneral + " where reclamos_varios.estado_unity = 'Seguimiento' and convert(date, reclamos_varios.fecha_visualizar,112) < getdate() order by gestores.nombre, reclamos_varios.fecha_visualizar";
+        alarmas = selectGeneral + " where r.estado_unity = 'Seguimiento' and convert(date, r.fecha_visualizar,112) < getdate() order by gestores.nombre, r.fecha_visualizar";
 
         if (!IsPostBack)
         {
@@ -70,7 +70,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmRecDañosSeguimiento : System.
     {
         estado = GridReclamosSeguimiento.SelectedRow.Cells[2].Text;
         reclamosSeguimiento = selectGeneral +
-               " where (reclamos_varios.usuario_unity = '" + userlogin + "' and reclamos_varios.estado_unity = 'Seguimiento' and reclamos_varios.estado_reclamo_unity = '"+HttpUtility.HtmlDecode(estado)+"') ";
+               " where (r.usuario_unity = '" + userlogin + "' and r.estado_unity = 'Seguimiento' and r.estado_reclamo_unity = '"+HttpUtility.HtmlDecode(estado)+"') ";
         llenado.llenarGrid(reclamosSeguimiento, GridReclamosEstado);
     }
 
@@ -120,25 +120,25 @@ public partial class Modulos_MdReclamosUnity_wbFrmRecDañosSeguimiento : System.
     protected void GridReclamosSeguimiento_RowDataBound(object sender, GridViewRowEventArgs e)
     {
         if (e.Row.RowType == DataControlRowType.DataRow)
-            if (Convert.ToDateTime(e.Row.Cells[15].Text) >= DateTime.Today)
+            if (Convert.ToDateTime(e.Row.Cells[16].Text) >= DateTime.Today)
             {
                 e.Row.Attributes.Add("style", "background-color: #8ace8e "); //verdes
             }
 
         if (e.Row.RowType == DataControlRowType.DataRow)
-            if (Convert.ToDateTime(e.Row.Cells[15].Text) < DateTime.Today)
+            if (Convert.ToDateTime(e.Row.Cells[16].Text) < DateTime.Today)
             {
                e.Row.Attributes.Add("style", "background-color: #f7c6be"); //rojos
             }
 
         if (e.Row.RowType == DataControlRowType.DataRow)
-            if (Convert.ToDateTime(e.Row.Cells[15].Text) == DateTime.Today.AddDays(2) || Convert.ToDateTime(e.Row.Cells[14].Text) == DateTime.Today.AddDays(1))
+            if (Convert.ToDateTime(e.Row.Cells[16].Text) == DateTime.Today.AddDays(2) || Convert.ToDateTime(e.Row.Cells[15].Text) == DateTime.Today.AddDays(1))
             {
                e.Row.Attributes.Add("style", "background-color: #f9f595"); //amarillos
             }
 
         if (e.Row.RowType == DataControlRowType.DataRow)
-            if (Convert.ToDateTime(e.Row.Cells[15].Text) == DateTime.Today)
+            if (Convert.ToDateTime(e.Row.Cells[16].Text) == DateTime.Today)
             {
                 e.Row.Attributes.Add("style", "background-color: #afcaf7"); //azules
             }
@@ -147,13 +147,13 @@ public partial class Modulos_MdReclamosUnity_wbFrmRecDañosSeguimiento : System.
     protected void ddlgestor_SelectedIndexChanged(object sender, EventArgs e)
     {
         String reclamosGestor = selectGeneral +
-              "where ( reclamos_varios.id_gestor = " + ddlgestor.SelectedValue + " and reclamos_varios.estado_unity = 'Seguimiento') order by reclamos_varios.fecha_visualizar";
+              "where ( r.id_gestor = " + ddlgestor.SelectedValue + " and r.estado_unity = 'Seguimiento') order by r.fecha_visualizar";
 
         String Prioritarios = selectGeneral +
-             " where ((reclamos_varios.prioritario = 'true') and (reclamos_varios.id_gestor = " + ddlgestor.SelectedValue + " and reclamos_varios.estado_unity = 'Seguimiento')) order by reclamos_varios.fecha_visualizar";
+             " where ((r.prioritario = 'true') and (r.id_gestor = " + ddlgestor.SelectedValue + " and r.estado_unity = 'Seguimiento')) order by r.fecha_visualizar";
 
         String Complicados = selectGeneral +
-             " where ((reclamos_varios.complicado = 'true') and (reclamos_varios.id_gestor = " + ddlgestor.SelectedValue + " and reclamos_varios.estado_unity = 'Seguimiento' )) order by reclamos_varios.fecha_visualizar";
+             " where ((r.complicado = 'true') and (r.id_gestor = " + ddlgestor.SelectedValue + " and r.estado_unity = 'Seguimiento' )) order by r.fecha_visualizar";
 
         llenado.llenarGrid(reclamosGestor, GridReclamosGeneral);
         llenado.llenarGrid(Prioritarios, GridPrioritarios);
@@ -184,8 +184,8 @@ public partial class Modulos_MdReclamosUnity_wbFrmRecDañosSeguimiento : System.
 
     protected void ddlAlarmaGestor_SelectedIndexChanged(object sender, EventArgs e)
     {
-        alarmas = selectGeneral + " where reclamos_varios.estado_unity = 'Seguimiento' and id_gestor = " + ddlAlarmaGestor.SelectedValue + " and " +
-            " convert(date, reclamos_varios.fecha_visualizar, 112) < getdate() order by reclamos_varios.fecha_visualizar ";
+        alarmas = selectGeneral + " where r.estado_unity = 'Seguimiento' and r.id_gestor = " + ddlAlarmaGestor.SelectedValue + " and " +
+            " convert(date, r.fecha_visualizar, 112) < getdate() order by r.fecha_visualizar ";
         llenado.llenarGrid(alarmas, GridAlarmas);
         GridAlarmas.DataBind();
         lblTotalAlarmas.Text = "Total de reclamos: " + GridAlarmas.Rows.Count.ToString();

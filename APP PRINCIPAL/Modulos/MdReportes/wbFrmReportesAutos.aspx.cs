@@ -527,21 +527,18 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesAutos : System.Web.UI.
 
     protected void Mostrar_Click(object sender, EventArgs e)
     {
+        PanelCamposSeleccion.Visible = false;
+        PanelEficiencia.Visible = false;
+        PnCiclos.Visible = true;
+
         if (ddlCiclos.SelectedValue == "Ciclo Total")
         {
             kpi = 87;
             kpiImportacion = 87;
-            PanelCamposSeleccion.Visible = false;
-            PanelEficiencia.Visible = false;
-            PnCiclos.Visible = true;
-            //Utils.Ciclos_Reclamos(txtFechaInicio, txtFechaFin, "pa_ciclos_reclamos_autos", GridCiclos, 4, kpi);
-            //lblTitulo.Text = "Ciclo Total, KPI sobre " + kpi.ToString() + " dias";
             Utils.Ciclos_Reclamos_tipo(txtFechaInicio, txtFechaFin, "pa_ciclos_reclamos_autos_con_importacion", GridCiclos, 4, kpi, 1);
             kpi = 57;
             Utils.Ciclos_Reclamos_tipo(txtFechaInicio, txtFechaFin, "pa_ciclos_reclamos_autos_con_importacion", GridCiclos2, 4, kpi, 0);
-            lblTitulo.Text = "Ciclo Aseguradora, KPI sobre " + kpi.ToString() + " dias sin importacion y " + kpiImportacion + " con importacion";
-            KpiConImportacion.Text = "Con importación Evaluado sobre " + kpiImportacion + " Dias";
-            KpiSinImportacion.Text = "Sin importación Evaluado sobre " + kpi + " Dias";
+            Titulo("Total",kpi,kpiImportacion);
             KPI(true);
             Utils.actividades(0, Constantes.AUTOS(), 34, Constantes.USER());
         }
@@ -549,9 +546,6 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesAutos : System.Web.UI.
         else if (ddlCiclos.SelectedValue == "Ciclo Unity")
         {
             kpi = 11;
-            PanelCamposSeleccion.Visible = false;
-            PanelEficiencia.Visible = false;
-            PnCiclos.Visible = true;
             Utils.Ciclos_Reclamos(txtFechaInicio, txtFechaFin, "pa_ciclos_reclamos_autos", GridCiclos, 1, kpi);
             Utils.Ciclos_Reclamos(txtFechaInicio, txtFechaFin, "pa_ciclos_reclamos_autos", GridCiclos2, 5, kpi);
             lblTitulo.Text = "Ciclo Unity, KPI sobre " + kpi.ToString() + " dias";
@@ -563,15 +557,10 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesAutos : System.Web.UI.
         {
             kpi = 63;
             kpiImportacion = 63;
-            PanelCamposSeleccion.Visible = false;
-            PanelEficiencia.Visible = false;
-            PnCiclos.Visible = true;
             Utils.Ciclos_Reclamos_tipo(txtFechaInicio, txtFechaFin, "pa_ciclos_reclamos_autos_con_importacion", GridCiclos, 2, kpi,1);
             kpi = 33;
             Utils.Ciclos_Reclamos_tipo(txtFechaInicio, txtFechaFin, "pa_ciclos_reclamos_autos_con_importacion", GridCiclos2, 2, kpi,0);
-            lblTitulo.Text = "Ciclo Aseguradora, KPI sobre " + kpi.ToString() + " dias sin importacion y "+kpiImportacion+" con importacion" ;
-            KpiConImportacion.Text = "Con importación Evaluado sobre " + kpiImportacion + " Dias";
-            KpiSinImportacion.Text = "Sin importación Evaluado sobre " + kpi + " Dias";
+            Titulo("Aseguradora", kpi, kpiImportacion);
             KPI(true);
             Utils.actividades(0, Constantes.AUTOS(), 32, Constantes.USER());
         }
@@ -579,15 +568,18 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesAutos : System.Web.UI.
         else if (ddlCiclos.SelectedValue == "Ciclo Cliente")
         {
             kpi = 13;
-            PanelCamposSeleccion.Visible = false;
-            PanelEficiencia.Visible = false;
-            PnCiclos.Visible = true;
             Utils.Ciclos_Reclamos(txtFechaInicio, txtFechaFin, "pa_ciclos_reclamos_autos", GridCiclos, 3, kpi);
             lblTitulo.Text = "Ciclo Cliente, KPI sobre " + kpi.ToString() + " dias";
             Utils.actividades(0, Constantes.AUTOS(), 33, Constantes.USER());
             KPI(false);
         }
+    }
 
+    public void Titulo(string titulo, int kpi, int kpiImportacion)
+    {
+        lblTitulo.Text = "Ciclo "+titulo+", KPI sobre " + kpi.ToString() + " dias sin importacion y " + kpiImportacion + " con importacion";
+        KpiConImportacion.Text = "Con importación Evaluado sobre " + kpiImportacion + " Dias";
+        KpiSinImportacion.Text = "Sin importación Evaluado sobre " + kpi + " Dias";
     }
 
     private void KPI(bool valor)

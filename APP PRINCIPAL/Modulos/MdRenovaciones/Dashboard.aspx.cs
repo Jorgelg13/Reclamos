@@ -112,7 +112,7 @@ public partial class Modulos_MdRenovaciones_Dashboard : System.Web.UI.Page
         try
         {
             Utils.EmailRenovacion("pa_envio_renovaciones", correo, txtCuerpo.Text, registro.correo_gestor.Trim());
-            Utils.EmailRenovacion("pa_envio_renovaciones", registro.correo_gestor, txtCuerpo.Text, registro.correo_gestor.Trim());
+            Utils.EmailRenovacion("pa_envio_renovaciones", registro.correo_gestor, txtCuerpo.Text, Utils.seleccionarCorreoGestor(userlogin));
             registro.estado = 3;
             DBRenovaciones.SaveChanges();
             String Poliza = (registro.ramo + registro.poliza + registro.endoso_renov + ".pdf");

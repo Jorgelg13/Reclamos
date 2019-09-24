@@ -14,6 +14,7 @@
                     <asp:CheckBoxList ID="checkCampos" runat="server" Height="141px" Width="147px">
                         <asp:ListItem Value="reclamos_varios.estado_unity as [Estado Reclamo]">Estado</asp:ListItem>
                         <asp:ListItem Value="reclamos_varios.estado_reclamo_unity as [Estado Reclamo Unity]">Estado Unity</asp:ListItem>
+                        <asp:ListItem Value="reclamos_varios.motivo_cierre as [Motivo Cierre]">Motivo Cierre</asp:ListItem>
                         <asp:ListItem Value="reclamos_varios.reaseguro as Reaseguro">Reaseguro</asp:ListItem>
                         <asp:ListItem Value="reg_reclamo_varios.poliza as Poliza">Poliza</asp:ListItem>
                         <asp:ListItem Value="reg_reclamo_varios.asegurado as Asegurado">Asegurado</asp:ListItem>

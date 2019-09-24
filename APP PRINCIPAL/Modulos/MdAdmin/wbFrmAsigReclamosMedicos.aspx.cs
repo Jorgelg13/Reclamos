@@ -6,6 +6,7 @@ using System.Web.UI.WebControls;
 public partial class Modulos_MdAdmin_wbFrmAsigReclamosMedicos : System.Web.UI.Page
 {
     String userlogin = HttpContext.Current.User.Identity.Name;
+    Email notificacion = new Email();
     ReclamosEntities DBReclamos = new ReclamosEntities();
     private static readonly /*HttpClient client = new HttpClient();*/
     Utils comprobar = new Utils();
@@ -41,6 +42,7 @@ public partial class Modulos_MdAdmin_wbFrmAsigReclamosMedicos : System.Web.UI.Pa
                     Utils.insertarComentario(id, "Su reclamo ha sido asignado a un ejecutivo para su revisión, fecha: " + DateTime.Now, "Asignado");
                     string mensaje = "UNITY: Estimad@ cliente su reclamo ha sido asignado a  "+DDLusuario.SelectedItem.Text+", Telefono: "+telefonoGestor.telefono+".";
                     Utils.SMS_gastos_medicos(asignar.telefono,mensaje,userlogin,"Asignado",id, asignar.reg_reclamos_medicos.tipo);
+            
                     Utils.ShowMessage(this.Page, "Reclamos asignados con exito", "Excelente", "success");
                 }
                 catch (Exception)

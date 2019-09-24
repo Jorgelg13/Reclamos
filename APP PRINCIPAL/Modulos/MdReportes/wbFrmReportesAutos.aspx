@@ -29,6 +29,7 @@
                         (select min(fecha) from bitacora_estados_autos where id_reclamo_auto = reclamo_auto.id),
                         (select max(fecha) from bitacora_estados_autos where id_reclamo_auto = reclamo_auto.id))
                         end as Dias from bitacora_estados_autos where id_reclamo_auto = reclamo_auto.id)">Cantidad de dias</asp:ListItem>
+                    <asp:ListItem Value="reclamo_auto.importacion">Importacion</asp:ListItem>
                     <asp:ListItem Value="auto_reclamo.cliente as Cliente">Cliente</asp:ListItem>
                     <asp:ListItem Value="auto_reclamo.vip as VIP">VIP</asp:ListItem>
                     <asp:ListItem Value="auto_reclamo.placa as Placa">Placa</asp:ListItem>

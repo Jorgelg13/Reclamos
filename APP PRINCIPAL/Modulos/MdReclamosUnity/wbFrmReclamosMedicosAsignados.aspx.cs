@@ -1,15 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
-using System.Data;
 using System.Data.SqlClient;
 
 public partial class Modulos_MdReclamosUnity_wbFrmReclamosMedicosAsignados : System.Web.UI.Page
 {
     String userlogin = HttpContext.Current.User.Identity.Name;
+    Email notificacion = new Email();
     ReclamosEntities DB = new ReclamosEntities();
     Utils comprobar = new Utils();
     Utils llenado = new Utils();
@@ -17,6 +13,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosMedicosAsignados : Sys
     conexionBD obj = new conexionBD();
     SqlCommand cmd = new SqlCommand();
     String ReclamosAsignados, sql;
+    String correoEjecutivo, contenido;
     int totalDias = 10;
 
 
@@ -48,11 +45,20 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosMedicosAsignados : Sys
         int id_reclamo_medico;
         string actualizarFecha = "update reclamos_medicos set fecha_revision = getdate() , fecha_apertura = getdate(), estado_unity = 'Seguimiento', id_estado= "+ 8 + ", fecha_visualizar = getdate() +3  ";
         id_reclamo_medico = Convert.ToInt32(GridMedicosAsignados.SelectedRow.Cells[1].Text);
+        var asignar = DB.reclamos_medicos.Find(id_reclamo_medico);
+
+        if (asignar.reg_reclamos_medicos.tipo == "I")
+        {
+            contenido = "Se ha aperturado un nuevo reclamo de gastos medicos bajo la poliza " + asignar.reg_reclamos_medicos.poliza + " " +
+                "que pertenece al asegurado  " + asignar.reg_reclamos_medicos.asegurado + " para mas detalle puede consultarlo en el siguiente " +
+                "link: \n\n https://reclamosgt.unitypromotores.com/MdBitacora/wbFrmConsultaSeguimientoRmedicos.aspx?ID_reclamo="+id_reclamo_medico+" ";
+            correoEjecutivo = Utils.CORREO_GESTOR(asignar.reg_reclamos_medicos.ejecutivo);
+            notificacion.NOTIFICACION(correoEjecutivo, contenido, "Nuevo Reclamo Aperturado");
+        }
+
         update.actualizarDatos(actualizarFecha, id_reclamo_medico);
         Utils.actividades(0, Constantes.GASTOS_MEDICOS(), 5, Constantes.USER());
-
         Utils.insertarComentario(id_reclamo_medico, "Reclamo aperturado con fecha: " + DateTime.Now, "Apertura");
-
         Response.Redirect("/Modulos/MdReclamosUnity/wbFrmReclamosMedicosSeguimiento.aspx?ID_reclamo=" + id_reclamo_medico,false);
     }
 }

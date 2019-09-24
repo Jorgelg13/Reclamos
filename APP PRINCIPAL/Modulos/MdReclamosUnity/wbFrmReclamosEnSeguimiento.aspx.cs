@@ -28,6 +28,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosEnSeguimiento : System
           " r.num_reclamo as [Numero Reclamo]," +
           " r.estado_auto_unity as [Estado Auto]," +
           " r.usuario_unity as [Usuario Unity]," +
+          " DATEDIFF(DAY, r.fecha_commit, GETDATE()) as  [Total Dias]," +
           " a.poliza as Poliza," +
           " a.asegurado as Asegurado, " +
           " a.placa as Placa," +
@@ -121,7 +122,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosEnSeguimiento : System
     //funcion que coloca en rojo los registros que no se an abierto en el dia
     protected void GridReclamosSeguimiento_RowDataBound(object sender, GridViewRowEventArgs e)
     {
-        int pocision = 13;
+        int pocision = 14;
         if (e.Row.RowType == DataControlRowType.DataRow)
             if (Convert.ToDateTime(e.Row.Cells[pocision].Text) >= DateTime.Today)
             {

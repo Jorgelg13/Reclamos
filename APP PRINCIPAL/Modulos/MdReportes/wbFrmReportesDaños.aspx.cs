@@ -13,7 +13,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesDaños : System.Web.UI
     String buscar;
     String EficienciaGestor;
     Double Pendientes, Nuevos, Cerrados, Ejecucion,CCRFT,CSRFT,PCRFT,PSRFT,EficienciaCierre,Anejamiento;
-    int Promedio, Total, KPI, KpiReaseguro, EjecucionCiclos;
+    int Promedio, Total, KPISinReasaeguro, KpiReaseguro, EjecucionCiclos;
     int Total2, Promedio2, EjecucionCiclos2;
     conexionBD obj = new conexionBD();
     ReclamosEntities DBReclamos = new ReclamosEntities();
@@ -343,84 +343,66 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesDaños : System.Web.UI
 
     protected void Mostrar_Click(object sender, EventArgs e)
     {
+        PanelCamposSeleccion.Visible = false;
+        PanelEficiencia.Visible = false;
+        PnCiclos.Visible = true;
+
         if (ddlCiclos.SelectedValue == "Ciclo Total")
         {
-            KpiConReaseguro.Visible = true;
-            KpiSinReaseguro.Visible = true;
-
-            KPI = 70;
-            KpiReaseguro = 150;
-            PanelCamposSeleccion.Visible = false;
-            PanelEficiencia.Visible = false;
-            PnCiclos.Visible = true;
-            //Utils.Ciclos_Reclamos(txtFechaInicio, txtFechaFin, "pa_ciclos_reclamos_danios", GridCiclos, 4,KPI);
+            MostrarLabel(true);
+            KPISinReasaeguro = 115;
+            KpiReaseguro = 195;
             Utils.Ciclos_Reclamos_tipo(txtFechaInicio, txtFechaFin, "pa_ciclos_reclamos_danios_reaseguro", GridCiclos, 4, KpiReaseguro, 1);
-            KpiReaseguro = 70;
-            Utils.Ciclos_Reclamos_tipo(txtFechaInicio, txtFechaFin, "pa_ciclos_reclamos_danios_reaseguro", GridCiclos2, 4, KPI, 0);
-            KpiReaseguro = 150;
-            lblTitulo.Text = "Ciclo Cliente, KPI sobre " + KPI + " dias sin reaseguro y " + KpiReaseguro + " con reaseguro.";
-            KpiReaseguro = 150;
-            KpiConReaseguro.Text = "Con Reaseguro Evaluado sobre " + KpiReaseguro + " Dias";
-            KpiSinReaseguro.Text = "Sin Reaseguro Evaluado sobre " + KPI + " Dias";
+            Utils.Ciclos_Reclamos_tipo(txtFechaInicio, txtFechaFin, "pa_ciclos_reclamos_danios_reaseguro", GridCiclos2, 4, KPISinReasaeguro, 0);
+            Titulo("Total", KPISinReasaeguro, KpiReaseguro);
             Utils.actividades(0, Constantes.DANIOS(), 34, Constantes.USER());
         }
 
         else if (ddlCiclos.SelectedValue == "Ciclo Unity")
         {
-
+            MostrarLabel(false);
             KpiReaseguro = 15;
-            PanelCamposSeleccion.Visible = false;
-            PanelEficiencia.Visible = false;
-            PnCiclos.Visible = true;
+            KPISinReasaeguro = 15;
             Utils.Ciclos_Reclamos(txtFechaInicio, txtFechaFin, "pa_ciclos_reclamos_danios", GridCiclos, 1,KpiReaseguro);
-            Utils.Ciclos_Reclamos(txtFechaInicio, txtFechaFin, "pa_ciclos_reclamos_danios", GridCiclos2, 5,KpiReaseguro);
+            Utils.Ciclos_Reclamos(txtFechaInicio, txtFechaFin, "pa_ciclos_reclamos_danios", GridCiclos2, 5,KPISinReasaeguro);
             lblTitulo.Text = "Ciclo Unity, KPI sobre " + KpiReaseguro.ToString() + " dias";
-            KpiConReaseguro.Visible = false;
-            KpiSinReaseguro.Visible = false;
             Utils.actividades(0, Constantes.DANIOS(), 31, Constantes.USER());
         }
                 
         else if (ddlCiclos.SelectedValue == "Ciclo Cliente")
         {
-            KpiConReaseguro.Visible = true;
-            KpiSinReaseguro.Visible = true;
-
-            KPI = 23;
-            KpiReaseguro = 100;
-            PanelCamposSeleccion.Visible = false;
-            PanelEficiencia.Visible = false;
-            PnCiclos.Visible = true;
-            //Utils.Ciclos_Reclamos(txtFechaInicio, txtFechaFin, "pa_ciclos_reclamos_danios", GridCiclos, 3 ,KPI);
+            MostrarLabel(true);
+            KPISinReasaeguro = 68;
+            KpiReaseguro = 80;
             Utils.Ciclos_Reclamos_tipo(txtFechaInicio, txtFechaFin, "pa_ciclos_reclamos_danios_reaseguro", GridCiclos, 3, KpiReaseguro, 1);
-            KpiReaseguro = 23;
-            Utils.Ciclos_Reclamos_tipo(txtFechaInicio, txtFechaFin, "pa_ciclos_reclamos_danios_reaseguro", GridCiclos2, 3, KPI, 0);
-            KpiReaseguro = 100;
-
-            lblTitulo.Text = "Ciclo Cliente, KPI sobre " + KPI + " dias sin reaseguro y " + KpiReaseguro + " con reaseguro.";
-            KpiConReaseguro.Text = "Con Reaseguro Evaluado sobre " + KpiReaseguro + " Dias";
-            KpiSinReaseguro.Text = "Sin Reaseguro Evaluado sobre " + KPI + " Dias";
+            Utils.Ciclos_Reclamos_tipo(txtFechaInicio, txtFechaFin, "pa_ciclos_reclamos_danios_reaseguro", GridCiclos2, 3, KPISinReasaeguro, 0);
+            Titulo("Cliente", KPISinReasaeguro, KpiReaseguro);
             Utils.actividades(0, Constantes.DANIOS(), 33, Constantes.USER());
         }
 
         else if (ddlCiclos.SelectedValue == "Ciclo Aseguradora")
         {
-            KpiConReaseguro.Visible = true;
-            KpiSinReaseguro.Visible = true;
-
-            KPI = 32;
+            MostrarLabel(true);
+            KPISinReasaeguro = 32;
             KpiReaseguro = 100;
-            PanelCamposSeleccion.Visible = false;
-            PanelEficiencia.Visible = false;
-            PnCiclos.Visible = true;
             Utils.Ciclos_Reclamos_tipo(txtFechaInicio, txtFechaFin, "pa_ciclos_reclamos_danios_reaseguro", GridCiclos, 2, KpiReaseguro,1);
-            KpiReaseguro = 32;
-            Utils.Ciclos_Reclamos_tipo(txtFechaInicio, txtFechaFin, "pa_ciclos_reclamos_danios_reaseguro", GridCiclos2, 2, KPI,0);
-            KpiReaseguro = 100;
-            lblTitulo.Text = "Ciclo Aseguradora, KPI sobre " + KPI.ToString() + " dias sin reaseguro y "+KpiReaseguro+" con reaseguro.";
-            KpiConReaseguro.Text = "Con Reaseguro Evaluado sobre " + KpiReaseguro + " Dias";
-            KpiSinReaseguro.Text = "Sin Reaseguro Evaluado sobre " + KPI + " Dias";
+            Utils.Ciclos_Reclamos_tipo(txtFechaInicio, txtFechaFin, "pa_ciclos_reclamos_danios_reaseguro", GridCiclos2, 2, KPISinReasaeguro,0);
+            Titulo("Aseguradora", KPISinReasaeguro, KpiReaseguro);
             Utils.actividades(0, Constantes.DANIOS(), 32, Constantes.USER());
         }
+    }
+
+    public void MostrarLabel(bool valor)
+    {
+        KpiConReaseguro.Visible = valor;
+        KpiSinReaseguro.Visible = valor;
+    }
+
+    private void Titulo(string titulo, int KPI, int KpiReaseguro)
+    {
+        lblTitulo.Text = "Ciclo "+titulo+", KPI sobre " + KPI + " dias sin reaseguro y " + KpiReaseguro + " con reaseguro.";
+        KpiConReaseguro.Text = "Con Reaseguro Evaluado sobre " + KpiReaseguro + " Dias";
+        KpiSinReaseguro.Text = "Sin Reaseguro Evaluado sobre " + KPI + " Dias";
     }
 
     protected void GridEficiencia_RowDataBound(object sender, GridViewRowEventArgs e)
@@ -548,7 +530,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesDaños : System.Web.UI
                 e.Row.Cells[2].HorizontalAlign = HorizontalAlign.Left;
                 e.Row.Font.Bold = true;
 
-                e.Row.Cells[3].Text = ((Convert.ToDouble(KpiReaseguro) / (Promedio2 / GridCiclos2.Rows.Count)) * 100 ).ToString("N2");
+                e.Row.Cells[3].Text = ((Convert.ToDouble(KPISinReasaeguro) / (Promedio2 / GridCiclos2.Rows.Count)) * 100 ).ToString("N2");
                 e.Row.Cells[3].HorizontalAlign = HorizontalAlign.Left;
                 e.Row.Font.Bold = true;
             }
