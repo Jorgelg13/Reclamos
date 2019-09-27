@@ -340,19 +340,19 @@
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                                 <h4 class="modal-title"><b>Agregar o Editar Liquidaciòn de reclamo</b></h4>
                             </div>
-                            <div class="modal-body">
+                            <div class="modal-body row">
                                 <div class="form-group col-sm-12 col-md-6 col-lg-6">
-                                    Cobertura:
-                                    <asp:DropDownList class="form-control" ID="ddlCoberturas" Style="width: 100%" Height="34px" runat="server">
+                                    <label>Cobertura:</label>
+                                    <asp:DropDownList CssClass="form-control" ID="ddlCoberturas" Style="width: 100%" Height="30px" runat="server">
                                     </asp:DropDownList>
                                 </div>
                                 <div class="form-group col-sm-12 col-md-6 col-lg-6">
                                     <label>Ramo:</label>
-                                    <asp:TextBox ID="txtRamo" Style="width: 100%" autocomplete="off" class="form-control" placeholder="Ramo" runat="server"></asp:TextBox>
+                                    <asp:TextBox ID="txtRamo" Style="width: 100%" autocomplete="off" CssClass="form-control" placeholder="Ramo" runat="server"></asp:TextBox>
                                 </div>
                                 <div class="form-group col-sm-12 col-md-6 col-lg-6">
                                     <label>Tipo Pago:</label>
-                                    <asp:DropDownList ID="ddlElegir" class="form-control" Style="width: 100%; height: 30px;" runat="server">
+                                    <asp:DropDownList ID="ddlElegir" CssClass="form-control" Style="width: 100%; height: 30px;" runat="server">
                                         <asp:ListItem Value="1">Valor Real</asp:ListItem>
                                         <asp:ListItem Value="2">Valor Repocision</asp:ListItem>
                                         <asp:ListItem Value="3">Valor Pactado</asp:ListItem>
@@ -361,51 +361,69 @@
                                 </div>
                                 <div class="form-group col-sm-12 col-md-6 col-lg-6">
                                     <label>Monto Reclamado:</label>
-                                    <asp:TextBox ID="txtMontoReclamado" Text="0.00" Style="width: 100%" autocomplete="off" class="form-control" placeholder="Monto Reclamado" runat="server"></asp:TextBox>
+                                    <asp:TextBox ID="txtMontoReclamado" Text="0.00" Style="width: 100%" autocomplete="off" CssClass="form-control" placeholder="Monto Reclamado" runat="server"></asp:TextBox>
                                 </div>
                                 <div class="form-group col-sm-12 col-md-4 col-lg-4">
                                     <label>IVA:</label>
-                                    <asp:TextBox ID="txtIva" Text="0.00" Style="width: 100%" autocomplete="off" class="form-control" placeholder="iva" runat="server"></asp:TextBox>
+                                    <asp:TextBox ID="txtIva" Text="0.00" Style="width: 100%" autocomplete="off" CssClass="form-control" placeholder="iva" runat="server"></asp:TextBox>
                                 </div>
                                 <div class="form-group col-sm-12 col-md-4 col-lg-4">
                                     <label>Monto Ajustado:</label>
-                                    <asp:TextBox ID="txtMontoAjustado" Text="0.00" Style="width: 100%" autocomplete="off" class="form-control" placeholder="Monto Ajustado" runat="server"></asp:TextBox>
+                                    <asp:TextBox ID="txtMontoAjustado" Text="0.00" Style="width: 100%" autocomplete="off" CssClass="form-control" placeholder="Monto Ajustado" runat="server"></asp:TextBox>
                                 </div>
                                 <div class="form-group col-sm-12 col-md-4 col-lg-4">
                                     <label>Salvamento:</label>
-                                    <asp:TextBox ID="txtSalvamento" Text="0.00" Style="width: 100%" autocomplete="off" class="form-control" placeholder="Salvamento" runat="server"></asp:TextBox>
+                                    <asp:TextBox ID="txtSalvamento" Text="0.00" Style="width: 100%" autocomplete="off" CssClass="form-control" placeholder="Salvamento" runat="server"></asp:TextBox>
                                 </div>
                                 <div class="form-group col-sm-12 col-md-4 col-lg-4">
                                     <label>Mejora Tecnologica:</label>
-                                    <asp:TextBox ID="txtMejora" Text="0.00" Style="width: 100%" autocomplete="off" class="form-control" placeholder="Mejora Tecnologica" runat="server"></asp:TextBox>
+                                    <asp:TextBox ID="txtMejora" Text="0.00" Style="width: 100%" autocomplete="off" CssClass="form-control" placeholder="Mejora Tecnologica" runat="server"></asp:TextBox>
                                 </div>
                                 <div class="form-group col-sm-12 col-md-4 col-lg-4">
                                     <label>Tiempo de uso:</label>
-                                    <asp:TextBox ID="txtTiempoUso" Text="0.00" Style="width: 100%" autocomplete="off" class="form-control" placeholder="Tiempo De Uso" runat="server"></asp:TextBox>
+                                    <asp:TextBox ID="txtTiempoUso" Text="0.00" Style="width: 100%" autocomplete="off" CssClass="form-control" placeholder="Tiempo De Uso" runat="server"></asp:TextBox>
                                 </div>
                                 <div class="form-group col-sm-12 col-md-4 col-lg-4">
                                     <label>Infra Seguro:</label>
-                                    <asp:TextBox ID="txtInfraseguro" Text="0.00" Style="width: 100%" autocomplete="off" class="form-control" placeholder="Infra Seguro" runat="server"></asp:TextBox>
+                                    <asp:TextBox ID="txtInfraseguro" Text="0.00" Style="width: 100%" autocomplete="off" CssClass="form-control" placeholder="Infra Seguro" runat="server"></asp:TextBox>
                                 </div>
                                 <div class="form-group col-sm-12 col-md-6 col-lg-6">
                                     <label>Perdidad Final Ajustada:</label>
-                                    <asp:TextBox ID="txtPerdidaFinal" Text="0.00" Style="width: 100%" autocomplete="off" class="form-control" placeholder="Perdida Final Ajustada" runat="server"></asp:TextBox>
+                                    <asp:TextBox ID="txtPerdidaFinal" Text="0.00" Style="width: 100%" autocomplete="off" CssClass="form-control" placeholder="Perdida Final Ajustada" runat="server"></asp:TextBox>
                                 </div>
                                 <div class="form-group col-sm-12 col-md-6 col-lg-6">
                                     <label>Deducible:</label>
-                                    <asp:TextBox ID="txtDeducible2" Text="0.00" Style="width: 100%" autocomplete="off" class="form-control" placeholder="Deducible " runat="server"></asp:TextBox>
+                                    <asp:TextBox ID="txtDeducible2" Text="0.00" Style="width: 100%" autocomplete="off" CssClass="form-control" placeholder="Deducible " runat="server"></asp:TextBox>
                                 </div>
                                 <div class="form-group col-sm-12 col-md-4 col-lg-4">
-                                    <label>Timbres:</label>
-                                    <asp:TextBox ID="txtTimbres" Text="0.00" Style="width: 100%" autocomplete="off" class="form-control" placeholder="Timbres " runat="server"></asp:TextBox>
+                                    <label>No. Cheque:</label>
+                                    <asp:TextBox ID="txtNumeroCheque" Style="width: 100%" autocomplete="off" CssClass="form-control" placeholder="No. Cheque" runat="server"></asp:TextBox>
+                                </div>
+                                <div class="form-group col-sm-12 col-md-4 col-lg-4">
+                                    <label>Nombre Emision:</label>
+                                    <asp:TextBox ID="txtEmisionCheque"  Style="width: 100%" autocomplete="off" CssClass="form-control" placeholder="Nombre" runat="server"></asp:TextBox>
                                 </div>
                                 <div class="form-group col-sm-12 col-md-4 col-lg-4">
                                     <label>Valor Indemnizado</label>
-                                    <asp:TextBox ID="txtValorTotal" Text="0.00" Style="width: 100%" autocomplete="off" class="form-control" placeholder="Valor Idemnizado " runat="server"></asp:TextBox>
+                                    <asp:TextBox ID="txtValorTotal" Text="0.00" Style="width: 100%" autocomplete="off" CssClass="form-control" placeholder="Valor Idemnizado " runat="server"></asp:TextBox>
                                 </div>
                                 <div class="form-group col-sm-12 col-md-4 col-lg-4">
+                                    <label>Medio de pago</label>
+                                    <asp:DropDownList ID="ddlMedioPago" CssClass="form-control" Style="width: 100%; height: 30px;" runat="server">
+                                        <asp:ListItem >Ninguno</asp:ListItem>
+                                        <asp:ListItem >Cheque</asp:ListItem>
+                                        <asp:ListItem >Giro</asp:ListItem>
+                                        <asp:ListItem >Transferencia</asp:ListItem>
+                                    </asp:DropDownList>
+                                </div>
+                                <div class="form-group col-sm-12 col-md-4 col-lg-4">
+                                    <label>Timbres:</label>
+                                    <asp:TextBox ID="txtTimbres" Text="0.00" Style="width: 100%" autocomplete="off" CssClass="form-control" placeholder="Timbres " runat="server"></asp:TextBox>
+                                </div>
+                                
+                                <div class="form-group col-sm-12 col-md-4 col-lg-4">
                                     <label>Destino Cheque</label>
-                                    <asp:DropDownList ID="ddlDestinoCheque" class="form-control" Style="width: 100%; height: 30px;" runat="server">
+                                    <asp:DropDownList ID="ddlDestinoCheque" CssClass="form-control" Style="width: 100%; height: 30px;" runat="server">
                                         <asp:ListItem Value="Ruta">Ruta</asp:ListItem>
                                         <asp:ListItem Value="Recepcion">Recepcion</asp:ListItem>
                                         <asp:ListItem Value="Escritura de pago">Escritura de pago</asp:ListItem>
@@ -414,8 +432,8 @@
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <asp:Button runat="server" Text="Guardar" ID="btnPago" class="btn btn-primary" OnClick="btnPago_Click" />
-                                <asp:Button ID="btnActualizarPagos" CssClass="btn btn-success" runat="server" Text="Actualizar" OnClick="btnActualizarDatos_Click" />
+                               <asp:Button ID="btnPago" runat="server" Text="Guardar" CssClass="btn btn-primary" OnClick="btnPago_Click" />
+                               <asp:Button ID="btnActualizarPagos" runat="server" Text="Actualizar" CssClass="btn btn-success" OnClick="btnActualizarDatos_Click" />
                             </div>
                         </div>
                     </div>

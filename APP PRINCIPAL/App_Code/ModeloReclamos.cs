@@ -470,6 +470,9 @@ public partial class detalle_pagos_reclamos_varios
     public Nullable<int> id_reclamos_varios { get; set; }
     public Nullable<System.DateTime> fecha { get; set; }
     public string destino { get; set; }
+    public string no_cheque { get; set; }
+    public string nombre_emision_cheque { get; set; }
+    public string medio_pago { get; set; }
 
     public virtual reclamos_varios reclamos_varios { get; set; }
 }

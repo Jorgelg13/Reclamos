@@ -682,4 +682,13 @@ public partial class ReclamosEntities : DbContext
     {
         return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<long>>("pa_sec_reg_reclamos_danios_varios");
     }
+
+    public virtual int actualizar_reclamos_copiados(Nullable<int> tipo)
+    {
+        var tipoParameter = tipo.HasValue ?
+            new ObjectParameter("tipo", tipo) :
+            new ObjectParameter("tipo", typeof(int));
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("actualizar_reclamos_copiados", tipoParameter);
+    }
 }

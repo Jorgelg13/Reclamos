@@ -421,6 +421,9 @@
           <Property Name="id_reclamos_varios" Type="int" />
           <Property Name="fecha" Type="datetime" />
           <Property Name="destino" Type="varchar" MaxLength="50" />
+          <Property Name="no_cheque" Type="varchar" MaxLength="25" />
+          <Property Name="nombre_emision_cheque" Type="varchar" MaxLength="75" />
+          <Property Name="medio_pago" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="direcciones">
           <Key>
@@ -1768,6 +1771,9 @@ advertencia 6002: La tabla o vista 'reclamos.dbo.v_producto_no_conforme' no tien
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="actualizar_reclamos_copiados" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="tipo" Type="int" Mode="In" />
+        </Function>
         <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
         <Function Name="FN_DIAS_HABILES" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int">
           <Parameter Name="StartDate" Type="datetime" Mode="In" />
@@ -2672,6 +2678,9 @@ FROM [dbo].[v_producto_no_conforme] AS [v_producto_no_conforme]</DefiningQuery>
             <End Role="talleres" EntitySet="talleres" />
             <End Role="reclamos_varios" EntitySet="reclamos_varios" />
           </AssociationSet>
+          <FunctionImport Name="actualizar_reclamos_copiados">
+            <Parameter Name="tipo" Mode="In" Type="Int32" />
+          </FunctionImport>
           </EntityContainer>
         <ComplexType Name="pa_reclamos_autos_Result">
           <Property Type="Int32" Name="secuencia" Nullable="true" />
@@ -3375,6 +3384,9 @@ FROM [dbo].[v_producto_no_conforme] AS [v_producto_no_conforme]</DefiningQuery>
           <Property Name="id_reclamos_varios" Type="Int32" />
           <Property Name="fecha" Type="DateTime" Precision="3" />
           <Property Name="destino" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="no_cheque" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="nombre_emision_cheque" Type="String" MaxLength="75" FixedLength="false" Unicode="false" />
+          <Property Name="medio_pago" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="reclamos_varios" Relationship="reclamosModel.FK_detalle_pagos_reclamos_varios_reclamos_varios" FromRole="detalle_pagos_reclamos_varios" ToRole="reclamos_varios" />
         </EntityType>
         <EntityType Name="direcciones">
@@ -5555,6 +5567,9 @@ FROM [dbo].[v_producto_no_conforme] AS [v_producto_no_conforme]</DefiningQuery>
           <EntitySetMapping Name="detalle_pagos_reclamos_varios">
             <EntityTypeMapping TypeName="reclamosModel.detalle_pagos_reclamos_varios">
               <MappingFragment StoreEntitySet="detalle_pagos_reclamos_varios">
+                <ScalarProperty Name="medio_pago" ColumnName="medio_pago" />
+                <ScalarProperty Name="nombre_emision_cheque" ColumnName="nombre_emision_cheque" />
+                <ScalarProperty Name="no_cheque" ColumnName="no_cheque" />
                 <ScalarProperty Name="destino" ColumnName="destino" />
                 <ScalarProperty Name="fecha" ColumnName="fecha" />
                 <ScalarProperty Name="id_reclamos_varios" ColumnName="id_reclamos_varios" />
@@ -6365,6 +6380,7 @@ FROM [dbo].[v_producto_no_conforme] AS [v_producto_no_conforme]</DefiningQuery>
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="actualizar_reclamos_copiados" FunctionName="reclamosModel.Store.actualizar_reclamos_copiados" />
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

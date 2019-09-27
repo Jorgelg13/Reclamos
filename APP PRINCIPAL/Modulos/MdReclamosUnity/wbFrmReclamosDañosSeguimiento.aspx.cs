@@ -468,6 +468,9 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosDañosSeguimiento : Sy
             pago.fecha                  = DateTime.Now;
             pago.id_reclamos_varios     = id;
             pago.destino                = ddlDestinoCheque.SelectedValue;
+            pago.no_cheque              = txtNumeroCheque.Text;
+            pago.nombre_emision_cheque  = txtEmisionCheque.Text;
+            pago.medio_pago             = ddlMedioPago.SelectedItem.Text;
             DBReclamos.detalle_pagos_reclamos_varios.Add(pago);
             DBReclamos.SaveChanges();
 
@@ -538,6 +541,9 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosDañosSeguimiento : Sy
             pago.valor_indemnizado      = Convert.ToDecimal(txtValorTotal.Text);
             pago.iva                    = Convert.ToDecimal(txtIva.Text);
             pago.destino                = ddlDestinoCheque.SelectedValue;
+            pago.no_cheque = txtNumeroCheque.Text;
+            pago.nombre_emision_cheque = txtEmisionCheque.Text;
+            pago.medio_pago = ddlMedioPago.SelectedItem.Text;
             DBReclamos.SaveChanges();
             Utils.ShowMessage(this.Page, "Pago Actualizado con exito", "Excelente..!", "info");
             MostrarLiquidacion(idPago);
@@ -734,7 +740,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosDañosSeguimiento : Sy
         idPago = Convert.ToInt32(GridLiquidaciones.SelectedRow.Cells[1].Text);
 
         String actualizar_pago = "select id, cobertura_pagada, ramo, tipo_pago, monto_reclamado, mejora_tecnologica, tiempo_uso, infra_seguro," +
-            " perdida_final_ajustada, deducible, timbres, valor_indemnizado , iva,salvamento, destino from detalle_pagos_reclamos_varios where id = " + idPago + "";
+            " perdida_final_ajustada, deducible, timbres, valor_indemnizado , iva,salvamento, destino, no_cheque,nombre_emision_cheque,medio_pago from detalle_pagos_reclamos_varios where id = " + idPago + "";
         SqlDataAdapter da = new SqlDataAdapter(actualizar_pago, objeto.ObtenerConexionReclamos());
         DataTable dt = new DataTable();
         da.Fill(dt);
@@ -752,6 +758,9 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosDañosSeguimiento : Sy
         txtIva.Text            = dt.Rows[0][12].ToString();
         txtSalvamento.Text     = dt.Rows[0][13].ToString();
         ddlDestinoCheque.SelectedValue = String.IsNullOrEmpty(dt.Rows[0][14].ToString()) ? "" : dt.Rows[0][14].ToString();
+        txtNumeroCheque.Text = dt.Rows[0][15].ToString();
+        txtEmisionCheque.Text = dt.Rows[0][16].ToString();
+        ddlMedioPago.SelectedValue = String.IsNullOrEmpty(dt.Rows[0][17].ToString()) ? "" : dt.Rows[0][17].ToString();
         btnPago.Enabled            = false;
         btnActualizarPagos.Enabled = true;
         MostrarLiquidacion(idPago);
