@@ -65,18 +65,27 @@
     <div class="modal fade" id="ModalCorreo" data-keyboard="false" data-backdrop="static" style="overflow-y:auto">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
-                <div class="modal-header">
+              <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span>&times;</span></button>
                     <h4 class="modal-title" id="imprimircarta"><b>Envio de correo electronico</b></h4>
                 </div>
-                <asp:TextBox  style="display:none" runat="server" ID="txtCuerpo"></asp:TextBox>
+                <asp:TextBox Style="display: none" runat="server" ID="txtCuerpo"></asp:TextBox>
                 <div id="summernote" class="modal-body">
                 </div>
-                <div class="form-inline">
-                   <asp:TextBox runat="server" ID="txtTelefono" CssClass="form-control" placeholder="Celular"></asp:TextBox>
-                   <asp:LinkButton ID="lnkGuardar" OnClick="lnkGuardar_Click" title="Enviar Correo" runat="server" Style="font-size:40px; padding-left:20px;"><i class="fa fa-envelope-o"></i></asp:LinkButton>
-                </div>
 
+                <div class="modal-footer" style="text-align: left;">
+                    <div class="form-group col-sm-12 col-md-6 col-lg-5">
+                        <label>Correo:</label>
+                        <asp:TextBox runat="server" ID="txtCorreoElectronico" Style="width: 100%" CssClass="form-control" placeholder="Correo"></asp:TextBox>
+                    </div>
+                    <div class="form-group col-sm-12 col-md-6 col-lg-4">
+                        <label>Telefono:</label>
+                        <asp:TextBox runat="server" ID="txtTelefono" Style="width: 100%" CssClass="form-control" placeholder="Telefono"></asp:TextBox>
+                    </div>
+                    <div class="form-group col-sm-12 col-md-6 col-lg-3">
+                        <asp:LinkButton ID="lnkGuardar" OnClick="lnkGuardar_Click" title="Enviar Correo" runat="server" Style="font-size: 53px;"><i class="fa fa-envelope-o"></i></asp:LinkButton>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -89,6 +98,18 @@
          $('.note-editable').keyup(function () { 
              $('#<%=txtCuerpo.ClientID%>').val($('.note-editable').html());
          });
+
+          
+        $("#ContentPlaceHolder1_txtCorreo").keyup(function () {
+            var value = $(this).val();
+            $("#ContentPlaceHolder1_txtCorreoElectronico").val(value);
+            });
+
+        $("#ContentPlaceHolder1_txtCorreoElectronico").keyup(function () {
+            var value = $(this).val();
+            $("#ContentPlaceHolder1_txtCorreo").val(value);
+            });
+
     </script>
 </asp:Content>
 

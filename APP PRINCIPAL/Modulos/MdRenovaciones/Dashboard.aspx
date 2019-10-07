@@ -20,9 +20,9 @@
                     <div class="scrolling-table-container col-lg-12 col-md-12" style="padding: 15px;">
                         <asp:GridView ID="GridElRoble" CssClass="table bs-table table-responsive" OnSelectedIndexChanged="GridElRoble_SelectedIndexChanged" OnRowDeleting="GridElRoble_RowDeleting" runat="server" AutoGenerateColumns="True" ForeColor="#333333" GridLines="None">
                             <Columns>
-                              <asp:CommandField ShowSelectButton="True" SelectText="Seleccionar" />
-                              <asp:CommandField ShowDeleteButton="True" DeleteText="" ControlStyle-CssClass="fa fa-ban" ControlStyle-ForeColor="Red" HeaderText="Invalidar"/>
-                              <asp:CommandField ShowEditButton="True"   EditText=""  ControlStyle-CssClass="fa fa-search btnRevisarPoliza" HeaderText=" Revisar"/>
+                                <asp:CommandField ShowSelectButton="True" SelectText="Seleccionar" />
+                                <asp:CommandField ShowDeleteButton="True" DeleteText="" ControlStyle-CssClass="fa fa-ban" ControlStyle-ForeColor="Red" HeaderText="Invalidar" />
+                                <asp:CommandField ShowEditButton="True" EditText="" ControlStyle-CssClass="fa fa-search btnRevisarPoliza" HeaderText=" Revisar" />
                             </Columns>
                             <HeaderStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" Wrap="false" />
                             <PagerStyle BackColor="#131B4D" ForeColor="White" HorizontalAlign="Center" />
@@ -35,7 +35,7 @@
             <div role="tabpanel" class="tab-pane" id="todasPolizas">
                 <div class="row">
                     <div class="scrolling-table-container col-lg-12 col-md-12" style="padding: 0px;">
-                        <asp:GridView ID="GridAllPolizas" CssClass="table bs-table table-responsive" 
+                        <asp:GridView ID="GridAllPolizas" CssClass="table bs-table table-responsive"
                             runat="server" AutoGenerateColumns="True" ForeColor="#333333" GridLines="None">
                             <Columns>
                                 <asp:CommandField ShowSelectButton="True" SelectText="Seleccionar" />
@@ -51,22 +51,29 @@
         </div>
     </div>
     <%--------------------------  modal para enviar correos electronicos a los clientes ---------------------------------%>
-    <div class="modal fade" id="ModalCorreo" data-keyboard="false" data-backdrop="static" style="overflow-y:auto">
+    <div class="modal fade" id="ModalCorreo" data-keyboard="false" data-backdrop="static" style="overflow-y: auto">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span>&times;</span></button>
                     <h4 class="modal-title" id="imprimircarta"><b>Envio de correo electronico</b></h4>
                 </div>
-                <asp:TextBox  style="display:none" runat="server" ID="txtCuerpo"></asp:TextBox>
+                <asp:TextBox Style="display: none" runat="server" ID="txtCuerpo"></asp:TextBox>
                 <div id="summernote" class="modal-body">
                 </div>
-               
-                <div class="modal-footer">
-                  <div class="form-inline">
-                   <asp:TextBox runat="server" ID="txtTelefono" CssClass="form-control" placeholder="Celular"></asp:TextBox>
-                   <asp:LinkButton ID="lnkGuardar" OnClick="lnkGuardar_Click" title="Enviar Correo" runat="server" Style="font-size:40px; padding-left:20px;"><i class="fa fa-envelope-o"></i></asp:LinkButton>
-                </div>
+
+                <div class="modal-footer" style="text-align: left;">
+                    <div class="form-group col-sm-12 col-md-6 col-lg-5">
+                        <label>Correo:</label>
+                        <asp:TextBox runat="server" ID="txtCorreo" Style="width: 100%" CssClass="form-control" placeholder="Correo"></asp:TextBox>
+                    </div>
+                    <div class="form-group col-sm-12 col-md-6 col-lg-4">
+                        <label>Telefono:</label>
+                        <asp:TextBox runat="server" ID="txtTelefono" Style="width: 100%" CssClass="form-control" placeholder="Telefono"></asp:TextBox>
+                    </div>
+                    <div class="form-group col-sm-12 col-md-6 col-lg-3">
+                        <asp:LinkButton ID="lnkGuardar" OnClick="lnkGuardar_Click" title="Enviar Correo" runat="server" Style="font-size: 53px;"><i class="fa fa-envelope-o"></i></asp:LinkButton>
+                    </div>
                 </div>
             </div>
         </div>
@@ -74,11 +81,11 @@
 </asp:Content>
 <asp:Content ID="Js" runat="server" ContentPlaceHolderID="contentJS">
     <script>
-         $('#summernote').html($('#ContentPlaceHolder1_txtCuerpo').val());
-         $('#summernote').summernote();
+        $('#summernote').html($('#ContentPlaceHolder1_txtCuerpo').val());
+        $('#summernote').summernote();
 
-         $('.note-editable').keyup(function () { 
-             $('#<%=txtCuerpo.ClientID%>').val($('.note-editable').html());
+        $('.note-editable').keyup(function () {
+            $('#<%=txtCuerpo.ClientID%>').val($('.note-editable').html());
         });
 
         $('.btnRevisarPoliza').attr('href', "javascript:void(0)");

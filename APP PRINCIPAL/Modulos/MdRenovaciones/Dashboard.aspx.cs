@@ -50,51 +50,9 @@ public partial class Modulos_MdRenovaciones_Dashboard : System.Web.UI.Page
         EmailValidationResult resultado;
         var registro = DBRenovaciones.renovaciones_polizas.Find(id);
         var gestor = DBReclamos.usuario.Find(Convert.ToInt32(Session["CodigoGestor"]));
-        if(registro.correo_cliente != "")
+        if(txtCorreo.Text.Trim() != "")
         {
             envio(id,correo);
-            /*if (!emailValidator.Validate(correo.Trim(), out resultado))
-            {
-                Console.WriteLine("Unable to check email"); // no internet connection or mailserver is down / busy
-                registro.estado = 6;
-                DBRenovaciones.SaveChanges();
-                llenarGrid();
-            }
-
-            switch (resultado)
-            {
-                case EmailValidationResult.OK:
-                    Utils.EmailRenovacion("pa_envio_renovaciones", correo.Trim(), txtCuerpo.Text, registro.correo_gestor.Trim());
-                    Utils.EmailRenovacion("pa_envio_renovaciones", registro.correo_gestor.Trim(), txtCuerpo.Text, registro.correo_gestor.Trim());
-                    registro.estado = 3;
-                    DBRenovaciones.SaveChanges();
-                    String Poliza = (registro.ramo + registro.poliza + registro.endoso_renov + ".pdf");
-                    Utils.MoverArchivos(Poliza, "Enviadas");
-                    //EnvioSms();
-                    llenarGrid();
-                    break;
-
-                case EmailValidationResult.MailboxUnavailable:
-                    //Console.WriteLine("Email server replied there is no such mailbox");
-                    registro.estado = 6;
-                    DBRenovaciones.SaveChanges();
-                    llenarGrid();
-                    break;
-
-                case EmailValidationResult.MailboxStorageExceeded:
-                    //Console.WriteLine("Mailbox overflow");
-                    registro.estado = 6;
-                    DBRenovaciones.SaveChanges();
-                    llenarGrid();
-                    break;
-
-                case EmailValidationResult.NoMailForDomain:
-                    //Console.WriteLine("Emails are not configured for domain (no MX records)");
-                    registro.estado = 6;
-                    DBRenovaciones.SaveChanges();
-                    llenarGrid();
-                    break;
-            } */
         } 
 
         else
@@ -108,12 +66,13 @@ public partial class Modulos_MdRenovaciones_Dashboard : System.Web.UI.Page
     private void envio(int id,string correo)
     {
         var registro = DBRenovaciones.renovaciones_polizas.Find(id);
-
+       
         try
         {
             Utils.EmailRenovacion("pa_envio_renovaciones", correo, txtCuerpo.Text, registro.correo_gestor.Trim());
-            Utils.EmailRenovacion("pa_envio_renovaciones", registro.correo_gestor, txtCuerpo.Text, Utils.seleccionarCorreoGestor(userlogin));
+            Utils.EmailRenovacion("pa_envio_renovaciones", Utils.seleccionarCorreoGestor(userlogin), txtCuerpo.Text, Utils.seleccionarCorreoGestor(userlogin));
             registro.estado = 3;
+            registro.contenido_correo = txtCuerpo.Text;
             DBRenovaciones.SaveChanges();
             String Poliza = (registro.ramo + registro.poliza + registro.endoso_renov + ".pdf");
             Utils.MoverArchivos(Poliza, "Enviadas","Polizas");
@@ -133,6 +92,7 @@ public partial class Modulos_MdRenovaciones_Dashboard : System.Web.UI.Page
     {
         int identificador = Convert.ToInt32(GridElRoble.SelectedRow.Cells[3].Text);
         var registro = DBRenovaciones.renovaciones_polizas.Find(identificador);
+        txtCorreo.Text = registro.correo_cliente;
         txtTelefono.Text = registro.telefono_cliente;
         cuerpo = Cartas.RENOVACIONES(identificador);
         txtCuerpo.Text = cuerpo;
@@ -154,7 +114,6 @@ public partial class Modulos_MdRenovaciones_Dashboard : System.Web.UI.Page
             Utils.ShowMessage(this.Page, "No se a podido renovar " + ex.Message, "Excelente", "success");
         }
     }
-
   
     //mover registros a invalidos
     protected void GridElRoble_RowDeleting(object sender, System.Web.UI.WebControls.GridViewDeleteEventArgs e)

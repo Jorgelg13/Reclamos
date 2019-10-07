@@ -18,8 +18,8 @@
                         <Columns>
                             <asp:TemplateField HeaderText="Seleccionar">
                                 <ItemTemplate>
-                                    <asp:CheckBox ID="chkCancelar" runat="server" Text="Cancelar"/> 
-                                    <asp:CheckBox ID="chkRenovar" runat="server"  Text="Renovar"/> 
+                                    <asp:CheckBox ID="chkCancelar" runat="server" Text="Cancelar" AutoPostBack="true" OnCheckedChanged="chkCancelar_CheckedChanged" />
+                                    <asp:CheckBox ID="chkRenovar" runat="server" Text="Renovar" AutoPostBack="true" OnCheckedChanged="chkRenovar_CheckedChanged" />
                                 </ItemTemplate>
                             </asp:TemplateField>
                         </Columns>
@@ -32,6 +32,26 @@
             </div>
         </div>
     </div>
+    <div class="modal fade" tabindex="-1" role="dialog" id="comentario" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Agregar informacion para la poliza</h4>
+                </div>
+                <div class="modal-body">
+                    <asp:TextBox runat="server" ID="txtComentario" CssClass="form-control"  TextMode="multiline" Columns="75" Rows="10" placeholder="Agregar detalle"></asp:TextBox>
+                    <asp:Label runat="server" ID="lblId"></asp:Label>
+                </div>
+                <div class="modal-footer">
+                     <asp:Button runat="server" ID="btnCerrar" class="btn btn-defautl"  Text="Cerrar" OnClick="btnCerrar_Click"/>
+                    <asp:Button runat="server" ID="btnGuardar" class="btn btn-primary"  Text="Guardar" OnClick="btnGuardar_Click"/>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
     <%-- botones circulares con las opciones multiples --%>
     <div id="container-floating">
         <div class="nd4 nds" data-toggle="tooltip" data-placement="left" data-original-title="contract@gmail.com">
@@ -41,7 +61,7 @@
             <asp:LinkButton ID="btnGenerarTabla" title="Buscar Datos" CssClass="letter" autopostback="true" runat="server" OnClick="btnGenerarTabla_Click"><i class="fa fa-table"></i></asp:LinkButton>
         </div>
         <div class="nd1 nds" data-toggle="tooltip" data-placement="left" data-original-title="Edoardo@live.it">
-            <asp:LinkButton ID="btnGuardarCambios" title="Guardar" CssClass="letter" autopostback="true" runat="server" OnClick="btnGuardarCambios_Click"><i class="fa fa-save"></i></asp:LinkButton>
+            <asp:LinkButton ID="btnGuardarCambios" title="Guardar" CssClass="letter" autopostback="true" runat="server"><i class="fa fa-save"></i></asp:LinkButton>
         </div>
         <div id="floating-button" data-toggle="tooltip" data-placement="left" data-original-title="Create" onclick="newmail()">
             <p class="plus">+</p>
@@ -50,5 +70,10 @@
     </div>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="contentJS" runat="Server">
+    <script>
+        $("#ContentPlaceHolder1_GridEnviadas_chkRenovar_0").click(function () {
+            console.log('prueba');
+        });
+    </script>
 </asp:Content>
 

@@ -4,16 +4,17 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="0160a999e9f743879d4efa5a8ae66c48" Name="Diagram1" ZoomLevel="46">
-        <EntityTypeShape EntityType="RenovacionesModel.estados" Width="1.5" PointX="0.75" PointY="8.375" />
-        <EntityTypeShape EntityType="RenovacionesModel.poliza" Width="1.5" PointX="5.75" PointY="0.75" />
-        <EntityTypeShape EntityType="RenovacionesModel.renovaciones_log" Width="1.5" PointX="5.25" PointY="8.25" />
-        <EntityTypeShape EntityType="RenovacionesModel.renovaciones_polizas" Width="1.5" PointX="3" PointY="1.625" />
-        <EntityTypeShape EntityType="RenovacionesModel.requerimientos" Width="1.5" PointX="7.75" PointY="0.75" />
+      <Diagram DiagramId="0160a999e9f743879d4efa5a8ae66c48" Name="Diagram1" ZoomLevel="242">
+        <EntityTypeShape EntityType="RenovacionesModel.archivos" Width="1.5" PointX="5.75" PointY="0.75" />
+        <EntityTypeShape EntityType="RenovacionesModel.contenido_correo" Width="1.5" PointX="5.75" PointY="3.75" />
+        <EntityTypeShape EntityType="RenovacionesModel.estados" Width="1.5" PointX="0.75" PointY="8.875" />
+        <EntityTypeShape EntityType="RenovacionesModel.poliza" Width="1.5" PointX="7.75" PointY="0.75" />
+        <EntityTypeShape EntityType="RenovacionesModel.renovaciones_log" Width="1.5" PointX="5.25" PointY="8.625" />
+        <EntityTypeShape EntityType="RenovacionesModel.renovaciones_polizas" Width="2.25" PointX="3" PointY="1.625" />
+        <EntityTypeShape EntityType="RenovacionesModel.requerimientos" Width="1.5" PointX="7.75" PointY="6.75" />
         <AssociationConnector Association="RenovacionesModel.FK_polizas_estado" />
         <AssociationConnector Association="RenovacionesModel.FK_renovaciones_log_estado" />
         <AssociationConnector Association="RenovacionesModel.FK_renovaciones_log_poliza" />
-        <EntityTypeShape EntityType="RenovacionesModel.archivos" Width="1.5" PointX="7.375" PointY="6.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

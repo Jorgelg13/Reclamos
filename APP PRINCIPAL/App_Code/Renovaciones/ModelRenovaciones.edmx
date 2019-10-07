@@ -12,6 +12,13 @@
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="poliza" Type="varchar" MaxLength="50" />
         </EntityType>
+        <EntityType Name="contenido_correo">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="contenido" Type="text" />
+        </EntityType>
         <EntityType Name="estados">
           <Key>
             <PropertyRef Name="id" />
@@ -131,6 +138,9 @@
           <Property Name="vigf_acs" Type="varchar" MaxLength="20" />
           <Property Name="correo_gestor" Type="varchar" MaxLength="90" />
           <Property Name="grupo_economico" Type="int" />
+          <Property Name="contenido_correo" Type="text" />
+          <Property Name="comentario_renovacion" Type="text" />
+          <Property Name="comentario_invalida" Type="text" />
         </EntityType>
         <EntityType Name="requerimientos">
           <Key>
@@ -185,6 +195,7 @@
         <Function Name="pa_sq_renovaciones" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="RenovacionesModelStoreContainer">
           <EntitySet Name="archivos" EntityType="Self.archivos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="contenido_correo" EntityType="Self.contenido_correo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="estados" EntityType="Self.estados" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="poliza" EntityType="Self.poliza" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="renovaciones_log" EntityType="Self.renovaciones_log" Schema="dbo" store:Type="Tables" />
@@ -210,6 +221,8 @@
         <EntityContainer Name="RenovacionesEntities" annotation:LazyLoadingEnabled="true">
           <FunctionImport Name="pa_cargar_polizas" />
           <FunctionImport Name="pa_sq_renovaciones" ReturnType="Collection(Int32)" />
+          <EntitySet Name="archivos" EntityType="RenovacionesModel.archivos" />
+          <EntitySet Name="contenido_correo" EntityType="RenovacionesModel.contenido_correo" />
           <EntitySet Name="estados" EntityType="RenovacionesModel.estados" />
           <EntitySet Name="poliza" EntityType="RenovacionesModel.poliza" />
           <EntitySet Name="renovaciones_log" EntityType="RenovacionesModel.renovaciones_log" />
@@ -227,8 +240,21 @@
             <End Role="renovaciones_polizas" EntitySet="renovaciones_polizas" />
             <End Role="renovaciones_log" EntitySet="renovaciones_log" />
           </AssociationSet>
-          <EntitySet Name="archivos" EntityType="RenovacionesModel.archivos" />
           </EntityContainer>
+        <EntityType Name="archivos">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="poliza" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="contenido_correo">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="contenido" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
         <EntityType Name="estados">
           <Key>
             <PropertyRef Name="id" />
@@ -351,9 +377,12 @@
           <Property Name="fecha_registro" Type="DateTime" Precision="3" />
           <Property Name="vigf_acs" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="correo_gestor" Type="String" MaxLength="90" FixedLength="false" Unicode="false" />
+          <Property Name="grupo_economico" Type="Int32" />
+          <Property Name="contenido_correo" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="comentario_renovacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="comentario_invalida" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="estados" Relationship="RenovacionesModel.FK_polizas_estado" FromRole="renovaciones_polizas" ToRole="estados" />
           <NavigationProperty Name="renovaciones_log" Relationship="RenovacionesModel.FK_renovaciones_log_poliza" FromRole="renovaciones_polizas" ToRole="renovaciones_log" />
-          <Property Name="grupo_economico" Type="Int32" />
         </EntityType>
         <EntityType Name="requerimientos">
           <Key>
@@ -404,13 +433,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="archivos">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="poliza" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -419,6 +441,22 @@
         <EntityContainerMapping StorageEntityContainer="RenovacionesModelStoreContainer" CdmEntityContainer="RenovacionesEntities">
           <FunctionImportMapping FunctionImportName="pa_cargar_polizas" FunctionName="RenovacionesModel.Store.pa_cargar_polizas" />
           <FunctionImportMapping FunctionImportName="pa_sq_renovaciones" FunctionName="RenovacionesModel.Store.pa_sq_renovaciones" />
+          <EntitySetMapping Name="archivos">
+            <EntityTypeMapping TypeName="RenovacionesModel.archivos">
+              <MappingFragment StoreEntitySet="archivos">
+                <ScalarProperty Name="poliza" ColumnName="poliza" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="contenido_correo">
+            <EntityTypeMapping TypeName="RenovacionesModel.contenido_correo">
+              <MappingFragment StoreEntitySet="contenido_correo">
+                <ScalarProperty Name="contenido" ColumnName="contenido" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="estados">
             <EntityTypeMapping TypeName="RenovacionesModel.estados">
               <MappingFragment StoreEntitySet="estados">
@@ -466,6 +504,9 @@
           <EntitySetMapping Name="renovaciones_polizas">
             <EntityTypeMapping TypeName="RenovacionesModel.renovaciones_polizas">
               <MappingFragment StoreEntitySet="renovaciones_polizas">
+                <ScalarProperty Name="comentario_invalida" ColumnName="comentario_invalida" />
+                <ScalarProperty Name="comentario_renovacion" ColumnName="comentario_renovacion" />
+                <ScalarProperty Name="contenido_correo" ColumnName="contenido_correo" />
                 <ScalarProperty Name="grupo_economico" ColumnName="grupo_economico" />
                 <ScalarProperty Name="correo_gestor" ColumnName="correo_gestor" />
                 <ScalarProperty Name="vigf_acs" ColumnName="vigf_acs" />
@@ -552,14 +593,6 @@
                 <ScalarProperty Name="fecha" ColumnName="fecha" />
                 <ScalarProperty Name="requerimiento" ColumnName="requerimiento" />
                 <ScalarProperty Name="renovacion" ColumnName="renovacion" />
-                <ScalarProperty Name="poliza" ColumnName="poliza" />
-                <ScalarProperty Name="id" ColumnName="id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="archivos">
-            <EntityTypeMapping TypeName="RenovacionesModel.archivos">
-              <MappingFragment StoreEntitySet="archivos">
                 <ScalarProperty Name="poliza" ColumnName="poliza" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>

@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.UI;
-using System.Web.UI.WebControls;
 
 public partial class Modulos_MdRenovaciones_Reportes_Estados : System.Web.UI.Page
 {
@@ -24,6 +20,8 @@ public partial class Modulos_MdRenovaciones_Reportes_Estados : System.Web.UI.Pag
             "r.placa, " +
             "r.nombre_gestor as Gestor," +
             "r.asegurado as Asegurado," +
+            "r.comentario_renovacion as [Comentario Renovacion]," +
+            "r.comentario_invalida as [Comentario Invalida],"+
             "r.telefono_cliente," +
             "r.correo_cliente as [Correo Cliente] " +
             "from renovaciones_polizas as r " +

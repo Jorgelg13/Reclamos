@@ -162,7 +162,7 @@ public class Consultas
     {
         String userlogin = HttpContext.Current.User.Identity.Name;
         String backoffice = Utils.backOffice(userlogin);
-
+        String sql;
         string rol = "E";
 
         try
@@ -173,13 +173,15 @@ public class Consultas
         }
         catch { }
 
-
-        String sql = "Select " +
+        if(ddlEstado == 4)
+        {
+            sql = "Select " +
             "r.id as ID, " +
             "r.poliza as Poliza," +
             "r.ramo as Ramo," +
             "r.endoso_renov as Endoso," +
             "r.asegurado as Asegurado," +
+            "r.comentario_renovacion as Comentario," +
             "r.marca as Marca," +
             "r.modelo as Modelo," +
             "r.placa as Placa," +
@@ -188,6 +190,26 @@ public class Consultas
             " (select top 1 fecha from renovaciones_log where poliza = r.id) as [Fecha Registro]" +
             " from renovaciones_polizas r " +
             "where r.estado = " + ddlEstado;
+        }
+        else
+        {
+            sql = "Select " +
+             "r.id as ID, " +
+             "r.poliza as Poliza," +
+             "r.ramo as Ramo," +
+             "r.endoso_renov as Endoso," +
+             "r.asegurado as Asegurado," +
+             "r.marca as Marca," +
+             "r.modelo as Modelo," +
+             "r.placa as Placa," +
+             "r.vigf as [Vigencia Final]," +
+             "r.correo_cliente as [Correo Cliente]," +
+             " (select top 1 fecha from renovaciones_log where poliza = r.id) as [Fecha Registro]" +
+             " from renovaciones_polizas r " +
+             "where r.estado = " + ddlEstado;
+        }
+        
+
 
         if (rol == "E")
         {

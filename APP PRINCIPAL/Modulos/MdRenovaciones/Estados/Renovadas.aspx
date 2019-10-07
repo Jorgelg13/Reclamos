@@ -22,6 +22,7 @@
                                 </ItemTemplate>
                             </asp:TemplateField>
                             <asp:CommandField DeleteText="Requerimientos" ControlStyle-CssClass="btn btn-info" ShowDeleteButton="True"></asp:CommandField>
+                            <asp:CommandField ControlStyle-CssClass="btn btn-info ver-poliza" ShowSelectButton="True" SelectText="Ver Poliza" />
                         </Columns>
                         <HeaderStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" Wrap="false" />
                         <PagerStyle BackColor="#131B4D" ForeColor="White" HorizontalAlign="Center" />
@@ -62,5 +63,12 @@
     </div>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="contentJS" runat="Server">
+    <script>
+        $('.ver-poliza').on('click', function () {
+            $tr = $(this).closest('tr')[0].cells;
+            $poliza = $tr[5].innerText + $tr[4].innerText + $tr[6].innerText + ".pdf";
+            window.open('https://archivos-reclamos.unitypromotores.com/files/RenovacionesElRoble/OneDrive%20-%20Unity%20Seguros/Renovaciones/Renovadas/' + $poliza, '_blank');
+        });
+    </script>
 </asp:Content>
 

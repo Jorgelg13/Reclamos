@@ -6,6 +6,7 @@ using System.Linq;
 
 public partial class Modulos_MdRenovaciones_Estados_NoEnviadas : System.Web.UI.Page
 {
+    String userlogin = HttpContext.Current.User.Identity.Name;
     Utils llenar = new Utils();
     ReclamosEntities DBReclamos = new ReclamosEntities();
     Renovaciones.RenovacionesEntities DB = new Renovaciones.RenovacionesEntities();
@@ -61,9 +62,16 @@ public partial class Modulos_MdRenovaciones_Estados_NoEnviadas : System.Web.UI.P
         txtCorreo.Text = registro.correo_cliente;
         txtTelefono.Text = registro.telefono_cliente;
 
-        cuerpo = Cartas.RENOVACIONES(id); 
+        if (String.IsNullOrEmpty(registro.contenido_correo))
+        {
+            txtCuerpo.Text = Cartas.RENOVACIONES(id);
+        }
+        else
+        {
+            txtCuerpo.Text = registro.contenido_correo;
 
-        txtCuerpo.Text = cuerpo;
+        }
+
         Utils.ShowMessage(this.Page, "Ahora debe de ingresar el correo exacto del cliente ", "Excelente..", "success");
     }
 
@@ -75,7 +83,6 @@ public partial class Modulos_MdRenovaciones_Estados_NoEnviadas : System.Web.UI.P
             var registro = DB.renovaciones_polizas.Find(id);
             registro.correo_cliente = txtCorreo.Text;
             DB.SaveChanges();
-            llenarGrid();
 
             if (ValidarCorreo(txtCorreo.Text, id))
             {
@@ -86,13 +93,14 @@ public partial class Modulos_MdRenovaciones_Estados_NoEnviadas : System.Web.UI.P
             {
                 Utils.EmailRenovacion("pa_envio_renovaciones", txtCorreo.Text, txtCuerpo.Text, registro.correo_gestor.Trim());
                 //copia al ejecutivo
-                Utils.EmailRenovacion("pa_envio_renovaciones", registro.correo_gestor, txtCuerpo.Text, registro.correo_gestor.Trim());
+                Utils.EmailRenovacion("pa_envio_renovaciones", Utils.seleccionarCorreoGestor(userlogin), txtCuerpo.Text, Utils.seleccionarCorreoGestor(userlogin));
                 registro.estado = 3;
                 DB.SaveChanges();
                 String Poliza = (registro.ramo + registro.poliza + registro.endoso_renov + ".pdf");
-                Utils.MoverArchivos(Poliza, "Enviadas", "Polizas");
+                Utils.CopiarArchivos(Poliza, "Enviadas", "Polizas");
                 EnvioSms();
                 llenarGrid();
+                Utils.ShowMessage(this.Page, "Se ha actualizado el correo y se ha enviado con exito la notificacion. ", "Excelente", "success");
             }
         }
 
@@ -126,11 +134,11 @@ public partial class Modulos_MdRenovaciones_Estados_NoEnviadas : System.Web.UI.P
                     // Console.WriteLine("Mailbox exists");
                     Utils.EmailRenovacion("pa_envio_renovaciones", txtCorreo.Text, txtCuerpo.Text, registro.correo_gestor.Trim());
                     //copia al ejecutivo
-                    Utils.EmailRenovacion("pa_envio_renovaciones", registro.correo_gestor, txtCuerpo.Text, registro.correo_gestor.Trim());
+                    Utils.EmailRenovacion("pa_envio_renovaciones", Utils.seleccionarCorreoGestor(userlogin), txtCuerpo.Text, Utils.seleccionarCorreoGestor(userlogin));
                     registro.estado = 3;
                     DB.SaveChanges();
                     String Poliza = (registro.ramo + registro.poliza + registro.endoso_renov + ".pdf");
-                    Utils.MoverArchivos(Poliza, "Enviadas", "Polizas");
+                    Utils.CopiarArchivos(Poliza, "Enviadas", "Polizas");
                     EnvioSms();
                     llenarGrid();
                     break;
@@ -139,7 +147,6 @@ public partial class Modulos_MdRenovaciones_Estados_NoEnviadas : System.Web.UI.P
                     //Console.WriteLine("Email server replied there is no such mailbox");
                     registro.estado = 6;
                     DB.SaveChanges();
-                    llenarGrid();
                     estado = false;
                     break;
 
@@ -147,7 +154,6 @@ public partial class Modulos_MdRenovaciones_Estados_NoEnviadas : System.Web.UI.P
                     //Console.WriteLine("Mailbox overflow");
                     registro.estado = 6;
                     DB.SaveChanges();
-                    llenarGrid();
                     estado = false;
                     break;
 
@@ -155,7 +161,6 @@ public partial class Modulos_MdRenovaciones_Estados_NoEnviadas : System.Web.UI.P
                     //Console.WriteLine("Emails are not configured for domain (no MX records)");
                     registro.estado = 6;
                     DB.SaveChanges();
-                    llenarGrid();
                     estado = false;
                     break;
             }

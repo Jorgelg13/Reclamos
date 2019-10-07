@@ -838,6 +838,34 @@ public class Utils
         }
     }
 
+    public static void CopiarArchivos(string poliza, string destino, string rutaOrigen)
+    {
+        String pathPrincipal = @"E:\ReclamosScanner\files\RenovacionesElRoble\OneDrive - Unity Seguros\Renovaciones\" + rutaOrigen + "";
+        String pathDestino = @"E:\ReclamosScanner\files\RenovacionesElRoble\OneDrive - Unity Seguros\Renovaciones";
+
+        //String pathPrincipal = @"C:\Renovaciones\Polizas";
+        //String pathDestino = @"C:\Renovaciones";
+
+        String origen = Path.Combine(pathPrincipal, poliza);
+        String destinoArchivo = Path.Combine(pathDestino, destino + "\\" + poliza);
+
+        if (File.Exists(origen))
+        {
+            if (File.Exists(destinoArchivo))
+            {
+                File.Delete(destinoArchivo);
+            }
+
+            File.Copy(origen, destinoArchivo);
+        }
+
+        else
+        {
+
+        }
+    }
+
+
     //agregar comentario a reclamos de gastos medicos
     public static void insertarComentario(int id, string descripcion, string estado)
     {

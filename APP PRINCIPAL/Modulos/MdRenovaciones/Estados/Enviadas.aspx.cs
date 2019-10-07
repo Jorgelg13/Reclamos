@@ -55,7 +55,17 @@ public partial class Modulos_MdRenovaciones_Estados_Enviadas : System.Web.UI.Pag
                txtFechaFin.Text), GridEnviadas);
     }
 
-    protected void btnGuardarCambios_Click(object sender, EventArgs e)
+    protected void chkCancelar_CheckedChanged(object sender, EventArgs e)
+    {
+        this.Page.ClientScript.RegisterStartupScript(this.Page.GetType(), "show_modal", "$('#comentario').modal('show');", addScriptTags: true);
+    }
+
+    protected void chkRenovar_CheckedChanged(object sender, EventArgs e)
+    { 
+        this.Page.ClientScript.RegisterStartupScript(this.Page.GetType(), "show_modal", "$('#comentario').modal('show');", addScriptTags: true);
+    }
+
+    protected void btnGuardar_Click(object sender, EventArgs e)
     {
         foreach (GridViewRow row in GridEnviadas.Rows)
         {
@@ -69,10 +79,10 @@ public partial class Modulos_MdRenovaciones_Estados_Enviadas : System.Web.UI.Pag
                 {
                     var poliza = DB.renovaciones_polizas.Find(id);
                     String Poliza = (poliza.ramo + poliza.poliza + poliza.endoso_renov + ".pdf");
-
                     poliza.estado = 4;
+                    poliza.comentario_renovacion = txtComentario.Text;
                     DB.SaveChanges();
-                    Utils.MoverArchivos(Poliza, "Renovadas","Enviadas");
+                    Utils.CopiarArchivos(Poliza, "Renovadas","Enviadas");
                     Utils.ShowMessage(this.Page, "Polizas renovadas exitosamente", "Excelente", "success");
                 }
                 catch (Exception ex)
@@ -87,8 +97,8 @@ public partial class Modulos_MdRenovaciones_Estados_Enviadas : System.Web.UI.Pag
                 {
                     var poliza = DB.renovaciones_polizas.Find(id);
                     String Poliza = (poliza.ramo + poliza.poliza + poliza.endoso_renov + ".pdf");
-
                     poliza.estado = 5;
+                    poliza.comentario_invalida = txtComentario.Text;
                     DB.SaveChanges();
                     Utils.MoverArchivos(Poliza, "Canceladas", "Enviadas");
                     Utils.ShowMessage(this.Page, "Polizas renovadas exitosamente", "Excelente", "success");
@@ -98,9 +108,13 @@ public partial class Modulos_MdRenovaciones_Estados_Enviadas : System.Web.UI.Pag
                     Utils.ShowMessage(this.Page, "No se a podido renovar " + ex.Message, "Excelente", "success");
                 }
             }
-
-
         }
+
         llenarGrid();
+    }
+
+    protected void btnCerrar_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("/Modulos/MdRenovaciones/Estados/Enviadas.aspx");
     }
 }

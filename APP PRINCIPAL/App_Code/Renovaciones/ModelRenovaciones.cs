@@ -23,6 +23,17 @@ namespace Renovaciones
     using System;
     using System.Collections.Generic;
     
+    public partial class contenido_correo
+    {
+        public int id { get; set; }
+        public string contenido { get; set; }
+    }
+}
+namespace Renovaciones
+{
+    using System;
+    using System.Collections.Generic;
+    
     public partial class estados
     {
         public estados()
@@ -169,6 +180,9 @@ namespace Renovaciones
         public string vigf_acs { get; set; }
         public string correo_gestor { get; set; }
         public Nullable<int> grupo_economico { get; set; }
+        public string contenido_correo { get; set; }
+        public string comentario_renovacion { get; set; }
+        public string comentario_invalida { get; set; }
     
         public virtual estados estados { get; set; }
         public virtual ICollection<renovaciones_log> renovaciones_log { get; set; }
