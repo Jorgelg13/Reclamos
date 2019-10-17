@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -31,6 +30,8 @@ public partial class Modulos_MdRenovaciones_Estados_Enviadas : System.Web.UI.Pag
             llenar.llenarGridRenovaciones(Consultas.POLIZAS_RENOVADAS(Convert.ToInt32(Session["CodigoGestor"]), 3, txtFechaInicio.Text,
                  txtFechaFin.Text), GridEnviadas);
         }
+
+        txtComentario.Text = "";
     }
 
     public override void VerifyRenderingInServerForm(Control control)

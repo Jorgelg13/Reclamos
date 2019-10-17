@@ -90,6 +90,8 @@
                             <a href="#" class="dropdown-toggle fa fa-mail" style="font-size: 16px;" data-toggle="dropdown" role="button">Catalogo<span class="caret"></span></a>
                             <ul class="dropdown-menu">
                                 <li><a href="/Modulos/MdRenovaciones/Catalogo/correo.aspx">Contenido Correo</a></li>
+                                <li><a href="/Modulos/MdRenovaciones/Catalogo/cambiar-estado.aspx">Cambiar estado</a></li>
+                                <li><a href="/Modulos/MdRenovaciones/Catalogo/cambiar-usuario.aspx">Reasignar Usuario</a></li>
                             </ul>
                         </li>
                     </ul>

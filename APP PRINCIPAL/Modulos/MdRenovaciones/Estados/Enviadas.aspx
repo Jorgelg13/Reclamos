@@ -70,10 +70,5 @@
     </div>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="contentJS" runat="Server">
-    <script>
-        $("#ContentPlaceHolder1_GridEnviadas_chkRenovar_0").click(function () {
-            console.log('prueba');
-        });
-    </script>
 </asp:Content>
 

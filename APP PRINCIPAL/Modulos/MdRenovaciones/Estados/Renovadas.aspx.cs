@@ -65,7 +65,7 @@ public partial class Modulos_MdRenovaciones_Estados_Renovadas : System.Web.UI.Pa
         foreach (GridViewRow row in GridRenovadas.Rows)
         {
             CheckBox checkAsig = (CheckBox)row.FindControl("checkAsignar");
-            int id = Convert.ToInt32(Convert.ToString(row.Cells[2].Text));
+            int id = Convert.ToInt32(Convert.ToString(row.Cells[3].Text));
             if (checkAsig.Checked)
             {
                 try
@@ -79,7 +79,7 @@ public partial class Modulos_MdRenovaciones_Estados_Renovadas : System.Web.UI.Pa
                 }
                 catch (Exception ex)
                 {
-                    Utils.ShowMessage(this.Page, "No se a podido facturar " + ex.Message, "Excelente", "success");
+                    Utils.ShowMessage(this.Page, "No se a podido facturar " + ex.Message, "Error", "error");
                 }
             }  
         }
