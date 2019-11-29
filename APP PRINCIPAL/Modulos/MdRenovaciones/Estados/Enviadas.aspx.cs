@@ -30,8 +30,6 @@ public partial class Modulos_MdRenovaciones_Estados_Enviadas : System.Web.UI.Pag
             llenar.llenarGridRenovaciones(Consultas.POLIZAS_RENOVADAS(Convert.ToInt32(Session["CodigoGestor"]), 3, txtFechaInicio.Text,
                  txtFechaFin.Text), GridEnviadas);
         }
-
-        txtComentario.Text = "";
     }
 
     public override void VerifyRenderingInServerForm(Control control)
@@ -85,6 +83,7 @@ public partial class Modulos_MdRenovaciones_Estados_Enviadas : System.Web.UI.Pag
                     DB.SaveChanges();
                     Utils.CopiarArchivos(Poliza, "Renovadas","Enviadas");
                     Utils.ShowMessage(this.Page, "Polizas renovadas exitosamente", "Excelente", "success");
+                    txtComentario.Text = "";
                 }
                 catch (Exception ex)
                 {
@@ -103,6 +102,7 @@ public partial class Modulos_MdRenovaciones_Estados_Enviadas : System.Web.UI.Pag
                     DB.SaveChanges();
                     Utils.MoverArchivos(Poliza, "Canceladas", "Enviadas");
                     Utils.ShowMessage(this.Page, "Polizas renovadas exitosamente", "Excelente", "success");
+                    txtComentario.Text = "";
                 }
                 catch (Exception ex)
                 {

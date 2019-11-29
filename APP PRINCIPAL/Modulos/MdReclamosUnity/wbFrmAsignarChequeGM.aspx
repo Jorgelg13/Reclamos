@@ -4,33 +4,50 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <div class="container-fluid">
-        <div class="panel panel-info">
-            <div class="panel-heading">Listado De Reclamos Pendientes de ingresar cheque</div>
-            <div class="panel-body">
-                <div class="scrolling-table-container">
-                    <asp:GridView ID="GridGeneral" runat="server" CssClass="table bs-table table-responsive" AutoGenerateColumns="True" GridLines="None" OnSelectedIndexChanged="GridGeneral_SelectedIndexChanged" PageSize="3000">
-                        <AlternatingRowStyle BackColor="White" />
-                        <Columns>
-                            <asp:CommandField ShowSelectButton="True">
-                                <HeaderStyle HorizontalAlign="Center" Wrap="False" />
-                                <ItemStyle HorizontalAlign="Left" Wrap="False" />
-                            </asp:CommandField>
-                        </Columns>
-                        <HeaderStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" HorizontalAlign="Center" Wrap="False" />
-                        <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
-                        <RowStyle BackColor="#EFF3FB" HorizontalAlign="Left" Wrap="False" />
-                        <SelectedRowStyle BackColor="#D1DDF1" Font-Bold="True" ForeColor="#333333" />
-                    </asp:GridView>
+<%--        <div class="col-lg-3 col-md-3 col-sm-12">
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><b style="font-size: 16px;">Buscar Registro</b></h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="form-inline">
+                            <asp:TextBox CssClass="form-control" Style="width: 70%" runat="server" ID="txtbuscar"></asp:TextBox>
+                            <asp:Button CssClass="btn btn-primary" runat="server" ID="buscar" Text="Buscar" OnClick="buscar_Click" />
+                        </div>
+                        <br />
+                    </div>
+                </div>
+            </div>--%>
+            <div class="col-md-12 col-lg-12">
+              <div class="panel panel-info">
+                <div class="panel-heading">Listado De Reclamos Pendientes de ingresar cheque</div>
+                  <div class="panel-body">
+                    <div class="scrolling-table-container">
+                        <asp:GridView ID="GridGeneral" runat="server" CssClass="table bs-table table-responsive" AutoGenerateColumns="True" GridLines="None" 
+                            OnSelectedIndexChanged="GridGeneral_SelectedIndexChanged" PageSize="3000">
+                            <AlternatingRowStyle BackColor="White" />
+                            <Columns>
+                                <asp:CommandField ShowSelectButton="True">
+                                    <HeaderStyle HorizontalAlign="Center" Wrap="False" />
+                                    <ItemStyle HorizontalAlign="Left" Wrap="False" />
+                                </asp:CommandField>
+                            </Columns>
+                            <HeaderStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" HorizontalAlign="Center" Wrap="False" />
+                            <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
+                            <RowStyle BackColor="#EFF3FB" HorizontalAlign="Left" Wrap="False" />
+                            <SelectedRowStyle BackColor="#D1DDF1" Font-Bold="True" ForeColor="#333333" />
+                        </asp:GridView>
+                    </div>
                 </div>
             </div>
-        </div>
+         </div> 
     </div>
     <%-- modal para verificacion de envio de correo --%>
     <div class="modal fade" id="ingresar-cheque">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title"><b>Ingreso De Cheque..</b></h4>
+                    <h4 class="modal-title"><b>Ingreso De Cheque En ID <asp:Label runat="server" ID="lblId"></asp:Label></b></h4>
                 </div>
                 <div class="modal-body form-inline">
                     <div class="form-group" style="width: 33%">

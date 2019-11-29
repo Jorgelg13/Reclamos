@@ -76,6 +76,10 @@
                     <asp:ListItem Value="pais.nombre as Pais">Pais</asp:ListItem>
                     <asp:ListItem Value="usuario.nombre as Usuario_cabina">Usuario Cabina</asp:ListItem>
                     <asp:ListItem Value="m.nombre as Motivo_Cierre">Motivo Cierre</asp:ListItem>
+                    <asp:ListItem Value="reclamo_auto.piloto">Piloto</asp:ListItem>
+                    <asp:ListItem Value="Monto =(select top 1 monto from detalle_pagos_reclamos_autos where id_reclamo_auto= reclamo_auto.id)">Monto Pagado</asp:ListItem>
+                    <asp:ListItem Value="Deducible = (select top 1 deducible from detalle_pagos_reclamos_autos where id_reclamo_auto= reclamo_auto.id)">Deducible</asp:ListItem>
+                    <asp:ListItem Value="Total =(select top 1 total from detalle_pagos_reclamos_autos where id_reclamo_auto= reclamo_auto.id)">Total</asp:ListItem>
                 </asp:CheckBoxList>
             </div>
         </div>
