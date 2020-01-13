@@ -32,43 +32,34 @@ public partial class Modulos_MdAdmin_wbFrmAsigReclamosDaños : System.Web.UI.Pag
             " '" + fechaInicio.Text + "' and '" + fechaFinal.Text + "' group by usuario_unity order by Total desc";
 
         datos = "SELECT " +
-            "dbo.reclamos_varios.id as ID," +
-            "dbo.reclamos_varios.usuario_unity as Usuario, "+
-            "dbo.reclamos_varios.asignado_por as [Asignado por],"+
-            "dbo.reclamos_varios.estado_unity as Estado,"+
-            "dbo.reg_reclamo_varios.poliza as Poliza," +
-            "dbo.reg_reclamo_varios.asegurado as Asegurado," +
-            "dbo.reg_reclamo_varios.[cliente] as Cliente," +
-            "dbo.reg_reclamo_varios.tipo as Tipo," +
-            "dbo.reg_reclamo_varios.direccion as Direccion," +
-            "dbo.reg_reclamo_varios.ramo as Ramo," +
-            "dbo.reg_reclamo_varios.ejecutivo as Ejecutivo," +
-            "dbo.reg_reclamo_varios.aseguradora as Aseguradora," +
-            "dbo.reg_reclamo_varios.contratante as Contratante," +
-            "dbo.reclamos_varios.boleta as Boleta," +
-            "dbo.reclamos_varios.titular as Titular," +
-            "dbo.reclamos_varios.ubicacion as Ubicacion," +
-            "dbo.reclamos_varios.hora as Hora," +
-            "dbo.reclamos_varios.fecha as Fecha_Incidente," +
-            "dbo.reclamos_varios.reportante as Reportante," +
-            "dbo.reclamos_varios.telefono as Telefono," +
-            "dbo.reclamos_varios.ajustador as Ajustador," +
-            //"dbo.reclamos_varios.version as Version," +
-            "dbo.reclamos_varios.fecha_commit as Fecha_Creacion," +
-            "dbo.reclamos_varios.fecha_cierre as Fecha_cierre," +
-           // "dbo.cabina.nombre as Cabina," +
-            //"dbo.sucursal.nombre as Sucursal," +
-            //"dbo.empresa.nombre as Empresa," +
-            //"dbo.pais.nombre as Pais," +
-            "dbo.usuario.nombre as Usuario_cabina " +
-            "FROM dbo.reclamos_varios " +
-            "INNER JOIN dbo.reg_reclamo_varios ON dbo.reclamos_varios.id_reg_reclamos_varios = dbo.reg_reclamo_varios.id " +
-            //"INNER JOIN dbo.cabina ON dbo.reclamos_varios.id_cabina = dbo.cabina.id " +
-            //"INNER JOIN dbo.sucursal ON dbo.cabina.id_sucursal = dbo.sucursal.id " +
-            //"INNER JOIN dbo.empresa ON dbo.sucursal.id_empresa = dbo.empresa.id " +
-            //"INNER JOIN dbo.pais ON dbo.empresa.id_pais = dbo.pais.id " +
-            "INNER JOIN dbo.usuario ON dbo.reclamos_varios.id_usuario = dbo.usuario.id " +
-            "where(fecha_cierre between '" + fechaInicio.Text + "' and '" + fechaFinal.Text + "') and(reclamos_varios.id_estado = 2)";
+            "r.id as ID," +
+            "r.usuario_unity as Usuario, "+
+            "r.asignado_por as [Asignado por],"+
+            "r.estado_unity as Estado,"+
+            "reg.poliza as Poliza," +
+            "reg.asegurado as Asegurado," +
+            "reg.[cliente] as Cliente," +
+            "reg.tipo as Tipo," +
+            "r.version as Version,"+
+            //"reg.direccion as Direccion," +
+            "reg.ramo as Ramo," +
+            "reg.ejecutivo as Ejecutivo," +
+            "reg.aseguradora as Aseguradora," +
+            //"reg.contratante as Contratante," +
+            //"r.boleta as Boleta," +
+            //"r.titular as Titular," +
+            //"r.ubicacion as Ubicacion," +
+            //"r.hora as Hora," +
+            "convert(date,r.fecha,112) as Fecha_Incidente," +
+            "r.reportante as Reportante," +
+            "r.telefono as Telefono " +
+            //"r.ajustador as Ajustador," +
+            //"r.fecha_commit as Fecha_Creacion," +
+            //"r.fecha_cierre as Fecha_cierre " +
+            "FROM reclamos_varios as r " +
+            "INNER JOIN reg_reclamo_varios as reg ON r.id_reg_reclamos_varios = reg.id " +
+            "INNER JOIN usuario ON r.id_usuario = usuario.id " +
+            "where(r.fecha_cierre between '" + fechaInicio.Text + "' and '" + fechaFinal.Text + "') and(r.id_estado = 2)";
     }
     private void asignar_reclamos()
     {

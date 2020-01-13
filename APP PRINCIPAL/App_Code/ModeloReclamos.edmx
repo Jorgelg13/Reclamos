@@ -62,6 +62,22 @@
           <Property Name="codigo" Type="smallint" />
           <Property Name="total_dias_rc_medicos" Type="smallint" />
         </EntityType>
+        <EntityType Name="asegurados_implants">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="asegurado" Type="varchar" MaxLength="100" />
+          <Property Name="telefono" Type="varchar" MaxLength="30" />
+          <Property Name="correo" Type="varchar" MaxLength="75" />
+          <Property Name="empresa" Type="varchar" MaxLength="50" />
+          <Property Name="motivo" Type="varchar" MaxLength="80" />
+          <Property Name="comentario" Type="varchar" MaxLength="500" />
+          <Property Name="usuario" Type="varchar" MaxLength="30" />
+          <Property Name="fechareg" Type="datetime" />
+          <Property Name="fechafin" Type="datetime" />
+          <Property Name="estado" Type="bit" />
+        </EntityType>
         <EntityType Name="auto_reclamo">
           <Key>
             <PropertyRef Name="id" />
@@ -480,6 +496,14 @@
           <Property Name="nombre" Type="varchar" MaxLength="50" />
           <Property Name="id_pais" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="empresas_implants">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="75" />
+          <Property Name="fechareg" Type="datetime" />
+        </EntityType>
         <EntityType Name="encuesta">
           <Key>
             <PropertyRef Name="id" />
@@ -500,6 +524,9 @@
           <Property Name="fecha" Type="datetime" />
           <Property Name="telefono" Type="varchar" MaxLength="25" />
           <Property Name="nombre" Type="varchar" MaxLength="150" />
+          <Property Name="codigo" Type="varchar" MaxLength="25" />
+          <Property Name="correo" Type="varchar" MaxLength="75" />
+          <Property Name="gestion" Type="varchar" MaxLength="125" />
         </EntityType>
         <EntityType Name="encuesta_recepcion">
           <Key>
@@ -969,23 +996,6 @@
           <Property Name="correo" Type="varchar" MaxLength="70" />
           <Property Name="estado" Type="bit" />
         </EntityType>
-        <EntityType Name="tblCities">
-          <Key>
-            <PropertyRef Name="CityID" />
-          </Key>
-          <Property Name="CityID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="CityName" Type="varchar" MaxLength="20" Nullable="false" />
-        </EntityType>
-        <EntityType Name="tblEmployee">
-          <Key>
-            <PropertyRef Name="EmployeeID" />
-          </Key>
-          <Property Name="EmployeeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="varchar" MaxLength="20" Nullable="false" />
-          <Property Name="City" Type="varchar" MaxLength="20" Nullable="false" />
-          <Property Name="Department" Type="varchar" MaxLength="20" Nullable="false" />
-          <Property Name="Gender" Type="varchar" MaxLength="6" Nullable="false" />
-        </EntityType>
         <EntityType Name="tipo_documentos">
           <Key>
             <PropertyRef Name="id" />
@@ -1157,23 +1167,6 @@ advertencia 6002: La tabla o vista 'reclamos.dbo.ViewBusquedaAuto' no tiene defi
           <Property Name="prima" Type="decimal" Precision="12" Scale="2" />
           <Property Name="porcom" Type="decimal" Precision="10" Scale="4" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6013: La tabla o vista 'reclamos.dbo.v_polizas' no tiene definida una clave principal y no es posible inferir ninguna clave principal válida. Esta tabla o vista se ha excluido. Para usar la entidad, necesitará revisar el esquema, agregar las claves correctas y quitar sus comentarios.
-        <EntityType Name="v_polizas">
-          <Property Name="poliza" Type="nvarchar" MaxLength="50" />
-          <Property Name="secren" Type="smallint" />
-          <Property Name="ramo" Type="nvarchar" MaxLength="60" />
-          <Property Name="aseguradora" Type="nvarchar" MaxLength="300" />
-          <Property Name="vigi" Type="date" />
-          <Property Name="vigf" Type="date" />
-          <Property Name="cliente" Type="int" />
-          <Property Name="asegurado" Type="nvarchar" MaxLength="300" />
-          <Property Name="gestor" Type="nvarchar" MaxLength="300" />
-          <Property Name="prima" Type="decimal" Precision="12" Scale="2" />
-          <Property Name="porcom" Type="decimal" Precision="12" Scale="4" />
-          <Property Name="moneda" Type="nvarchar" MaxLength="50" />
-          <Property Name="gst_nombre" Type="nvarchar" MaxLength="300" />
-        </EntityType>-->
         <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'reclamos.dbo.v_producto_no_conforme' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="v_producto_no_conforme">
@@ -1852,9 +1845,9 @@ advertencia 6002: La tabla o vista 'reclamos.dbo.v_producto_no_conforme' no tien
         <Function Name="pa_reclamos_app" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="cliente" Type="int" Mode="In" />
         </Function>
-        <Function Name="pa_reclamos_autos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
-        <Function Name="pa_reclamos_varios" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="pa_replicar_reclamos_autos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="pa_replicar_reclamos_gm" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="pa_replicar_reclamos_varios" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="pa_reporte_problemas_autos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="fechaInicio" Type="date" Mode="In" />
           <Parameter Name="fechaFin" Type="date" Mode="In" />
@@ -1934,6 +1927,7 @@ advertencia 6002: La tabla o vista 'reclamos.dbo.v_producto_no_conforme' no tien
           <EntitySet Name="analistas" EntityType="Self.analistas" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="archivos_copagos" EntityType="Self.archivos_copagos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="aseguradoras" EntityType="Self.aseguradoras" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="asegurados_implants" EntityType="Self.asegurados_implants" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="auto_reclamo" EntityType="Self.auto_reclamo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="autorizaciones" EntityType="Self.autorizaciones" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="bitacora_autorizaciones" EntityType="Self.bitacora_autorizaciones" Schema="dbo" store:Type="Tables" />
@@ -1967,6 +1961,7 @@ advertencia 6002: La tabla o vista 'reclamos.dbo.v_producto_no_conforme' no tien
           <EntitySet Name="documentos_solicitados" EntityType="Self.documentos_solicitados" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ejecutivos" EntityType="Self.ejecutivos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="empresa" EntityType="Self.empresa" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="empresas_implants" EntityType="Self.empresas_implants" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="encuesta" EntityType="Self.encuesta" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="encuesta_recepcion" EntityType="Self.encuesta_recepcion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="encuesta-egresos" EntityType="Self.encuesta-egresos" Schema="dbo" store:Type="Tables" />
@@ -1991,8 +1986,6 @@ advertencia 6002: La tabla o vista 'reclamos.dbo.v_producto_no_conforme' no tien
           <EntitySet Name="sucursal" EntityType="Self.sucursal" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="talleres" EntityType="Self.talleres" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="tblCities" EntityType="Self.tblCities" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="tblEmployee" EntityType="Self.tblEmployee" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tipo_documentos" EntityType="Self.tipo_documentos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tipo_reclamos" EntityType="Self.tipo_reclamos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="usuario" EntityType="Self.usuario" Schema="dbo" store:Type="Tables" />
@@ -2413,11 +2406,17 @@ FROM [dbo].[v_producto_no_conforme] AS [v_producto_no_conforme]</DefiningQuery>
           </FunctionImport>
           <FunctionImport Name="pa_sec_reclamos_varios" ReturnType="Collection(Int64)" />
           <FunctionImport Name="pa_sec_reg_reclamos_danios_varios" ReturnType="Collection(Int64)" />
+          <FunctionImport Name="actualizar_reclamos_copiados">
+          <Parameter Name="tipo" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="pa_replicar_reclamos_autos" />
+          <FunctionImport Name="pa_replicar_reclamos_varios" />
           <EntitySet Name="actividades" EntityType="reclamosModel.actividades" />
           <EntitySet Name="ajustadores" EntityType="reclamosModel.ajustadores" />
           <EntitySet Name="analistas" EntityType="reclamosModel.analistas" />
           <EntitySet Name="archivos_copagos" EntityType="reclamosModel.archivos_copagos" />
           <EntitySet Name="aseguradoras" EntityType="reclamosModel.aseguradoras" />
+          <EntitySet Name="asegurados_implants" EntityType="reclamosModel.asegurados_implants" />
           <EntitySet Name="auto_reclamo" EntityType="reclamosModel.auto_reclamo" />
           <EntitySet Name="autorizaciones" EntityType="reclamosModel.autorizaciones" />
           <EntitySet Name="bitacora_autorizaciones" EntityType="reclamosModel.bitacora_autorizaciones" />
@@ -2451,6 +2450,7 @@ FROM [dbo].[v_producto_no_conforme] AS [v_producto_no_conforme]</DefiningQuery>
           <EntitySet Name="documentos_solicitados" EntityType="reclamosModel.documentos_solicitados" />
           <EntitySet Name="ejecutivos" EntityType="reclamosModel.ejecutivos" />
           <EntitySet Name="empresa" EntityType="reclamosModel.empresa" />
+          <EntitySet Name="empresas_implants" EntityType="reclamosModel.empresas_implants" />
           <EntitySet Name="encuesta" EntityType="reclamosModel.encuesta" />
           <EntitySet Name="encuesta_recepcion" EntityType="reclamosModel.encuesta_recepcion" />
           <EntitySet Name="encuesta_egresos" EntityType="reclamosModel.encuesta_egresos" />
@@ -2475,8 +2475,6 @@ FROM [dbo].[v_producto_no_conforme] AS [v_producto_no_conforme]</DefiningQuery>
           <EntitySet Name="sucursal" EntityType="reclamosModel.sucursal" />
           <EntitySet Name="sysdiagrams" EntityType="reclamosModel.sysdiagrams" />
           <EntitySet Name="talleres" EntityType="reclamosModel.talleres" />
-          <EntitySet Name="tblCities" EntityType="reclamosModel.tblCities" />
-          <EntitySet Name="tblEmployee" EntityType="reclamosModel.tblEmployee" />
           <EntitySet Name="tipo_documentos" EntityType="reclamosModel.tipo_documentos" />
           <EntitySet Name="tipo_reclamos" EntityType="reclamosModel.tipo_reclamos" />
           <EntitySet Name="usuario" EntityType="reclamosModel.usuario" />
@@ -2678,9 +2676,6 @@ FROM [dbo].[v_producto_no_conforme] AS [v_producto_no_conforme]</DefiningQuery>
             <End Role="talleres" EntitySet="talleres" />
             <End Role="reclamos_varios" EntitySet="reclamos_varios" />
           </AssociationSet>
-          <FunctionImport Name="actualizar_reclamos_copiados">
-            <Parameter Name="tipo" Mode="In" Type="Int32" />
-          </FunctionImport>
           </EntityContainer>
         <ComplexType Name="pa_reclamos_autos_Result">
           <Property Type="Int32" Name="secuencia" Nullable="true" />
@@ -2997,6 +2992,22 @@ FROM [dbo].[v_producto_no_conforme] AS [v_producto_no_conforme]</DefiningQuery>
           <Property Name="aseguradora" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="codigo" Type="Int16" />
           <Property Name="total_dias_rc_medicos" Type="Int16" />
+        </EntityType>
+        <EntityType Name="asegurados_implants">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="asegurado" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="telefono" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="correo" Type="String" MaxLength="75" FixedLength="false" Unicode="false" />
+          <Property Name="empresa" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="usuario" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="fechareg" Type="DateTime" Precision="3" />
+          <Property Name="fechafin" Type="DateTime" Precision="3" />
+          <Property Name="estado" Type="Boolean" />
+          <Property Name="motivo" Type="String" MaxLength="80" FixedLength="false" Unicode="false" />
+          <Property Name="comentario" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="auto_reclamo">
           <Key>
@@ -3447,6 +3458,14 @@ FROM [dbo].[v_producto_no_conforme] AS [v_producto_no_conforme]</DefiningQuery>
           <NavigationProperty Name="pais" Relationship="reclamosModel.FK__empresa__id_pais__4F7CD00D" FromRole="empresa" ToRole="pais" />
           <NavigationProperty Name="sucursal" Relationship="reclamosModel.FK__sucursal__id_emp__5BE2A6F2" FromRole="empresa" ToRole="sucursal" />
         </EntityType>
+        <EntityType Name="empresas_implants">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" MaxLength="75" FixedLength="false" Unicode="false" />
+          <Property Name="fechareg" Type="DateTime" Precision="3" />
+        </EntityType>
         <EntityType Name="encuesta">
           <Key>
             <PropertyRef Name="id" />
@@ -3467,6 +3486,9 @@ FROM [dbo].[v_producto_no_conforme] AS [v_producto_no_conforme]</DefiningQuery>
           <Property Name="fecha" Type="DateTime" Precision="3" />
           <Property Name="telefono" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
           <Property Name="nombre" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="codigo" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="correo" Type="String" MaxLength="75" FixedLength="false" Unicode="false" />
+          <Property Name="gestion" Type="String" MaxLength="125" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="encuesta_recepcion">
           <Key>
@@ -3989,23 +4011,6 @@ FROM [dbo].[v_producto_no_conforme] AS [v_producto_no_conforme]</DefiningQuery>
           <Property Name="estado" Type="Boolean" />
           <NavigationProperty Name="reclamo_auto" Relationship="reclamosModel.FK_reclamo_auto_talleres" FromRole="talleres" ToRole="reclamo_auto" />
           <NavigationProperty Name="reclamos_varios" Relationship="reclamosModel.FK_reclamos_varios_talleres" FromRole="talleres" ToRole="reclamos_varios" />
-        </EntityType>
-        <EntityType Name="tblCities">
-          <Key>
-            <PropertyRef Name="CityID" />
-          </Key>
-          <Property Name="CityID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="CityName" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
-        </EntityType>
-        <EntityType Name="tblEmployee">
-          <Key>
-            <PropertyRef Name="EmployeeID" />
-          </Key>
-          <Property Name="EmployeeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="City" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="Department" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="Gender" Type="String" Nullable="false" MaxLength="6" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="tipo_documentos">
           <Key>
@@ -4784,49 +4789,6 @@ FROM [dbo].[v_producto_no_conforme] AS [v_producto_no_conforme]</DefiningQuery>
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="reclamosModelStoreContainer" CdmEntityContainer="ReclamosEntities">
-          <FunctionImportMapping FunctionImportName="pa_reclamos_autos" FunctionName="reclamosModel.Store.pa_reclamos_autos">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="reclamosModel.pa_reclamos_autos_Result">
-                <ScalarProperty Name="secuencia" ColumnName="secuencia" />
-                <ScalarProperty Name="numRamo" ColumnName="numRamo" />
-                <ScalarProperty Name="poliza" ColumnName="poliza" />
-                <ScalarProperty Name="cia" ColumnName="cia" />
-                <ScalarProperty Name="secren" ColumnName="secren" />
-                <ScalarProperty Name="numero_gestor" ColumnName="numero_gestor" />
-                <ScalarProperty Name="num_reclamo" ColumnName="num_reclamo" />
-                <ScalarProperty Name="Column1" ColumnName="Column1" />
-                <ScalarProperty Name="Column2" ColumnName="Column2" />
-                <ScalarProperty Name="Column3" ColumnName="Column3" />
-                <ScalarProperty Name="telefono" ColumnName="telefono" />
-                <ScalarProperty Name="placa" ColumnName="placa" />
-                <ScalarProperty Name="usuario_unity" ColumnName="usuario_unity" />
-                <ScalarProperty Name="ubicacion" ColumnName="ubicacion" />
-                <ScalarProperty Name="nombre" ColumnName="nombre" />
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="contacto" ColumnName="contacto" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="pa_reclamos_varios" FunctionName="reclamosModel.Store.pa_reclamos_varios">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="reclamosModel.pa_reclamos_varios_Result">
-                <ScalarProperty Name="secuencia" ColumnName="secuencia" />
-                <ScalarProperty Name="num_ramo" ColumnName="num_ramo" />
-                <ScalarProperty Name="poliza" ColumnName="poliza" />
-                <ScalarProperty Name="cia" ColumnName="cia" />
-                <ScalarProperty Name="secren" ColumnName="secren" />
-                <ScalarProperty Name="gestor" ColumnName="gestor" />
-                <ScalarProperty Name="num_reclamo" ColumnName="num_reclamo" />
-                <ScalarProperty Name="Column1" ColumnName="Column1" />
-                <ScalarProperty Name="Column2" ColumnName="Column2" />
-                <ScalarProperty Name="Column3" ColumnName="Column3" />
-                <ScalarProperty Name="usuario_unity" ColumnName="usuario_unity" />
-                <ScalarProperty Name="ubicacion" ColumnName="ubicacion" />
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="nombre" ColumnName="nombre" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="pa_reportesAutorizaciones" FunctionName="reclamosModel.Store.pa_reportesAutorizaciones">
             <ResultMapping>
               <ComplexTypeMapping TypeName="reclamosModel.pa_reportesAutorizaciones_Result">
@@ -5140,6 +5102,9 @@ FROM [dbo].[v_producto_no_conforme] AS [v_producto_no_conforme]</DefiningQuery>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="pa_sec_reclamos_varios" FunctionName="reclamosModel.Store.pa_sec_reclamos_varios" />
           <FunctionImportMapping FunctionImportName="pa_sec_reg_reclamos_danios_varios" FunctionName="reclamosModel.Store.pa_sec_reg_reclamos_danios_varios" />
+          <FunctionImportMapping FunctionImportName="actualizar_reclamos_copiados" FunctionName="reclamosModel.Store.actualizar_reclamos_copiados" />
+          <FunctionImportMapping FunctionImportName="pa_replicar_reclamos_autos" FunctionName="reclamosModel.Store.pa_replicar_reclamos_autos" />
+          <FunctionImportMapping FunctionImportName="pa_replicar_reclamos_varios" FunctionName="reclamosModel.Store.pa_replicar_reclamos_varios" />
           <EntitySetMapping Name="actividades">
             <EntityTypeMapping TypeName="reclamosModel.actividades">
               <MappingFragment StoreEntitySet="actividades">
@@ -5198,6 +5163,23 @@ FROM [dbo].[v_producto_no_conforme] AS [v_producto_no_conforme]</DefiningQuery>
                 <ScalarProperty Name="total_dias_rc_medicos" ColumnName="total_dias_rc_medicos" />
                 <ScalarProperty Name="codigo" ColumnName="codigo" />
                 <ScalarProperty Name="aseguradora" ColumnName="aseguradora" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="asegurados_implants">
+            <EntityTypeMapping TypeName="reclamosModel.asegurados_implants">
+              <MappingFragment StoreEntitySet="asegurados_implants">
+                <ScalarProperty Name="comentario" ColumnName="comentario" />
+                <ScalarProperty Name="motivo" ColumnName="motivo" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="fechafin" ColumnName="fechafin" />
+                <ScalarProperty Name="fechareg" ColumnName="fechareg" />
+                <ScalarProperty Name="usuario" ColumnName="usuario" />
+                <ScalarProperty Name="empresa" ColumnName="empresa" />
+                <ScalarProperty Name="correo" ColumnName="correo" />
+                <ScalarProperty Name="telefono" ColumnName="telefono" />
+                <ScalarProperty Name="asegurado" ColumnName="asegurado" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -5653,9 +5635,21 @@ FROM [dbo].[v_producto_no_conforme] AS [v_producto_no_conforme]</DefiningQuery>
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="empresas_implants">
+            <EntityTypeMapping TypeName="reclamosModel.empresas_implants">
+              <MappingFragment StoreEntitySet="empresas_implants">
+                <ScalarProperty Name="fechareg" ColumnName="fechareg" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="encuesta">
             <EntityTypeMapping TypeName="reclamosModel.encuesta">
               <MappingFragment StoreEntitySet="encuesta">
+                <ScalarProperty Name="gestion" ColumnName="gestion" />
+                <ScalarProperty Name="correo" ColumnName="correo" />
+                <ScalarProperty Name="codigo" ColumnName="codigo" />
                 <ScalarProperty Name="nombre" ColumnName="nombre" />
                 <ScalarProperty Name="telefono" ColumnName="telefono" />
                 <ScalarProperty Name="fecha" ColumnName="fecha" />
@@ -6166,25 +6160,6 @@ FROM [dbo].[v_producto_no_conforme] AS [v_producto_no_conforme]</DefiningQuery>
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="tblCities">
-            <EntityTypeMapping TypeName="reclamosModel.tblCities">
-              <MappingFragment StoreEntitySet="tblCities">
-                <ScalarProperty Name="CityName" ColumnName="CityName" />
-                <ScalarProperty Name="CityID" ColumnName="CityID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="tblEmployee">
-            <EntityTypeMapping TypeName="reclamosModel.tblEmployee">
-              <MappingFragment StoreEntitySet="tblEmployee">
-                <ScalarProperty Name="Gender" ColumnName="Gender" />
-                <ScalarProperty Name="Department" ColumnName="Department" />
-                <ScalarProperty Name="City" ColumnName="City" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="tipo_documentos">
             <EntityTypeMapping TypeName="reclamosModel.tipo_documentos">
               <MappingFragment StoreEntitySet="tipo_documentos">
@@ -6380,7 +6355,6 @@ FROM [dbo].[v_producto_no_conforme] AS [v_producto_no_conforme]</DefiningQuery>
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="actualizar_reclamos_copiados" FunctionName="reclamosModel.Store.actualizar_reclamos_copiados" />
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

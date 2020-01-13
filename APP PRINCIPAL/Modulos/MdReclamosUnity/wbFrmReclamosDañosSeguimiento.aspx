@@ -730,7 +730,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label>Telefono:</label>
-                                    <asp:TextBox ID="txtTelefono" MaxLength="8" Style="width: 100%" CssClass="form-control" AutoComplete="off" runat="server"></asp:TextBox>
+                                    <asp:TextBox ID="txtTelefono" MaxLength="15" Style="width: 100%" CssClass="form-control" AutoComplete="off" runat="server"></asp:TextBox>
                                 </div>
                             </div>
                             <div class="modal-footer">

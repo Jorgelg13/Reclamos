@@ -411,6 +411,7 @@
                                     <ul class="dropdown-menu">
                                         <li class="dropdown-submenu"></li>
                                         <li><a href="/Modulos/MdAdmin/wbFrmBitacoras.aspx">Bitacoras En General</a></li>
+                                        <li><a href="/Modulos/MdAdmin/bitacora-autos.aspx">Imprimir bitacora autos</a></li>
                                     </ul>
                                 </li>
                             </ul>

@@ -55,7 +55,7 @@ public partial class Modulos_MdRenovaciones_Estados_SinAsignar : System.Web.UI.P
     {
         ddlEjecutivo.DataSource = DBReclamos.ejecutivos.ToList();
         ddlEjecutivo.DataTextField = "gestor";
-        ddlEjecutivo.DataValueField = "codigo";
+        ddlEjecutivo.DataValueField = "id";
         ddlEjecutivo.DataBind();
     }
 
@@ -97,7 +97,7 @@ public partial class Modulos_MdRenovaciones_Estados_SinAsignar : System.Web.UI.P
             correo_gestor = gestor.correo;
             int id = Convert.ToInt32(GridSinAsignar.SelectedRow.Cells[1].Text);
             var registro = DB.renovaciones_polizas.Find(id);
-            registro.codigo_gestor = Convert.ToInt32(ddlEjecutivo.SelectedValue);
+            registro.codigo_gestor = gestor.codigo;
             registro.nombre_pagador = ddlEjecutivo.SelectedItem.Text;
             registro.correo_cliente = txtCorreo.Text;
             registro.poliza_unity = txtPolizaUnity.Text;

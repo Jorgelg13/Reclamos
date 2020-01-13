@@ -1,0 +1,60 @@
+﻿body {
+    font-size:12px;
+}
+
+.jumbotron {
+    padding-top: 1px;
+    padding-bottom: 0px;
+    font-size: 14px;
+    background-color: #131B4D;
+    margin: -3px;
+    padding-bottom: 7px;
+    margin-bottom: -15px;
+}
+
+.titulo-cabecera {
+    padding-left: 2%;
+    color: white;
+}
+
+
+.altura {
+   height:500px;
+}
+
+.margen{
+    margin-top:15px;
+    margin-bottom:10px;
+}
+.scrolling-table-container {
+    height: 480px;
+    overflow-y: auto;
+    overflow-x: auto;
+    max-height: 420px;
+}
+
+table-style {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+    text-align: left;
+    padding: 1px;
+}
+
+
+.titulo {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.panel-count {
+    padding: 0px !important;
+    margin-top: 0px !important;
+}
+
+.centrar-count{
+    text-align:center !important;
+    font-size:30px;
+}

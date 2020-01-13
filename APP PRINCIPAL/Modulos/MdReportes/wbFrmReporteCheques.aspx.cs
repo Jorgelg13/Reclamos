@@ -17,7 +17,7 @@ public partial class Modulos_MdReportes_wbFrmReporteCheques : System.Web.UI.Page
         PanelPrincipal.Visible = true;
 
 
-        ingreso = "select c.id_reclamo as ID, u.nombre_completo AS Nombre, reg.poliza as Poliza, reg.aseguradora as Aseguradora, c.fecha as Fecha from ingreso_cheques as c " +
+        ingreso = "select c.id_reclamo as ID, u.nombre_completo AS Nombre, reg.poliza as Poliza, p.no_cheque as [No. Cheque], reg.aseguradora as Aseguradora, c.fecha as Fecha from ingreso_cheques as c " +
             "inner join reclamos_medicos as r on r.id = c.id_reclamo " +
             "inner join reg_reclamos_medicos as reg on reg.id = r.id_reg_reclamos_medicos " +
             "inner join detalle_pagos_reclamos_medicos as p on p.id_reclamo_medico = c.id_reclamo " +

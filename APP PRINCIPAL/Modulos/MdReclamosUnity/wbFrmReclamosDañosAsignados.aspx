@@ -116,7 +116,7 @@
                                     <br />
                                     <br />
                                     <label>Telefono:</label>
-                                    <asp:TextBox ID="txtTelefono" maxlength="8" Style="width: 95%" CssClass="form-control" AutoComplete="off" runat="server"></asp:TextBox>
+                                    <asp:TextBox ID="txtTelefono" maxlength="15" Style="width: 95%" CssClass="form-control" AutoComplete="off" runat="server"></asp:TextBox>
                                 </div>
                             </div>
                         </div>

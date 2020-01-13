@@ -716,7 +716,7 @@
         </div>
     </div>
     <%-- data source con las conexiones a las tablas de la bd reclamos--%>
-    <asp:SqlDataSource ID="SqlDataSourceGestores" runat="server" ConnectionString="<%$ ConnectionStrings:reclamosConnectionString %>" SelectCommand="SELECT [id], [nombre] FROM [gestores] where tipo = 'autos' "></asp:SqlDataSource>
+    <asp:SqlDataSource ID="SqlDataSourceGestores" runat="server" ConnectionString="<%$ ConnectionStrings:reclamosConnectionString %>" SelectCommand="SELECT [id], [nombre] FROM [gestores] where tipo = 'autos' and estado = 1"></asp:SqlDataSource>
     <asp:SqlDataSource ID="SqlDataSourceAnalistas" runat="server" ConnectionString="<%$ ConnectionStrings:reclamosConnectionString %>" SelectCommand="SELECT [id], [nombre] FROM [analistas] where estado = 'true' "></asp:SqlDataSource>
     <asp:SqlDataSource ID="SqlDataSourceEstadosAutos" runat="server" ConnectionString="<%$ ConnectionStrings:reclamosConnectionString %>" SelectCommand="SELECT [descripcion], [dias_revision] FROM [estados_reclamos_unity] where tipo = 'auto'"></asp:SqlDataSource>
     <asp:SqlDataSource ID="SqlDataSourceTalleres" runat="server" ConnectionString="<%$ ConnectionStrings:reclamosConnectionString %>" SelectCommand="SELECT [id], [nombre] FROM [talleres] where estado = 'true'"></asp:SqlDataSource>

@@ -31,6 +31,7 @@ public partial class ReclamosEntities : DbContext
     public DbSet<analistas> analistas { get; set; }
     public DbSet<archivos_copagos> archivos_copagos { get; set; }
     public DbSet<aseguradoras> aseguradoras { get; set; }
+    public DbSet<asegurados_implants> asegurados_implants { get; set; }
     public DbSet<auto_reclamo> auto_reclamo { get; set; }
     public DbSet<autorizaciones> autorizaciones { get; set; }
     public DbSet<bitacora_autorizaciones> bitacora_autorizaciones { get; set; }
@@ -64,6 +65,7 @@ public partial class ReclamosEntities : DbContext
     public DbSet<documentos_solicitados> documentos_solicitados { get; set; }
     public DbSet<ejecutivos> ejecutivos { get; set; }
     public DbSet<empresa> empresa { get; set; }
+    public DbSet<empresas_implants> empresas_implants { get; set; }
     public DbSet<encuesta> encuesta { get; set; }
     public DbSet<encuesta_recepcion> encuesta_recepcion { get; set; }
     public DbSet<encuesta_egresos> encuesta_egresos { get; set; }
@@ -88,8 +90,6 @@ public partial class ReclamosEntities : DbContext
     public DbSet<sucursal> sucursal { get; set; }
     public DbSet<sysdiagrams> sysdiagrams { get; set; }
     public DbSet<talleres> talleres { get; set; }
-    public DbSet<tblCities> tblCities { get; set; }
-    public DbSet<tblEmployee> tblEmployee { get; set; }
     public DbSet<tipo_documentos> tipo_documentos { get; set; }
     public DbSet<tipo_reclamos> tipo_reclamos { get; set; }
     public DbSet<usuario> usuario { get; set; }
@@ -690,5 +690,15 @@ public partial class ReclamosEntities : DbContext
             new ObjectParameter("tipo", typeof(int));
 
         return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("actualizar_reclamos_copiados", tipoParameter);
+    }
+
+    public virtual int pa_replicar_reclamos_autos()
+    {
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pa_replicar_reclamos_autos");
+    }
+
+    public virtual int pa_replicar_reclamos_varios()
+    {
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pa_replicar_reclamos_varios");
     }
 }

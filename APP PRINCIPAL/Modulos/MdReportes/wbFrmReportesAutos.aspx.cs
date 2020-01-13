@@ -325,7 +325,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesAutos : System.Web.UI.
 
         else if (ddlElegir.SelectedItem.Text == "Gestor")
         {
-            ddlBuscar.DataSource = DBReclamos.gestores.ToList().Where(ge => ge.tipo == "autos");
+            ddlBuscar.DataSource = DBReclamos.gestores.ToList().Where(ge => ge.tipo == "autos" && ge.estado == true);
             ddlBuscar.DataValueField = "id";
             ddlBuscar.DataTextField = "nombre";
             ddlBuscar.DataBind();

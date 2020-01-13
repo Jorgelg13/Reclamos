@@ -32,17 +32,27 @@ public partial class Modulos_MdAdmin_wbFrmAsigReclamosMedicos : System.Web.UI.Pa
                 try
                 {
                     var asignar = DBReclamos.reclamos_medicos.Find(id);
-                    var telefonoGestor = DBReclamos.gestores.Select(g => new { g.telefono, g.usuario, g.tipo }).Where(ges => ges.usuario == DDLusuario.SelectedValue && ges.tipo == "Medicos").First();
-                    asignar.usuario_unity = DDLusuario.SelectedValue;
-                    asignar.id_estado = 6;
-                    asignar.estado_unity = "Asignado";
-                    asignar.fecha_asignacion = DateTime.Now;
-                    DBReclamos.SaveChanges();
+                    var telefonoGestor = DBReclamos.gestores.Select(g => new { g.telefono, g.usuario, g.tipo })
+                        .Where(ges => ges.usuario == DDLusuario.SelectedValue && ges.tipo == "Medicos").First();
+
+                    if (asignar.estado_unity == "Sin Asignar")
+                    {
+                        asignar.fecha_asignacion = DateTime.Now;
+                        asignar.estado_unity = "Asignado";
+                        asignar.usuario_unity = DDLusuario.SelectedValue;
+                        asignar.id_estado = 6;
+                        DBReclamos.SaveChanges();
+                        Utils.insertarComentario(id, "Su reclamo ha sido asignado a un ejecutivo para su revisión, fecha: " + DateTime.Now, "Asignado");
+                        string mensaje = "UNITY: Estimad@ cliente su reclamo ha sido asignado a  " + DDLusuario.SelectedItem.Text + ", Telefono: " + telefonoGestor.telefono + ".";
+                        Utils.SMS_gastos_medicos(asignar.telefono, mensaje, userlogin, "Asignado", id, asignar.reg_reclamos_medicos.tipo);
+                        Utils.insertarComentario(id, "Su reclamo ha sido asignado a un ejecutivo para su revisión, fecha: " + DateTime.Now, "Asignado");
+                    }
+                    else
+                    {
+                        Utils.insertarComentario(id, "Su reclamo ha sido reasignado a un ejecutivo para su revisión, fecha: " + DateTime.Now, "Reasignado");
+                    }
+
                     GridAsigMedicos.DataBind();
-                    Utils.insertarComentario(id, "Su reclamo ha sido asignado a un ejecutivo para su revisión, fecha: " + DateTime.Now, "Asignado");
-                    string mensaje = "UNITY: Estimad@ cliente su reclamo ha sido asignado a  "+DDLusuario.SelectedItem.Text+", Telefono: "+telefonoGestor.telefono+".";
-                    Utils.SMS_gastos_medicos(asignar.telefono,mensaje,userlogin,"Asignado",id, asignar.reg_reclamos_medicos.tipo);
-            
                     Utils.ShowMessage(this.Page, "Reclamos asignados con exito", "Excelente", "success");
                 }
                 catch (Exception)

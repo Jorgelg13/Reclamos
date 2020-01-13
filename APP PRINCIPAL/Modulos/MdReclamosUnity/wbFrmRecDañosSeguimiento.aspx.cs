@@ -12,7 +12,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmRecDañosSeguimiento : System.
 
     protected void Page_Load(object sender, EventArgs e)
     {
-        if (userlogin == "cmejia" || userlogin == "jlaj" || userlogin == "jsagastume" || userlogin == "mbarrios")
+        if (userlogin == "cmejia" || userlogin == "jlaj" || userlogin == "mbarrios")
         {
             PnAlarmas.Visible = true;
         }
@@ -24,9 +24,9 @@ public partial class Modulos_MdReclamosUnity_wbFrmRecDañosSeguimiento : System.
                 "gestores.nombre as Gestor," +
                 "r.estado_reclamo_unity as Estado," +
                 "DATEDIFF(DAY, r.fecha_commit, GETDATE()) as  [Total Dias]," +
+                "case when reaseguro=1 then 'Si' else 'No' end as Reaseguro,"+
                 "reg.poliza as Poliza," +
                 "reg.asegurado as Asegurado," +
-                "reg.cliente as Cliente," +
                 "reg.aseguradora as Aseguradora," + //4
                 "reg.contratante as Contratante," +
                 "reg.ejecutivo as Ejecutivo," +//6

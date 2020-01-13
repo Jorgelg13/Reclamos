@@ -74,6 +74,21 @@ public partial class aseguradoras
     public Nullable<short> total_dias_rc_medicos { get; set; }
 }
 
+public partial class asegurados_implants
+{
+    public int id { get; set; }
+    public string asegurado { get; set; }
+    public string telefono { get; set; }
+    public string correo { get; set; }
+    public string empresa { get; set; }
+    public string usuario { get; set; }
+    public Nullable<System.DateTime> fechareg { get; set; }
+    public Nullable<System.DateTime> fechafin { get; set; }
+    public Nullable<bool> estado { get; set; }
+    public string motivo { get; set; }
+    public string comentario { get; set; }
+}
+
 public partial class auto_reclamo
 {
     public auto_reclamo()
@@ -536,6 +551,13 @@ public partial class empresa
     public virtual ICollection<sucursal> sucursal { get; set; }
 }
 
+public partial class empresas_implants
+{
+    public int id { get; set; }
+    public string nombre { get; set; }
+    public Nullable<System.DateTime> fechareg { get; set; }
+}
+
 public partial class encuesta
 {
     public int id { get; set; }
@@ -554,6 +576,9 @@ public partial class encuesta
     public Nullable<System.DateTime> fecha { get; set; }
     public string telefono { get; set; }
     public string nombre { get; set; }
+    public string codigo { get; set; }
+    public string correo { get; set; }
+    public string gestion { get; set; }
 }
 
 public partial class encuesta_egresos
@@ -1147,21 +1172,6 @@ public partial class talleres
 
     public virtual ICollection<reclamo_auto> reclamo_auto { get; set; }
     public virtual ICollection<reclamos_varios> reclamos_varios { get; set; }
-}
-
-public partial class tblCities
-{
-    public int CityID { get; set; }
-    public string CityName { get; set; }
-}
-
-public partial class tblEmployee
-{
-    public int EmployeeID { get; set; }
-    public string Name { get; set; }
-    public string City { get; set; }
-    public string Department { get; set; }
-    public string Gender { get; set; }
 }
 
 public partial class tipo_documentos
