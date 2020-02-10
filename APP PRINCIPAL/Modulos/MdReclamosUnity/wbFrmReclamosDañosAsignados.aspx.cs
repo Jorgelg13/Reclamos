@@ -322,7 +322,8 @@ public partial class Modulos_MdReclamos_wbFrmReclamosDañosAsignados : System.We
         string telefono = Utils.TelefonoGestor(ddlGestor);
         string mensaje = Constantes.ASIGNACION_DANOS(ddlGestor, registro.reg_reclamo_varios.poliza, telefono);
 
-        notificacion.NOTIFICACION(txtCorreo.Text.Trim(), mensaje, "Asignacion de Reclamo");
+        //notificacion.NOTIFICACION(txtCorreo.Text.Trim(), mensaje, "Asignacion de Reclamo");
+        Utils.notificacion_email("pa_notificacion", txtCorreo.Text, mensaje, registro.gestores.correo, "Asignacion de Reclamo");
         insertarComentarios("Registro de envio de correo de notificacion: \n\n" + mensaje);
     }
 
@@ -348,7 +349,7 @@ public partial class Modulos_MdReclamos_wbFrmReclamosDañosAsignados : System.We
         Utils.notificacion_email("pa_notificacion", correoGestor, cuerpo, correoReclamos, asunto);
         Utils.notificacion_email("pa_notificacion", correoVendedor, cuerpo, correoGestor, asunto);
         Utils.notificacion_email("pa_notificacion", correoEjecutivo, cuerpo, correoGestor, asunto);
-
+        insertarComentarios("Registro de notificacion a ejecutivo: \n\n" + cuerpo);
         //if (codigo == "&nbsp;")
         //{
 

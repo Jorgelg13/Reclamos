@@ -246,8 +246,10 @@ public partial class Modulos_MdReclamos_wbFrmReclamosAsignadosUnity : System.Web
         string telefono = Utils.TelefonoGestor(ddlGestor);
         string mensaje = Constantes.ASIGNACION_AUTOS(ddlGestor, registro.auto_reclamo.placa, registro.auto_reclamo.marca, registro.auto_reclamo.modelo, telefono, id);
 
-        notificacion.NOTIFICACION(txtCorreo.Text.Trim(), mensaje, "Asignacion de Reclamo");
+        //notificacion.NOTIFICACION(txtCorreo.Text.Trim(), mensaje, "Asignacion de Reclamo");
+        Utils.notificacion_email("pa_notificacion", txtCorreo.Text, mensaje, registro.gestores.correo, "Asignacion de Reclamo");
         agregarComentario("Registro de envio de correo de notificacion: \n\n" + mensaje);
+
     }
 
     //insertar el primero estado del auto su bitacora
@@ -295,6 +297,8 @@ public partial class Modulos_MdReclamos_wbFrmReclamosAsignadosUnity : System.Web
         Utils.notificacion_email("pa_notificacion", correoGestor, cuerpo, correoReclamos, asunto);
         Utils.notificacion_email("pa_notificacion", correoVendedor, cuerpo, correoGestor, asunto);
         Utils.notificacion_email("pa_notificacion", correoEjecutivo, cuerpo, correoGestor, asunto);
+        agregarComentario("Registro de notificacion a ejecutivo: \n\n " + cuerpo);
+
         //if (codigo == "&nbsp;" || codigo == null || codigo == "")
         //{
 
