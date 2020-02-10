@@ -16,10 +16,22 @@ public class Consultas
 
     public static string DATOS_SINIESTRO(int ID)
     {
-       return  "select Campo, Dato from (select cast(reportante as varchar(1000)) as Reportante,cast(telefono as varchar(1000)) as Telefono," +
-           "cast(ubicacion as varchar(1000)) as Ubicacion, cast(convert(varchar(20), fecha, 103) as varchar(1000)) as Fecha_Siniestro, cast(hora as varchar(1000)) as Hora, " +
-           "cast(boleta as varchar(1000)) as Boleta, cast(ajustador as varchar(1000)) as Ajustador, cast(titular as varchar(1000)) as Titular, " +
-           "cast(version as varchar(1000)) as Version from reclamos_varios where id = " + ID + ") a unpivot (Dato for  Campo in (Reportante, Telefono, Ubicacion, Fecha_Siniestro, Boleta, Ajustador, Titular, Version)) up ";
+       return  "" +
+            "select " +
+            "Campo, " +
+            "Dato from (" +
+            "select cast(reportante as varchar(1000)) as Reportante," +
+            "cast(telefono as varchar(1000)) as Telefono," +
+           "cast(ubicacion as varchar(1000)) as Ubicacion, " +
+           "cast(convert(varchar(20), fecha, 103) as varchar(1000)) as Fecha_Siniestro, " +
+           "cast(convert(varchar(20), fecha_commit,103) as varchar(1000)) as Fecha_Registro," +
+           "cast(hora as varchar(1000)) as Hora, " +
+           "cast(boleta as varchar(1000)) as Boleta, " +
+           "cast(ajustador as varchar(1000)) as Ajustador, " +
+           "cast(titular as varchar(1000)) as Titular, " +
+           "cast(version as varchar(1000)) as Version " +
+           "from reclamos_varios where id = " + ID + ") a unpivot (Dato for  Campo in " +
+           "(Reportante, Telefono, Ubicacion,Fecha_Registro, Fecha_Siniestro, Boleta, Ajustador, Titular, Version)) up ";
     }
 
     public static string COBERTURAS(int ID)

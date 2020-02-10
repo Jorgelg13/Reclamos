@@ -80,6 +80,7 @@
                                 <li><a href="/Modulos/MdReclamosUnity/wbFrmRecDañosSeguimiento.aspx">Mis Reclamos En Seguimiento</a></li>
                                 <li><a href="/Modulos/MdReclamosUnity/wbFrmBusquedaReclamosDaños.aspx">Busqueda Reclamo</a></li>
                                 <li><a data-toggle="modal" data-target="#BuscarDanios">Busqueda por ID</a></li>
+                                <li><a href="/Modulos/MdReclamosUnity/aperturar-reclamos.aspx">Reaperturar Reclamo</a></li>
                             </ul>
                         </li>
                         <li class="dropdown">
@@ -121,6 +122,8 @@
                                 <li><a href="/Modulos/MdCatalogos/wbTipoDocumentos.aspx?id=1">Documentos Autos</a></li>
                                 <li><a href="/Modulos/MdCatalogos/wbTipoDocumentos.aspx?id=2">Documentos Daños varios</a></li>
                                 <li><a href="/Modulos/MdCatalogos/wbAsegurados.aspx">Catalogo de asegurados</a></li>
+                                <li><a href="/Modulos/MdCatalogos/comentariosAutos.aspx">Borrar o editar comentario de autos</a></li>
+                                <li><a href="/Modulos/MdCatalogos/comentariosDanios">Borrar o editar comentario de daños</a></li>
                             </ul>
                         </li>
                     </ul>

@@ -188,8 +188,8 @@
                         <div class="panel-body">
                             <div class="form-inline">
                                 <label style="width: 15%">Estado:</label>
-                                <asp:DropDownList CssClass="form-control" ID="ddlEstadoAuto" Style="width: 80%" Height="34px" runat="server" DataSourceID="SqlDataSourceEstadosAutos" 
-                                    DataTextField="descripcion" DataValueField="descripcion" AutoPostBack="true" OnSelectedIndexChanged="ddlEstadoAuto_SelectedIndexChanged"></asp:DropDownList>
+                                <asp:DropDownList CssClass="form-control" ID="ddlEstadoAuto" Style="width: 80%" Height="34px" runat="server"  
+                                   AutoPostBack="true" OnSelectedIndexChanged="ddlEstadoAuto_SelectedIndexChanged"></asp:DropDownList>
                             </div>
                             <br />
                             <div class="form-inline">
@@ -976,15 +976,20 @@
                 <div class="modal-body">
                     <div class="form-group">
                         <asp:CheckBox runat="server" ID="chTaller" Text="Problemas Con Taller" />
-                        <asp:TextBox ID="txtProblemaTaller" Style="width: 99%" autocomplete="off" class="form-control" TextMode="multiline" Columns="50" Rows="3" placeholder="Observacion Taller" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="txtProblemaTaller" Style="width: 99%" autocomplete="off" class="form-control" TextMode="multiline" 
+                            Columns="50" Rows="3" placeholder="Observacion Taller" runat="server"></asp:TextBox>
                         <asp:CheckBox runat="server" ID="chAnalista" Text="Problemas con Ajustador" />
-                        <asp:TextBox ID="txtProblemaAjustador" Style="width: 99%" autocomplete="off" class="form-control" TextMode="multiline" Columns="50" Rows="3" placeholder="Observacion para ajustador" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="txtProblemaAjustador" Style="width: 99%" autocomplete="off" class="form-control" TextMode="multiline" 
+                            Columns="50" Rows="3" placeholder="Observacion para ajustador" runat="server"></asp:TextBox>
                         <asp:CheckBox runat="server" ID="chCabina" Text="Problemas con Cabina" />
-                        <asp:TextBox ID="txtProblemaCabina" Style="width: 99%" autocomplete="off" class="form-control" TextMode="multiline" Columns="50" Rows="3" placeholder="Observacion para cabina" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="txtProblemaCabina" Style="width: 99%" autocomplete="off" class="form-control" TextMode="multiline" 
+                            Columns="50" Rows="3" placeholder="Observacion para cabina" runat="server"></asp:TextBox>
                         <asp:CheckBox runat="server" ID="ChAseguradora" Text="Problemas con Aseguradora" />
-                        <asp:TextBox ID="txtProblemaAseguradora" Style="width: 99%" autocomplete="off" class="form-control" TextMode="multiline" Columns="50" Rows="3" placeholder="Observacion para aseguradora" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="txtProblemaAseguradora" Style="width: 99%" autocomplete="off" class="form-control" TextMode="multiline" 
+                            Columns="50" Rows="3" placeholder="Observacion para aseguradora" runat="server"></asp:TextBox>
                         <asp:CheckBox runat="server" ID="chEjecutivo" Text="Problemas con ejecutivo" />
-                        <asp:TextBox ID="txtProblemaEjecutivo" Style="width: 99%" autocomplete="off" class="form-control" TextMode="multiline" Columns="50" Rows="3" placeholder="Observacion para ejecutivo" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="txtProblemaEjecutivo" Style="width: 99%" autocomplete="off" class="form-control" TextMode="multiline" 
+                            Columns="50" Rows="3" placeholder="Observacion para ejecutivo" runat="server"></asp:TextBox>
                     </div>
                 </div>
                 <div class="modal-footer">

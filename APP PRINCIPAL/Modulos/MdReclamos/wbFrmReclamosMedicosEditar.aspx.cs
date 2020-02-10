@@ -95,6 +95,7 @@ public partial class Modulos_MdReclamos_wbFrmReclamosMedicosEditar : System.Web.
             lblAseguradora.Text = "<ins>" + dt.Rows[0][3].ToString() + "</ins>";
             lblpoliza.Text = "<ins>" + dt.Rows[0][2].ToString() + "</ins>";
             lblEmpresa.Text = "<ins>" + dt.Rows[0][6].ToString() + "</ins>";
+            lblEjecutivoPoliza.Text = "<ins>" + dt.Rows[0][11].ToString() + "</ins>";
             objeto.conexion.Close();
         }
         catch (Exception)

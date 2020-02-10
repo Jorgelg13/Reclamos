@@ -104,6 +104,22 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosDañosSeguimiento : Sy
         ddlGestor.DataValueField = "id";
         ddlGestor.DataBind();
 
+        if (userlogin == "mbarrios" || userlogin == "jwiesner" || userlogin == "jlaj")
+        {
+            ddlEstadoReclamo.DataSource = DBReclamos.estados_reclamos_unity.ToList().Where(au => au.tipo == "daños");
+            ddlEstadoReclamo.DataTextField = "descripcion";
+            ddlEstadoReclamo.DataValueField = "descripcion";
+            ddlEstadoReclamo.DataBind();
+        }
+
+        else
+        {
+            ddlEstadoReclamo.DataSource = DBReclamos.estados_reclamos_unity.ToList().Where(au => au.tipo == "daños" && au.descripcion != "Congelado");
+            ddlEstadoReclamo.DataTextField = "descripcion";
+            ddlEstadoReclamo.DataValueField = "descripcion";
+            ddlEstadoReclamo.DataBind();
+        }
+
         ddlTipoCierre.DataBind();
     }
 
@@ -386,7 +402,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosDañosSeguimiento : Sy
                 if (reclamo.estado_unity != "Cerrado")
                 {
                     cerrarReclamo();
-                    NotificacionCierre();
+                    //NotificacionCierre();
                 }
             }
 

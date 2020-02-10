@@ -20,18 +20,18 @@ public partial class Modulos_MdReclamosUnity_wbFrmBusquedaReclamosDaños : Syste
         if (arreglo.Length > 0)
         {
              sql = "SELECT " +
-               "dbo.reclamos_varios.id as ID," +
-               "dbo.reg_reclamo_varios.poliza as Poliza," +
-               "dbo.reg_reclamo_varios.asegurado as Asegurado," +
-               "dbo.reg_reclamo_varios.cliente as Cliente," +
-               "dbo.reg_reclamo_varios.contratante as Contratante," +
-               "dbo.reg_reclamo_varios.ramo as Ramo," +
-               "dbo.reclamos_varios.titular as Titular," +
-               "dbo.reclamos_varios.fecha_commit as [Fecha Creacion] " +
+               "r.id as ID," +
+               "reg.poliza as Poliza," +
+               "reg.asegurado as Asegurado," +
+               "reg.cliente as Cliente," +
+               "reg.contratante as Contratante," +
+               "reg.ramo as Ramo," +
+               "r.titular as Titular," +
+               "r.fecha_commit as [Fecha Creacion] " +
                "FROM " +
-               "dbo.reg_reclamo_varios " +
-               "INNER JOIN dbo.reclamos_varios ON dbo.reclamos_varios.id_reg_reclamos_varios = dbo.reg_reclamo_varios.id " +
-               " where " + DDLTipo.SelectedValue + " like '%" + arreglo[0] + "%' ";
+               "reg_reclamo_varios as reg " +
+               "INNER JOIN reclamos_varios as r ON r.id_reg_reclamos_varios = reg.id " +
+               " where " + DDLTipo.SelectedValue + " like '%" + arreglo[0] + "%' and r.estado_unity = '"+ddlEstado.SelectedValue+"'";
 
             if (arreglo.Length > 1)
             {

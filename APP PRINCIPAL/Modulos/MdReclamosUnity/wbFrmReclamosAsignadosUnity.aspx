@@ -5,13 +5,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <div class="container-fluid">
         <div>
-            <asp:Label ID="lblId" runat="server" Visible="false"></asp:Label>
-            <asp:Label ID="LblUsuario" runat="server" Text="Label" Visible="false"></asp:Label>
-            <asp:Label ID="lblPlaca" runat="server" Visible="false"></asp:Label>
             <asp:Label ID="lblChasis" runat="server" Visible="false"></asp:Label>
-            <asp:Label ID="lblMarca" runat="server" Visible="false"></asp:Label>
-            <asp:Label ID="lblModelo" runat="server" Visible="false"></asp:Label>
-            <asp:Label ID="lblTelefono" runat="server" Visible="false"></asp:Label>
         </div>
         <div class="panel panel-info col-sm-12">
             <ul class="nav nav-tabs" role="tablist">
@@ -40,8 +34,6 @@
                                     <ItemStyle HorizontalAlign="Left" Wrap="False" />
                                 </asp:CommandField>
                             </Columns>
-                            <EditRowStyle BackColor="#131B4D" />
-                            <FooterStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" />
                             <HeaderStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" HorizontalAlign="Center" Wrap="False" />
                             <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
                             <RowStyle BackColor="#EFF3FB" HorizontalAlign="Left" Wrap="False" />
@@ -54,7 +46,6 @@
                     <div class="scrolling-table-container">
                         <asp:GridView ID="Gridllamadas" CssClass="table bs-table tablaDetalleAuto table-responsive table-hover" runat="server" AutoGenerateColumns="true" CellPadding="4" ForeColor="#333333" GridLines="None">
                             <AlternatingRowStyle BackColor="White" />
-                            <FooterStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" />
                             <HeaderStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" HorizontalAlign="Center" Wrap="False" />
                             <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
                             <RowStyle BackColor="#EFF3FB" />
@@ -93,8 +84,6 @@
                                     <ItemStyle HorizontalAlign="Left" Wrap="False" />
                                 </asp:BoundField>
                             </Columns>
-                            <EditRowStyle BackColor="#2461BF" />
-                            <FooterStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" />
                             <HeaderStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" />
                             <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
                             <RowStyle BackColor="#EFF3FB" />

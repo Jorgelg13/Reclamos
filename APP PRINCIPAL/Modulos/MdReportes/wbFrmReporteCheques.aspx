@@ -7,17 +7,20 @@
         <div class="col-sm-12 col-md-12 col-lg-12">
             <div class="panel panel-info">
                 <div class="panel-heading">
-                    <h3 class="panel-title"><b style="font-size: 16px;">Listado de cheques ingresados<spam style="margin-left: 100px">Total de registros: </spam><asp:Label ID="lblConteo" runat="server" Style="font-size: 20px;"></asp:Label></b></h3>
+                    <h3 class="panel-title"><b style="font-size: 16px;">Listado de cheques ingresados<span style="margin-left: 100px">Total de registros: </span>
+                    <asp:Label ID="lblConteo" runat="server" Style="font-size: 20px;"></asp:Label></b></h3>
                 </div>
                 <div class="panel-body" style="max-height: 620px;">
                     <div class="form-inline">
                         <div class="form-group" style="width: 15%">
                             <label>Fecha Inicio:</label>
-                            <asp:TextBox ID="txtFechaInicio" Height="34px" type="date" CssClass="form-control" Style="width: 100%" placeholder="Escriba su busqueda" runat="server"></asp:TextBox>
+                            <asp:TextBox ID="txtFechaInicio" Height="34px" type="date" CssClass="form-control" 
+                                Style="width: 100%" placeholder="Escriba su busqueda" runat="server"></asp:TextBox>
                         </div>
                         <div class="form-group" style="width: 15%">
                             <label>Fecha Fin:</label>
-                            <asp:TextBox ID="txtFechaFin" type="date" Height="34px" CssClass="form-control" Style="width: 100%" placeholder="Escriba su busqueda" runat="server"></asp:TextBox>
+                            <asp:TextBox ID="txtFechaFin" type="date" Height="34px" CssClass="form-control" Style="width: 100%" placeholder="Escriba su busqueda" runat="server">
+                            </asp:TextBox>
                         </div>
                     </div>
                     <br />
@@ -33,7 +36,8 @@
                         </div>
                         <br />
                         <div class="scrolling-table-container">
-                            <asp:GridView ID="GridCheques" runat="server" CssClass="table bs-table table-responsive" AutoGenerateColumns="True" ForeColor="#333333" GridLines="None" AllowCustomPaging="True" PageSize="3000">
+                            <asp:GridView ID="GridCheques" runat="server" CssClass="table bs-table table-responsive" AutoGenerateColumns="True" 
+                                ForeColor="#333333" GridLines="None" AllowCustomPaging="True" PageSize="3000">
                                 <AlternatingRowStyle BackColor="White" />
                                 <HeaderStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" HorizontalAlign="Center" Wrap="False" />
                                 <PagerSettings PageButtonCount="30" />

@@ -19,8 +19,8 @@ public partial class Modulos_MdReclamos_wbFrmReclamosDañosAsignados : System.We
     bool complicado = false;
     bool prioritario = false;
     bool compromiso_pago = false;
-    String poliza, correoGestor, cuerpo, asunto, fechaCreacion, asegurado, correoComentario, codigo;
-    String correo = "reclamosgt@unitypromotores.com";
+    String correoGestor, correoEjecutivo, correoVendedor, cuerpo, asunto, correoComentario, codigo;
+    String correoReclamos = "reclamosgt@unitypromotores.com";
     int id;
 
     protected void Page_Load(object sender, EventArgs e)
@@ -124,14 +124,13 @@ public partial class Modulos_MdReclamos_wbFrmReclamosDañosAsignados : System.We
     //carga de coberturas y llamadas al seleccionar un registro de la tabla de asignaciones de reclamos
     protected void GridReclamosDaños_SelectedIndexChanged(object sender, EventArgs e)
     {
+        id = Convert.ToInt32(GridReclamosDaños.SelectedRow.Cells[1].Text);
+        var registro = DBReclamos.reclamos_varios.Find(id);
         var gestor = DBReclamos.gestores.ToList().Where(ge => ge.usuario == userlogin && ge.tipo == "Daños varios").First();
         ddlGestor.SelectedValue = gestor.id.ToString();
 
-        id = Convert.ToInt32(GridReclamosDaños.SelectedRow.Cells[1].Text);
-        poliza = GridReclamosDaños.SelectedRow.Cells[2].Text.ToString();
-
-        String coberturas = "SELECT descr as Descripcion, limite1 as Limite1, limite2 as Limite2, deducible as Deducible FROM busqCoberturasPolizasDaños WHERE poliza = '" + poliza + "' ";
-        String llamadas = "SELECT descripcion as Descripcion, convert(varchar(20),fecha_commit, 103)   as Fecha, hora_commit as Hora, usuario as Usuario FROM bitacora_reclamos_varios WHERE (id_reclamos_varios = " + id + ")";
+        String coberturas = "SELECT descr as Descripcion, limite1 as Limite1, limite2 as Limite2, deducible as Deducible FROM busqCoberturasPolizasDaños WHERE poliza = '" + registro.reg_reclamo_varios.poliza + "' ";
+        String llamadas = "SELECT descripcion as Descripcion, convert(varchar(20),fecha_commit, 103) as Fecha, hora_commit as Hora, usuario as Usuario FROM bitacora_reclamos_varios WHERE (id_reclamos_varios = " + id + ")";
 
         llenado.llenarGrid(llamadas, GridLlamadas);
         llenado.llenarGrid(coberturas, GridCoberturas);
@@ -219,9 +218,6 @@ public partial class Modulos_MdReclamos_wbFrmReclamosDañosAsignados : System.We
     protected void txtGuardar_Click(object sender, EventArgs e)
     {
         id = Convert.ToInt32(GridReclamosDaños.SelectedRow.Cells[1].Text);
-        poliza = GridReclamosDaños.SelectedRow.Cells[2].Text.ToString();
-        fechaCreacion = GridReclamosDaños.SelectedRow.Cells[23].Text;
-        asegurado = GridReclamosDaños.SelectedRow.Cells[3].Text;
         opcionesChecked();
 
         try
@@ -320,8 +316,11 @@ public partial class Modulos_MdReclamos_wbFrmReclamosDañosAsignados : System.We
 
     public void enviarNotificacion()
     {
+        id = Convert.ToInt32(GridReclamosDaños.SelectedRow.Cells[1].Text);
+        var registro = DBReclamos.reclamos_varios.Find(id);
+
         string telefono = Utils.TelefonoGestor(ddlGestor);
-        string mensaje = Constantes.ASIGNACION_DANOS(ddlGestor, poliza, telefono);
+        string mensaje = Constantes.ASIGNACION_DANOS(ddlGestor, registro.reg_reclamo_varios.poliza, telefono);
 
         notificacion.NOTIFICACION(txtCorreo.Text.Trim(), mensaje, "Asignacion de Reclamo");
         insertarComentarios("Registro de envio de correo de notificacion: \n\n" + mensaje);
@@ -330,31 +329,46 @@ public partial class Modulos_MdReclamos_wbFrmReclamosDañosAsignados : System.We
     //enviar notificacion al correo electronico del ejecutivo
     public void NoficacionEjecutivo()
     {
-        codigo = GridReclamosDaños.SelectedRow.Cells[26].Text;
+        var registro = DBReclamos.reclamos_varios.Find(id);
         correoGestor = Utils.seleccionarCorreoGestor(userlogin);
-        cuerpo = Constantes.NOTIFICACION_EJECUTIVO(fechaCreacion, asegurado, poliza, ddlGestor, id);
-        asunto = "Notificacion Siniestro";
-
-        if (codigo == "&nbsp;")
+        cuerpo = Constantes.NOTIFICACION_EJECUTIVO(registro.fecha.ToString(), registro.reg_reclamo_varios.asegurado, registro.reg_reclamo_varios.poliza, ddlGestor, id);
+        codigo = registro.reg_reclamo_varios.vendedor;
+        if (codigo != "&nbsp;" || codigo != null || codigo != "")
         {
-
+            correoVendedor = Utils.seleccionarCorreo(Convert.ToInt32(registro.reg_reclamo_varios.vendedor));
         }
-        else
+
+        codigo = registro.reg_reclamo_varios.gestor.ToString();
+        if (codigo != "&nbsp;" || codigo != null || codigo != "")
         {
-            correo = Utils.seleccionarCorreo(Convert.ToInt16(codigo));
-            try
-            {
-                notificacion.NOTIFICACION_EJECUTIVO(correo, cuerpo, asunto, correoGestor);
-                correoComentario = HttpUtility.HtmlDecode("Destinatario: " + correo + " Asunto:" + asunto + " Cuerpo del mensaje: " + cuerpo);
-                insertarComentarios(correoComentario);
-                DBReclamos.SaveChanges();
-            }
-
-            catch (SmtpException)
-            {
-
-            }
+            correoEjecutivo = Utils.seleccionarCorreo(Convert.ToInt32(registro.reg_reclamo_varios.gestor));
         }
+
+        asunto = "Notificacion de siniestro";
+        Utils.notificacion_email("pa_notificacion", correoGestor, cuerpo, correoReclamos, asunto);
+        Utils.notificacion_email("pa_notificacion", correoVendedor, cuerpo, correoGestor, asunto);
+        Utils.notificacion_email("pa_notificacion", correoEjecutivo, cuerpo, correoGestor, asunto);
+
+        //if (codigo == "&nbsp;")
+        //{
+
+        //}
+        //else
+        //{
+        //    correoReclamos = Utils.seleccionarCorreo(Convert.ToInt16(codigo));
+        //    try
+        //    {
+        //        notificacion.NOTIFICACION_EJECUTIVO(correoReclamos, cuerpo, asunto, correoGestor);
+        //        correoComentario = HttpUtility.HtmlDecode("Destinatario: " + correoReclamos + " Asunto:" + asunto + " Cuerpo del mensaje: " + cuerpo);
+        //        insertarComentarios(correoComentario);
+        //        DBReclamos.SaveChanges();
+        //    }
+
+        //    catch (SmtpException)
+        //    {
+
+        //    }
+        //}
     }
 
     //regresar a la pantalla principal

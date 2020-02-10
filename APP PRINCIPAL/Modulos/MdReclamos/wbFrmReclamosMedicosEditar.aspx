@@ -25,11 +25,11 @@
                                 <div style="height: 230px; overflow-x: auto;">
                                     <div class="panel-body form-inline">
                                         <div class="form-group" style="width: 45%; padding-top: 10px;">
-                                            <label for="message-text" class="control-label">Asegurado:</label>
+                                            <label class="control-label">Asegurado:</label>
                                             <asp:TextBox runat="server" ID="txtAsegurado" autocomplete="false" Style="width: 100%" class="form-control" placeholder="Asegurado"></asp:TextBox>
                                         </div>
                                         <div class="form-group" style="width: 50%; padding-top: 10px;">
-                                            <label for="message-text" class="control-label">Aseguradora:</label>
+                                            <label class="control-label">Aseguradora:</label>
                                             <asp:TextBox runat="server" ID="txtAseguradora" autocomplete="false" Style="width: 100%" class="form-control" placeholder="Aseguradora"></asp:TextBox>
                                         </div>
                                         <div class="form-group" style="width: 45%; padding-top: 10px;">
@@ -37,22 +37,22 @@
                                             <asp:TextBox runat="server" ID="txtPoliza" autocomplete="false" Style="width: 100%" class="form-control" placeholder="Poliza"></asp:TextBox>
                                         </div>
                                         <div class="form-group" style="width: 50%; padding-top: 10px;">
-                                            <label for="message-text" class="control-label">Telefono:</label>
+                                            <label class="control-label">Telefono:</label>
                                             <asp:TextBox runat="server" ID="txtTelefono" autocomplete="false" Style="width: 100%" class="form-control" placeholder="Telefono"></asp:TextBox>
                                         </div>
                                         <div class="form-group" style="width: 40%; padding-top: 10px;">
-                                            <label for="message-text" class="control-label">Correo:</label>
+                                            <label class="control-label">Correo:</label>
                                             <asp:TextBox runat="server" ID="txtCorreo" autocomplete="false" Style="width: 100%" class="form-control" placeholder="Correo"></asp:TextBox>
                                         </div>
                                         <div class="form-group" style="width: 30%; padding-top: 10px;">
-                                            <label for="message-text" class="control-label">Tipo Reclamo:</label>
+                                            <label class="control-label">Tipo Reclamo:</label>
                                             <asp:DropDownList CssClass="form-control" ID="DDLTipo" Style="width: 100%" Height="34px" runat="server">
                                                 <asp:ListItem>Vida</asp:ListItem>
                                                 <asp:ListItem>Gastos Medicos</asp:ListItem>
                                             </asp:DropDownList>
                                         </div>
                                         <div class="form-group" style="width: 25%; padding-top: 10px;">
-                                            <label for="message-text" class="control-label">Estado:</label>
+                                            <label class="control-label">Estado:</label>
                                             <asp:DropDownList CssClass="form-control" ID="ddlEstado" Style="width: 100%" Height="34px" runat="server">
                                                 <asp:ListItem Value="4">Asegurado</asp:ListItem>
                                                 <asp:ListItem Value="5">Aseguradora</asp:ListItem>
@@ -77,34 +77,38 @@
                             <div class="img-float-right" style="float: right; padding-top: 10px;">
                                 <asp:Label ID="lblId" Style="font-size: 14px;" runat="server"></asp:Label>
                             </div>
-                            <div class="form-inline" style="padding-top: 90px;">
+                            <div class="form-inline" style="padding-top: 50px;">
                                 <table style="width: 100%">
                                     <tr>
                                         <td>
-                                            <asp:Label Style="font-size: 13px;" runat="server" for="message-text" class="control-label">Asegurado Titular:</asp:Label>
-                                            <asp:Label Style="font-size: 13px;" runat="server" for="message-text" ID="lblAsegurado" class="control-label"></asp:Label>
+                                            <asp:Label runat="server" class="control-label">Asegurado Titular:</asp:Label>
+                                            <asp:Label runat="server" ID="lblAsegurado" class="control-label"></asp:Label>
                                         </td>
                                         <td>
-                                            <asp:Label Style="font-size: 13px;" runat="server" for="message-text" class="control-label">Aseguradora: </asp:Label>
-                                            <asp:Label Style="font-size: 13px;" runat="server" for="message-text" ID="lblAseguradora" class="control-label"></asp:Label>
+                                            <asp:Label runat="server" class="control-label">Aseguradora: </asp:Label>
+                                            <asp:Label runat="server" ID="lblAseguradora" class="control-label"></asp:Label>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>
-                                            <asp:Label Style="font-size: 13px;" runat="server" for="message-text" class="control-label">Poliza:</asp:Label>
-                                            <asp:Label Style="font-size: 13px;" runat="server" for="message-text" ID="lblpoliza" class="control-label"></asp:Label>
+                                            <asp:Label runat="server" class="control-label">Poliza:</asp:Label>
+                                            <asp:Label runat="server" ID="lblpoliza" class="control-label"></asp:Label>
                                         </td>
                                         <td>
-                                            <asp:Label Style="font-size: 13px;" runat="server" for="message-text" class="control-label">Empresa:</asp:Label>
-                                            <asp:Label Style="font-size: 13px;" runat="server" for="message-text" ID="lblEmpresa" class="control-label"></asp:Label>
+                                            <asp:Label runat="server" class="control-label">Empresa:</asp:Label>
+                                            <asp:Label runat="server" ID="lblEmpresa" class="control-label"></asp:Label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                         <td>
+                                            <asp:Label runat="server" class="control-label">Ejecutivo:</asp:Label>
+                                            <asp:Label runat="server" ID="lblEjecutivoPoliza"></asp:Label>
                                         </td>
                                     </tr>
                                 </table>
                                 <br />
                             </div>
                             <div>
-                                <br />
-                                <br />
                                 <asp:GridView ID="GridRecibo" runat="server" CssClass="table bs-table table-responsive table-hover" AutoGenerateColumns="True">
                                     <HeaderStyle HorizontalAlign="Center" Wrap="False" />
                                     <RowStyle HorizontalAlign="Left" Wrap="False" />
@@ -118,7 +122,7 @@
                                 </ul>
                                 <br />
                                 <br />
-                                <p>Firma de quien entrega papeleria:_______________________________  Fecha Recepcion:____________________</p>
+                                <p>Firma de quien entrega papeleria:___________________________ Fecha Recepcion:__________________</p>
                             </div>
                         </div>
                     </div>

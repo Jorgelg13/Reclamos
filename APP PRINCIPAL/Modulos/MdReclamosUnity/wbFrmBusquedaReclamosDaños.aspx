@@ -16,6 +16,11 @@
                         <asp:ListItem Value="num_reclamo">No. Reclamo</asp:ListItem> 
                         <asp:ListItem Value="cliente">Cliente</asp:ListItem> 
                     </asp:DropDownList>
+                     <asp:DropDownList CssClass="form-control" ID="ddlEstado" Style="width: 15%" Height="34px" runat="server" CausesValidation="True">
+                        <asp:ListItem Value="seguimiento">Seguimiento</asp:ListItem>
+                        <asp:ListItem Value="cerrado">Cerrado</asp:ListItem>
+                    </asp:DropDownList>
+
                     <asp:Button runat="server" Text="Buscar" ID="btnBuscar" class="btn btn-primary" OnClick="btnBuscar_Click" />
                 </div>
                 <div class="scrolling-table-container">

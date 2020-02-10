@@ -172,8 +172,7 @@
                                 <div class="form-inline">
                                     <label style="width: 15%">Etapa:</label>
                                     <asp:DropDownList CssClass="form-control" ID="ddlEstadoReclamo" AutoPostBack="True" Style="width: 80%" Height="34px" 
-                                        runat="server" DataSourceID="SqlDataSourceEstados" DataTextField="descripcion" DataValueField="descripcion" 
-                                        OnSelectedIndexChanged="ddlEstadoReclamo_SelectedIndexChanged"></asp:DropDownList>
+                                        runat="server" OnSelectedIndexChanged="ddlEstadoReclamo_SelectedIndexChanged"></asp:DropDownList>
                                 </div>
                                 <br />
                                 <div class="form-inline">
@@ -188,7 +187,8 @@
                                 <br />
                                 <div>
                                     <label style="width: 15%">Gestor:</label>
-                                    <asp:DropDownList CssClass="form-control" ID="ddlGestor" OnSelectedIndexChanged="ddlGestor_SelectedIndexChanged" Style="width: 80%" Height="34px" runat="server" AutoPostBack="True"></asp:DropDownList>
+                                    <asp:DropDownList CssClass="form-control" ID="ddlGestor" OnSelectedIndexChanged="ddlGestor_SelectedIndexChanged" 
+                                        Style="width: 80%" Height="34px" runat="server" AutoPostBack="True"></asp:DropDownList>
                                 </div>
                             </div>
                         </div>

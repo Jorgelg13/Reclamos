@@ -811,6 +811,28 @@ public class Utils
         }
     }
 
+    //procedimiento para insertar registro en el envio de correos automatico en el servidor 192.168.5.199
+    public static void notificacion_email(String procedimiento, String cliente, String cuerpo, String gestor, String asunto)
+    {
+        try
+        {
+            conexionBD obj = new conexionBD();
+            DataTable dt = new DataTable();
+            SqlCommand comando = new SqlCommand(procedimiento, obj.ObtenerConexionSeguro());
+            comando.CommandType = CommandType.StoredProcedure;
+            comando.Parameters.AddWithValue("@emailCliente", cliente);
+            comando.Parameters.AddWithValue("@cuerpo", cuerpo);
+            comando.Parameters.AddWithValue("@correoGestor", gestor);
+            comando.Parameters.AddWithValue("@asunto", asunto);
+            comando.ExecuteNonQuery();
+        }
+
+        catch (Exception ex)
+        {
+            throw ex;
+        }
+    }
+
     public static void MoverArchivos(string poliza,string destino, string rutaOrigen)
     {
         String pathPrincipal = @"E:\ReclamosScanner\files\RenovacionesElRoble\OneDrive - Unity Seguros\Renovaciones\"+rutaOrigen+"";

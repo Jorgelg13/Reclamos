@@ -16,84 +16,21 @@
                     <div class="panel-body">
                         <div class=" form-inline">
                             <asp:TextBox ID="txtBusqueda" autocomplete="off" CssClass="form-control active" runat="server"></asp:TextBox>
-                            <asp:Button ID="btnBuscar" CssClass="btn btn-primary " runat="server" Text="Buscar" />
+                            <asp:Button ID="btnBuscar" CssClass="btn btn-primary " runat="server" Text="Buscar" OnClick="btnBuscar_Click"/>
                             <br />
                             <div class="scrolling-table-container">
-                                <asp:GridView ID="GridDaños" runat="server" EmptyDataText="No se encontro ese registro" CssClass="table bs-table table-responsive table-hover" AutoGenerateColumns="False" CellPadding="4" DataSourceID="SqlDataSourceDañosVarios" ForeColor="#333333" GridLines="None" HorizontalAlign="Center" OnSelectedIndexChanged="GridDaños_SelectedIndexChanged" AllowSorting="True">
-                                    <EditRowStyle BackColor="#2461BF" />
+                                <asp:GridView ID="GridDaños" runat="server" EmptyDataText="No se encontro ese registro" 
+                                    CssClass="table bs-table table-responsive table-hover" AutoGenerateColumns="True" CellPadding="4" 
+                                    ForeColor="#333333" GridLines="None" HorizontalAlign="Center" 
+                                    OnSelectedIndexChanged="GridDaños_SelectedIndexChanged" AllowSorting="True">
                                     <EmptyDataRowStyle BackColor="LightBlue" ForeColor="Red" />
                                     <AlternatingRowStyle BackColor="White" />
                                     <Columns>
                                         <asp:CommandField ShowSelectButton="True" />
-                                        <asp:BoundField DataField="poliza" HeaderText="Poliza" SortExpression="poliza">
-                                            <HeaderStyle HorizontalAlign="Center" Wrap="False" />
-                                            <ItemStyle HorizontalAlign="Left" Wrap="False" />
-                                        </asp:BoundField>
-                                        <asp:BoundField DataField="asegurado" HeaderText="Asegurado" SortExpression="asegurado">
-                                            <HeaderStyle HorizontalAlign="Center" Wrap="False" />
-                                            <ItemStyle HorizontalAlign="Left" Wrap="False" />
-                                        </asp:BoundField>
-                                        <asp:BoundField DataField="vip" HeaderText="VIP" SortExpression="vip">
-                                            <HeaderStyle HorizontalAlign="Center" Wrap="False" />
-                                            <ItemStyle HorizontalAlign="Center" Wrap="False" />
-                                        </asp:BoundField>
-                                        <asp:BoundField DataField="aseguradora" HeaderText="Aseguradora" SortExpression="aseguradora">
-                                            <HeaderStyle HorizontalAlign="Center" Wrap="False" />
-                                            <ItemStyle HorizontalAlign="Left" Wrap="False" />
-                                        </asp:BoundField>
-                                        <asp:BoundField DataField="contratante" HeaderText="Contratante" SortExpression="contratante">
-                                            <HeaderStyle HorizontalAlign="Center" Wrap="False" />
-                                            <ItemStyle HorizontalAlign="Left" Wrap="False" />
-                                        </asp:BoundField>
-                                        <asp:BoundField DataField="ramo" HeaderText="Ramo" SortExpression="ramo">
-                                            <HeaderStyle HorizontalAlign="Center" Wrap="False" />
-                                            <ItemStyle HorizontalAlign="Left" Wrap="False" />
-                                        </asp:BoundField>
-                                        <asp:BoundField DataField="vigi" HeaderText="Fecha Inicial" SortExpression="vigi" DataFormatString="{0:dd/MM/yyyy}">
-                                            <HeaderStyle HorizontalAlign="Center" Wrap="False" />
-                                            <ItemStyle HorizontalAlign="Left" Wrap="False" />
-                                        </asp:BoundField>
-                                        <asp:BoundField DataField="vigf" HeaderText="Fecha Final" SortExpression="vigf" DataFormatString="{0:dd/MM/yyyy}">
-                                            <HeaderStyle HorizontalAlign="Center" Wrap="False" />
-                                            <ItemStyle HorizontalAlign="Left" Wrap="False" />
-                                        </asp:BoundField>
-                                        <asp:BoundField DataField="status" HeaderText="Estado Poliza" SortExpression="status">
-                                            <HeaderStyle HorizontalAlign="Center" Wrap="False" />
-                                            <ItemStyle HorizontalAlign="Left" Wrap="False" />
-                                        </asp:BoundField>
-                                        <asp:BoundField DataField="direccion" HeaderText="Direccion" SortExpression="direccion">
-                                            <HeaderStyle HorizontalAlign="Center" Wrap="False" />
-                                            <ItemStyle HorizontalAlign="Left" Wrap="False" />
-                                        </asp:BoundField>
-                                        <asp:BoundField DataField="gst_nombre" HeaderText="Gestor" SortExpression="gst_nombre">
-                                            <HeaderStyle HorizontalAlign="Center" Wrap="False" />
-                                            <ItemStyle HorizontalAlign="Left" Wrap="False" />
-                                        </asp:BoundField>
-                                        <asp:BoundField DataField="cliente" HeaderText="Cliente" SortExpression="cliente">
-                                            <HeaderStyle HorizontalAlign="Center" Wrap="False" />
-                                            <ItemStyle HorizontalAlign="Left" Wrap="False" />
-                                        </asp:BoundField>
-                                        <asp:BoundField DataField="tipo" HeaderText="Tipo" SortExpression="tipo">
-                                            <HeaderStyle HorizontalAlign="Center" Wrap="False" />
-                                            <ItemStyle HorizontalAlign="Left" Wrap="False" />
-                                        </asp:BoundField>
-                                        <asp:BoundField DataField="suma_aseg" HeaderText="Suma Asegurada" SortExpression="suma_aseg">
-                                            <HeaderStyle HorizontalAlign="Center" Wrap="False" />
-                                            <ItemStyle HorizontalAlign="Left" Wrap="False" />
-                                        </asp:BoundField>
-                                        <asp:BoundField DataField="moneda" HeaderText="Moneda" SortExpression="moneda">
-                                            <HeaderStyle HorizontalAlign="Center" Wrap="False" />
-                                            <ItemStyle HorizontalAlign="Left" Wrap="False" />
-                                        </asp:BoundField>
-                                        <asp:BoundField DataField="num_ramo" HeaderText="num_ramo" SortExpression="num_ramo" />
-                                        <asp:BoundField DataField="gestor" HeaderText="gestor" SortExpression="gestor" />
-                                        <asp:BoundField DataField="cia" HeaderText="cia" SortExpression="cia" />
-                                        <asp:BoundField DataField="secren" HeaderText="secren" SortExpression="secren" />
                                     </Columns>
-                                    <FooterStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" />
                                     <HeaderStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" />
                                     <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
-                                    <RowStyle BackColor="#EFF3FB" />
+                                    <RowStyle BackColor="#EFF3FB" Wrap="false"/>
                                     <SelectedRowStyle BackColor="#D1DDF1" Font-Bold="True" ForeColor="#333333" />
                                 </asp:GridView>
                             </div>
@@ -111,11 +48,9 @@
                                 <asp:BoundField DataField="limite2" HeaderText="Limite 2" SortExpression="poliza" />
                                 <asp:BoundField DataField="deducible" HeaderText="Deducible" SortExpression="poliza" />
                             </Columns>
-                            <FooterStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" />
                             <HeaderStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" />
                             <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
                             <RowStyle BackColor="#EFF3FB" />
-                            <SelectedRowStyle BackColor="#D1DDF1" Font-Bold="True" ForeColor="#333333" />
                         </asp:GridView>
                     </div>
                 </div>
@@ -174,13 +109,6 @@
             </div>
         </div>
     </div>
-    <asp:SqlDataSource ID="SqlDataSourceDañosVarios" runat="server" ConnectionString="<%$ ConnectionStrings:reclamosConnectionString %>" SelectCommand="SELECT [poliza], [asegurado],[vip],[numero_gestor], [ramo], [vigi], [vigf], [status], [gst_nombre], [contratante], [aseguradora], [direccion], [tipo], [cliente], [suma_aseg], moneda,num_ramo, gestor,cia, secren FROM [vistaReclamosDaños] where (poliza like '%' + @poliza +'%') or (asegurado COLLATE Latin1_General_CI_AI like '%' + @asegurado + '%') or (contratante like '%' + @contratante +'%')">
-        <SelectParameters>
-            <asp:ControlParameter ControlID="txtBusqueda" Name="poliza" PropertyName="Text" />
-            <asp:ControlParameter ControlID="txtBusqueda" Name="asegurado" PropertyName="Text" />
-            <asp:ControlParameter ControlID="txtBusqueda" Name="contratante" PropertyName="Text" />
-        </SelectParameters>
-    </asp:SqlDataSource>
     <asp:SqlDataSource ID="SqlDataSourcebusquedaCobertura" runat="server" ConnectionString="<%$ ConnectionStrings:reclamosConnectionString %>" SelectCommand="SELECT * FROM [busqCoberturasPolizasDaños] WHERE ( poliza like '%' + @poliza + '%') ">
         <SelectParameters>
             <asp:ControlParameter ControlID="txtBusqueda" Name="poliza" PropertyName="Text" Type="String" DefaultValue="91-0035715#2" />

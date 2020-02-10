@@ -7,11 +7,10 @@ public partial class Modulos_MdReclamos_wbFrmReclamosAutos : System.Web.UI.Page
     String userlogin = HttpContext.Current.User.Identity.Name;
     Utils comprobar = new Utils();
     ReclamosEntities DBReclamos = new ReclamosEntities();
+    Utils llenar = new Utils();
+    int id;
     string ultimoIdAuto, ultimoIdReclamo, idCabina, idUsuario, codigo;
     string metodo = "sistema";
-    public string auto, marca, estilo, color, chasis, motor, placa, contratante, propietario, ramo, modelo, 
-        poliza, fechaInicial, fechaFinal, ejecutivo,aseguradora, estado, asegurado, vip, inciso, moneda, direccion, 
-        cia, gestor, secren, numRamo, cliente, programa;
 
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -23,58 +22,17 @@ public partial class Modulos_MdReclamos_wbFrmReclamosAutos : System.Web.UI.Page
         obtenerID();
     }
 
-    public void obtenerAuto()
-    {
-        try
-        {
-            placa = GridAutos.SelectedRow.Cells[1].Text;
-            propietario = HttpUtility.HtmlDecode(GridAutos.SelectedRow.Cells[2].Text);
-            asegurado = HttpUtility.HtmlDecode(GridAutos.SelectedRow.Cells[3].Text);
-            vip= GridAutos.SelectedRow.Cells[4].Text;
-            poliza = GridAutos.SelectedRow.Cells[5].Text;
-            aseguradora = GridAutos.SelectedRow.Cells[6].Text;
-            marca = GridAutos.SelectedRow.Cells[7].Text;
-            modelo = GridAutos.SelectedRow.Cells[8].Text;
-            color = GridAutos.SelectedRow.Cells[9].Text;
-            chasis = GridAutos.SelectedRow.Cells[10].Text;
-            motor = HttpUtility.HtmlDecode(GridAutos.SelectedRow.Cells[11].Text);
-            estado = HttpUtility.HtmlDecode(GridAutos.SelectedRow.Cells[12].Text);
-            fechaInicial = GridAutos.SelectedRow.Cells[13].Text;
-            fechaFinal = GridAutos.SelectedRow.Cells[14].Text;
-            contratante = HttpUtility.HtmlDecode(GridAutos.SelectedRow.Cells[15].Text);
-            ejecutivo = HttpUtility.HtmlDecode(GridAutos.SelectedRow.Cells[16].Text);
-            inciso = HttpUtility.HtmlDecode(GridAutos.SelectedRow.Cells[17].Text);
-            moneda = GridAutos.SelectedRow.Cells[19].Text;
-            direccion = HttpUtility.HtmlDecode(GridAutos.SelectedRow.Cells[20].Text);
-            cia = HttpUtility.HtmlDecode(GridAutos.SelectedRow.Cells[21].Text);
-            secren = HttpUtility.HtmlDecode(GridAutos.SelectedRow.Cells[22].Text);
-            gestor = HttpUtility.HtmlDecode(GridAutos.SelectedRow.Cells[23].Text);
-            numRamo = HttpUtility.HtmlDecode(GridAutos.SelectedRow.Cells[24].Text);
-            cliente = GridAutos.SelectedRow.Cells[25].Text;
-            programa = GridAutos.SelectedRow.Cells[26].Text;
-
-            if (GridAutos.SelectedRow.Cells[1].Text == "P-")
-            {
-                placa = "PENDIENTE";
-            }
-        }
-
-        catch(Exception)
-        {
-            Utils.ShowMessage(this.Page,"No se pudieron obtener los datos", "Nota","warning");
-        }
-    }
-
     protected void txtGuardarReclamo_Click(object sender, EventArgs e)
     {
-        obtenerAuto();
+        id = Convert.ToInt32(GridAutos.SelectedRow.Cells[1].Text);
+        var registro = DBReclamos.ViewBusquedaAuto.Find(id);
         idCabina = (string)(Session["id_cabina"]);
         idUsuario = (string)(Session["id_usuario"]);
         codigo = (string)(Session["codigo"]);
         int id1 = Convert.ToInt32(idCabina);
         int id2 = Convert.ToInt32(idUsuario);
 
-        if (chasis == null)
+        if (registro.chasis == null)
         {
             Utils.ShowMessage(this.Page, "Debes seleccionar un auto", "Nota..!", "warning");
         }
@@ -100,31 +58,32 @@ public partial class Modulos_MdReclamos_wbFrmReclamosAutos : System.Web.UI.Page
                 var sec_registro = DBReclamos.pa_sec_auto_reclamo();
                 long? id_registro = sec_registro.Single();
                 auto.id = Convert.ToInt64(id_registro);
-                auto.placa = placa.ToString();
-                auto.color = color.ToString();
-                auto.chasis = chasis.ToString();
-                auto.motor = motor.ToString();
-                auto.propietario = propietario.ToString();
-                auto.marca = marca.ToString();
-                auto.poliza = poliza.ToString();
-                auto.ejecutivo = ejecutivo.ToString();
-                auto.aseguradora = aseguradora.ToString();
-                auto.contratante = contratante.ToString();
-                auto.estado_poliza = estado.ToString();
-                auto.modelo = modelo.ToString();
-                auto.asegurado = asegurado.ToString();
-                auto.vip = vip.ToString();
-                auto.inciso = inciso.ToString();
-                auto.moneda = moneda.ToString();
-                auto.direccion = direccion.ToString();
-                auto.vigencia_inicial = Convert.ToDateTime(fechaInicial);
-                auto.vigencia_final = Convert.ToDateTime(fechaFinal);
-                auto.cia = Convert.ToInt16(cia);
-                auto.secren = Convert.ToInt16(secren);
-                auto.numero_gestor = Convert.ToInt16(gestor);
-                auto.numRamo = Convert.ToInt16(numRamo);
-                auto.cliente = Convert.ToInt32(cliente);
-                auto.programa = programa.ToString();
+                auto.placa = (registro.placa == "P-") ? "PENDIENTE" : registro.placa;
+                auto.color = registro.color;
+                auto.chasis =registro.chasis;
+                auto.motor = registro.motor;
+                auto.propietario = registro.propietario;
+                auto.marca = registro.marca;
+                auto.poliza = registro.poliza;
+                auto.ejecutivo = registro.gst_nombre;
+                auto.aseguradora = registro.nombre;
+                auto.contratante = registro.contratante;
+                auto.estado_poliza = registro.estado;
+                auto.modelo = registro.modelo;
+                auto.asegurado = registro.asegurado;
+                auto.vip = registro.vip;
+                auto.inciso = registro.inciso;
+                auto.moneda = registro.moneda;
+                auto.direccion = registro.direccion;
+                auto.vigencia_inicial = registro.vigi;
+                auto.vigencia_final = registro.vigf;
+                auto.cia = Convert.ToInt16(registro.cia);
+                auto.secren = Convert.ToInt16(registro.secren);
+                auto.numero_gestor = Convert.ToInt16(registro.numero_gestor);
+                auto.numRamo = Convert.ToInt16(registro.ramo);
+                auto.cliente = Convert.ToInt32(registro.cliente);
+                auto.programa = registro.programa;
+                auto.vendedor = registro.vendedor.ToString();
 
                 reclamo_auto reclamo = new reclamo_auto();
                 var resultado = DBReclamos.pa_sec_reclamo_auto();
@@ -157,7 +116,7 @@ public partial class Modulos_MdReclamos_wbFrmReclamosAutos : System.Web.UI.Page
                 DBReclamos.SaveChanges();
                 ultimoIdAuto = auto.id.ToString();
                 ultimoIdReclamo = reclamo.id.ToString();
-                Response.Redirect("/Modulos/MdReclamos/wbFrmReclamosAutosEditar.aspx?ID_reclamo=" + ultimoIdReclamo + "&ultimoAuto=" + ultimoIdAuto + "&placa=" + placa, false);
+                Response.Redirect("/Modulos/MdReclamos/wbFrmReclamosAutosEditar.aspx?ID_reclamo=" + ultimoIdReclamo + "&ultimoAuto=" + ultimoIdAuto + "&placa=" + registro.placa, false);
             }
             catch (Exception ex )
             {
@@ -196,5 +155,32 @@ public partial class Modulos_MdReclamos_wbFrmReclamosAutos : System.Web.UI.Page
         {
             Utils.ShowMessage(this.Page, "A ocurrido un error al traer las variables de session", "Nota..!", "warning");
         }
+    }
+
+    protected void btnBuscar_Click(object sender, EventArgs e)
+    {
+        string consulta = "SELECT " +
+            "id," +
+            "placa as Placa, " +
+            "propietario as Propietario, " +
+            "asegurado as Asegurado," +
+            "poliza as Poliza," +
+            "nombre as Aseguradora, " +
+            "marca as Marca," +
+            "modelo as Modelo," +
+            "color as Color,"+
+            "chasis as Chasis," +
+            "motor as Motor," +
+            "estado as Estado," +
+            "vigi as Vigencia_inicial," +
+            "vigf as Vigencia_Final " +
+            "FROM ViewBusquedaAuto WHERE " +
+            "(placa like '%"+txtBusqueda.Text+"%') " +
+            "OR (propietario COLLATE Latin1_General_CI_AI like '%"+txtBusqueda.Text+"%') " +
+            "OR (poliza like '%"+txtBusqueda.Text+"%') " +
+            "OR (chasis like '%"+txtBusqueda.Text+"%' ) " +
+            "OR (contratante like '%"+txtBusqueda.Text+"%') " +
+            "OR (asegurado COLLATE Latin1_General_CI_AI like '%"+txtBusqueda.Text+"%')";
+        llenar.llenarGrid(consulta,GridAutos);
     }
 }

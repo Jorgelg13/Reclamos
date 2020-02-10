@@ -8,6 +8,7 @@ using System.Net;
 using System.Net.Mail;
 using System.Globalization;
 using System.IO;
+using System.Activities.Expressions;
 
 public partial class Modulos_MdReclamosUnity_wbFrmReclamosAutosSeguimiento : System.Web.UI.Page
 {
@@ -89,6 +90,22 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosAutosSeguimiento : Sys
         ddlTipoCierre.DataTextField = "nombre";
         ddlTipoCierre.DataValueField = "id";
         ddlTipoCierre.DataBind();
+        
+        if(userlogin == "mbarrios" || userlogin =="jwiesner" || userlogin =="jlaj")
+        {
+            ddlEstadoAuto.DataSource = DBReclamos.estados_reclamos_unity.ToList().Where(au => au.tipo == "auto");
+            ddlEstadoAuto.DataTextField = "descripcion";
+            ddlEstadoAuto.DataValueField = "descripcion";
+            ddlEstadoAuto.DataBind();
+        }
+
+        else
+        {
+            ddlEstadoAuto.DataSource = DBReclamos.estados_reclamos_unity.ToList().Where(au => au.tipo == "auto" && au.descripcion !="Congelado");
+            ddlEstadoAuto.DataTextField = "descripcion";
+            ddlEstadoAuto.DataValueField = "descripcion";
+            ddlEstadoAuto.DataBind();
+        }
     }
 
     //consulta que obtiene la maoyoria de datos de un reclamo

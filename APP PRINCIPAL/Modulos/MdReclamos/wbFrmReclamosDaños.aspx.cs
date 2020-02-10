@@ -5,17 +5,15 @@ using System.Web;
 public partial class Modulos_MdReclamos_wbFrmReclamosDaños : System.Web.UI.Page
 {
     String userlogin = HttpContext.Current.User.Identity.Name;
-    Utils comprobar = new Utils();
+    Utils util = new Utils();
     ReclamosEntities DBReclamos = new ReclamosEntities();
-    String asegurado, poliza, fechaInicio, fechaFinal, ramo, cliente, status, tipo, direccion, ejecutivo, 
-           aseguradora, contratante,vip, moneda,num_ramo,gestor,cia, secren ;
+    int id;
     String metodo = "sistema";
     String ultimoIdReclamoDano, ultimoIdRegDano, idCabina, idUsuario, codigo;
-    Double sumaAsegurada;
 
     protected void Page_Load(object sender, EventArgs e)
     {
-        if (!comprobar.verificarUsuario(userlogin))
+        if (!util.verificarUsuario(userlogin))
         {
             Response.Redirect("/Asignacion.aspx");
         }
@@ -24,46 +22,18 @@ public partial class Modulos_MdReclamos_wbFrmReclamosDaños : System.Web.UI.Page
         txtReportante.Focus();
     }
 
-    public void obtenerDatos()
-    {
-        try
-        {
-            poliza = GridDaños.SelectedRow.Cells[1].Text.ToString();
-            asegurado = HttpUtility.HtmlDecode(GridDaños.SelectedRow.Cells[2].Text);
-            vip = GridDaños.SelectedRow.Cells[3].Text;
-            aseguradora = HttpUtility.HtmlDecode(GridDaños.SelectedRow.Cells[4].Text);
-            contratante = HttpUtility.HtmlDecode(GridDaños.SelectedRow.Cells[5].Text);
-            ramo = HttpUtility.HtmlDecode(GridDaños.SelectedRow.Cells[6].Text);
-            fechaInicio = GridDaños.SelectedRow.Cells[7].Text.ToString();
-            fechaFinal = GridDaños.SelectedRow.Cells[8].Text.ToString();
-            status = HttpUtility.HtmlDecode(GridDaños.SelectedRow.Cells[9].Text);
-            direccion = HttpUtility.HtmlDecode(GridDaños.SelectedRow.Cells[10].Text);
-            ejecutivo = HttpUtility.HtmlDecode(GridDaños.SelectedRow.Cells[11].Text);
-            cliente = HttpUtility.HtmlDecode(GridDaños.SelectedRow.Cells[12].Text);
-            tipo = HttpUtility.HtmlDecode(GridDaños.SelectedRow.Cells[13].Text);
-            sumaAsegurada = Convert.ToDouble(GridDaños.SelectedRow.Cells[14].Text);
-            moneda = GridDaños.SelectedRow.Cells[15].Text;
-            num_ramo = GridDaños.SelectedRow.Cells[16].Text;
-            gestor = GridDaños.SelectedRow.Cells[17].Text;
-            cia = GridDaños.SelectedRow.Cells[18].Text;
-            secren = GridDaños.SelectedRow.Cells[19].Text;
-        }
-        catch (Exception)
-        {
-            Utils.ShowMessage(this.Page, "No se pudieron obtener los datos seleccionados", "Nota..!", "warning");
-        }
-    }
 
     protected void btnGuardarReclamo_Click(object sender, EventArgs e)
     {
-        obtenerDatos();
+        id = Convert.ToInt32(GridDaños.SelectedRow.Cells[1].Text);
+        var reg = DBReclamos.vistaReclamosDaños.Find(id);
         idCabina = (string)(Session["id_cabina"]);
         idUsuario = (string)(Session["id_usuario"]);
         codigo = (string)(Session["codigo"]);
         int id1 = Convert.ToInt32(idCabina);
         int id2 = Convert.ToInt32(idUsuario);
 
-        if (poliza == null)
+        if (reg.poliza == null)
         {
             Utils.ShowMessage(this.Page, "Debes seleccionar una poliza", "Nota..!", "warning");
         }
@@ -83,23 +53,24 @@ public partial class Modulos_MdReclamos_wbFrmReclamosDaños : System.Web.UI.Page
                 var sec_registro = DBReclamos.pa_sec_reg_reclamos_danios_varios();
                 long? id_registro = sec_registro.Single();
                 registro.id = Convert.ToInt32(id_registro);
-                registro.poliza = poliza.ToString();
-                registro.asegurado = asegurado.ToString();
-                registro.cliente = Convert.ToInt32(cliente);
-                registro.status = status.ToString();
-                registro.tipo = tipo.ToString();
-                registro.direccion = direccion.ToString();
-                registro.ramo = ramo.ToString();
-                registro.ejecutivo = ejecutivo.ToString();
-                registro.aseguradora = aseguradora.ToString();
-                registro.contratante = contratante.ToString();
-                registro.vip = vip.ToString();
-                registro.suma_asegurada = Convert.ToDecimal(sumaAsegurada);
-                registro.moneda = moneda.ToString();
-                registro.num_ramo = Convert.ToInt16(num_ramo);
-                registro.gestor = Convert.ToInt16(gestor);
-                registro.cia = Convert.ToInt16(cia);
-                registro.secren = Convert.ToInt16(secren);
+                registro.poliza = reg.poliza;
+                registro.asegurado = reg.asegurado;
+                registro.cliente = Convert.ToInt32(reg.cliente);
+                registro.status = reg.status;
+                registro.tipo = reg.tipo;
+                registro.direccion = reg.direccion;
+                registro.ramo = reg.ramo;
+                registro.ejecutivo = reg.gst_nombre;
+                registro.aseguradora = reg.aseguradora;
+                registro.contratante = reg.contratante;
+                registro.vip = reg.vip;
+                registro.suma_asegurada = Convert.ToDecimal(reg.suma_aseg);
+                registro.moneda = reg.moneda;
+                registro.num_ramo = Convert.ToInt16(reg.num_ramo);
+                registro.gestor = Convert.ToInt16(reg.numero_gestor);
+                registro.cia = Convert.ToInt16(reg.cia);
+                registro.secren = Convert.ToInt16(reg.secren);
+                registro.vendedor = reg.vendedor.ToString();
 
                 if (txtReportante.Text == "" || txtTelefono.Text == "" || txtFecha.Text == "")
                 {
@@ -135,7 +106,7 @@ public partial class Modulos_MdReclamos_wbFrmReclamosDaños : System.Web.UI.Page
                 DBReclamos.SaveChanges();
                 ultimoIdReclamoDano = reclamo.id.ToString();
                 ultimoIdRegDano = registro.id.ToString();
-                Response.Redirect("/Modulos/MdReclamos/wbFrmReclamosDañosEditar.aspx?ID_reclamo=" + ultimoIdReclamoDano + "&ultimoIdRegistrosDaños=" + ultimoIdRegDano + "&poliza=" + poliza);
+                Response.Redirect("/Modulos/MdReclamos/wbFrmReclamosDañosEditar.aspx?ID_reclamo=" + ultimoIdReclamoDano + "&ultimoIdRegistrosDaños=" + ultimoIdRegDano + "&poliza=" + reg.poliza);
             }
 
             catch (Exception)
@@ -147,9 +118,11 @@ public partial class Modulos_MdReclamos_wbFrmReclamosDaños : System.Web.UI.Page
 
     protected void GridDaños_SelectedIndexChanged(object sender, EventArgs e)
     {
-        txtBusqueda.Text = GridDaños.SelectedRow.Cells[1].Text;
+        id = Convert.ToInt32(GridDaños.SelectedRow.Cells[1].Text);
+        var registro = DBReclamos.vistaReclamosDaños.Find(id);
+        txtBusqueda.Text = registro.poliza;
 
-        if (GridDaños.SelectedRow.Cells[3].Text == "Si")
+        if (registro.vip == "Si")
         {
             Utils.ShowMessage(this.Page, "Tome en cuenta que este asegurado en VIP", "Nota.. !", "Info");
         }
@@ -169,5 +142,27 @@ public partial class Modulos_MdReclamos_wbFrmReclamosDaños : System.Web.UI.Page
         {
             Utils.ShowMessage(this.Page, "A ocurrido un error al traer las variables de session", "Nota..!", "warning");
         }
+    }
+
+    protected void btnBuscar_Click(object sender, EventArgs e)
+    {
+        string consulta = "SELECT id, " +
+            "poliza as Poliza, " +
+            "asegurado as Asegurado," +
+            "aseguradora as Aseguradora, " +
+            "contratante as Contratante, " +
+            "ramo as Ramo,"+
+            "vip as Vip," +
+            "vigi as Vigencia_Inicial, " +
+            "vigf as Vigencia_Final, " +
+            "status as Estado, " +
+            "gst_nombre as Gestor, " +
+            "moneda as Moneda " +
+            "FROM vistaReclamosDaños " +
+            "where (poliza like '%"+txtBusqueda.Text+"%') " +
+            "or (asegurado COLLATE Latin1_General_CI_AI like '%"+txtBusqueda.Text+"%') " +
+            "or (contratante like '%"+txtBusqueda.Text+"%')";
+
+        util.llenarGrid(consulta,GridDaños);
     }
 }

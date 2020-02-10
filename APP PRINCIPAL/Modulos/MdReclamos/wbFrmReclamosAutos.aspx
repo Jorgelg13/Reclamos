@@ -15,108 +15,21 @@
                     <div class="panel-body">
                         <div class=" form-inline">
                             <asp:TextBox runat="server" autocomplete="off" ID="txtBusqueda" Style="width: 30%" class="form-control" placeholder="Escriba una opcion de busqueda" data-toggle="tooltip" data-placement="top" title="Puede realizar una busqueda por placa, poliza, asegurado, propietario, o chasis"></asp:TextBox>
-                            <asp:Button runat="server" Text="Buscar Auto" ID="btnBuscar" class="btn btn-primary" />
+                            <asp:Button runat="server" Text="Buscar Auto" ID="btnBuscar" OnClick="btnBuscar_Click" class="btn btn-primary" />
                         </div>
                         <br />
                         <div class="scrolling-table-container">
-                            <asp:GridView ID="GridAutos" EmptyDataText="No se encontro ese registro" CssClass="table bs-table table-responsive table-hover" runat="server" AutoGenerateColumns="False" DataSourceID="SqlDataSource1" CellPadding="4" OnSelectedIndexChanged="GridAutos_SelectedIndexChanged" ForeColor="#333333" GridLines="None" AllowSorting="True">
-                                <EditRowStyle BackColor="#2461BF" />
+                            <asp:GridView ID="GridAutos" EmptyDataText="No se encontro ese registro" CssClass="table bs-table table-responsive table-hover" 
+                                runat="server" AutoGenerateColumns="true"  CellPadding="4" 
+                                OnSelectedIndexChanged="GridAutos_SelectedIndexChanged" ForeColor="#333333" GridLines="None">
                                 <EmptyDataRowStyle BackColor="LightBlue"
                                     ForeColor="Red" />
-                                <AlternatingRowStyle BackColor="White" />
                                 <Columns>
-                                    <asp:CommandField ShowSelectButton="True" SelectText="Seleccionar" />
-                                    <asp:BoundField DataField="placa" HeaderText="Placa" SortExpression="placa">
-                                        <HeaderStyle HorizontalAlign="Center" Wrap="False" />
-                                        <ItemStyle HorizontalAlign="Left" Wrap="False" />
-                                    </asp:BoundField>
-                                    <asp:BoundField DataField="propietario" HeaderText="Propietario" SortExpression="propietario">
-                                        <HeaderStyle HorizontalAlign="Center" Wrap="False" />
-                                        <ItemStyle HorizontalAlign="Left" Wrap="False" />
-                                    </asp:BoundField>
-                                    <asp:BoundField DataField="asegurado" HeaderText="Asegurado" SortExpression="asegurado">
-                                        <HeaderStyle HorizontalAlign="Center" Wrap="False" />
-                                        <ItemStyle HorizontalAlign="Left" Wrap="False" />
-                                    </asp:BoundField>
-                                    <asp:BoundField DataField="vip" HeaderText="VIP" SortExpression="vip">
-                                        <HeaderStyle HorizontalAlign="Center" Wrap="False" />
-                                        <ItemStyle HorizontalAlign="Center" Wrap="False" />
-                                    </asp:BoundField>
-                                    <asp:BoundField DataField="poliza" HeaderText="Poliza" SortExpression="poliza">
-                                        <HeaderStyle HorizontalAlign="Center" Wrap="True" />
-                                        <ItemStyle HorizontalAlign="Left" Wrap="False" />
-                                    </asp:BoundField>
-                                    <asp:BoundField DataField="nombre" HeaderText="Aseguradora" SortExpression="nombre">
-                                        <HeaderStyle HorizontalAlign="Center" Wrap="False" />
-                                        <ItemStyle HorizontalAlign="Center" Wrap="False" />
-                                    </asp:BoundField>
-                                    <asp:BoundField DataField="marca" HeaderText="Marca" SortExpression="marca">
-                                        <HeaderStyle HorizontalAlign="Center" Wrap="False" />
-                                        <ItemStyle HorizontalAlign="Center" Wrap="False" />
-                                    </asp:BoundField>
-                                    <asp:BoundField DataField="modelo" HeaderText="Modelo" SortExpression="modelo">
-                                        <HeaderStyle HorizontalAlign="Center" Wrap="False" />
-                                        <ItemStyle HorizontalAlign="Center" Wrap="False" />
-                                    </asp:BoundField>
-                                    <asp:BoundField DataField="color" HeaderText="Color" SortExpression="color">
-                                        <HeaderStyle HorizontalAlign="Center" Wrap="False" />
-                                        <ItemStyle HorizontalAlign="Left" Wrap="False" />
-                                    </asp:BoundField>
-                                    <asp:BoundField DataField="chasis" HeaderText="Chasis" SortExpression="chasis">
-                                        <HeaderStyle HorizontalAlign="Center" Wrap="False" />
-                                        <ItemStyle HorizontalAlign="Left" Wrap="False" />
-                                    </asp:BoundField>
-                                    <asp:BoundField DataField="motor" HeaderText="Motor" SortExpression="motor">
-                                        <HeaderStyle HorizontalAlign="Center" />
-                                        <ItemStyle HorizontalAlign="Left" Wrap="False" />
-                                    </asp:BoundField>
-                                    <asp:BoundField DataField="estado" HeaderText="Estado Poliza" SortExpression="estado">
-                                        <HeaderStyle HorizontalAlign="Center" Wrap="False" />
-                                        <ItemStyle HorizontalAlign="Center" Wrap="False" />
-                                    </asp:BoundField>
-                                    <asp:BoundField DataField="vigi" HeaderText="Fecha Inicial" SortExpression="vigi" DataFormatString="{0:dd/MM/yyyy}">
-                                        <HeaderStyle HorizontalAlign="Center" Wrap="False" />
-                                        <ItemStyle HorizontalAlign="Left" Wrap="False" />
-                                    </asp:BoundField>
-                                    <asp:BoundField DataField="vigf" HeaderText="Fecha Final" SortExpression="vigf" DataFormatString="{0:dd/MM/yyyy}">
-                                        <HeaderStyle HorizontalAlign="Center" Wrap="False" />
-                                        <ItemStyle HorizontalAlign="Left" Wrap="False" />
-                                    </asp:BoundField>
-                                    <asp:BoundField DataField="contratante" HeaderText="Contratante" SortExpression="contratante">
-                                        <HeaderStyle HorizontalAlign="Center" Wrap="False" />
-                                        <ItemStyle HorizontalAlign="Left" Wrap="False" />
-                                    </asp:BoundField>
-                                    <asp:BoundField DataField="gst_nombre" HeaderText="Ejecutivo" SortExpression="gst_nombre">
-                                        <HeaderStyle HorizontalAlign="Center" Wrap="False" />
-                                        <ItemStyle HorizontalAlign="Left" Wrap="False" />
-                                    </asp:BoundField>
-                                    <asp:BoundField DataField="inciso" HeaderText="Inciso Vehiculo" SortExpression="inciso">
-                                        <HeaderStyle HorizontalAlign="Center" Wrap="False" />
-                                        <ItemStyle HorizontalAlign="Left" Wrap="False" />
-                                    </asp:BoundField>
-                                    <asp:BoundField DataField="suma_aseg" HeaderText="Suma Asegurada" SortExpression="suma_aseg">
-                                        <HeaderStyle HorizontalAlign="Center" Wrap="False" />
-                                        <ItemStyle HorizontalAlign="Left" Wrap="False" />
-                                    </asp:BoundField>
-                                    <asp:BoundField DataField="moneda" HeaderText="Moneda" SortExpression="moneda">
-                                        <HeaderStyle HorizontalAlign="Center" Wrap="False" />
-                                        <ItemStyle HorizontalAlign="Left" Wrap="False" />
-                                    </asp:BoundField>
-                                    <asp:BoundField DataField="direccion" HeaderText="Direccion" SortExpression="direccion">
-                                        <HeaderStyle HorizontalAlign="Center" Wrap="False" />
-                                        <ItemStyle HorizontalAlign="Left" Wrap="False" />
-                                    </asp:BoundField>
-                                    <asp:BoundField DataField="cia" HeaderText="cia" SortExpression="cia" />
-                                    <asp:BoundField DataField="secren" HeaderText="secren" SortExpression="secren" />
-                                    <asp:BoundField DataField="numero_gestor" HeaderText="numero_gestor" SortExpression="numero_gestor" />
-                                    <asp:BoundField DataField="ramo" HeaderText="ramo" SortExpression="ramo" />
-                                    <asp:BoundField DataField="cliente" HeaderText="Cliente" SortExpression="cliente" />
-                                    <asp:BoundField DataField="programa" HeaderText="Programa" SortExpression="Programa" />
+                                    <asp:CommandField ShowSelectButton="True" />
                                 </Columns>
-                                <FooterStyle BackColor="#507CD1" ForeColor="White" Font-Bold="True" />
+                                <AlternatingRowStyle BackColor="White" />
                                 <HeaderStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" />
-                                <PagerStyle BackColor="#131B4D" ForeColor="White" HorizontalAlign="Center" />
-                                <RowStyle BackColor="#EFF3FB" />
+                                <RowStyle BackColor="#EFF3FB" Wrap="false" />
                                 <SelectedRowStyle BackColor="#D1DDF1" Font-Bold="True" ForeColor="#333333" />
                             </asp:GridView>
                         </div>
@@ -124,7 +37,8 @@
                 </div>
                 <div role="tabpanel" class="tab-pane" id="profile">
                     <div class="scrolling-table-container">
-                        <asp:GridView ID="GridCoberturas" runat="server" CssClass="table bs-table table-responsive table-hover" AllowSorting="True" AutoGenerateColumns="False" CellPadding="4" DataSourceID="SqlDataSource2" ForeColor="#333333" GridLines="None">
+                        <asp:GridView ID="GridCoberturas" runat="server" CssClass="table bs-table table-responsive table-hover" 
+                            AllowSorting="True" AutoGenerateColumns="False" CellPadding="4" DataSourceID="SqlDataSource2" ForeColor="#333333" GridLines="None">
                             <AlternatingRowStyle BackColor="White" />
                             <Columns>
                                 <asp:BoundField DataField="descr" HeaderText="Descripcion" SortExpression="descr" />
@@ -132,12 +46,9 @@
                                 <asp:BoundField DataField="limite2" HeaderText="Limite 2" SortExpression="limite2" />
                                 <asp:BoundField DataField="deducible" HeaderText="Deducible" SortExpression="deducible" />
                             </Columns>
-                            <EditRowStyle BackColor="#2461BF" />
-                            <FooterStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" />
                             <HeaderStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" />
                             <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
                             <RowStyle BackColor="#EFF3FB" />
-                            <SelectedRowStyle BackColor="#D1DDF1" Font-Bold="True" ForeColor="#333333" />
                         </asp:GridView>
                     </div>
                 </div>
