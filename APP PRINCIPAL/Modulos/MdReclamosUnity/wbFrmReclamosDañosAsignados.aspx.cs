@@ -21,6 +21,7 @@ public partial class Modulos_MdReclamos_wbFrmReclamosDañosAsignados : System.We
     bool compromiso_pago = false;
     String correoGestor, correoEjecutivo, correoVendedor, cuerpo, asunto, correoComentario, codigo;
     String correoReclamos = "reclamosgt@unitypromotores.com";
+    String gerente= "jennifer.wiesner @unitypromotores.com";
     int id;
 
     protected void Page_Load(object sender, EventArgs e)
@@ -55,17 +56,18 @@ public partial class Modulos_MdReclamos_wbFrmReclamosDañosAsignados : System.We
            "r.version as Version," +
            "Convert(varchar(10), r.fecha_commit, 103) as [Fecha Creacion]," +//23
            "usuario.nombre as Usuario, " +
-           "reg.id as id_registro," + //29
-           "reg.gestor as [Codigo Ejecutivo] " +//30
+           "reg.id as id_registro," + //25
+           "reg.gestor as [Codigo Ejecutivo], " +//26
+           "reg.vendedor as Vendedor " +//27
            "FROM reclamos_varios as r " +
            "INNER JOIN reg_reclamo_varios as reg ON r.id_reg_reclamos_varios = reg.id " +
            "INNER JOIN cabina ON r.id_cabina = cabina.id " +
            "INNER JOIN usuario ON usuario.id_cabina = cabina.id AND r.id_usuario = usuario.id " +
            "where(r.usuario_unity = '" + userlogin + "') and(r.estado_unity = 'Sin Cerrar')";
 
-        llenado.llenarGrid(ReclamosAsignados, GridReclamosDaños); 
+        llenado.llenarGrid(ReclamosAsignados, GridReclamosDaños);
 
-        if(!IsPostBack)
+        if (!IsPostBack)
         {
             llenar_dropdowns();
         }
@@ -83,7 +85,7 @@ public partial class Modulos_MdReclamos_wbFrmReclamosDañosAsignados : System.We
         ddlTaller.DataValueField = "id";
         ddlTaller.DataBind();
 
-        ddlGestor.DataSource = DBReclamos.gestores.ToList().Where(gestores => gestores.tipo == "Daños varios" && gestores.estado==true);
+        ddlGestor.DataSource = DBReclamos.gestores.ToList().Where(gestores => gestores.tipo == "Daños varios" && gestores.estado == true);
         ddlGestor.DataTextField = "nombre";
         ddlGestor.DataValueField = "id";
         ddlGestor.DataBind();
@@ -147,7 +149,7 @@ public partial class Modulos_MdReclamos_wbFrmReclamosDañosAsignados : System.We
             {
                 string cobertura = HttpUtility.HtmlDecode(Convert.ToString(row.Cells[1].Text));
 
-                if(row.Cells[2].Text == "&nbsp;")
+                if (row.Cells[2].Text == "&nbsp;")
                 {
                     limite1 = 0;
                 }
@@ -206,6 +208,7 @@ public partial class Modulos_MdReclamos_wbFrmReclamosDañosAsignados : System.We
             comentario.id_reclamos_varios = id;
             comentario.fecha = DateTime.Now;
             DBReclamos.comentarios_reclamos_varios.Add(comentario);
+            DBReclamos.SaveChanges();
             txtComentarios.Text = "";
         }
         catch (Exception)
@@ -252,6 +255,8 @@ public partial class Modulos_MdReclamos_wbFrmReclamosDañosAsignados : System.We
             reclamo.b_carta_declinado = false;
             reclamo.b_carta_envio_cheque = false;
             reclamo.b_carta_deducible_anual = false;
+            reclamo.b_carta_alerta_tiempo = false;
+            reclamo.b_carta_cierre_reclamo = false;
             reclamo.problema_ajustador = false;
             reclamo.problema_aseguradora = false;
             reclamo.problema_cabina = false;
@@ -278,7 +283,7 @@ public partial class Modulos_MdReclamos_wbFrmReclamosDañosAsignados : System.We
         catch (Exception ex)
         {
             Utils.ShowMessage(this.Page, "A ocurrido un error al insertar los datos " + ex.Message, "Nota..!", "error");
-            Email.ENVIAR_ERROR("Error en apertura de reclamos de daños","Error ocasionado al usuario: " + userlogin + " en el registro con el id: " + id + "\n\n " + ex.Message);
+            Email.ENVIAR_ERROR("Error en apertura de reclamos de daños", "Error ocasionado al usuario: " + userlogin + " en el registro con el id: " + id + "\n\n " + ex.Message);
         }
     }
 
@@ -333,23 +338,34 @@ public partial class Modulos_MdReclamos_wbFrmReclamosDañosAsignados : System.We
         var registro = DBReclamos.reclamos_varios.Find(id);
         correoGestor = Utils.seleccionarCorreoGestor(userlogin);
         cuerpo = Constantes.NOTIFICACION_EJECUTIVO(registro.fecha.ToString(), registro.reg_reclamo_varios.asegurado, registro.reg_reclamo_varios.poliza, ddlGestor, id);
-        codigo = registro.reg_reclamo_varios.vendedor;
-        if (codigo != "&nbsp;" || codigo != null || codigo != "")
-        {
-            correoVendedor = Utils.seleccionarCorreo(Convert.ToInt32(registro.reg_reclamo_varios.vendedor));
-        }
-
-        codigo = registro.reg_reclamo_varios.gestor.ToString();
-        if (codigo != "&nbsp;" || codigo != null || codigo != "")
-        {
-            correoEjecutivo = Utils.seleccionarCorreo(Convert.ToInt32(registro.reg_reclamo_varios.gestor));
-        }
-
         asunto = "Notificacion de siniestro";
+
+        codigo = GridReclamosDaños.SelectedRow.Cells[26].Text;
+        if (codigo != "&nbsp;")
+        {
+            correoEjecutivo = Utils.seleccionarCorreo(Convert.ToInt32(codigo));
+
+            if (!string.IsNullOrEmpty(correoEjecutivo))
+            {
+                Utils.notificacion_email("pa_notificacion", correoEjecutivo, cuerpo, correoGestor, asunto);
+                Utils.notificacion_email("pa_notificacion", gerente, cuerpo, correoGestor, asunto);
+                insertarComentarios("Registro de notificacion a ejecutivo: \n\n" + cuerpo);
+            }
+        }
+
         Utils.notificacion_email("pa_notificacion", correoGestor, cuerpo, correoReclamos, asunto);
-        Utils.notificacion_email("pa_notificacion", correoVendedor, cuerpo, correoGestor, asunto);
-        Utils.notificacion_email("pa_notificacion", correoEjecutivo, cuerpo, correoGestor, asunto);
-        insertarComentarios("Registro de notificacion a ejecutivo: \n\n" + cuerpo);
+
+        codigo = GridReclamosDaños.SelectedRow.Cells[27].Text;
+        if (codigo != "&nbsp;")
+        {
+            correoVendedor = Utils.seleccionarCorreo(Convert.ToInt32(codigo));
+
+            if (!string.IsNullOrEmpty(correoVendedor))
+            {
+                Utils.notificacion_email("pa_notificacion", correoVendedor, cuerpo, correoGestor, asunto);
+            }
+        }
+
         //if (codigo == "&nbsp;")
         //{
 
@@ -375,6 +391,6 @@ public partial class Modulos_MdReclamos_wbFrmReclamosDañosAsignados : System.We
     //regresar a la pantalla principal
     protected void linkSalir_Click(object sender, EventArgs e)
     {
-        Response.Redirect("/Default.aspx",false);
+        Response.Redirect("/Default.aspx", false);
     }
 }

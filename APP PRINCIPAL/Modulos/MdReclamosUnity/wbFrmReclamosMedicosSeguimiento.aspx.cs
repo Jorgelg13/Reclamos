@@ -8,6 +8,9 @@ using System.Data.SqlClient;
 using System.Net.Mail;
 using System.Globalization;
 using System.IO;
+using System.Threading.Tasks;
+using System.Net;
+using System.Text;
 
 public partial class Modulos_MdReclamosUnity_wbFrmReclamosMedicosSeguimientos : System.Web.UI.Page
 {
@@ -952,14 +955,38 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosMedicosSeguimientos : 
     {
         try
         {
+            string tiemposCerrado, tiemposAbierto;
             string seleccionar = "";
-            string tiemposCerrado = "select DATEDIFF(SECOND, fecha_commit, fecha_cierre)," +
+
+            if(lblTipo.Text == "I")
+            {
+                tiemposAbierto = "select dbo.FN_DIAS_HABILES(fecha_commit, getdate())* 24 * 60 * 60, " +
+                  "fecha_commit, fecha_asignacion, fecha_apertura, fecha_envio_aseg, fecha_recepcion_cheque, convert(nvarchar(20), fecha_envio_cheque, 103), fecha_cierre, destino" +
+                  " from reclamos_medicos where id = " + id + "";
+            }
+
+            else
+            {
+                tiemposAbierto = "select DATEDIFF(SECOND, fecha_commit, getdate())," +
+                "fecha_commit, fecha_asignacion, fecha_apertura, fecha_envio_aseg, fecha_recepcion_cheque, convert(nvarchar(20), fecha_envio_cheque, 103), fecha_cierre, destino" +
+                " from reclamos_medicos where id = " + id + "";
+            }
+
+            if(lblTipo.Text == "I")
+            {
+                tiemposCerrado = "select dbo.FN_DIAS_HABILES(fecha_commit, fecha_cierre) * 24 * 60 * 60," +
             "fecha_commit, fecha_asignacion, fecha_apertura, fecha_envio_aseg, fecha_recepcion_cheque, convert(nvarchar(20), fecha_envio_cheque, 103), fecha_cierre, destino" +
             " from reclamos_medicos where id = " + id + "";
+            }
 
-            string tiemposAbierto = "select DATEDIFF(SECOND, fecha_commit, getdate())," +
-            "fecha_commit, fecha_asignacion, fecha_apertura, fecha_envio_aseg, fecha_recepcion_cheque, convert(nvarchar(20), fecha_envio_cheque, 103), fecha_cierre, destino" +
-            " from reclamos_medicos where id = "+id+"";
+            else
+            {
+                tiemposCerrado = "select DATEDIFF(SECOND, fecha_commit, fecha_cierre)," +
+           "fecha_commit, fecha_asignacion, fecha_apertura, fecha_envio_aseg, fecha_recepcion_cheque, convert(nvarchar(20), fecha_envio_cheque, 103), fecha_cierre, destino" +
+           " from reclamos_medicos where id = " + id + "";
+            }
+            
+
 
             seleccionar = (ddlEstado.SelectedItem.Text == "Cerrado") ? tiemposCerrado : tiemposAbierto;
 
@@ -1136,4 +1163,43 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosMedicosSeguimientos : 
         lblTituloMemoAseguradora.Text = "Producto No Conforme";
         lblCartaObservacion.Text = txtObservacionesNoConf.Text;
     }
+
+    protected void btnRoble_Click(object sender, EventArgs e)
+    {
+        LoginCallAsync().Wait();
+    }
+
+    public static async Task LoginCallAsync()
+    {
+        Console.Write("A ESCRITO UNA LINEA.....................");
+        var myxml = @"xml = <?xml version=\'1.0\' encoding=\'UTF-8\'?>\n
+                            <ACCION>ECHO</ACCION>";
+
+        var request = (HttpWebRequest)WebRequest.Create("https://script.google.com/macros/s/AKfycby0T-0rCJE2Sgji63yzG21bXHGZ_1VUe2HMMf9-ZoqP2-HyfyE/exec");
+        request.Method = "POST";
+        request.ContentType = "application/x-www-form-urlencoded; encoding='utf-8'";
+
+        using (var dataStream = new StreamWriter(await request.GetRequestStreamAsync()))
+        {
+            dataStream.Write(myxml);
+            dataStream.Dispose();
+        }
+
+        string result = null;
+
+        using (var response = await request.GetResponseAsync())
+        using (var stream = response.GetResponseStream())
+        using (var reader = new StreamReader(stream, Encoding.ASCII))
+        {
+            result = reader.ReadToEnd();
+        }
+
+
+        Console.WriteLine(result);
+        //Response.Write("");
+    }
+
+
+
+
 }

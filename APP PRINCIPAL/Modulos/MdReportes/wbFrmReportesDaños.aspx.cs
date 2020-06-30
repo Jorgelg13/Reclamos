@@ -29,7 +29,8 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesDaños : System.Web.UI
             checkSinFiltro_CheckedChanged(sender, e);
         }
 
-        if(userlogin == "jsagastume" || userlogin == "jlaj" || userlogin == "jwiesner" || userlogin == "jpazos" || userlogin =="cmejia" || userlogin =="mbarrios")
+        if(userlogin == "jlaj" || userlogin == "jwiesner"  || userlogin =="cmejia" || userlogin =="mbarrios" || 
+           userlogin == "hvillacinda" || userlogin == "lgarcia" || userlogin == "mguillen")
         {
             btnMostrarEficiencia.Visible = true;
         }

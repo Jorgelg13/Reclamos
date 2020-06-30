@@ -22,6 +22,11 @@
                                     <asp:CheckBox ID="chkRenovar" runat="server" Text="Renovar" AutoPostBack="true" OnCheckedChanged="chkRenovar_CheckedChanged" />
                                 </ItemTemplate>
                             </asp:TemplateField>
+                            <asp:TemplateField HeaderText="Pedir Aclaracion Para">
+                              <ItemTemplate>
+                                 <asp:TextBox ID="txtAclaracion" Autocomplete="off" style="width : 100%;"  CssClass="form-control" runat="server"></asp:TextBox>
+                              </ItemTemplate>
+                            </asp:TemplateField>
                         </Columns>
                         <HeaderStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" Wrap="false" />
                         <PagerStyle BackColor="#131B4D" ForeColor="White" HorizontalAlign="Center" />

@@ -60,6 +60,32 @@ public class Cartas
                "</ol>";
     }
 
+    public static string CIERRE_RECLAMO(reclamos_varios reg)
+    {
+        return "<p>En relación al reclamo presentado en fecha "+ reg.fecha_commit.ToString("dd/MM/yyyy") + " por " +
+            ""+reg.version+", vemos con preocupación que a la presente fecha no hemos recibido la documentación " +
+            "necesaria para proceder con el trámite del caso. </p>" +
+            "<p>Debido a lo anterior, procederemos a cerrar el caso, si existiera interés de su parte en continuar con el proceso del mismo, " +
+            "apreciaremos nos envíe, los documentos solicitados para que la Aseguradora evalúe la reapertura del mismo en caso procediera. </p>" +
+            "<p>La documentación requerida para el proceso, es la siguiente: </p>"+
+            "<ol><li></li>"+
+            "<li></li>"+
+            "<li></li></ol>"+
+            "<p>Es importante informarle, que las condiciones de la póliza indican que cualquier gestión de reclamo prescribirá en dos años contados " +
+            "a partir de la fecha del siniestro.</p>";
+    }
+
+    public static string ALERTA_TIEMPO_DANIOS(reclamos_varios reg)
+    {
+        return "<p>Reciba un cordial saludo.</p>"+
+            "<p>En relación al siniestro ocurrido el día "+ Convert.ToDateTime(reg.fecha_commit).ToString("D") + ", por este medio hacemos de su conocimiento que han transcurrido" +
+            " 30 días posteriores al evento y a la fecha no hemos recibido los requerimientos solicitados para continuar con la gestión de su reclamación.</p>" +
+            "<p>Es importante indicar, que según las condiciones de la póliza tenemos un tiempo estipulado máximo de XXXX días para " +
+            "la presentación de documentos, estaremos solicitando una prórroga para que no se vean afectados sus intereses, sin embargo, " +
+            "apreciaremos su retroalimentación en cuanto a  si desea continuar o no con su reclamación.</p>"+
+            "<p>Quedamos atentos a sus prontas noticias y estamos a sus órdenes si necesita alguna información adicional o asesoría al respecto</p>";
+    }
+
     public static string SOLICITUD_DOCUMENTOS()
 
     {
@@ -84,9 +110,12 @@ public class Cartas
 
     public static string CARTA_CIERRE_INTERNO_AUTOS(reclamo_auto auto )
     {
-        return "<p>En relación al siniestro ocurrido el día " + Convert.ToDateTime(auto.fecha_commit).ToString("D") + ", por este medio hacemos de su conocimiento que a la fecha no hemos recibido documentos para el pago del reclamo.</p>" +
-            "<p>Por lo anterior, estamos procediendo a cerrar el reclamo internamente en nuestro sistema y cuando recibamos la documentación solicitada procederemos a reaperturar el reclamo.</p>" +
-            "<p>Es importante indicarle, que según las condiciones de la póliza de automóviles indica que cualquier gestión de reclamo prescribirá en dos años contados a partir de la fecha del siniestro.</p>" +
+        return "<p>En relación al siniestro ocurrido el día " + Convert.ToDateTime(auto.fecha_commit).ToString("D") + ", por este medio hacemos de su conocimiento" +
+            " que a la fecha no hemos recibido documentos para el pago del reclamo.</p>" +
+            "<p>Por lo anterior, estamos procediendo a cerrar el reclamo, si existiera interés de su parte en continuar con el proceso del mismo, " +
+            "apreciaremos nos envíe la documentación completa para que la Aseguradora evalúe la reapertura del mismo en caso procediera.</p>" +
+            "<p>Es importante informarle, que las condiciones de la póliza de automóviles indican que cualquier gestión de reclamo prescribirá " +
+            "en dos años contados a partir de la fecha del siniestro. </p>" +
             "<p>Si necesita alguna información, adicional estamos a la orden</p>" +
             "<p>Sin otro particular,</p>" +
             "<p>Cordialmente,</p>";
@@ -94,10 +123,23 @@ public class Cartas
 
     public static string CARTA_DECLINACION_RECLAMOS_AUTOS(reclamo_auto auto)
     {
-        return "En relación al reclamo presentado en " + Convert.ToDateTime(auto.fecha_commit).ToString("D") + ", lamentablemente por este medio adjuntamos carta de Seguros " + auto.auto_reclamo.aseguradora + ", en la cual confirman la declinación del reclamo debido a que el siniestro no está cubierto en las condiciones generales de la póliza, que lee lo siguiente:" +
+        return "En relación al reclamo presentado en fecha " + Convert.ToDateTime(auto.fecha_commit).ToString("D") + ", lamentablemente por este medio adjuntamos " +
+            "carta de Seguros " + auto.auto_reclamo.aseguradora + ", en la cual confirman la declinación del reclamo debido a que el siniestro no está cubierto en" +
+            " las condiciones generales de la póliza, que lee lo siguiente:" +
             "<br />" +
             "<br />" +
             "<p>Esperamos poder servirle en otra oportunidad</p>" +
+            "<p>Cordialmente,</p>";
+    }
+
+    public static string CARTA_ALERTA_TIEMPO(reclamo_auto auto)
+    {
+        return "<p>En relación al siniestro ocurrido el día " + Convert.ToDateTime(auto.fecha_commit).ToString("D") + ", por este medio hacemos de su conocimiento que han transcurrido 30 días posteriores al evento" +
+            " y a la fecha no hemos recibido los requerimientos solicitados para continuar con la gestión de su reclamación.</p> " +
+            "<p>Es importante indicar, que según las condiciones de la póliza tenemos un tiempo estipulado máximo de XXXX días para la presentación de documentos, " +
+            "estaremos solicitando una prórroga para que no se vean afectados sus intereses, sin embargo, apreciaremos su retroalimentación en cuanto a si desea continuar o no con su reclamación.</p> " +
+            "<p>Quedamos atentos a sus prontas noticias y estamos a sus órdenes si necesita alguna información adicional o asesoría al respecto.</p>" +
+            "<p>Sin otro particular.</p> " +
             "<p>Cordialmente,</p>";
     }
 

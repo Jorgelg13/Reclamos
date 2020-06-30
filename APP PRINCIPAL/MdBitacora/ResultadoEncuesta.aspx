@@ -64,6 +64,8 @@
                 <asp:ListItem Value="Energuate">Energuate</asp:ListItem>
                 <asp:ListItem Value="Bandegua-gt">Bandegua gt</asp:ListItem>
                 <asp:ListItem Value="Aceros">Aceros</asp:ListItem>
+		<asp:ListItem Value="cgn-pronico">Pronico</asp:ListItem>
+		<asp:ListItem Value="ics">ICS</asp:ListItem>
             </asp:DropDownList>
         </div>
         <div class="form-group  col-lg-2 col-md-2 col-sm-12">

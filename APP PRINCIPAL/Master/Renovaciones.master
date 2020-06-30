@@ -84,6 +84,7 @@
                             <a href="#" class="dropdown-toggle fa fa-file-excel-o" style="font-size: 16px;" data-toggle="dropdown" role="button">Reportes<span class="caret"></span></a>
                             <ul class="dropdown-menu">
                                 <li><a href="/Modulos/MdRenovaciones/Reportes/Estados.aspx">Reporte de Renovaciones por estado</a></li>
+                                <li><a href="/Modulos/MdRenovaciones/Reportes/email-enviados.aspx">Reporte de emails enviados</a></li>
                             </ul>
                         </li>
                          <li class="dropdown">

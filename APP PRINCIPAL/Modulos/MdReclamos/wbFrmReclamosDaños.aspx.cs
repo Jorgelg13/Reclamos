@@ -71,6 +71,9 @@ public partial class Modulos_MdReclamos_wbFrmReclamosDaños : System.Web.UI.Page
                 registro.cia = Convert.ToInt16(reg.cia);
                 registro.secren = Convert.ToInt16(reg.secren);
                 registro.vendedor = reg.vendedor.ToString();
+                registro.contacto = reg.contacto;
+                registro.telefono_contacto = reg.telefono_contacto;
+                registro.correo_contacto = reg.correo;
 
                 if (txtReportante.Text == "" || txtTelefono.Text == "" || txtFecha.Text == "")
                 {

@@ -38,6 +38,7 @@
             <asp:Label ID="lblBanderaCierreInterno" runat="server" Style="display: none;"></asp:Label>
             <asp:Label ID="lblBanderaDeclinado" runat="server" Style="display: none;"></asp:Label>
             <asp:Label ID="lblBanderaEnvioCheque" runat="server" Style="display: none;"></asp:Label>
+            <asp:Label ID="lblBanderaAlertaTiempo" runat="server" Style="display: none;"></asp:Label>
             <asp:Label ID="lblDocumento" runat="server" Style="display: none;"></asp:Label>
         </div>
         <%---------------------------------------------------------------------------------------------------%>
@@ -222,6 +223,7 @@
                             <asp:CheckBox ID="chCartaCierre" Text="Carta Cierre Interno" AutoPostBack="true" runat="server" OnCheckedChanged="chCartaCierre_CheckedChanged" />
                             <asp:CheckBox ID="chCartaDeclinado" Text="Carta Declinado" AutoPostBack="true" runat="server" OnCheckedChanged="chCartaDeclinado_CheckedChanged" />
                             <asp:CheckBox ID="chEnvioCarta" Text="Carta Envio Cheque" AutoPostBack="true" runat="server" OnCheckedChanged="chEnvioCarta_CheckedChanged" />
+                            <asp:CheckBox ID="chAlertaTiempo" Text="Alerta de tiempo" AutoPostBack="true" runat="server" OnCheckedChanged="chAlertaTiempo_CheckedChanged" />
                             <br />
                         </div>
                     </div>
@@ -805,6 +807,9 @@
                                         <td>0.00</td>
                                     </tr>
                                 </table>
+                                <br />
+                                <p>Esperando lo encuentre todo de conformidad, quedo a sus órdenes,</p>
+                                <p>Atentamente,</p>
                             </asp:Panel>
                             <br />
                             <!--hasta aqui se mantiene el formato -->

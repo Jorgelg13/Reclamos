@@ -343,7 +343,7 @@ public class Utils
                  };
 
                 var content = new FormUrlEncodedContent(values);
-                var response = client.PostAsync("http://192.168.81.225:9900/movistar/enviar", content);
+                var response = client.PostAsync("http://192.168.81.127:9900/movistar/enviar", content);
                 bool estado_envio = response.IsFaulted;
 
                 comentarios_reclamos_medicos comentario = new comentarios_reclamos_medicos();
@@ -375,7 +375,7 @@ public class Utils
                  };
 
                 var content = new FormUrlEncodedContent(values);
-                var response = client.PostAsync("http://192.168.81.225:9900/movistar/enviar", content);
+                var response = client.PostAsync("http://192.168.81.127:9900/movistar/enviar", content);
                 bool estado_envio = response.IsFaulted;
 
                 comentarios_reclamos_varios comentario = new comentarios_reclamos_varios();
@@ -406,7 +406,7 @@ public class Utils
                  };
 
                 var content = new FormUrlEncodedContent(values);
-                var response = client.PostAsync("http://192.168.81.225:9900/movistar/enviar", content);
+                var response = client.PostAsync("http://192.168.81.127:9900/movistar/enviar", content);
                 bool estado_envio = response.IsFaulted;
 
                 comentarios_reclamos_autos comentario = new comentarios_reclamos_autos();
@@ -437,7 +437,7 @@ public class Utils
                  };
 
                 var content = new FormUrlEncodedContent(values);
-                var response = client.PostAsync("http://192.168.81.225:9900/movistar/enviar", content);
+                var response = client.PostAsync("http://192.168.81.127:9900/movistar/enviar", content);
                 bool estado_envio = response.IsFaulted;
             }
         }
@@ -553,6 +553,58 @@ public class Utils
                 }
             }
 
+            if (tipoCarta.SelectedValue == "cierre reclamo")
+            {
+                if (bandera.b_carta_cierre_reclamo == false)
+                {
+                    cartas carta = new cartas();
+                    var sec_registro = DBReclamos.pa_sec_cartas();
+                    int? id_registro = sec_registro.Single();
+                    carta.id = Convert.ToInt32(id_registro);
+                    carta.contenido = contenido.Text;
+                    carta.tipo = tipo;
+                    carta.modulo = modulo;
+                    carta.id_reclamo = id;
+                    bandera.b_carta_cierre_reclamo = true;
+                    DBReclamos.cartas.Add(carta);
+                }
+
+                else
+                {
+                    var actualizar = DBReclamos.cartas.Where(ca => ca.id_reclamo == id && ca.tipo == tipo && ca.modulo == modulo).First();
+                    actualizar.contenido = contenido.Text;
+                    actualizar.tipo = tipo;
+                    actualizar.modulo = modulo;
+                    actualizar.id_reclamo = id;
+                }
+            }
+
+            if (tipoCarta.SelectedValue == "alerta tiempo")
+            {
+                if (bandera.b_carta_alerta_tiempo == false)
+                {
+                    cartas carta = new cartas();
+                    var sec_registro = DBReclamos.pa_sec_cartas();
+                    int? id_registro = sec_registro.Single();
+                    carta.id = Convert.ToInt32(id_registro);
+                    carta.contenido = contenido.Text;
+                    carta.tipo = tipo;
+                    carta.modulo = modulo;
+                    carta.id_reclamo = id;
+                    bandera.b_carta_alerta_tiempo = true;
+                    DBReclamos.cartas.Add(carta);
+                }
+
+                else
+                {
+                    var actualizar = DBReclamos.cartas.Where(ca => ca.id_reclamo == id && ca.tipo == tipo && ca.modulo == modulo).First();
+                    actualizar.contenido = contenido.Text;
+                    actualizar.tipo = tipo;
+                    actualizar.modulo = modulo;
+                    actualizar.id_reclamo = id;
+                }
+            }
+
             DBReclamos.SaveChanges();
 
         }
@@ -562,7 +614,8 @@ public class Utils
         }
     }
 
-    public static void Guardar_cartas_autos(TextBox contenido, string tipo, string modulo, int id, CheckBox chCierreInterno, CheckBox chDeclinado, CheckBox chEnvioCheque)
+    public static void Guardar_cartas_autos(TextBox contenido, string tipo, string modulo, int id, CheckBox chCierreInterno, 
+        CheckBox chDeclinado, CheckBox chEnvioCheque, CheckBox chAlertaTiempo)
     {
         try
         {
@@ -632,6 +685,32 @@ public class Utils
                     carta.modulo = modulo;
                     carta.id_reclamo = id;
                     bandera.b_carta_envio_cheque = true;
+                    DBReclamos.cartas.Add(carta);
+                }
+
+                else
+                {
+                    var actualizar = DBReclamos.cartas.Where(ca => ca.id_reclamo == id && ca.tipo == tipo && ca.modulo == modulo).First();
+                    actualizar.contenido = contenido.Text;
+                    actualizar.tipo = tipo;
+                    actualizar.modulo = modulo;
+                    actualizar.id_reclamo = id;
+                }
+            }
+
+            if (chAlertaTiempo.Checked)
+            {
+                if (bandera.b_carta_alerta_tiempo == false)
+                {
+                    cartas carta = new cartas();
+                    var sec_registro = DBReclamos.pa_sec_cartas();
+                    int? id_registro = sec_registro.Single();
+                    carta.id = Convert.ToInt32(id_registro);
+                    carta.contenido = contenido.Text;
+                    carta.tipo = tipo;
+                    carta.modulo = modulo;
+                    carta.id_reclamo = id;
+                    bandera.b_carta_alerta_tiempo = true;
                     DBReclamos.cartas.Add(carta);
                 }
 
@@ -791,7 +870,7 @@ public class Utils
     }
 
     //procedimiento para insertar registro en el envio de correos automatico en el servidor 192.168.5.199
-    public static void EmailRenovacion(String procedimiento, String cliente, String cuerpo, String gestor)
+    public static void EmailRenovacion(String procedimiento, String cliente, String cuerpo, String gestor, int codigo_gestor, int grupo_economico)
     {
         try
         {
@@ -802,6 +881,8 @@ public class Utils
             comando.Parameters.AddWithValue("@emailCliente", cliente);
             comando.Parameters.AddWithValue("@cuerpo", cuerpo);
             comando.Parameters.AddWithValue("@correoGestor",gestor);
+            comando.Parameters.AddWithValue("@ejecutivo", codigo_gestor);
+            comando.Parameters.AddWithValue("@grupo_economico", grupo_economico);
             comando.ExecuteNonQuery();
         }
 

@@ -22,6 +22,7 @@
                         <asp:ListItem Value="2">Asignada</asp:ListItem>
                         <asp:ListItem Value="3">Enviada</asp:ListItem>
                         <asp:ListItem Value="4">Renovada</asp:ListItem>
+                        <asp:ListItem Value="7">Facturada</asp:ListItem>
                         <asp:ListItem Value="5">Cancelada</asp:ListItem>
                         <asp:ListItem Value="6">No Enviada</asp:ListItem>
                         <asp:ListItem Value="8">Invalida</asp:ListItem>

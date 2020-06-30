@@ -290,7 +290,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesMedicos : System.Web.U
         }
 
         string ejecutivoKPI = "select count(*) total_reclamos, " +
-            "AVG(((dbo.FN_DIAS_HABILES(r.fecha_completa_commit, r.fecha_cierre) - dbo.FN_DIAS_HABILES(r.fecha_envio_aseg, r.fecha_recepcion_cheque)) * 24) - DATEDIFF(HOUR, r.fecha_completa_commit, r.fecha_asignacion) ) as promedio, " +
+            "AVG(((dbo.FN_DIAS_HABILES(r.fecha_completa_commit, r.fecha_cierre) - dbo.FN_DIAS_HABILES(r.fecha_envio_aseg, isnull(r.fecha_recepcion_cheque, r.fecha_cierre ))) * 24) - DATEDIFF(HOUR, r.fecha_completa_commit, r.fecha_asignacion) ) as promedio, " +
             "r.usuario_unity " +
             "into #ciclo_ejecutivoKPI " +
             "from reclamos_medicos as r " +
@@ -298,9 +298,9 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesMedicos : System.Web.U
             "where(r.estado_unity = 'Cerrado') and (" + ddlMoneda.SelectedValue + ") and (Convert(date, r.fecha_cierre, 112) between '" + txtFechaInicio.Text + "' and '" + txtFechaFin.Text + "') " +
             "and(" + ddlTipoReclamo.SelectedValue + ") group by r.usuario_unity " +
             " select usuario_unity as Usuario, total_reclamos as Total_Reclamos , " +
-            " isnull(promedio, 1) as Promedio_usuario, " +
-            " cast(("+kpiUnity+" / ((case when promedio = 0 then 1 " +
-            " when promedio is NULL then 1 else promedio end) * 1.0) ) *100 as decimal) as Ejecucion " +
+            " abs(isnull(promedio, 1)) as Promedio_usuario, " +
+            " abs(cast(("+kpiUnity+" / ((case when promedio = 0 then 1 " +
+            " when promedio is NULL then 1 else promedio end) * 1.0) ) *100 as decimal)) as Ejecucion " +
             " from #ciclo_ejecutivoKPI";
 
         llenado.llenarGrid(ejecutivoKPI, GridEjecutivosKPI);

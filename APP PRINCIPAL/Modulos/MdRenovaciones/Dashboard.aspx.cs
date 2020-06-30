@@ -69,8 +69,8 @@ public partial class Modulos_MdRenovaciones_Dashboard : System.Web.UI.Page
        
         try
         {
-            Utils.EmailRenovacion("pa_envio_renovaciones", correo, txtCuerpo.Text, registro.correo_gestor.Trim());
-            Utils.EmailRenovacion("pa_envio_renovaciones", Utils.seleccionarCorreoGestor(userlogin), txtCuerpo.Text, Utils.seleccionarCorreoGestor(userlogin));
+            Utils.EmailRenovacion("pa_envio_renovaciones", correo, txtCuerpo.Text, registro.correo_gestor.Trim(), (int)registro.codigo_gestor, (int)registro.grupo_economico);
+            Utils.EmailRenovacion("pa_envio_renovaciones", Utils.seleccionarCorreoGestor(userlogin), txtCuerpo.Text, Utils.seleccionarCorreoGestor(userlogin), (int)registro.codigo_gestor, (int)registro.grupo_economico);
             registro.estado = 3;
             registro.contenido_correo = txtCuerpo.Text;
             DBRenovaciones.SaveChanges();
@@ -102,12 +102,12 @@ public partial class Modulos_MdRenovaciones_Dashboard : System.Web.UI.Page
     //enviar correo electronico
     protected void lnkGuardar_Click(object sender, EventArgs e)
     {
-        string correo = Convert.ToString(GridElRoble.SelectedRow.Cells[12].Text);
+        //string correo = Convert.ToString(GridElRoble.SelectedRow.Cells[12].Text);
         int id = Convert.ToInt32(GridElRoble.SelectedRow.Cells[3].Text);
 
         try
         {
-            this.ValidarCorreo(correo, id);
+            this.ValidarCorreo(txtCorreo.Text, id);
         }
         catch (Exception ex)
         {

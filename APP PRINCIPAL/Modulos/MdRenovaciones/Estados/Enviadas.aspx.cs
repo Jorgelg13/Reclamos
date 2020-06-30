@@ -70,7 +70,8 @@ public partial class Modulos_MdRenovaciones_Estados_Enviadas : System.Web.UI.Pag
         {
             CheckBox chkRenovar = (CheckBox)row.FindControl("chkRenovar");
             CheckBox chkCancelar = (CheckBox)row.FindControl("chkCancelar");
-            int id = Convert.ToInt32(Convert.ToString(row.Cells[1].Text));
+            TextBox aclaracion = row.FindControl("txtAclaracion") as TextBox;
+            int id = Convert.ToInt32(Convert.ToString(row.Cells[2].Text));
 
             if (chkRenovar.Checked)
             {
@@ -80,6 +81,7 @@ public partial class Modulos_MdRenovaciones_Estados_Enviadas : System.Web.UI.Pag
                     String Poliza = (poliza.ramo + poliza.poliza + poliza.endoso_renov + ".pdf");
                     poliza.estado = 4;
                     poliza.comentario_renovacion = txtComentario.Text;
+                    poliza.aclaracion = aclaracion.Text;
                     DB.SaveChanges();
                     Utils.CopiarArchivos(Poliza, "Renovadas","Enviadas");
                     Utils.ShowMessage(this.Page, "Polizas renovadas exitosamente", "Excelente", "success");
@@ -99,6 +101,7 @@ public partial class Modulos_MdRenovaciones_Estados_Enviadas : System.Web.UI.Pag
                     String Poliza = (poliza.ramo + poliza.poliza + poliza.endoso_renov + ".pdf");
                     poliza.estado = 5;
                     poliza.comentario_invalida = txtComentario.Text;
+                    poliza.aclaracion = aclaracion.Text;
                     DB.SaveChanges();
                     Utils.MoverArchivos(Poliza, "Canceladas", "Enviadas");
                     Utils.ShowMessage(this.Page, "Polizas renovadas exitosamente", "Excelente", "success");

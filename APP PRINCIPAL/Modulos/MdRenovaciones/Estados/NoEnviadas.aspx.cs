@@ -91,9 +91,9 @@ public partial class Modulos_MdRenovaciones_Estados_NoEnviadas : System.Web.UI.P
 
             else
             {
-                Utils.EmailRenovacion("pa_envio_renovaciones", txtCorreo.Text, txtCuerpo.Text, registro.correo_gestor.Trim());
+                Utils.EmailRenovacion("pa_envio_renovaciones", txtCorreo.Text, txtCuerpo.Text, registro.correo_gestor.Trim(), (int)registro.codigo_gestor, (int)registro.grupo_economico);
                 //copia al ejecutivo
-                Utils.EmailRenovacion("pa_envio_renovaciones", Utils.seleccionarCorreoGestor(userlogin), txtCuerpo.Text, Utils.seleccionarCorreoGestor(userlogin));
+                Utils.EmailRenovacion("pa_envio_renovaciones", Utils.seleccionarCorreoGestor(userlogin), txtCuerpo.Text, Utils.seleccionarCorreoGestor(userlogin), (int)registro.codigo_gestor, (int)registro.grupo_economico);
                 registro.estado = 3;
                 DB.SaveChanges();
                 String Poliza = (registro.ramo + registro.poliza + registro.endoso_renov + ".pdf");
@@ -132,9 +132,9 @@ public partial class Modulos_MdRenovaciones_Estados_NoEnviadas : System.Web.UI.P
             {
                 case EmailValidationResult.OK:
                     // Console.WriteLine("Mailbox exists");
-                    Utils.EmailRenovacion("pa_envio_renovaciones", txtCorreo.Text, txtCuerpo.Text, registro.correo_gestor.Trim());
+                    Utils.EmailRenovacion("pa_envio_renovaciones", txtCorreo.Text, txtCuerpo.Text, registro.correo_gestor.Trim(), (int)registro.codigo_gestor, (int)registro.grupo_economico);
                     //copia al ejecutivo
-                    Utils.EmailRenovacion("pa_envio_renovaciones", Utils.seleccionarCorreoGestor(userlogin), txtCuerpo.Text, Utils.seleccionarCorreoGestor(userlogin));
+                    Utils.EmailRenovacion("pa_envio_renovaciones", Utils.seleccionarCorreoGestor(userlogin), txtCuerpo.Text, Utils.seleccionarCorreoGestor(userlogin), (int)registro.codigo_gestor, (int)registro.grupo_economico);
                     registro.estado = 3;
                     DB.SaveChanges();
                     String Poliza = (registro.ramo + registro.poliza + registro.endoso_renov + ".pdf");

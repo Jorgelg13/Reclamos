@@ -82,6 +82,15 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosAutosSeguimiento : Sys
         {
             btnGuardarProximaFecha.Enabled = true;
         }
+
+        if(lblEstadoAuto.Text == "Congelado")
+        {
+            if(userlogin != "mbarrios" && userlogin != "jwiesner" && userlogin !="jlaj")
+            {
+                ddlEstadoAuto.Enabled = false;
+                ddlEstadoAuto.SelectedItem.Text = "Congelado";
+            }
+        }
     }
 
     public void llenar_dropdowns()
@@ -140,6 +149,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosAutosSeguimiento : Sys
             lblBanderaCierreInterno.Text =                    reclamo.b_carta_cierre_interno.Value.ToString();
             lblBanderaDeclinado.Text =                        reclamo.b_carta_declinado.Value.ToString();
             lblBanderaEnvioCheque.Text =                      reclamo.b_carta_envio_cheque.Value.ToString();
+            lblBanderaAlertaTiempo.Text =                     reclamo.b_carta_alerta_tiempo.Value.ToString();
             lblProductoNoConforme.Text = "<b>Producto No Conforme Asignado: </b>" + reclamo.detalle_no_conforme;
             txtObservaciones.Text = reclamo.observaciones;
             txtObservacionesNoConf.Text = reclamo.observacion_no_conforme;
@@ -1142,6 +1152,42 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosAutosSeguimiento : Sys
         }
     }
 
+    protected void chAlertaTiempo_CheckedChanged(object sender, EventArgs e)
+    {
+        if (chAlertaTiempo.Checked)
+        {
+            chCartaDeclinado.Checked = false;
+            chEnvioCarta.Checked = false;
+            chCartaCierre.Checked = false;
+            
+            CodigoISO.Text = "RE-AU-F-07/Ver.02";
+            var buscarCarta = DBReclamos.cartas.Where(ca => ca.tipo == "alerta tiempo" && ca.modulo == "autos" && ca.id_reclamo == id).Count();
+
+            if (buscarCarta == 1)
+            {
+                var mostrar = DBReclamos.cartas.Where(ma => ma.id_reclamo == id && ma.tipo == "alerta tiempo" && ma.modulo == "autos").First();
+                txtContenidoCarta.Text = mostrar.contenido;
+                panelPrincipal.Visible = false;
+                Panelsecundario.Visible = true;
+                lblcarta.Text = txtContenidoCarta.Text;
+            }
+            else
+            {
+                PnDetallePago.Visible = false;
+                DatosCarta();
+                lblMemo.Text = cartaCierreInterno;
+            }
+        }
+        else
+        {
+            lblMemo.Text = "";
+            panelPrincipal.Visible = true;
+            Panelsecundario.Visible = false;
+        }
+
+        this.Page.ClientScript.RegisterStartupScript(this.Page.GetType(), "show_modal", "$('#Editor').modal('show');", addScriptTags: true);
+    }
+
     protected void chCartaCierre_CheckedChanged(object sender, EventArgs e)
     {
         if (chCartaCierre.Checked)
@@ -1252,19 +1298,25 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosAutosSeguimiento : Sys
         {
             if (chCartaCierre.Checked)
             {
-                Utils.Guardar_cartas_autos(txtContenidoCarta, "cierre interno", "autos", id, chCartaCierre, chCartaDeclinado, chEnvioCarta);
+                Utils.Guardar_cartas_autos(txtContenidoCarta, "cierre interno", "autos", id, chCartaCierre, chCartaDeclinado, chEnvioCarta, chAlertaTiempo);
                 Utils.actividades(id, Constantes.AUTOS(), 9, Constantes.USER());
             }
 
             else if (chCartaDeclinado.Checked)
             {
-                Utils.Guardar_cartas_autos(txtContenidoCarta, "declinado", "autos", id, chCartaCierre, chCartaDeclinado, chEnvioCarta);
+                Utils.Guardar_cartas_autos(txtContenidoCarta, "declinado", "autos", id, chCartaCierre, chCartaDeclinado, chEnvioCarta, chAlertaTiempo);
                 Utils.actividades(id, Constantes.AUTOS(), 10, Constantes.USER());
             }
 
             else if (chEnvioCarta.Checked)
             {
-                Utils.Guardar_cartas_autos(txtContenidoCarta, "envio cheque", "autos", id, chCartaCierre, chCartaDeclinado, chEnvioCarta);
+                Utils.Guardar_cartas_autos(txtContenidoCarta, "envio cheque", "autos", id, chCartaCierre, chCartaDeclinado, chEnvioCarta, chAlertaTiempo);
+                Utils.actividades(id, Constantes.AUTOS(), 11, Constantes.USER());
+            }
+
+            else if (chAlertaTiempo.Checked)
+            {
+                Utils.Guardar_cartas_autos(txtContenidoCarta, "alerta tiempo", "autos", id, chCartaCierre, chCartaDeclinado, chEnvioCarta, chAlertaTiempo);
                 Utils.actividades(id, Constantes.AUTOS(), 11, Constantes.USER());
             }
 
@@ -1467,4 +1519,6 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosAutosSeguimiento : Sys
             Utils.ShowMessage(this.Page, "No se pudieron grabar las observaciones " + ex.Message, "Error", "error");
         }
     }
+
+
 }

@@ -21,13 +21,17 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="FeaturedContent" runat="Server">
     <div class="container-fluid">
         <div class="form-inline">
-            <div class="form-group" style="width: 15%">
-                <label for="message-text" class="control-label">Fecha Inicio:</label>
-                <asp:TextBox ID="fechaInicio" Style="width: 100%" CssClass="form-control" Height="34px" type="date" runat="server"></asp:TextBox>
+          <div class="form-group col-lg-2">
+                <asp:TextBox CssClass="form-control" runat="server" ID="txtBuscar"  style="width: 100%"></asp:TextBox>
             </div>
-            <div class="form-group" style="width: 15%">
-                <label>Fecha Final:</label>
-                <asp:TextBox ID="fechaFinal" Style="width: 100%" CssClass="form-control" Height="34px" type="date" runat="server"></asp:TextBox>
+            <div class="form-group col-lg-1">
+                <asp:DropDownList CssClass="form-control" runat="server" ID="ddltipo" style="width:100%">
+                  <asp:ListItem Value="r.id">ID</asp:ListItem>
+                  <asp:ListItem Value="au.placa">placa</asp:ListItem>
+                  <asp:ListItem Value="au.poliza">poliza</asp:ListItem>
+                  <asp:ListItem Value="au.cliente">cliente</asp:ListItem>
+                  <asp:ListItem Value="au.asegurado">Asegurado</asp:ListItem>
+                </asp:DropDownList>
             </div>
             <div class="form-group">
                 <asp:Button ID="btnBuscar" runat="server" Text="Buscar" CssClass="btn btn-primary" OnClick="btnBuscar_Click" />

@@ -166,6 +166,8 @@ public partial class Modulos_MdReclamos_wbFrmReclamosAutos : System.Web.UI.Page
             "asegurado as Asegurado," +
             "poliza as Poliza," +
             "nombre as Aseguradora, " +
+            "gst_nombre as Ejecutivo,"+
+            "inciso as Certificado,"+
             "marca as Marca," +
             "modelo as Modelo," +
             "color as Color,"+

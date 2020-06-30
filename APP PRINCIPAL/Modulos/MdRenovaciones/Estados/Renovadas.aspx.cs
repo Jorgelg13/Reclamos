@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 public partial class Modulos_MdRenovaciones_Estados_Renovadas : System.Web.UI.Page
 {
     Utils llenar = new Utils();
-
+    String userlogin = HttpContext.Current.User.Identity.Name;
     ReclamosEntities DBReclamos = new ReclamosEntities();
     Renovaciones.RenovacionesEntities DB = new Renovaciones.RenovacionesEntities();
 
@@ -65,7 +65,8 @@ public partial class Modulos_MdRenovaciones_Estados_Renovadas : System.Web.UI.Pa
         foreach (GridViewRow row in GridRenovadas.Rows)
         {
             CheckBox checkAsig = (CheckBox)row.FindControl("checkAsignar");
-            int id = Convert.ToInt32(Convert.ToString(row.Cells[3].Text));
+           
+            int id = Convert.ToInt32(Convert.ToString(row.Cells[2].Text));
             if (checkAsig.Checked)
             {
                 try
@@ -73,6 +74,8 @@ public partial class Modulos_MdRenovaciones_Estados_Renovadas : System.Web.UI.Pa
                     var poliza = DB.renovaciones_polizas.Find(id);
                     String Poliza = (poliza.ramo + poliza.poliza + poliza.endoso_renov + ".pdf");
                     poliza.estado = 7;
+                    poliza.facturador = userlogin;
+                    poliza.fecha_facturacion = DateTime.Now;
                     DB.SaveChanges();
                     Utils.MoverArchivos(Poliza, "Archivo", "Renovadas");
                     Utils.ShowMessage(this.Page, "Polizas facturada exitosamente", "Excelente", "success");

@@ -24,7 +24,9 @@
             <div class="tab-content">
                 <div role="tabpanel" class="tab-pane" id="home">
                     <div class="scrolling-table-container">
-                        <asp:GridView ID="GridReclamosSeguimiento" OnRowDataBound="GridReclamosSeguimiento_RowDataBound" runat="server" CssClass="table bs-table table-responsive table-hover" AutoGenerateColumns="True" CellPadding="4" ForeColor="#333333" GridLines="None" OnSelectedIndexChanged="GridReclamosSeguimiento_SelectedIndexChanged">
+                        <asp:GridView ID="GridReclamosSeguimiento" OnRowDataBound="GridReclamosSeguimiento_RowDataBound" 
+                            runat="server" CssClass="table bs-table table-responsive table-hover" AutoGenerateColumns="True" CellPadding="4" 
+                            ForeColor="#333333" GridLines="None" OnSelectedIndexChanged="GridReclamosSeguimiento_SelectedIndexChanged">
                             <AlternatingRowStyle BackColor="White" />
                             <Columns>
                                 <asp:CommandField ShowSelectButton="True">
@@ -44,7 +46,10 @@
                 <%-----------------------------------------------  reclamos Pendientes de ser cerrados  -----------------------------------%>
                 <div role="tabpanel" class="tab-pane" id="profile">
                     <div class="scrolling-table-container">
-                        <asp:GridView ID="GridPendientes" runat="server" CssClass="table bs-table table-responsive table-hover" AutoGenerateColumns="True" CellPadding="4" ForeColor="#333333" GridLines="None" OnSelectedIndexChanged="GridPendientes_SelectedIndexChanged">
+                        <asp:GridView ID="GridPendientes" runat="server" CssClass="table bs-table table-responsive table-hover" 
+                            AutoGenerateColumns="True" CellPadding="4" ForeColor="#333333" GridLines="None" OnSelectedIndexChanged="GridPendientes_SelectedIndexChanged"
+                            OnRowDataBound="GridReclamosSeguimiento_RowDataBound"
+                            >
                             <AlternatingRowStyle BackColor="White" />
                             <Columns>
                                 <asp:CommandField ShowSelectButton="True">
@@ -65,11 +70,14 @@
                 <div role="tabpanel" class="tab-pane" id="coberturas">
                     <div class="form-inline">
                         <br />
-                        <asp:DropDownList ID="ddlGestor" Style="height: 34px; width: 200px;" CssClass="form-control" runat="server" DataSourceID="SqlDataSourceGestores" DataTextField="usuario" DataValueField="id"></asp:DropDownList>
+                        <asp:DropDownList ID="ddlGestor" Style="height: 34px; width: 200px;" CssClass="form-control" runat="server" 
+                            DataSourceID="SqlDataSourceGestores" DataTextField="usuario" DataValueField="id"></asp:DropDownList>
                         <asp:Button ID="btnBuscar" CssClass="btn btn-primary" runat="server" Text="Buscar" OnClick="btnBuscar_Click" />
                     </div>
                     <div class="scrolling-table-container">
-                        <asp:GridView ID="GridReclamosPorGestor" runat="server" CssClass="table bs-table table-responsive table-hover" AutoGenerateColumns="True" CellPadding="4" ForeColor="#333333" GridLines="None" OnSelectedIndexChanged="GridReclamosPorGestor_SelectedIndexChanged">
+                        <asp:GridView ID="GridReclamosPorGestor" runat="server" CssClass="table bs-table table-responsive table-hover" 
+                            OnRowDataBound="GridReclamosSeguimiento_RowDataBound" AutoGenerateColumns="True" CellPadding="4" ForeColor="#333333" 
+                            GridLines="None" OnSelectedIndexChanged="GridReclamosPorGestor_SelectedIndexChanged">
                             <AlternatingRowStyle BackColor="White" />
                             <Columns>
                                 <asp:CommandField ShowSelectButton="True">

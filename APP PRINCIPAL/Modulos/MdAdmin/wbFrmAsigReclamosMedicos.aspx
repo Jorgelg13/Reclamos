@@ -13,7 +13,7 @@
                         <asp:Label ID="lblFechaFinal" runat="server" Text="Fecha Final:   "></asp:Label>
                         <asp:TextBox ID="fechaFinal" CssClass="form-control" Height="34px" type="date" runat="server"></asp:TextBox>
                         <asp:Button runat="server" Text="Buscar" ID="btnBuscar" class="btn btn-primary" />
-                        <asp:SqlDataSource ID="SqlDataSourceUsuarios" runat="server" ConnectionString="<%$ ConnectionStrings:reclamosConnectionString %>" SelectCommand="SELECT nombre, usuario FROM [gestores] where tipo ='Medicos'"></asp:SqlDataSource>
+                        <asp:SqlDataSource ID="SqlDataSourceUsuarios" runat="server" ConnectionString="<%$ ConnectionStrings:reclamosConnectionString %>" SelectCommand="SELECT nombre, usuario FROM [gestores] where tipo ='Medicos' and estado = 1"></asp:SqlDataSource>
                         <asp:Label ID="Label3" class="form-control" runat="server" Text="Asignar Reclamo a:"></asp:Label>
                         <asp:DropDownList CssClass="form-control" ID="DDLusuario" runat="server" DataSourceID="SqlDataSourceUsuarios" DataTextField="nombre" DataValueField="usuario">
                         </asp:DropDownList>

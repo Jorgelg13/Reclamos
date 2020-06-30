@@ -22,6 +22,11 @@
                             <asp:TextBox ID="txtFechaFin" type="date" Height="34px" CssClass="form-control" Style="width: 100%" placeholder="Escriba su busqueda" runat="server">
                             </asp:TextBox>
                         </div>
+                         <div class="form-group" style="width: 15%">
+                          <asp:CheckBox runat="server" ID="chFiltro" Text="Filtrar" OnCheckedChanged="chFiltro_CheckedChanged" AutoPostBack="true" />
+                          <asp:DropDownList runat="server" ID="ddlUsuario" CssClass="form-control" Style="width: 100%" Enabled="false">
+                          </asp:DropDownList>
+                        </div>
                     </div>
                     <br />
                     <asp:Panel runat="server" ID="PanelPrincipal">

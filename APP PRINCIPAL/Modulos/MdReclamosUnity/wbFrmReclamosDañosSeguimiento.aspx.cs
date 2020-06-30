@@ -25,7 +25,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosDañosSeguimiento : Sy
     String poliza;
     short codigo;
     String idRecibido, comentarios, pagos, llamadas, coberturas, datosSiniestro, estados, liquidaciones;
-    String estadoReclamo, cartaEnvioCheque, cartaCierreInterno, cartaDeclinado, cartaDeducibleAnual, documentos, doc_solicitados;
+    String estadoReclamo, cartaEnvioCheque, cartaCierreInterno, cartaDeclinado, cartaDeducibleAnual,cartaCierre,cartaAlertaTiempo, documentos, doc_solicitados;
     int id, dias,totalEstado, idPago = 0;
     //variables para calculos de pagos de reclamos
     Double iva, monto_reclamado, mejora_tecnologica, tiempo_uso, infra_seguro, perdida_final_ajustada, 
@@ -39,10 +39,12 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosDañosSeguimiento : Sy
         Session.Add("id_RD", id.ToString());
         var reg = DBReclamos.reclamos_varios.Find(id);
 
-        cartaEnvioCheque   = Cartas.CARTA_ENVIO_CHEQUE_DANOS(reg);
-        cartaCierreInterno = Cartas.CARTA_CIERRE_INTERNO_DANOS(reg);
-        cartaDeclinado     = Cartas.CARTA_DECLINADO_DANOS(reg);
+        cartaEnvioCheque    = Cartas.CARTA_ENVIO_CHEQUE_DANOS(reg);
+        cartaCierreInterno  = Cartas.CARTA_CIERRE_INTERNO_DANOS(reg);
+        cartaDeclinado      = Cartas.CARTA_DECLINADO_DANOS(reg);
         cartaDeducibleAnual = Cartas.CIERRE_DEDUCIBLE_ANUAL(reg);
+        cartaCierre         = Cartas.CIERRE_RECLAMO(reg);
+        cartaAlertaTiempo   = Cartas.ALERTA_TIEMPO_DANIOS(reg);
         txtSolicitudDocumentos.Text = Cartas.SOLICITUD_DOCUMENTOS();
 
         datosSiniestro     = Consultas.DATOS_SINIESTRO(id);
@@ -78,6 +80,15 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosDañosSeguimiento : Sy
         if(userlogin== "cmejia" || userlogin == "mbarrios" || userlogin =="jlaj" || userlogin =="nsierra")
         {
             btnGuardarProximaFecha.Enabled = true;
+        }
+
+        if (lblEstadoReclamo.Text == "Congelado")
+        {
+            if (userlogin != "mbarrios" && userlogin != "jwiesner" && userlogin != "jlaj")
+            {
+                ddlEstadoReclamo.Enabled = false;
+                ddlEstadoReclamo.SelectedItem.Text = "Congelado";
+            }
         }
     }
 
@@ -146,8 +157,9 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosDañosSeguimiento : Sy
             lblBanderaCierreInterno.Text     = reclamo.b_carta_cierre_interno.Value.ToString();
             lblBanderaDeclinado.Text         = reclamo.b_carta_declinado.Value.ToString();
             lblBanderaEnvioCheque.Text       = reclamo.b_carta_envio_cheque.Value.ToString();
-            lblBanderaCierreDeducible.Text = reclamo.b_carta_deducible_anual.ToString();
-
+            lblBanderaCierreDeducible.Text   = reclamo.b_carta_deducible_anual.ToString();
+            lblBanderaCierreReclamo.Text     = reclamo.b_carta_cierre_reclamo.ToString();
+            lblBanderaAlerta.Text            = reclamo.b_carta_alerta_tiempo.ToString();
             //listado de dropdown
             lblEstadoReclamo.Text       = reclamo.estado_reclamo_unity;
             lblRamo.Text                = reclamo.reg_reclamo_varios.ramo;
@@ -173,6 +185,9 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosDañosSeguimiento : Sy
             txtReserva.Text        = reclamo.reserva.ToString();
             lblDocumento.Text      = String.IsNullOrEmpty(reclamo.documentos)? "": reclamo.documentos.Replace("\\","/");
             codigo                 = Convert.ToInt16(reclamo.reg_reclamo_varios.gestor);
+            lblContacto.Text = "<b>Contacto: </b> "+ reclamo.reg_reclamo_varios.contacto;
+            lblTelefonoContacto.Text = "<b>Telefono: </b>" + reclamo.reg_reclamo_varios.telefono_contacto;
+            lblCorreoContacto.Text = "<b>Correo: </b>" + reclamo.reg_reclamo_varios.correo_contacto;
 
             if (reclamo.estado_unity == "Cerrado")
             {
@@ -832,6 +847,20 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosDañosSeguimiento : Sy
                 datosReclamo(id);
             }
 
+            else if (ddlCartas.SelectedValue == "cierre reclamo")
+            {
+                Utils.Guardar_cartas(txtContenidoCarta, "cierre reclamo", "daños", id, ddlCartas, Response);
+                Utils.actividades(id, Constantes.DANIOS(), 11, Constantes.USER());
+                datosReclamo(id);
+            }
+
+            else if (ddlCartas.SelectedValue == "alerta tiempo")
+            {
+                Utils.Guardar_cartas(txtContenidoCarta, "alerta tiempo", "daños", id, ddlCartas, Response);
+                Utils.actividades(id, Constantes.DANIOS(), 11, Constantes.USER());
+                datosReclamo(id);
+            }
+
             Utils.ShowMessage(this.Page, "Carta Guardada con exito", "Excelente", "success");
         }
         catch (Exception ex)
@@ -1135,6 +1164,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosDañosSeguimiento : Sy
 
         if (ddlCartas.SelectedValue == "declinado")
         {
+            CodigoISO.Text = "RE-DA-F-05/Ver.03";
             var buscarCarta = DBReclamos.cartas.Where(ca => ca.tipo == "declinado" && ca.modulo == "daños" && ca.id_reclamo == id).Count();
 
             if (buscarCarta == 1)
@@ -1177,6 +1207,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosDañosSeguimiento : Sy
 
         else if (ddlCartas.SelectedValue == "envio cheque")
         {
+            CodigoISO.Text = "RE-DA-F-03/Ver.03";
             var buscarCarta = DBReclamos.cartas.Where(ca => ca.tipo == "envio cheque" && ca.modulo == "daños" && ca.id_reclamo == id).Count();
 
             if (buscarCarta == 1)
@@ -1198,6 +1229,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosDañosSeguimiento : Sy
 
         else if (ddlCartas.SelectedValue == "cierre deducible")
         {
+            CodigoISO.Text = "RE-DA-F-06/Ver.02";
             var buscarCarta = DBReclamos.cartas.Where(ca => ca.tipo == "cierre deducible" && ca.modulo == "daños" && ca.id_reclamo == id).Count();
 
             if (buscarCarta == 1)
@@ -1217,12 +1249,58 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosDañosSeguimiento : Sy
             }
         }
 
+        else if (ddlCartas.SelectedValue == "cierre reclamo")
+        {
+            CodigoISO.Text = "RE-DA-F-09/Ver.01";
+            var buscarCarta = DBReclamos.cartas.Where(ca => ca.tipo == "cierre reclamo" && ca.modulo == "daños" && ca.id_reclamo == id).Count();
+
+            if (buscarCarta == 1)
+            {
+                var mostrar = DBReclamos.cartas.Where(ma => ma.id_reclamo == id && ma.tipo == "cierre reclamo" && ma.modulo == "daños").First();
+                txtContenidoCarta.Text = mostrar.contenido;
+                panelPrincipal.Visible = false;
+                Panelsecundario.Visible = true;
+                lblcarta.Text = txtContenidoCarta.Text;
+            }
+            else
+            {
+                PnDetallePago.Visible = false;
+                PanelDetalleDeducible.Visible = false;
+                DatosCarta();
+                lblMemo.Text = cartaCierre;
+            }
+        }
+
+        else if (ddlCartas.SelectedValue == "alerta tiempo")
+        {
+            CodigoISO.Text = "RE-DA-F-08/Ver.02";
+            var buscarCarta = DBReclamos.cartas.Where(ca => ca.tipo == "alerta tiempo" && ca.modulo == "daños" && ca.id_reclamo == id).Count();
+
+            if (buscarCarta == 1)
+            {
+                var mostrar = DBReclamos.cartas.Where(ma => ma.id_reclamo == id && ma.tipo == "alerta tiempo" && ma.modulo == "daños").First();
+                txtContenidoCarta.Text = mostrar.contenido;
+                panelPrincipal.Visible = false;
+                Panelsecundario.Visible = true;
+                lblcarta.Text = txtContenidoCarta.Text;
+            }
+            else
+            {
+                PnDetallePago.Visible = false;
+                PanelDetalleDeducible.Visible = false;
+                DatosCarta();
+                lblMemo.Text = cartaAlertaTiempo;
+            }
+        }
+
         else
         {
             lblMemo.Text = "";
             panelPrincipal.Visible = true;
             Panelsecundario.Visible = false;
         }
+
+
 
         this.Page.ClientScript.RegisterStartupScript(this.Page.GetType(), "show_modal", "$('#Editor').modal('show');", addScriptTags: true);
     }

@@ -59,7 +59,6 @@ public partial class Modulos_MdReclamos_wbFrmReclamoDañoManual : System.Web.UI.
                 registro.asegurado = txtNombre.Text.ToString();
                 registro.aseguradora = ddlAseguradora.SelectedValue;
 
-
                 if (txtReportante.Text == "" || txtTelefono.Text == "" || txtFecha.Text == "")
                 {
                     Utils.ShowMessage(this.Page, "Los campos reportantes, telefono, y fecha son requeridos", "Nota..!", "warning");

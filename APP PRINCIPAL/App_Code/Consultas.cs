@@ -192,14 +192,15 @@ public class Consultas
             "r.poliza as Poliza," +
             "r.ramo as Ramo," +
             "r.endoso_renov as Endoso," +
-            "r.asegurado as Asegurado," +
-            "r.comentario_renovacion as Comentario," +
+            "r.asegurado as Asegurado,"+
+            "r.aclaracion as Aclaracion," +
+            "r.comentario_renovacion as Condiciones," +
             "r.marca as Marca," +
             "r.modelo as Modelo," +
             "r.placa as Placa," +
             "r.vigf as [Vigencia Final]," +
-            "r.correo_cliente as [Correo Cliente]," +
-            " (select top 1 fecha from renovaciones_log where poliza = r.id) as [Fecha Registro]" +
+            "(select top 1 fecha from renovaciones_log where poliza = r.id) as [Fecha Registro]," +
+            "r.correo_cliente as Correo "+
             " from renovaciones_polizas r " +
             "where r.estado = " + ddlEstado;
         }
@@ -215,13 +216,11 @@ public class Consultas
              "r.modelo as Modelo," +
              "r.placa as Placa," +
              "r.vigf as [Vigencia Final]," +
-             "r.correo_cliente as [Correo Cliente]," +
-             " (select top 1 fecha from renovaciones_log where poliza = r.id) as [Fecha Registro]" +
+             "(select top 1 fecha from renovaciones_log where poliza = r.id) as [Fecha Registro]," +
+             "r.correo_cliente as Correo " +
              " from renovaciones_polizas r " +
              "where r.estado = " + ddlEstado;
         }
-        
-
 
         if (rol == "E")
         {

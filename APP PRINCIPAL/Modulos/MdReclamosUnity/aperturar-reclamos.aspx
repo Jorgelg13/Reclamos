@@ -7,16 +7,17 @@
         <div class="panel panel-info">
             <div class="panel-heading"><b>Reaperturar Reclamos</b></div>
             <div class="panel-body">
-                <div class="form-group  col-sm-12 col-md-6 col-lg-2">
-                    <label>Desde:</label>
-                    <asp:TextBox ID="txtFechaInicio" Height="34px" type="date" CssClass="form-control" Style="width: 100%" runat="server"></asp:TextBox>
-                </div>
-                <div class="form-group  col-sm-12 col-md-6 col-lg-2">
-                    <label>Hasta:</label>
-                    <asp:TextBox ID="txtFechaFin" type="date" Height="34px" CssClass="form-control" Style="width: 100%" runat="server"></asp:TextBox>
-                </div>
-                <div class="form-group  col-sm-12 col-md-6 col-lg-2" style="padding-top: 26px;">
-                    <asp:Button runat="server" ID="btnBuscar" CssClass="btn btn-primary" Text="Buscar" OnClick="btnBuscar_Click" />
+                  <div class=" form-inline">
+                    <asp:TextBox runat="server" autocomplete="off" ID="txtBusqueda" Style="width: 25%" class="form-control" placeholder="Escriba una opcion de busqueda" 
+                        data-toggle="tooltip"></asp:TextBox>
+                    <asp:DropDownList CssClass="form-control" ID="DDLTipo" Style="width: 15%" Height="34px" runat="server" CausesValidation="True">
+                        <asp:ListItem Value="r.id">ID</asp:ListItem> 
+                        <asp:ListItem Value="reg.poliza">Poliza</asp:ListItem>
+                        <asp:ListItem Value="reg.asegurado">Asegurado</asp:ListItem>
+                        <asp:ListItem Value="r.num_reclamo">No. de reclamo de Aseguradora</asp:ListItem> 
+                        <asp:ListItem Value="reg.cliente">Cliente</asp:ListItem> 
+                    </asp:DropDownList>
+                    <asp:Button runat="server" Text="Buscar" ID="Button1" class="btn btn-primary" OnClick="btnBuscar_Click" />
                     <asp:Button runat="server" ID="btnAperturar" CssClass="btn btn-primary" Text="Reaperturar" OnClick="btnAperturar_Click" />
                 </div>
                 <div class="scrolling-table-container col-lg-12 col-md-12" style="padding: 0px;">

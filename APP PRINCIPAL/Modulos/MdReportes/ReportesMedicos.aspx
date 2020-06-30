@@ -24,13 +24,17 @@
                 <div class="panel-heading"><b>Reporte de Autorizaciones</b></div>
                 <div class="panel-body" style="padding:6px;">
                     <div class="panel-body form-inline">
-                        <asp:Label ID="Label1" class="form-control" runat="server" Text="Fecha Inicio:   "></asp:Label>
+                        <asp:Label ID="Label1" runat="server" Text="Fecha Inicio:   "></asp:Label>
                         <asp:TextBox ID="txtFechaInicio" CssClass="form-control" Height="34px" type="date" runat="server"></asp:TextBox>
-                        <asp:Label ID="Label2" runat="server" class="form-control" Text="Fecha Final:   "></asp:Label>
+                        <asp:Label ID="Label2" runat="server" Text="Fecha Final:   "></asp:Label>
                         <asp:TextBox ID="txtFechaFin" CssClass="form-control" Height="34px" type="date" runat="server"></asp:TextBox>
+                        <asp:DropDownList runat="server" ID="ddlTipoFecha" CssClass="form-control">
+                            <asp:ListItem Value="1">Fecha Registro</asp:ListItem>
+                            <asp:ListItem Value="2">Fecha Cierre</asp:ListItem>
+                        </asp:DropDownList>
                         <asp:Button ID="btnBuscar" runat="server" Text="Buscar" CssClass="btn btn-primary" OnClick="btnBuscar_Click" />
                         <asp:Button ID="btnRegresar" runat="server" Text="Inicio" CssClass="btn btn-primary" OnClick="btnRegresar_Click" />
-                         <asp:LinkButton ID="linkDescargar" OnClick="linkDescargar_Click" title="Descargar en excel" runat="server" Style="font-size: 30px; text-align: center; color:green; padding:0px;"><i class="fa fa-file-excel-o" aria-hidden="true"></i></asp:LinkButton>
+                        <asp:LinkButton ID="linkDescargar" OnClick="linkDescargar_Click" title="Descargar en excel" runat="server" Style="font-size: 30px; text-align: center; color:green; padding:0px;"><i class="fa fa-file-excel-o" aria-hidden="true"></i></asp:LinkButton>
                     </div>
                     <div class="scrolling-table-container">
                         <asp:GridView ID="GridMedicos" runat="server" CssClass="table bs-table table-responsive table-hover" AutoGenerateColumns="true" CellPadding="4" ForeColor="#333333" GridLines="None">

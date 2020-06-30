@@ -141,6 +141,9 @@
           <Property Name="contenido_correo" Type="text" />
           <Property Name="comentario_renovacion" Type="text" />
           <Property Name="comentario_invalida" Type="text" />
+          <Property Name="aclaracion" Type="text" />
+          <Property Name="facturador" Type="text" />
+          <Property Name="fecha_facturacion" Type="datetime" />
         </EntityType>
         <EntityType Name="requerimientos">
           <Key>
@@ -383,6 +386,9 @@
           <Property Name="comentario_invalida" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="estados" Relationship="RenovacionesModel.FK_polizas_estado" FromRole="renovaciones_polizas" ToRole="estados" />
           <NavigationProperty Name="renovaciones_log" Relationship="RenovacionesModel.FK_renovaciones_log_poliza" FromRole="renovaciones_polizas" ToRole="renovaciones_log" />
+          <Property Name="aclaracion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="facturador" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="fecha_facturacion" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="requerimientos">
           <Key>
@@ -504,6 +510,9 @@
           <EntitySetMapping Name="renovaciones_polizas">
             <EntityTypeMapping TypeName="RenovacionesModel.renovaciones_polizas">
               <MappingFragment StoreEntitySet="renovaciones_polizas">
+                <ScalarProperty Name="fecha_facturacion" ColumnName="fecha_facturacion" />
+                <ScalarProperty Name="facturador" ColumnName="facturador" />
+                <ScalarProperty Name="aclaracion" ColumnName="aclaracion" />
                 <ScalarProperty Name="comentario_invalida" ColumnName="comentario_invalida" />
                 <ScalarProperty Name="comentario_renovacion" ColumnName="comentario_renovacion" />
                 <ScalarProperty Name="contenido_correo" ColumnName="contenido_correo" />

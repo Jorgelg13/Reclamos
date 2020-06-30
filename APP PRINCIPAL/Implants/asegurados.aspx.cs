@@ -109,7 +109,7 @@ public partial class Implants_asegurados : System.Web.UI.Page
                     registro.fechafin = DateTime.Now;
                     DB.SaveChanges();
                     llenarGrid();
-                    Utils.EmailRenovacion("pa_email_implant", registro.correo, contenidoCorreo, correoUsuario);
+                    Utils.EmailRenovacion("pa_email_implant", registro.correo, contenidoCorreo, correoUsuario,0,0);
                     Utils.ShowMessage(this.Page, "Registro cerrado con exito", "Excelente", "success");
                 }
                 catch (Exception ex)

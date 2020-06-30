@@ -84,7 +84,7 @@ public partial class Modulos_MdAdmin_wbFrmAsignacionUnity : System.Web.UI.Page
                     asignar.asignado_por = userlogin;
                     DBReclamos.SaveChanges();
                     Utils.ShowMessage(this.Page, "Reclamos asignados exitosamente", "Excelente", "success");
-                    //Correos.Notificacion(gestor.correo,"Asignacion de reclamo", Cuerpo);
+                    Correos.Notificacion(gestor.correo,"Asignacion de reclamo", Cuerpo);
                 }
                 catch (Exception ex)
                 {

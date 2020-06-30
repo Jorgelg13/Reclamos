@@ -98,6 +98,12 @@ $(document).ready(function () {
         else {
             $('#summernote').html($('#MemosReclamos').html());
         }
+        if ($('#ContentPlaceHolder1_chAlertaTiempo')[0].checked && $('#ContentPlaceHolder1_lblBanderaAlertaTiempo').text() === 'True') {
+            $('#summernote').html($('#ContentPlaceHolder1_lblcarta').html());
+        }
+        else {
+            $('#summernote').html($('#MemosReclamos').html());
+        }
         $('#summernote').summernote();
     }
     catch ($ex) { }
@@ -129,6 +135,20 @@ $(document).ready(function () {
         }
 
         if ($('#ContentPlaceHolder1_ddlCartas').val() === "cierre deducible" && $('#ContentPlaceHolder1_lblBanderaCierreDeducible').text() === 'True') {
+            $('#summernote').html($('#ContentPlaceHolder1_lblcarta').html());
+        }
+        else {
+            $('#summernote').html($('#MemosReclamos').html());
+        }
+
+        if ($('#ContentPlaceHolder1_ddlCartas').val() === "cierre reclamo" && $('#ContentPlaceHolder1_lblBanderaCierreReclamo').text() === 'True') {
+            $('#summernote').html($('#ContentPlaceHolder1_lblcarta').html());
+        }
+        else {
+            $('#summernote').html($('#MemosReclamos').html());
+        }
+
+        if ($('#ContentPlaceHolder1_ddlCartas').val() === "alerta tiempo" && $('#ContentPlaceHolder1_lblBanderaAlerta').text() === 'True') {
             $('#summernote').html($('#ContentPlaceHolder1_lblcarta').html());
         }
         else {

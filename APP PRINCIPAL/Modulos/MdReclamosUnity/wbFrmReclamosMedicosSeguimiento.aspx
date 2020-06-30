@@ -10,7 +10,8 @@
             <div class=" col-sm-8">
                 <div>
                     <h1>
-                        <a href="/Modulos/MdReclamosUnity/wbFrmReclamosMedicosAsignados.aspx" style="font-size: 70px; text-align: center" class="fa fa-lock">Este reclamo no esta aperturado o no tiene seguimiento</a>
+                        <a href="/Modulos/MdReclamosUnity/wbFrmReclamosMedicosAsignados.aspx" 
+                            style="font-size: 70px; text-align: center" class="fa fa-lock">Este reclamo no esta aperturado o no tiene seguimiento</a>
                     </h1>
                 </div>
             </div>
@@ -58,11 +59,13 @@
                                 <b>
                                     <asp:Label ID="txtFechaModificado" runat="server" Style="padding-left: 15%;"></asp:Label>
                                 </b>
-                                <asp:CheckBox ID="checkMoneda" automplete="false" AutoPostBack="true" runat="server" Style="padding-left: 12%;" Text="Cambiar Moneda" OnCheckedChanged="checkMoneda_CheckedChanged" />
+                                <asp:CheckBox ID="checkMoneda" automplete="false" AutoPostBack="true" runat="server" Style="padding-left: 12%;" 
+                                    Text="Cambiar Moneda" OnCheckedChanged="checkMoneda_CheckedChanged" />
                             </div>
                             <div class="panel-body" style="padding: 0px; height: 800px;">
                                 <div style="height: auto; overflow-x: auto;">
-                                    <asp:GridView ID="GridDetalleM" CssClass="table bs-table tablaDetalleAuto table-responsive" runat="server" ForeColor="#333333" GridLines="None" AutoGenerateColumns="False" DataKeyNames="ID" DataSourceID="detalle_gasto_medico" OnSelectedIndexChanged="GridDetalleM_SelectedIndexChanged">
+                                    <asp:GridView ID="GridDetalleM" CssClass="table bs-table tablaDetalleAuto table-responsive" runat="server" 
+                                        ForeColor="#333333" GridLines="None" AutoGenerateColumns="False" DataKeyNames="ID" DataSourceID="detalle_gasto_medico" OnSelectedIndexChanged="GridDetalleM_SelectedIndexChanged">
                                         <Columns>
                                             <asp:CommandField SelectText="Eliminar" ShowSelectButton="True" />
                                             <asp:BoundField DataField="Descripcion" HeaderText="Descripcion" SortExpression="Descripcion" />
@@ -983,6 +986,7 @@
                             <asp:ListItem Value="2">Recepcion</asp:ListItem>
                             <asp:ListItem Value="3">Correo</asp:ListItem>
                             <asp:ListItem Value="4">Cerrado Porque no Procede</asp:ListItem>
+                            <asp:ListItem Value="5">Transferencia</asp:ListItem>
                         </asp:DropDownList>
                     </div>
                 </div>

@@ -785,6 +785,7 @@
           <Property Name="b_carta_cierre_interno" Type="bit" />
           <Property Name="b_carta_declinado" Type="bit" />
           <Property Name="b_carta_envio_cheque" Type="bit" />
+          <Property Name="b_carta_alerta_tiempo" Type="bit" />
           <Property Name="documentos" Type="varchar" MaxLength="200" />
           <Property Name="problema_taller" Type="bit" />
           <Property Name="problema_cabina" Type="bit" />
@@ -834,7 +835,7 @@
           <Property Name="fecha_gasto" Type="date" />
           <Property Name="fecha_modificacion" Type="datetime" />
           <Property Name="fecha_visualizar" Type="date" />
-          <Property Name="num_reclamo" Type="varchar" MaxLength="50" />
+          <Property Name="num_reclamo" Type="varchar" MaxLength="300" />
           <Property Name="observacion" Type="text" />
           <Property Name="recepcion" Type="varchar" MaxLength="50" />
           <Property Name="detalle_cliente" Type="text" />
@@ -851,7 +852,7 @@
           <Property Name="fecha_cierre_no_conforme" Type="datetime" />
           <Property Name="observacion_no_conforme" Type="varchar" MaxLength="500" />
           <Property Name="documento" Type="varchar" MaxLength="250" />
-          <Property Name="direccion" Type="varchar" MaxLength="180" />
+          <Property Name="direccion" Type="varchar" MaxLength="400" />
         </EntityType>
         <EntityType Name="reclamos_varios">
           <Key>
@@ -907,6 +908,8 @@
           <Property Name="b_carta_declinado" Type="bit" />
           <Property Name="b_carta_envio_cheque" Type="bit" />
           <Property Name="b_carta_deducible_anual" Type="bit" />
+          <Property Name="b_carta_cierre_reclamo" Type="bit" />
+          <Property Name="b_carta_alerta_tiempo" Type="bit" />
           <Property Name="reserva" Type="decimal" Precision="10" Scale="2" />
           <Property Name="documentos" Type="varchar" MaxLength="150" />
           <Property Name="problema_ajustador" Type="bit" />
@@ -946,6 +949,9 @@
           <Property Name="cia" Type="smallint" />
           <Property Name="secren" Type="smallint" />
           <Property Name="vendedor" Type="nvarchar" MaxLength="10" />
+          <Property Name="contacto" Type="varchar" MaxLength="200" />
+          <Property Name="correo_contacto" Type="varchar" MaxLength="100" />
+          <Property Name="telefono_contacto" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="reg_reclamos_medicos">
           <Key>
@@ -1143,6 +1149,9 @@ advertencia 6002: La tabla o vista 'reclamos.dbo.ViewBusquedaAuto' no tiene defi
           <Property Name="prima" Type="decimal" Precision="12" Scale="2" />
           <Property Name="porcom" Type="decimal" Precision="10" Scale="2" />
           <Property Name="vendedor" Type="int" />
+          <Property Name="contacto" Type="varchar" MaxLength="200" />
+          <Property Name="correo" Type="varchar" MaxLength="250" />
+          <Property Name="telefono_contacto" Type="varchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="vistaReclamosMedicos">
           <Key>
@@ -3816,6 +3825,7 @@ FROM [dbo].[v_producto_no_conforme] AS [v_producto_no_conforme]</DefiningQuery>
           <Property Name="b_carta_cierre_interno" Type="Boolean" />
           <Property Name="b_carta_declinado" Type="Boolean" />
           <Property Name="b_carta_envio_cheque" Type="Boolean" />
+          <Property Name="b_carta_alerta_tiempo" Type="Boolean" />
           <Property Name="documentos" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="problema_taller" Type="Boolean" />
           <Property Name="problema_cabina" Type="Boolean" />
@@ -3880,7 +3890,7 @@ FROM [dbo].[v_producto_no_conforme] AS [v_producto_no_conforme]</DefiningQuery>
           <Property Name="fecha_gasto" Type="DateTime" Precision="0" />
           <Property Name="fecha_modificacion" Type="DateTime" Precision="3" />
           <Property Name="fecha_visualizar" Type="DateTime" Precision="0" />
-          <Property Name="num_reclamo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="num_reclamo" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
           <Property Name="observacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="recepcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="detalle_cliente" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
@@ -3897,7 +3907,7 @@ FROM [dbo].[v_producto_no_conforme] AS [v_producto_no_conforme]</DefiningQuery>
           <Property Name="fecha_cierre_no_conforme" Type="DateTime" Precision="3" />
           <Property Name="observacion_no_conforme" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="documento" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
-          <Property Name="direccion" Type="String" MaxLength="180" FixedLength="false" Unicode="false" />
+          <Property Name="direccion" Type="String" MaxLength="400" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="bitacora_reclamos_medicos" Relationship="reclamosModel.FK__bitacora___id_re__3A81B327" FromRole="reclamos_medicos" ToRole="bitacora_reclamos_medicos" />
           <NavigationProperty Name="cabina" Relationship="reclamosModel.FK__reclamos___id_ca__4E88ABD4" FromRole="reclamos_medicos" ToRole="cabina" />
           <NavigationProperty Name="comentarios_reclamos_medicos" Relationship="reclamosModel.FK_comentarios_reclamos_medicos_reclamos_medicos" FromRole="reclamos_medicos" ToRole="comentarios_reclamos_medicos" />
@@ -3963,6 +3973,8 @@ FROM [dbo].[v_producto_no_conforme] AS [v_producto_no_conforme]</DefiningQuery>
           <Property Name="b_carta_declinado" Type="Boolean" />
           <Property Name="b_carta_envio_cheque" Type="Boolean" />
           <Property Name="b_carta_deducible_anual" Type="Boolean" />
+          <Property Name="b_carta_cierre_reclamo" Type="Boolean" />
+          <Property Name="b_carta_alerta_tiempo" Type="Boolean" />
           <Property Name="reserva" Type="Decimal" Precision="10" Scale="2" />
           <Property Name="documentos" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
           <Property Name="problema_ajustador" Type="Boolean" />
@@ -4014,6 +4026,9 @@ FROM [dbo].[v_producto_no_conforme] AS [v_producto_no_conforme]</DefiningQuery>
           <Property Name="cia" Type="Int16" />
           <Property Name="secren" Type="Int16" />
           <Property Name="vendedor" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="contacto" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="correo_contacto" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="telefono_contacto" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="reclamos_varios" Relationship="reclamosModel.FK__reclamos___id_re__5441852A" FromRole="reg_reclamo_varios" ToRole="reclamos_varios" />
         </EntityType>
         <EntityType Name="reg_reclamos_medicos">
@@ -4184,6 +4199,9 @@ FROM [dbo].[v_producto_no_conforme] AS [v_producto_no_conforme]</DefiningQuery>
           <Property Name="prima" Type="Decimal" Precision="12" Scale="2" />
           <Property Name="porcom" Type="Decimal" Precision="10" Scale="2" />
           <Property Name="vendedor" Type="Int32" />
+          <Property Name="contacto" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="correo" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="telefono_contacto" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="vistaReclamosMedicos">
           <Key>
@@ -5982,6 +6000,7 @@ FROM [dbo].[v_producto_no_conforme] AS [v_producto_no_conforme]</DefiningQuery>
                 <ScalarProperty Name="problema_cabina" ColumnName="problema_cabina" />
                 <ScalarProperty Name="problema_taller" ColumnName="problema_taller" />
                 <ScalarProperty Name="documentos" ColumnName="documentos" />
+                <ScalarProperty Name="b_carta_alerta_tiempo" ColumnName="b_carta_alerta_tiempo" />
                 <ScalarProperty Name="b_carta_envio_cheque" ColumnName="b_carta_envio_cheque" />
                 <ScalarProperty Name="b_carta_declinado" ColumnName="b_carta_declinado" />
                 <ScalarProperty Name="b_carta_cierre_interno" ColumnName="b_carta_cierre_interno" />
@@ -6110,6 +6129,8 @@ FROM [dbo].[v_producto_no_conforme] AS [v_producto_no_conforme]</DefiningQuery>
                 <ScalarProperty Name="problema_ajustador" ColumnName="problema_ajustador" />
                 <ScalarProperty Name="documentos" ColumnName="documentos" />
                 <ScalarProperty Name="reserva" ColumnName="reserva" />
+                <ScalarProperty Name="b_carta_alerta_tiempo" ColumnName="b_carta_alerta_tiempo" />
+                <ScalarProperty Name="b_carta_cierre_reclamo" ColumnName="b_carta_cierre_reclamo" />
                 <ScalarProperty Name="b_carta_deducible_anual" ColumnName="b_carta_deducible_anual" />
                 <ScalarProperty Name="b_carta_envio_cheque" ColumnName="b_carta_envio_cheque" />
                 <ScalarProperty Name="b_carta_declinado" ColumnName="b_carta_declinado" />
@@ -6166,6 +6187,9 @@ FROM [dbo].[v_producto_no_conforme] AS [v_producto_no_conforme]</DefiningQuery>
           <EntitySetMapping Name="reg_reclamo_varios">
             <EntityTypeMapping TypeName="reclamosModel.reg_reclamo_varios">
               <MappingFragment StoreEntitySet="reg_reclamo_varios">
+                <ScalarProperty Name="telefono_contacto" ColumnName="telefono_contacto" />
+                <ScalarProperty Name="correo_contacto" ColumnName="correo_contacto" />
+                <ScalarProperty Name="contacto" ColumnName="contacto" />
                 <ScalarProperty Name="vendedor" ColumnName="vendedor" />
                 <ScalarProperty Name="secren" ColumnName="secren" />
                 <ScalarProperty Name="cia" ColumnName="cia" />
@@ -6328,6 +6352,9 @@ FROM [dbo].[v_producto_no_conforme] AS [v_producto_no_conforme]</DefiningQuery>
           <EntitySetMapping Name="vistaReclamosDaños">
             <EntityTypeMapping TypeName="reclamosModel.vistaReclamosDaños">
               <MappingFragment StoreEntitySet="vistaReclamosDaños">
+                <ScalarProperty Name="telefono_contacto" ColumnName="telefono_contacto" />
+                <ScalarProperty Name="correo" ColumnName="correo" />
+                <ScalarProperty Name="contacto" ColumnName="contacto" />
                 <ScalarProperty Name="vendedor" ColumnName="vendedor" />
                 <ScalarProperty Name="porcom" ColumnName="porcom" />
                 <ScalarProperty Name="prima" ColumnName="prima" />

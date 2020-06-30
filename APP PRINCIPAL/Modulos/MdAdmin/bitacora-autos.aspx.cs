@@ -20,10 +20,7 @@ public partial class Modulos_MdAdmin_bitacora_autos : System.Web.UI.Page
     {
         if (!IsPostBack)
         {
-            DateTime primerDia = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
-            DateTime ultimoDia = primerDia.AddMonths(1).AddDays(-1);
-            fechaInicio.Text = primerDia.ToString("yyyy/MM/dd").Replace("/", "-");
-            fechaFinal.Text = ultimoDia.ToString("yyyy/MM/dd").Replace("/", "-");
+
         }
 
         bitacoraAutos = "SELECT " +
@@ -63,7 +60,7 @@ public partial class Modulos_MdAdmin_bitacora_autos : System.Web.UI.Page
            " auto_reclamo as au " +
            "INNER JOIN reclamo_auto as r ON r.id_auto_reclamo = au.id " +
            "INNER JOIN usuario ON r.id_usuario = usuario.id " +
-           "where(fecha_cierre between '" + fechaInicio.Text + "' and '" + fechaFinal.Text + "') and (r.id_estado = 2)";
+           "where "+ddltipo.SelectedValue+" like '%"+txtBuscar.Text+"%' and (r.id_estado = 2)";
     }
 
     protected void btnBuscar_Click(object sender, EventArgs e)

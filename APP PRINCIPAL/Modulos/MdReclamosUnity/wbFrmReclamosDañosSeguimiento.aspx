@@ -42,7 +42,9 @@
                 <asp:Label ID="lblBanderaCierreInterno" runat="server" Style="display: none;"></asp:Label>
                 <asp:Label ID="lblBanderaDeclinado" runat="server" Style="display: none;"></asp:Label>
                 <asp:Label ID="lblBanderaEnvioCheque" runat="server" Style="display: none;"></asp:Label>
-                 <asp:Label ID="lblBanderaCierreDeducible" runat="server" Style="display: none;"></asp:Label>
+                <asp:Label ID="lblBanderaCierreDeducible" runat="server" Style="display: none;"></asp:Label>
+                <asp:Label ID="lblBanderaCierreReclamo" runat="server" Style="display: none;"></asp:Label>
+                <asp:Label ID="lblBanderaAlerta" runat="server" Style="display: none;"></asp:Label>
                 <asp:Label ID="lblDocumento" runat="server" Style="display: none;"></asp:Label>
             </div>
             <%---------------------------------------------------------------------------------------------------%>
@@ -205,6 +207,8 @@
                                     <asp:ListItem Value="declinado">Carta Declinado</asp:ListItem>
                                     <asp:ListItem Value="envio cheque">Carta envio cheque</asp:ListItem>
                                     <asp:ListItem Value="cierre deducible">Cierre deducible anual</asp:ListItem>
+                                    <asp:ListItem Value="cierre reclamo">Cierre reclamo</asp:ListItem>
+                                    <asp:ListItem Value="alerta tiempo">Alerta tiempo</asp:ListItem>
                                 </asp:DropDownList>
                                 <br />
                                 <br />
@@ -703,7 +707,7 @@
                                             </b>
                                         </p>
                                     </div>
-                                    <p  style="text-align: right; padding-top: 20px;"><asp:label runat="server" ID="CodigoISO"></asp:label></p>
+                                    <p style="text-align: right; padding-top: 20px;"><asp:label runat="server" ID="CodigoISO"></asp:label></p>
                                 </div>
                             </asp:Panel>
                             <asp:Panel runat="server" ID="Panelsecundario" Style="display: none">
@@ -731,6 +735,15 @@
                                 <div class="form-group">
                                     <label>Telefono:</label>
                                     <asp:TextBox ID="txtTelefono" MaxLength="15" Style="width: 100%" CssClass="form-control" AutoComplete="off" runat="server"></asp:TextBox>
+                                </div>
+                                 <div class="form-group">
+                                     <b>Contacto ACS:</b>
+                                     <br />
+                                   <asp:Label runat="server" ID="lblContacto"></asp:Label>
+                                     <br />
+                                   <asp:Label runat="server" ID="lblTelefonoContacto"></asp:Label>
+                                     <br />
+                                   <asp:Label runat="server" ID="lblCorreoContacto"></asp:Label>
                                 </div>
                             </div>
                             <div class="modal-footer">

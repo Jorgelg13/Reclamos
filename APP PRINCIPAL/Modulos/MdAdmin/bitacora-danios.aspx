@@ -36,7 +36,7 @@
         </div>
         <br />
         <div class="panel panel-info" style="min-height: 400px;">
-            <div class="panel-heading">Registro de Reclamos de Autos</div>
+            <div class="panel-heading">Registro de Reclamos Daños</div>
             <div class="panel-body">
                 <div class="scrolling-table-container">
                     <asp:GridView ID="GridBitacoras" CssClass="table bs-table tablaDetalleAuto table-responsive table-hover"
@@ -65,7 +65,7 @@
                         <table style="width: 100%">
                             <tr>
                                 <td><b>Departamento:</b></td>
-                                <td>Reclamos Autos</td>
+                                <td>Reclamos Daños</td>
                                 <td><b>Reportante:</b></td>
                                 <td>
                                     <asp:Label ID="lblReportante" runat="server"></asp:Label></td>

@@ -17,13 +17,17 @@ public partial class Modulos_MdRenovaciones_Reportes_Estados : System.Web.UI.Pag
             "r.poliza_unity as Poliza_Unity," +
             "r.fecha_registro as [Fecha Registro]," +
             "r.ramo as Ramo," +
-            "r.placa, " +
+            "r.placa as Placa, " +
+            "r.codigo_gestor as [Codigo Gestor],"+
             "r.nombre_gestor as Gestor," +
             "r.asegurado as Asegurado," +
             "r.comentario_renovacion as [Comentario Renovacion]," +
-            "r.comentario_invalida as [Comentario Invalida],"+
-            "r.telefono_cliente," +
-            "r.correo_cliente as [Correo Cliente] " +
+            "r.telefono_cliente as [Telefono Cliente]," +
+            "r.correo_cliente as [Correo Cliente], " +
+            "r.comentario_invalida as [Comentario Invalida]," +
+            "r.aclaracion as Aclaracion," +
+            "r.facturador as Facturador, " +
+            "r.fecha_facturacion as [Fecha Facturacion] " +
             "from renovaciones_polizas as r " +
             "inner join(select distinct poliza from renovaciones_log where estado = "+ddlEstado.SelectedValue+") as l on l.poliza = r.id " +
             "and convert(date,fecha_registro,112) between '"+txtFechaInicio.Text+"' and '"+txtFechaFin.Text+"' ";

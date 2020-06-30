@@ -11,10 +11,11 @@
                     <asp:TextBox runat="server" autocomplete="off" ID="txtBusqueda" Style="width: 25%" class="form-control" placeholder="Escriba una opcion de busqueda" 
                         data-toggle="tooltip"></asp:TextBox>
                     <asp:DropDownList CssClass="form-control" ID="DDLTipo" Style="width: 15%" Height="34px" runat="server" CausesValidation="True">
-                        <asp:ListItem Value="poliza">Poliza</asp:ListItem>
-                        <asp:ListItem Value="asegurado">Asegurado</asp:ListItem>
-                        <asp:ListItem Value="num_reclamo">No. Reclamo</asp:ListItem> 
-                        <asp:ListItem Value="cliente">Cliente</asp:ListItem> 
+                        <asp:ListItem Value="r.id">ID</asp:ListItem> 
+                        <asp:ListItem Value="reg.poliza">Poliza</asp:ListItem>
+                        <asp:ListItem Value="reg.asegurado">Asegurado</asp:ListItem>
+                        <asp:ListItem Value="r.num_reclamo">No. de reclamo de Aseguradora</asp:ListItem> 
+                        <asp:ListItem Value="reg.cliente">Cliente</asp:ListItem> 
                     </asp:DropDownList>
                      <asp:DropDownList CssClass="form-control" ID="ddlEstado" Style="width: 15%" Height="34px" runat="server" CausesValidation="True">
                         <asp:ListItem Value="seguimiento">Seguimiento</asp:ListItem>

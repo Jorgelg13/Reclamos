@@ -16,9 +16,11 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosMedicosGeneral : Syste
           "reg.asegurado as Asegurado," +
           "reg.poliza as Poliza," +
           "reg.aseguradora as Aseguradora," +
+          "reg.ejecutivo as Ejecutivo,"+
           "r.telefono as Telefono," +
           "r.empresa as Empresa," +
           "r.tipo_reclamo as [Tipo Reclamo]," +
+          "r.usuario_unity as Usuario,"+
           "Convert(varchar(10), r.fecha_visualizar, 103) As [Fecha Visualizar] " +
           "FROM " +
           "reg_reclamos_medicos as reg " +
@@ -76,7 +78,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosMedicosGeneral : Syste
     protected void GridGeneral_RowDataBound(object sender, System.Web.UI.WebControls.GridViewRowEventArgs e)
     {
         if (e.Row.RowType == DataControlRowType.DataRow)
-            if (Convert.ToDateTime(e.Row.Cells[8].Text) <= DateTime.Today)
+            if (Convert.ToDateTime(e.Row.Cells[10].Text) <= DateTime.Today)
             {
                 e.Row.Attributes.Add("style", "background-color: #f7c6be"); //rojos
             }

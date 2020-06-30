@@ -27,7 +27,8 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesAutos : System.Web.UI.
             txtFechaFin.Text = ultimoDia.ToString("yyyy/MM/dd").Replace("/", "-");
         }
 
-        if (userlogin == "jsagastume" || userlogin == "jlaj" || userlogin == "jwiesner" || userlogin == "nsierra" || userlogin == "jpazos" || userlogin =="mbarrios")
+        if ( userlogin == "jlaj" || userlogin == "jwiesner" ||  
+            userlogin == "nsierra" || userlogin =="mbarrios" || userlogin == "hvillacinda" || userlogin == "lgarcia" || userlogin == "mguillen")
         {
             btnMostrarEficiencia.Visible = true;
         }
@@ -533,8 +534,8 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesAutos : System.Web.UI.
 
         if (ddlCiclos.SelectedValue == "Ciclo Total")
         {
-            kpi = 87;
-            kpiImportacion = 87;
+            kpi = 73;
+            kpiImportacion = 73;
             Utils.Ciclos_Reclamos_tipo(txtFechaInicio, txtFechaFin, "pa_ciclos_reclamos_autos_con_importacion", GridCiclos, 4, kpi, 1);
             kpi = 57;
             Utils.Ciclos_Reclamos_tipo(txtFechaInicio, txtFechaFin, "pa_ciclos_reclamos_autos_con_importacion", GridCiclos2, 4, kpi, 0);
@@ -545,7 +546,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesAutos : System.Web.UI.
 
         else if (ddlCiclos.SelectedValue == "Ciclo Unity")
         {
-            kpi = 11;
+            kpi = 6;
             Utils.Ciclos_Reclamos(txtFechaInicio, txtFechaFin, "pa_ciclos_reclamos_autos", GridCiclos, 1, kpi);
             Utils.Ciclos_Reclamos(txtFechaInicio, txtFechaFin, "pa_ciclos_reclamos_autos", GridCiclos2, 5, kpi);
             lblTitulo.Text = "Ciclo Unity, KPI sobre " + kpi.ToString() + " dias";
@@ -555,10 +556,10 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesAutos : System.Web.UI.
 
         else if (ddlCiclos.SelectedValue == "Ciclo Aseguradora")
         {
-            kpi = 63;
-            kpiImportacion = 63;
+            kpi = 54;
+            kpiImportacion = 54;
             Utils.Ciclos_Reclamos_tipo(txtFechaInicio, txtFechaFin, "pa_ciclos_reclamos_autos_con_importacion", GridCiclos, 2, kpi,1);
-            kpi = 33;
+            kpi = 24;
             Utils.Ciclos_Reclamos_tipo(txtFechaInicio, txtFechaFin, "pa_ciclos_reclamos_autos_con_importacion", GridCiclos2, 2, kpi,0);
             Titulo("Aseguradora", kpi, kpiImportacion);
             KPI(true);

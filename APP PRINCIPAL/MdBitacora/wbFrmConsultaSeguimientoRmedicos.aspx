@@ -1127,13 +1127,13 @@
          }
 
          function documento() {
-             window.open('http://52.34.115.100:5556/files/GastosMedicos/'+ruta+'', "ventana1", "width=700,height=800,scrollbars=NO")
+             window.open('https://archivos-reclamos.unitypromotores.com/files/GastosMedicos/'+ruta+'', "ventana1", "width=700,height=800,scrollbars=NO")
          }
 
          function buscador() {
              var alto = $(window).height() - 200;
              var ancho = $(window).width() - 700;
-             window.open('http://52.34.115.100:5556/explorador.html#files%2FGastosMedicos/'+ ruta, "ventana1", "width=" + ancho + ",height=" + alto + ",scrollbars=NO")
+             window.open('https://archivos-reclamos.unitypromotores.com/explorador.html#files%2FGastosMedicos/'+ ruta, "ventana1", "width=" + ancho + ",height=" + alto + ",scrollbars=NO")
          }
       </script>
     </form>

@@ -58,7 +58,8 @@ public partial class Modulos_MdReclamos_wbFrmReclamosAsignadosUnity : System.Web
                    "reclamo_auto.piloto as Piloto," +
                    "reclamo_auto.telefono as Telefono," +
                    "reclamo_auto.ajustador as Ajustador, " +
-                   "auto_reclamo.numero_gestor as Cod " +
+                   "auto_reclamo.numero_gestor as Cod ," +
+                   "auto_reclamo.vendedor as Cod_vendedor "+ //25
                    "FROM auto_reclamo " +
                    "INNER JOIN reclamo_auto ON reclamo_auto.id_auto_reclamo = auto_reclamo.id " +
                    "where (usuario_unity = '" + userlogin + "') and(estado_unity = 'Sin Cerrar')";
@@ -167,6 +168,7 @@ public partial class Modulos_MdReclamos_wbFrmReclamosAsignadosUnity : System.Web
             reclamo.b_carta_cierre_interno = false;
             reclamo.b_carta_declinado = false;
             reclamo.b_carta_envio_cheque = false;
+            reclamo.b_carta_alerta_tiempo = false;
             reclamo.problema_ajustador = false;
             reclamo.problema_cabina = false;
             reclamo.problema_taller = false;
@@ -247,9 +249,8 @@ public partial class Modulos_MdReclamos_wbFrmReclamosAsignadosUnity : System.Web
         string mensaje = Constantes.ASIGNACION_AUTOS(ddlGestor, registro.auto_reclamo.placa, registro.auto_reclamo.marca, registro.auto_reclamo.modelo, telefono, id);
 
         //notificacion.NOTIFICACION(txtCorreo.Text.Trim(), mensaje, "Asignacion de Reclamo");
-        Utils.notificacion_email("pa_notificacion", txtCorreo.Text, mensaje, registro.gestores.correo, "Asignacion de Reclamo");
+        Utils.notificacion_email("pa_notificacion", txtCorreo.Text.Trim(), mensaje, registro.gestores.correo, "Asignacion de Reclamo");
         agregarComentario("Registro de envio de correo de notificacion: \n\n" + mensaje);
-
     }
 
     //insertar el primero estado del auto su bitacora
@@ -265,6 +266,7 @@ public partial class Modulos_MdReclamos_wbFrmReclamosAsignadosUnity : System.Web
             estado.id_reclamo_auto = id_estado;
             estado.fecha = DateTime.Now;
             DBReclamos.bitacora_estados_autos.Add(estado);
+            DBReclamos.SaveChanges();
         }
         catch (Exception)
         {
@@ -277,27 +279,33 @@ public partial class Modulos_MdReclamos_wbFrmReclamosAsignadosUnity : System.Web
         var registro = DBReclamos.reclamo_auto.Find(id);
         correoGestor = Utils.seleccionarCorreoGestor(userlogin);
         asunto = "Notificacion Siniestro Auto";
-
-        codigo = registro.auto_reclamo.vendedor;
-        if (codigo != "&nbsp;" || codigo != null || codigo != "")
-        {
-            correoVendedor = Utils.seleccionarCorreo(Convert.ToInt32(registro.auto_reclamo.vendedor));
-        }
-
-        codigo = registro.auto_reclamo.numero_gestor.ToString();
-        if (codigo != "&nbsp;" || codigo != null || codigo != "")
-        {
-            correoEjecutivo = Utils.seleccionarCorreo(Convert.ToInt32(registro.auto_reclamo.numero_gestor));
-        }
-
         cuerpo = Constantes.NOTIFICACION_EJECUTIVO_AUTOS(
-            registro.fecha.ToString(), registro.auto_reclamo.asegurado, registro.auto_reclamo.poliza, ddlGestor,
-            registro.auto_reclamo.placa, registro.auto_reclamo.marca, registro.auto_reclamo.modelo, id);
+          registro.fecha.ToString(), registro.auto_reclamo.asegurado, registro.auto_reclamo.poliza, ddlGestor,
+          registro.auto_reclamo.placa, registro.auto_reclamo.marca, registro.auto_reclamo.modelo, id);
 
-        Utils.notificacion_email("pa_notificacion", correoGestor, cuerpo, correoReclamos, asunto);
-        Utils.notificacion_email("pa_notificacion", correoVendedor, cuerpo, correoGestor, asunto);
-        Utils.notificacion_email("pa_notificacion", correoEjecutivo, cuerpo, correoGestor, asunto);
-        agregarComentario("Registro de notificacion a ejecutivo: \n\n " + cuerpo);
+        
+        codigo = GridAsignacion.SelectedRow.Cells[24].Text;
+        if (codigo != "&nbsp;")
+        {
+            correoEjecutivo = Utils.seleccionarCorreo(Convert.ToInt32(codigo));
+            if (!string.IsNullOrEmpty(correoEjecutivo))
+            {
+                Utils.notificacion_email("pa_notificacion", correoEjecutivo, cuerpo, correoGestor, asunto);
+                agregarComentario("Registro de notificacion a ejecutivo: \n\n " + cuerpo);
+            }
+        }
+
+        codigo = GridAsignacion.SelectedRow.Cells[25].Text;
+        if (codigo != "&nbsp;")
+        {
+            correoVendedor = Utils.seleccionarCorreo(Convert.ToInt32(codigo));
+            if (!string.IsNullOrEmpty(correoVendedor))
+            {
+                Utils.notificacion_email("pa_notificacion", correoVendedor, cuerpo, correoGestor, asunto);
+            }
+        }
+
+        //Utils.notificacion_email("pa_notificacion", correoGestor, cuerpo, correoReclamos, asunto);
 
         //if (codigo == "&nbsp;" || codigo == null || codigo == "")
         //{

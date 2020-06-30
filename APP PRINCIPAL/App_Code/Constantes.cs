@@ -147,7 +147,7 @@ public class Constantes
         return "Estimado Ejecutivo: \n\n" +
            "Hacemos de su conocimiento que con fecha " + fecha + " ingreso un reclamo del Asegurado " + asegurado + " " +
            "por daños al vehiculo "+placa+ "  "+marca+ " "+modelo+ "  Según póliza No. " + poliza + "." +
-           "el asesor de reclamos asignado es " + gestor.SelectedItem.Text + " \n" +
+           "el asesor de reclamos asignado es " + gestor.SelectedItem.Text + " \n\n" +
            "Para mas detalles puede consultar el reclamo con este id : " + id + " en el siguiente link \n\n" +
            "<a href= \"http://reclamosgt.unitypromotores.com/MdBitacora/DashboardUnity.aspx\">Consulta Reclamos</a>" +
         " Cualquier duda y/ o comentario al respecto quedamos a sus ordenes.\n\n\n";

@@ -10,22 +10,12 @@ public partial class Modulos_MdReclamosUnity_aperturar_reclamos : System.Web.UI.
 
     protected void Page_Load(object sender, EventArgs e)
     {
-        if (!IsPostBack)
-        {
-            DateTime primerDia = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
-            DateTime ultimoDia = primerDia.AddMonths(1).AddDays(-1);
-            txtFechaInicio.Text = primerDia.ToString("yyyy/MM/dd").Replace("/", "-");
-            txtFechaFin.Text = ultimoDia.ToString("yyyy/MM/dd").Replace("/", "-");
-        }
+
     }
 
     protected void btnBuscar_Click(object sender, EventArgs e)
     {
-        consulta = " select r.id as ID, reg.poliza as Poliza, reg.asegurado as Asegurado, r.estado_unity as Estado from reclamos_varios as r " +
-            "inner join reg_reclamo_varios as reg on reg.id = r.id_reg_reclamos_varios where r.estado_unity = 'Cerrado' " +
-            "and convert(date,fecha_cierre_reclamo,113) between '"+txtFechaInicio.Text+"' and '"+txtFechaFin.Text+"'";
-
-        llenar.llenarGrid(consulta, GridReclamos);
+        llenar.llenarGrid(buscador(txtBusqueda.Text), GridReclamos);
     }
 
     protected void btnAperturar_Click(object sender, EventArgs e)
@@ -47,6 +37,7 @@ public partial class Modulos_MdReclamosUnity_aperturar_reclamos : System.Web.UI.
                     var aperturar = DBReclamos.reclamos_varios.Find(id);
                     aperturar.estado_unity = "Seguimiento";
                     DBReclamos.SaveChanges();
+                    llenar.llenarGrid(buscador(txtBusqueda.Text), GridReclamos);
                     GridReclamos.DataBind();
                     Utils.ShowMessage(this.Page, "Reclamos reaperturados con exito", "Excelente", "success");
                 }
@@ -56,5 +47,35 @@ public partial class Modulos_MdReclamosUnity_aperturar_reclamos : System.Web.UI.
                 }
             }
         }
+    }
+
+    public string buscador(String dato)
+    {
+        string[] arreglo = dato.Split(" ".ToCharArray());
+        string sql = "";
+        if (arreglo.Length > 0)
+        {
+            sql = "select " +
+                "r.id as ID, " +
+                "reg.poliza as Poliza, " +
+                "reg.asegurado as Asegurado, " +
+                "r.estado_unity as Estado "+
+                "FROM reclamos_varios as r " +
+                "INNER JOIN reg_reclamo_varios as reg ON r.id_reg_reclamos_varios = reg.id " +
+                "where " + DDLTipo.SelectedValue + " like '%" + arreglo[0] + "%' and r.estado_unity = 'Cerrado' ";
+
+            if (arreglo.Length > 1)
+            {
+                for (int i = 1; i < arreglo.Length; i++)
+                {
+                    if (!String.IsNullOrEmpty(arreglo[i].Trim()))
+                    {
+                        sql += " and " + DDLTipo.SelectedValue + " like '%" + arreglo[i] + "%' ";
+                    }
+                }
+            }
+        }
+
+        return sql;
     }
 }
