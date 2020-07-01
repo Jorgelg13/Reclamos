@@ -16,7 +16,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesMedicos : System.Web.U
     int kpiAseguradora = 15; //dias
     int kpiUnity = 72; //horas
     Double TotalReclamos, totalPromedioUsuario, totalPendientes;
-    int totalNuevos, totalCerrados,pendientesFueratiempo, totalFueraTiempo;
+    int totalNuevos, totalCerrados, pendientesFueratiempoQ, pendientesFueratiempo_dollar, cerradosFueraTiempoQ, cerradosFueraTiempo_dollar;
     Double totalPromedio, totalPromedioPonderado, totalPromedioEjecucion;
     String buscar;
     //variable que contiene todos los joins que se hacen en el query del reporte
@@ -378,7 +378,6 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesMedicos : System.Web.U
         PnCicloEjecutivoKPI.Visible = false;
         PnEficiencia.Visible = false;
     }
-
     protected void linkDescarExcel_Click(object sender, EventArgs e)
     {
         if(PnCicloAseguradora.Visible == true)
@@ -412,7 +411,6 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesMedicos : System.Web.U
     }
 
     //funcion para realizar una sumatoria y colocar el total en la parte de abajo del grid
-
     protected void GridPromedioAseguradora_RowDataBound(object sender, GridViewRowEventArgs e)
     {
         try
@@ -528,8 +526,10 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesMedicos : System.Web.U
                 totalPendientes += Convert.ToInt32(DataBinder.Eval(e.Row.DataItem, "[Pendientes]"));
                 totalNuevos += Convert.ToInt32(DataBinder.Eval(e.Row.DataItem, "[Nuevos]"));
                 totalCerrados += Convert.ToInt32(DataBinder.Eval(e.Row.DataItem, "[Cerrados]"));
-                pendientesFueratiempo += Convert.ToInt32(DataBinder.Eval(e.Row.DataItem, "[Pendientes_fuera_tiempo]"));
-                totalFueraTiempo += Convert.ToInt32(DataBinder.Eval(e.Row.DataItem, "[Cerrados_fuera_tiempo]"));
+                pendientesFueratiempoQ += Convert.ToInt32(DataBinder.Eval(e.Row.DataItem, "[Pendientes_fuera_tiempo_Q]"));
+                pendientesFueratiempo_dollar += Convert.ToInt32(DataBinder.Eval(e.Row.DataItem, "[Pendientes_fuera_tiempo_$]"));
+                cerradosFueraTiempoQ += Convert.ToInt32(DataBinder.Eval(e.Row.DataItem, "[Cerrados_fuera_tiempo_Q]"));
+                cerradosFueraTiempo_dollar += Convert.ToInt32(DataBinder.Eval(e.Row.DataItem, "[Cerrados_fuera_tiempo_$]"));
                 totalPromedioEjecucion += Convert.ToDouble(DataBinder.Eval(e.Row.DataItem, "[Ejecucion]"));
             }
             else if (e.Row.RowType == DataControlRowType.Footer)
@@ -547,20 +547,28 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesMedicos : System.Web.U
                 e.Row.Cells[3].HorizontalAlign = HorizontalAlign.Left;
                 e.Row.Font.Bold = true;
 
-                e.Row.Cells[4].Text = pendientesFueratiempo.ToString();
+                e.Row.Cells[4].Text = pendientesFueratiempoQ.ToString();
                 e.Row.Cells[4].HorizontalAlign = HorizontalAlign.Left;
                 e.Row.Font.Bold = true;
 
-                e.Row.Cells[5].Text = totalFueraTiempo.ToString();
+                e.Row.Cells[5].Text = pendientesFueratiempo_dollar.ToString();
                 e.Row.Cells[5].HorizontalAlign = HorizontalAlign.Left;
                 e.Row.Font.Bold = true;
 
-                e.Row.Cells[6].Text = ((1 - (Convert.ToDouble(totalFueraTiempo) / Convert.ToDouble(totalCerrados) )) * 100).ToString("N2");
+                e.Row.Cells[6].Text = cerradosFueraTiempoQ.ToString();
                 e.Row.Cells[6].HorizontalAlign = HorizontalAlign.Left;
                 e.Row.Font.Bold = true;
 
-                e.Row.Cells[7].Text = ((1 - (Convert.ToDouble(pendientesFueratiempo) / Convert.ToDouble(totalPendientes))) * 100).ToString("N2");
+                e.Row.Cells[7].Text = cerradosFueraTiempo_dollar.ToString();
                 e.Row.Cells[7].HorizontalAlign = HorizontalAlign.Left;
+                e.Row.Font.Bold = true;
+
+                e.Row.Cells[8].Text = ((1 - (Convert.ToDouble(cerradosFueraTiempoQ + cerradosFueraTiempo_dollar) / Convert.ToDouble(totalCerrados) )) * 100).ToString("N2");
+                e.Row.Cells[8].HorizontalAlign = HorizontalAlign.Left;
+                e.Row.Font.Bold = true;
+
+                e.Row.Cells[9].Text = ((1 - (Convert.ToDouble(pendientesFueratiempoQ + pendientesFueratiempo_dollar) / Convert.ToDouble(totalPendientes))) * 100).ToString("N2");
+                e.Row.Cells[9].HorizontalAlign = HorizontalAlign.Left;
                 e.Row.Font.Bold = true;
             }
         }

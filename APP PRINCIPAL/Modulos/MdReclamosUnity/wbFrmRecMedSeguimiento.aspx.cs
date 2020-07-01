@@ -29,7 +29,8 @@ public partial class Modulos_MdReclamosUnity_wbFrmRecMedSeguimiento : System.Web
            "r.fecha_apertura as [Fecha Apertura]," +
            "r.fecha_envio_aseg as [Fecha Envio Aseguradora]," +
            // "CASE WHEN CONVERT(date, reclamos_medicos.fecha_visualizar, 110) < CONVERT(date, GETDATE(), 110)  THEN 0 ELSE 1 END AS mostrar, " +
-           "Convert(varchar(10),r.fecha_visualizar, 103) As [Fecha Visualizar] " +
+           "Convert(varchar(10),r.fecha_visualizar, 103) As [Fecha Visualizar], " +
+           "dbo.FN_DIAS_HABILES(r.fecha_apertura, getdate()) as [Dias Habiles] "+
            "FROM reg_reclamos_medicos as reg " +
            "INNER JOIN reclamos_medicos as r ON r.id_reg_reclamos_medicos = reg.id ";
 
@@ -64,19 +65,19 @@ public partial class Modulos_MdReclamosUnity_wbFrmRecMedSeguimiento : System.Web
 
             if(e.Row.Cells[11].Text == "Quetzales")
             {
-                if ((DateTime.Now - Convert.ToDateTime(e.Row.Cells[12].Text)).TotalDays >= 10)
+                if (Convert.ToInt32(e.Row.Cells[15].Text) >= 10)
                 {
                     e.Row.Attributes.Add("style", "background-color: #FFFBD2"); //amarillos
                 }
 
-                if ((DateTime.Now - Convert.ToDateTime(e.Row.Cells[12].Text)).TotalDays >= 15)
+                if (Convert.ToInt32(e.Row.Cells[15].Text) >= 15)
                 {
                     e.Row.Attributes.Add("style", "background-color: #f7c6be"); //rojos
                 }
 
                 if (e.Row.Cells[13].Text != "&nbsp;")
                 {
-                    if ((DateTime.Now - Convert.ToDateTime(e.Row.Cells[13].Text)).TotalDays < 10)
+                    if (Convert.ToInt32(e.Row.Cells[15].Text) < 10)
                     {
                         e.Row.Attributes.Add("style", "background-color: #8ace8e"); //verdes
                     }
@@ -85,19 +86,19 @@ public partial class Modulos_MdReclamosUnity_wbFrmRecMedSeguimiento : System.Web
 
             if (e.Row.Cells[11].Text == "Dolares")
             {
-                if ((DateTime.Now - Convert.ToDateTime(e.Row.Cells[12].Text)).TotalDays >= 20)
+                if (Convert.ToInt32(e.Row.Cells[15].Text) >= 20)
                 {
                     e.Row.Attributes.Add("style", "background-color: #FFFBD2"); //amarillos
                 }
 
-                if ((DateTime.Now - Convert.ToDateTime(e.Row.Cells[12].Text)).TotalDays >= 28)
+                if (Convert.ToInt32(e.Row.Cells[15].Text) >= 28)
                 {
                     e.Row.Attributes.Add("style", "background-color: #f7c6be"); //rojos
                 }
 
                 if (e.Row.Cells[13].Text != "&nbsp;")
                 {
-                    if ((DateTime.Now - Convert.ToDateTime(e.Row.Cells[13].Text)).TotalDays < 20)
+                    if (Convert.ToInt32(e.Row.Cells[15].Text) < 20)
                     {
                         e.Row.Attributes.Add("style", "background-color: #8ace8e"); //verdes
                     }

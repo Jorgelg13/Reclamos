@@ -321,11 +321,11 @@
             $('#ContentPlaceHolder1_GridEficiencia tr').each(function (index) {
                 $tr = $(this);
                 if (index > 0) {
-                    $td = $tr[0].cells[6];
+                    $td = $tr[0].cells[8];
                     $td.innerText = $td.innerText + ' %';
                     $td.className = 'alinearNumeros';
 
-                     $td = $tr[0].cells[7];
+                     $td = $tr[0].cells[9];
                     $td.innerText = $td.innerText + ' %';
                     $td.className = 'alinearNumeros';
                 }
