@@ -190,6 +190,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosAutosSeguimiento : Sys
             CheckPerdida.Checked       = reclamo.perdida_total.Value;
             checkCierreInterno.Checked = reclamo.cierre_interno.Value;
             CheckRobo.Checked          = reclamo.robo.Value;
+            txtReserva.Text            = reclamo.reserva.ToString();
 
             //informacion del taller asignado
             txtNombreTaller.Text      = reclamo.talleres.nombre;
@@ -372,6 +373,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosAutosSeguimiento : Sys
             reclamo.id_taller         = Convert.ToInt16(ddlTaller.SelectedValue);
             reclamo.observaciones     = txtObservaciones.Text;
             reclamo.cierre_interno    = cierre_interno;
+            reclamo.reserva           = Convert.ToDecimal(txtReserva.Text);
             DBReclamos.SaveChanges();
             llenado.llenarGrid(estados_autos,GridEstadosAuto);
 

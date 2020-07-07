@@ -799,6 +799,7 @@
           <Property Name="comentario_aseguradora" Type="text" />
           <Property Name="fecha_problema" Type="datetime" />
           <Property Name="importacion" Type="bit" />
+          <Property Name="reserva" Type="decimal" Precision="10" Scale="2" />
         </EntityType>
         <EntityType Name="reclamos_medicos">
           <Key>
@@ -1199,23 +1200,6 @@ advertencia 6002: La tabla o vista 'reclamos.dbo.consultar_asegurados' no tiene 
           <Property Name="vigi" Type="date" />
           <Property Name="vigf" Type="date" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6013: La tabla o vista 'reclamos.dbo.v_polizas' no tiene definida una clave principal y no es posible inferir ninguna clave principal válida. Esta tabla o vista se ha excluido. Para usar la entidad, necesitará revisar el esquema, agregar las claves correctas y quitar sus comentarios.
-        <EntityType Name="v_polizas">
-          <Property Name="poliza" Type="nvarchar" MaxLength="50" />
-          <Property Name="secren" Type="smallint" />
-          <Property Name="ramo" Type="nvarchar" MaxLength="60" />
-          <Property Name="aseguradora" Type="nvarchar" MaxLength="300" />
-          <Property Name="vigi" Type="date" />
-          <Property Name="vigf" Type="date" />
-          <Property Name="cliente" Type="int" />
-          <Property Name="asegurado" Type="nvarchar" MaxLength="300" />
-          <Property Name="gestor" Type="nvarchar" MaxLength="300" />
-          <Property Name="prima" Type="decimal" Precision="12" Scale="2" />
-          <Property Name="porcom" Type="decimal" Precision="12" Scale="4" />
-          <Property Name="moneda" Type="nvarchar" MaxLength="50" />
-          <Property Name="gst_nombre" Type="nvarchar" MaxLength="300" />
-        </EntityType>-->
         <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'reclamos.dbo.v_producto_no_conforme' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="v_producto_no_conforme">
@@ -3854,6 +3838,7 @@ FROM [dbo].[v_producto_no_conforme] AS [v_producto_no_conforme]</DefiningQuery>
           <NavigationProperty Name="motivos_cierre" Relationship="reclamosModel.FK_reclamo_auto_motivos_cierre" FromRole="reclamo_auto" ToRole="motivos_cierre" />
           <NavigationProperty Name="usuario" Relationship="reclamosModel.FK__reclamo_a__id_us__440B1D61" FromRole="reclamo_auto" ToRole="usuario" />
           <NavigationProperty Name="talleres" Relationship="reclamosModel.FK_reclamo_auto_talleres" FromRole="reclamo_auto" ToRole="talleres" />
+          <Property Name="reserva" Type="Decimal" Precision="10" Scale="2" />
         </EntityType>
         <EntityType Name="reclamos_medicos">
           <Key>
@@ -5987,6 +5972,7 @@ FROM [dbo].[v_producto_no_conforme] AS [v_producto_no_conforme]</DefiningQuery>
           <EntitySetMapping Name="reclamo_auto">
             <EntityTypeMapping TypeName="reclamosModel.reclamo_auto">
               <MappingFragment StoreEntitySet="reclamo_auto">
+                <ScalarProperty Name="reserva" ColumnName="reserva" />
                 <ScalarProperty Name="importacion" ColumnName="importacion" />
                 <ScalarProperty Name="fecha_problema" ColumnName="fecha_problema" />
                 <ScalarProperty Name="comentario_aseguradora" ColumnName="comentario_aseguradora" />

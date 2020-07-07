@@ -160,6 +160,10 @@
                             <b>Selecciones</b>
                         </div>
                         <div class="panel-body" style="height: 200px; overflow-y: auto; overflow-x: auto">
+                            <label>Monto De Reserva:</label>
+                            <asp:TextBox runat="server" ID="txtReserva" CssClass="form-control" style="width:90%" placeholder="Monto de reserva"></asp:TextBox>
+                            <br />
+                            <br />
                             <asp:CheckBox ID="checkImportacion" runat="server" Text="Importacion" ForeColor="Red" />
                             <br />
                             <asp:CheckBox ID="checkPrioritario" runat="server" Text="Prioritario" />
@@ -180,6 +184,7 @@
                             <br />
                             <asp:DropDownList CssClass="form-control" ID="ddlTipoCierre" Enabled="false" Style="width: 95%" Height="34px" runat="server">
                             </asp:DropDownList>
+                           
                         </div>
                     </div>
                     <div style="height: 275px; overflow-y: auto;" class="panel panel-info col-sm-7 col-md-12 col-lg-7">

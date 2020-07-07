@@ -904,6 +904,7 @@ public partial class reclamo_auto
     public string comentario_aseguradora { get; set; }
     public Nullable<System.DateTime> fecha_problema { get; set; }
     public Nullable<bool> importacion { get; set; }
+    public Nullable<decimal> reserva { get; set; }
 
     public virtual analistas analistas { get; set; }
     public virtual auto_reclamo auto_reclamo { get; set; }
