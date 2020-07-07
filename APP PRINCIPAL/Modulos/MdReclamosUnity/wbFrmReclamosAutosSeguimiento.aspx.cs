@@ -373,7 +373,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosAutosSeguimiento : Sys
             reclamo.id_taller         = Convert.ToInt16(ddlTaller.SelectedValue);
             reclamo.observaciones     = txtObservaciones.Text;
             reclamo.cierre_interno    = cierre_interno;
-            reclamo.reserva           = Convert.ToDecimal(txtReserva.Text);
+            reclamo.reserva           = (txtReserva.Text == "" ) ? 0 : Convert.ToDecimal(txtReserva.Text);
             DBReclamos.SaveChanges();
             llenado.llenarGrid(estados_autos,GridEstadosAuto);
 
