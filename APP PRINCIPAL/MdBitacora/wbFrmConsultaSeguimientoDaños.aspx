@@ -18,7 +18,7 @@
 <body>
     <form id="form1" runat="server">
        <div class="jumbotron titulo-cabecera" style="height: 115px;">
-            <h2 style="width: 781px; padding-bottom: 20px;">Reclamos Gastos Medicos Unity Promotores</h2>
+            <h2 style="width: 781px; padding-bottom: 20px;">Reclamos De Daños Varios Unity Promotores</h2>
             <header>
                 <div class="content-wrapper">
                     <div class="float-right">
