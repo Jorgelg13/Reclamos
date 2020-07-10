@@ -34,8 +34,6 @@ public partial class MdBitacora_pendientes : System.Web.UI.Page
             "and reg.gestor = " + codigo + " ";
 
         llenado.llenarGrid(consulta, GridPendientes);
-
-       // PENDIENTES();
     }
 
     protected void GridPendientes_SelectedIndexChanged(object sender, EventArgs e)

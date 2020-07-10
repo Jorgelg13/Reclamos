@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using System.Web.UI;
 using System.Web.UI.WebControls;
 
 public partial class Modulos_MdRenovaciones_Catalogo_cambiar_usuario : System.Web.UI.Page
@@ -74,6 +72,7 @@ public partial class Modulos_MdRenovaciones_Catalogo_cambiar_usuario : System.We
                 try
                 {
                     var poliza = DB.renovaciones_polizas.Find(id);
+                    poliza.nombre_gestor = ddlUsuario.SelectedItem.Text;
                     poliza.codigo_gestor = Convert.ToInt32(ddlUsuario.SelectedValue);
                     DB.SaveChanges();
                     Utils.ShowMessage(this.Page, "Polizas cambiadas de usuario con exito", "Excelente", "success");
