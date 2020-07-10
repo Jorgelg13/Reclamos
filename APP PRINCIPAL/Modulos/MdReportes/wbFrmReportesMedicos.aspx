@@ -32,6 +32,7 @@
                     <asp:ListItem Value="reg.vip as VIP">VIP</asp:ListItem>
                     <asp:ListItem Value="reg.moneda as Moneda">Moneda</asp:ListItem>
                     <asp:ListItem Value="r.fecha_commit as [Fecha Creacion]">Fecha Creacion</asp:ListItem>
+                    <asp:ListItem Value="r.fecha_asignacion as [Fecha Asignacion]">Fecha Asignacion</asp:ListItem>
                     <asp:ListItem Value="r.fecha_revision as [Fecha Revision]">Fecha Revision</asp:ListItem>
                     <asp:ListItem Value="r.fecha_envio_aseg as [Fecha Envio Aseguradora]">Fecha Envio Aseg.</asp:ListItem>
                     <asp:ListItem Value="r.fecha_modificacion as [Fecha Modificacion]">Fecha Modificacion</asp:ListItem>
