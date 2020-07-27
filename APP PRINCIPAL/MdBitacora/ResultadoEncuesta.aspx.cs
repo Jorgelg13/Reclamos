@@ -88,7 +88,7 @@ public partial class MdBitacora_ResultadoEncuesta : System.Web.UI.Page
             "e.fecha as Fecha " +
             "from encuesta as e " +
             "inner join cabina_virtual as c on c.codigo = e.codigo " +
-            "where empresa = 'Cabina' and convert(date,e.fecha,112) between '"+txtFechaInicio.Text+"' and '"+txtFechaFin.Text+"' ";
+            "where convert(date,e.fecha,112) between '"+txtFechaInicio.Text+"' and '"+txtFechaFin.Text+"' ";
     }
 
     protected void btnBuscar_Click1(object sender, EventArgs e)
