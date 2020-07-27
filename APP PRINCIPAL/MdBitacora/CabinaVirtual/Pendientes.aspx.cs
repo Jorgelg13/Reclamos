@@ -14,7 +14,14 @@ public partial class MdBitacora_CabinaVirtual_Pendientes : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
-        consulta = "select id, nombre as Nombre, correo as Correo, telefono as Telefono, codigo as Codigo, fechareg as Fecha, estado as Estado from cabina_virtual where estado = 0";
+        consulta = "select id, " +
+            "nombre as Nombre, " +
+            "correo as Correo, " +
+            "telefono as Telefono, " +
+            "codigo as Codigo, " +
+            "fechareg as Fecha, " +
+            "estado as Estado " +
+            "from cabina_virtual where estado = 0";
 
         if (!IsPostBack)
         {

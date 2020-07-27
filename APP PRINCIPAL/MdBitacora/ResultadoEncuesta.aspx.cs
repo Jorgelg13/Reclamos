@@ -70,8 +70,24 @@ public partial class MdBitacora_ResultadoEncuesta : System.Web.UI.Page
 
         egresos_hospitalarios = "select * from [encuesta-egresos] where convert(date,fecha,112) between '"+txtFechaInicio.Text+"' and '"+txtFechaFin.Text+"' " ;
 
-        cabina = "select c.codigo, c.nombre, c.telefono, c.correo, e.id, e.empresa, e.pregunta1, e.comentario1, e.pregunta2, e.comentario2, e.pregunta3," +
-            "e.comentario3, e.comentario, e.fecha from encuesta as e " +
+        cabina = "select " +
+            "c.codigo as Codigo, " +
+            "c.nombre as Nombre, " +
+            "c.telefono as Telefono, " +
+            "c.correo as Correo, " +
+            "c.empresa as Empresa," +
+            "c.motivo as Motivo," +
+            "e.id as ID, " +
+            "e.empresa as Empresa, " +
+            "e.pregunta1 as [Pregunta 1], " +
+            "e.comentario1 as [Comentario 1], " +
+            "e.pregunta2 as [Pregunta 2], " +
+            "e.comentario2 as [Comentario 2], " +
+            "e.pregunta3 as [Pregunta 3]," +
+            "e.comentario3 as [Comentario 3], " +
+            "e.comentario as Comentario, " +
+            "e.fecha as Fecha " +
+            "from encuesta as e " +
             "inner join cabina_virtual as c on c.codigo = e.codigo " +
             "where empresa = 'Cabina' and convert(date,e.fecha,112) between '"+txtFechaInicio.Text+"' and '"+txtFechaFin.Text+"' ";
     }
