@@ -78,7 +78,6 @@ public partial class MdBitacora_ResultadoEncuesta : System.Web.UI.Page
             "c.empresa as Empresa," +
             "c.motivo as Motivo," +
             "e.id as ID, " +
-            "e.empresa as Empresa, " +
             "e.pregunta1 as [Pregunta 1], " +
             "e.comentario1 as [Comentario 1], " +
             "e.pregunta2 as [Pregunta 2], " +
