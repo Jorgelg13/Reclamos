@@ -96,6 +96,7 @@
                                 <li><a href="/Modulos/MdReclamos/wbFrmAutorizacionManual.aspx">Realizar Una autorizacion Manual</a></li>
                                 <li><a href="/Modulos/MdReclamos/wbFrmAutorizacionesAbiertas.aspx">Mis Autorizaciones Abiertas</a></li>
                                 <li><a href="/Modulos/MdReclamos/wbFrmAutorizacionesGenerales.aspx">Autorizaciones Generales</a></li>
+                                 <li><a href="/Modulos/MdReclamos/autorizaciones.aspx">Buscar Autorizaciones</a></li>
                             </ul>
                         </li>
                         <li class="dropdown">
