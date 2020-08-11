@@ -10,6 +10,8 @@
                 <div class="form-group  col-sm-12 col-md-6 col-lg-2" style="padding-top: 10px;">
                     <label>Estado:</label>
                     <asp:DropDownList ID="ddlEstado" runat="server" CssClass="form-control" Width="100%">
+                        <asp:ListItem Value="2">Asignadas</asp:ListItem>
+                        <asp:ListItem Value="3">Enviadas</asp:ListItem>
                         <asp:ListItem Value="4">Renovadas</asp:ListItem>
                         <asp:ListItem Value="5">Canceladas</asp:ListItem>
                         <asp:ListItem Value="6">No enviadas</asp:ListItem>
