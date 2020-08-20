@@ -1,0 +1,774 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Reclamos.AuthConfig" Collapsed="true">
+    <Position X="12.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>App_Code\AuthConfig.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Reclamos.BundleConfig" Collapsed="true">
+    <Position X="12.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAA=</HashCode>
+      <FileName>App_Code\BundleConfig.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Reclamos.RouteConfig" Collapsed="true">
+    <Position X="14.5" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAA=</HashCode>
+      <FileName>App_Code\RouteConfig.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Cartas" Collapsed="true">
+    <Position X="2.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAMABAQAAAAQAAIAAAAAAAAIAAAAMwAAAAEAAAAAAQA=</HashCode>
+      <FileName>App_Code\Cartas.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="conexionBD" Collapsed="true">
+    <Position X="16.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAAAAAAAgAAAEAAAAAAAAAAAEAAAAAQAACAAAAAAAE=</HashCode>
+      <FileName>App_Code\conexionBD.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Constantes" Collapsed="true">
+    <Position X="18" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAUAAAAAQAIAAAqQIAEBCBAIAAAEAAgQEIAAAAAA=</HashCode>
+      <FileName>App_Code\Constantes.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Consultas" Collapsed="true">
+    <Position X="2.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEEAAIAABAAIQIAgEoAAAAEEABAIAAAAQAQEAACkAA=</HashCode>
+      <FileName>App_Code\Consultas.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Correos" Collapsed="true">
+    <Position X="9.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAA=</HashCode>
+      <FileName>App_Code\Correos.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Email" Collapsed="true">
+    <Position X="7.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIABAAAAAAAAAAAAAAAAAAAAAAAAEQAEgAAAAE=</HashCode>
+      <FileName>App_Code\Email.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ReclamosEntities" Collapsed="true">
+    <Position X="2.25" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>coft/oA4uaA7MJ3EyqDm6YCZuIrEsAwgbQcQE1h10kE=</HashCode>
+      <FileName>App_Code\ModeloReclamos.Context.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="actividades" Collapsed="true">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAAAAAgAQAAAAAAQAQAAAAAAAAAAAQAAAAAAAAAAiA=</HashCode>
+      <FileName>App_Code\ModeloReclamos.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ajustadores" Collapsed="true">
+    <Position X="2.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAADAAAAAAAAACAAACEAAAAAAAAABCAAAAAAAAAAgI=</HashCode>
+      <FileName>App_Code\ModeloReclamos.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="analistas" Collapsed="true">
+    <Position X="4" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABCADAAACAAAAACAAAAAAAAAAAAAAACAAAAAAAAAAgI=</HashCode>
+      <FileName>App_Code\ModeloReclamos.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="archivos_copagos" Collapsed="true">
+    <Position X="7.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAACAAAACAAAAAAAAABQAAAAAAIAAAgA=</HashCode>
+      <FileName>App_Code\ModeloReclamos.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="aseguradoras" Collapsed="true">
+    <Position X="9.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAAAAAAAAAAAAAEAAAAQAAAAAAAAAAAAAAAAgA=</HashCode>
+      <FileName>App_Code\ModeloReclamos.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="asegurados_implants" Collapsed="true">
+    <Position X="11" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAQAAAAAAAAAAAAAAAgAAAAABSIICAAAAAAAgI=</HashCode>
+      <FileName>App_Code\ModeloReclamos.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="auto_reclamo" Collapsed="true">
+    <Position X="14.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QgAAACggSAAUoAAAAAAEAAACgAAAIBDIAAgAAAAoIiE=</HashCode>
+      <FileName>App_Code\ModeloReclamos.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="autorizaciones" Collapsed="true">
+    <Position X="16.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAAIAAwAQEIAQGAkAAAAAAigBSEQAJAAAAAAgI=</HashCode>
+      <FileName>App_Code\ModeloReclamos.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="bitacora_autorizaciones" Collapsed="true">
+    <Position X="18" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAAAAAAAAAAAAEAAAAAAAAAAAQMAAEAAAAAAgA=</HashCode>
+      <FileName>App_Code\ModeloReclamos.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="bitacora_autos_unity" Collapsed="true">
+    <Position X="0.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEQAAAAACAAAAAAAAAEAAAAAAAAAAAAEAAAAAAAAAgA=</HashCode>
+      <FileName>App_Code\ModeloReclamos.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="bitacora_consulta_movil" Collapsed="true">
+    <Position X="2.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAQAAAAAAAAAAAAAAAAAAADQAAAAIAAAAAgA=</HashCode>
+      <FileName>App_Code\ModeloReclamos.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="bitacora_estados_autos" Collapsed="true">
+    <Position X="4" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAACAAACQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgA=</HashCode>
+      <FileName>App_Code\ModeloReclamos.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="bitacora_estados_reclamos_varios" Collapsed="true">
+    <Position X="5.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACACAAAAQAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAgA=</HashCode>
+      <FileName>App_Code\ModeloReclamos.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="bitacora_reclamo_auto" Collapsed="true">
+    <Position X="7.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAACAAAAAAAAAUAAAAAAAAAAAQEAAAAAAAAAgA=</HashCode>
+      <FileName>App_Code\ModeloReclamos.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="bitacora_reclamos_medicos" Collapsed="true">
+    <Position X="9.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABAAAAAAAAAAAAAEAAAAAAACAAAQEAAAAAAAAAgA=</HashCode>
+      <FileName>App_Code\ModeloReclamos.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="bitacora_reclamos_varios" Collapsed="true">
+    <Position X="11" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAAAAAAAAAAAAEAAAAAAAQAAAQEAAAAAAAAAgA=</HashCode>
+      <FileName>App_Code\ModeloReclamos.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="busqCoberturasPolizasDaños" Collapsed="true">
+    <Position X="14.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAgACAAAAAAAAAEEAAAAAABAQAAYAAAAAAgA=</HashCode>
+      <FileName>App_Code\ModeloReclamos.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="cabina" Collapsed="true">
+    <Position X="16.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAACAAAIACAAAAAAAAAAACAAAQAAAEAAQAAAiI=</HashCode>
+      <FileName>App_Code\ModeloReclamos.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="cabina_virtual" Collapsed="true">
+    <Position X="18" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABCAAAAAAAAACAAAAAAAgAAAAAABCAAAAAAAAAAgI=</HashCode>
+      <FileName>App_Code\ModeloReclamos.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="cartas" Collapsed="true">
+    <Position X="0.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABAAAAAAAAAAAAAQAAAAAAAAAQAAAAAAAAAAAAgg=</HashCode>
+      <FileName>App_Code\ModeloReclamos.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="clientes" Collapsed="true">
+    <Position X="4" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAAAAAAAACAAAAAAAAAAAAAABCAAAAAAAAAAgI=</HashCode>
+      <FileName>App_Code\ModeloReclamos.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="coberturas" Collapsed="true">
+    <Position X="5.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgA=</HashCode>
+      <FileName>App_Code\ModeloReclamos.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="coberturas_afectadas" Collapsed="true">
+    <Position X="7.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAAAAABCAACAAAAAAAAAEAAAAAAAAAAAAYAAAAAAgA=</HashCode>
+      <FileName>App_Code\ModeloReclamos.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="coberturas_afectadas_danios" Collapsed="true">
+    <Position X="9.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAAABAAACAAAAAAAAAEAAAAQAAAAAAAYAAAAAAgA=</HashCode>
+      <FileName>App_Code\ModeloReclamos.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="comentarios_reclamos_autos" Collapsed="true">
+    <Position X="11" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAAAAAACQAAAAAAAAEAAAAAAAAAAARAAAAAAAAAAgA=</HashCode>
+      <FileName>App_Code\ModeloReclamos.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="comentarios_reclamos_medicos" Collapsed="true">
+    <Position X="12.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAAAQAAAAAAAAEAAAAAAACAAAQAAAABAAAAAgA=</HashCode>
+      <FileName>App_Code\ModeloReclamos.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="comentarios_reclamos_varios" Collapsed="true">
+    <Position X="14.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAAAQAAAAAAAAEAAAAAAAQAAAQAAAAAAAAAAgA=</HashCode>
+      <FileName>App_Code\ModeloReclamos.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="consultar_asegurados" Collapsed="true">
+    <Position X="0.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABAAQAAAAAAAAAAAAAAAAgAAAABBIAABCAAAAAgA=</HashCode>
+      <FileName>App_Code\ModeloReclamos.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="contacto_auto" Collapsed="true">
+    <Position X="4" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QEAAAAAACAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAgI=</HashCode>
+      <FileName>App_Code\ModeloReclamos.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="contactos_reclamos_varios" Collapsed="true">
+    <Position X="5.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAACAAAAAAAAAAAQAAACAAAAAAAAAAgI=</HashCode>
+      <FileName>App_Code\ModeloReclamos.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="detalle_gasto_medico" Collapsed="true">
+    <Position X="11" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQIAAAAAAAAAAAAAAAEAAAAAAACAAAAAAAARAAAgAgA=</HashCode>
+      <FileName>App_Code\ModeloReclamos.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="detalle_pagos_reclamos_autos" Collapsed="true">
+    <Position X="12.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEQAAAAACQACAAAAAAgAAEAAAAAAAEAAAEAAAAAAIgI=</HashCode>
+      <FileName>App_Code\ModeloReclamos.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="detalle_pagos_reclamos_medicos" Collapsed="true">
+    <Position X="14.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAwAAQgAAAACAAAAAAiAkAAABACAIAAIAEABAAAgGgA=</HashCode>
+      <FileName>App_Code\ModeloReclamos.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="detalle_pagos_reclamos_varios" Collapsed="true">
+    <Position X="16.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AASAAggQAaACAAAAAEAAAEAgAAQQAkAAAAAAAABCMhI=</HashCode>
+      <FileName>App_Code\ModeloReclamos.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="direcciones" Collapsed="true">
+    <Position X="18" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAIgAgAAAAAAAAgAAAAAAAAAAAAAAAAgA=</HashCode>
+      <FileName>App_Code\ModeloReclamos.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="direcciones_clientes_gm" Collapsed="true">
+    <Position X="0.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAIAAAAAAAAAAAgAAAABAAAAAAAAAAAgA=</HashCode>
+      <FileName>App_Code\ModeloReclamos.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="documentos_medicos" Collapsed="true">
+    <Position X="2.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAgA=</HashCode>
+      <FileName>App_Code\ModeloReclamos.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="documentos_solicitados" Collapsed="true">
+    <Position X="4" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABAAAAQAAAAAAAAQAAAAAAAIAAAAAAAAAAAAEAgA=</HashCode>
+      <FileName>App_Code\ModeloReclamos.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ejecutivos" Collapsed="true">
+    <Position X="5.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAAAAAAAAAAAAAAgAAAAAAAAACAAAAAAAAAAgI=</HashCode>
+      <FileName>App_Code\ModeloReclamos.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="empresa" Collapsed="true">
+    <Position X="9.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAACEAAAAAAAAAAAAAAIAAAAAAQAAAgA=</HashCode>
+      <FileName>App_Code\ModeloReclamos.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="empresas_implants" Collapsed="true">
+    <Position X="11" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAACAAAAAAAAAAAAAABAAAAAAAAAAAgA=</HashCode>
+      <FileName>App_Code\ModeloReclamos.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="encuesta" Collapsed="true">
+    <Position X="12.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAABBAAQIQAAAACAAAAAAQIAAAAAQIGAIAAAAAAAAgo=</HashCode>
+      <FileName>App_Code\ModeloReclamos.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="encuesta_egresos" Collapsed="true">
+    <Position X="14.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAIQAAAAAAAAAAAAAAAABAAAAIAAAAAIAAAgA=</HashCode>
+      <FileName>App_Code\ModeloReclamos.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="encuesta_recepcion" Collapsed="true">
+    <Position X="16.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAQIQAAAAAAAAAAAQIAAAIAAIEAAAAAAAAAAgA=</HashCode>
+      <FileName>App_Code\ModeloReclamos.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="errores_insercion" Collapsed="true">
+    <Position X="18" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAQAAAAABAAEAAAAAAAAAAAAAAAEAAAAAAgA=</HashCode>
+      <FileName>App_Code\ModeloReclamos.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="estado" Collapsed="true">
+    <Position X="0.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAACAAAAACAAAAAAAAAAACAAAAAAAAAAAAAAgA=</HashCode>
+      <FileName>App_Code\ModeloReclamos.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="estados_reclamos_unity" Collapsed="true">
+    <Position X="4" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABAAAAAAAAAAAAAEABAAAAAAAAAAAAAAAAAAAAgA=</HashCode>
+      <FileName>App_Code\ModeloReclamos.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="formulario_colectivo" Collapsed="true">
+    <Position X="5.75" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIABAUEAgkCEIAQhgIAAABBcAEAIBJAKQRQEEAAOIgo=</HashCode>
+      <FileName>App_Code\ModeloReclamos.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="gestores" Collapsed="true">
+    <Position X="7.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACADAAACAAAAACAAAAAAAAAAAAAAASAAAAAAAAAAgI=</HashCode>
+      <FileName>App_Code\ModeloReclamos.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="info_asegurado" Collapsed="true">
+    <Position X="9.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAICAAAAAAAAIAAAAAAAAAAAAAAABAIAAAAAAAAAgA=</HashCode>
+      <FileName>App_Code\ModeloReclamos.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ingreso_cheques" Collapsed="true">
+    <Position X="11" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABAAAAQAAAAAAAAQAAAAAAACAAAQAAAAAAAAAAgA=</HashCode>
+      <FileName>App_Code\ModeloReclamos.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="maternidad" Collapsed="true">
+    <Position X="12.75" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAACAAAAQAAAAAAAAAAAAAAAAAAABAIAQAAAAAAAgA=</HashCode>
+      <FileName>App_Code\ModeloReclamos.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="motivos_cierre" Collapsed="true">
+    <Position X="14.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAACAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAgA=</HashCode>
+      <FileName>App_Code\ModeloReclamos.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="movimientos" Collapsed="true">
+    <Position X="16.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAQAAAAAAgA=</HashCode>
+      <FileName>App_Code\ModeloReclamos.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="pais" Collapsed="true">
+    <Position X="7.5" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAQAAAAAACAAAAAAAAAAAACAAAAAAAAAAAgAgA=</HashCode>
+      <FileName>App_Code\ModeloReclamos.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ramos" Collapsed="true">
+    <Position X="12.75" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAQAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAgA=</HashCode>
+      <FileName>App_Code\ModeloReclamos.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="recibos_medicos" Collapsed="true">
+    <Position X="14.5" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAAAAAAAAAAAAAAAEAAAAAAADAAAAAAAABAAAAAgA=</HashCode>
+      <FileName>App_Code\ModeloReclamos.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="reclamo_auto" Collapsed="true">
+    <Position X="16.25" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAUkayGQZUAeEQAAkwfQwAAFkAMiIBRUJQJUIA4ERgI=</HashCode>
+      <FileName>App_Code\ModeloReclamos.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="reclamos_medicos" Collapsed="true">
+    <Position X="18" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>GYQHakAQAAAyKAiIAyXAgACAiAoigBSMBAIEAhoMRgI=</HashCode>
+      <FileName>App_Code\ModeloReclamos.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="reclamos_varios" Collapsed="true">
+    <Position X="0.5" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAQke2CYQUAeAQAAgYfw4AABiAMiIBRUJAJUoAoFRgI=</HashCode>
+      <FileName>App_Code\ModeloReclamos.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="reg_reclamo_varios" Collapsed="true">
+    <Position X="4" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QASABAIQQEAEoAAAAAAEgAAAgAAAABAIQEAAAAAgIiA=</HashCode>
+      <FileName>App_Code\ModeloReclamos.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="reg_reclamos_medicos" Collapsed="true">
+    <Position X="5.75" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAABgAQQAAEgAABAAAEAAAAgACAABAIAIEAAAAgCiA=</HashCode>
+      <FileName>App_Code\ModeloReclamos.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="sucursal" Collapsed="true">
+    <Position X="16.25" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAQAAAAAACAgAAAgAAAAAAAAAAAAAAAAAAAAgA=</HashCode>
+      <FileName>App_Code\ModeloReclamos.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="sysdiagrams" Collapsed="true">
+    <Position X="18" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAACAIAAAAAAAAAAAAAAAQAAAFAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>App_Code\ModeloReclamos.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="talleres" Collapsed="true">
+    <Position X="0.5" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACACAAACAAAIACAAAAAAAAAAAAAAACAAAAAAAAAAgI=</HashCode>
+      <FileName>App_Code\ModeloReclamos.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="tipo_documentos" Collapsed="true">
+    <Position X="2.25" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAADAAAAQAAAAAAAAEAAAABAAAAAAQAAAAAAAAAAgA=</HashCode>
+      <FileName>App_Code\ModeloReclamos.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="tipo_reclamos" Collapsed="true">
+    <Position X="4" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAQAAAAAAgA=</HashCode>
+      <FileName>App_Code\ModeloReclamos.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="usuario" Collapsed="true">
+    <Position X="5.75" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACBDCAQCAAAAACEAAiBgAACAACAABCAAAEAAwAAEgA=</HashCode>
+      <FileName>App_Code\ModeloReclamos.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="v_producto_no_conforme" Collapsed="true">
+    <Position X="9.25" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAiAAQAAAQAAAAAACAEAAABAgAAAAAAAAQAAAAAgY=</HashCode>
+      <FileName>App_Code\ModeloReclamos.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ViewBusquedaAuto" Collapsed="true">
+    <Position X="11" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgACDCgwAgAUogCAAAAAAEACwAAAABDIAABCAAAqKiE=</HashCode>
+      <FileName>App_Code\ModeloReclamos.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="viewCoberturasAutos" Collapsed="true">
+    <Position X="12.75" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAACAAAAAAAAAEECAAAAAABQAAYAAAAAAgA=</HashCode>
+      <FileName>App_Code\ModeloReclamos.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="vistaBusquedaPolizaMovil" Collapsed="true">
+    <Position X="14.5" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQABAAYAEAEIgAAAAAEAAEAgAgAABAAAABCAAAAAgA=</HashCode>
+      <FileName>App_Code\ModeloReclamos.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="vistaReclamosDaños" Collapsed="true">
+    <Position X="16.25" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAQCBCIQAAAEogAAAAAEgEAAwAAAABCIQABCAAAgIiA=</HashCode>
+      <FileName>App_Code\ModeloReclamos.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="vistaReclamosMedicos" Collapsed="true">
+    <Position X="18" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQCBCAQQAAGgoCBAAAAAEAAgAAAABAIAIBCAAAgAiA=</HashCode>
+      <FileName>App_Code\ModeloReclamos.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="pa_cargar_asegurados_Result" Collapsed="true">
+    <Position X="18" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>App_Code\ModeloReclamos.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="pa_cargar_autos_Result" Collapsed="true">
+    <Position X="0.5" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>App_Code\ModeloReclamos.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="pa_cargar_danios_varios_Result" Collapsed="true">
+    <Position X="2.25" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>App_Code\ModeloReclamos.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="pa_eficiencia_autos_Result" Collapsed="true">
+    <Position X="4" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>KAAgAAAAAAAAAAAAAAAgAAAABAEAAACoAAAEAAAAAAA=</HashCode>
+      <FileName>App_Code\ModeloReclamos.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="pa_eficiencia_colectivos_Result" Collapsed="true">
+    <Position X="5.75" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAIAAAAAAggAAAAAEAAAggAAAAAAAAAAA=</HashCode>
+      <FileName>App_Code\ModeloReclamos.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="pa_eficiencia_danos_varios_Result" Collapsed="true">
+    <Position X="7.5" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAAAAAAAAAAIAAAAAgIAAABAEAAAAgAgAEAAAAgAA=</HashCode>
+      <FileName>App_Code\ModeloReclamos.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="pa_eficiencia_individuales_Result" Collapsed="true">
+    <Position X="9.25" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAIAAAAAAggAAAAAEAAAggAAAAAAAAAAA=</HashCode>
+      <FileName>App_Code\ModeloReclamos.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="pa_reclamos_autos_Result" Collapsed="true">
+    <Position X="11" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAACAAAAAEAACAgAAAABAAAAA4ABBAAAgAAAoAACI=</HashCode>
+      <FileName>App_Code\ModeloReclamos.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="pa_reclamos_varios_Result" Collapsed="true">
+    <Position X="12.75" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAACAAAAAEAACAgAAAgBAAAAA4ABAAQAAAAAoAACA=</HashCode>
+      <FileName>App_Code\ModeloReclamos.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="pa_reporte_problemas_autos_Result" Collapsed="true">
+    <Position X="14.5" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAAAAEAgAAQAAAQAAABJgAAhQAAAAQAAAAAiI=</HashCode>
+      <FileName>App_Code\ModeloReclamos.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="pa_reporte_problemas_danios_Result" Collapsed="true">
+    <Position X="16.25" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAAAAEAgAAQAAAQAAABJgAAhAAAAAQAAAAAiI=</HashCode>
+      <FileName>App_Code\ModeloReclamos.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="pa_reportesAutorizaciones_Result" Collapsed="true">
+    <Position X="18" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAABAAQAAAUAQCEAQEEkAAAAAAggBCMQIBAAQAAAgI=</HashCode>
+      <FileName>App_Code\ModeloReclamos.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="pa_reportesAutorizacionesAbiertas_Result" Collapsed="true">
+    <Position X="0.5" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAABAAQAAAEAQCEAAEEgAAAAAAggBCMQIAAAQAAAgI=</HashCode>
+      <FileName>App_Code\ModeloReclamos.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="pa_ReportesAutos_Result" Collapsed="true">
+    <Position X="2.25" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QgAAACAQRQAUAQAEgQMEgAADAAIAABTMAAIAAQgMQgM=</HashCode>
+      <FileName>App_Code\ModeloReclamos.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="pa_ReportesDaños_Result" Collapsed="true">
+    <Position X="4" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAQABCAQAQAUIQAEgQMEgAABAAAAABRMAAAAAQAEAgI=</HashCode>
+      <FileName>App_Code\ModeloReclamos.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="pa_vista_movil_Result" Collapsed="true">
+    <Position X="5.75" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>App_Code\ModeloReclamos.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="promedio_aseguradoras_Result" Collapsed="true">
+    <Position X="11" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAEAAAAAAAAAEAAAAAAAAAAAAAAAAAABAQAA=</HashCode>
+      <FileName>App_Code\ModeloReclamos.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Utils" Collapsed="true">
+    <Position X="7.5" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAAAAkAAAAEAoAAAAiABFIFEAABAwACBgRBI1CQAAk=</HashCode>
+      <FileName>App_Code\Utils.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Renovaciones.RenovacionesEntities" Collapsed="true">
+    <Position X="11" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAQAAAgAAAAAAAACAAAkAAAABAQAAHAAAAAAAA=</HashCode>
+      <FileName>App_Code\Renovaciones\ModelRenovaciones.Context.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Renovaciones.archivos" Collapsed="true">
+    <Position X="5.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAgA=</HashCode>
+      <FileName>App_Code\Renovaciones\ModelRenovaciones.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Renovaciones.contenido_correo" Collapsed="true">
+    <Position X="7.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAgA=</HashCode>
+      <FileName>App_Code\Renovaciones\ModelRenovaciones.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Renovaciones.estados" Collapsed="true">
+    <Position X="2.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAAAAAgAAAAAAAAAAAAgAAAAAAAAAAAAAAAAgA=</HashCode>
+      <FileName>App_Code\Renovaciones\ModelRenovaciones.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Renovaciones.poliza" Collapsed="true">
+    <Position X="9.25" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAABAhEAAAEIAAAAAAEgAAIAAAAABiAAABCIAAAAiI=</HashCode>
+      <FileName>App_Code\Renovaciones\ModelRenovaciones.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Renovaciones.renovaciones_log" Collapsed="true">
+    <Position X="7.5" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAQAQAAAAAAAAAAAAAAgAAAABAAAAAAAAAAAgA=</HashCode>
+      <FileName>App_Code\Renovaciones\ModelRenovaciones.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Renovaciones.renovaciones_polizas" Collapsed="true">
+    <Position X="9.25" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BhCADACUOBK4CQCPSFWQWYAGDEAYIJnIAIwGpihIDkM=</HashCode>
+      <FileName>App_Code\Renovaciones\ModelRenovaciones.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Renovaciones.requerimientos" Collapsed="true">
+    <Position X="12.75" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAIAAAAQQAABAAAAAAAAAAAAIAAABEAAAAAAAAAAgA=</HashCode>
+      <FileName>App_Code\Renovaciones\ModelRenovaciones.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
