@@ -68,10 +68,17 @@ public partial class archivos_copagos
 
 public partial class aseguradoras
 {
+    public aseguradoras()
+    {
+        this.carpetas_aseguradoras = new HashSet<carpetas_aseguradoras>();
+    }
+
     public int id { get; set; }
     public string aseguradora { get; set; }
     public Nullable<short> codigo { get; set; }
     public Nullable<short> total_dias_rc_medicos { get; set; }
+
+    public virtual ICollection<carpetas_aseguradoras> carpetas_aseguradoras { get; set; }
 }
 
 public partial class asegurados_implants
@@ -299,6 +306,21 @@ public partial class cabina_virtual
     public Nullable<System.DateTime> fechareg { get; set; }
     public Nullable<System.DateTime> fecha_atencion { get; set; }
     public Nullable<bool> estado { get; set; }
+}
+
+public partial class carpetas_aseguradoras
+{
+    public carpetas_aseguradoras()
+    {
+        this.formularios_aseguradoras = new HashSet<formularios_aseguradoras>();
+    }
+
+    public int id { get; set; }
+    public Nullable<int> id_aseguradora { get; set; }
+    public string nombre_carpeta { get; set; }
+
+    public virtual aseguradoras aseguradoras { get; set; }
+    public virtual ICollection<formularios_aseguradoras> formularios_aseguradoras { get; set; }
 }
 
 public partial class cartas
@@ -709,6 +731,17 @@ public partial class formulario_colectivo
     public string lugar_fecha { get; set; }
     public string solicitante { get; set; }
     public string firma { get; set; }
+}
+
+public partial class formularios_aseguradoras
+{
+    public int id { get; set; }
+    public Nullable<int> id_carpeta { get; set; }
+    public string ruta { get; set; }
+    public string usuario { get; set; }
+    public Nullable<System.DateTime> fecha_registro { get; set; }
+
+    public virtual carpetas_aseguradoras carpetas_aseguradoras { get; set; }
 }
 
 public partial class gestores

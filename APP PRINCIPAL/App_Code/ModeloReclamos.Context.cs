@@ -45,6 +45,7 @@ public partial class ReclamosEntities : DbContext
     public DbSet<busqCoberturasPolizasDaños> busqCoberturasPolizasDaños { get; set; }
     public DbSet<cabina> cabina { get; set; }
     public DbSet<cabina_virtual> cabina_virtual { get; set; }
+    public DbSet<carpetas_aseguradoras> carpetas_aseguradoras { get; set; }
     public DbSet<cartas> cartas { get; set; }
     public DbSet<clientes> clientes { get; set; }
     public DbSet<coberturas> coberturas { get; set; }
@@ -73,6 +74,7 @@ public partial class ReclamosEntities : DbContext
     public DbSet<estado> estado { get; set; }
     public DbSet<estados_reclamos_unity> estados_reclamos_unity { get; set; }
     public DbSet<formulario_colectivo> formulario_colectivo { get; set; }
+    public DbSet<formularios_aseguradoras> formularios_aseguradoras { get; set; }
     public DbSet<gestores> gestores { get; set; }
     public DbSet<info_asegurado> info_asegurado { get; set; }
     public DbSet<ingreso_cheques> ingreso_cheques { get; set; }

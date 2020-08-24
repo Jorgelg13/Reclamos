@@ -256,6 +256,14 @@
           <Property Name="fecha_atencion" Type="datetime" />
           <Property Name="estado" Type="bit" />
         </EntityType>
+        <EntityType Name="carpetas_aseguradoras">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_aseguradora" Type="int" />
+          <Property Name="nombre_carpeta" Type="varchar" MaxLength="75" />
+        </EntityType>
         <EntityType Name="cartas">
           <Key>
             <PropertyRef Name="id" />
@@ -639,6 +647,16 @@
           <Property Name="lugar_fecha" Type="nvarchar" MaxLength="50" />
           <Property Name="solicitante" Type="nvarchar" MaxLength="100" />
           <Property Name="firma" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="formularios_aseguradoras">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_carpeta" Type="int" />
+          <Property Name="ruta" Type="varchar" MaxLength="400" />
+          <Property Name="usuario" Type="varchar" MaxLength="50" />
+          <Property Name="fecha_registro" Type="datetime" />
         </EntityType>
         <EntityType Name="gestores">
           <Key>
@@ -1201,6 +1219,23 @@ advertencia 6002: La tabla o vista 'reclamos.dbo.consultar_asegurados' no tiene 
           <Property Name="vigf" Type="date" />
         </EntityType>
         <!--Errores durante la generación:
+advertencia 6013: La tabla o vista 'reclamos.dbo.v_polizas' no tiene definida una clave principal y no es posible inferir ninguna clave principal válida. Esta tabla o vista se ha excluido. Para usar la entidad, necesitará revisar el esquema, agregar las claves correctas y quitar sus comentarios.
+        <EntityType Name="v_polizas">
+          <Property Name="poliza" Type="nvarchar" MaxLength="50" />
+          <Property Name="secren" Type="smallint" />
+          <Property Name="ramo" Type="nvarchar" MaxLength="60" />
+          <Property Name="aseguradora" Type="nvarchar" MaxLength="300" />
+          <Property Name="vigi" Type="date" />
+          <Property Name="vigf" Type="date" />
+          <Property Name="cliente" Type="int" />
+          <Property Name="asegurado" Type="nvarchar" MaxLength="300" />
+          <Property Name="gestor" Type="nvarchar" MaxLength="300" />
+          <Property Name="prima" Type="decimal" Precision="12" Scale="2" />
+          <Property Name="porcom" Type="decimal" Precision="12" Scale="4" />
+          <Property Name="moneda" Type="nvarchar" MaxLength="50" />
+          <Property Name="gst_nombre" Type="nvarchar" MaxLength="300" />
+        </EntityType>-->
+        <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'reclamos.dbo.v_producto_no_conforme' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="v_producto_no_conforme">
           <Key>
@@ -1497,6 +1532,18 @@ advertencia 6002: La tabla o vista 'reclamos.dbo.v_producto_no_conforme' no tien
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_aseguradoras">
+          <End Role="aseguradoras" Type="Self.aseguradoras" Multiplicity="0..1" />
+          <End Role="carpetas_aseguradoras" Type="Self.carpetas_aseguradoras" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aseguradoras">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="carpetas_aseguradoras">
+              <PropertyRef Name="id_aseguradora" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_bitacora_autos_unity_reclamo_auto">
           <End Role="reclamo_auto" Type="Self.reclamo_auto" Multiplicity="0..1" />
           <End Role="bitacora_autos_unity" Type="Self.bitacora_autos_unity" Multiplicity="*" />
@@ -1530,6 +1577,18 @@ advertencia 6002: La tabla o vista 'reclamos.dbo.v_producto_no_conforme' no tien
             </Principal>
             <Dependent Role="bitacora_estados_reclamos_varios">
               <PropertyRef Name="id_reclamos_varios" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_carpeta">
+          <End Role="carpetas_aseguradoras" Type="Self.carpetas_aseguradoras" Multiplicity="0..1" />
+          <End Role="formularios_aseguradoras" Type="Self.formularios_aseguradoras" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="carpetas_aseguradoras">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="formularios_aseguradoras">
+              <PropertyRef Name="id_carpeta" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1976,6 +2035,7 @@ advertencia 6002: La tabla o vista 'reclamos.dbo.v_producto_no_conforme' no tien
           <EntitySet Name="busqCoberturasPolizasDaños" EntityType="Self.busqCoberturasPolizasDaños" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="cabina" EntityType="Self.cabina" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="cabina_virtual" EntityType="Self.cabina_virtual" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="carpetas_aseguradoras" EntityType="Self.carpetas_aseguradoras" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="cartas" EntityType="Self.cartas" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="clientes" EntityType="Self.clientes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="coberturas" EntityType="Self.coberturas" Schema="dbo" store:Type="Tables" />
@@ -2004,6 +2064,7 @@ advertencia 6002: La tabla o vista 'reclamos.dbo.v_producto_no_conforme' no tien
           <EntitySet Name="estado" EntityType="Self.estado" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="estados_reclamos_unity" EntityType="Self.estados_reclamos_unity" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="formulario_colectivo" EntityType="Self.formulario_colectivo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="formularios_aseguradoras" EntityType="Self.formularios_aseguradoras" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="gestores" EntityType="Self.gestores" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="info_asegurado" EntityType="Self.info_asegurado" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ingreso_cheques" EntityType="Self.ingreso_cheques" Schema="dbo" store:Type="Tables" />
@@ -2187,6 +2248,10 @@ FROM [dbo].[v_producto_no_conforme] AS [v_producto_no_conforme]</DefiningQuery>
             <End Role="cabina" EntitySet="cabina" />
             <End Role="usuario" EntitySet="usuario" />
           </AssociationSet>
+          <AssociationSet Name="FK_aseguradoras" Association="Self.FK_aseguradoras">
+            <End Role="aseguradoras" EntitySet="aseguradoras" />
+            <End Role="carpetas_aseguradoras" EntitySet="carpetas_aseguradoras" />
+          </AssociationSet>
           <AssociationSet Name="FK_bitacora_autos_unity_reclamo_auto" Association="Self.FK_bitacora_autos_unity_reclamo_auto">
             <End Role="reclamo_auto" EntitySet="reclamo_auto" />
             <End Role="bitacora_autos_unity" EntitySet="bitacora_autos_unity" />
@@ -2198,6 +2263,10 @@ FROM [dbo].[v_producto_no_conforme] AS [v_producto_no_conforme]</DefiningQuery>
           <AssociationSet Name="FK_bitacora_estados_reclamos_varios_reclamos_varios" Association="Self.FK_bitacora_estados_reclamos_varios_reclamos_varios">
             <End Role="reclamos_varios" EntitySet="reclamos_varios" />
             <End Role="bitacora_estados_reclamos_varios" EntitySet="bitacora_estados_reclamos_varios" />
+          </AssociationSet>
+          <AssociationSet Name="FK_carpeta" Association="Self.FK_carpeta">
+            <End Role="carpetas_aseguradoras" EntitySet="carpetas_aseguradoras" />
+            <End Role="formularios_aseguradoras" EntitySet="formularios_aseguradoras" />
           </AssociationSet>
           <AssociationSet Name="FK_cobertuas_afectadas_reclamo_auto" Association="Self.FK_cobertuas_afectadas_reclamo_auto">
             <End Role="reclamo_auto" EntitySet="reclamo_auto" />
@@ -2481,6 +2550,7 @@ FROM [dbo].[v_producto_no_conforme] AS [v_producto_no_conforme]</DefiningQuery>
           <EntitySet Name="busqCoberturasPolizasDaños" EntityType="reclamosModel.busqCoberturasPolizasDaños" />
           <EntitySet Name="cabina" EntityType="reclamosModel.cabina" />
           <EntitySet Name="cabina_virtual" EntityType="reclamosModel.cabina_virtual" />
+          <EntitySet Name="carpetas_aseguradoras" EntityType="reclamosModel.carpetas_aseguradoras" />
           <EntitySet Name="cartas" EntityType="reclamosModel.cartas" />
           <EntitySet Name="clientes" EntityType="reclamosModel.clientes" />
           <EntitySet Name="coberturas" EntityType="reclamosModel.coberturas" />
@@ -2509,6 +2579,7 @@ FROM [dbo].[v_producto_no_conforme] AS [v_producto_no_conforme]</DefiningQuery>
           <EntitySet Name="estado" EntityType="reclamosModel.estado" />
           <EntitySet Name="estados_reclamos_unity" EntityType="reclamosModel.estados_reclamos_unity" />
           <EntitySet Name="formulario_colectivo" EntityType="reclamosModel.formulario_colectivo" />
+          <EntitySet Name="formularios_aseguradoras" EntityType="reclamosModel.formularios_aseguradoras" />
           <EntitySet Name="gestores" EntityType="reclamosModel.gestores" />
           <EntitySet Name="info_asegurado" EntityType="reclamosModel.info_asegurado" />
           <EntitySet Name="ingreso_cheques" EntityType="reclamosModel.ingreso_cheques" />
@@ -2551,6 +2622,10 @@ FROM [dbo].[v_producto_no_conforme] AS [v_producto_no_conforme]</DefiningQuery>
           <AssociationSet Name="FK_reclamos_varios_analistas" Association="reclamosModel.FK_reclamos_varios_analistas">
             <End Role="analistas" EntitySet="analistas" />
             <End Role="reclamos_varios" EntitySet="reclamos_varios" />
+          </AssociationSet>
+          <AssociationSet Name="FK_aseguradoras" Association="reclamosModel.FK_aseguradoras">
+            <End Role="aseguradoras" EntitySet="aseguradoras" />
+            <End Role="carpetas_aseguradoras" EntitySet="carpetas_aseguradoras" />
           </AssociationSet>
           <AssociationSet Name="FK__reclamo_a__id_au__300424B4" Association="reclamosModel.FK__reclamo_a__id_au__300424B4">
             <End Role="auto_reclamo" EntitySet="auto_reclamo" />
@@ -2615,6 +2690,10 @@ FROM [dbo].[v_producto_no_conforme] AS [v_producto_no_conforme]</DefiningQuery>
           <AssociationSet Name="FK__usuario__id_cabi__5CD6CB2B" Association="reclamosModel.FK__usuario__id_cabi__5CD6CB2B">
             <End Role="cabina" EntitySet="cabina" />
             <End Role="usuario" EntitySet="usuario" />
+          </AssociationSet>
+          <AssociationSet Name="FK_carpeta" Association="reclamosModel.FK_carpeta">
+            <End Role="carpetas_aseguradoras" EntitySet="carpetas_aseguradoras" />
+            <End Role="formularios_aseguradoras" EntitySet="formularios_aseguradoras" />
           </AssociationSet>
           <AssociationSet Name="FK_cobertuas_afectadas_reclamo_auto" Association="reclamosModel.FK_cobertuas_afectadas_reclamo_auto">
             <End Role="reclamo_auto" EntitySet="reclamo_auto" />
@@ -3044,6 +3123,7 @@ FROM [dbo].[v_producto_no_conforme] AS [v_producto_no_conforme]</DefiningQuery>
           <Property Name="aseguradora" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="codigo" Type="Int16" />
           <Property Name="total_dias_rc_medicos" Type="Int16" />
+          <NavigationProperty Name="carpetas_aseguradoras" Relationship="reclamosModel.FK_aseguradoras" FromRole="aseguradoras" ToRole="carpetas_aseguradoras" />
         </EntityType>
         <EntityType Name="asegurados_implants">
           <Key>
@@ -3256,6 +3336,16 @@ FROM [dbo].[v_producto_no_conforme] AS [v_producto_no_conforme]</DefiningQuery>
           <Property Name="fechareg" Type="DateTime" Precision="3" />
           <Property Name="fecha_atencion" Type="DateTime" Precision="3" />
           <Property Name="estado" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="carpetas_aseguradoras">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_aseguradora" Type="Int32" />
+          <Property Name="nombre_carpeta" Type="String" MaxLength="75" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="aseguradoras" Relationship="reclamosModel.FK_aseguradoras" FromRole="carpetas_aseguradoras" ToRole="aseguradoras" />
+          <NavigationProperty Name="formularios_aseguradoras" Relationship="reclamosModel.FK_carpeta" FromRole="carpetas_aseguradoras" ToRole="formularios_aseguradoras" />
         </EntityType>
         <EntityType Name="cartas">
           <Key>
@@ -3657,6 +3747,17 @@ FROM [dbo].[v_producto_no_conforme] AS [v_producto_no_conforme]</DefiningQuery>
           <Property Name="solicitante" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="firma" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
+        <EntityType Name="formularios_aseguradoras">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_carpeta" Type="Int32" />
+          <Property Name="ruta" Type="String" MaxLength="400" FixedLength="false" Unicode="false" />
+          <Property Name="usuario" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="fecha_registro" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="carpetas_aseguradoras" Relationship="reclamosModel.FK_carpeta" FromRole="formularios_aseguradoras" ToRole="carpetas_aseguradoras" />
+        </EntityType>
         <EntityType Name="gestores">
           <Key>
             <PropertyRef Name="id" />
@@ -3823,6 +3924,7 @@ FROM [dbo].[v_producto_no_conforme] AS [v_producto_no_conforme]</DefiningQuery>
           <Property Name="comentario_aseguradora" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="fecha_problema" Type="DateTime" Precision="3" />
           <Property Name="importacion" Type="Boolean" />
+          <Property Name="reserva" Type="Decimal" Precision="10" Scale="2" />
           <NavigationProperty Name="analistas" Relationship="reclamosModel.FK_reclamo_auto_analistas" FromRole="reclamo_auto" ToRole="analistas" />
           <NavigationProperty Name="auto_reclamo" Relationship="reclamosModel.FK__reclamo_a__id_au__300424B4" FromRole="reclamo_auto" ToRole="auto_reclamo" />
           <NavigationProperty Name="bitacora_autos_unity" Relationship="reclamosModel.FK_bitacora_autos_unity_reclamo_auto" FromRole="reclamo_auto" ToRole="bitacora_autos_unity" />
@@ -3838,7 +3940,6 @@ FROM [dbo].[v_producto_no_conforme] AS [v_producto_no_conforme]</DefiningQuery>
           <NavigationProperty Name="motivos_cierre" Relationship="reclamosModel.FK_reclamo_auto_motivos_cierre" FromRole="reclamo_auto" ToRole="motivos_cierre" />
           <NavigationProperty Name="usuario" Relationship="reclamosModel.FK__reclamo_a__id_us__440B1D61" FromRole="reclamo_auto" ToRole="usuario" />
           <NavigationProperty Name="talleres" Relationship="reclamosModel.FK_reclamo_auto_talleres" FromRole="reclamo_auto" ToRole="talleres" />
-          <Property Name="reserva" Type="Decimal" Precision="10" Scale="2" />
         </EntityType>
         <EntityType Name="reclamos_medicos">
           <Key>
@@ -4338,6 +4439,18 @@ FROM [dbo].[v_producto_no_conforme] AS [v_producto_no_conforme]</DefiningQuery>
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_aseguradoras">
+          <End Type="reclamosModel.aseguradoras" Role="aseguradoras" Multiplicity="0..1" />
+          <End Type="reclamosModel.carpetas_aseguradoras" Role="carpetas_aseguradoras" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aseguradoras">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="carpetas_aseguradoras">
+              <PropertyRef Name="id_aseguradora" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__reclamo_a__id_au__300424B4">
           <End Type="reclamosModel.auto_reclamo" Role="auto_reclamo" Multiplicity="1" />
           <End Type="reclamosModel.reclamo_auto" Role="reclamo_auto" Multiplicity="*" />
@@ -4527,6 +4640,18 @@ FROM [dbo].[v_producto_no_conforme] AS [v_producto_no_conforme]</DefiningQuery>
             </Principal>
             <Dependent Role="usuario">
               <PropertyRef Name="id_cabina" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_carpeta">
+          <End Type="reclamosModel.carpetas_aseguradoras" Role="carpetas_aseguradoras" Multiplicity="0..1" />
+          <End Type="reclamosModel.formularios_aseguradoras" Role="formularios_aseguradoras" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="carpetas_aseguradoras">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="formularios_aseguradoras">
+              <PropertyRef Name="id_carpeta" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -5460,6 +5585,15 @@ FROM [dbo].[v_producto_no_conforme] AS [v_producto_no_conforme]</DefiningQuery>
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="carpetas_aseguradoras">
+            <EntityTypeMapping TypeName="reclamosModel.carpetas_aseguradoras">
+              <MappingFragment StoreEntitySet="carpetas_aseguradoras">
+                <ScalarProperty Name="nombre_carpeta" ColumnName="nombre_carpeta" />
+                <ScalarProperty Name="id_aseguradora" ColumnName="id_aseguradora" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="cartas">
             <EntityTypeMapping TypeName="reclamosModel.cartas">
               <MappingFragment StoreEntitySet="cartas">
@@ -5868,6 +6002,17 @@ FROM [dbo].[v_producto_no_conforme] AS [v_producto_no_conforme]</DefiningQuery>
                 <ScalarProperty Name="vigencia" ColumnName="vigencia" />
                 <ScalarProperty Name="certificado" ColumnName="certificado" />
                 <ScalarProperty Name="poliza" ColumnName="poliza" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="formularios_aseguradoras">
+            <EntityTypeMapping TypeName="reclamosModel.formularios_aseguradoras">
+              <MappingFragment StoreEntitySet="formularios_aseguradoras">
+                <ScalarProperty Name="fecha_registro" ColumnName="fecha_registro" />
+                <ScalarProperty Name="usuario" ColumnName="usuario" />
+                <ScalarProperty Name="ruta" ColumnName="ruta" />
+                <ScalarProperty Name="id_carpeta" ColumnName="id_carpeta" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
