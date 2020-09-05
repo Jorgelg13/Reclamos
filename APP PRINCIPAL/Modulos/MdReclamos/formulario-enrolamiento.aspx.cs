@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Web;
@@ -12,8 +11,8 @@ public partial class Modulos_MdReclamos_formulario_enrolamiento : System.Web.UI.
     ReclamosEntities DBReclamos = new ReclamosEntities();
     Utils llenado = new Utils();
     String consulta,carpetas, url;
-    String guardarArchivo = @"C:\Proyectos\Formularios\";
-    //String guardarArchivo = @"D:\Reclamos\pdf\formularios-enrolamiento\";
+    //String guardarArchivo = @"C:\Proyectos\Formularios\";
+    String guardarArchivo = @"D:\Reclamos\pdf\formularios-enrolamiento\";
     int id;
 
     protected void Page_Load(object sender, EventArgs e)
