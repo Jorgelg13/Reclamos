@@ -17,6 +17,7 @@
                             <asp:ListItem Value="1">Autos</asp:ListItem>
                             <asp:ListItem Value="2">Daños</asp:ListItem>
                             <asp:ListItem Value="3">Gastos Medicos</asp:ListItem>
+                            <asp:ListItem Value="4">Todas las areas</asp:ListItem>
                         </asp:DropDownList>
                     </div>
                     <div class="form-group  col-sm-12 col-md-6 col-lg-2">

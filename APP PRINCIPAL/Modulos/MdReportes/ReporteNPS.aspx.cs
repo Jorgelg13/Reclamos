@@ -40,6 +40,11 @@ public partial class Modulos_MdReportes_ReporteNPS : System.Web.UI.Page
             Utils.Reportes(txtFechaInicio, txtFechaFin, "pa_nps_gastos_medicos", GridNPS);
         }
 
+        else if (ddlElegir.SelectedValue == "4")
+        {
+            Utils.Reportes(txtFechaInicio, txtFechaFin, "pa_nps_general", GridNPS);
+        }
+
         lbltotal.Text = " " + GridNPS.Rows.Count.ToString();
     }
 

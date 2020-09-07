@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="f6b4798536da4735887fb7f905f97590" Name="Diagram1" ZoomLevel="101">
+      <Diagram DiagramId="f6b4798536da4735887fb7f905f97590" Name="Diagram1" ZoomLevel="81">
         <EntityTypeShape EntityType="reclamosModel.actividades" Width="1.5" PointX="3" PointY="5" />
         <EntityTypeShape EntityType="reclamosModel.ajustadores" Width="1.5" PointX="7.75" PointY="0.75" />
         <EntityTypeShape EntityType="reclamosModel.analistas" Width="1.5" PointX="0.75" PointY="23.125" />
@@ -32,7 +32,7 @@
         <EntityTypeShape EntityType="reclamosModel.coberturas_afectadas_danios" Width="1.5" PointX="8.25" PointY="24.625" />
         <EntityTypeShape EntityType="reclamosModel.comentarios_reclamos_autos" Width="1.5" PointX="5.25" PointY="43.875" />
         <EntityTypeShape EntityType="reclamosModel.comentarios_reclamos_medicos" Width="1.5" PointX="11.25" PointY="30.125" />
-        <EntityTypeShape EntityType="reclamosModel.comentarios_reclamos_varios" Width="1.5" PointX="8.25" PointY="48.25" />
+        <EntityTypeShape EntityType="reclamosModel.comentarios_reclamos_varios" Width="1.5" PointX="12.25" PointY="49.25" />
         <EntityTypeShape EntityType="reclamosModel.contacto_auto" Width="1.5" PointX="5.25" PointY="19" />
         <EntityTypeShape EntityType="reclamosModel.contactos_reclamos_varios" Width="1.5" PointX="11.75" PointY="7.75" />
         <EntityTypeShape EntityType="reclamosModel.detalle_gasto_medico" Width="1.5" PointX="11.25" PointY="39.25" />
