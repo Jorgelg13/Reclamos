@@ -73,6 +73,13 @@ public partial class Modulos_MdReportes_ReporteNPS : System.Web.UI.Page
             Utils.ExportarExcel(GridNPS, Response, titulo);
         }
 
+
+        else if (ddlElegir.SelectedValue == "4" && PnNPS.Visible == true)
+        {
+            titulo = "Reporte NPS General " + txtFechaInicio.Text + " al " + txtFechaFin.Text + " ";
+            Utils.ExportarExcel(GridNPS, Response, titulo);
+        }
+
         else if(PnClientes.Visible == true)
         {
             titulo = "Reporte Renovaciones y Cancelaciones " + txtFechaInicio.Text + " al " + txtFechaFin.Text + " ";
