@@ -55,7 +55,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesAutorizaciones : Syste
             {
                 llenado.llenarGrid(listado.Substring(0, (listado.Length - 2)) + Join + " where (Convert(date,aut.fecha_completa_cierre, 112) between '" + txtFechaInicio.Text + "' and '" + txtFechaFin.Text + "')  and aut.tipo_estado = 'Cerrado'", GridCamposSeleccion);
                 Conteo();
-                eficiencia();
+                //eficiencia();
             }
             //si seleccionaron cualquier otra opcion de tipo de estado
             else if (ddlEstado.SelectedValue != "Cerrado")
@@ -72,8 +72,9 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesAutorizaciones : Syste
         {
             if (ddlElegir.SelectedItem.Text == "Aseguradora")
             {
-                buscar = ddlBuscar.SelectedValue;
-                eficienciaPorAseguradora();
+                buscar = ddlBuscar.SelectedItem.Text;
+                eficiencia();
+                //eficienciaPorAseguradora();
             }
             else
             {
@@ -153,6 +154,11 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesAutorizaciones : Syste
             ddlElegir.Enabled = true;
             ddlBuscar.Enabled = true;
         }
+
+        if(ddlElegir.SelectedItem.Text == "Aseguradora")
+        {
+            ddlBuscar.Visible = true;
+        }
     }
 
     protected void CheckTodos_CheckedChanged(object sender, EventArgs e)
@@ -203,7 +209,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesAutorizaciones : Syste
     {
         ddlBuscar.DataSource = DBReclamos.aseguradoras.ToList();
         ddlBuscar.DataTextField = "aseguradora";
-        ddlBuscar.DataValueField = "aseguradora";
+        ddlBuscar.DataValueField = "codigo";
         ddlBuscar.DataBind();
     }
 
@@ -215,6 +221,8 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesAutorizaciones : Syste
             comando.CommandType = CommandType.StoredProcedure;
             comando.Parameters.AddWithValue("@fechaInicio", txtFechaInicio.Text);
             comando.Parameters.AddWithValue("@fechaFin", txtFechaFin.Text);
+            comando.Parameters.AddWithValue("@idAseguradora", (ddlBuscar.Visible == false) ? 0 : Convert.ToInt32(ddlBuscar.SelectedValue));
+            comando.Parameters.AddWithValue("@aseguradora", (ddlBuscar.Visible == false) ?  "" : ddlBuscar.SelectedItem.Text );
             comando.ExecuteNonQuery();
             SqlDataAdapter sda = new SqlDataAdapter(comando);
             sda.Fill(dt);
@@ -236,7 +244,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesAutorizaciones : Syste
             comando.CommandType = CommandType.StoredProcedure;
             comando.Parameters.AddWithValue("@fechaInicio", txtFechaInicio.Text);
             comando.Parameters.AddWithValue("@fechaFin", txtFechaFin.Text);
-            comando.Parameters.AddWithValue("@aseguradora", ddlBuscar.SelectedValue);
+            comando.Parameters.AddWithValue("@aseguradora", ddlBuscar.SelectedItem.Text);
             comando.ExecuteNonQuery();
             SqlDataAdapter sda = new SqlDataAdapter(comando);
             sda.Fill(dt);
@@ -298,7 +306,17 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesAutorizaciones : Syste
 
     protected void btnMostrarEficiencia_Click(object sender, EventArgs e)
     {
-        lblTitulo.Text = "Reporte de Eficiencia de autorizaciones";
+        eficiencia();
+
+        if (checkSinFiltro.Checked)
+        {
+            ddlBuscar.Visible = false;
+        }
+        else
+        {
+            ddlBuscar.Visible = true;
+        }
+        lblTitulo.Text = "Reporte de Eficiencia de autorizaciones " + ((ddlBuscar.Visible == false) ? "" : ddlBuscar.SelectedItem.Text).ToString();
         PanelTitulo.Visible = true;
         PanelPrincipal.Visible = false;
         PanelEficiencia.Visible = true;
