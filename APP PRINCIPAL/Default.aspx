@@ -23,7 +23,7 @@
                     </div>
                     <div class="panel-body">
                         <a href="/Modulos/Dashboard/DashboardUnity.aspx" title="Seguimiento De Reclamos en Unity Promotores" style="font-size: 80px;">
-                            <img src="imgUnity/Unity%20Promotores%20transparente.png" style="height: 125px;" /></a>
+                            <img src="imgUnity/unity-wtw2.png" style="height: 125px;" /></a>
                         <p style="text-align: center">
                             <b>Control De Reclamos en Unity</b>
                         </p>

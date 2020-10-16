@@ -468,7 +468,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label>Contraseña de su correo:</label>
-                                    <asp:TextBox ID="txtContrasena" type="password" Style="width: 100%" CssClass="form-control" AutoComplete="off" runat="server"></asp:TextBox>
+                                    <asp:TextBox ID="txtContrasena"  Style="width: 100%" CssClass="form-control" AutoComplete="off" runat="server"></asp:TextBox>
                                 </div>
                             </div>
                             <div class="modal-footer">

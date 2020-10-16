@@ -21,7 +21,7 @@
                 <div class="content-wrapper">
                     <div class="float-right">
                         <div class="img-float-right" style="float: right;">
-                            <img src="/imgUnity/Unity%20Promotores-%20Logo%20en%20blanco.png" style="margin-top: -57px; width: 150px;" />
+                            <img src="/imgUnity/unity-wtw.png" style="margin-top: -50px; width: 140px;" />
                         </div>
                         <section id="login">
                             <asp:LoginView runat="server" ViewStateMode="Disabled">
