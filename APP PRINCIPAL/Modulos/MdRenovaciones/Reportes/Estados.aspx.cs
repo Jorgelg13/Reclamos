@@ -40,7 +40,8 @@ public partial class Modulos_MdRenovaciones_Reportes_Estados : System.Web.UI.Pag
 
         consulta = "select r.id as ID," +
                "r.poliza_unity as [Poliza Unity]," +
-               "r.fecha_registro as [Fecha Registro]," +
+               "r.vigf as [Vigencia Final]," +
+               "convert(varchar, r.fecha_registro, 103) as [Fecha Registro]," +
                "r.placa as Placa," +
                "r.codigo_gestor as [Codigo Gestor]," +
                "r.asegurado as Asegurado " +
@@ -48,18 +49,101 @@ public partial class Modulos_MdRenovaciones_Reportes_Estados : System.Web.UI.Pag
                "where r.estado = " + ddlEstado.SelectedValue + " " +
                " and convert(date,fecha_registro,112) between '" + txtFechaInicio.Text + "' and '" + txtFechaFin.Text + "' ";
 
-        if (ddlEstado.SelectedValue == "4")
+        if (ddlEstado.SelectedValue == "2")
         {
             consulta = "select r.id as ID," +
                 "r.poliza_unity as [Poliza Unity]," +
-                "r.fecha_registro as [Fecha Registro]," +
+                "r.vigf as [Vigencia Final]," +
+                "convert(varchar, r.fecha_registro, 103) as [Fecha Registro]," +
+                "convert(varchar, p.fecha, 103) as [Fecha Asignada]," +
+                "r.placa as Placa," +
+                "r.codigo_gestor as [Codigo Gestor]," +
+                "r.asegurado as Asegurado " +
+                "from renovaciones_polizas as r " +
+                "inner join renovaciones_log as p on r.id = p.poliza and p.estado = 2 " +
+                "where r.estado = " + ddlEstado.SelectedValue + " " +
+                " and convert(date,p.fecha,112) between '" + txtFechaInicio.Text + "' and '" + txtFechaFin.Text + "' ";
+        }
+
+        else if (ddlEstado.SelectedValue == "3")
+        {
+            consulta = "select r.id as ID," +
+                 "r.poliza_unity as [Poliza Unity]," +
+                 "r.vigf as [Vigencia Final]," +
+                 "convert(varchar, r.fecha_registro, 103) as [Fecha Registro],"+
+                 "convert(varchar, p.fecha, 103) as [Fecha Enviada],"+
+                 "r.placa as Placa," +
+                 "r.codigo_gestor as [Codigo Gestor]," +
+                 "r.asegurado as Asegurado " +
+                 "from renovaciones_polizas as r " +
+                 "inner join renovaciones_log as p on r.id = p.poliza and p.estado = 3 " +
+                 "where r.estado = " + ddlEstado.SelectedValue + " " +
+                 " and convert(date,p.fecha,112) between '" + txtFechaInicio.Text + "' and '" + txtFechaFin.Text + "' ";
+        }
+
+        else if (ddlEstado.SelectedValue == "4")
+        {
+            consulta = "select r.id as ID," +
+                "r.poliza_unity as [Poliza Unity]," +
+                "r.vigf as [Vigencia Final],"+
+                "convert(varchar, r.fecha_registro, 103) as [Fecha Registro]," +
+                "convert(varchar, p.fecha, 103) as [Fecha Renovacion]," +
                 "r.placa as Placa," +
                 "r.codigo_gestor as [Codigo Gestor]," +
                 "r.asegurado as Asegurado, " +
                 "r.comentario_renovacion as [Comentario Renovacion] " +
                 "from renovaciones_polizas as r " +
+                "inner join renovaciones_log as p on r.id = p.poliza and p.estado = 4 " +
                 "where r.estado = " + ddlEstado.SelectedValue + " " +
-                " and convert(date,fecha_registro,112) between '" + txtFechaInicio.Text + "' and '" + txtFechaFin.Text + "' ";
+                " and convert(date,p.fecha,112) between '" + txtFechaInicio.Text + "' and '" + txtFechaFin.Text + "' ";
+        }
+
+        else if (ddlEstado.SelectedValue == "5")
+        {
+            consulta = "select r.id as ID," +
+                "r.poliza_unity as [Poliza Unity]," +
+                "r.vigf as [Vigencia Final]," +
+                "convert(varchar, r.fecha_registro, 103) as [Fecha Registro]," +
+                "convert(varchar, p.fecha, 103) as [Fecha Cancelacion]," +
+                "r.placa as Placa," +
+                "r.codigo_gestor as [Codigo Gestor]," +
+                "r.asegurado as Asegurado " +
+                "from renovaciones_polizas as r " +
+                "inner join renovaciones_log as p on r.id = p.poliza and p.estado = 5 " +
+                "where r.estado = " + ddlEstado.SelectedValue + " " +
+                " and convert(date,p.fecha,112) between '" + txtFechaInicio.Text + "' and '" + txtFechaFin.Text + "' ";
+        }
+
+        else if (ddlEstado.SelectedValue == "6")
+        {
+            consulta = "select r.id as ID," +
+                "r.poliza_unity as [Poliza Unity]," +
+                "r.vigf as [Vigencia Final]," +
+                "convert(varchar, r.fecha_registro, 103) as [Fecha Registro]," +
+                "convert(varchar, p.fecha, 103) as [Fecha No Enviada]," +
+                "r.placa as Placa," +
+                "r.codigo_gestor as [Codigo Gestor]," +
+                "r.asegurado as Asegurado " +
+                "from renovaciones_polizas as r " +
+                "inner join renovaciones_log as p on r.id = p.poliza and p.estado = 6 " +
+                "where r.estado = " + ddlEstado.SelectedValue + " " +
+                " and convert(date,p.fecha,112) between '" + txtFechaInicio.Text + "' and '" + txtFechaFin.Text + "' ";
+        }
+
+        else if(ddlEstado.SelectedValue == "7")
+        {
+            consulta = "select r.id as ID," +
+                 "r.poliza_unity as [Poliza Unity]," +
+                 "r.vigf as [Vigencia Final]," +
+                 "convert(varchar, r.fecha_registro, 103) as [Fecha Registro]," +
+                 "convert(varchar, p.fecha, 103) as [Fecha Facturada]," +
+                 "r.placa as Placa," +
+                 "r.codigo_gestor as [Codigo Gestor]," +
+                 "r.asegurado as Asegurado " +
+                 "from renovaciones_polizas as r " +
+                 "inner join renovaciones_log as p on r.id = p.poliza and p.estado = 7 " +
+                 "where r.estado = " + ddlEstado.SelectedValue + " " +
+                 " and convert(date,p.fecha,112) between '" + txtFechaInicio.Text + "' and '" + txtFechaFin.Text + "' ";
         }
 
 
