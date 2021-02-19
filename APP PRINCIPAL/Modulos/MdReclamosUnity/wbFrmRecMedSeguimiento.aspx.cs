@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Web;
+using System.Web.UI;
 using System.Web.UI.WebControls;
 
 public partial class Modulos_MdReclamosUnity_wbFrmRecMedSeguimiento : System.Web.UI.Page
@@ -128,5 +129,15 @@ public partial class Modulos_MdReclamosUnity_wbFrmRecMedSeguimiento : System.Web
     protected void btnBuscar_Click(object sender, EventArgs e)
     {
         llenado.llenarGrid(ReclamosGestor, GridReclamosPorGestor);
+    }
+
+    public override void VerifyRenderingInServerForm(Control control)
+    {
+        //base.VerifyRenderingInServerForm(control);
+    }
+
+    protected void linkDescargar_Click(object sender, EventArgs e)
+    {
+        Utils.ExportarExcel(GridReclamosPorGestor, Response, "Reclamos Medicos en seguimiento");
     }
 }

@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/ReclamosUnity.master" AutoEventWireup="true" CodeFile="wbFrmRecMedSeguimiento.aspx.cs" Inherits="Modulos_MdReclamosUnity_wbFrmRecMedSeguimiento" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/ReclamosUnity.master" AutoEventWireup="true"  EnableEventValidation="false"  CodeFile="wbFrmRecMedSeguimiento.aspx.cs" Inherits="Modulos_MdReclamosUnity_wbFrmRecMedSeguimiento" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
 </asp:Content>
@@ -95,6 +95,7 @@
                 </div>
             </div>
         </div>
+        <asp:LinkButton ID="linkDescargar" OnClick="linkDescargar_Click" title="Descargar en excel" runat="server" Style="font-size: 70px; text-align: center; color:green"><i class="fa fa-file-excel-o" aria-hidden="true"></i></asp:LinkButton>
     </div>
     <asp:SqlDataSource ID="SqlDataSourceGestores" runat="server" ConnectionString="<%$ ConnectionStrings:reclamosConnectionString %>" SelectCommand="select id, usuario  from gestores where tipo = 'Medicos'"></asp:SqlDataSource>
 </asp:Content>

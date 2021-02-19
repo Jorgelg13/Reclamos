@@ -25,7 +25,7 @@ public partial class Modulos_MdAdmin_wbFrmAsigReclamosMedicos : System.Web.UI.Pa
         foreach (GridViewRow row in GridAsigMedicos.Rows)
         {
             CheckBox checkAsig = (CheckBox)row.FindControl("checkAsignar");
-            String reclamo = Convert.ToString(row.Cells[1].Text);
+            string reclamo = Convert.ToString(row.Cells[1].Text);
             int id = Convert.ToInt32(reclamo);
             if (checkAsig.Checked)
             {
@@ -44,8 +44,11 @@ public partial class Modulos_MdAdmin_wbFrmAsigReclamosMedicos : System.Web.UI.Pa
                         DBReclamos.SaveChanges();
                         Utils.insertarComentario(id, "Su reclamo ha sido asignado a un ejecutivo para su revisión, fecha: " + DateTime.Now, "Asignado");
                         string mensaje = "UNITY: Estimad@ cliente su reclamo ha sido asignado a  " + DDLusuario.SelectedItem.Text + ", Telefono: " + telefonoGestor.telefono + ".";
-                        Utils.SMS_gastos_medicos(asignar.telefono, mensaje, userlogin, "Asignado", id, asignar.reg_reclamos_medicos.tipo);
-                        Utils.insertarComentario(id, "Su reclamo ha sido asignado a un ejecutivo para su revisión, fecha: " + DateTime.Now, "Asignado");
+
+                        if(asignar.reg_reclamos_medicos.tipo == "I")
+                        {
+                            Utils.SMS_gastos_medicos(asignar.telefono, mensaje, userlogin, "Asignado", id, asignar.reg_reclamos_medicos.tipo);
+                        }
                     }
                     else
                     {

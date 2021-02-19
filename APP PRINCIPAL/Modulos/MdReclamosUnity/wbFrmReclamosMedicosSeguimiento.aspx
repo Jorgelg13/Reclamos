@@ -376,7 +376,7 @@
                         <div id="imprimirEnvioAseg" style="display: none" class="form-inline">
                             <br />
                             <div class="img-float-right" style="float: right; padding-top: 50px;">
-                                <img src="../../imgUnity/Unity%20Promotores%20transparente.png" style="margin-top: -100px; width: 235px;">
+                                <img src="../../imgUnity/unity-wtw2.png" style="margin-top: -100px; width: 235px;">
                             </div>
                             <div class="img-float-left" style="float: left; padding-top: 10px;">
                                 <p>Avenida Las Americas 22-23, Zona 14</p>

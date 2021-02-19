@@ -136,7 +136,8 @@ public partial class Modulos_MdRenovaciones_Dashboard : System.Web.UI.Page
         int id = Convert.ToInt32(GridElRoble.SelectedRow.Cells[3].Text);
         var registro = DBRenovaciones.renovaciones_polizas.Find(id);
 
-        string mensaje = "Le saludamos de Unity Promotores, informando que hemos enviado a su email registrado " +
+
+        string mensaje = "Le saludamos de Unity WTW, informando que hemos enviado a su email registrado " +
                          "la renovacion " +  Convert.ToDateTime(registro.vigf).Year + "/" +  Convert.ToDateTime(registro.vigf).AddYears(1).Year + " " +
                          "de su poliza " + registro.poliza_unity + " del " + registro.marca + " / " + registro.modelo +", favor revisar y " +
                          "cualquier duda contacte a " + registro.nombre_gestor + " al " + Utils.TelefonoEjecutivo(Convert.ToInt32(registro.codigo_gestor));
