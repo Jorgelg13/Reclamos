@@ -9,7 +9,7 @@ public class Email
     MailMessage mail = new MailMessage();
     SmtpClient smtp = new SmtpClient();
     string from = "reclamosgt@unitypromotores.com";
-    string password = "123$456R";
+    string password = "ymqrmndyzqbrwshw";
 
     public Email()
     {
@@ -20,16 +20,16 @@ public class Email
     {
         try
         {
-            //mail.To.Clear();
-            //mail.From = new MailAddress(from);
-            //mail.To.Add(new MailAddress(para));
-            //mail.Body = cuerpo;
-            //mail.Subject = asunto;
-            //smtp.Host = "smtp.office365.com";
-            //smtp.Port = 587;
-            //smtp.Credentials = new NetworkCredential(from, password);
-            //smtp.EnableSsl = true;
-            //smtp.Send(mail);
+            mail.To.Clear();
+            mail.From = new MailAddress(from);
+            mail.To.Add(new MailAddress(para));
+            mail.Body = cuerpo;
+            mail.Subject = asunto;
+            smtp.Host = "smtp.office365.com";
+            smtp.Port = 587;
+            smtp.Credentials = new NetworkCredential(from, password);
+            smtp.EnableSsl = true;
+            smtp.Send(mail);
 
             return true;
         }
@@ -47,7 +47,7 @@ public class Email
             MailMessage mail = new MailMessage();
             SmtpClient smtp = new SmtpClient();
             string from = "reclamosgt@unitypromotores.com";
-            string password = "123$456R";
+            string password = "ymqrmndyzqbrwshw";
             string para = "jorge.laj@unitypromotores.com";
             mail.To.Clear();
             mail.From = new MailAddress(from);

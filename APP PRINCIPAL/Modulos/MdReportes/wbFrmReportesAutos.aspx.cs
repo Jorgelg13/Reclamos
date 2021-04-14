@@ -537,7 +537,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesAutos : System.Web.UI.
             kpi = 73;
             kpiImportacion = 73;
             Utils.Ciclos_Reclamos_tipo(txtFechaInicio, txtFechaFin, "pa_ciclos_reclamos_autos_con_importacion", GridCiclos, 4, kpi, 1);
-            kpi = 57;
+            kpi = 43;
             Utils.Ciclos_Reclamos_tipo(txtFechaInicio, txtFechaFin, "pa_ciclos_reclamos_autos_con_importacion", GridCiclos2, 4, kpi, 0);
             Titulo("Total",kpi,kpiImportacion);
             KPI(true);
