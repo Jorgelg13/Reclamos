@@ -103,7 +103,7 @@ public partial class Consultas_Caja_de_ahorro_ReportesMedicos : System.Web.UI.Pa
 
     protected void linkSalir_Click(object sender, EventArgs e)
     {
-        Response.Redirect("/Consultas/Caja-de-ahorro/Dashboard.aspx", false);
+        Response.Redirect("/Consultas/pronico/Dashboard.aspx", false);
     }
 
     public override void VerifyRenderingInServerForm(Control control)

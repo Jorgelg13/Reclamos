@@ -81,6 +81,14 @@ public partial class aseguradoras
     public virtual ICollection<carpetas_aseguradoras> carpetas_aseguradoras { get; set; }
 }
 
+public partial class asegurados_caja_ahorro
+{
+    public int id { get; set; }
+    public string codigo { get; set; }
+    public string nombre { get; set; }
+    public string placa { get; set; }
+}
+
 public partial class asegurados_implants
 {
     public int id { get; set; }
@@ -306,6 +314,8 @@ public partial class cabina_virtual
     public Nullable<System.DateTime> fechareg { get; set; }
     public Nullable<System.DateTime> fecha_atencion { get; set; }
     public Nullable<bool> estado { get; set; }
+    public string empresa { get; set; }
+    public string motivo { get; set; }
 }
 
 public partial class carpetas_aseguradoras
@@ -1184,6 +1194,17 @@ public partial class reg_reclamos_medicos
 
     public virtual ICollection<autorizaciones> autorizaciones { get; set; }
     public virtual ICollection<reclamos_medicos> reclamos_medicos { get; set; }
+}
+
+public partial class registros_vifrio
+{
+    public int id { get; set; }
+    public string asegurado { get; set; }
+    public string sucursal { get; set; }
+    public string codigo { get; set; }
+    public string servicio { get; set; }
+    public string placa { get; set; }
+    public Nullable<System.DateTime> fecha { get; set; }
 }
 
 public partial class sucursal

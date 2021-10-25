@@ -131,6 +131,8 @@
         <AssociationConnector Association="reclamosModel.FK__reclamos___id_re__5441852A" />
         <AssociationConnector Association="reclamosModel.FK__reclamos___id_us__5535A963" />
         <AssociationConnector Association="reclamosModel.FK_reclamos_varios_talleres" />
+        <EntityTypeShape EntityType="reclamosModel.asegurados_caja_ahorro" Width="1.5" PointX="17.375" PointY="21.75" />
+        <EntityTypeShape EntityType="reclamosModel.registros_vifrio" Width="1.5" PointX="19.375" PointY="21.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

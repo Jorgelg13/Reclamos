@@ -102,6 +102,8 @@ public partial class ReclamosEntities : DbContext
     public DbSet<ViewBusquedaAuto> ViewBusquedaAuto { get; set; }
     public DbSet<consultar_asegurados> consultar_asegurados { get; set; }
     public DbSet<v_producto_no_conforme> v_producto_no_conforme { get; set; }
+    public DbSet<asegurados_caja_ahorro> asegurados_caja_ahorro { get; set; }
+    public DbSet<registros_vifrio> registros_vifrio { get; set; }
 
     public virtual ObjectResult<pa_reclamos_autos_Result> pa_reclamos_autos()
     {
@@ -311,7 +313,7 @@ public partial class ReclamosEntities : DbContext
         return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_upgraddiagrams");
     }
 
-    public virtual int pa_kpi_autirizaciones(Nullable<System.DateTime> fechaInicio, Nullable<System.DateTime> fechaFin)
+    public virtual int pa_kpi_autirizaciones(Nullable<System.DateTime> fechaInicio, Nullable<System.DateTime> fechaFin, Nullable<int> idAseguradora, string aseguradora)
     {
         var fechaInicioParameter = fechaInicio.HasValue ?
             new ObjectParameter("fechaInicio", fechaInicio) :
@@ -321,7 +323,15 @@ public partial class ReclamosEntities : DbContext
             new ObjectParameter("fechaFin", fechaFin) :
             new ObjectParameter("fechaFin", typeof(System.DateTime));
 
-        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pa_kpi_autirizaciones", fechaInicioParameter, fechaFinParameter);
+        var idAseguradoraParameter = idAseguradora.HasValue ?
+            new ObjectParameter("idAseguradora", idAseguradora) :
+            new ObjectParameter("idAseguradora", typeof(int));
+
+        var aseguradoraParameter = aseguradora != null ?
+            new ObjectParameter("aseguradora", aseguradora) :
+            new ObjectParameter("aseguradora", typeof(string));
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pa_kpi_autirizaciones", fechaInicioParameter, fechaFinParameter, idAseguradoraParameter, aseguradoraParameter);
     }
 
     public virtual ObjectResult<Nullable<int>> pa_sec_cartas()

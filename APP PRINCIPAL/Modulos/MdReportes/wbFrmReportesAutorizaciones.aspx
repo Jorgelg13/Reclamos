@@ -122,7 +122,7 @@
                     </asp:Panel>
                     <asp:Panel runat="server" ID="PanelEficiencia" Visible="false">
                       <div class="scrolling-table-container" style="overflow-y: auto;">
-                        <asp:GridView ID="GridEficiencia" runat="server" CssClass="table bs-table table-responsive" AutoGenerateColumns="true" ForeColor="#333333" GridLines="None" AllowCustomPaging="True" AllowPaging="True" PageSize="3000" ShowFooter="true" OnRowDataBound="GridEficiencia_RowDataBound">
+                        <asp:GridView ID="GridEficiencia" runat="server" CssClass="table bs-table table-responsive" AutoGenerateColumns="true" ForeColor="#333333" GridLines="None" AllowCustomPaging="True" AllowPaging="True" PageSize="10000" ShowFooter="true" OnRowDataBound="GridEficiencia_RowDataBound">
                           <AlternatingRowStyle BackColor="White" />
                             <Columns>
                             </Columns>

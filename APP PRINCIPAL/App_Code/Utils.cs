@@ -861,12 +861,19 @@ public class Utils
 
     public static String CORREO_GESTOR(string ejecutivo)
     {
-        if (String.IsNullOrEmpty(ejecutivo))
+        try
         {
-            return  "reclamosgt@unitypromotores.com";
+            if (String.IsNullOrEmpty(ejecutivo))
+            {
+                return "reclamosgt@unitypromotores.com";
+            }
+            return DBReclamos.ejecutivos.Where(ej => ej.gestor == ejecutivo).First().ToString();
+        } 
+        catch(Exception ex)
+        {
+            return "reclamosgt@unitypromotores.com";
         }
-        var correo = DBReclamos.ejecutivos.Where(ej => ej.gestor == ejecutivo).First();
-        return correo.correo;
+        
     }
 
     //procedimiento para insertar registro en el envio de correos automatico en el servidor 192.168.5.199

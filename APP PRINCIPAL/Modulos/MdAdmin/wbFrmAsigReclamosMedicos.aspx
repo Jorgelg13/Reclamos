@@ -30,6 +30,10 @@
                                         </ItemTemplate>
                                     </asp:TemplateField>
                                 <asp:BoundField DataField="id" HeaderText="ID" InsertVisible="False" ReadOnly="True" SortExpression="id" />
+                                  <asp:BoundField DataField="nombre_completo" HeaderText="Creado por" SortExpression="nombre_completo">
+                                <HeaderStyle HorizontalAlign="Center" Wrap="False" />
+                                <ItemStyle HorizontalAlign="Left" Wrap="False" />
+                                </asp:BoundField>
                                 <asp:BoundField DataField="usuario_unity" HeaderText="Usuario Asignado" SortExpression="usuario_unity">
                                 <HeaderStyle HorizontalAlign="Center" Wrap="False" />
                                 <ItemStyle HorizontalAlign="Left" Wrap="False" />
@@ -81,8 +85,10 @@
                             <RowStyle BackColor="#EFF3FB" />
                             <SelectedRowStyle BackColor="#D1DDF1" Font-Bold="True" ForeColor="#333333" />
                         </asp:GridView>
-                        <asp:SqlDataSource ID="SqlDataSourceReclamosMedicos" runat="server" ConnectionString="<%$ ConnectionStrings:reclamosConnectionString %>" SelectCommand="SELECT reclamos_medicos.id, 
+                        <asp:SqlDataSource ID="SqlDataSourceReclamosMedicos" runat="server" 
+                            ConnectionString="<%$ ConnectionStrings:reclamosConnectionString %>" SelectCommand="SELECT reclamos_medicos.id, 
                         reclamos_medicos.tipo_reclamo, 
+                        usuario.nombre_completo,
                         reclamos_medicos.telefono, 
                         reclamos_medicos.correo,
                         reclamos_medicos.hora_commit, 

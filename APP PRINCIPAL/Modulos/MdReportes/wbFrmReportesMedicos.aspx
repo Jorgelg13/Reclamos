@@ -58,6 +58,18 @@
                     <asp:ListItem Value="CONCAT(DATEDIFF(MINUTE, r.fecha_completa_commit, r.fecha_cierre)/60, ':',
 	                                                DATEDIFF(MINUTE, r.fecha_completa_commit, r.fecha_cierre)%60, ':',
 	                                                DATEDIFF(SECOND, r.fecha_completa_commit, r.fecha_cierre)%60 ) as [Fecha Creacion a cierre] ">Fecha creacion a cierre</asp:ListItem>
+                    <asp:ListItem Value=" (select top 1 total_reclamado from detalle_pagos_reclamos_medicos where id_reclamo_medico = r.id ) as Total_Reclamado ">Total Reclamado</asp:ListItem>
+                    <asp:ListItem Value=" (select top 1 total_aprobado from detalle_pagos_reclamos_medicos where id_reclamo_medico = r.id ) as Total_Aprobado ">Total Aprobado</asp:ListItem>
+                    <asp:ListItem Value=" (select top 1 total_iva from detalle_pagos_reclamos_medicos where id_reclamo_medico = r.id ) as Total_IVA ">Total IVA</asp:ListItem>
+                    <asp:ListItem Value=" (select top 1 deducible from detalle_pagos_reclamos_medicos where id_reclamo_medico = r.id ) as Total_Deducible ">Deducible</asp:ListItem>
+                    <asp:ListItem Value=" (select top 1 coaseguro from detalle_pagos_reclamos_medicos where id_reclamo_medico = r.id ) as Coaseguro ">Coaseguro</asp:ListItem>
+                    <asp:ListItem Value=" (select top 1 copago from detalle_pagos_reclamos_medicos where id_reclamo_medico = r.id ) as Copago ">Copago</asp:ListItem>
+                    <asp:ListItem Value=" (select top 1 timbres from detalle_pagos_reclamos_medicos where id_reclamo_medico = r.id ) as Timbres ">Timbres</asp:ListItem>
+                    <asp:ListItem Value=" (select top 1 no_cheque from detalle_pagos_reclamos_medicos where id_reclamo_medico = r.id ) as Numero_Cheque ">Numero de cheque</asp:ListItem>
+                    <asp:ListItem Value=" (select top 1 moneda from detalle_pagos_reclamos_medicos where id_reclamo_medico = r.id ) as Moneda ">Moneda</asp:ListItem>
+                    <asp:ListItem Value=" (select top 1 banco from detalle_pagos_reclamos_medicos where id_reclamo_medico = r.id ) as Banco ">Banco</asp:ListItem>
+                    <asp:ListItem Value=" (select top 1 monto from detalle_pagos_reclamos_medicos where id_reclamo_medico = r.id ) as Monto ">Monto</asp:ListItem>
+                    <asp:ListItem Value=" (select top 1 fecha_creacion from detalle_pagos_reclamos_medicos where id_reclamo_medico = r.id ) as Fecha_registro ">Fecha Registro</asp:ListItem>
                 </asp:CheckBoxList>
             </div>
         </div>

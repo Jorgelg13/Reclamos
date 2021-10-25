@@ -1,0 +1,92 @@
+﻿body {
+    background-color: #f8f9fa;
+    /*background-image: url("../../imgUnity/unity-wtw2.png");*/
+}
+
+.fondo {
+    background-color: #151b4f;
+}
+.fondo-descuentos {
+    background: rgb(2,0,36);
+    background: linear-gradient(27deg, rgba(2,0,36,1) 0%, rgba(42,125,227,1) 52%, rgba(255,255,255,1) 96%);
+}
+
+
+.margen-container {
+    margin-top: 15px;
+    padding: 40px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    background-color: white;
+    border-radius: 2em;
+    box-shadow: 0.8px 0.2px 25px #6666;
+}
+
+
+.margen-container-table {
+    margin-top: 50px;
+    padding: 11px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    background-color: white;
+    border-radius: 2em;
+    box-shadow: 0.8px 0.2px 25px #6666;
+}
+
+.navbar-fondo {
+    height: 70px;
+    background-color: #801e83 !important;
+    color: white;
+    box-shadow: 0.8px 0.2px 25px #6666;
+}
+
+.controles-guardar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+}
+
+.scrolling-table-container {
+    overflow-y: auto;
+    overflow-x: auto;
+}
+
+img {
+    width: 365px;
+}
+
+@media(max-width: 500px) {
+
+    img {
+        width: 250px;
+    }
+}
+
+.color-letra{
+    color:white !important;
+}
+
+@media(max-width: 500px) {
+
+    .logo-wtw {
+        display: none;
+    }
+}
+
+.logo-wtw {
+    width: 159px;
+}
+
+li{
+    font-size:13px;
+
+}
+
+a {
+    color: #801e83 !important;
+}
