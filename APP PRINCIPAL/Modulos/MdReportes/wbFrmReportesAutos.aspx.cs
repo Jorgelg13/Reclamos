@@ -14,7 +14,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesAutos : System.Web.UI.
     String buscar, Join, eficienciaGestores;
     int Total, Promedio, EjecucionCiclos, kpi, kpiImportacion;
     int Total2, Promedio2, EjecucionCiclos2;
-    Double Pendientes, Nuevos, Cerrados, Ejecucion, CCIFT, CSIFT,PCIFT,PSIFT,EficienciaCierre,Anejamiento;
+    Double Pendientes, Nuevos, Cerrados, Congelados, Ejecucion, CCIFT, CSIFT,PCIFT,PSIFT,EficienciaCierre,Anejamiento;
 
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -28,7 +28,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesAutos : System.Web.UI.
         }
 
         if ( userlogin == "jlaj" || userlogin == "jwiesner" ||  userlogin == "sgordillo " ||
-            userlogin == "nsierra" || userlogin =="mbarrios" || userlogin == "hvillacinda" || userlogin == "lgarcia" || userlogin == "mguillen")
+            userlogin == "nsierra" || userlogin =="cmejia" || userlogin == "hvillacinda" || userlogin == "lgarcia" || userlogin == "mguillen")
         {
             btnMostrarEficiencia.Visible = true;
         }
@@ -397,6 +397,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesAutos : System.Web.UI.
                 Pendientes       += Convert.ToDouble(DataBinder.Eval(e.Row.DataItem, "[Pendientes]"));
                 Nuevos           += Convert.ToDouble(DataBinder.Eval(e.Row.DataItem, "[Nuevos]"));
                 Cerrados         += Convert.ToDouble(DataBinder.Eval(e.Row.DataItem, "[Cerrados]"));
+                Congelados       += Convert.ToDouble(DataBinder.Eval(e.Row.DataItem, "[Congelados]"));
                 CCIFT            += Convert.ToDouble(DataBinder.Eval(e.Row.DataItem, "[Cerrados Con Importacion_Fuera_Tiempo]"));
                 CSIFT            += Convert.ToDouble(DataBinder.Eval(e.Row.DataItem, "[Cerrados Sin Importacion_Fuera_Tiempo]"));
                 PCIFT            += Convert.ToDouble(DataBinder.Eval(e.Row.DataItem, "[Pendientes Con Importacion_Fuera_Tiempo]"));
@@ -419,28 +420,32 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesAutos : System.Web.UI.
                 e.Row.Cells[3].HorizontalAlign = HorizontalAlign.Right;
                 e.Row.Font.Bold = true;
 
-                e.Row.Cells[4].Text = CCIFT.ToString();
+                e.Row.Cells[4].Text = Congelados.ToString();
                 e.Row.Cells[4].HorizontalAlign = HorizontalAlign.Right;
                 e.Row.Font.Bold = true;
 
-                e.Row.Cells[5].Text = CSIFT.ToString();
+                e.Row.Cells[5].Text = CCIFT.ToString();
                 e.Row.Cells[5].HorizontalAlign = HorizontalAlign.Right;
                 e.Row.Font.Bold = true;
 
-                e.Row.Cells[6].Text = PCIFT.ToString();
+                e.Row.Cells[6].Text = CSIFT.ToString();
                 e.Row.Cells[6].HorizontalAlign = HorizontalAlign.Right;
                 e.Row.Font.Bold = true;
 
-                e.Row.Cells[7].Text = PSIFT.ToString();
+                e.Row.Cells[7].Text = PCIFT.ToString();
                 e.Row.Cells[7].HorizontalAlign = HorizontalAlign.Right;
                 e.Row.Font.Bold = true;
 
-                e.Row.Cells[8].Text =((1- ((CCIFT + CSIFT) /Cerrados)) *100 ).ToString("N2");
+                e.Row.Cells[8].Text = PSIFT.ToString();
                 e.Row.Cells[8].HorizontalAlign = HorizontalAlign.Right;
                 e.Row.Font.Bold = true;
 
-                e.Row.Cells[9].Text = ((1 -((PCIFT + PSIFT) / Pendientes)) * 100).ToString("N2");
+                e.Row.Cells[9].Text =((1- ((CCIFT + CSIFT) /Cerrados)) *100 ).ToString("N2");
                 e.Row.Cells[9].HorizontalAlign = HorizontalAlign.Right;
+                e.Row.Font.Bold = true;
+
+                e.Row.Cells[10].Text = ((1 -((PCIFT + PSIFT) / Pendientes)) * 100).ToString("N2");
+                e.Row.Cells[10].HorizontalAlign = HorizontalAlign.Right;
                 e.Row.Font.Bold = true;
             }
         }

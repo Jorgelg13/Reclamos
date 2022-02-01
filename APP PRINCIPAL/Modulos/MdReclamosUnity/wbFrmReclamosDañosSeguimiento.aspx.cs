@@ -84,7 +84,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosDañosSeguimiento : Sy
 
         if (lblEstadoReclamo.Text == "Congelado")
         {
-            if (userlogin != "mbarrios" && userlogin != "jwiesner" && userlogin != "jlaj")
+            if (userlogin != "sgordillo" && userlogin != "jwiesner" && userlogin != "jlaj" && userlogin != "cmejia" && userlogin != "nsierra")
             {
                 ddlEstadoReclamo.Enabled = false;
                 ddlEstadoReclamo.SelectedItem.Text = "Congelado";
@@ -115,7 +115,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosDañosSeguimiento : Sy
         ddlGestor.DataValueField = "id";
         ddlGestor.DataBind();
 
-        if (userlogin == "mbarrios" || userlogin == "jwiesner" || userlogin == "jlaj")
+        if (userlogin == "mbarrios" || userlogin == "jwiesner" || userlogin == "jlaj" || userlogin == "cmejia" || userlogin =="nsierra")
         {
             ddlEstadoReclamo.DataSource = DBReclamos.estados_reclamos_unity.ToList().Where(au => au.tipo == "daños");
             ddlEstadoReclamo.DataTextField = "descripcion";

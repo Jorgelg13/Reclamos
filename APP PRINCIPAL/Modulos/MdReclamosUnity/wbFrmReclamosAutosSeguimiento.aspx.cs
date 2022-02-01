@@ -78,14 +78,15 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosAutosSeguimiento : Sys
             tiempo();
         }
 
-        if (userlogin == "nsierra" || userlogin == "jlaj" || userlogin == "sgordillo" || userlogin =="cmejia" || userlogin == "hvillacinda" || userlogin == "lgarcia")
+        if (userlogin == "nsierra" || userlogin == "jlaj" || userlogin == "sgordillo" || userlogin =="cmejia" 
+            || userlogin == "hvillacinda" || userlogin == "lgarcia")
         {
             btnGuardarProximaFecha.Enabled = true;
         }
 
         if(lblEstadoAuto.Text == "Congelado")
         {
-            if(userlogin != "mbarrios" && userlogin != "jwiesner" && userlogin !="jlaj")
+            if(userlogin != "sgordillo" && userlogin != "jwiesner" && userlogin !="jlaj" && userlogin != "cmejia" && userlogin != "nsierra")
             {
                 ddlEstadoAuto.Enabled = false;
                 ddlEstadoAuto.SelectedItem.Text = "Congelado";
@@ -100,7 +101,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosAutosSeguimiento : Sys
         ddlTipoCierre.DataValueField = "id";
         ddlTipoCierre.DataBind();
         
-        if(userlogin == "mbarrios" || userlogin =="jwiesner" || userlogin =="jlaj")
+        if(userlogin == "mbarrios" || userlogin =="jwiesner" || userlogin == "jlaj" || userlogin == "cmejia" || userlogin == "nsierra")
         {
             ddlEstadoAuto.DataSource = DBReclamos.estados_reclamos_unity.ToList().Where(au => au.tipo == "auto");
             ddlEstadoAuto.DataTextField = "descripcion";

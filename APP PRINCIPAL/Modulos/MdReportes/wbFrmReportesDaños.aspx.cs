@@ -12,7 +12,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesDaños : System.Web.UI
     String Join;
     String buscar;
     String EficienciaGestor;
-    Double Pendientes, Nuevos, Cerrados, Ejecucion,CCRFT,CSRFT,PCRFT,PSRFT,EficienciaCierre,Anejamiento;
+    Double Pendientes, Nuevos, Cerrados,Congelados, Ejecucion,CCRFT,CSRFT,PCRFT,PSRFT,EficienciaCierre,Anejamiento;
     int Promedio, Total, KPISinReasaeguro, KpiReaseguro, EjecucionCiclos;
     int Total2, Promedio2, EjecucionCiclos2;
     conexionBD obj = new conexionBD();
@@ -415,6 +415,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesDaños : System.Web.UI
                 Pendientes       += Convert.ToDouble(DataBinder.Eval(e.Row.DataItem, "[Pendientes]"));
                 Nuevos           += Convert.ToDouble(DataBinder.Eval(e.Row.DataItem, "[Nuevos]"));
                 Cerrados         += Convert.ToDouble(DataBinder.Eval(e.Row.DataItem, "[Cerrados]"));
+                Congelados       += Convert.ToDouble(DataBinder.Eval(e.Row.DataItem, "[Congelados]"));
                 CCRFT            += Convert.ToDouble(DataBinder.Eval(e.Row.DataItem, "[Cerrados Con Reaseguro_Fuera_Tiempo]"));
                 CSRFT            += Convert.ToDouble(DataBinder.Eval(e.Row.DataItem, "[Cerrados Sin Reaseguro_Fuera_Tiempo]"));
                 PCRFT            += Convert.ToDouble(DataBinder.Eval(e.Row.DataItem, "[Pendientes Con Reaseguro_Fuera_Tiempo]"));
@@ -437,28 +438,32 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesDaños : System.Web.UI
                 e.Row.Cells[3].HorizontalAlign = HorizontalAlign.Right;
                 e.Row.Font.Bold = true;
 
-                e.Row.Cells[4].Text = CCRFT.ToString();
+                e.Row.Cells[4].Text = Congelados.ToString();
                 e.Row.Cells[4].HorizontalAlign = HorizontalAlign.Right;
                 e.Row.Font.Bold = true;
 
-                e.Row.Cells[5].Text = CSRFT.ToString();
+                e.Row.Cells[5].Text = CCRFT.ToString();
                 e.Row.Cells[5].HorizontalAlign = HorizontalAlign.Right;
                 e.Row.Font.Bold = true;
 
-                e.Row.Cells[6].Text = PCRFT.ToString();
+                e.Row.Cells[6].Text = CSRFT.ToString();
                 e.Row.Cells[6].HorizontalAlign = HorizontalAlign.Right;
                 e.Row.Font.Bold = true;
 
-                e.Row.Cells[7].Text = PSRFT.ToString();
+                e.Row.Cells[7].Text = PCRFT.ToString();
                 e.Row.Cells[7].HorizontalAlign = HorizontalAlign.Right;
                 e.Row.Font.Bold = true;
 
-                e.Row.Cells[8].Text = ((1 - ((CCRFT + CSRFT) / Cerrados)) * 100).ToString("N2");
+                e.Row.Cells[8].Text = PSRFT.ToString();
                 e.Row.Cells[8].HorizontalAlign = HorizontalAlign.Right;
                 e.Row.Font.Bold = true;
 
-                e.Row.Cells[9].Text = ((1 - ((PCRFT + PSRFT) / Pendientes)) * 100).ToString("N2");
+                e.Row.Cells[9].Text = ((1 - ((CCRFT + CSRFT) / Cerrados)) * 100).ToString("N2");
                 e.Row.Cells[9].HorizontalAlign = HorizontalAlign.Right;
+                e.Row.Font.Bold = true;
+
+                e.Row.Cells[10].Text = ((1 - ((PCRFT + PSRFT) / Pendientes)) * 100).ToString("N2");
+                e.Row.Cells[10].HorizontalAlign = HorizontalAlign.Right;
                 e.Row.Font.Bold = true;
             }
         }
