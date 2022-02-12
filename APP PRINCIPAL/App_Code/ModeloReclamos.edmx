@@ -920,6 +920,7 @@
           <Property Name="estado_reclamo_unity" Type="varchar" MaxLength="70" />
           <Property Name="prioritario" Type="bit" />
           <Property Name="complicado" Type="bit" />
+          <Property Name="cuello_botella" Type="bit" />
           <Property Name="compromiso_pago" Type="bit" />
           <Property Name="asignado_por" Type="varchar" MaxLength="50" />
           <Property Name="fecha_asignacion" Type="datetime" />
@@ -4103,6 +4104,7 @@ FROM [dbo].[v_producto_no_conforme] AS [v_producto_no_conforme]</DefiningQuery>
           <NavigationProperty Name="reg_reclamo_varios" Relationship="reclamosModel.FK__reclamos___id_re__5441852A" FromRole="reclamos_varios" ToRole="reg_reclamo_varios" />
           <NavigationProperty Name="usuario" Relationship="reclamosModel.FK__reclamos___id_us__5535A963" FromRole="reclamos_varios" ToRole="usuario" />
           <NavigationProperty Name="talleres" Relationship="reclamosModel.FK_reclamos_varios_talleres" FromRole="reclamos_varios" ToRole="talleres" />
+          <Property Name="cuello_botella" Type="Boolean" />
         </EntityType>
         <EntityType Name="reg_reclamo_varios">
           <Key>
@@ -6285,6 +6287,7 @@ FROM [dbo].[v_producto_no_conforme] AS [v_producto_no_conforme]</DefiningQuery>
           <EntitySetMapping Name="reclamos_varios">
             <EntityTypeMapping TypeName="reclamosModel.reclamos_varios">
               <MappingFragment StoreEntitySet="reclamos_varios">
+                <ScalarProperty Name="cuello_botella" ColumnName="cuello_botella" />
                 <ScalarProperty Name="reaseguro" ColumnName="reaseguro" />
                 <ScalarProperty Name="fecha_problema" ColumnName="fecha_problema" />
                 <ScalarProperty Name="comentario_aseguradora" ColumnName="comentario_aseguradora" />

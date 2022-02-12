@@ -55,6 +55,7 @@
                         <asp:ListItem Value="reclamos_varios.prioritario as Prioritario">Prioritario</asp:ListItem>
                         <asp:ListItem Value="reclamos_varios.complicado as Complicado">Complicado</asp:ListItem>
                         <asp:ListItem Value="reclamos_varios.compromiso_pago as Compromiso">Compromiso </asp:ListItem>
+                        <asp:ListItem Value="reclamos_varios.cuello_botella as [Cuello de botella]">Cuello de botella</asp:ListItem>
                         <asp:ListItem Value="reclamos_varios.num_reclamo as [No. Reclamo]">Num. Reclamo</asp:ListItem>
                         <asp:ListItem Value="cabina.nombre as Cabina">Cabina</asp:ListItem>
                         <asp:ListItem Value="sucursal.nombre as Sucursal">Sucursal</asp:ListItem>

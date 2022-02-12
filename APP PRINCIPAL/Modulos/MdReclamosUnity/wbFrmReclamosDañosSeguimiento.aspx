@@ -146,6 +146,9 @@
                                 <div class="form-group col-lg-12 col-md-12">
                                     <asp:CheckBox ID="checkCompromiso" runat="server" Text="Compromiso De Pago" />                                    
                                 </div>
+                                 <div class="form-group col-lg-12 col-md-12">
+                                    <asp:CheckBox ID="checkCuelloBotella" runat="server" Text="Cuello de botella" />                                    
+                                </div>
                                 <div class="form-group col-lg-12 col-md-12">
                                    <asp:CheckBox ID="checkCerrarReclamo" OnCheckedChanged="checkCerrarReclamo_CheckedChanged" AutoPostBack="true" runat="server" Text="Cerrar Reclamo" />                                    
                                 </div>

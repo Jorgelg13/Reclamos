@@ -99,6 +99,8 @@
                     <div class="form-inline">
                         <asp:DropDownList CssClass="form-control" AutoPostBack="True" ID="ddlgestor" Style="width: 15%" Height="34px" runat="server" CausesValidation="True" DataSourceID="SqlDataSourceGestores" DataTextField="nombre" DataValueField="id" OnSelectedIndexChanged="ddlgestor_SelectedIndexChanged">
                         </asp:DropDownList>
+                     <asp:LinkButton ID="LinKReclamosPorGestor" OnClick="LinKReclamosPorGestor_Click" title="Descargar en excel" runat="server" Style="font-size: 30px; text-align: center; color: green"><i class="fa fa-file-excel-o"></i></asp:LinkButton>
+
                     </div>
                     <br />
                     <div class="scrolling-table-container">

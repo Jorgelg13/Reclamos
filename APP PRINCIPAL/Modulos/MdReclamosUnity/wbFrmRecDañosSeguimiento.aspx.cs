@@ -201,6 +201,13 @@ public partial class Modulos_MdReclamosUnity_wbFrmRecDañosSeguimiento : System.
         Utils.actividades(0, Constantes.DANIOS(), 28, Constantes.USER());
         Utils.ExportarExcel(PnAlarmas, Response, "Alarmas de reclamos daños");
     }
+
+    protected void LinKReclamosPorGestor_Click(object sender, EventArgs e)
+    {
+        Utils.actividades(0, Constantes.DANIOS(), 28, Constantes.USER());
+        Utils.ExportarExcel(GridReclamosGeneral, Response, "reclamos por gestor");
+    }
+
 }
 
 

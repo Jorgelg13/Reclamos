@@ -38,6 +38,7 @@ public partial class Modulos_MdReclamos_wbFrmReclamosAutosEditar : System.Web.UI
     {
         try
         {
+            var datos = DBReclamos.auto_reclamo.Find(idAuto);
             var reclamo = DBReclamos.reclamo_auto.Find(id);
             reclamo.boleta = txtBoleta.Text;
             reclamo.titular = txtTitular.Text;
@@ -64,6 +65,11 @@ public partial class Modulos_MdReclamos_wbFrmReclamosAutosEditar : System.Web.UI
             GridLLamadas.DataBind();
             txtllamada.Text = "";
             Utils.ShowMessage(this.Page, "Registro Actualizado con exito", "Exelente", "success");
+
+            if (datos.poliza == "AUTO-249422")
+            {
+                Page.ClientScript.RegisterStartupScript(this.Page.GetType(), "show_modal", "$('#modal-recordatorio').modal('show');", addScriptTags: true);
+            }
         }
 
         catch (Exception)

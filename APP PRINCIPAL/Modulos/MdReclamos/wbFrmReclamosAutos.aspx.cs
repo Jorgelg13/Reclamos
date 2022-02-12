@@ -134,6 +134,10 @@ public partial class Modulos_MdReclamos_wbFrmReclamosAutos : System.Web.UI.Page
             Utils.ShowMessage(this.Page, "Tomar En cuenta que este cliente es VIP", "Nota..!", "info");
             Page.ClientScript.RegisterStartupScript(this.Page.GetType(), "show_modal", "$('#ModalVip').modal('show');", addScriptTags: true);
         }
+        if(GridAutos.SelectedRow.Cells[5].Text == "AUTO-249422")
+        {
+            Page.ClientScript.RegisterStartupScript(this.Page.GetType(), "show_modal", "$('#modal-recordatorio').modal('show');", addScriptTags: true);
+        }
     }
 
     protected void btnResguardos_Click(object sender, EventArgs e)

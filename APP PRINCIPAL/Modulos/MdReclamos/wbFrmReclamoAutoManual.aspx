@@ -30,6 +30,9 @@
                                 <asp:TextBox runat="server" ID="txtMarca" autocomplete="off" Style="width: 40%" class="form-control" placeholder="Marca Vehiculo"></asp:TextBox>
                                 <asp:TextBox runat="server" ID="txtColor" autocomplete="off" Style="width: 30%" class="form-control" placeholder="Color"></asp:TextBox>
                                 <asp:TextBox runat="server" ID="txtEjecutivo" autocomplete="off" Style="width: 25%" class="form-control" placeholder="ejecutivo"></asp:TextBox>
+                                 <br />
+                                <br />
+                                <asp:CheckBox runat="server" ID="checkProductosAlimenticios" OnCheckedChanged="checkProductosAlimenticios_CheckedChanged" AutoPostBack="true"  Style="width: 50%" class="form-control" Text="Fábrica de Productos Alimenticios René"></asp:CheckBox>
                                 <br />
                                 <br />
                             </div>
@@ -69,6 +72,25 @@
                 </div>
             </div>
         </div>
+          <div class="modal fade" id="modal-recordatorio">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title"><b>Recordatorio Unity-Pepsico</b></h4>
+                </div>
+                <div class="modal-body">
+                    <ul>
+                        <li>
+                            <h4>Estimado usuario, le recordamos que es importante reportar esta emergencia en el chat Unity-Pepsico</h4>
+                        </li>
+                    </ul>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-warning" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
     </div>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="MainContent" runat="Server">

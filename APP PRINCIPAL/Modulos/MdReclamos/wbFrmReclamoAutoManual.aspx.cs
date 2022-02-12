@@ -12,7 +12,7 @@ public partial class Modulos_MdReclamos_wbFrmInsertarAutoManual : System.Web.UI.
     ReclamosEntities DBReclamos = new ReclamosEntities();
     string ultimoIdAuto, ultimoIdReclamo, idCabina, idUsuario, codigo;
     string metodo = "manual";
-
+    Email notificacion = new Email();
 
     private void Page_Error(object sender, EventArgs e)
     {
@@ -73,9 +73,16 @@ public partial class Modulos_MdReclamos_wbFrmInsertarAutoManual : System.Web.UI.
                 auto.color = txtColor.Text.ToString();
                 auto.chasis = txtChasis.Text.ToString();
                 auto.motor = txtMotor.Text.ToString();
-                auto.propietario = txtPropietario.Text.ToString();
                 auto.marca = txtMarca.Text.ToString();
-                auto.poliza = txtPoliza.Text.ToString();
+                if(checkProductosAlimenticios.Checked == true)
+                {
+                    auto.poliza = "AUTO-249422";
+                    auto.propietario = "Fábrica de Productos Alimenticios René";
+                } else
+                {
+                    auto.poliza = txtPoliza.Text.ToString(); 
+                    auto.propietario = txtPropietario.Text.ToString();
+                }
                 auto.ejecutivo = txtEjecutivo.Text.ToString();
                 auto.aseguradora = ddlAseguradora.SelectedItem.Text;
                 auto.asegurado = txtEmpresa.Text;
@@ -134,6 +141,22 @@ public partial class Modulos_MdReclamos_wbFrmInsertarAutoManual : System.Web.UI.
         catch (Exception)
         {
             Utils.ShowMessage(this.Page, "A ocurrido un error al traer las variables de session", "Nota..!", "warning");
+        }
+    }
+
+    protected void checkProductosAlimenticios_CheckedChanged(object sender, EventArgs e)
+    {
+        if (checkProductosAlimenticios.Checked == true)
+        {
+            txtPoliza.Text = "AUTO-249422";
+            txtPropietario.Text = "Fábrica de Productos Alimenticios René";
+            Page.ClientScript.RegisterStartupScript(this.Page.GetType(), "show_modal", "$('#modal-recordatorio').modal('show');", addScriptTags: true);
+            //Email.ENVIAR_ERROR("Error ocasionado al usuario: " + userlogin,"cuerpo del correo");
+        }
+        else
+        {
+            txtPoliza.Text = "";
+            txtPropietario.Text = "";
         }
     }
 }

@@ -21,6 +21,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosDañosSeguimiento : Sy
     bool prioritario = false;
     bool complicado = false;
     bool compromiso_pago = false;
+    bool cuelloBotella = false;
     String estado = "Seguimiento"; //esta variable es la que se utiliza para cambiar el estado a cerrado de un reclamo.
     String poliza;
     short codigo;
@@ -199,6 +200,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosDañosSeguimiento : Sy
             checkPrioritario.Checked = reclamo.prioritario.Value;
             CheckComplicado.Checked  = reclamo.complicado.Value;
             checkCompromiso.Checked  = reclamo.compromiso_pago.Value;
+            checkCuelloBotella.Checked = reclamo.cuello_botella.Value;
             CheckReaseuro.Checked = reclamo.reaseguro.Value;
 
             //informacion del taller asignado
@@ -363,6 +365,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosDañosSeguimiento : Sy
     {
         if (CheckComplicado.Checked)  complicado = true;
         if (checkCompromiso.Checked)  compromiso_pago = true;
+        if (checkCuelloBotella.Checked) cuelloBotella = true;
         if (checkPrioritario.Checked) prioritario = true;
         if (CheckReaseuro.Checked) reaseguro = true;
     }
@@ -405,6 +408,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosDañosSeguimiento : Sy
             reclamo.complicado    = complicado;
             reclamo.prioritario   = prioritario;
             reclamo.compromiso_pago = compromiso_pago;
+            reclamo.cuello_botella = cuelloBotella;
             reclamo.id_taller     = Convert.ToInt16(ddlGestor.SelectedValue);
             reclamo.id_analista   = Convert.ToInt16(ddlAnalista.SelectedValue);
             reclamo.id_taller     = Convert.ToInt16(ddlTaller.SelectedValue);

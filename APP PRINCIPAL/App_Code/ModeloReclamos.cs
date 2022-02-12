@@ -1117,6 +1117,7 @@ public partial class reclamos_varios
     public string comentario_aseguradora { get; set; }
     public Nullable<System.DateTime> fecha_problema { get; set; }
     public Nullable<bool> reaseguro { get; set; }
+    public Nullable<bool> cuello_botella { get; set; }
 
     public virtual analistas analistas { get; set; }
     public virtual ICollection<bitacora_estados_reclamos_varios> bitacora_estados_reclamos_varios { get; set; }
