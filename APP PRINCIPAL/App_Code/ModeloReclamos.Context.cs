@@ -31,6 +31,7 @@ public partial class ReclamosEntities : DbContext
     public DbSet<analistas> analistas { get; set; }
     public DbSet<archivos_copagos> archivos_copagos { get; set; }
     public DbSet<aseguradoras> aseguradoras { get; set; }
+    public DbSet<asegurados_caja_ahorro> asegurados_caja_ahorro { get; set; }
     public DbSet<asegurados_implants> asegurados_implants { get; set; }
     public DbSet<auto_reclamo> auto_reclamo { get; set; }
     public DbSet<autorizaciones> autorizaciones { get; set; }
@@ -56,6 +57,7 @@ public partial class ReclamosEntities : DbContext
     public DbSet<comentarios_reclamos_varios> comentarios_reclamos_varios { get; set; }
     public DbSet<contacto_auto> contacto_auto { get; set; }
     public DbSet<contactos_reclamos_varios> contactos_reclamos_varios { get; set; }
+    public DbSet<descuentos_vifrio> descuentos_vifrio { get; set; }
     public DbSet<detalle_gasto_medico> detalle_gasto_medico { get; set; }
     public DbSet<detalle_pagos_reclamos_autos> detalle_pagos_reclamos_autos { get; set; }
     public DbSet<detalle_pagos_reclamos_medicos> detalle_pagos_reclamos_medicos { get; set; }
@@ -73,6 +75,7 @@ public partial class ReclamosEntities : DbContext
     public DbSet<errores_insercion> errores_insercion { get; set; }
     public DbSet<estado> estado { get; set; }
     public DbSet<estados_reclamos_unity> estados_reclamos_unity { get; set; }
+    public DbSet<flotillas> flotillas { get; set; }
     public DbSet<formulario_colectivo> formulario_colectivo { get; set; }
     public DbSet<formularios_aseguradoras> formularios_aseguradoras { get; set; }
     public DbSet<gestores> gestores { get; set; }
@@ -89,6 +92,7 @@ public partial class ReclamosEntities : DbContext
     public DbSet<reclamos_varios> reclamos_varios { get; set; }
     public DbSet<reg_reclamo_varios> reg_reclamo_varios { get; set; }
     public DbSet<reg_reclamos_medicos> reg_reclamos_medicos { get; set; }
+    public DbSet<registros_vifrio> registros_vifrio { get; set; }
     public DbSet<sucursal> sucursal { get; set; }
     public DbSet<sysdiagrams> sysdiagrams { get; set; }
     public DbSet<talleres> talleres { get; set; }
@@ -102,8 +106,6 @@ public partial class ReclamosEntities : DbContext
     public DbSet<ViewBusquedaAuto> ViewBusquedaAuto { get; set; }
     public DbSet<consultar_asegurados> consultar_asegurados { get; set; }
     public DbSet<v_producto_no_conforme> v_producto_no_conforme { get; set; }
-    public DbSet<asegurados_caja_ahorro> asegurados_caja_ahorro { get; set; }
-    public DbSet<registros_vifrio> registros_vifrio { get; set; }
 
     public virtual ObjectResult<pa_reclamos_autos_Result> pa_reclamos_autos()
     {
@@ -723,5 +725,31 @@ public partial class ReclamosEntities : DbContext
     public virtual int pa_cargar_ejecutivos()
     {
         return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pa_cargar_ejecutivos");
+    }
+
+    public virtual ObjectResult<pa_eficiencia_individuales2_Result> pa_eficiencia_individuales2(Nullable<System.DateTime> fechaInicio, Nullable<System.DateTime> fechaFin)
+    {
+        var fechaInicioParameter = fechaInicio.HasValue ?
+            new ObjectParameter("fechaInicio", fechaInicio) :
+            new ObjectParameter("fechaInicio", typeof(System.DateTime));
+
+        var fechaFinParameter = fechaFin.HasValue ?
+            new ObjectParameter("fechaFin", fechaFin) :
+            new ObjectParameter("fechaFin", typeof(System.DateTime));
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<pa_eficiencia_individuales2_Result>("pa_eficiencia_individuales2", fechaInicioParameter, fechaFinParameter);
+    }
+
+    public virtual int pa_nps_general(Nullable<System.DateTime> fechaInicio, Nullable<System.DateTime> fechaFin)
+    {
+        var fechaInicioParameter = fechaInicio.HasValue ?
+            new ObjectParameter("fechaInicio", fechaInicio) :
+            new ObjectParameter("fechaInicio", typeof(System.DateTime));
+
+        var fechaFinParameter = fechaFin.HasValue ?
+            new ObjectParameter("fechaFin", fechaFin) :
+            new ObjectParameter("fechaFin", typeof(System.DateTime));
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pa_nps_general", fechaInicioParameter, fechaFinParameter);
     }
 }

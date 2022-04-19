@@ -395,6 +395,13 @@
                                 <li><a href="javascript:ventanaSecundaria('/pdf/textos/TEXTOS DE RESPUESTA.pdf')">Textos de respuesta</a></li>
                             </ul>
                         </li>
+                           <li class="dropdown">
+                            <a href="#" class="fa fa-car" aria-hidden="true" style="font-size: 18px;" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Flotillas <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="/Modulos/MdFlotillas/cargar-flotillas.aspx">Cargar autos</a></li>
+                                <li><a href="/Modulos/MdFlotillas/buscar-auto.aspx">Buscar auto en flotilla</a></li>
+                            </ul>
+                        </li>
                         <li class="dropdown">
                             <a href="#" class="fa fa-cogs" aria-hidden="true" style="font-size: 18px;" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Admin <span class="caret"></span></a>
                             <ul class="dropdown-menu">
@@ -420,6 +427,8 @@
                                 </li>
                             </ul>
                         </li>
+                      
+
                     </ul>
                 </div>
             </div>

@@ -453,6 +453,13 @@ public partial class contactos_reclamos_varios
     public Nullable<int> id_reclamos_varios { get; set; }
 }
 
+public partial class descuentos_vifrio
+{
+    public int id { get; set; }
+    public string servicio { get; set; }
+    public string descuento { get; set; }
+}
+
 public partial class detalle_gasto_medico
 {
     public int id { get; set; }
@@ -685,6 +692,20 @@ public partial class estados_reclamos_unity
     public string descripcion { get; set; }
     public Nullable<short> dias_revision { get; set; }
     public string tipo { get; set; }
+}
+
+public partial class flotillas
+{
+    public int id { get; set; }
+    public Nullable<int> inciso { get; set; }
+    public string propietario { get; set; }
+    public string marca { get; set; }
+    public string linea { get; set; }
+    public string chasis { get; set; }
+    public string motor { get; set; }
+    public string year { get; set; }
+    public string color { get; set; }
+    public string placa { get; set; }
 }
 
 public partial class formulario_colectivo
@@ -1083,6 +1104,7 @@ public partial class reclamos_varios
     public string estado_reclamo_unity { get; set; }
     public Nullable<bool> prioritario { get; set; }
     public Nullable<bool> complicado { get; set; }
+    public Nullable<bool> cuello_botella { get; set; }
     public Nullable<bool> compromiso_pago { get; set; }
     public string asignado_por { get; set; }
     public Nullable<System.DateTime> fecha_asignacion { get; set; }
@@ -1117,7 +1139,6 @@ public partial class reclamos_varios
     public string comentario_aseguradora { get; set; }
     public Nullable<System.DateTime> fecha_problema { get; set; }
     public Nullable<bool> reaseguro { get; set; }
-    public Nullable<bool> cuello_botella { get; set; }
 
     public virtual analistas analistas { get; set; }
     public virtual ICollection<bitacora_estados_reclamos_varios> bitacora_estados_reclamos_varios { get; set; }
@@ -1527,6 +1548,20 @@ public partial class pa_eficiencia_individuales_Result
     public Nullable<int> Cerrados { get; set; }
     public Nullable<int> Fuera_de_tiempo { get; set; }
     public Nullable<int> Ejecucion { get; set; }
+}
+
+public partial class pa_eficiencia_individuales2_Result
+{
+    public string Nombre { get; set; }
+    public Nullable<int> Pendientes { get; set; }
+    public Nullable<int> Nuevos { get; set; }
+    public Nullable<int> Cerrados { get; set; }
+    public Nullable<int> Pendientes_fuera_tiempo_Q { get; set; }
+    public Nullable<int> Pendientes_fuera_tiempo__ { get; set; }
+    public Nullable<int> Cerrados_fuera_tiempo_Q { get; set; }
+    public Nullable<int> Cerrados_fuera_tiempo__ { get; set; }
+    public Nullable<int> Ejecucion { get; set; }
+    public Nullable<int> Añejamiento { get; set; }
 }
 
 public partial class pa_reclamos_autos_Result
