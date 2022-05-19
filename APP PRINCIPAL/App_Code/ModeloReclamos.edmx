@@ -616,14 +616,25 @@
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="inciso" Type="int" />
-          <Property Name="propietario" Type="varchar" MaxLength="50" />
-          <Property Name="marca" Type="varchar" MaxLength="50" />
-          <Property Name="linea" Type="varchar" MaxLength="50" />
+          <Property Name="propietario" Type="varchar" MaxLength="150" />
+          <Property Name="marca" Type="varchar" MaxLength="150" />
+          <Property Name="linea" Type="varchar" MaxLength="150" />
           <Property Name="chasis" Type="varchar" MaxLength="50" />
           <Property Name="motor" Type="varchar" MaxLength="50" />
           <Property Name="year" Type="varchar" MaxLength="25" />
-          <Property Name="color" Type="varchar" MaxLength="30" />
+          <Property Name="color" Type="varchar" MaxLength="130" />
           <Property Name="placa" Type="varchar" MaxLength="50" />
+          <Property Name="usuario" Type="varchar" MaxLength="50" />
+          <Property Name="aseguradora" Type="varchar" MaxLength="100" />
+          <Property Name="asegurado" Type="varchar" MaxLength="150" />
+          <Property Name="poliza" Type="varchar" MaxLength="50" />
+          <Property Name="vigencia" Type="varchar" MaxLength="50" />
+          <Property Name="ejecutivo" Type="varchar" MaxLength="150" />
+          <Property Name="fecha" Type="datetime" />
+          <Property Name="estado" Type="varchar" MaxLength="50" />
+          <Property Name="usuario_inactivacion" Type="varchar" MaxLength="50" />
+          <Property Name="codigo_interno" Type="varchar" MaxLength="30" />
+          <Property Name="pagador" Type="varchar" MaxLength="150" />
         </EntityType>
         <EntityType Name="formulario_colectivo">
           <Key>
@@ -1265,23 +1276,6 @@ advertencia 6002: La tabla o vista 'reclamos.dbo.consultar_asegurados' no tiene 
           <Property Name="vigi" Type="date" />
           <Property Name="vigf" Type="date" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6013: La tabla o vista 'reclamos.dbo.v_polizas' no tiene definida una clave principal y no es posible inferir ninguna clave principal válida. Esta tabla o vista se ha excluido. Para usar la entidad, necesitará revisar el esquema, agregar las claves correctas y quitar sus comentarios.
-        <EntityType Name="v_polizas">
-          <Property Name="poliza" Type="nvarchar" MaxLength="50" />
-          <Property Name="secren" Type="smallint" />
-          <Property Name="ramo" Type="nvarchar" MaxLength="60" />
-          <Property Name="aseguradora" Type="nvarchar" MaxLength="300" />
-          <Property Name="vigi" Type="date" />
-          <Property Name="vigf" Type="date" />
-          <Property Name="cliente" Type="int" />
-          <Property Name="asegurado" Type="nvarchar" MaxLength="300" />
-          <Property Name="gestor" Type="nvarchar" MaxLength="300" />
-          <Property Name="prima" Type="decimal" Precision="12" Scale="2" />
-          <Property Name="porcom" Type="decimal" Precision="12" Scale="4" />
-          <Property Name="moneda" Type="nvarchar" MaxLength="50" />
-          <Property Name="gst_nombre" Type="nvarchar" MaxLength="300" />
-        </EntityType>-->
         <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'reclamos.dbo.v_producto_no_conforme' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="v_producto_no_conforme">
@@ -3790,14 +3784,25 @@ FROM [dbo].[v_producto_no_conforme] AS [v_producto_no_conforme]</DefiningQuery>
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="inciso" Type="Int32" />
-          <Property Name="propietario" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="marca" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="linea" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="propietario" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="marca" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="linea" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
           <Property Name="chasis" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="motor" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="year" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
-          <Property Name="color" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="color" Type="String" MaxLength="130" FixedLength="false" Unicode="false" />
           <Property Name="placa" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="usuario" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="aseguradora" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="asegurado" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="fecha" Type="DateTime" Precision="3" />
+          <Property Name="estado" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="poliza" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="vigencia" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ejecutivo" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="usuario_inactivacion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="codigo_interno" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="pagador" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="formulario_colectivo">
           <Key>
@@ -6106,6 +6111,17 @@ FROM [dbo].[v_producto_no_conforme] AS [v_producto_no_conforme]</DefiningQuery>
           <EntitySetMapping Name="flotillas">
             <EntityTypeMapping TypeName="reclamosModel.flotillas">
               <MappingFragment StoreEntitySet="flotillas">
+                <ScalarProperty Name="pagador" ColumnName="pagador" />
+                <ScalarProperty Name="codigo_interno" ColumnName="codigo_interno" />
+                <ScalarProperty Name="usuario_inactivacion" ColumnName="usuario_inactivacion" />
+                <ScalarProperty Name="ejecutivo" ColumnName="ejecutivo" />
+                <ScalarProperty Name="vigencia" ColumnName="vigencia" />
+                <ScalarProperty Name="poliza" ColumnName="poliza" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="fecha" ColumnName="fecha" />
+                <ScalarProperty Name="asegurado" ColumnName="asegurado" />
+                <ScalarProperty Name="aseguradora" ColumnName="aseguradora" />
+                <ScalarProperty Name="usuario" ColumnName="usuario" />
                 <ScalarProperty Name="placa" ColumnName="placa" />
                 <ScalarProperty Name="color" ColumnName="color" />
                 <ScalarProperty Name="year" ColumnName="year" />

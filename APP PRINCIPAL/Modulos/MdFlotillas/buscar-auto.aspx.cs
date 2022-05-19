@@ -58,7 +58,10 @@ public partial class Modulos_MdFlotillas_buscar_auto : System.Web.UI.Page
                 auto.chasis = GridAutos.SelectedRow.Cells[6].Text;
                 auto.motor = GridAutos.SelectedRow.Cells[7].Text;
                 auto.marca = GridAutos.SelectedRow.Cells[4].Text;
-                auto.poliza = "";
+                auto.aseguradora = GridAutos.SelectedRow.Cells[11].Text;
+                auto.asegurado = GridAutos.SelectedRow.Cells[12].Text;
+                auto.poliza = GridAutos.SelectedRow.Cells[13].Text;
+                auto.ejecutivo = GridAutos.SelectedRow.Cells[14].Text;
                 auto.propietario = GridAutos.SelectedRow.Cells[3].Text;
 
                 reclamo_auto reclamo = new reclamo_auto();
@@ -114,7 +117,11 @@ public partial class Modulos_MdFlotillas_buscar_auto : System.Web.UI.Page
             "motor as Motor," +
             "year as Año," +
             "color as Color," +
-            "placa as Placa " +
+            "placa as Placa, " +
+            "aseguradora as Aseguradora, " +
+            "asegurado as Asegurado," +
+            "poliza as Poliza," +
+            "ejecutivo as Ejecutivo "+
             "FROM flotillas WHERE " +
             "(placa like '%" + txtBusqueda.Text + "%') " +
             "OR (propietario COLLATE Latin1_General_CI_AI like '%" + txtBusqueda.Text + "%') " +

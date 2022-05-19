@@ -706,6 +706,17 @@ public partial class flotillas
     public string year { get; set; }
     public string color { get; set; }
     public string placa { get; set; }
+    public string usuario { get; set; }
+    public string aseguradora { get; set; }
+    public string asegurado { get; set; }
+    public Nullable<System.DateTime> fecha { get; set; }
+    public string estado { get; set; }
+    public string poliza { get; set; }
+    public string vigencia { get; set; }
+    public string ejecutivo { get; set; }
+    public string usuario_inactivacion { get; set; }
+    public string codigo_interno { get; set; }
+    public string pagador { get; set; }
 }
 
 public partial class formulario_colectivo
