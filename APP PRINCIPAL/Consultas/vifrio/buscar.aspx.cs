@@ -10,13 +10,12 @@ public partial class Consultas_vifrio_Default : System.Web.UI.Page
 {
     ReclamosEntities DBReclamos = new ReclamosEntities();
     Utils llenado = new Utils();
-
     String consulta, sucursal;
 
     protected void Page_Load(object sender, EventArgs e)
     {
         sucursal = Convert.ToString(Request.QueryString[0]).ToString();
-        consulta = "select codigo as Codigo, nombre as Nombre, placa as Placa from asegurados_caja_ahorro where codigo = '" + txtBusqueda.Text + "' ";
+        consulta = "select poliza as Poliza, nombre as Nombre, placa as Placa from asegurados_caja_ahorro where poliza like '%" + txtBusqueda.Text + "%' or placa like '%"+txtBusqueda.Text+"%' ";
     }
 
     protected void btnBuscar_Click(object sender, EventArgs e)
@@ -39,7 +38,7 @@ public partial class Consultas_vifrio_Default : System.Web.UI.Page
             }
             else
             {
-                lblError.Text = "No existe ningun asegurado con ese codigo";
+                lblError.Text = "No se encontro ningun asegurado";
                 ddlServicio.Visible = false;
                 btnGuardar.Visible = false;
                 panelSuccess.Visible = false;

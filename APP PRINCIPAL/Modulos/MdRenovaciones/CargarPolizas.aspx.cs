@@ -132,7 +132,7 @@ public partial class Modulos_MdRenovaciones_CargarPolizas : System.Web.UI.Page
                         insertar.nit = row.Cells[62].Text;
                         insertar.estado = 1;
                         DBRenovaciones.renovaciones_polizas.Add(insertar);
-                        DBRenovaciones.SaveChanges();
+                        //DBRenovaciones.SaveChanges();
                         row.CssClass = "success";
                         Utils.ShowMessage(this.Page, "Datos Cargados con exito", "Excelente", "success");
                     }

@@ -399,6 +399,7 @@
                             <a href="#" class="fa fa-car" aria-hidden="true" style="font-size: 18px;" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Flotillas <span class="caret"></span></a>
                             <ul class="dropdown-menu">
                                 <li><a href="/Modulos/MdFlotillas/cargar-flotillas.aspx">Cargar autos</a></li>
+                                <li><a href="/Modulos/MdFlotillas/agregar.aspx">Agregar autos</a></li>
                                 <li><a href="/Modulos/MdFlotillas/buscar-auto.aspx">Buscar auto en flotilla</a></li>
                             </ul>
                         </li>

@@ -11,7 +11,7 @@ public partial class Modulos_MdCatalogos_comentariosDanios : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
-        if (userlogin == "nsierra" || userlogin == "cmejia" || userlogin == "mbarrios" || userlogin == "jlaj")
+        if (userlogin == "nsierra" || userlogin == "nmelgar" || userlogin == "cmejia" || userlogin == "mbarrios" || userlogin == "jlaj")
         {
             PnPrincipal.Visible = true;
         }

@@ -218,7 +218,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesMedicos : System.Web.U
     {
         if (ddlTipoReclamo.SelectedItem.Text == "Colectivos")
         {
-            kpiAseguradora = ddlMoneda.SelectedItem.Text == "Dolares" ? 35 : 11;
+            kpiAseguradora = ddlMoneda.SelectedItem.Text == "Dolares" ? 35 : 10;
         }
 
         else if (ddlTipoReclamo.SelectedItem.Text == "Individual")
@@ -253,7 +253,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesMedicos : System.Web.U
 
         if (ddlTipoReclamo.SelectedItem.Text == "Colectivos")
         {
-            kpiCliente = ddlMoneda.SelectedItem.Text == "Dolares" ? 38 : 15;
+            kpiCliente = ddlMoneda.SelectedItem.Text == "Dolares" ? 38 : 12;
         }
 
         if (ddlTipoReclamo.SelectedItem.Text == "Individual")
@@ -286,7 +286,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesMedicos : System.Web.U
     {
         if(ddlTipoReclamo.SelectedItem.Text == "Colectivos")
         {
-            kpiUnity = 35;
+            kpiUnity = 24;
         }
 
         string ejecutivoKPI = "select count(*) total_reclamos, " +
@@ -682,7 +682,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesMedicos : System.Web.U
 
         else
         {
-            KPI_EFICIENCIA = "Eficiencia evaluada sobre el 85%";
+            KPI_EFICIENCIA = "Eficiencia evaluada sobre el 90%";
             Utils.Reportes(txtFechaInicio, txtFechaFin, "pa_eficiencia_colectivos", GridEficiencia);
         }
 

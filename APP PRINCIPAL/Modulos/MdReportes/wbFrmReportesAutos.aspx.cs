@@ -27,7 +27,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesAutos : System.Web.UI.
             txtFechaFin.Text = ultimoDia.ToString("yyyy/MM/dd").Replace("/", "-");
         }
 
-        if ( userlogin == "jlaj" || userlogin == "jwiesner" ||  userlogin == "sgordillo " ||
+        if ( userlogin == "nmelgar" || userlogin == "jlaj" || userlogin == "jwiesner" ||  userlogin == "sgordillo " ||
             userlogin == "nsierra" || userlogin =="cmejia" || userlogin == "hvillacinda" || userlogin == "lgarcia" || userlogin == "mguillen")
         {
             btnMostrarEficiencia.Visible = true;

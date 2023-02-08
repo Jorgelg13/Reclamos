@@ -266,6 +266,8 @@ public partial class Modulos_MdReclamos_wbFrmReclamosDañosAsignados : System.We
             reclamo.fecha_visualizar = DateTime.Now;
             reclamo.fecha_apertura_reclamo = DateTime.Now;
             reclamo.reserva = 0;
+            reclamo.reserva_final = 0;
+            reclamo.deducible_reserva = 0;
             DBReclamos.SaveChanges();
             if (txtComentarios.Text != "") insertarComentarios(txtComentarios.Text);
             if (txtCorreo.Text != "") enviarNotificacion();

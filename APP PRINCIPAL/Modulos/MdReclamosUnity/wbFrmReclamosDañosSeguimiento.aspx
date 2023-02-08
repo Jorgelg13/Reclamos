@@ -165,8 +165,16 @@
                                     </asp:DropDownList>
                                 </div>
                                 <div class="form-group col-lg-12 col-md-12">
-                                   <label>Monto de reserva:</label>
-                                   <asp:TextBox runat="server" ID="txtReserva" Text="0.00" CssClass="form-control" Width="100%" placeholder="Monto de Reserva"></asp:TextBox>                                    
+                                   <label>Reserva:</label>
+                                   <asp:TextBox runat="server" ID="txtReserva" Text="0.00" CssClass="form-control" Width="100%" placeholder="Reserva"></asp:TextBox>                                    
+                                </div>
+                                 <div class="form-group col-lg-12 col-md-12">
+                                   <label>Deducible:</label>
+                                   <asp:TextBox  type="number" runat="server" ID="txtDeducibleReserva" Text="0.00" CssClass="form-control" Width="100%" placeholder="Reserva"></asp:TextBox>                                    
+                                </div>
+                                 <div class="form-group col-lg-12 col-md-12">
+                                   <label>Reserva final:</label>
+                                   <asp:TextBox type="number" runat="server" ID="txtReservaFinal" Text="0.00" CssClass="form-control" Width="100%" placeholder="Reserva"></asp:TextBox>                                    
                                 </div>
                             </div>
                         </div>

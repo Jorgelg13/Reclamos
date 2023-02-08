@@ -32,9 +32,13 @@
                                 <asp:TextBox runat="server" ID="txtEjecutivo" autocomplete="off" Style="width: 25%" class="form-control" placeholder="ejecutivo"></asp:TextBox>
                                  <br />
                                 <br />
-                                <asp:CheckBox runat="server" ID="checkProductosAlimenticios" OnCheckedChanged="checkProductosAlimenticios_CheckedChanged" AutoPostBack="true"  Style="width: 50%" class="form-control" Text="Fábrica de Productos Alimenticios René"></asp:CheckBox>
-                                <br />
-                                <br />
+                                 <div class="col-md-6 col-lg-6 col-sm-12">
+                            Empresa:<asp:DropDownList CssClass="form-control" ID="ddlEmpresa" OnSelectedIndexChanged="ddlEmpresa_SelectedIndexChanged" AutoPostBack="true" Style="width: 100%" Height="34px" runat="server">
+                                <asp:ListItem>Seleccionar empresa</asp:ListItem>
+                                <asp:ListItem>Fábrica de Productos Alimenticios René</asp:ListItem>
+                                <asp:ListItem>La Vision</asp:ListItem>
+                            </asp:DropDownList>
+                        </div>
                             </div>
                         </div>
                     </div>

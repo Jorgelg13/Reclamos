@@ -78,14 +78,14 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosDañosSeguimiento : Sy
             btnActualizarPagos.Enabled = false;
         }
 
-        if(userlogin== "cmejia" || userlogin == "sgordillo" || userlogin =="jlaj" || userlogin =="nsierra" || userlogin == "hvillacinda" || userlogin == "lgarcia")
+        if(userlogin== "cmejia" || userlogin == "nmelgar" || userlogin == "sgordillo" || userlogin =="jlaj" || userlogin =="nsierra" || userlogin == "hvillacinda" || userlogin == "lgarcia")
         {
             btnGuardarProximaFecha.Enabled = true;
         }
 
         if (lblEstadoReclamo.Text == "Congelado")
         {
-            if (userlogin != "sgordillo" && userlogin != "jwiesner" && userlogin != "jlaj" && userlogin != "cmejia" && userlogin != "nsierra")
+            if (userlogin != "sgordillo" && userlogin != "nmelgar" && userlogin != "jwiesner" && userlogin != "jlaj" && userlogin != "cmejia" && userlogin != "nsierra")
             {
                 ddlEstadoReclamo.Enabled = false;
                 ddlEstadoReclamo.SelectedItem.Text = "Congelado";
@@ -116,7 +116,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosDañosSeguimiento : Sy
         ddlGestor.DataValueField = "id";
         ddlGestor.DataBind();
 
-        if (userlogin == "mbarrios" || userlogin == "jwiesner" || userlogin == "jlaj" || userlogin == "cmejia" || userlogin =="nsierra")
+        if (userlogin == "nmelgar" || userlogin == "jwiesner" || userlogin == "jlaj" || userlogin == "cmejia" || userlogin =="nsierra")
         {
             ddlEstadoReclamo.DataSource = DBReclamos.estados_reclamos_unity.ToList().Where(au => au.tipo == "daños");
             ddlEstadoReclamo.DataTextField = "descripcion";
@@ -174,6 +174,9 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosDañosSeguimiento : Sy
             txtNumReclamo.Text          = reclamo.num_reclamo;
             txtContrato.Text            = reclamo.num_contrato;
             txtFrom.Text                = reclamo.gestores.correo;
+            txtDeducibleReserva.Text =  reclamo.deducible_reserva.ToString();
+            txtReservaFinal.Text = reclamo.reserva_final.ToString();
+
 
             //varios
             lblfechaSiniestro.Text = reclamo.fecha.ToString();
@@ -415,6 +418,8 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosDañosSeguimiento : Sy
             reclamo.estado_reclamo_unity = ddlEstadoReclamo.SelectedItem.Text;
             reclamo.reserva       =Convert.ToDecimal(txtReserva.Text); 
             reclamo.observaciones = txtObservaciones.Text.ToString();
+            reclamo.reserva_final = Convert.ToDecimal(txtReservaFinal.Text);
+            reclamo.deducible_reserva = Convert.ToDecimal(txtDeducibleReserva.Text);
 
             if (checkCerrarReclamo.Checked)
             {

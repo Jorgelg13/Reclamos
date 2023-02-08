@@ -16,7 +16,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosEnSeguimiento : System
 
     protected void Page_Load(object sender, EventArgs e)
     {
-        if(userlogin == "nsierra" || userlogin == "jlaj" || userlogin == "jsagastume" || userlogin =="mbarrios")
+        if(userlogin == "nsierra" || userlogin == "jlaj" || userlogin == "nmelgar" || userlogin =="mbarrios")
         {
             PnAlarmas.Visible = true;
         }

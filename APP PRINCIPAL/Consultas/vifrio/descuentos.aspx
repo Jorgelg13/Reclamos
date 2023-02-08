@@ -14,12 +14,13 @@
 <body>
     <form id="form1" runat="server" class="fondo-descuentos">
         <div class="container">
-            <div class="row justify-content-md-center" style="justify-content: center">
+            <div class="row justify-content-md-center" style="justify-content: center; display:flex; flex-direction:row">
                 <img src="../../imgUnity/unity-wtw2.png" />
+                 <img src="../../imgUnity/logo_vifrio.png" />
             </div>
-            <ul>
+            <ul  class="col justify-content-md-center"  style="justify-content:center; display:flex; flex-direction:column">
                 <li>Programar su cita al 2413-1313 indicando la sucursal en donde desea realizar su servicio. <a href="http://www.vifrio.com/page.php?st=contacto&ref=18"> Ver sucursales aqui.</a></li>
-                <li>Al llegar al centro de servicio deberá proporcionar su número de cuenta para identificar que es asociado de Caja de Ahorro.</li>
+                <li>Al llegar al centro de servicio deberá proporcionar su número de póliza para identificar su vehículo.</li>
                 <li>Indicar el descuento que desee utilizar.</li>
             </ul>
             <div class="row justify-content-center " style="justify-content: center; margin-top:-40px">

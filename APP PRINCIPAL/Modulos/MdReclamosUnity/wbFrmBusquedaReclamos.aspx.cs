@@ -31,6 +31,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmBusquedaReclamos : System.Web.
                " auto_reclamo.poliza as Poliza," +
                " auto_reclamo.asegurado as Asegurado, " +
                " auto_reclamo.placa as Placa," +
+               " reclamo_auto.tipo_servicio as [Tipo asistencia]," +
                " auto_reclamo.marca as Marca," +
                " auto_reclamo.modelo as Modelo," +
                " auto_reclamo.propietario as Propietario " +

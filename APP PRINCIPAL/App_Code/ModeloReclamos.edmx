@@ -67,8 +67,11 @@
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="codigo" Type="nvarchar" MaxLength="50" />
-          <Property Name="nombre" Type="varchar" MaxLength="90" />
+          <Property Name="poliza" Type="nvarchar" MaxLength="50" />
+          <Property Name="nombre" Type="varchar" MaxLength="150" />
+          <Property Name="modelo" Type="nvarchar" MaxLength="50" />
+          <Property Name="marca" Type="nvarchar" MaxLength="50" />
+          <Property Name="linea" Type="nvarchar" MaxLength="50" />
           <Property Name="placa" Type="nvarchar" MaxLength="15" />
         </EntityType>
         <EntityType Name="asegurados_implants">
@@ -989,6 +992,8 @@
           <Property Name="comentario_aseguradora" Type="text" />
           <Property Name="fecha_problema" Type="datetime" />
           <Property Name="reaseguro" Type="bit" />
+          <Property Name="reserva_final" Type="decimal" Precision="12" Scale="2" />
+          <Property Name="deducible_reserva" Type="decimal" Precision="12" Scale="2" />
         </EntityType>
         <EntityType Name="reg_reclamo_varios">
           <Key>
@@ -1215,7 +1220,7 @@ advertencia 6002: La tabla o vista 'reclamos.dbo.ViewBusquedaAuto' no tiene defi
           <Property Name="tipo" Type="nvarchar" MaxLength="20" />
           <Property Name="direccion" Type="nvarchar" MaxLength="200" />
           <Property Name="asegurado" Type="nvarchar" MaxLength="150" />
-          <Property Name="suma_aseg" Type="int" />
+          <Property Name="suma_aseg" Type="bigint" />
           <Property Name="vip" Type="nvarchar" MaxLength="50" />
           <Property Name="numero_gestor" Type="int" />
           <Property Name="moneda" Type="nvarchar" MaxLength="30" />
@@ -1223,8 +1228,8 @@ advertencia 6002: La tabla o vista 'reclamos.dbo.ViewBusquedaAuto' no tiene defi
           <Property Name="gestor" Type="smallint" />
           <Property Name="cia" Type="smallint" />
           <Property Name="secren" Type="smallint" />
-          <Property Name="prima" Type="decimal" Precision="12" Scale="2" />
-          <Property Name="porcom" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="prima" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="porcom" Type="decimal" Precision="14" Scale="2" />
           <Property Name="vendedor" Type="int" />
           <Property Name="contacto" Type="varchar" MaxLength="200" />
           <Property Name="correo" Type="varchar" MaxLength="250" />
@@ -2588,6 +2593,14 @@ FROM [dbo].[v_producto_no_conforme] AS [v_producto_no_conforme]</DefiningQuery>
           <FunctionImport Name="pa_replicar_reclamos_varios" />
           <FunctionImport Name="contenido_correo" />
           <FunctionImport Name="pa_cargar_ejecutivos" />
+          <FunctionImport Name="pa_eficiencia_individuales2" ReturnType="Collection(reclamosModel.pa_eficiencia_individuales2_Result)">
+            <Parameter Name="fechaInicio" Mode="In" Type="DateTime" />
+            <Parameter Name="fechaFin" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="pa_nps_general">
+            <Parameter Name="fechaInicio" Mode="In" Type="DateTime" />
+            <Parameter Name="fechaFin" Mode="In" Type="DateTime" />
+          </FunctionImport>
           <EntitySet Name="actividades" EntityType="reclamosModel.actividades" />
           <EntitySet Name="ajustadores" EntityType="reclamosModel.ajustadores" />
           <EntitySet Name="analistas" EntityType="reclamosModel.analistas" />
@@ -2868,14 +2881,6 @@ FROM [dbo].[v_producto_no_conforme] AS [v_producto_no_conforme]</DefiningQuery>
             <End Role="talleres" EntitySet="talleres" />
             <End Role="reclamos_varios" EntitySet="reclamos_varios" />
           </AssociationSet>
-          <FunctionImport Name="pa_eficiencia_individuales2" ReturnType="Collection(reclamosModel.pa_eficiencia_individuales2_Result)">
-            <Parameter Name="fechaInicio" Mode="In" Type="DateTime" />
-            <Parameter Name="fechaFin" Mode="In" Type="DateTime" />
-          </FunctionImport>
-          <FunctionImport Name="pa_nps_general">
-            <Parameter Name="fechaInicio" Mode="In" Type="DateTime" />
-            <Parameter Name="fechaFin" Mode="In" Type="DateTime" />
-          </FunctionImport>
           </EntityContainer>
         <ComplexType Name="pa_reclamos_autos_Result">
           <Property Type="Int32" Name="secuencia" Nullable="true" />
@@ -3132,6 +3137,18 @@ FROM [dbo].[v_producto_no_conforme] AS [v_producto_no_conforme]</DefiningQuery>
           <Property Type="Double" Name="Ejecucion_Cierre" Nullable="true" />
           <Property Type="Double" Name="Añejamiento" Nullable="true" />
         </ComplexType>
+        <ComplexType Name="pa_eficiencia_individuales2_Result">
+          <Property Type="String" Name="Nombre" Nullable="true" MaxLength="80" />
+          <Property Type="Int32" Name="Pendientes" Nullable="true" />
+          <Property Type="Int32" Name="Nuevos" Nullable="true" />
+          <Property Type="Int32" Name="Cerrados" Nullable="true" />
+          <Property Type="Int32" Name="Pendientes_fuera_tiempo_Q" Nullable="true" />
+          <Property Type="Int32" Name="Pendientes_fuera_tiempo__" Nullable="true" />
+          <Property Type="Int32" Name="Cerrados_fuera_tiempo_Q" Nullable="true" />
+          <Property Type="Int32" Name="Cerrados_fuera_tiempo__" Nullable="true" />
+          <Property Type="Int32" Name="Ejecucion" Nullable="true" />
+          <Property Type="Int32" Name="Añejamiento" Nullable="true" />
+        </ComplexType>
         <EntityType Name="actividades">
           <Key>
             <PropertyRef Name="id" />
@@ -3199,8 +3216,11 @@ FROM [dbo].[v_producto_no_conforme] AS [v_producto_no_conforme]</DefiningQuery>
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="codigo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="nombre" Type="String" MaxLength="90" FixedLength="false" Unicode="false" />
+          <Property Name="poliza" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="nombre" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="modelo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="marca" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="linea" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="placa" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="asegurados_implants">
@@ -3795,11 +3815,11 @@ FROM [dbo].[v_producto_no_conforme] AS [v_producto_no_conforme]</DefiningQuery>
           <Property Name="usuario" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="aseguradora" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="asegurado" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
-          <Property Name="fecha" Type="DateTime" Precision="3" />
-          <Property Name="estado" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="poliza" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="vigencia" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="ejecutivo" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="fecha" Type="DateTime" Precision="3" />
+          <Property Name="estado" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="usuario_inactivacion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="codigo_interno" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
           <Property Name="pagador" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
@@ -4202,6 +4222,8 @@ FROM [dbo].[v_producto_no_conforme] AS [v_producto_no_conforme]</DefiningQuery>
           <NavigationProperty Name="reg_reclamo_varios" Relationship="reclamosModel.FK__reclamos___id_re__5441852A" FromRole="reclamos_varios" ToRole="reg_reclamo_varios" />
           <NavigationProperty Name="usuario" Relationship="reclamosModel.FK__reclamos___id_us__5535A963" FromRole="reclamos_varios" ToRole="usuario" />
           <NavigationProperty Name="talleres" Relationship="reclamosModel.FK_reclamos_varios_talleres" FromRole="reclamos_varios" ToRole="talleres" />
+          <Property Name="reserva_final" Type="Decimal" Precision="12" Scale="2" />
+          <Property Name="deducible_reserva" Type="Decimal" Precision="12" Scale="2" />
         </EntityType>
         <EntityType Name="reg_reclamo_varios">
           <Key>
@@ -4409,8 +4431,8 @@ FROM [dbo].[v_producto_no_conforme] AS [v_producto_no_conforme]</DefiningQuery>
           <Property Name="gestor" Type="Int16" />
           <Property Name="cia" Type="Int16" />
           <Property Name="secren" Type="Int16" />
-          <Property Name="prima" Type="Decimal" Precision="12" Scale="2" />
-          <Property Name="porcom" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="prima" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="porcom" Type="Decimal" Precision="14" Scale="2" />
           <Property Name="vendedor" Type="Int32" />
           <Property Name="contacto" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="correo" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
@@ -5118,18 +5140,6 @@ FROM [dbo].[v_producto_no_conforme] AS [v_producto_no_conforme]</DefiningQuery>
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <ComplexType Name="pa_eficiencia_individuales2_Result">
-          <Property Type="String" Name="Nombre" Nullable="true" MaxLength="80" />
-          <Property Type="Int32" Name="Pendientes" Nullable="true" />
-          <Property Type="Int32" Name="Nuevos" Nullable="true" />
-          <Property Type="Int32" Name="Cerrados" Nullable="true" />
-          <Property Type="Int32" Name="Pendientes_fuera_tiempo_Q" Nullable="true" />
-          <Property Type="Int32" Name="Pendientes_fuera_tiempo__" Nullable="true" />
-          <Property Type="Int32" Name="Cerrados_fuera_tiempo_Q" Nullable="true" />
-          <Property Type="Int32" Name="Cerrados_fuera_tiempo__" Nullable="true" />
-          <Property Type="Int32" Name="Ejecucion" Nullable="true" />
-          <Property Type="Int32" Name="Añejamiento" Nullable="true" />
-        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -5454,6 +5464,23 @@ FROM [dbo].[v_producto_no_conforme] AS [v_producto_no_conforme]</DefiningQuery>
           <FunctionImportMapping FunctionImportName="pa_replicar_reclamos_varios" FunctionName="reclamosModel.Store.pa_replicar_reclamos_varios" />
           <FunctionImportMapping FunctionImportName="contenido_correo" FunctionName="reclamosModel.Store.contenido_correo" />
           <FunctionImportMapping FunctionImportName="pa_cargar_ejecutivos" FunctionName="reclamosModel.Store.pa_cargar_ejecutivos" />
+          <FunctionImportMapping FunctionImportName="pa_eficiencia_individuales2" FunctionName="reclamosModel.Store.pa_eficiencia_individuales2">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="reclamosModel.pa_eficiencia_individuales2_Result">
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Pendientes" ColumnName="Pendientes" />
+                <ScalarProperty Name="Nuevos" ColumnName="Nuevos" />
+                <ScalarProperty Name="Cerrados" ColumnName="Cerrados" />
+                <ScalarProperty Name="Pendientes_fuera_tiempo_Q" ColumnName="Pendientes_fuera_tiempo_Q" />
+                <ScalarProperty Name="Pendientes_fuera_tiempo__" ColumnName="Pendientes_fuera_tiempo_$" />
+                <ScalarProperty Name="Cerrados_fuera_tiempo_Q" ColumnName="Cerrados_fuera_tiempo_Q" />
+                <ScalarProperty Name="Cerrados_fuera_tiempo__" ColumnName="Cerrados_fuera_tiempo_$" />
+                <ScalarProperty Name="Ejecucion" ColumnName="Ejecucion" />
+                <ScalarProperty Name="Añejamiento" ColumnName="Añejamiento" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="pa_nps_general" FunctionName="reclamosModel.Store.pa_nps_general" />
           <EntitySetMapping Name="actividades">
             <EntityTypeMapping TypeName="reclamosModel.actividades">
               <MappingFragment StoreEntitySet="actividades">
@@ -5520,8 +5547,11 @@ FROM [dbo].[v_producto_no_conforme] AS [v_producto_no_conforme]</DefiningQuery>
             <EntityTypeMapping TypeName="reclamosModel.asegurados_caja_ahorro">
               <MappingFragment StoreEntitySet="asegurados_caja_ahorro">
                 <ScalarProperty Name="placa" ColumnName="placa" />
+                <ScalarProperty Name="linea" ColumnName="linea" />
+                <ScalarProperty Name="marca" ColumnName="marca" />
+                <ScalarProperty Name="modelo" ColumnName="modelo" />
                 <ScalarProperty Name="nombre" ColumnName="nombre" />
-                <ScalarProperty Name="codigo" ColumnName="codigo" />
+                <ScalarProperty Name="poliza" ColumnName="poliza" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -6114,11 +6144,11 @@ FROM [dbo].[v_producto_no_conforme] AS [v_producto_no_conforme]</DefiningQuery>
                 <ScalarProperty Name="pagador" ColumnName="pagador" />
                 <ScalarProperty Name="codigo_interno" ColumnName="codigo_interno" />
                 <ScalarProperty Name="usuario_inactivacion" ColumnName="usuario_inactivacion" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="fecha" ColumnName="fecha" />
                 <ScalarProperty Name="ejecutivo" ColumnName="ejecutivo" />
                 <ScalarProperty Name="vigencia" ColumnName="vigencia" />
                 <ScalarProperty Name="poliza" ColumnName="poliza" />
-                <ScalarProperty Name="estado" ColumnName="estado" />
-                <ScalarProperty Name="fecha" ColumnName="fecha" />
                 <ScalarProperty Name="asegurado" ColumnName="asegurado" />
                 <ScalarProperty Name="aseguradora" ColumnName="aseguradora" />
                 <ScalarProperty Name="usuario" ColumnName="usuario" />
@@ -6433,6 +6463,8 @@ FROM [dbo].[v_producto_no_conforme] AS [v_producto_no_conforme]</DefiningQuery>
           <EntitySetMapping Name="reclamos_varios">
             <EntityTypeMapping TypeName="reclamosModel.reclamos_varios">
               <MappingFragment StoreEntitySet="reclamos_varios">
+                <ScalarProperty Name="deducible_reserva" ColumnName="deducible_reserva" />
+                <ScalarProperty Name="reserva_final" ColumnName="reserva_final" />
                 <ScalarProperty Name="reaseguro" ColumnName="reaseguro" />
                 <ScalarProperty Name="fecha_problema" ColumnName="fecha_problema" />
                 <ScalarProperty Name="comentario_aseguradora" ColumnName="comentario_aseguradora" />
@@ -6817,23 +6849,6 @@ FROM [dbo].[v_producto_no_conforme] AS [v_producto_no_conforme]</DefiningQuery>
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="pa_eficiencia_individuales2" FunctionName="reclamosModel.Store.pa_eficiencia_individuales2">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="reclamosModel.pa_eficiencia_individuales2_Result">
-                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
-                <ScalarProperty Name="Pendientes" ColumnName="Pendientes" />
-                <ScalarProperty Name="Nuevos" ColumnName="Nuevos" />
-                <ScalarProperty Name="Cerrados" ColumnName="Cerrados" />
-                <ScalarProperty Name="Pendientes_fuera_tiempo_Q" ColumnName="Pendientes_fuera_tiempo_Q" />
-                <ScalarProperty Name="Pendientes_fuera_tiempo__" ColumnName="Pendientes_fuera_tiempo_$" />
-                <ScalarProperty Name="Cerrados_fuera_tiempo_Q" ColumnName="Cerrados_fuera_tiempo_Q" />
-                <ScalarProperty Name="Cerrados_fuera_tiempo__" ColumnName="Cerrados_fuera_tiempo_$" />
-                <ScalarProperty Name="Ejecucion" ColumnName="Ejecucion" />
-                <ScalarProperty Name="Añejamiento" ColumnName="Añejamiento" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="pa_nps_general" FunctionName="reclamosModel.Store.pa_nps_general" />
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

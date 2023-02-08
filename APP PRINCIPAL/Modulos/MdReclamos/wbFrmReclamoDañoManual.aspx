@@ -7,7 +7,7 @@
     <div class="container">
         <div  class="panel panel-default col-sm-12">
             <ul class="nav nav-tabs" role="tablist">
-                <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Ingresar datos Poliza</a></li>
+                <li role="presentation" class="active"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Ingresar datos Poliza</a></li>
                 <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">Ingresar Datos</a></li>
             </ul>
               <div class="tab-content">
@@ -22,6 +22,13 @@
                         <br />
                         <asp:TextBox runat="server" ID="txtPoliza" autocomplete="false" Style="width: 47%" class="form-control" placeholder="Poliza"></asp:TextBox>
                         <asp:TextBox runat="server" ID="txtEjecutivo" autocomplete="false" Style="width: 40%" class="form-control" placeholder="Ejecutivo de la cuenta"></asp:TextBox>
+                         <br />
+                         <br />
+                            Empresa:<asp:DropDownList CssClass="form-control" ID="ddlEmpresa" OnSelectedIndexChanged="ddlEmpresa_SelectedIndexChanged" AutoPostBack="true" Style="width: 100%" Height="34px" runat="server">
+                                <asp:ListItem>Seleccionar empresa</asp:ListItem>
+                                <asp:ListItem>Fábrica de Productos Alimenticios René</asp:ListItem>
+                                <asp:ListItem>La Vision</asp:ListItem>
+                            </asp:DropDownList>
                     </div>
                 </div>
                 <div role="tabpanel" class="tab-pane" id="messages">
@@ -44,6 +51,7 @@
                          <asp:TextBox runat="server" ID="txtVersion" autocomplete="false" Style="width: 95%" class="form-control" placeholder="Version"></asp:TextBox>
                          <br />
                          <br />
+                          
                          <asp:Button runat="server" Text="Guardar Reclamo" ID="txtGuardarReclamo" class="btn btn-primary" OnClick="btnGuardarReclamo_Click" />
                          <br />
                          <br />

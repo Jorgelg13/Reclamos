@@ -52,8 +52,8 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosMedicosAsignados : Sys
             contenido = "Se ha aperturado un nuevo reclamo de gastos medicos bajo la poliza " + asignar.reg_reclamos_medicos.poliza + " " +
                 "que pertenece al asegurado  " + asignar.reg_reclamos_medicos.asegurado + " para mas detalle puede consultarlo en el siguiente " +
                 "link: \n\n https://reclamosgt.unitypromotores.com/MdBitacora/wbFrmConsultaSeguimientoRmedicos.aspx?ID_reclamo="+id_reclamo_medico+" ";
-            correoEjecutivo = Utils.CORREO_GESTOR(asignar.reg_reclamos_medicos.ejecutivo);
-            notificacion.NOTIFICACION(correoEjecutivo, contenido, "Nuevo Reclamo Aperturado");
+            //correoEjecutivo = Utils.CORREO_GESTOR(asignar.reg_reclamos_medicos.ejecutivo);
+           //notificacion.NOTIFICACION(correoEjecutivo, contenido, "Nuevo Reclamo Aperturado");
         }
 
         update.actualizarDatos(actualizarFecha, id_reclamo_medico);

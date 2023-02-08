@@ -24,21 +24,22 @@ public partial class Modulos_MdReclamosUnity_wbFrmRecDañosSeguimiento : System.
                 "gestores.nombre as Gestor," +
                 "r.estado_reclamo_unity as Estado," +
                 "DATEDIFF(DAY, r.fecha_commit, GETDATE()) as  [Total Dias]," +
-                "case when reaseguro=1 then 'Si' else 'No' end as Reaseguro,"+
+                "case when reaseguro=1 then 'Si' else 'No' end as Reaseguro," +
                 "reg.poliza as Poliza," +
                 "reg.asegurado as Asegurado," +
                 "reg.aseguradora as Aseguradora," + //4
+                "a.nombre as Ajustador,"+
                 "reg.contratante as Contratante," +
                 "reg.ejecutivo as Ejecutivo," +//6
                 "reg.ramo as Ramo," +
                 "reg.status as Estatus," +
-                "reg.tipo as Tipo," +//10
                 "r.reportante as Reportante," +
                 "Convert(varchar(20),r.fecha_commit, 103) as [Fecha Creacion]," +
                 "Convert(varchar(20),r.fecha_visualizar, 103) as [Fecha Visualizar] " +
                 "FROM reg_reclamo_varios as reg " +
-                "INNER JOIN reclamos_varios as r on r.id_reg_reclamos_varios = reg.id "+
-                "INNER JOIN gestores on r.id_gestor = gestores.id ";
+                "INNER JOIN reclamos_varios as r on r.id_reg_reclamos_varios = reg.id " +
+                "INNER JOIN gestores on r.id_gestor = gestores.id " +
+                "LEFT JOIN analistas as a on a.id = r.id_analista ";
 
         string reclamosPrioritarios = selectGeneral +
                " where ((r.prioritario = 'true') and (r.usuario_unity = '" + userlogin + "' and r.estado_unity = 'Seguimiento' ))";

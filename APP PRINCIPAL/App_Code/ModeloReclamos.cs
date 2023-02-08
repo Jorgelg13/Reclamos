@@ -84,8 +84,11 @@ public partial class aseguradoras
 public partial class asegurados_caja_ahorro
 {
     public int id { get; set; }
-    public string codigo { get; set; }
+    public string poliza { get; set; }
     public string nombre { get; set; }
+    public string modelo { get; set; }
+    public string marca { get; set; }
+    public string linea { get; set; }
     public string placa { get; set; }
 }
 
@@ -709,11 +712,11 @@ public partial class flotillas
     public string usuario { get; set; }
     public string aseguradora { get; set; }
     public string asegurado { get; set; }
-    public Nullable<System.DateTime> fecha { get; set; }
-    public string estado { get; set; }
     public string poliza { get; set; }
     public string vigencia { get; set; }
     public string ejecutivo { get; set; }
+    public Nullable<System.DateTime> fecha { get; set; }
+    public string estado { get; set; }
     public string usuario_inactivacion { get; set; }
     public string codigo_interno { get; set; }
     public string pagador { get; set; }
@@ -1150,6 +1153,8 @@ public partial class reclamos_varios
     public string comentario_aseguradora { get; set; }
     public Nullable<System.DateTime> fecha_problema { get; set; }
     public Nullable<bool> reaseguro { get; set; }
+    public Nullable<decimal> reserva_final { get; set; }
+    public Nullable<decimal> deducible_reserva { get; set; }
 
     public virtual analistas analistas { get; set; }
     public virtual ICollection<bitacora_estados_reclamos_varios> bitacora_estados_reclamos_varios { get; set; }

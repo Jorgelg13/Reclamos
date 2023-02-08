@@ -158,7 +158,7 @@ public partial class Modulos_MdReclamos_wbFrmReclamosDaños : System.Web.UI.Page
             "vip as Vip," +
             "vigi as Vigencia_Inicial, " +
             "vigf as Vigencia_Final, " +
-            "status as Estado, " +
+            //////"status as Estado, " +
             "gst_nombre as Gestor, " +
             "moneda as Moneda " +
             "FROM vistaReclamosDaños " +

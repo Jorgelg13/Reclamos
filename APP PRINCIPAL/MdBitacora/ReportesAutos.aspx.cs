@@ -22,7 +22,7 @@ public partial class MdBitacora_ReportesAutos : System.Web.UI.Page
             checkSinFiltro_CheckedChanged(sender, e);
         }
 
-        if (userlogin == "jsagastume" || userlogin == "jlaj" || userlogin == "jwiesner" || userlogin == "nsierra" || userlogin == "jpazos")
+        if (userlogin == "nmelgar" || userlogin == "jlaj" || userlogin == "jwiesner" || userlogin == "nsierra" || userlogin == "jpazos")
         {
             btnMostrarEficiencia.Visible = true;
         }

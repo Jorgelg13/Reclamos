@@ -29,7 +29,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesDaños : System.Web.UI
             checkSinFiltro_CheckedChanged(sender, e);
         }
 
-        if(userlogin == "jlaj" || userlogin == "jwiesner"  || userlogin =="cmejia" || userlogin =="gdiaz" ||
+        if(userlogin == "jlaj" || userlogin == "jwiesner"  || userlogin =="cmejia" || userlogin =="nmelgar" ||
            userlogin == "hvillacinda" || userlogin == "lgarcia" || userlogin == "mguillen" || userlogin == "nsierra" || userlogin == "sgordillo")
         {
             btnMostrarEficiencia.Visible = true;
@@ -122,7 +122,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesDaños : System.Web.UI
             }
 
             string listado;
-            listado = "Select distinct reclamos_varios.id, ";
+            listado = "Select reclamos_varios.id, ";
             for (int i = 0; i < checkCampos.Items.Count; i++)
             {
                 if (checkCampos.Items[i].Selected)

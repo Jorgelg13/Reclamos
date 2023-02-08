@@ -10,9 +10,9 @@
         </div>
         <div class="row justify-content-md-center"  style="justify-content:center">
             <div class="col col-auto margen-container margen-container-movil">
-                <h3>Buscar Asegurado</h3>
+                <h4>Buscar poliza</h4>
                 <div class="input-group mb-3">
-                    <asp:TextBox runat="server" autocomplete="off" ID="txtBusqueda" class="form-control" placeholder="codigo asegurado"></asp:TextBox>
+                    <asp:TextBox runat="server" autocomplete="off" ID="txtBusqueda" class="form-control" placeholder="placa del vehiculo"></asp:TextBox>
                     <div class="input-group-append">
                         <asp:Button runat="server" Text="Buscar" ID="btnBuscar" class="input-group-text" OnClick="btnBuscar_Click" />
                     </div>
@@ -34,7 +34,6 @@
                 <div class="controles-guardar">
                     <asp:DropDownList CssClass="form-control" ID="ddlServicio" runat="server" Visible="false">
                         <asp:ListItem>Seleccionar servicio</asp:ListItem>
-                        <asp:ListItem>Llanta nueva de vehículo</asp:ListItem>
                         <asp:ListItem>Cambio de aceite de motor</asp:ListItem>
                         <asp:ListItem>Servicios Preventivos</asp:ListItem>
                         <asp:ListItem>Mano de obra mecánica</asp:ListItem>

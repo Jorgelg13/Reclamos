@@ -125,4 +125,32 @@ public partial class Modulos_MdReclamos_wbFrmReclamoDañoManual : System.Web.UI.
         ddlAseguradora.DataValueField = "aseguradora";
         ddlAseguradora.DataBind();
     }
+
+    protected void ddlEmpresa_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        if (ddlEmpresa.SelectedItem.Text == "Fábrica de Productos Alimenticios René")
+        {
+            txtPoliza.Text = "";
+            txtNombre.Text = "";
+            txtPoliza.Enabled = true;
+            txtNombre.Enabled = true;
+            Page.ClientScript.RegisterStartupScript(this.Page.GetType(), "show_modal", "$('#modal-recordatorio').modal('show');", addScriptTags: true);
+
+        }
+        else if (ddlEmpresa.SelectedItem.Text == "La Vision")
+        {
+            txtPoliza.Text = "LA VISIÓN";
+            txtNombre.Text = "LA VISIÓN";
+            txtPoliza.Enabled = false;
+            txtNombre.Enabled = false;
+        }
+
+        else
+        {
+            txtPoliza.Text = "";
+            txtNombre.Text = "";
+            txtNombre.Enabled = true;
+            txtPoliza.Enabled = true;
+        }
+    }
 }

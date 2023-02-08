@@ -98,7 +98,7 @@
                           <asp:TextBox runat="server" ID="txtTitular" autocomplete="off" Style="width: 100%" class="form-control" placeholder="Titular"></asp:TextBox>                                                   
                        </div>
                        <div class="form-group col-sm-12 col-md-12 col-lg-9">
-                          <label for="recipient-name" class="control-label">Version:</label>
+                          <label for="recipient-name" class="control-label">Causa:</label>
                           <asp:TextBox runat="server" ID="txtVersion" autocomplete="off" Style="width: 100%" class="form-control" placeholder="Version"></asp:TextBox>                                                  
                        </div>
                        <div class="form-group">
