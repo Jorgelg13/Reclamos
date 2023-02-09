@@ -21,8 +21,8 @@
                                 <Columns>
                                     <asp:CommandField ShowSelectButton="True" SelectText="Seleccionar" />
                                 </Columns>
-                                <HeaderStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" />
-                                <PagerStyle BackColor="#131B4D" ForeColor="White" HorizontalAlign="Center" />
+                                <HeaderStyle BackColor="#48086f" Font-Bold="True" ForeColor="White" />
+                                <PagerStyle BackColor="#48086f" ForeColor="White" HorizontalAlign="Center" />
                                 <RowStyle BackColor="#EFF3FB" Wrap="false" />
                                 <SelectedRowStyle BackColor="#D1DDF1" Font-Bold="True" ForeColor="#333333" />
                             </asp:GridView>
@@ -39,7 +39,7 @@
                                 <asp:BoundField DataField="limite2" HeaderText="Limite 2" DataFormatString="{0:0,0.00}"/>
                                 <asp:BoundField DataField="deducible" HeaderText="Deducible" DataFormatString="{0:0,0.00}"/>
                             </Columns>
-                            <HeaderStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" />
+                            <HeaderStyle BackColor="#48086f" Font-Bold="True" ForeColor="White" />
                             <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Right" />
                             <RowStyle BackColor="#EFF3FB" />
                         </asp:GridView>

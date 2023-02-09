@@ -32,7 +32,7 @@
                         AutoGenerateColumns="True"
                         ForeColor="#333333"
                         GridLines="None">
-                        <HeaderStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" />
+                        <HeaderStyle BackColor="#48086f" Font-Bold="True" ForeColor="White" />
                         <RowStyle Wrap="false" HorizontalAlign="Left" Font-Size="Small" />
                         <SelectedRowStyle BackColor="#D1DDF1" Font-Bold="True" />
                     </asp:GridView>

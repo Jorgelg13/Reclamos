@@ -17,8 +17,8 @@
                             </asp:CommandField>
                         </Columns>
                          <EditRowStyle BackColor="#2461BF" />
-                         <FooterStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" />
-                         <HeaderStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" HorizontalAlign="Center" Wrap="False" />
+                         <FooterStyle BackColor="#48086f" Font-Bold="True" ForeColor="White" />
+                         <HeaderStyle BackColor="#48086f" Font-Bold="True" ForeColor="White" HorizontalAlign="Center" Wrap="False" />
                          <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" Wrap="True" />
                          <RowStyle BackColor="#EFF3FB" HorizontalAlign="Left" Wrap="False" />
                          <SelectedRowStyle BackColor="#D1DDF1" Font-Bold="True" ForeColor="#333333" />

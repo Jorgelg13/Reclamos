@@ -32,8 +32,8 @@
                                         </ItemTemplate>
                                     </asp:TemplateField>
                                 </Columns>
-                                <FooterStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" />
-                                <HeaderStyle BackColor="#131B4D" Font-Bold="True" Wrap="false" ForeColor="White" />
+                                <FooterStyle BackColor="#48086f" Font-Bold="True" ForeColor="White" />
+                                <HeaderStyle BackColor="#48086f" Font-Bold="True" Wrap="false" ForeColor="White" />
                                 <PagerStyle BackColor="#ACD6F2" ForeColor="White" HorizontalAlign="Center" />
                                 <RowStyle BackColor="#EFF3FB" Wrap="false" />
                                 <SelectedRowStyle BackColor="#D1DDF1" Font-Bold="True" ForeColor="#333333" />
@@ -41,7 +41,7 @@
                         </div>
                         <div class="scrolling-table-container col-sm-12 col-md-3 col-lg-3">
                             <asp:GridView ID="GridAsignados" CssClass="table table-responsive table-hover" runat="server" AutoGenerateColumns="true" GridLines="None">
-                                <HeaderStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" />
+                                <HeaderStyle BackColor="#48086f" Font-Bold="True" ForeColor="White" />
                                 <PagerStyle BackColor="#ACD6F2" ForeColor="White" HorizontalAlign="Center" />
                                 <RowStyle BackColor="#EFF3FB" Wrap="false" />
                             </asp:GridView>

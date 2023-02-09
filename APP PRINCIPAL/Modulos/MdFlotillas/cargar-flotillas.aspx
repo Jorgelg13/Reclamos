@@ -21,7 +21,7 @@
                     <asp:GridView ID="GridCargas" runat="server" CssClass="table bs-table table-responsive" AutoGenerateColumns="true"
                         ForeColor="#333333" GridLines="None">
                         <AlternatingRowStyle BackColor="White" />
-                        <HeaderStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" Wrap="false" />
+                        <HeaderStyle BackColor="#48086f" Font-Bold="True" ForeColor="White" Wrap="false" />
                         <RowStyle BackColor="#EFF3FB" Wrap="false" />
                         <SelectedRowStyle BackColor="#D1DDF1" Font-Bold="True" ForeColor="#333333" />
                     </asp:GridView>

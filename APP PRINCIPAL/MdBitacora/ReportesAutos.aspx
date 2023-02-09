@@ -160,7 +160,7 @@
                                 <div class="scrolling-table-container" style="overflow-y: auto;">
                                     <asp:GridView ID="GridCamposSeleccion" runat="server" CssClass="table bs-table table-responsive" AutoGenerateColumns="True" ForeColor="#333333" GridLines="None" PageSize="3000">
                                         <AlternatingRowStyle BackColor="White" />
-                                        <HeaderStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" HorizontalAlign="Center" Wrap="False" />
+                                        <HeaderStyle BackColor="#48086f" Font-Bold="True" ForeColor="White" HorizontalAlign="Center" Wrap="False" />
                                         <RowStyle BackColor="#EFF3FB" HorizontalAlign="Left" Wrap="False" />
                                     </asp:GridView>
                                 </div>
@@ -169,8 +169,8 @@
                                 <div class="scrolling-table-container" style="overflow-y: auto;">
                                     <asp:GridView ID="GridEficiencia" runat="server" CssClass="table bs-table table-responsive" AutoGenerateColumns="True" ForeColor="#333333" GridLines="None" AllowCustomPaging="True" PageSize="3000" OnRowDataBound="GridEficiencia_RowDataBound" ShowFooter="true">
                                         <AlternatingRowStyle BackColor="White" />
-                                        <FooterStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" />
-                                        <HeaderStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" HorizontalAlign="Center" Wrap="False" />
+                                        <FooterStyle BackColor="#48086f" Font-Bold="True" ForeColor="White" />
+                                        <HeaderStyle BackColor="#48086f" Font-Bold="True" ForeColor="White" HorizontalAlign="Center" Wrap="False" />
                                         <RowStyle BackColor="#EFF3FB" HorizontalAlign="Left" Wrap="False" />
                                     </asp:GridView>
                                 </div>
@@ -180,8 +180,8 @@
                                     <div class="scrolling-table-container" style="overflow-y: auto;">
                                         <asp:GridView ID="GridCiclos" runat="server" CssClass="table bs-table table-responsive" OnRowDataBound="GridCiclos_RowDataBound" AutoGenerateColumns="True" ShowFooter="true" ForeColor="#333333" GridLines="None">
                                             <AlternatingRowStyle BackColor="White" />
-                                            <FooterStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" />
-                                            <HeaderStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" HorizontalAlign="Center" Wrap="False" />
+                                            <FooterStyle BackColor="#48086f" Font-Bold="True" ForeColor="White" />
+                                            <HeaderStyle BackColor="#48086f" Font-Bold="True" ForeColor="White" HorizontalAlign="Center" Wrap="False" />
                                             <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
                                             <RowStyle BackColor="#EFF3FB" HorizontalAlign="Left" Wrap="False" />
                                         </asp:GridView>

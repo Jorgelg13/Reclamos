@@ -144,8 +144,8 @@
                     <div class="scrolling-table-container">
                         <asp:GridView ID="GridCamposSeleccion" runat="server" CssClass="table bs-table table-responsive" AutoGenerateColumns="True" CellPadding="4" ForeColor="#333333" GridLines="None">
                             <AlternatingRowStyle BackColor="White" />
-                            <FooterStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" />
-                            <HeaderStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" HorizontalAlign="Center" Wrap="False" />
+                            <FooterStyle BackColor="#48086f" Font-Bold="True" ForeColor="White" />
+                            <HeaderStyle BackColor="#48086f" Font-Bold="True" ForeColor="White" HorizontalAlign="Center" Wrap="False" />
                             <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
                             <RowStyle BackColor="#EFF3FB" HorizontalAlign="Left" Wrap="False" />
                         </asp:GridView>
@@ -189,8 +189,8 @@
                         <div class="panel-body" style="height: auto;">
                             <asp:GridView ID="GridPromedioAseguradora" runat="server" OnRowDataBound="GridPromedioAseguradora_RowDataBound" CssClass="table bs-table table-responsive " AutoGenerateColumns="True" ShowFooter="true" ForeColor="#333333" GridLines="None">
                                 <AlternatingRowStyle BackColor="White" />
-                                <FooterStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" />
-                                <HeaderStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" HorizontalAlign="Center" Wrap="False" />
+                                <FooterStyle BackColor="#48086f" Font-Bold="True" ForeColor="White" />
+                                <HeaderStyle BackColor="#48086f" Font-Bold="True" ForeColor="White" HorizontalAlign="Center" Wrap="False" />
                                 <RowStyle BackColor="#EFF3FB" HorizontalAlign="Left" Wrap="False" />
                             </asp:GridView>
                         </div>
@@ -199,8 +199,8 @@
                     <asp:Panel ID="PnCicloCliente" Visible="false" runat="server">
                         <asp:GridView ID="GridCicloCliente" runat="server" CssClass="table bs-table table-responsive" ShowFooter="true" OnRowDataBound="GridCicloCliente_RowDataBound" AutoGenerateColumns="True" CellPadding="4" ForeColor="#333333" GridLines="None">
                             <AlternatingRowStyle BackColor="White" />
-                            <FooterStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" />
-                            <HeaderStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" HorizontalAlign="Center" Wrap="False" />
+                            <FooterStyle BackColor="#48086f" Font-Bold="True" ForeColor="White" />
+                            <HeaderStyle BackColor="#48086f" Font-Bold="True" ForeColor="White" HorizontalAlign="Center" Wrap="False" />
                             <RowStyle BackColor="#EFF3FB" HorizontalAlign="Left" Wrap="False" />
                         </asp:GridView>
                     </asp:Panel>
@@ -208,8 +208,8 @@
                     <asp:Panel ID="PnCicloEjecutivoKPI" Visible="false" runat="server">
                         <asp:GridView ID="GridEjecutivosKPI" runat="server" CssClass="table bs-table table-responsive" ShowFooter="true" OnRowDataBound="GridEjecutivosKPI_RowDataBound" AutoGenerateColumns="True" CellPadding="4" ForeColor="#333333" GridLines="None">
                             <AlternatingRowStyle BackColor="White" />
-                            <FooterStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" />
-                            <HeaderStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" HorizontalAlign="Center" Wrap="False" />
+                            <FooterStyle BackColor="#48086f" Font-Bold="True" ForeColor="White" />
+                            <HeaderStyle BackColor="#48086f" Font-Bold="True" ForeColor="White" HorizontalAlign="Center" Wrap="False" />
                             <RowStyle BackColor="#EFF3FB" HorizontalAlign="Left" Wrap="False" />
                         </asp:GridView>
                     </asp:Panel>
@@ -217,30 +217,30 @@
                         <h3><b style="font-size: 16px;">Promedio Ejecutivo (Creacion / Asignacion)</b></h3>
                         <asp:GridView ID="GridCicloEjecutivo" runat="server" CssClass="table bs-table table-responsive col-lg-5" AutoGenerateColumns="True" ForeColor="#333333" GridLines="None">
                             <AlternatingRowStyle BackColor="White" />
-                            <FooterStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" />
-                            <HeaderStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" HorizontalAlign="Center" Wrap="False" />
+                            <FooterStyle BackColor="#48086f" Font-Bold="True" ForeColor="White" />
+                            <HeaderStyle BackColor="#48086f" Font-Bold="True" ForeColor="White" HorizontalAlign="Center" Wrap="False" />
                             <RowStyle BackColor="#EFF3FB" HorizontalAlign="Left" Wrap="False" />
                         </asp:GridView>
                         <h3><b style="font-size: 16px;">Promedio Ejecutivo (Asignacion / Apertura)</b></h3>
                         <asp:GridView ID="GridCicloAsignacionApertura" runat="server" CssClass="table bs-table table-responsive" AutoGenerateColumns="True" ForeColor="#333333" GridLines="None">
                             <AlternatingRowStyle BackColor="White" />
-                            <FooterStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" />
-                            <HeaderStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" HorizontalAlign="Center" Wrap="False" />
+                            <FooterStyle BackColor="#48086f" Font-Bold="True" ForeColor="White" />
+                            <HeaderStyle BackColor="#48086f" Font-Bold="True" ForeColor="White" HorizontalAlign="Center" Wrap="False" />
                             <RowStyle BackColor="#EFF3FB" HorizontalAlign="Left" Wrap="False" />
                         </asp:GridView>
                         <h3><b style="font-size: 16px;">Promedio Ejecutivo (Apertura / Aseguradora)</b></h3>
                         <asp:GridView ID="GridAperturaAseguradora" runat="server" CssClass="table bs-table table-responsive" AutoGenerateColumns="True"  ForeColor="#333333" GridLines="None">
                             <AlternatingRowStyle BackColor="White" />
-                            <FooterStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" />
-                            <HeaderStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" HorizontalAlign="Center" Wrap="False" />
+                            <FooterStyle BackColor="#48086f" Font-Bold="True" ForeColor="White" />
+                            <HeaderStyle BackColor="#48086f" Font-Bold="True" ForeColor="White" HorizontalAlign="Center" Wrap="False" />
                             <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
                             <RowStyle BackColor="#EFF3FB" HorizontalAlign="Left" Wrap="False" />
                         </asp:GridView>
                         <h3><b style="font-size: 16px;">Promedio Ejecutivo (Recepcion Cheque / Cierre)</b></h3>
                         <asp:GridView ID="GridRecepcionChequeCierre" runat="server" CssClass="table bs-table table-responsive" AutoGenerateColumns="True" ForeColor="#333333" GridLines="None">
                             <AlternatingRowStyle BackColor="White" />
-                            <FooterStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" />
-                            <HeaderStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" HorizontalAlign="Center" Wrap="False" />
+                            <FooterStyle BackColor="#48086f" Font-Bold="True" ForeColor="White" />
+                            <HeaderStyle BackColor="#48086f" Font-Bold="True" ForeColor="White" HorizontalAlign="Center" Wrap="False" />
                             <RowStyle BackColor="#EFF3FB" HorizontalAlign="Left" Wrap="False" />
                         </asp:GridView>
                     </asp:Panel>
@@ -248,8 +248,8 @@
                     <asp:Panel ID="PnEficiencia" Visible="false" runat="server">
                         <asp:GridView ID="GridEficiencia" runat="server" CssClass="table bs-table table-responsive table-hover" OnRowDataBound="GridEficiencia_RowDataBound" AutoGenerateColumns="True" ForeColor="#333333" GridLines="None" AllowCustomPaging="True" ShowFooter="true">
                             <AlternatingRowStyle BackColor="White" />
-                            <FooterStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" />
-                            <HeaderStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" HorizontalAlign="Center" Wrap="False" />
+                            <FooterStyle BackColor="#48086f" Font-Bold="True" ForeColor="White" />
+                            <HeaderStyle BackColor="#48086f" Font-Bold="True" ForeColor="White" HorizontalAlign="Center" Wrap="False" />
                             <RowStyle BackColor="#EFF3FB" HorizontalAlign="Left" Wrap="False" />
                         </asp:GridView>
                     </asp:Panel>

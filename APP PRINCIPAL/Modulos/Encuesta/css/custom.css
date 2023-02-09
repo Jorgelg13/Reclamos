@@ -275,7 +275,7 @@
 /* Fifth Slide */
 .demo-1 .bg-5 .sl-slide-inner,
 .demo-1 .bg-5 .sl-content-slice {
-    background: #131B4D;
+    background: #48086f;
 }
 
 .demo-1 .bg-5 .deco {
@@ -301,7 +301,7 @@
 /* Fifth Slide bg-6 */
 .demo-1 .bg-6 .sl-slide-inner,
 .demo-1 .bg-6 .sl-content-slice {
-    background: #131B4D;
+    background: #48086f;
 }
 
 .demo-1 .bg-6 .deco {
@@ -327,7 +327,7 @@
 /* Fifth Slide bg-7 */
 .demo-1 .bg-7 .sl-slide-inner,
 .demo-1 .bg-7 .sl-content-slice {
-    background: #131B4D;
+    background: #48086f;
 }
 
 .demo-1 .bg-7 .deco {
@@ -352,7 +352,7 @@
 /* Fifth Slide bg-8 */
 .demo-1 .bg-8 .sl-slide-inner,
 .demo-1 .bg-8 .sl-content-slice {
-    background: #131B4D;
+    background: #48086f;
 }
 
 .demo-1 .bg-8 .deco {
@@ -580,7 +580,7 @@
 }
 
     .ec-stars-wrapper:hover a {
-        color: #131b4d;
+        color: #48086f;
     }
 /*
  * El selector de hijo, es necesario para aumentar la especifidad

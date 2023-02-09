@@ -42,7 +42,7 @@
                                 <asp:CommandField ShowSelectButton="True" SelectText=" Borrar" ControlStyle-CssClass="fa fa-trash"  ControlStyle-ForeColor="Red" HeaderText="Eliminar" />
                                 <asp:CommandField ShowDeleteButton="True" DeleteText="Ver"  HeaderText="Ver Archivo" />
                             </Columns>
-                            <HeaderStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" HorizontalAlign="Center" Wrap="False" />
+                            <HeaderStyle BackColor="#48086f" Font-Bold="True" ForeColor="White" HorizontalAlign="Center" Wrap="False" />
                             <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
                             <RowStyle HorizontalAlign="Left" Wrap="False" />
                             <SelectedRowStyle BackColor="#D1DDF1" Font-Bold="True" ForeColor="#333333" />

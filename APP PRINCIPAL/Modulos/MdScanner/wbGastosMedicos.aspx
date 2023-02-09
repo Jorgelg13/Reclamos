@@ -7,7 +7,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Scanear Documentos</title>
 </head>
-<body style="background-color: #131B4D;">
+<body style="background-color: #48086f;">
     <form id="form1" runat="server">
         <div id="dwtcontrolContainer"></div>
         <br />

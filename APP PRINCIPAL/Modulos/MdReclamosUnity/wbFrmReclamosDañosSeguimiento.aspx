@@ -93,7 +93,7 @@
                             <div style="overflow-y: auto; overflow-x: auto;">
                                 <asp:GridView ID="GridCoberturasAfectadas" CssClass="table bs-table tablaDetalleAuto table-responsive" runat="server" AutoGenerateColumns="true" ForeColor="#333333" GridLines="None">
                                     <AlternatingRowStyle BackColor="White" />
-                                    <HeaderStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" HorizontalAlign="Center" />
+                                    <HeaderStyle BackColor="#48086f" Font-Bold="True" ForeColor="White" HorizontalAlign="Center" />
                                     <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
                                     <RowStyle BackColor="#EFF3FB" />
                                 </asp:GridView>
@@ -110,7 +110,7 @@
                             <b><span style="font-size: 20px">LLamadas Realizadas en cabina:</span></b>
                             <asp:GridView ID="Gridllamadas" CssClass="table bs-table tablaDetalleAuto table-responsive" runat="server" AutoGenerateColumns="true" ForeColor="#333333" GridLines="None">
                                 <AlternatingRowStyle BackColor="White" />
-                                <HeaderStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" HorizontalAlign="Center" Wrap="False" />
+                                <HeaderStyle BackColor="#48086f" Font-Bold="True" ForeColor="White" HorizontalAlign="Center" Wrap="False" />
                                 <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
                                 <RowStyle BackColor="#EFF3FB" />
                             </asp:GridView>
@@ -119,7 +119,7 @@
                             <b><span style="font-size: 20px">Datos del incidente:</span></b>
                             <asp:GridView ID="GridDatosAccidente" CssClass="table bs-table tablaDetalleAuto table-responsive" runat="server" AutoGenerateColumns="true" ForeColor="#333333" GridLines="None">
                                 <AlternatingRowStyle BackColor="White" />
-                                <HeaderStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" HorizontalAlign="Center" Wrap="False" />
+                                <HeaderStyle BackColor="#48086f" Font-Bold="True" ForeColor="White" HorizontalAlign="Center" Wrap="False" />
                                 <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
                                 <RowStyle BackColor="#EFF3FB" />
                             </asp:GridView>
@@ -310,7 +310,7 @@
                             <div style="height: 300px; overflow-x: auto;">
                                 <asp:GridView ID="GridComentarios" CssClass="table bs-table tablaDetalleAuto table-responsive table-hover" style="padding-left:0px; margin-top:0px; padding-top:0px;" runat="server" AutoGenerateColumns="true"
                                     CellPadding="3" BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" OnRowDataBound="GridComentarios_RowDataBound">
-                                    <HeaderStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" HorizontalAlign="Center" Wrap="False" />
+                                    <HeaderStyle BackColor="#48086f" Font-Bold="True" ForeColor="White" HorizontalAlign="Center" Wrap="False" />
                                     <PagerStyle BackColor="White" ForeColor="#000066" HorizontalAlign="Left" />
                                     <RowStyle ForeColor="#000066" HorizontalAlign="Left" Wrap="True" />
                                 </asp:GridView>
@@ -331,7 +331,7 @@
                                 </asp:CommandField>
                             </Columns>
                             <AlternatingRowStyle BackColor="White" />
-                            <HeaderStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" HorizontalAlign="Center" Wrap="False" />
+                            <HeaderStyle BackColor="#48086f" Font-Bold="True" ForeColor="White" HorizontalAlign="Center" Wrap="False" />
                             <RowStyle BackColor="#EFF3FB" HorizontalAlign="Left" Wrap="False" />
                             <SelectedRowStyle BackColor="#D1DDF1" Font-Bold="True" ForeColor="#333333" />
                         </asp:GridView>
@@ -342,7 +342,7 @@
                     <div class="col-sm-12 col-md-6 col-lg-6 scrolling-table-container">
                         <asp:GridView ID="GridPagosReclamos" CssClass="table bs-table tablaDetalleAuto table-responsive table-hover" runat="server" AutoGenerateColumns="true" CellPadding="4" ForeColor="#333333" GridLines="None">
                             <AlternatingRowStyle BackColor="White" />
-                            <HeaderStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" HorizontalAlign="Center" Wrap="False" />
+                            <HeaderStyle BackColor="#48086f" Font-Bold="True" ForeColor="White" HorizontalAlign="Center" Wrap="False" />
                             <RowStyle BackColor="#EFF3FB" HorizontalAlign="Left" Wrap="False" />
                         </asp:GridView>
                     </div>
@@ -832,10 +832,10 @@
                                     <asp:GridView ID="GridEstados" CssClass="table bs-table table-responsive table-hover" runat="server" 
                                         AutoGenerateColumns="true" ShowFooter="true" CellPadding="4" ForeColor="#333333" GridLines="None" OnRowDataBound="GridEstados_RowDataBound">
                                         <AlternatingRowStyle BackColor="White" />
-                                        <HeaderStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" HorizontalAlign="Center" Wrap="False" />
+                                        <HeaderStyle BackColor="#48086f" Font-Bold="True" ForeColor="White" HorizontalAlign="Center" Wrap="False" />
                                         <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
                                         <RowStyle BackColor="#EFF3FB" HorizontalAlign="Left" Wrap="False" />
-                                        <FooterStyle BackColor="#131B4D" HorizontalAlign="Left" Wrap="False" ForeColor="White" />
+                                        <FooterStyle BackColor="#48086f" HorizontalAlign="Left" Wrap="False" ForeColor="White" />
                                     </asp:GridView>
                                 </div>
                             </div>
@@ -1020,7 +1020,7 @@
                                             </asp:TemplateField>
                                         </Columns>
                                         <AlternatingRowStyle BackColor="White" />
-                                        <HeaderStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" HorizontalAlign="Center" Wrap="False" />
+                                        <HeaderStyle BackColor="#48086f" Font-Bold="True" ForeColor="White" HorizontalAlign="Center" Wrap="False" />
                                         <RowStyle BackColor="#EFF3FB" HorizontalAlign="Left" />
                                     </asp:GridView>
                                 </div>
@@ -1034,7 +1034,7 @@
                                     <br />
                                     <asp:GridView ID="GridDocSeleccionados" CssClass="table detalle" runat="server" AutoGenerateColumns="true" ForeColor="#333333" GridLines="None" CellPadding="4">
                                         <AlternatingRowStyle BackColor="White" />
-                                        <HeaderStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" HorizontalAlign="Center" Wrap="False" />
+                                        <HeaderStyle BackColor="#48086f" Font-Bold="True" ForeColor="White" HorizontalAlign="Center" Wrap="False" />
                                         <RowStyle BackColor="#EFF3FB" HorizontalAlign="Left" />
                                     </asp:GridView>
                                     <asp:TextBox ID="txtSolicitudDocumentos" Style="width: 100%; border: 0px; text-align: justify;" autocomplete="off" CssClass="form-control" TextMode="multiline" Columns="50" Rows="30" runat="server" placeholder="Observaciones" />

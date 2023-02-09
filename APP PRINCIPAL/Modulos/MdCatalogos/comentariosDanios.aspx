@@ -31,7 +31,7 @@
                                 <Columns>
                                     <asp:CommandField ShowSelectButton="True" SelectText="Seleccionar" HeaderText="Seleccionar" />
                                 </Columns>
-                                <HeaderStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" HorizontalAlign="Center" Wrap="False" />
+                                <HeaderStyle BackColor="#48086f" Font-Bold="True" ForeColor="White" HorizontalAlign="Center" Wrap="False" />
                                 <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
                                 <RowStyle HorizontalAlign="Left" Wrap="True" />
                                 <SelectedRowStyle BackColor="#D1DDF1" Font-Bold="True" ForeColor="#333333" />

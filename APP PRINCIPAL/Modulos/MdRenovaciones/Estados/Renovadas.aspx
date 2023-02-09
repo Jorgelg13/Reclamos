@@ -24,8 +24,8 @@
                             <%--<asp:CommandField  DeleteText="Requerimientos" ControlStyle-CssClass="btn btn-info" ShowDeleteButton="True" ></asp:CommandField> --%>
                             <asp:CommandField ControlStyle-CssClass="btn btn-info ver-poliza" ShowSelectButton="True" SelectText="Ver Poliza" />
                         </Columns>
-                        <HeaderStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" Wrap="false" />
-                        <PagerStyle BackColor="#131B4D" ForeColor="White" HorizontalAlign="Center" />
+                        <HeaderStyle BackColor="#48086f" Font-Bold="True" ForeColor="White" Wrap="false" />
+                        <PagerStyle BackColor="#48086f" ForeColor="White" HorizontalAlign="Center" />
                         <RowStyle BackColor="White" Wrap="true" />
                         <SelectedRowStyle BackColor="#D1DDF1" Font-Bold="True" ForeColor="#333333" />
                     </asp:GridView>
@@ -37,8 +37,8 @@
         <asp:Panel ID="pnlRequerimientos" runat="server">
             <div class="scrolling-table-container col-lg-12 col-md-12" style="padding: 0px;">
                 <asp:GridView ID="gridRequerimientos" CssClass="table bs-table table-responsive" runat="server" AutoGenerateColumns="True" ForeColor="#333333" GridLines="None">
-                    <HeaderStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" Wrap="false" />
-                    <PagerStyle BackColor="#131B4D" ForeColor="White" HorizontalAlign="Center" />
+                    <HeaderStyle BackColor="#48086f" Font-Bold="True" ForeColor="White" Wrap="false" />
+                    <PagerStyle BackColor="#48086f" ForeColor="White" HorizontalAlign="Center" />
                     <RowStyle BackColor="White" Wrap="false" />
                     <SelectedRowStyle BackColor="#D1DDF1" Font-Bold="True" ForeColor="#333333" />
                 </asp:GridView>

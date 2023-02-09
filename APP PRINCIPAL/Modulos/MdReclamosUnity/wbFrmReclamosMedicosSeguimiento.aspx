@@ -82,8 +82,8 @@
                                                 <ItemStyle ForeColor="White" />
                                             </asp:BoundField>
                                         </Columns>
-                                        <FooterStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" />
-                                        <HeaderStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" />
+                                        <FooterStyle BackColor="#48086f" Font-Bold="True" ForeColor="White" />
+                                        <HeaderStyle BackColor="#48086f" Font-Bold="True" ForeColor="White" />
                                         <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
                                         <RowStyle BackColor="#EFF3FB" />
                                         <SelectedRowStyle BackColor="#D1DDF1" Font-Bold="True" ForeColor="#333333" />
@@ -178,8 +178,8 @@
                                         <Columns>
                                             <asp:CommandField ShowSelectButton="True" />
                                         </Columns>
-                                        <FooterStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" />
-                                        <HeaderStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" />
+                                        <FooterStyle BackColor="#48086f" Font-Bold="True" ForeColor="White" />
+                                        <HeaderStyle BackColor="#48086f" Font-Bold="True" ForeColor="White" />
                                         <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
                                         <RowStyle BackColor="#EFF3FB" />
                                         <SelectedRowStyle BackColor="#D1DDF1" Font-Bold="True" ForeColor="#333333" />
@@ -192,8 +192,8 @@
                     <div role="tabpanel" class="tab-pane" id="alarmas">
                         <div class="scrolling-table-container">
                             <asp:GridView ID="GridComentarios" CssClass="table bs-table tablaDetalleAuto table-responsive table-hover" runat="server" CellPadding="3" BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" OnRowDataBound="GridComentarios_RowDataBound">
-                                <FooterStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" />
-                                <HeaderStyle BackColor="#131B4D" Font-Bold="True" Wrap="false" ForeColor="White" />
+                                <FooterStyle BackColor="#48086f" Font-Bold="True" ForeColor="White" />
+                                <HeaderStyle BackColor="#48086f" Font-Bold="True" Wrap="false" ForeColor="White" />
                                 <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
                                 <RowStyle BackColor="#EFF3FB" />
                                 <SelectedRowStyle BackColor="#D1DDF1" Font-Bold="True" ForeColor="#333333" />
@@ -205,8 +205,8 @@
                         <div id="imprimir" class="form-inline">
                             <br />
                             <asp:Label Style="font-size: 12px; text-align: center" runat="server"><b>CONTRASEÑA RECEPCION PAPELERIA PARA TRAMITE DE RECLAMOS</b></asp:Label>
-                            <div class="img-float-left" style="float: left; padding-top: 50px;">
-                                <img src="../../imgUnity/Unity%20Promotores%20transparente.png" style="margin-top: -100px; width: 235px;">
+                            <div class="img-float-left" style="float: left; padding-top: 80px;">
+                                <img src="../../imgUnity/wtw_logo.png" style="margin-top: -100px; width: 200px;">
                             </div>
                             <div class="img-float-right" style="float: right; padding-top: 10px;">
                                 <asp:Label ID="lblId" Style="font-size: 14px;" runat="server"></asp:Label>
@@ -375,8 +375,8 @@
                         <%------------------------------------------------ imprimir memo para aseguradora ------------------------------------------%>
                         <div id="imprimirEnvioAseg" style="display: none" class="form-inline">
                             <br />
-                            <div class="img-float-right" style="float: right; padding-top: 50px;">
-                                <img src="../../imgUnity/unity-wtw2.png" style="margin-top: -100px; width: 235px;">
+                            <div class="img-float-right" style="float: right; padding-top: 90px;">
+                                <img src="../../imgUnity/wtw_logo.png" style="margin-top: -120px; width: 180px;">
                             </div>
                             <div class="img-float-left" style="float: left; padding-top: 10px;">
                                 <p>Avenida Las Americas 22-23, Zona 14</p>

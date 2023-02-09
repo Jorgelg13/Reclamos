@@ -61,8 +61,8 @@
                              <asp:BoundField DataField="id_auto_reclamo" HeaderText="id_auto_reclamo" SortExpression="id_auto_reclamo" Visible="False" />
                              <asp:BoundField DataField="idAuto" HeaderText="idAuto" InsertVisible="False" ReadOnly="True" SortExpression="idAuto" Visible="False" />
                          </Columns>
-                         <FooterStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" />
-                         <HeaderStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" />
+                         <FooterStyle BackColor="#48086f" Font-Bold="True" ForeColor="White" />
+                         <HeaderStyle BackColor="#48086f" Font-Bold="True" ForeColor="White" />
                          <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
                          <RowStyle BackColor="#EFF3FB" />
                          <SelectedRowStyle BackColor="#D1DDF1" Font-Bold="True" ForeColor="#333333" />

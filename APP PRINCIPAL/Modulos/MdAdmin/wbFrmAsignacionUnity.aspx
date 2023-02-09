@@ -41,14 +41,14 @@
                                         </ItemTemplate>
                                     </asp:TemplateField>
                                 </Columns>
-                                <HeaderStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" Wrap="false" />
+                                <HeaderStyle BackColor="#48086f" Font-Bold="True" ForeColor="White" Wrap="false" />
                                 <PagerStyle BackColor="#ACD6F2" ForeColor="White" HorizontalAlign="Center" />
                                 <RowStyle BackColor="#EFF3FB" Wrap="false" />
                             </asp:GridView>
                         </div>
                         <div class="scrolling-table-container col-sm-12 col-md-3 col-lg-3">
                             <asp:GridView ID="GridAsignados" CssClass="table table-responsive table-hover" runat="server" AutoGenerateColumns="true" GridLines="None">
-                                <HeaderStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" />
+                                <HeaderStyle BackColor="#48086f" Font-Bold="True" ForeColor="White" />
                                 <PagerStyle BackColor="#ACD6F2" ForeColor="White" HorizontalAlign="Center" />
                                 <RowStyle BackColor="#EFF3FB" Wrap="false" />
                             </asp:GridView>

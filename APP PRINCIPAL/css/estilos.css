@@ -6,7 +6,7 @@
     padding-top: 1px;
     padding-bottom: 0px;
     font-size: 14px;
-    background-color: #131B4D;
+    background-color: #48086f;
     margin: -3px;
     padding-bottom: 7px;
     margin-bottom: -15px;
@@ -45,7 +45,7 @@
 
 a {
     text-decoration: none !important;
-    color: #131B4D;
+    color: #48086f;
 }
 
 
@@ -55,7 +55,7 @@ a {
 }
 
 .menu-cuadrado .panel:hover {
-    background: #ACD6F2;
+    background: #dab8ef;
 }
 
 .menu-cuadrado .panel:hover h1{
@@ -70,7 +70,7 @@ a {
 
 .btn-primary {
     margin-left: 5px;
-    background-color: #131B4D;
+    background-color: #48086f;
 }
 
 
@@ -146,7 +146,7 @@ a {
 }
 
 .unityColor {
-    background-color: #131B4D;
+    background-color: #48086f;
 }
 
 
@@ -161,7 +161,7 @@ a {
     font-size: 12px;
     line-height: 1.428571429;
     border-radius: 15px;
-    background-color: #131B4D;
+    background-color: #48086f;
 }
 
     .btn-circle.btn-lg {
@@ -171,7 +171,7 @@ a {
         font-size: 18px;
         line-height: 1.33;
         border-radius: 25px;
-        background-color: #131B4D;
+        background-color: #48086f;
     }
 
     .btn-circle.btn-xl {
@@ -210,7 +210,7 @@ a {
     width: 55px;
     height: 55px;
     border-radius: 50%;
-    background: #131B4D;
+    background: #48086f;
     position: fixed;
     bottom: 30px;
     right: 30px;
@@ -339,7 +339,7 @@ a {
 }
 
 .nd1 {
-    background: #131B4D;
+    background: #48086f;
     right: 40px;
     bottom: 120px;
     animation-delay: 0.2s;
@@ -348,7 +348,7 @@ a {
 }
 
 .nd3 {
-    background: #131B4D;
+    background: #48086f;
     right: 40px;
     bottom: 180px;
     animation-delay: 0.15s;
@@ -357,7 +357,7 @@ a {
 }
 
 .nd4 {
-    background: #131B4D;
+    background: #48086f;
     right: 40px;
     bottom: 240px;
     animation-delay: 0.1s;

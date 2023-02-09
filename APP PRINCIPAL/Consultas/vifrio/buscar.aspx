@@ -27,7 +27,7 @@
                     <Columns>
                         <asp:CommandField ShowSelectButton="True" SelectText="Seleccionar" />
                     </Columns>
-                    <HeaderStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" />
+                    <HeaderStyle BackColor="#48086f" Font-Bold="True" ForeColor="White" />
                     <RowStyle Wrap="false" />
                     <SelectedRowStyle BackColor="#D1DDF1" Font-Bold="True" />
                 </asp:GridView>

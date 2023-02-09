@@ -32,7 +32,7 @@
                             <Columns>
                                 <asp:CommandField ShowSelectButton="True" ControlStyle-CssClass="fa fa-search" SelectText="" />
                             </Columns>
-                            <HeaderStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" HorizontalAlign="Center" Wrap="False" />
+                            <HeaderStyle BackColor="#48086f" Font-Bold="True" ForeColor="White" HorizontalAlign="Center" Wrap="False" />
                             <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
                             <RowStyle HorizontalAlign="Left" Wrap="false" />
                             <SelectedRowStyle BackColor="#D1DDF1" Font-Bold="True" ForeColor="#333333" />
@@ -300,7 +300,7 @@
                                     <asp:GridView ID="GridCoberturas" runat="server" CssClass="table table-responsive table-hover" AutoGenerateColumns="True"
                                         GridLines="None" AllowCustomPaging="True" PageSize="300">
                                         <AlternatingRowStyle BackColor="White" />
-                                        <HeaderStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" HorizontalAlign="Center" Wrap="False" />
+                                        <HeaderStyle BackColor="#48086f" Font-Bold="True" ForeColor="White" HorizontalAlign="Center" Wrap="False" />
                                         <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
                                         <RowStyle HorizontalAlign="Left" Wrap="false" />
                                         <SelectedRowStyle BackColor="#D1DDF1" Font-Bold="True" ForeColor="#333333" />
@@ -325,7 +325,7 @@
                                         <Columns>
                                             <asp:CommandField ShowSelectButton="True" ControlStyle-CssClass="fa fa-search btnRevisarReclamo" SelectText="" />
                                         </Columns>
-                                        <HeaderStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" HorizontalAlign="Center" Wrap="False" />
+                                        <HeaderStyle BackColor="#48086f" Font-Bold="True" ForeColor="White" HorizontalAlign="Center" Wrap="False" />
                                         <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
                                         <RowStyle HorizontalAlign="Left" Wrap="false" />
                                         <SelectedRowStyle BackColor="#D1DDF1" Font-Bold="True" ForeColor="#333333" />

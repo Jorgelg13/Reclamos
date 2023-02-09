@@ -39,8 +39,8 @@
                     <div class="scrolling-table-container">
                         <asp:GridView ID="GridMedicos" runat="server" CssClass="table bs-table table-responsive table-hover" AutoGenerateColumns="true" CellPadding="4" ForeColor="#333333" GridLines="None">
                             <AlternatingRowStyle BackColor="White" />
-                            <FooterStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" />
-                            <HeaderStyle BackColor="#131B4D" Font-Bold="True" ForeColor="White" />
+                            <FooterStyle BackColor="#48086f" Font-Bold="True" ForeColor="White" />
+                            <HeaderStyle BackColor="#48086f" Font-Bold="True" ForeColor="White" />
                             <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
                             <RowStyle BackColor="#EFF3FB" Wrap="False" />
                             <SelectedRowStyle BackColor="#D1DDF1" Font-Bold="True" ForeColor="#333333" />

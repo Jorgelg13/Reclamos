@@ -19,13 +19,13 @@
             <div class="col-md-3 col-lg-3 col-sm-12" style="height: 250px;">
                 <div class="panel panel-info">
                     <div class="panel-heading">
-                        <p style="text-align: center; font-size: 16px;"><b>Seguimiento Unity</b></p>
+                        <p style="text-align: center; font-size: 16px;"><b>Seguimiento wtw</b></p>
                     </div>
                     <div class="panel-body">
                         <a href="/Modulos/Dashboard/DashboardUnity.aspx" title="Seguimiento De Reclamos en Unity Promotores" style="font-size: 80px;">
-                            <img src="imgUnity/unity-wtw2.png" style="height: 125px;" /></a>
+                            <img src="imgUnity/wtw_logo.png" style="height: 125px;" /></a>
                         <p style="text-align: center">
-                            <b>Control De Reclamos en Unity</b>
+                            <b>Control de Reclamos wtw</b>
                         </p>
                     </div>
                 </div>
