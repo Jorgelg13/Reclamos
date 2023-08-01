@@ -1082,7 +1082,7 @@
                 <div id="imprimirBitacora" style="display: none" class="form-inline">
                     <br />
                     <div class="img-float-right" style="float: right; padding-top: 50px;">
-                         <img src="../../imgUnity/Unity%20Promotores%20-%20Alta%20resolución.png" style="margin-top: -100px; width: 235px;">
+                         <img src="../../imgUnity/wtw_logo.png" style="margin-top: -80px; width: 235px;">
                     </div>
                     <div class="img-float-left" style="float: left; padding-top: 10px;">
                         <p>Avenida Las Americas 22-23, Zona 14</p>
@@ -1143,7 +1143,7 @@
                 <div id="MemoPNC" style="display: none">
                     <br />
                     <div class="img-float-right" style="float: right; padding-top: 50px;">
-                        <img src="../../imgUnity/Unity%20Promotores%20transparente.png" style="margin-top: -100px; width: 235px;">
+                        <img src="../../imgUnity/wtw_logo.png" style="margin-top: -80px; width: 235px;">
                     </div>
                     <div class="img-float-left" style="float: left; padding-top: 5px;">
                         <p>Avenida Las Americas 22-23, Zona 14</p>

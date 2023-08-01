@@ -79,7 +79,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosAutosSeguimiento : Sys
         }
 
         if (userlogin == "nsierra" || userlogin == "nmelgar" || userlogin == "jlaj" || userlogin == "sgordillo" || userlogin =="cmejia" 
-            || userlogin == "hvillacinda" || userlogin == "lgarcia")
+            || userlogin == "hvillacinda" || userlogin == "lgarcia" || userlogin == "hosoy" || userlogin == "cbenavides" || userlogin == "jmorales")
         {
             btnGuardarProximaFecha.Enabled = true;
         }

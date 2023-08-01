@@ -14,9 +14,6 @@ public partial class Modulos_flotillas_agregar : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
-        Guardar.Enabled = true;
-        Actualizar.Enabled = false;
-
         if (!IsPostBack)
         {
             gridAutos.DataSource = DBReclamos.flotillas.OrderByDescending(es => es.id).Take(100).ToList();
@@ -91,7 +88,7 @@ public partial class Modulos_flotillas_agregar : System.Web.UI.Page
             actualizar.pagador = txtPagador.Text;
             DBReclamos.SaveChanges();
             Actualizar.Visible = false;
-            Guardar.Visible = true;
+            //Guardar.Visible = true;
             gridAutos.DataSource = DBReclamos.asegurados_caja_ahorro.OrderByDescending(es => es.id).Take(100).ToList();
             gridAutos.DataBind();
             limiparCampos();
@@ -131,7 +128,7 @@ public partial class Modulos_flotillas_agregar : System.Web.UI.Page
         txtEjecutivo.Text = reg.ejecutivo;
         txtCodigoInterno.Text = reg.codigo_interno;
         txtPagador.Text = reg.pagador;
-        Guardar.Visible = false;
+        //Guardar.Visible = false;
         Actualizar.Visible = true;
         Actualizar.Enabled = true;
         Borrar.Visible = true;

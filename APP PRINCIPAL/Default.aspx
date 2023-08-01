@@ -22,7 +22,7 @@
                         <p style="text-align: center; font-size: 16px;"><b>Seguimiento wtw</b></p>
                     </div>
                     <div class="panel-body">
-                        <a href="/Modulos/Dashboard/DashboardUnity.aspx" title="Seguimiento De Reclamos en Unity Promotores" style="font-size: 80px;">
+                        <a href="/Modulos/Dashboard/DashboardUnity.aspx" title="Seguimiento De Reclamos en WTW" style="font-size: 80px;">
                             <img src="imgUnity/wtw_logo.png" style="height: 125px;" /></a>
                         <p style="text-align: center">
                             <b>Control de Reclamos wtw</b>

@@ -67,7 +67,7 @@
 
                         <div class="form-group row col-md-3 col-lg-8">
                             <asp:LinkButton runat="server" Visible="false" ID="Actualizar" OnClick="Actualizar_Click" ToolTip="Actualizar registro" Style="font-size: 40px; text-align: center;"><i class="fa fa-pencil-square-o"></i></asp:LinkButton>
-                            <asp:LinkButton runat="server" enabled="false" ID="Guardar"  OnClick="Guardar_Click" ToolTip="Guardar registro"  Style="font-size: 40px; text-align: center;"><i class="fa fa-floppy-o"></i></asp:LinkButton>
+                            <asp:LinkButton runat="server" enabled="false" ID="LinkButton1"  OnClick="Guardar_Click" ToolTip="Guardar registro"  Style="font-size: 40px; text-align: center;"><i class="fa fa-floppy-o"></i></asp:LinkButton>
                             <asp:LinkButton data-toggle="modal" data-target="#myModal" runat="server" Visible="false" ID="Borrar"  ToolTip="Eliminar registro" Style="font-size: 40px; text-align: center; color:red"><i class="fa fa-trash"></i></asp:LinkButton>                        
                         </div>
                     </div>

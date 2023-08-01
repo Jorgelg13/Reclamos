@@ -8,7 +8,7 @@
 }
 .fondo-descuentos {
     background: rgb(2,0,36);
-    background: linear-gradient(27deg, rgba(2,0,36,1) 0%, rgba(42,125,227,1) 52%, rgba(255,255,255,1) 96%);
+    background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(147,71,194,1) 0%, rgba(252,254,255,1) 100%);
 }
 
 
@@ -20,7 +20,7 @@
     flex-direction: column;
     text-align: center;
     background-color: white;
-    border-radius: 1em;
+    border-radius: 2em;
     box-shadow: 0.8px 0.2px 25px #6666;
 }
 
@@ -39,7 +39,7 @@
 
 .navbar-fondo {
     height: 70px;
-    background-color: #48086f !important;
+    background-color: #801e83 !important;
     color: white;
     box-shadow: 0.8px 0.2px 25px #6666;
 }

@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Consultas/vifrio/MasterPage.master" AutoEventWireup="true" CodeFile="buscar.aspx.cs" Inherits="Consultas_vifrio_Default" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Consultas/descuentos/MasterPage.master" AutoEventWireup="true" CodeFile="buscar.aspx.cs" Inherits="Consultas_vifrio_Default" %>
 
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
@@ -6,7 +6,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <div class="container">
         <div class="row justify-content-md-center" style="justify-content:center">
-            <img src="../../imgUnity/wtw_logo.png" />
+            <img src="../../imgUnity/unity-wtw2.png" />
         </div>
         <div class="row justify-content-md-center"  style="justify-content:center">
             <div class="col col-auto margen-container margen-container-movil">

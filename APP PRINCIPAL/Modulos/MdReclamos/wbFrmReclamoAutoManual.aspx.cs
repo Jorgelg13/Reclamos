@@ -150,29 +150,19 @@ public partial class Modulos_MdReclamos_wbFrmInsertarAutoManual : System.Web.UI.
             txtPoliza.Text = "AUTO-249422";
             txtPropietario.Text = "Fábrica de Productos Alimenticios René";
             txtEmpresa.Text = "";
-            txtPoliza.Enabled = true;
-            txtPropietario.Enabled = true;
             txtEmpresa.Enabled = true;
             Page.ClientScript.RegisterStartupScript(this.Page.GetType(), "show_modal", "$('#modal-recordatorio').modal('show');", addScriptTags: true);
 
         }
         else if (ddlEmpresa.SelectedItem.Text == "La Vision")
         {
-            txtPoliza.Text = "LA VISIÓN";
-            txtPropietario.Text = "LA VISIÓN";
             txtEmpresa.Text = "LA VISIÓN";
-            txtPoliza.Enabled = false;
-            txtPropietario.Enabled = false;
             txtEmpresa.Enabled = false;
         }
       
         else
         {
-            txtPoliza.Text = "";
-            txtPropietario.Text = "";
             txtEmpresa.Text = "";
-            txtPoliza.Enabled = true;
-            txtPropietario.Enabled = true;
             txtEmpresa.Enabled = true;
         }
     }

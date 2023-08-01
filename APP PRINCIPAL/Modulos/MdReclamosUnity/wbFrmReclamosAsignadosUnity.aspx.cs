@@ -248,8 +248,8 @@ public partial class Modulos_MdReclamos_wbFrmReclamosAsignadosUnity : System.Web
         string telefono = Utils.TelefonoGestor(ddlGestor);
         string mensaje = Constantes.ASIGNACION_AUTOS(ddlGestor, registro.auto_reclamo.placa, registro.auto_reclamo.marca, registro.auto_reclamo.modelo, telefono, id);
 
-        //notificacion.NOTIFICACION(txtCorreo.Text.Trim(), mensaje, "Asignacion de Reclamo");
-        Utils.notificacion_email("pa_notificacion", txtCorreo.Text.Trim(), mensaje, registro.gestores.correo, "Asignacion de Reclamo");
+        notificacion.NOTIFICACION(txtCorreo.Text.Trim(), mensaje, "Asignacion de Reclamo");
+        //Utils.notificacion_email("pa_notificacion", txtCorreo.Text.Trim(), mensaje, registro.gestores.correo, "Asignacion de Reclamo");
         agregarComentario("Registro de envio de correo de notificacion: \n\n" + mensaje);
     }
 
@@ -290,7 +290,8 @@ public partial class Modulos_MdReclamos_wbFrmReclamosAsignadosUnity : System.Web
             correoEjecutivo = Utils.seleccionarCorreo(Convert.ToInt32(codigo));
             if (!string.IsNullOrEmpty(correoEjecutivo))
             {
-                Utils.notificacion_email("pa_notificacion", correoEjecutivo, cuerpo, correoGestor, asunto);
+                //Utils.notificacion_email("pa_notificacion", correoEjecutivo, cuerpo, correoGestor, asunto);
+                notificacion.NOTIFICACION(correoEjecutivo, cuerpo, asunto);
                 agregarComentario("Registro de notificacion a ejecutivo: \n\n " + cuerpo);
             }
         }
@@ -301,7 +302,8 @@ public partial class Modulos_MdReclamos_wbFrmReclamosAsignadosUnity : System.Web
             correoVendedor = Utils.seleccionarCorreo(Convert.ToInt32(codigo));
             if (!string.IsNullOrEmpty(correoVendedor))
             {
-                Utils.notificacion_email("pa_notificacion", correoVendedor, cuerpo, correoGestor, asunto);
+                notificacion.NOTIFICACION(correoVendedor, cuerpo, asunto);
+                //Utils.notificacion_email("pa_notificacion", correoVendedor, cuerpo, correoGestor, asunto);
             }
         }
 

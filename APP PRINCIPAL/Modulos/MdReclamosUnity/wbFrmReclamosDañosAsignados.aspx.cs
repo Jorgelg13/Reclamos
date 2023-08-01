@@ -21,7 +21,7 @@ public partial class Modulos_MdReclamos_wbFrmReclamosDañosAsignados : System.We
     bool compromiso_pago = false;
     String correoGestor, correoEjecutivo, correoVendedor, cuerpo, asunto, correoComentario, codigo;
     String correoReclamos = "reclamosgt@unitypromotores.com";
-    String gerente= "jennifer.wiesner @unitypromotores.com";
+    String gerente= "jennifer.wiesner@unitypromotores.com";
     int id;
 
     protected void Page_Load(object sender, EventArgs e)
@@ -349,8 +349,10 @@ public partial class Modulos_MdReclamos_wbFrmReclamosDañosAsignados : System.We
 
             if (!string.IsNullOrEmpty(correoEjecutivo))
             {
-                Utils.notificacion_email("pa_notificacion", correoEjecutivo, cuerpo, correoGestor, asunto);
-                Utils.notificacion_email("pa_notificacion", gerente, cuerpo, correoGestor, asunto);
+                //Utils.notificacion_email("pa_notificacion", correoEjecutivo, cuerpo, correoGestor, asunto);
+                //Utils.notificacion_email("pa_notificacion",  , cuerpo, correoGestor, asunto);
+                notificacion.NOTIFICACION(correoEjecutivo, cuerpo, asunto);
+                notificacion.NOTIFICACION(correoGestor, cuerpo, asunto);
                 insertarComentarios("Registro de notificacion a ejecutivo: \n\n" + cuerpo);
             }
         }

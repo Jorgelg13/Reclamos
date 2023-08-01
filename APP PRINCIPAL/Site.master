@@ -16,12 +16,12 @@
 <body onLoad="">
     <form runat="server">
         <div class="jumbotron titulo-cabecera">
-            <h2 style="width: 781px; padding-bottom: 20px; font-size:18px;">Reclamos Unity Promotores</h2>
+            <h2 style="width: 781px; padding-bottom: 20px; font-size:18px;">Reclamos WTW</h2>
             <header>
                 <div class="content-wrapper">
                     <div class="float-right">
                         <div class="img-float-right" style="float: right;">
-                            <img src="/imgUnity/unity-wtw.png" style="margin-top: -50px; width: 130px;">
+                            <img src="/imgUnity/logo_blanco_wtw.png" style="margin-top: -50px; width: 130px;">
                         </div>
                         <section id="login">
                             <asp:LoginView runat="server" ViewStateMode="Disabled">
