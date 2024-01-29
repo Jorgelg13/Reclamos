@@ -34,11 +34,16 @@
                           <div class="form-group col-sm-12 col-md-12 col-lg-12">
                             <asp:TextBox runat="server" ID="txtPlaca" Style="width: 100%" autocomplete="off" CssClass="form-control" placeholder="placa"></asp:TextBox>
                         </div>
+                        <div class="form-group col-sm-12 col-md-12 col-lg-12">
+                            <label>Empresa</label>
+                           <asp:DropDownList CssClass="form-control" ID="ddlEmpresa" runat="server">
+                              <asp:ListItem>Grupo Q</asp:ListItem>
+                              <asp:ListItem>Vifrio</asp:ListItem>
+                           </asp:DropDownList>
+                        </div>
                         <div class="form-inline">
                             <asp:Button CssClass="btn btn-primary" runat="server" ID="Guardar" OnClick="Guardar_Click" Text="Guardar" />
                             <asp:Button CssClass="btn btn-primary" runat="server" Visible="false" ID="Actualizar" OnClick="Actualizar_Click" Text="Actualizar" />
-                            <%--<asp:LinkButton runat="server" Visible="false" ID="Actualizar" OnClick="Actualizar_Click" ToolTip="Actualizar registro" Style="font-size: 40px; text-align: center;"><i class="fa fa-pencil-square-o"></i></asp:LinkButton>--%>
-                            <%--<asp:LinkButton runat="server" enabled="false" ID="Guardar"  OnClick="Guardar_Click" ToolTip="Guardar registro"  Style="font-size: 40px; text-align: center;"><i class="fa fa-floppy-o"></i></asp:LinkButton>--%>
                             <asp:LinkButton data-toggle="modal" data-target="#myModal" runat="server" Visible="false" ID="Borrar"  ToolTip="Eliminar registro" Style="font-size: 40px; text-align: center; color:red"><i class="fa fa-trash"></i></asp:LinkButton>                        
                         </div>
                     </div>

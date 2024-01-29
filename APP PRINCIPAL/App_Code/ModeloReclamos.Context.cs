@@ -106,6 +106,8 @@ public partial class ReclamosEntities : DbContext
     public DbSet<ViewBusquedaAuto> ViewBusquedaAuto { get; set; }
     public DbSet<consultar_asegurados> consultar_asegurados { get; set; }
     public DbSet<v_producto_no_conforme> v_producto_no_conforme { get; set; }
+    public DbSet<asegurados_consultas> asegurados_consultas { get; set; }
+    public DbSet<registros_consultas> registros_consultas { get; set; }
 
     public virtual ObjectResult<pa_reclamos_autos_Result> pa_reclamos_autos()
     {

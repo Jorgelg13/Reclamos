@@ -1,0 +1,84 @@
+﻿body {
+    background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(147,71,194,1) 0%, rgba(252,254,255,1) 100%);
+}
+
+
+
+
+.margen-container {
+    margin-top: 15px;
+    padding: 12px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    background-color: white;
+    border-radius: 1em;
+    box-shadow: 0.8px 0.2px 25px #6666;
+}
+
+
+.margen-container-table {
+    margin-top: 40px;
+    padding: 5px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    background-color: white;
+    border-radius: 2em;
+    box-shadow: 0.8px 0.2px 25px #6666;
+}
+
+.navbar-fondo {
+    height: 70px;
+    background-color: #48086f !important;
+    color: white;
+    box-shadow: 0.8px 0.2px 25px #6666;
+}
+
+.controles-guardar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+}
+
+.scrolling-table-container {
+    overflow-y: auto;
+    overflow-x: auto;
+}
+
+img {
+    width: 280px;
+}
+
+@media(max-width: 500px) {
+
+    img {
+        width: 230px;
+    }
+}
+
+.color-letra{
+    color:white !important;
+}
+
+@media(max-width: 500px) {
+
+    .logo-wtw {
+        display: none;
+    }
+}
+
+.logo-wtw {
+    width: 140px;
+}
+
+li{
+    font-size:13px;
+}
+
+a {
+    color: #801e83 !important;
+}

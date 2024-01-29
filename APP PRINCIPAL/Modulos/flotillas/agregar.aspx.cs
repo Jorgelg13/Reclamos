@@ -45,6 +45,7 @@ public partial class Modulos_flotillas_agregar : System.Web.UI.Page
                 registro.marca = txtMarca.Text;
                 registro.linea = txtLinea.Text;
                 registro.placa = txtPlaca.Text;
+                registro.empresa = ddlEmpresa.SelectedItem.Text;
                 DBReclamos.asegurados_caja_ahorro.Add(registro);
                 DBReclamos.SaveChanges();
                 Utils.ShowMessage(this.Page, "Registro guardado con exito", "Excelente..!", "success");
@@ -73,6 +74,7 @@ public partial class Modulos_flotillas_agregar : System.Web.UI.Page
             actualizar.marca = txtMarca.Text;
             actualizar.linea = txtLinea.Text;
             actualizar.placa = txtPlaca.Text;
+            actualizar.empresa = ddlEmpresa.SelectedItem.Text;
             DBReclamos.SaveChanges();
             Actualizar.Visible = false;
             Guardar.Visible = true;
@@ -105,6 +107,7 @@ public partial class Modulos_flotillas_agregar : System.Web.UI.Page
         txtLinea.Text = reg.linea;
         txtModelo.Text = reg.modelo;
         txtPlaca.Text = reg.placa;
+        ddlEmpresa.SelectedValue = reg.empresa;
         Guardar.Visible = false;
         Actualizar.Visible = true;
         Actualizar.Enabled = true;

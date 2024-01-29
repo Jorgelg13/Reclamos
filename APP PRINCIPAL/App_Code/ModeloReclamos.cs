@@ -90,6 +90,21 @@ public partial class asegurados_caja_ahorro
     public string marca { get; set; }
     public string linea { get; set; }
     public string placa { get; set; }
+    public string empresa { get; set; }
+}
+
+public partial class asegurados_consultas
+{
+    public int id { get; set; }
+    public string poliza { get; set; }
+    public string placa { get; set; }
+    public string nombre { get; set; }
+    public string modelo { get; set; }
+    public string marca { get; set; }
+    public string linea { get; set; }
+    public string chasis { get; set; }
+    public string fecha_registro { get; set; }
+    public string estado { get; set; }
 }
 
 public partial class asegurados_implants
@@ -461,6 +476,7 @@ public partial class descuentos_vifrio
     public int id { get; set; }
     public string servicio { get; set; }
     public string descuento { get; set; }
+    public string empresa { get; set; }
 }
 
 public partial class detalle_gasto_medico
@@ -1232,6 +1248,19 @@ public partial class reg_reclamos_medicos
 
     public virtual ICollection<autorizaciones> autorizaciones { get; set; }
     public virtual ICollection<reclamos_medicos> reclamos_medicos { get; set; }
+}
+
+public partial class registros_consultas
+{
+    public int id { get; set; }
+    public string asegurado { get; set; }
+    public string sucursal { get; set; }
+    public string codigo { get; set; }
+    public string servicio { get; set; }
+    public string placa { get; set; }
+    public string poliza { get; set; }
+    public string chasis { get; set; }
+    public Nullable<System.DateTime> fecha { get; set; }
 }
 
 public partial class registros_vifrio
