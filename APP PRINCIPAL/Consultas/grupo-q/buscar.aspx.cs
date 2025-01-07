@@ -15,7 +15,7 @@ public partial class Consultas_vifrio_Default : System.Web.UI.Page
     protected void Page_Load(object sender, EventArgs e)
     {
         sucursal = Convert.ToString(Request.QueryString[0]).ToString();
-        consulta = "select poliza as Poliza, estado as Estado, " +
+        consulta = "select poliza as Poliza, estado as Estado, nombre as Nombre," +
             "placa as Placa from asegurados_consultas where poliza like '%" + txtBusqueda.Text + "%' or placa like '%"+txtBusqueda.Text+ "%'  or chasis like '%"+txtBusqueda.Text+"%'  ";
     }
 
@@ -62,8 +62,8 @@ public partial class Consultas_vifrio_Default : System.Web.UI.Page
             {
                 registros_consultas registro = new registros_consultas();
                 registro.poliza = GridBuscar.SelectedRow.Cells[1].Text;
-                registro.asegurado = "";
-                registro.placa = GridBuscar.SelectedRow.Cells[3].Text;
+                registro.asegurado = GridBuscar.SelectedRow.Cells[3].Text;
+                registro.placa = GridBuscar.SelectedRow.Cells[4].Text;
                 registro.fecha = DateTime.Now;
                 registro.servicio = ddlServicio.SelectedItem.Text;
                 registro.sucursal = sucursal;

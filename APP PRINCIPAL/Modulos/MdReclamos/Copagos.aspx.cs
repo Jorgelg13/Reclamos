@@ -11,7 +11,9 @@ public partial class Modulos_MdReclamos_Copagos : System.Web.UI.Page
     Utils llenado = new Utils();
     String consulta, url;
     //String guardarArchivo = @"C:\Proyectos\Reclamos\pdf\Copagos\";
-    String guardarArchivo = @"D:\Reclamos\pdf\Copagos\";
+    //String guardarArchivo = @"D:\Reclamos\pdf\Copagos\";
+    String guardarArchivo = @"D:\aplicaciones web\reclamos";
+
     int id;
 
     protected void Page_Load(object sender, EventArgs e)

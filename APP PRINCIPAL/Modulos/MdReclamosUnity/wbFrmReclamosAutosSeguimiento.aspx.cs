@@ -28,6 +28,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosAutosSeguimiento : Sys
     bool compromiso_pago = false;
     bool cierre_interno = false;
     bool robo = false;
+    int idRlobs = 1;
     String estado = "Seguimiento";//esta variable es la que se utiliza para cambiar el estado a cerrado de un reclamo.
     String idRecibido, comentarios, pagos, llamadas, coberturas, datosAccidente,estados_autos,documentos, doc_solicitados;
     String cartaDeclinacionReclamo, cartaEnvioCheque, cartaCierreInterno, mensaje;
@@ -100,8 +101,13 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosAutosSeguimiento : Sys
         ddlTipoCierre.DataTextField = "nombre";
         ddlTipoCierre.DataValueField = "id";
         ddlTipoCierre.DataBind();
-        
-        if(userlogin == "nmelgar" || userlogin =="jwiesner" || userlogin == "jlaj" || userlogin == "cmejia" || userlogin == "nsierra")
+
+        ddlRlob.DataSource = DBReclamos.rlobs.ToList();
+        ddlRlob.DataTextField = "nombre";
+        ddlRlob.DataValueField = "id";
+        ddlRlob.DataBind();
+
+        if (userlogin == "nmelgar" || userlogin =="jwiesner" || userlogin == "jlaj" || userlogin == "cmejia" || userlogin == "nsierra")
         {
             ddlEstadoAuto.DataSource = DBReclamos.estados_reclamos_unity.ToList().Where(au => au.tipo == "auto");
             ddlEstadoAuto.DataTextField = "descripcion";
@@ -125,6 +131,12 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosAutosSeguimiento : Sys
         try
         {
             var reclamo = DBReclamos.reclamo_auto.Find(id);
+
+            ddlRamo.DataSource = DBReclamos.ramos_rlobs.ToList().Where(r => r.id_rlob == reclamo.id_rlob);
+            ddlRamo.DataTextField = "nombre_ramo";
+            ddlRamo.DataValueField = "id";
+            ddlRamo.DataBind();
+
             //detalle del vehiculo
             txtPlaca.Text  = reclamo.auto_reclamo.placa;
             txtMarca.Text  = reclamo.auto_reclamo.marca;
@@ -159,6 +171,8 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosAutosSeguimiento : Sys
             ddlGestor.SelectedValue     = reclamo.id_gestor.ToString();
             ddlTaller.SelectedValue     = reclamo.id_taller.ToString();
             ddlAnalista.SelectedValue   = reclamo.id_analista.ToString();
+            ddlRlob.SelectedValue = reclamo.id_rlob.ToString();
+            ddlRamo.SelectedValue = reclamo.id_ramo_rlob.ToString();
             ddlTipoCierre.SelectedValue = String.IsNullOrEmpty(reclamo.id_motivo_cierre.ToString()) ? "1": reclamo.id_motivo_cierre.ToString();
             ddlNoConforme.SelectedValue = String.IsNullOrEmpty(reclamo.detalle_no_conforme) ? "" : reclamo.detalle_no_conforme;
             //campos varios
@@ -370,6 +384,8 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosAutosSeguimiento : Sys
             reclamo.alquiler_auto     = alquiler;
             reclamo.id_gestor         = Convert.ToInt16(ddlGestor.SelectedValue);
             reclamo.id_analista       = Convert.ToInt16(ddlAnalista.SelectedValue);
+            reclamo.id_rlob           = Convert.ToInt32(ddlRlob.SelectedValue);
+            reclamo.id_ramo_rlob      = Convert.ToInt32(ddlRamo.SelectedValue);
             reclamo.estado_auto_unity = ddlEstadoAuto.SelectedItem.Text;
             reclamo.id_taller         = Convert.ToInt16(ddlTaller.SelectedValue);
             reclamo.observaciones     = txtObservaciones.Text;
@@ -1523,5 +1539,12 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosAutosSeguimiento : Sys
         }
     }
 
-
+    protected void ddlRlob_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        idRlobs = Convert.ToInt32(ddlRlob.SelectedValue);
+        ddlRamo.DataSource = DBReclamos.ramos_rlobs.ToList().Where(r => r.id_rlob == idRlobs);
+        ddlRamo.DataTextField = "nombre_ramo";
+        ddlRamo.DataValueField = "id";
+        ddlRamo.DataBind();
+    }
 }

@@ -45,16 +45,16 @@ public partial class _Default : Page
     {
         try
         {
-            var autos = DBReclamos.reclamo_auto.ToList().Where(a => a.id_estado == 1).Count();
+            var autos = DBReclamos.reclamo_auto.Count(a => a.id_estado == 1);
             totalReclamosAutos.Text = autos.ToString();
 
-            var danios = DBReclamos.reclamos_varios.ToList().Where(d => d.id_estado == 1).Count();
+            var danios = DBReclamos.reclamos_varios.Count(d => d.id_estado == 1);
             totalReclamosDaños.Text = danios.ToString();
 
-            var medicos = DBReclamos.reclamos_medicos.ToList().Where(m => m.estado_unity == "Sin Asignar" && m.id_estado != 3).Count();
+            var medicos = DBReclamos.reclamos_medicos.Count(m => m.estado_unity == "Sin Asignar" && m.id_estado != 3);
             totalReclamosMedicos.Text = medicos.ToString();
 
-            var autorizaciones = DBReclamos.autorizaciones.ToList().Where(a => a.tipo_estado != "Cerrado").Count();
+            var autorizaciones = DBReclamos.autorizaciones.Count(a => a.tipo_estado != "Cerrado");
             totalReclamosAutorizaciones.Text = autorizaciones.ToString();
         }
 

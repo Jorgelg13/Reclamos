@@ -203,6 +203,17 @@
                                     <asp:DropDownList CssClass="form-control" ID="ddlGestor" OnSelectedIndexChanged="ddlGestor_SelectedIndexChanged" 
                                         Style="width: 80%" Height="34px" runat="server" AutoPostBack="True"></asp:DropDownList>
                                 </div>
+                                 <br />
+                                  <div class="form-inline">
+                                      <label style="width: 15%">Rlob:</label>
+                                      <asp:DropDownList CssClass="form-control" ID="ddlRlob" Style="width: 80%" Height="34px" runat="server" OnSelectedIndexChanged="ddlRlob_SelectedIndexChanged" AutoPostBack="True">
+                                      </asp:DropDownList>
+                                  </div>
+                                  <br />
+                                  <div class="form-inline">
+                                      <label style="width: 15%">Ramo:</label>
+                                      <asp:DropDownList CssClass="form-control" ID="ddlRamo" Style="width: 80%" Height="34px" runat="server"></asp:DropDownList>
+                                  </div>
                             </div>
                         </div>
                         <%----------------------------------  correos y comentarios --------------------------------%>
@@ -1085,7 +1096,8 @@
                          <img src="../../imgUnity/wtw_logo.png" style="margin-top: -80px; width: 235px;">
                     </div>
                     <div class="img-float-left" style="float: left; padding-top: 10px;">
-                        <p>Avenida Las Americas 22-23, Zona 14</p>
+                        <p>Diagonal 6, 11-10 zona 10 Edificio Diagoseis</p>
+                        <p>Nivel 9 Oficina 902</p>
                         <p>PBX: 2326-3700, 2386-3700</p>
                         <p>www.unitypromotores.com</p>
                     </div>

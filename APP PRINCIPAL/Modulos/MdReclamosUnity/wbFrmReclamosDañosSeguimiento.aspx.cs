@@ -27,7 +27,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosDañosSeguimiento : Sy
     short codigo;
     String idRecibido, comentarios, pagos, llamadas, coberturas, datosSiniestro, estados, liquidaciones;
     String estadoReclamo, cartaEnvioCheque, cartaCierreInterno, cartaDeclinado, cartaDeducibleAnual,cartaCierre,cartaAlertaTiempo, documentos, doc_solicitados;
-    int id, dias,totalEstado, idPago = 0;
+    int id, dias,totalEstado, idPago = 0, idRlobs = 1;
     //variables para calculos de pagos de reclamos
     Double iva, monto_reclamado, mejora_tecnologica, tiempo_uso, infra_seguro, perdida_final_ajustada, 
         perdidaConDeducible, deducible, valor_indemnizado, timbres, total;
@@ -116,6 +116,11 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosDañosSeguimiento : Sy
         ddlGestor.DataValueField = "id";
         ddlGestor.DataBind();
 
+        ddlRlob.DataSource = DBReclamos.rlobs.ToList();
+        ddlRlob.DataTextField = "nombre";
+        ddlRlob.DataValueField = "id";
+        ddlRlob.DataBind();
+
         if (userlogin == "nmelgar" || userlogin == "jwiesner" || userlogin == "jlaj" || userlogin == "cmejia" || userlogin =="nsierra")
         {
             ddlEstadoReclamo.DataSource = DBReclamos.estados_reclamos_unity.ToList().Where(au => au.tipo == "daños");
@@ -140,56 +145,63 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosDañosSeguimiento : Sy
         try
         {
             var reclamo = DBReclamos.reclamos_varios.Find(id);
+            ddlRamo.DataSource = DBReclamos.ramos_rlobs.ToList().Where(r => r.id_rlob == reclamo.id_rlob);
+            ddlRamo.DataTextField = "nombre_ramo";
+            ddlRamo.DataValueField = "id";
+            ddlRamo.DataBind();
+
             //detalle de la poliza
-            lblIdReclamo.Text                = "<b>ID :</b>                " + reclamo.id;
-            lblPoliza.Text                   = "<b>POLIZA :</b>            " + reclamo.reg_reclamo_varios.poliza;
-            lblAsegurado.Text                = "<b>ASEGURADO :</b>         " + reclamo.reg_reclamo_varios.asegurado;
-            lblcliente.Text                  = "<b>No.Cliente</b>          " + reclamo.reg_reclamo_varios.cliente;
-            lblAseguradora.Text              = "<b>ASEGURADORA :</b>       " + reclamo.reg_reclamo_varios.aseguradora;
-            lblContratante.Text              = "<b>CONTRATANTE :</b>       " + reclamo.reg_reclamo_varios.contratante;
-            lblEjecutivo.Text                = "<b>EJECUTIVO :</b>         " + reclamo.reg_reclamo_varios.ejecutivo;
-            lblEstado.Text                   = "<b>ESTADO :</b>            " + reclamo.reg_reclamo_varios.status;
-            lblDireccion.Text                = "<b>DIRECCION :</b>         " + reclamo.reg_reclamo_varios.direccion;
-            lblVip.Text                      = "<b>VIP :</b>               " + reclamo.reg_reclamo_varios.vip;
-            lblSumaAsegurada.Text            = "<b>Suma Aseguarda :</b>  " + reclamo.reg_reclamo_varios.suma_asegurada;
-            lblMoneda.Text                   = "<b>Moneda :</b>            " + reclamo.reg_reclamo_varios.moneda;
-            lblProductoNoConforme.Text       = "<b>Producto No Conforme Asignado: </b>" + reclamo.detalle_no_conforme;
-            txtObservacionesNoConf.Text      = reclamo.observacion_no_conforme;
-            lblBanderaCierreInterno.Text     = reclamo.b_carta_cierre_interno.Value.ToString();
-            lblBanderaDeclinado.Text         = reclamo.b_carta_declinado.Value.ToString();
-            lblBanderaEnvioCheque.Text       = reclamo.b_carta_envio_cheque.Value.ToString();
-            lblBanderaCierreDeducible.Text   = reclamo.b_carta_deducible_anual.ToString();
-            lblBanderaCierreReclamo.Text     = reclamo.b_carta_cierre_reclamo.ToString();
-            lblBanderaAlerta.Text            = reclamo.b_carta_alerta_tiempo.ToString();
+            lblIdReclamo.Text = "<b>ID :</b>                " + reclamo.id;
+            lblPoliza.Text = "<b>POLIZA :</b>            " + reclamo.reg_reclamo_varios.poliza;
+            lblAsegurado.Text = "<b>ASEGURADO :</b>         " + reclamo.reg_reclamo_varios.asegurado;
+            lblcliente.Text = "<b>No.Cliente</b>          " + reclamo.reg_reclamo_varios.cliente;
+            lblAseguradora.Text = "<b>ASEGURADORA :</b>       " + reclamo.reg_reclamo_varios.aseguradora;
+            lblContratante.Text = "<b>CONTRATANTE :</b>       " + reclamo.reg_reclamo_varios.contratante;
+            lblEjecutivo.Text = "<b>EJECUTIVO :</b>         " + reclamo.reg_reclamo_varios.ejecutivo;
+            lblEstado.Text = "<b>ESTADO :</b>            " + reclamo.reg_reclamo_varios.status;
+            lblDireccion.Text = "<b>DIRECCION :</b>         " + reclamo.reg_reclamo_varios.direccion;
+            lblVip.Text = "<b>VIP :</b>               " + reclamo.reg_reclamo_varios.vip;
+            lblSumaAsegurada.Text = "<b>Suma Aseguarda :</b>  " + reclamo.reg_reclamo_varios.suma_asegurada;
+            lblMoneda.Text = "<b>Moneda :</b>            " + reclamo.reg_reclamo_varios.moneda;
+            lblProductoNoConforme.Text = "<b>Producto No Conforme Asignado: </b>" + reclamo.detalle_no_conforme;
+            txtObservacionesNoConf.Text = reclamo.observacion_no_conforme;
+            lblBanderaCierreInterno.Text = reclamo.b_carta_cierre_interno.Value.ToString();
+            lblBanderaDeclinado.Text = reclamo.b_carta_declinado.Value.ToString();
+            lblBanderaEnvioCheque.Text = reclamo.b_carta_envio_cheque.Value.ToString();
+            lblBanderaCierreDeducible.Text = reclamo.b_carta_deducible_anual.ToString();
+            lblBanderaCierreReclamo.Text = reclamo.b_carta_cierre_reclamo.ToString();
+            lblBanderaAlerta.Text = reclamo.b_carta_alerta_tiempo.ToString();
             //listado de dropdown
-            lblEstadoReclamo.Text       = reclamo.estado_reclamo_unity;
-            lblRamo.Text                = reclamo.reg_reclamo_varios.ramo;
-            ddlEstadoReclamo.Text       = reclamo.estado_reclamo_unity;
-            ddlGestor.SelectedValue     = reclamo.id_gestor.ToString();
-            ddlTaller.SelectedValue     = reclamo.id_taller.ToString();
-            ddlAnalista.SelectedValue   = reclamo.id_analista.ToString();
+            lblEstadoReclamo.Text = reclamo.estado_reclamo_unity;
+            lblRamo.Text = reclamo.reg_reclamo_varios.ramo;
+            ddlEstadoReclamo.Text = reclamo.estado_reclamo_unity;
+            ddlGestor.SelectedValue = reclamo.id_gestor.ToString();
+            ddlTaller.SelectedValue = reclamo.id_taller.ToString();
+            ddlAnalista.SelectedValue = reclamo.id_analista.ToString();
+            ddlRlob.SelectedValue = reclamo.id_rlob.ToString();
+            ddlRamo.SelectedValue = reclamo.id_ramo_rlob.ToString();
             ddlTipoCierre.SelectedValue = String.IsNullOrEmpty(reclamo.motivo_cierre) ? "Sin Cobertura" : reclamo.motivo_cierre;
             ddlNoConforme.SelectedValue = String.IsNullOrEmpty(reclamo.detalle_no_conforme) ? "" : reclamo.detalle_no_conforme;
-            txtObservaciones.Text       = reclamo.observaciones;
-            txtNumReclamo.Text          = reclamo.num_reclamo;
-            txtContrato.Text            = reclamo.num_contrato;
-            txtFrom.Text                = reclamo.gestores.correo;
-            txtDeducibleReserva.Text =  reclamo.deducible_reserva.ToString();
+            txtObservaciones.Text = reclamo.observaciones;
+            txtNumReclamo.Text = reclamo.num_reclamo;
+            txtContrato.Text = reclamo.num_contrato;
+            txtFrom.Text = reclamo.gestores.correo;
+            txtDeducibleReserva.Text = reclamo.deducible_reserva.ToString();
             txtReservaFinal.Text = reclamo.reserva_final.ToString();
 
 
             //varios
             lblfechaSiniestro.Text = reclamo.fecha.ToString();
-            lblFechaCommit.Text    = reclamo.fecha_commit.ToString();
-            lblReportante.Text     = reclamo.reportante;
-            lblIDRec.Text          = reclamo.num_reclamo;
-            lblAseguradoRec.Text   = reclamo.reg_reclamo_varios.asegurado;
-            lblProximaFecha.Text   = "Proxima Fecha:" + Convert.ToDateTime(reclamo.fecha_visualizar).ToString("dd/MM/yyyy");
-            lblEstadoR.Text        = reclamo.estado_unity;
-            txtReserva.Text        = reclamo.reserva.ToString();
-            lblDocumento.Text      = String.IsNullOrEmpty(reclamo.documentos)? "": reclamo.documentos.Replace("\\","/");
-            codigo                 = Convert.ToInt16(reclamo.reg_reclamo_varios.gestor);
-            lblContacto.Text = "<b>Contacto: </b> "+ reclamo.reg_reclamo_varios.contacto;
+            lblFechaCommit.Text = reclamo.fecha_commit.ToString();
+            lblReportante.Text = reclamo.reportante;
+            lblIDRec.Text = reclamo.num_reclamo;
+            lblAseguradoRec.Text = reclamo.reg_reclamo_varios.asegurado;
+            lblProximaFecha.Text = "Proxima Fecha:" + Convert.ToDateTime(reclamo.fecha_visualizar).ToString("dd/MM/yyyy");
+            lblEstadoR.Text = reclamo.estado_unity;
+            txtReserva.Text = reclamo.reserva.ToString();
+            lblDocumento.Text = String.IsNullOrEmpty(reclamo.documentos) ? "" : reclamo.documentos.Replace("\\", "/");
+            codigo = Convert.ToInt16(reclamo.reg_reclamo_varios.gestor);
+            lblContacto.Text = "<b>Contacto: </b> " + reclamo.reg_reclamo_varios.contacto;
             lblTelefonoContacto.Text = "<b>Telefono: </b>" + reclamo.reg_reclamo_varios.telefono_contacto;
             lblCorreoContacto.Text = "<b>Correo: </b>" + reclamo.reg_reclamo_varios.correo_contacto;
 
@@ -201,9 +213,19 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosDañosSeguimiento : Sy
 
             if (reclamo.estado_unity == "Cerrado") checkCerrarReclamo.Checked = true;
             checkPrioritario.Checked = reclamo.prioritario.Value;
-            CheckComplicado.Checked  = reclamo.complicado.Value;
-            checkCompromiso.Checked  = reclamo.compromiso_pago.Value;
-            checkCuelloBotella.Checked = reclamo.cuello_botella.Value;
+            CheckComplicado.Checked = reclamo.complicado.Value;
+            checkCompromiso.Checked = reclamo.compromiso_pago.Value;
+
+            if (reclamo.cuello_botella.HasValue)
+            {
+                checkCuelloBotella.Checked = reclamo.cuello_botella.Value;
+            } 
+
+            else
+            {
+                checkCuelloBotella.Checked = false;
+            }
+            
             CheckReaseuro.Checked = reclamo.reaseguro.Value;
 
             //informacion del taller asignado
@@ -415,6 +437,8 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosDañosSeguimiento : Sy
             reclamo.id_taller     = Convert.ToInt16(ddlGestor.SelectedValue);
             reclamo.id_analista   = Convert.ToInt16(ddlAnalista.SelectedValue);
             reclamo.id_taller     = Convert.ToInt16(ddlTaller.SelectedValue);
+            reclamo.id_rlob = Convert.ToInt32(ddlRlob.SelectedValue);
+            reclamo.id_ramo_rlob = Convert.ToInt32(ddlRamo.SelectedValue);
             reclamo.estado_reclamo_unity = ddlEstadoReclamo.SelectedItem.Text;
             reclamo.reserva       =Convert.ToDecimal(txtReserva.Text); 
             reclamo.observaciones = txtObservaciones.Text.ToString();
@@ -1309,8 +1333,16 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosDañosSeguimiento : Sy
             Panelsecundario.Visible = false;
         }
 
-
-
         this.Page.ClientScript.RegisterStartupScript(this.Page.GetType(), "show_modal", "$('#Editor').modal('show');", addScriptTags: true);
+    }
+
+
+    protected void ddlRlob_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        idRlobs = Convert.ToInt32(ddlRlob.SelectedValue);
+        ddlRamo.DataSource = DBReclamos.ramos_rlobs.ToList().Where(r => r.id_rlob == idRlobs);
+        ddlRamo.DataTextField = "nombre_ramo";
+        ddlRamo.DataValueField = "id";
+        ddlRamo.DataBind();
     }
 }

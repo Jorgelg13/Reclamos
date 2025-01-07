@@ -215,6 +215,17 @@
                                 <asp:DropDownList CssClass="form-control" ID="ddlGestor" Style="width: 80%" Height="34px" runat="server" OnSelectedIndexChanged="ddlGestor_SelectedIndexChanged"
                                     AutoPostBack="True" DataSourceID="SqlDataSourceGestores" DataTextField="nombre" DataValueField="id"></asp:DropDownList>
                             </div>
+                             <br />
+                             <div class="form-inline">
+                                 <label style="width: 15%">Rlob:</label>
+                                 <asp:DropDownList CssClass="form-control" ID="ddlRlob" Style="width: 80%" Height="34px" runat="server" OnSelectedIndexChanged="ddlRlob_SelectedIndexChanged" AutoPostBack="True">
+                                 </asp:DropDownList>
+                             </div>
+                             <br />
+                             <div class="form-inline">
+                                 <label style="width: 15%">Ramo:</label>
+                                 <asp:DropDownList CssClass="form-control" ID="ddlRamo" Style="width: 80%" Height="34px" runat="server"></asp:DropDownList>
+                             </div>
                         </div>
                     </div>
                     <%-- --------------------------------------- correos y comentarios-----------------------------------------%>
@@ -1012,11 +1023,12 @@
     <%------------------------------------------------ imprimir bitacora de seguimiento del reclamo ------------------------------------------%>
     <div id="imprimirBitacora" style="display: none" class="form-inline">
         <br />
-        <div class="img-float-right" style="float: right; padding-top: 50px;">
-            <img src="../../imgUnity/Unity%20Promotores%20-%20Alta%20resolución.png" style="margin-top: -100px; width: 235px;">
+        <div class="img-float-right" style="float: right; padding-top: 80px;">
+            <img src="../../imgUnity/logo_wt_bitacora.png" style="margin-top: -110px; width: 180px;">
         </div>
         <div class="img-float-left" style="float: left; padding-top: 10px;">
-            <p>Avenida Las Americas 22-23, Zona 14</p>
+            <p>Diagonal 6, 11-10 zona 10 Edificio Diagoseis</p>
+            <p>Nivel 9 Oficina 902</p>
             <p>PBX: 2326-3700, 2386-3700</p>
             <p>www.unitypromotores.com</p>
         </div>

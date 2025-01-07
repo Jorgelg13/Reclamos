@@ -75,7 +75,7 @@
                 <%----------------------------  opciones de checkobox --------------------------------------------------%>
                 <div role="tabpanel" class="tab-pane" id="ingreso-datos">
                     <div class="panel-body form-inline">
-                        <div style="height: 275px;" class="panel panel-info col-md-3">
+                        <div style="height: 330px;" class="panel panel-info col-md-3">
                             <div class="panel-heading"><b style="font-size: 18px;">Selecciones</b></div>
                             <div class="panel-body">
                                 <asp:CheckBox ID="checkPrioritario" Style="font-size: 18px;" runat="server" Text="Prioritario"  />
@@ -87,7 +87,7 @@
                                 <asp:CheckBox ID="checkCompromiso" Style="font-size: 18px;" runat="server" Text="Compromiso De Pago" />
                             </div>
                         </div>
-                        <div style="height: 275px;" class="panel panel-info col-md-4">
+                        <div style="height: 330px;" class="panel panel-info col-md-4">
                             <div class="panel-heading"><b style="font-size: 18px;">Opciones Multiples</b></div>
                             <div class="panel-body">
                                 <label style="width: 15%">Analista:</label>
@@ -100,10 +100,20 @@
                                 <br />
                                 <label style="width: 15%">Gestor:</label>
                                 <asp:DropDownList CssClass="form-control" ID="ddlGestor" Style="width: 80%" Height="34px" runat="server"></asp:DropDownList>
+                                <br />
+                                <br /> 
+                                <label style="width: 15%">Rlob:</label>
+                                 <asp:DropDownList CssClass="form-control" ID="ddlRlobs" Style="width: 80%" Height="34px" runat="server" OnSelectedIndexChanged="ddlRlobs_SelectedIndexChanged" AutoPostBack="true">
+                                     <asp:ListItem Value="0">Seleccionar</asp:ListItem>
+                                 </asp:DropDownList>
+                                  <br />
+                                  <br />
+                                  <label style="width: 15%">Ramo:</label>
+                                  <asp:DropDownList CssClass="form-control" ID="ddlRamoRlob" Style="width: 80%" Height="34px" runat="server"></asp:DropDownList>
                             </div>
                         </div>
                         <%--Datos del contacto--%>
-                        <div class="panel panel-info col-md-5" style="height: 275px;">
+                        <div class="panel panel-info col-md-5" style="height: 330px;">
                             <div class="panel-heading"><b style="font-size: 18px;">Datos Contacto</b></div>
                             <div class="panel-body">
                                 <div class="form-inline">

@@ -13,13 +13,14 @@ public partial class Modulos_MdReclamos_wbFrmReclamosAsignadosUnity : System.Web
     Utils llenar = new Utils();
     Email notificacion = new Email();
     ReclamosEntities DBReclamos = new ReclamosEntities();
+    int idRlobs = 1;
     bool complicado = false;
     bool prioritario = false;
     bool compromiso_pago = false;
     bool alquiler = false;
     bool perdidaTotal = false;
     bool robo = false;
-    int id, id_contacto;
+    int id;
     string id2;
     String poliza, correoGestor, correoVendedor, correoEjecutivo, cuerpo, asunto, fechaCreacion, asegurado, correoComentario, codigo;
     String correoReclamos = "reclamosgt@unitypromotores.com";
@@ -95,6 +96,16 @@ public partial class Modulos_MdReclamos_wbFrmReclamosAsignadosUnity : System.Web
         ddlGestor.DataTextField = "nombre";
         ddlGestor.DataValueField = "id";
         ddlGestor.DataBind();
+
+        ddlRlobs.DataSource = DBReclamos.rlobs.ToList();
+        ddlRlobs.DataTextField = "nombre";
+        ddlRlobs.DataValueField = "id";
+        ddlRlobs.DataBind();
+
+        ddlRamo.DataSource = DBReclamos.ramos_rlobs.ToList().Where(r => r.id_rlob == idRlobs);
+        ddlRamo.DataTextField = "nombre_ramo";
+        ddlRamo.DataValueField = "id";
+        ddlRamo.DataBind();
     }
 
     //actualizar fecha a visualizar 
@@ -177,6 +188,8 @@ public partial class Modulos_MdReclamos_wbFrmReclamosAsignadosUnity : System.Web
             reclamo.id_taller = Convert.ToInt16(ddlTaller.SelectedValue);
             reclamo.fecha_apertura_reclamo = DateTime.Now;
             reclamo.fecha_cierre_reclamo = DateTime.Now;
+            reclamo.id_rlob = Convert.ToInt32(ddlRlobs.SelectedValue);
+            reclamo.id_ramo_rlob = Convert.ToInt32(ddlRamo.SelectedValue);
             DBReclamos.SaveChanges();
             Utils.actividades(id, Constantes.AUTOS(), 5, Constantes.USER());
 
@@ -189,7 +202,7 @@ public partial class Modulos_MdReclamos_wbFrmReclamosAsignadosUnity : System.Web
             {
                 try
                 {
-                    enviarNotificacion();
+                    //enviarNotificacion();
                 }
                 catch (Exception)
                 {
@@ -202,7 +215,7 @@ public partial class Modulos_MdReclamos_wbFrmReclamosAsignadosUnity : System.Web
         }
         catch (Exception ex)
         {
-            Utils.ShowMessage(this.Page, "No se a podido ingresar ese registro..", "Nota..!", "error");
+            Utils.ShowMessage(this.Page, "No se a podido ingresar ese registro.."  + ex, "Nota..!", "error");
             Email.ENVIAR_ERROR("Error en apertura de reclamos de autos", "Error ocasionado al usuario: " + userlogin + " en el registro con el id: " + id + "\n\n" + ex.Message);
         }
     }
@@ -348,5 +361,14 @@ public partial class Modulos_MdReclamos_wbFrmReclamosAsignadosUnity : System.Web
         {
             Utils.ShowMessage(this.Page, "A ocurrido un error al insertar el comentario", "Error", "error");
         }
+    }
+
+    protected void ddlRlobs_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        idRlobs = Convert.ToInt32(ddlRlobs.SelectedValue);
+        ddlRamo.DataSource = DBReclamos.ramos_rlobs.ToList().Where(r => r.id_rlob == idRlobs);
+        ddlRamo.DataTextField = "nombre_ramo";
+        ddlRamo.DataValueField = "id";
+        ddlRamo.DataBind();
     }
 }

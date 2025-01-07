@@ -53,6 +53,8 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesDaños : System.Web.UI
                   " INNER JOIN gestores on reclamos_varios.id_gestor = gestores.id" +
                   " INNER JOIN talleres on reclamos_varios.id_taller = talleres.id" +
                   " INNER JOIN analistas on reclamos_varios.id_analista = analistas.id " +
+                  " LEFT JOIN rlobs on reclamos_varios.id_rlob = rlobs.id " +
+                  " LEFT JOIN ramos_rlobs on reclamos_varios.id_ramo_rlob = ramos_rlobs.id " +
                   " LEFT JOIN contactos_reclamos_varios on reclamos_varios.id = contactos_reclamos_varios.id_reclamos_varios " +
                   " LEFT JOIN detalle_pagos_reclamos_varios on reclamos_varios.id = detalle_pagos_reclamos_varios.id_reclamos_varios " +
                   " INNER JOIN cabina ON reclamos_varios.id_cabina = cabina.id " +
@@ -548,7 +550,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesDaños : System.Web.UI
     }
 
     protected void btnMostrarEficiencia_Click(object sender, EventArgs e)
-    {
+    {   
         PanelCamposSeleccion.Visible = false;
         PnCiclos.Visible = false;
         PanelEficiencia.Visible = true;

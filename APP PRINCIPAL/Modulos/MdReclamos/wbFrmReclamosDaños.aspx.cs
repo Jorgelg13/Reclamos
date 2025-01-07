@@ -67,8 +67,8 @@ public partial class Modulos_MdReclamos_wbFrmReclamosDaños : System.Web.UI.Page
                 registro.suma_asegurada = Convert.ToDecimal(reg.suma_aseg);
                 registro.moneda = reg.moneda;
                 registro.num_ramo = Convert.ToInt16(reg.num_ramo);
-                registro.gestor = Convert.ToInt16(reg.numero_gestor);
-                registro.cia = Convert.ToInt16(reg.cia);
+                registro.gestor = Convert.ToInt32(reg.numero_gestor);
+                registro.cia = Convert.ToInt32(reg.cia);
                 registro.secren = Convert.ToInt16(reg.secren);
                 registro.vendedor = reg.vendedor.ToString();
                 registro.contacto = reg.contacto;
@@ -112,9 +112,9 @@ public partial class Modulos_MdReclamos_wbFrmReclamosDaños : System.Web.UI.Page
                 Response.Redirect("/Modulos/MdReclamos/wbFrmReclamosDañosEditar.aspx?ID_reclamo=" + ultimoIdReclamoDano + "&ultimoIdRegistrosDaños=" + ultimoIdRegDano + "&poliza=" + reg.poliza);
             }
 
-            catch (Exception)
+            catch (Exception ex)
             {
-                Utils.ShowMessage(this.Page, "A ocurrido algo inesperado intentelo nuevamente", "Error", "error");
+                Utils.ShowMessage(this.Page, "A ocurrido algo inesperado intentelo nuevamente" + ex.Message, "Error", "error");
             }
         }
     }

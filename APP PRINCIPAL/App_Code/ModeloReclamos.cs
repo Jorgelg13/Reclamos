@@ -149,13 +149,14 @@ public partial class auto_reclamo
     public string direccion { get; set; }
     public Nullable<System.DateTime> vigencia_inicial { get; set; }
     public Nullable<System.DateTime> vigencia_final { get; set; }
-    public Nullable<short> cia { get; set; }
+    public Nullable<int> cia { get; set; }
     public Nullable<short> secren { get; set; }
-    public Nullable<short> numero_gestor { get; set; }
-    public Nullable<short> numRamo { get; set; }
+    public Nullable<int> numero_gestor { get; set; }
+    public Nullable<int> numRamo { get; set; }
     public Nullable<int> cliente { get; set; }
     public string programa { get; set; }
     public string vendedor { get; set; }
+    public Nullable<int> IdIbis { get; set; }
 
     public virtual ICollection<reclamo_auto> reclamo_auto { get; set; }
 }
@@ -907,6 +908,13 @@ public partial class ramos
     public Nullable<short> ramo { get; set; }
 }
 
+public partial class ramos_rlobs
+{
+    public int id { get; set; }
+    public string nombre_ramo { get; set; }
+    public Nullable<int> id_rlob { get; set; }
+}
+
 public partial class recibos_medicos
 {
     public int id { get; set; }
@@ -999,6 +1007,9 @@ public partial class reclamo_auto
     public Nullable<System.DateTime> fecha_problema { get; set; }
     public Nullable<bool> importacion { get; set; }
     public Nullable<decimal> reserva { get; set; }
+    public Nullable<bool> replica_ibis { get; set; }
+    public Nullable<int> id_rlob { get; set; }
+    public Nullable<int> id_ramo_rlob { get; set; }
 
     public virtual analistas analistas { get; set; }
     public virtual auto_reclamo auto_reclamo { get; set; }
@@ -1078,6 +1089,7 @@ public partial class reclamos_medicos
     public string observacion_no_conforme { get; set; }
     public string documento { get; set; }
     public string direccion { get; set; }
+    public Nullable<bool> replica_ibis { get; set; }
 
     public virtual ICollection<bitacora_reclamos_medicos> bitacora_reclamos_medicos { get; set; }
     public virtual cabina cabina { get; set; }
@@ -1171,6 +1183,9 @@ public partial class reclamos_varios
     public Nullable<bool> reaseguro { get; set; }
     public Nullable<decimal> reserva_final { get; set; }
     public Nullable<decimal> deducible_reserva { get; set; }
+    public Nullable<bool> replica_ibis { get; set; }
+    public Nullable<int> id_rlob { get; set; }
+    public Nullable<int> id_ramo_rlob { get; set; }
 
     public virtual analistas analistas { get; set; }
     public virtual ICollection<bitacora_estados_reclamos_varios> bitacora_estados_reclamos_varios { get; set; }
@@ -1208,14 +1223,15 @@ public partial class reg_reclamo_varios
     public string vip { get; set; }
     public Nullable<decimal> suma_asegurada { get; set; }
     public string moneda { get; set; }
-    public Nullable<short> num_ramo { get; set; }
-    public Nullable<short> gestor { get; set; }
-    public Nullable<short> cia { get; set; }
+    public Nullable<int> num_ramo { get; set; }
+    public Nullable<int> gestor { get; set; }
+    public Nullable<int> cia { get; set; }
     public Nullable<short> secren { get; set; }
     public string vendedor { get; set; }
     public string contacto { get; set; }
     public string correo_contacto { get; set; }
     public string telefono_contacto { get; set; }
+    public Nullable<int> IdIbis { get; set; }
 
     public virtual ICollection<reclamos_varios> reclamos_varios { get; set; }
 }
@@ -1245,6 +1261,7 @@ public partial class reg_reclamos_medicos
     public string tipo_registro { get; set; }
     public Nullable<int> cliente { get; set; }
     public string telefono_acs { get; set; }
+    public Nullable<int> IdIbis { get; set; }
 
     public virtual ICollection<autorizaciones> autorizaciones { get; set; }
     public virtual ICollection<reclamos_medicos> reclamos_medicos { get; set; }
@@ -1272,6 +1289,12 @@ public partial class registros_vifrio
     public string servicio { get; set; }
     public string placa { get; set; }
     public Nullable<System.DateTime> fecha { get; set; }
+}
+
+public partial class rlobs
+{
+    public int id { get; set; }
+    public string nombre { get; set; }
 }
 
 public partial class sucursal
@@ -1383,6 +1406,54 @@ public partial class usuario
     public virtual ICollection<reclamos_varios> reclamos_varios { get; set; }
 }
 
+public partial class v_autorizaciones
+{
+    public long id { get; set; }
+    public string reportante { get; set; }
+    public string asegurado { get; set; }
+    public string poliza { get; set; }
+    public string ramo { get; set; }
+    public string clase { get; set; }
+    public string aseguradora { get; set; }
+    public string tipo_consulta { get; set; }
+    public string estado { get; set; }
+    public string correo { get; set; }
+    public string telefono { get; set; }
+    public Nullable<System.DateTime> fecha_registro { get; set; }
+    public Nullable<System.DateTime> fecha_cierre { get; set; }
+    public string usuario { get; set; }
+    public Nullable<int> IdIbis { get; set; }
+}
+
+public partial class v_bitacora_reclamos_autos
+{
+    public int id { get; set; }
+    public string descripcion { get; set; }
+    public Nullable<System.DateTime> fecha_registro { get; set; }
+    public Nullable<System.TimeSpan> hora_registro { get; set; }
+    public long id_reclamo { get; set; }
+    public string usuario { get; set; }
+}
+
+public partial class v_bitacora_reclamos_medicos
+{
+    public int id { get; set; }
+    public string tipo_documento { get; set; }
+    public string comentarios { get; set; }
+    public string cantidad { get; set; }
+    public Nullable<long> id_reclamo_medico { get; set; }
+}
+
+public partial class v_bitacora_reclamos_varios
+{
+    public int id { get; set; }
+    public string descripcion { get; set; }
+    public Nullable<System.DateTime> fecha_registro { get; set; }
+    public Nullable<System.TimeSpan> hora_registro { get; set; }
+    public int id_reclamos_varios { get; set; }
+    public string usuario { get; set; }
+}
+
 public partial class v_producto_no_conforme
 {
     public long id { get; set; }
@@ -1397,6 +1468,91 @@ public partial class v_producto_no_conforme
     public string Observacion { get; set; }
     public string Tipo { get; set; }
     public string estado { get; set; }
+}
+
+public partial class v_reclamos_autos
+{
+    public long id { get; set; }
+    public string boleta { get; set; }
+    public string titular { get; set; }
+    public string ubicacion { get; set; }
+    public Nullable<System.TimeSpan> hora { get; set; }
+    public Nullable<System.DateTime> fecha { get; set; }
+    public string reportante { get; set; }
+    public string piloto { get; set; }
+    public Nullable<short> edad { get; set; }
+    public string telefono { get; set; }
+    public string ajustador { get; set; }
+    public string version { get; set; }
+    public string metodo { get; set; }
+    public string usuario { get; set; }
+    public Nullable<System.DateTime> fecha_registro { get; set; }
+    public Nullable<System.TimeSpan> hora_registro { get; set; }
+    public string tipo_servicio { get; set; }
+    public string poliza { get; set; }
+    public string placa { get; set; }
+    public string modelo { get; set; }
+    public string marca { get; set; }
+    public string chasis { get; set; }
+    public string motor { get; set; }
+    public string propietario { get; set; }
+    public string ejecutivo { get; set; }
+    public string aseguradora { get; set; }
+    public string asegurado { get; set; }
+    public string estado_reclamo { get; set; }
+    public Nullable<int> IdIbis { get; set; }
+}
+
+public partial class v_reclamos_medicos
+{
+    public long id { get; set; }
+    public string asegurado { get; set; }
+    public string titular { get; set; }
+    public string telefono { get; set; }
+    public string correo { get; set; }
+    public string empresa { get; set; }
+    public string metodo { get; set; }
+    public string usuario { get; set; }
+    public Nullable<System.DateTime> fecha_registro { get; set; }
+    public string poliza { get; set; }
+    public string ramo { get; set; }
+    public string tipo { get; set; }
+    public string clase { get; set; }
+    public string ejecutivo { get; set; }
+    public string aseguradora { get; set; }
+    public string moneda { get; set; }
+    public string certificado { get; set; }
+    public string estado_reclamo { get; set; }
+    public Nullable<int> IdIbis { get; set; }
+}
+
+public partial class v_reclamos_varios
+{
+    public int id { get; set; }
+    public string boleta { get; set; }
+    public string titular { get; set; }
+    public string ubicacion { get; set; }
+    public string tipo_servicio { get; set; }
+    public Nullable<System.TimeSpan> hora { get; set; }
+    public Nullable<System.DateTime> fecha { get; set; }
+    public string reportante { get; set; }
+    public string telefono { get; set; }
+    public string ajustador { get; set; }
+    public string version { get; set; }
+    public string metodo { get; set; }
+    public string usuario { get; set; }
+    public System.DateTime fecha_registro { get; set; }
+    public System.TimeSpan hora_registro { get; set; }
+    public string poliza { get; set; }
+    public string asegurado { get; set; }
+    public Nullable<int> cliente { get; set; }
+    public string ramo { get; set; }
+    public string ejecutivo { get; set; }
+    public string aseguradora { get; set; }
+    public string contratante { get; set; }
+    public string moneda { get; set; }
+    public string estado_reclamo { get; set; }
+    public Nullable<int> IdIbis { get; set; }
 }
 
 public partial class ViewBusquedaAuto
@@ -1428,13 +1584,14 @@ public partial class ViewBusquedaAuto
     public string inciso { get; set; }
     public string moneda { get; set; }
     public string direccion { get; set; }
-    public Nullable<short> cia { get; set; }
+    public Nullable<int> cia { get; set; }
     public Nullable<short> secren { get; set; }
     public Nullable<int> cliente { get; set; }
     public string programa { get; set; }
     public Nullable<decimal> prima { get; set; }
     public Nullable<decimal> porcom { get; set; }
     public Nullable<int> vendedor { get; set; }
+    public Nullable<int> IdIbis { get; set; }
 }
 
 public partial class viewCoberturasAutos
@@ -1485,13 +1642,13 @@ public partial class vistaReclamosDaños
     public string tipo { get; set; }
     public string direccion { get; set; }
     public string asegurado { get; set; }
-    public Nullable<int> suma_aseg { get; set; }
+    public Nullable<long> suma_aseg { get; set; }
     public string vip { get; set; }
     public Nullable<int> numero_gestor { get; set; }
     public string moneda { get; set; }
     public Nullable<short> num_ramo { get; set; }
     public Nullable<short> gestor { get; set; }
-    public Nullable<short> cia { get; set; }
+    public Nullable<int> cia { get; set; }
     public Nullable<short> secren { get; set; }
     public Nullable<decimal> prima { get; set; }
     public Nullable<decimal> porcom { get; set; }
@@ -1499,6 +1656,7 @@ public partial class vistaReclamosDaños
     public string contacto { get; set; }
     public string correo { get; set; }
     public string telefono_contacto { get; set; }
+    public Nullable<int> IdIbis { get; set; }
 }
 
 public partial class vistaReclamosMedicos
@@ -1527,6 +1685,7 @@ public partial class vistaReclamosMedicos
     public Nullable<decimal> porcom { get; set; }
     public string fechanac { get; set; }
     public string parentesco { get; set; }
+    public Nullable<int> IdIbis { get; set; }
 }
 
 public partial class pa_cargar_asegurados_Result

@@ -79,8 +79,8 @@ public partial class Modulos_MdReclamos_wbFrmReclamosAutos : System.Web.UI.Page
                 auto.vigencia_final = registro.vigf;
                 auto.cia = Convert.ToInt16(registro.cia);
                 auto.secren = Convert.ToInt16(registro.secren);
-                auto.numero_gestor = Convert.ToInt16(registro.numero_gestor);
-                auto.numRamo = Convert.ToInt16(registro.ramo);
+                auto.numero_gestor = Convert.ToInt32(registro.numero_gestor);
+                auto.numRamo = Convert.ToInt32(registro.ramo);
                 auto.cliente = Convert.ToInt32(registro.cliente);
                 auto.programa = registro.programa;
                 auto.vendedor = registro.vendedor.ToString();
@@ -120,6 +120,7 @@ public partial class Modulos_MdReclamos_wbFrmReclamosAutos : System.Web.UI.Page
             }
             catch (Exception ex )
             {
+                Console.WriteLine(ex);
                Utils.ShowMessage(this.Page, "A ocurrido un error inesperado intentelo de nuevo" + ex.Message, "Error", "error");
             }
         }

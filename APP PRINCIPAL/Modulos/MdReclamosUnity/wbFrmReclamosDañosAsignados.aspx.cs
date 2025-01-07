@@ -22,8 +22,7 @@ public partial class Modulos_MdReclamos_wbFrmReclamosDañosAsignados : System.We
     String correoGestor, correoEjecutivo, correoVendedor, cuerpo, asunto, correoComentario, codigo;
     String correoReclamos = "reclamosgt@unitypromotores.com";
     String gerente= "jennifer.wiesner@unitypromotores.com";
-    int id;
-
+    int id, idRlobs = 1;
     protected void Page_Load(object sender, EventArgs e)
     {
         if (!comprobar.verificarUsuario(userlogin))
@@ -104,6 +103,16 @@ public partial class Modulos_MdReclamos_wbFrmReclamosDañosAsignados : System.We
         ddlAseguradora.DataTextField = "aseguradora";
         ddlAseguradora.DataValueField = "id";
         ddlAseguradora.DataBind();
+
+        ddlRlobs.DataSource = DBReclamos.rlobs.ToList();
+        ddlRlobs.DataTextField = "nombre";
+        ddlRlobs.DataValueField = "id";
+        ddlRlobs.DataBind();
+
+        ddlRamoRlob.DataSource = DBReclamos.ramos_rlobs.ToList().Where(r => r.id_rlob == idRlobs);
+        ddlRamoRlob.DataTextField = "nombre_ramo";
+        ddlRamoRlob.DataValueField = "id";
+        ddlRamoRlob.DataBind();
     }
 
     //seleccionar los checks y darles valor a las variables para ser almacenadas
@@ -246,6 +255,8 @@ public partial class Modulos_MdReclamos_wbFrmReclamosDañosAsignados : System.We
             reclamo.estado_reclamo_unity = "Asignacion";
             reclamo.id_gestor = Convert.ToInt16(ddlGestor.SelectedValue);
             reclamo.id_analista = Convert.ToInt16(ddlAnalista.SelectedValue);
+            reclamo.id_rlob = Convert.ToInt32(ddlRlobs.SelectedValue);
+            reclamo.id_ramo_rlob = Convert.ToInt32(ddlRamoRlob.SelectedValue);
             reclamo.observaciones = txtObservaciones.Text.ToString();
             reclamo.reaseguro = false;
             reclamo.complicado = complicado;
@@ -278,7 +289,7 @@ public partial class Modulos_MdReclamos_wbFrmReclamosDañosAsignados : System.We
                     "es " + ddlGestor.SelectedItem + " Tel " + reclamo.gestores.telefono + " número de ID " + id + " ", userlogin, id);
             }
 
-            NoficacionEjecutivo();
+            //NoficacionEjecutivo();
             Utils.actividades(id, Constantes.DANIOS(), 5, Constantes.USER());
             Response.Redirect("/Modulos/MdReclamosUnity/wbFrmReclamosDañosSeguimiento.aspx?ID_reclamo=" + id, false);
         }
@@ -396,5 +407,14 @@ public partial class Modulos_MdReclamos_wbFrmReclamosDañosAsignados : System.We
     protected void linkSalir_Click(object sender, EventArgs e)
     {
         Response.Redirect("/Default.aspx", false);
+    }
+
+    protected void ddlRlobs_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        idRlobs = Convert.ToInt32(ddlRlobs.SelectedValue);
+        ddlRamoRlob.DataSource = DBReclamos.ramos_rlobs.ToList().Where(r => r.id_rlob == idRlobs);
+        ddlRamoRlob.DataTextField = "nombre_ramo";
+        ddlRamoRlob.DataValueField = "id";
+        ddlRamoRlob.DataBind();
     }
 }

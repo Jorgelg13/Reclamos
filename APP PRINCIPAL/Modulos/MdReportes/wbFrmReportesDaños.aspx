@@ -49,6 +49,8 @@
                         <asp:ListItem Value="gestores.nombre As Gestor">Gestor</asp:ListItem>
                         <asp:ListItem Value="talleres.nombre as Taller">Taller</asp:ListItem>
                         <asp:ListItem Value="analistas.nombre as Analista">Analista</asp:ListItem>
+                        <asp:ListItem Value="rlobs.nombre as Rlob">Rlob</asp:ListItem>
+                        <asp:ListItem Value="ramos_rlobs.nombre_ramo as [Ramo Rlob]">Ramo Rlob</asp:ListItem>
                         <asp:ListItem Value="contactos_reclamos_varios.nombre as [Nombre Contactos]">Contacto</asp:ListItem>
                         <asp:ListItem Value="contactos_reclamos_varios.telefono as [Telefono Contacto]">Telefono Contacto</asp:ListItem>
                         <asp:ListItem Value="reclamos_varios.observaciones as Observaciones">Observaciones</asp:ListItem>

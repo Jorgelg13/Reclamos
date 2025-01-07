@@ -21,7 +21,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosMedicosAsignados : Sys
     {
         ReclamosAsignados = "SELECT "+
            "dbo.reclamos_medicos.id as ID,"+ //1
-           "dbo.reg_reclamos_medicos.asegurado as Asegurado,"+
+           "dbo.reclamos_medicos.titular as Asegurado," +
            "dbo.reg_reclamos_medicos.poliza as Poliza,"+
            "dbo.reg_reclamos_medicos.aseguradora as Aseguradora,"+
            "dbo.reclamos_medicos.correo as Correo,"+
@@ -49,9 +49,9 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosMedicosAsignados : Sys
 
         if (asignar.reg_reclamos_medicos.tipo == "I")
         {
-            contenido = "Se ha aperturado un nuevo reclamo de gastos medicos bajo la poliza " + asignar.reg_reclamos_medicos.poliza + " " +
-                "que pertenece al asegurado  " + asignar.reg_reclamos_medicos.asegurado + " para mas detalle puede consultarlo en el siguiente " +
-                "link: \n\n https://reclamosgt.unitypromotores.com/MdBitacora/wbFrmConsultaSeguimientoRmedicos.aspx?ID_reclamo="+id_reclamo_medico+" ";
+            //contenido = "Se ha aperturado un nuevo reclamo de gastos medicos bajo la poliza " + asignar.reg_reclamos_medicos.poliza + " " +
+            //    "que pertenece al asegurado  " + asignar.reg_reclamos_medicos.asegurado + " para mas detalle puede consultarlo en el siguiente " +
+            //    "link: \n\n https://reclamosgt.unitypromotores.com/MdBitacora/wbFrmConsultaSeguimientoRmedicos.aspx?ID_reclamo="+id_reclamo_medico+" ";
             //correoEjecutivo = Utils.CORREO_GESTOR(asignar.reg_reclamos_medicos.ejecutivo);
            //notificacion.NOTIFICACION(correoEjecutivo, contenido, "Nuevo Reclamo Aperturado");
         }

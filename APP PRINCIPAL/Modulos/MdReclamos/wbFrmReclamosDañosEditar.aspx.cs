@@ -57,21 +57,21 @@ public partial class Modulos_MdReclamos_wbFrmReclamosDañosEditar : System.Web.U
         try
         {
             var dato = DBReclamos.reg_reclamo_varios.Find(idreg);
-            Label1.Text = "Poliza:        " + dato.poliza;
-            Label2.Text = "Asegurado:     " + dato.asegurado;
-            Label4.Text = "Cliente:       " + dato.cliente;
-            Label5.Text = "Estatus:       " + dato.status;
-            Label6.Text = "Tipo:          " + dato.tipo;
-            Label7.Text = "Direccion:     " + dato.direccion;
-            Label8.Text = "Ramo:          " + dato.ramo;
-            Label9.Text = "Ejecutivo:     " + dato.ejecutivo;
-            Label10.Text = "Aseguradora:  " + dato.aseguradora;
-            Label11.Text = "Contratante:  " + dato.contratante;
-            Label12.Text = "Cliente Vip:  " + dato.cliente;
+            Label1.Text = "Poliza:        " + dato.poliza ?? "";
+            Label2.Text = "Asegurado:     " + dato.asegurado ?? "";
+            Label4.Text = "Cliente:       " + dato.cliente ?? "";
+            Label5.Text = "Estatus:       " + dato.status ?? "";
+            Label6.Text = "Tipo:          " + dato.tipo ?? "";
+            Label7.Text = "Direccion:     " + dato.direccion ?? "";
+            Label8.Text = "Ramo:          " + dato.ramo ?? "";
+            Label9.Text = "Ejecutivo:     " + dato.ejecutivo ?? "";
+            Label10.Text = "Aseguradora:  " + dato.aseguradora ?? "";
+            Label11.Text = "Contratante:  " + dato.contratante ?? "";
+            Label12.Text = "Cliente Vip:  " + dato.cliente ?? "";
         }
-        catch (Exception)
+        catch (Exception ex)
         {
-            Utils.ShowMessage(this.Page, "No se pudieron traer todos los datos porque es un registro de forma manual", "Nota..!", "info");
+            Utils.ShowMessage(this.Page, "No se pudieron traer todos los datos porque es un registro de forma manual " + idreg, "Nota..!", "info");
         }
     }
 

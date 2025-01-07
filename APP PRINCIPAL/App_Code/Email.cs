@@ -61,7 +61,7 @@ public class Email
     {
         try
         {
-            MailMessage mail = new MailMessage();
+            /*MailMessage mail = new MailMessage();
             SmtpClient smtp = new SmtpClient();
             string from = "reclamosgt@unitypromotores.com";
             string password = "ymqrmndyzqbrwshw";
@@ -75,7 +75,7 @@ public class Email
             smtp.Port = 587;
             smtp.Credentials = new NetworkCredential(from, password);
             smtp.EnableSsl = true;
-            smtp.Send(mail);
+            smtp.Send(mail);*/
 
             return true;
         }

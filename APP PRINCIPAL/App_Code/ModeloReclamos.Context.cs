@@ -32,6 +32,7 @@ public partial class ReclamosEntities : DbContext
     public DbSet<archivos_copagos> archivos_copagos { get; set; }
     public DbSet<aseguradoras> aseguradoras { get; set; }
     public DbSet<asegurados_caja_ahorro> asegurados_caja_ahorro { get; set; }
+    public DbSet<asegurados_consultas> asegurados_consultas { get; set; }
     public DbSet<asegurados_implants> asegurados_implants { get; set; }
     public DbSet<auto_reclamo> auto_reclamo { get; set; }
     public DbSet<autorizaciones> autorizaciones { get; set; }
@@ -92,6 +93,7 @@ public partial class ReclamosEntities : DbContext
     public DbSet<reclamos_varios> reclamos_varios { get; set; }
     public DbSet<reg_reclamo_varios> reg_reclamo_varios { get; set; }
     public DbSet<reg_reclamos_medicos> reg_reclamos_medicos { get; set; }
+    public DbSet<registros_consultas> registros_consultas { get; set; }
     public DbSet<registros_vifrio> registros_vifrio { get; set; }
     public DbSet<sucursal> sucursal { get; set; }
     public DbSet<sysdiagrams> sysdiagrams { get; set; }
@@ -105,9 +107,16 @@ public partial class ReclamosEntities : DbContext
     public DbSet<vistaReclamosMedicos> vistaReclamosMedicos { get; set; }
     public DbSet<ViewBusquedaAuto> ViewBusquedaAuto { get; set; }
     public DbSet<consultar_asegurados> consultar_asegurados { get; set; }
+    public DbSet<v_autorizaciones> v_autorizaciones { get; set; }
+    public DbSet<v_bitacora_reclamos_autos> v_bitacora_reclamos_autos { get; set; }
+    public DbSet<v_bitacora_reclamos_medicos> v_bitacora_reclamos_medicos { get; set; }
+    public DbSet<v_bitacora_reclamos_varios> v_bitacora_reclamos_varios { get; set; }
     public DbSet<v_producto_no_conforme> v_producto_no_conforme { get; set; }
-    public DbSet<asegurados_consultas> asegurados_consultas { get; set; }
-    public DbSet<registros_consultas> registros_consultas { get; set; }
+    public DbSet<v_reclamos_autos> v_reclamos_autos { get; set; }
+    public DbSet<v_reclamos_medicos> v_reclamos_medicos { get; set; }
+    public DbSet<v_reclamos_varios> v_reclamos_varios { get; set; }
+    public DbSet<ramos_rlobs> ramos_rlobs { get; set; }
+    public DbSet<rlobs> rlobs { get; set; }
 
     public virtual ObjectResult<pa_reclamos_autos_Result> pa_reclamos_autos()
     {

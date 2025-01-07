@@ -56,6 +56,8 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesAutos : System.Web.UI.
                   " INNER JOIN gestores on reclamo_auto.id_gestor = gestores.id" +
                   " INNER JOIN talleres on reclamo_auto.id_taller = talleres.id" +
                   " INNER JOIN analistas on reclamo_auto.id_analista = analistas.id " +
+                  " LEFT JOIN rlobs on reclamo_auto.id_rlob = rlobs.id " +
+                  " LEFT JOIN ramos_rlobs on reclamo_auto.id_ramo_rlob = ramos_rlobs.id " +
                   " LEFT JOIN contacto_auto on reclamo_auto.id = contacto_auto.id_reclamo_auto " +
                   " lEFT JOIN motivos_cierre as m on m.id = reclamo_auto.id_motivo_cierre " +
                   " INNER JOIN cabina ON reclamo_auto.id_cabina = cabina.id " +
