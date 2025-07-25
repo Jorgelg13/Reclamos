@@ -10,7 +10,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesAutos : System.Web.UI.
     String userlogin = HttpContext.Current.User.Identity.Name;
     ReclamosEntities DBReclamos = new ReclamosEntities();
     Utils llenar = new Utils();
-    string reclamosSinAperturar = "select \r\nr.id, \t\r\ng.nombre as Ejecutivo,\r\na.poliza as Poliza,\r\na.placa as Placa,\r\nr.fecha_asignacion as [Fecha asignacion]\r\nfrom reclamo_auto as r\r\ninner join auto_reclamo as a on r.id_auto_reclamo = a.id\r\ninner join gestores as g on r.usuario_unity = g.usuario\r\nwhere r.fecha_apertura_reclamo is null\r\nand g.estado = 1\r\nand g.tipo = 'autos'\r\nand r.estado_unity = 'Sin Cerrar'";
+    string reclamosSinAperturar = "select \r\nr.id as ID, \t\r\ng.nombre as Ejecutivo,\r\nreg.poliza as Poliza,\r\nr.fecha_asignacion as [Fecha Asignacion]\r\nfrom reclamos_varios as r\r\ninner join reg_reclamo_varios as reg on r.id_reg_reclamos_varios = reg.id\r\ninner join gestores as g on r.usuario_unity = g.usuario\r\nwhere r.fecha_apertura_reclamo is null\r\nand g.estado = 1\r\nand g.tipo = 'Daños varios'\r\nand r.estado_unity = 'Sin Cerrar'";
     int totalAsignaciones = 0;
     int totalPorcentajeParticipacion = 0;
     int totalPendientes = 0;
@@ -29,7 +29,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesAutos : System.Web.UI.
             txtFechaInicio.Text = primerDia.ToString("yyyy/MM/dd").Replace("/", "-");
             txtFechaFin.Text = ultimoDia.ToString("yyyy/MM/dd").Replace("/", "-");
 
-            ddlGestor.DataSource = DBReclamos.gestores.ToList().Where(ges => ges.tipo == "autos" && ges.estado == true);
+            ddlGestor.DataSource = DBReclamos.gestores.ToList().Where(ges => ges.tipo == "Daños varios" && ges.estado == true);
             ddlGestor.DataTextField = "nombre";
             ddlGestor.DataValueField = "id";
             ddlGestor.DataBind();
@@ -38,7 +38,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesAutos : System.Web.UI.
 
     protected void btnGenerarTabla_Click(object sender, EventArgs e)
     {
-        Utils.TituloReporte(PanelPrincipal, lblPeriodo, lblFechaGeneracion, lblUsuario, lblTitulo, "Reporte de Reclamos de Autos", userlogin, txtFechaInicio, txtFechaFin, "");
+        Utils.TituloReporte(PanelPrincipal, lblPeriodo, lblFechaGeneracion, lblUsuario, lblTitulo, "Reporte de Reclamos de Daños varios", userlogin, txtFechaInicio, txtFechaFin, "");
     }
 
     //funcion para exportar a un archivo de excel lo que aparece en el gridview
@@ -46,7 +46,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesAutos : System.Web.UI.
     {
         if (PnCiclos.Visible == true)
         {
-            Utils.ExportarExcel(PanelPrincipal, Response, "Resumen-reclamos-autos-del-"+ Convert.ToDateTime(txtFechaInicio.Text).ToString("dd-MM-yyyy") + "-al-" + Convert.ToDateTime(txtFechaFin.Text).ToString("dd-MM-yyyy"));
+            Utils.ExportarExcel(PanelPrincipal, Response, "Resumen-reclamos-varios-del-"+ Convert.ToDateTime(txtFechaInicio.Text).ToString("dd-MM-yyyy") + "-al-" + Convert.ToDateTime(txtFechaFin.Text).ToString("dd-MM-yyyy"));
         }
     }
 
@@ -65,10 +65,10 @@ public partial class Modulos_MdReclamosUnity_wbFrmReportesAutos : System.Web.UI.
     {
         PnCiclos.Visible = true;
         lblGestor.Text = ddlGestor.SelectedItem.ToString();
-        Utils.TituloReporte(PanelPrincipal, lblPeriodo, lblFechaGeneracion, lblUsuario, lblTitulo, "Reporte de Reclamos de Autos", userlogin, txtFechaInicio, txtFechaFin, "");
-        Utils.resumen_reclamos(txtFechaInicio, txtFechaFin, "pa_resumen_asignacion_reclamos_autos", GridAsignaciones);
-        Utils.resumen_reclamos(txtFechaInicio, txtFechaFin, "pa_resumen_reclamos_autos_pendientes", GridPendientes);
-        Utils.resumen_reclamos_por_estado(Convert.ToInt32(ddlGestor.SelectedValue), "pa_resumen_reclamos_por_estado", GridReclamosPorEstado);
+        Utils.TituloReporte(PanelPrincipal, lblPeriodo, lblFechaGeneracion, lblUsuario, lblTitulo, "Reporte de Reclamos de Daños", userlogin, txtFechaInicio, txtFechaFin, "");
+        Utils.resumen_reclamos(txtFechaInicio, txtFechaFin, "pa_resumen_asignacion_reclamos_varios", GridAsignaciones);
+        Utils.resumen_reclamos(txtFechaInicio, txtFechaFin, "pa_resumen_reclamos_varios_pendientes", GridPendientes);
+        Utils.resumen_reclamos_por_estado(Convert.ToInt32(ddlGestor.SelectedValue), "pa_resumen_reclamos_varios_por_estado", GridReclamosPorEstado);
         llenar.llenarGrid(reclamosSinAperturar, GridReclamosSinAperturar);
     }
 
