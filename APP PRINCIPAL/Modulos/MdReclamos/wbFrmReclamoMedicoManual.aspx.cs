@@ -56,7 +56,7 @@ public partial class Modulos_MdReclamos_wbFrmReclamoMedicoManual : System.Web.UI
                 var sec_registro = DBReclamos.pa_sec_registros_medicos();
                 long? id_registro = sec_registro.Single();
                 registro.id = Convert.ToInt64(id_registro);
-                registro.asegurado = txtDependiente.Text;
+                registro.asegurado = ddlTipoAsegurado.SelectedItem.Text == "Principal" ? txtAseguradoTitular.Text : txtDependiente.Text;
                 registro.poliza = txtPoliza.Text;
                 registro.aseguradora = ddlAseguradora.SelectedItem.Text;
                 registro.tipo = ddlTipoReclamo.SelectedValue;
@@ -68,6 +68,7 @@ public partial class Modulos_MdReclamos_wbFrmReclamoMedicoManual : System.Web.UI
                 var results = DBReclamos.pa_sec_reclamos_medicos();
                 long? resultado = results.Single();
                 reclamo.id = Convert.ToInt64(resultado);
+                reclamo.titular = txtAseguradoTitular.Text;
                 reclamo.asegurado = txtDependiente.Text;
                 reclamo.titular = txtAseguradoTitular.Text;
                 reclamo.telefono = txtTelefono.Text.ToString();

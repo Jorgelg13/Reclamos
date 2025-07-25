@@ -16,11 +16,11 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosEnSeguimiento : System
 
     protected void Page_Load(object sender, EventArgs e)
     {
-        if(userlogin == "nsierra" || userlogin == "jlaj" || userlogin == "nmelgar" || userlogin =="mbarrios")
+        if (userlogin == "nsierra" || userlogin == "jlaj" || userlogin == "nmelgar" || userlogin == "mbarrios")
         {
             PnAlarmas.Visible = true;
         }
-        estadosAgrupados = "select count(*) as Total, estado_auto_unity as Estado from reclamo_auto where usuario_unity = '"+userlogin+"' and estado_unity = 'Seguimiento' " +
+        estadosAgrupados = "select count(*) as Total, estado_auto_unity as Estado from reclamo_auto where usuario_unity = '" + userlogin + "' and estado_unity = 'Seguimiento' " +
             "group by estado_auto_unity ";
 
         reclamosGeneral = "SELECT " +
@@ -37,9 +37,15 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosEnSeguimiento : System
           " a.modelo as Modelo," +
           " a.ejecutivo as Ejecutivo," +
           " a.aseguradora as Aseguradora," +
-          " CONVERT(varchar(12), r.fecha_visualizar,103) as [Fecha Visualizar] " +
+          " CONVERT(varchar(12), r.fecha_visualizar,103) as [Fecha Visualizar], " +
+          " ana.nombre as Ajustador, " +
+          " rlobs.nombre as Rlob, " +
+          " ramos_rlobs.nombre_ramo as [Ramo Rlob] " +
           " FROM auto_reclamo a " +
-          " INNER JOIN reclamo_auto as r ON r.id_auto_reclamo = a.id ";
+          " INNER JOIN reclamo_auto as r ON r.id_auto_reclamo = a.id " +
+          " INNER JOIN analistas as ana on r.id_analista = ana.id " +
+          " LEFT JOIN rlobs on r.id_rlob = rlobs.id " +
+          " LEFT JOIN ramos_rlobs on r.id_ramo_rlob = ramos_rlobs.id ";
 
         //query con el que se muestran los reclamos complicados por usuario.
         string reclamosComplicados = reclamosGeneral +

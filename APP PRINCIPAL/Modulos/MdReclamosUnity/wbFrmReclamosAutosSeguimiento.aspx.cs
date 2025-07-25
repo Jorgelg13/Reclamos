@@ -132,7 +132,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosAutosSeguimiento : Sys
         {
             var reclamo = DBReclamos.reclamo_auto.Find(id);
 
-            ddlRamo.DataSource = DBReclamos.ramos_rlobs.ToList().Where(r => r.id_rlob == reclamo.id_rlob);
+            ddlRamo.DataSource = DBReclamos.ramos_rlobs.ToList().Where(r => r.id_rlob == reclamo.id_rlob || r.id_rlob == 1);
             ddlRamo.DataTextField = "nombre_ramo";
             ddlRamo.DataValueField = "id";
             ddlRamo.DataBind();

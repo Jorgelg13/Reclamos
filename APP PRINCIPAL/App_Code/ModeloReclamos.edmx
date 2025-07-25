@@ -138,6 +138,15 @@
           <Property Name="programa" Type="nvarchar" MaxLength="30" />
           <Property Name="vendedor" Type="nvarchar" MaxLength="10" />
           <Property Name="IdIbis" Type="int" />
+          <Property Name="tipo_vehiculo" Type="nvarchar" MaxLength="100" />
+          <Property Name="uso_vehiculo" Type="nvarchar" MaxLength="100" />
+          <Property Name="cod_tipo_vehiculo" Type="nvarchar" MaxLength="25" />
+          <Property Name="cod_uso_vehiculo" Type="nvarchar" MaxLength="25" />
+          <Property Name="cod_aseguradora" Type="nvarchar" MaxLength="25" />
+          <Property Name="cod_marca" Type="nvarchar" MaxLength="25" />
+          <Property Name="usuario_carga" Type="nvarchar" MaxLength="50" />
+          <Property Name="fecha_carga" Type="datetime" />
+          <Property Name="estado_vehiculo" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="autorizaciones">
           <Key>
@@ -1224,6 +1233,15 @@ advertencia 6002: La tabla o vista 'reclamos.dbo.ViewBusquedaAuto' no tiene defi
           <Property Name="porcom" Type="decimal" Precision="10" Scale="4" />
           <Property Name="vendedor" Type="int" />
           <Property Name="IdIbis" Type="int" />
+          <Property Name="tipo_vehiculo" Type="nvarchar" MaxLength="100" />
+          <Property Name="uso_vehiculo" Type="nvarchar" MaxLength="100" />
+          <Property Name="cod_tipo_vehiculo" Type="nvarchar" MaxLength="25" />
+          <Property Name="cod_uso_vehiculo" Type="nvarchar" MaxLength="25" />
+          <Property Name="cod_aseguradora" Type="nvarchar" MaxLength="25" />
+          <Property Name="cod_marca" Type="nvarchar" MaxLength="25" />
+          <Property Name="usuario_carga" Type="nvarchar" MaxLength="50" />
+          <Property Name="fecha_carga" Type="datetime" />
+          <Property Name="estado_vehiculo" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="viewCoberturasAutos">
           <Key>
@@ -2374,45 +2392,7 @@ advertencia 6002: La tabla o vista 'reclamos.dbo.v_reclamos_varios' no tiene def
           <EntitySet Name="vistaBusquedaPolizaMovil" EntityType="Self.vistaBusquedaPolizaMovil" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="vistaReclamosDaños" EntityType="Self.vistaReclamosDaños" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="vistaReclamosMedicos" EntityType="Self.vistaReclamosMedicos" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="ViewBusquedaAuto" EntityType="Self.ViewBusquedaAuto" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-[ViewBusquedaAuto].[id] AS [id], 
-[ViewBusquedaAuto].[ramo] AS [ramo], 
-[ViewBusquedaAuto].[poliza] AS [poliza], 
-[ViewBusquedaAuto].[vigi] AS [vigi], 
-[ViewBusquedaAuto].[vigf] AS [vigf], 
-[ViewBusquedaAuto].[nombre] AS [nombre], 
-[ViewBusquedaAuto].[color] AS [color], 
-[ViewBusquedaAuto].[gst_nombre] AS [gst_nombre], 
-[ViewBusquedaAuto].[contratante] AS [contratante], 
-[ViewBusquedaAuto].[motor] AS [motor], 
-[ViewBusquedaAuto].[chasis] AS [chasis], 
-[ViewBusquedaAuto].[marca] AS [marca], 
-[ViewBusquedaAuto].[placa] AS [placa], 
-[ViewBusquedaAuto].[solicitud] AS [solicitud], 
-[ViewBusquedaAuto].[secart] AS [secart], 
-[ViewBusquedaAuto].[modelo] AS [modelo], 
-[ViewBusquedaAuto].[valorauto] AS [valorauto], 
-[ViewBusquedaAuto].[propietario] AS [propietario], 
-[ViewBusquedaAuto].[estado] AS [estado], 
-[ViewBusquedaAuto].[suma_aseg] AS [suma_aseg], 
-[ViewBusquedaAuto].[tipo] AS [tipo], 
-[ViewBusquedaAuto].[asegurado] AS [asegurado], 
-[ViewBusquedaAuto].[vip] AS [vip], 
-[ViewBusquedaAuto].[numero_gestor] AS [numero_gestor], 
-[ViewBusquedaAuto].[inciso] AS [inciso], 
-[ViewBusquedaAuto].[moneda] AS [moneda], 
-[ViewBusquedaAuto].[direccion] AS [direccion], 
-[ViewBusquedaAuto].[cia] AS [cia], 
-[ViewBusquedaAuto].[secren] AS [secren], 
-[ViewBusquedaAuto].[cliente] AS [cliente], 
-[ViewBusquedaAuto].[programa] AS [programa], 
-[ViewBusquedaAuto].[prima] AS [prima], 
-[ViewBusquedaAuto].[porcom] AS [porcom], 
-[ViewBusquedaAuto].[vendedor] AS [vendedor], 
-[ViewBusquedaAuto].[IdIbis] AS [IdIbis]
-FROM [dbo].[ViewBusquedaAuto] AS [ViewBusquedaAuto]</DefiningQuery>
-          </EntitySet>
+          <EntitySet Name="ViewBusquedaAuto" EntityType="Self.ViewBusquedaAuto" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="consultar_asegurados" EntityType="Self.consultar_asegurados" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
 [consultar_asegurados].[id] AS [id], 
@@ -3658,6 +3638,15 @@ FROM [dbo].[v_reclamos_varios] AS [v_reclamos_varios]</DefiningQuery>
           <Property Name="vendedor" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="IdIbis" Type="Int32" />
           <NavigationProperty Name="reclamo_auto" Relationship="reclamosModel.FK__reclamo_a__id_au__300424B4" FromRole="auto_reclamo" ToRole="reclamo_auto" />
+          <Property Name="tipo_vehiculo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="uso_vehiculo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="cod_tipo_vehiculo" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="cod_uso_vehiculo" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="cod_aseguradora" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="cod_marca" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="usuario_carga" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="fecha_carga" Type="DateTime" Precision="3" />
+          <Property Name="estado_vehiculo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="autorizaciones">
           <Key>
@@ -4919,6 +4908,15 @@ FROM [dbo].[v_reclamos_varios] AS [v_reclamos_varios]</DefiningQuery>
           <Property Name="porcom" Type="Decimal" Precision="10" Scale="4" />
           <Property Name="vendedor" Type="Int32" />
           <Property Name="IdIbis" Type="Int32" />
+          <Property Name="tipo_vehiculo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="uso_vehiculo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="cod_tipo_vehiculo" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="cod_uso_vehiculo" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="cod_aseguradora" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="cod_marca" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="usuario_carga" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="fecha_carga" Type="DateTime" Precision="3" />
+          <Property Name="estado_vehiculo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="consultar_asegurados">
           <Key>
@@ -6170,6 +6168,15 @@ FROM [dbo].[v_reclamos_varios] AS [v_reclamos_varios]</DefiningQuery>
           <EntitySetMapping Name="auto_reclamo">
             <EntityTypeMapping TypeName="reclamosModel.auto_reclamo">
               <MappingFragment StoreEntitySet="auto_reclamo">
+                <ScalarProperty Name="estado_vehiculo" ColumnName="estado_vehiculo" />
+                <ScalarProperty Name="fecha_carga" ColumnName="fecha_carga" />
+                <ScalarProperty Name="usuario_carga" ColumnName="usuario_carga" />
+                <ScalarProperty Name="cod_marca" ColumnName="cod_marca" />
+                <ScalarProperty Name="cod_aseguradora" ColumnName="cod_aseguradora" />
+                <ScalarProperty Name="cod_uso_vehiculo" ColumnName="cod_uso_vehiculo" />
+                <ScalarProperty Name="cod_tipo_vehiculo" ColumnName="cod_tipo_vehiculo" />
+                <ScalarProperty Name="uso_vehiculo" ColumnName="uso_vehiculo" />
+                <ScalarProperty Name="tipo_vehiculo" ColumnName="tipo_vehiculo" />
                 <ScalarProperty Name="IdIbis" ColumnName="IdIbis" />
                 <ScalarProperty Name="vendedor" ColumnName="vendedor" />
                 <ScalarProperty Name="programa" ColumnName="programa" />
@@ -7401,6 +7408,15 @@ FROM [dbo].[v_reclamos_varios] AS [v_reclamos_varios]</DefiningQuery>
           <EntitySetMapping Name="ViewBusquedaAuto">
             <EntityTypeMapping TypeName="reclamosModel.ViewBusquedaAuto">
               <MappingFragment StoreEntitySet="ViewBusquedaAuto">
+                <ScalarProperty Name="estado_vehiculo" ColumnName="estado_vehiculo" />
+                <ScalarProperty Name="fecha_carga" ColumnName="fecha_carga" />
+                <ScalarProperty Name="usuario_carga" ColumnName="usuario_carga" />
+                <ScalarProperty Name="cod_marca" ColumnName="cod_marca" />
+                <ScalarProperty Name="cod_aseguradora" ColumnName="cod_aseguradora" />
+                <ScalarProperty Name="cod_uso_vehiculo" ColumnName="cod_uso_vehiculo" />
+                <ScalarProperty Name="cod_tipo_vehiculo" ColumnName="cod_tipo_vehiculo" />
+                <ScalarProperty Name="uso_vehiculo" ColumnName="uso_vehiculo" />
+                <ScalarProperty Name="tipo_vehiculo" ColumnName="tipo_vehiculo" />
                 <ScalarProperty Name="IdIbis" ColumnName="IdIbis" />
                 <ScalarProperty Name="vendedor" ColumnName="vendedor" />
                 <ScalarProperty Name="porcom" ColumnName="porcom" />

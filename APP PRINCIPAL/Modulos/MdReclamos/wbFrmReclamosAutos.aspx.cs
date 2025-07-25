@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Web;
+using System.Web.UI.WebControls;
 
 public partial class Modulos_MdReclamos_wbFrmReclamosAutos : System.Web.UI.Page
 {
@@ -84,6 +85,14 @@ public partial class Modulos_MdReclamos_wbFrmReclamosAutos : System.Web.UI.Page
                 auto.cliente = Convert.ToInt32(registro.cliente);
                 auto.programa = registro.programa;
                 auto.vendedor = registro.vendedor.ToString();
+                auto.cod_aseguradora = registro.cod_aseguradora;
+                auto.cod_marca = registro.cod_marca;
+                auto.cod_tipo_vehiculo = registro.cod_tipo_vehiculo;
+                auto.cod_uso_vehiculo = registro.cod_uso_vehiculo;
+                auto.fecha_carga = registro.fecha_carga;
+                auto.usuario_carga = registro.usuario_carga;
+                auto.tipo_vehiculo = registro.tipo_vehiculo;
+                auto.uso_vehiculo = registro.uso_vehiculo;
 
                 reclamo_auto reclamo = new reclamo_auto();
                 var resultado = DBReclamos.pa_sec_reclamo_auto();
@@ -139,6 +148,12 @@ public partial class Modulos_MdReclamos_wbFrmReclamosAutos : System.Web.UI.Page
         {
             Page.ClientScript.RegisterStartupScript(this.Page.GetType(), "show_modal", "$('#modal-recordatorio').modal('show');", addScriptTags: true);
         }
+
+        if (GridAutos.SelectedRow.Cells[12].Text.ToLower() == "excluido")
+        {
+            Utils.ShowMessage(this.Page, "Tomar en cuenta que este vehiculo ha sido excluido.", "Nota..!", "error");
+            GridAutos.SelectedRow.BackColor = System.Drawing.Color.FromArgb(255, 255, 200, 200);
+        }
     }
 
     protected void btnResguardos_Click(object sender, EventArgs e)
@@ -172,22 +187,22 @@ public partial class Modulos_MdReclamos_wbFrmReclamosAutos : System.Web.UI.Page
             "poliza as Poliza," +
             "nombre as Aseguradora, " +
             "gst_nombre as Ejecutivo,"+
-            "inciso as Certificado,"+
+            //"inciso as Certificado,"+
             "marca as Marca," +
             "modelo as Modelo," +
-            "color as Color,"+
+            //"color as Color,"+
             "chasis as Chasis," +
             "motor as Motor," +
-            "estado as Estado," +
+            "estado_vehiculo as Estado," +
             "vigi as Vigencia_inicial," +
             "vigf as Vigencia_Final " +
             "FROM ViewBusquedaAuto WHERE " +
-            "(placa like '%"+txtBusqueda.Text+"%') " +
-            "OR (propietario COLLATE Latin1_General_CI_AI like '%"+txtBusqueda.Text+"%') " +
-            "OR (poliza like '%"+txtBusqueda.Text+"%') " +
-            "OR (chasis like '%"+txtBusqueda.Text+"%' ) " +
-            "OR (contratante like '%"+txtBusqueda.Text+"%') " +
-            "OR (asegurado COLLATE Latin1_General_CI_AI like '%"+txtBusqueda.Text+"%')";
+            "(placa like '%"+txtBusqueda.Text.Trim()+"%') " +
+            "OR (propietario COLLATE Latin1_General_CI_AI like '%"+txtBusqueda.Text.Trim()+"%') " +
+            "OR (poliza like '%"+txtBusqueda.Text.Trim()+"%') " +
+            "OR (chasis like '%"+txtBusqueda.Text.Trim() +"%' ) " +
+            "OR (contratante like '%"+txtBusqueda.Text.Trim() +"%') " +
+            "OR (asegurado COLLATE Latin1_General_CI_AI like '%"+txtBusqueda.Text.Trim() +"%')";
         llenar.llenarGrid(consulta,GridAutos);
     }
 }

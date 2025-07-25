@@ -9,11 +9,20 @@ using System.Web;
 using System.IO;
 using System.Configuration;
 using System.Data.OleDb;
+using System.Net.Http.Headers;
+using System.Net;
+using System.Threading.Tasks;
+using System.Text;
 
 public class Utils
 {
     conexionBD conexion = new conexionBD();
     public static ReclamosEntities DBReclamos = new ReclamosEntities();
+    const string API_KEY = "ycEjNgKWntaAvfOtIoU9ZLkK0ohdFLhu";
+    const string API_SECRET = "pSkwRIdWJWj515LHN6QwLfTPMQmgVhuq7ii4A4TVeKVHU9aJJ8pADmjI";
+    const string USER = "anSnDWxX1Xof9YBALSuuJb2zqKKylkr5";
+    const string PASSWORD = "jTXAaZb0dDbboUTK";
+    const string ORGANIZATION = "";
 
     public Utils()
     {
@@ -205,6 +214,52 @@ public class Utils
         }
     }
 
+
+    public static void resumen_reclamos(TextBox fechainicio, TextBox fechafin, String reporte, GridView gridReporte)
+    {
+        try
+        {
+            conexionBD obj = new conexionBD();
+            DataTable dt = new DataTable();
+            SqlCommand comando = new SqlCommand(reporte, obj.ObtenerConexionReclamos());
+            comando.CommandType = CommandType.StoredProcedure;
+            comando.Parameters.AddWithValue("@fechaInicio", fechainicio.Text);
+            comando.Parameters.AddWithValue("@fechaFin", fechafin.Text);
+            comando.ExecuteNonQuery();
+            SqlDataAdapter sda = new SqlDataAdapter(comando);
+            sda.Fill(dt);
+            gridReporte.DataSource = dt;
+            gridReporte.DataBind();
+        }
+
+        catch (Exception ex)
+        {
+            throw ex;
+        }
+    }
+
+    public static void resumen_reclamos_por_estado(int gestor, String reporte, GridView gridReporte)
+    {
+        try
+        {
+            conexionBD obj = new conexionBD();
+            DataTable dt = new DataTable();
+            SqlCommand comando = new SqlCommand(reporte, obj.ObtenerConexionReclamos());
+            comando.CommandType = CommandType.StoredProcedure;
+            comando.Parameters.AddWithValue("@gestor", gestor);
+            comando.ExecuteNonQuery();
+            SqlDataAdapter sda = new SqlDataAdapter(comando);
+            sda.Fill(dt);
+            gridReporte.DataSource = dt;
+            gridReporte.DataBind();
+        }
+
+        catch (Exception ex)
+        {
+            throw ex;
+        }
+    }
+
     public void llenarGrid2(String Consulta, GridView tabla)
     {
         try
@@ -334,18 +389,7 @@ public class Utils
         {
             if (tipo == "I" && telefono != "")
             {
-                HttpClient client = new HttpClient();
-                var values = new System.Collections.Generic.Dictionary<string, string>
-                 {
-                   { "token", "Un!ty2018" },
-                   { "numero", telefono },
-                   { "mensaje", mensaje}
-                 };
-
-                var content = new FormUrlEncodedContent(values);
-                var response = client.PostAsync("http://192.168.81.127:9900/movistar/enviar", content);
-                bool estado_envio = response.IsFaulted;
-
+                enviarMensaje(telefono, mensaje);
                 comentarios_reclamos_medicos comentario = new comentarios_reclamos_medicos();
                 comentario.descripcion = "Notificacion SMS: " + mensaje;
                 comentario.fecha = DateTime.Now;
@@ -366,18 +410,7 @@ public class Utils
         {
             if (telefono != "")
             {
-                HttpClient client = new HttpClient();
-                var values = new System.Collections.Generic.Dictionary<string, string>
-                 {
-                   { "token", "Un!ty2018" },
-                   { "numero", telefono },
-                   { "mensaje", mensaje}
-                 };
-
-                var content = new FormUrlEncodedContent(values);
-                var response = client.PostAsync("http://192.168.81.127:9900/movistar/enviar", content);
-                bool estado_envio = response.IsFaulted;
-
+                enviarMensaje(telefono, mensaje);
                 comentarios_reclamos_varios comentario = new comentarios_reclamos_varios();
                 comentario.descripcion = "Notificacion SMS: " + mensaje;
                 comentario.fecha = DateTime.Now;
@@ -397,18 +430,7 @@ public class Utils
         {
             if (telefono != "")
             {
-                HttpClient client = new HttpClient();
-                var values = new System.Collections.Generic.Dictionary<string, string>
-                 {
-                   { "token", "Un!ty2018" },
-                   { "numero", telefono },
-                   { "mensaje", mensaje}
-                 };
-
-                var content = new FormUrlEncodedContent(values);
-                var response = client.PostAsync("http://192.168.81.127:9900/movistar/enviar", content);
-                bool estado_envio = response.IsFaulted;
-
+                enviarMensaje(telefono, mensaje);
                 comentarios_reclamos_autos comentario = new comentarios_reclamos_autos();
                 comentario.descripcion = "Notificacion SMS: " + mensaje;
                 comentario.fecha = DateTime.Now;
@@ -416,7 +438,120 @@ public class Utils
                 comentario.id_reclamo_auto = id;
                 DBReclamos.comentarios_reclamos_autos.Add(comentario);
                 DBReclamos.SaveChanges();
+                
             }
+        }
+    }
+
+    async public static Task generateToken2()
+    {
+       try
+        {
+            string usuario = "anSnDWxX1Xof9YBALSuuJb2zqKKylkr5";
+            string contrasena = "jTXAaZb0dDbboUTK";
+
+            string authInfo = Convert.ToBase64String(Encoding.ASCII.GetBytes(string.Format("{0}:{1}", usuario, contrasena)));
+
+            var client = new HttpClient();
+            var request = new HttpRequestMessage(HttpMethod.Post, "https://prod.api.tigo.com/oauth/client_credential/accesstoken?grant_type=client_credentials");
+            request.Headers.Authorization = new AuthenticationHeaderValue("Basic", authInfo);
+            var content = new StringContent(string.Empty, Encoding.UTF8, "application/json");
+            request.Content = content;
+
+            var response = await client.SendAsync(request);
+            response.EnsureSuccessStatusCode();
+
+            string responseBody = await response.Content.ReadAsStringAsync();
+            Console.WriteLine(responseBody);
+
+            // Guardar la respuesta en un archivo de texto
+            string filePath = @"C:\Users\jorge\OneDrive\Escritorio\token_response.txt";
+            File.WriteAllText(filePath, responseBody);
+            Console.WriteLine(await response.Content.ReadAsStringAsync());
+        }
+
+        catch(Exception e)
+        {
+            Console.WriteLine(e);
+        }
+    }
+
+
+    async public static Task generateToken()
+    {
+        try
+        {
+            string usuario = USER;
+            string contrasena = PASSWORD;
+            string authInfo = Convert.ToBase64String(Encoding.ASCII.GetBytes(string.Format("{0}:{1}", usuario, contrasena)));
+
+            var client = new HttpClient();
+            var request = new HttpRequestMessage(HttpMethod.Post, "https://prod.api.tigo.com/oauth/client_credential/accesstoken?grant_type=client_credentials");
+            request.Headers.Authorization = new AuthenticationHeaderValue("Basic", authInfo);
+            var content = new StringContent(string.Empty, Encoding.UTF8, "application/json");
+            request.Content = content;
+
+            var response = await client.SendAsync(request);
+            response.EnsureSuccessStatusCode();
+            string responseBody = await response.Content.ReadAsStringAsync();
+            Newtonsoft.Json.Linq.JObject jsonResponse = Newtonsoft.Json.Linq.JObject.Parse(responseBody);
+            string accessToken = (string)jsonResponse["access_token"];
+
+            string filePath = @"C:\token_response.txt";
+            File.WriteAllText(filePath, accessToken);
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+        }
+    }
+
+    public static void enviarMensaje(String telefono, String mensaje)
+    {
+        try
+        {
+            //generateToken();
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12 | SecurityProtocolType.Tls13;
+            var client = new HttpClient();
+            var request = new HttpRequestMessage(HttpMethod.Post, "https://prod.api.tigo.com/v1/tigo/b2b/gt/comcorp/messages/organizations/6684633c8533070001cbb809");
+            request.Headers.Add("APIKey", API_KEY);
+            request.Headers.Add("APISecret", API_SECRET);
+            request.Headers.Add("Authorization", "Bearer " + "BMQCr3h05856RlfWGrQDrMjgRmhh");
+
+            var content = new StringContent("{\n  " +
+                "\"protocol\": \"sms\",\n  " +
+                "\"shortcodeId\": \"WTW\",\n  " +
+                "\"shortcodeType\": \"pretty_code\",\n " +
+                "\"msisdn\": \"502" + telefono + "\", \n " +
+                "\"priority\": 0,\n  " +
+                "\"body\": \"" + mensaje + "\"\n" +
+                "}", null, "application/json");
+
+            request.Content = content;
+
+            var response = client.SendAsync(request).GetAwaiter().GetResult();
+            response.EnsureSuccessStatusCode();
+        }
+
+        catch (Exception ex)
+        {
+            //enviarMensaje(telefono, mensaje);
+            Console.WriteLine(ex);
+        }
+    }
+
+    public static string ReadAccessToken()
+    {
+        try
+        {
+            string filePath = @"C:\token_response.txt";
+            string accessToken = File.ReadAllText(filePath);
+            return accessToken.Trim(); // Trim() para eliminar posibles espacios en blanco o saltos de línea
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine("Error al leer el token: " + e.Message);
+            return string.Empty;
         }
     }
 
@@ -428,17 +563,7 @@ public class Utils
         {
             if (telefono != "")
             {
-                HttpClient client = new HttpClient();
-                var values = new System.Collections.Generic.Dictionary<string, string>
-                 {
-                   { "token", "Un!ty2018" },
-                   { "numero", telefono },
-                   { "mensaje", mensaje}
-                 };
-
-                var content = new FormUrlEncodedContent(values);
-                var response = client.PostAsync("http://192.168.81.127:9900/movistar/enviar", content);
-                bool estado_envio = response.IsFaulted;
+                enviarMensaje(telefono, mensaje);
             }
         }
     }
@@ -849,6 +974,87 @@ public class Utils
         //muestra y carga los datos en el gridview
         cargas.Caption = Path.GetFileName(FilePath);
         cargas.DataSource = dt;
+        cargas.DataBind();
+    }
+
+    //funcion para cargar datos desde un archivo de excel
+    public void importar2(string FilePath, string Extension, string isHDR, GridView cargas)
+    {
+        string conStr = "";
+        //aqui selecciona un excel por la extension que sea y la asigna dependiendo con la cadena de conexion en el archivo web.config
+        switch (Extension)
+        {
+            case ".xls": //Excel 97-03
+                conStr = ConfigurationManager.ConnectionStrings["Excel03ConString"].ConnectionString;
+                break;
+            case ".xlsx": //Excel 07
+                conStr = ConfigurationManager.ConnectionStrings["Excel07ConString"].ConnectionString;
+                break;
+        }
+        conStr = String.Format(conStr, FilePath, isHDR);
+        OleDbConnection connExcel = new OleDbConnection(conStr);
+        OleDbCommand cmdExcel = new OleDbCommand();
+        OleDbDataAdapter oda = new OleDbDataAdapter();
+        DataTable dt = new DataTable();
+        cmdExcel.Connection = connExcel;
+
+        //obtiene la conexion hacia la hoja de excel
+        connExcel.Open();
+        DataTable dtExcelSchema;
+        dtExcelSchema = connExcel.GetOleDbSchemaTable(OleDbSchemaGuid.Tables, null);
+        string SheetName = dtExcelSchema.Rows[0]["TABLE_NAME"].ToString();
+        connExcel.Close();
+
+        //lee los datos desde la hoja de excel
+        connExcel.Open();
+        cmdExcel.CommandText = "SELECT * From [" + SheetName + "]";
+        oda.SelectCommand = cmdExcel;
+        oda.Fill(dt);
+        connExcel.Close();
+
+        DataTable dtFiltered = new DataTable();
+
+        // Agregar las columnas que quieres mostrar al nuevo DataTable
+        dtFiltered.Columns.Add(dt.Columns[2].ColumnName);
+        dtFiltered.Columns.Add(dt.Columns[7].ColumnName);
+        dtFiltered.Columns.Add(dt.Columns[8].ColumnName);
+        dtFiltered.Columns.Add(dt.Columns[9].ColumnName); 
+        dtFiltered.Columns.Add(dt.Columns[10].ColumnName);
+        dtFiltered.Columns.Add(dt.Columns[12].ColumnName);
+        dtFiltered.Columns.Add(dt.Columns[14].ColumnName);
+        dtFiltered.Columns.Add(dt.Columns[16].ColumnName);
+        dtFiltered.Columns.Add(dt.Columns[17].ColumnName);
+        dtFiltered.Columns.Add(dt.Columns[26].ColumnName);
+        dtFiltered.Columns.Add(dt.Columns[27].ColumnName);
+        dtFiltered.Columns.Add(dt.Columns[38].ColumnName);
+        dtFiltered.Columns.Add(dt.Columns[39].ColumnName);
+        dtFiltered.Columns.Add(dt.Columns[40].ColumnName);
+        dtFiltered.Columns.Add(dt.Columns[41].ColumnName);
+
+        foreach (DataRow row in dt.Rows)
+        {
+            dtFiltered.Rows.Add(
+                row[2],
+                row[7],
+                row[8],
+                row[9],
+                row[10],
+                row[12],
+                row[14],
+                row[16],
+                row[17],
+                row[26],
+                row[27],
+                row[38],
+                row[39],
+                row[40],
+                row[41]
+            );
+        }
+
+        //muestra y carga los datos en el gridview
+        cargas.Caption = Path.GetFileName(FilePath);
+        cargas.DataSource = dtFiltered;
         cargas.DataBind();
     }
 

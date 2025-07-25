@@ -35,11 +35,15 @@ public partial class Modulos_MdReclamosUnity_wbFrmRecDañosSeguimiento : System.
                 "reg.status as Estatus," +
                 "r.reportante as Reportante," +
                 "Convert(varchar(20),r.fecha_commit, 103) as [Fecha Creacion]," +
-                "Convert(varchar(20),r.fecha_visualizar, 103) as [Fecha Visualizar] " +
+                "Convert(varchar(20),r.fecha_visualizar, 103) as [Fecha Visualizar], " +
+                " rlobs.nombre as Rlob, " +
+                " ramos_rlobs.nombre_ramo as [Ramo Rlob] " +
                 "FROM reg_reclamo_varios as reg " +
                 "INNER JOIN reclamos_varios as r on r.id_reg_reclamos_varios = reg.id " +
                 "INNER JOIN gestores on r.id_gestor = gestores.id " +
-                "LEFT JOIN analistas as a on a.id = r.id_analista ";
+                "LEFT JOIN analistas as a on a.id = r.id_analista " +
+                " LEFT JOIN rlobs on r.id_rlob = rlobs.id " +
+                " LEFT JOIN ramos_rlobs on r.id_ramo_rlob = ramos_rlobs.id ";
 
         string reclamosPrioritarios = selectGeneral +
                " where ((r.prioritario = 'true') and (r.usuario_unity = '" + userlogin + "' and r.estado_unity = 'Seguimiento' ))";

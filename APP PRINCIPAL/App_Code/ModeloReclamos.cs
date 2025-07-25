@@ -157,6 +157,15 @@ public partial class auto_reclamo
     public string programa { get; set; }
     public string vendedor { get; set; }
     public Nullable<int> IdIbis { get; set; }
+    public string tipo_vehiculo { get; set; }
+    public string uso_vehiculo { get; set; }
+    public string cod_tipo_vehiculo { get; set; }
+    public string cod_uso_vehiculo { get; set; }
+    public string cod_aseguradora { get; set; }
+    public string cod_marca { get; set; }
+    public string usuario_carga { get; set; }
+    public Nullable<System.DateTime> fecha_carga { get; set; }
+    public string estado_vehiculo { get; set; }
 
     public virtual ICollection<reclamo_auto> reclamo_auto { get; set; }
 }
@@ -1592,6 +1601,15 @@ public partial class ViewBusquedaAuto
     public Nullable<decimal> porcom { get; set; }
     public Nullable<int> vendedor { get; set; }
     public Nullable<int> IdIbis { get; set; }
+    public string tipo_vehiculo { get; set; }
+    public string uso_vehiculo { get; set; }
+    public string cod_tipo_vehiculo { get; set; }
+    public string cod_uso_vehiculo { get; set; }
+    public string cod_aseguradora { get; set; }
+    public string cod_marca { get; set; }
+    public string usuario_carga { get; set; }
+    public Nullable<System.DateTime> fecha_carga { get; set; }
+    public string estado_vehiculo { get; set; }
 }
 
 public partial class viewCoberturasAutos

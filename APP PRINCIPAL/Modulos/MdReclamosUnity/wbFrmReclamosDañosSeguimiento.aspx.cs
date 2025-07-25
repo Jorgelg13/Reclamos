@@ -121,6 +121,11 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosDañosSeguimiento : Sy
         ddlRlob.DataValueField = "id";
         ddlRlob.DataBind();
 
+        ddlRamo.DataSource = DBReclamos.ramos_rlobs.ToList().Where(r => r.id_rlob == 1);
+        ddlRamo.DataTextField = "nombre_ramo";
+        ddlRamo.DataValueField = "id";
+        ddlRamo.DataBind();
+
         if (userlogin == "nmelgar" || userlogin == "jwiesner" || userlogin == "jlaj" || userlogin == "cmejia" || userlogin =="nsierra")
         {
             ddlEstadoReclamo.DataSource = DBReclamos.estados_reclamos_unity.ToList().Where(au => au.tipo == "daños");
@@ -145,7 +150,7 @@ public partial class Modulos_MdReclamosUnity_wbFrmReclamosDañosSeguimiento : Sy
         try
         {
             var reclamo = DBReclamos.reclamos_varios.Find(id);
-            ddlRamo.DataSource = DBReclamos.ramos_rlobs.ToList().Where(r => r.id_rlob == reclamo.id_rlob);
+            ddlRamo.DataSource = DBReclamos.ramos_rlobs.ToList().Where(r => r.id_rlob == reclamo.id_rlob || r.id_rlob == 1);
             ddlRamo.DataTextField = "nombre_ramo";
             ddlRamo.DataValueField = "id";
             ddlRamo.DataBind();

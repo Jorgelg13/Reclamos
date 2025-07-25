@@ -170,8 +170,8 @@
     <%------------------------------------------------ imprimir bitacora de seguimiento del reclamo ------------------------------------------%>
     <div id="imprimirBitacora" style="display: none" class="form-inline">
         <br />
-        <div class="img-float-right" style="float: right; padding-top: 50px;">
-            <img src="../../imgUnity/Unity%20Promotores%20transparente.png" style="margin-top: -100px; width: 235px;">
+        <div class="img-float-right" style="float: right; padding-top: 70px;">
+            <img src="../../imgUnity/logo_wt_bitacora.png" style="margin-top: -100px; width: 205px;">
         </div>
         <div class="img-float-left" style="float: left; padding-top: 10px;">
             <p>Avenida Las Americas 22-23, Zona 14</p>

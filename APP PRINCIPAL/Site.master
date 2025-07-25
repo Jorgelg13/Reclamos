@@ -426,6 +426,7 @@
                                         <li><a href="/Modulos/MdAdmin/bitacora-danios.aspx">Imprimir bitacora daños</a></li>
                                     </ul>
                                 </li>
+                                <li><a href="/Modulos/MdCargas/CargarAutos.aspx">Cargar autos</a></li>
                             </ul>
                         </li>
                       
